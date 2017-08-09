@@ -76,7 +76,7 @@ class ComercializadorController extends Controller
     {
         $usuario = Sentinel::check();
         $comercializador = $this->comerGateway->findSolicitudesFromUser($usuario->usuario);
-        return $comercializador->solicitudes()->toArray();
+        return $comercializador->solicitudes;
     }
 
 
