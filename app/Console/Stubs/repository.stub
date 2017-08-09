@@ -1,0 +1,22 @@
+<?php
+
+namespace DummyNamespace;
+
+
+use App\Repositories\Eloquent\Repos\Gateway\DummyGateway;
+use App\Repositories\Eloquent\Repos\Mapper\DummyMapper;
+
+class DummyClass extends Repositorio
+{
+    public function __construct()
+    {
+        $this->gateway = new DummyGateway();
+        $this->mapper = new DummyMapper();
+    }
+
+    function model()
+    {
+        return 'App\Repositories\Eloquent\Repos\DummyClass';
+    }
+
+}

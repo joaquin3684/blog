@@ -1,0 +1,13 @@
+<?php
+
+namespace DummyNamespace;
+
+
+class DummyClass extends Gateway
+{
+    function model()
+    {
+        return 'App\DummyModel';
+    }
+
+}

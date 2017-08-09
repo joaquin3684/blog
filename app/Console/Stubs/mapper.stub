@@ -1,0 +1,14 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\DummyModel;
+
+class DummyClass
+{
+
+    public function map($objeto)
+    {
+        //TODO poner lo que corresponde aca
+    }
+}
