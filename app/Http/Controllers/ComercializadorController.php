@@ -6,6 +6,7 @@ use App\Repositories\Eloquent\Repos\ComercializadorRepo;
 use App\Repositories\Eloquent\Repos\Gateway\ComercializadorGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use App\Repositories\Eloquent\Repos\Mapper\AgenteFinancieroMapper;
+use App\Repositories\Eloquent\Repos\Mapper\ProveedoresMapper;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
@@ -17,12 +18,13 @@ class ComercializadorController extends Controller
     private $comerRepo;
     private $solicitudGateway;
     private $comerGateway;
+    private $proovedorMapper;
 
     public function __construct()
     {
         $this->comerRepo = new ComercializadorRepo();
         $this->solicitudGateway = new SolicitudGateway();
-        $this->agenteMapper = new AgenteFinancieroMapper();
+        $this->proovedorMapper = new ProveedoresMapper();
         $this->comerGateway = new ComercializadorGateway();
     }
 
@@ -55,13 +57,15 @@ class ComercializadorController extends Controller
         $usuario = Sentinel::check();
 
         //TODO::falta mover los archivos;
-        $agentes = DB::table('agentes_financieros')
-            ->select('agentes_financieros.*');
+        $agentes = DB::table('proovedores')
+            ->join('productos', 'proovedores.id', '=', 'productos.id_proovedor')
+            ->where('productos.tipo', 'Credito')
+            ->select('proovedores.*', 'productos.*');
 
-        $agentesFiltrados = \App\Repositories\Eloquent\Filtros\AgentesFinancierosFilter::apply($filtro, $agentes);
+        $agentesFiltrados = \App\Repositories\Eloquent\Filtros\ProovedoresFilter::apply($filtro, $agentes);
 
         $agentes = $agentesFiltrados->map(function($agente){
-           return $this->agenteMapper->map($agente);
+           return $this->proovedorMapper->map($agente);
         });
 
         $comercializador = $this->comerRepo->findByUser($usuario->usuario);
@@ -72,7 +76,7 @@ class ComercializadorController extends Controller
     {
         $usuario = Sentinel::check();
         $comercializador = $this->comerGateway->findSolicitudesFromUser($usuario->usuario);
-        return $comercializador->solicitudes();
+        return $comercializador->solicitudes()->toArray();
     }
 
 

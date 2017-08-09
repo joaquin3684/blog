@@ -9,10 +9,10 @@
 namespace App\Repositories\Eloquent\Filtros;
 
 
-class AgentesFinancierosFilter extends Filtro
+class ProovedoresFilter extends Filtro
 {
     public static function name()
     {
-        return 'AgentesFinancieros';
+        return 'Proovedores';
     }
 }

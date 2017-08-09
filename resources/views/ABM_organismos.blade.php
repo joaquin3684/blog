@@ -1,7 +1,7 @@
 @extends('welcome')
 
 @section('contenido')
-    Blade::setContentTags('[%', '%]');
+
 
 {!! Html::script('js/controladores/ABMprueba.js') !!}
 
@@ -13,8 +13,9 @@
   <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
 <div class="nav-md" ng-controller="ABM" >
 
+
   <div class="container body" >
-  
+
     <div class="main_container" >
 
       <input type="hidden" id="tipo_tabla" value="organismos">

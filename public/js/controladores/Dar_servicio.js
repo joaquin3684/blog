@@ -8,6 +8,7 @@ $scope.vencimiento = moment().format('L');
 	// machea a los socios en base al searchText
 	$scope.query = function(searchText, ruta)
 	{
+
 		return $http({
 			url: 'dar_servicio/'+ruta,
 			method: 'post',
@@ -18,6 +19,13 @@ $scope.vencimiento = moment().format('L');
 				}, function errorCallback(data){
 					console.log(data);
 				});
+		sddf
+		asd
+		fas
+		df
+		asdf
+		asd
+		f
 	}
 
  	$scope.traerProductos = function(searchText)

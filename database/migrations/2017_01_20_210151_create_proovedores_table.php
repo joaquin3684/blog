@@ -20,6 +20,8 @@ class CreateProovedoresTable extends Migration
             $table->softDeletes();
             $table->integer('id_prioridad')->unsigned();
             $table->foreign('id_prioridad')->references('id')->on('prioridades');
+            $table->integer('usuario')->unsigned();
+            $table->foreign('usuario')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Repositories\Eloquent\Repos\Gateway\AgenteFinancieroGateway;
+use App\Repositories\Eloquent\Repos\Gateway\ProveedoresGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -19,7 +20,7 @@ class AgenteFinancieroTest extends TestCase
     {
         parent::setUp();
         $this->solicitudGateway = new SolicitudGateway();
-        $this->agenteGateway = new AgenteFinancieroGateway();
+        $this->agenteGateway = new ProveedoresGateway();
         $this->solicitudGateway->create(['nombre' => '1',
                                         'apellido' => '1',
                                         'cuit' => '1',

@@ -1,5 +1,7 @@
 <?php   namespace App\Repositories\Eloquent\Repos\Gateway;
 
+use App\Proovedores;
+
 /**
  * Created by PhpStorm.
  * User: joaquin
@@ -11,5 +13,10 @@ class ProveedoresGateway extends Gateway
     function model()
     {
         return 'App\Proovedores';
+    }
+
+    public function findSolicitudesByAgenteFinanciero($id)
+    {
+        return Proovedores::with('solicitudes')->where('usuario', $id)->get()->first();
     }
 }
