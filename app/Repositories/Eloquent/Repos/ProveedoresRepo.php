@@ -23,4 +23,10 @@ class ProveedoresRepo extends Repositorio
     {
         return 'App\Repositories\Eloquent\Repos\ProveedoresRepo';
     }
+
+    public function findProductos($id_proveedor)
+    {
+        $proveedor = $this->gateway->findProductos($id_proveedor);
+        return $this->mapper->map($proveedor);
+    }
 }

@@ -19,7 +19,7 @@ class ProductosMapper
      */
     public function __construct()
     {
-        $this->proveedorMapper = new ProveedoresMapper();
+
     }
 
     public function map(Productos $producto)
@@ -27,7 +27,8 @@ class ProductosMapper
         $productoNuevo = new Producto($producto->id, $producto->nombre, $producto->ganancia, $producto->tipo);
         if($producto->relationLoaded('proovedor'))
         {
-            $proveedor = $this->proveedorMapper->map($producto->proovedor);
+            $mapper = new ProveedoresMapper();
+            $proveedor = $mapper->map($producto->proovedor);
             $productoNuevo->setProveedor($proveedor);
         }
         return $productoNuevo;

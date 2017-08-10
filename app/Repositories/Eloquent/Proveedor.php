@@ -16,6 +16,7 @@ class Proveedor
     private $nombre;
     private $descripcion;
     private $prioridad;
+    private $productos;
 
     public function __construct($id, $nombre, $descripcion)
     {
@@ -41,6 +42,24 @@ class Proveedor
     {
         $this->id = $id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    /**
+     * @param mixed $productos
+     */
+    public function setProductos($productos)
+    {
+        $this->productos = $productos;
+    }
+
+
 
     /**
      * @return mixed

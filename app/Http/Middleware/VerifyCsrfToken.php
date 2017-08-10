@@ -12,6 +12,6 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        'pruebas', 'comercializador/altaSolicitud'
+        'pruebas', 'agente_financiero/otorgarCapital'
     ];
 }
