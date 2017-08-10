@@ -1,7 +1,7 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize']).config(function($interpolateProvider){
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
-app.controller('cobrar', function($scope, $http, $compile, $sce) {
+app.controller('cobrar', function($scope, $http, $compile, $sce, NgTableParams, $filter) {
    
 // ESTAS FUNCIONES SON PARA DEFINIR LOS PARAMETROS DE BUSQUEDA EN LA FUNCION QUERY
    $scope.buscandoSocios = function(searchText)
@@ -123,98 +123,7 @@ app.controller('cobrar', function($scope, $http, $compile, $sce) {
     $("#cobrarSocio").hide();
     $("#cobrarVenta").hide();
    // TABLA DE LA DATATABLE  
-   var tabla =  $("#tablaOrganismos").DataTable({
-      processing: true,
-      serverSide: true,
-      ajax:
-      {
-         url:"cobrar/datos",
-         type: "POST",
-         headers:
-         {
-            'X-CSRF-TOKEN': $('#token').val()
-         },
-         data: function (d)
-         {
-            d.filtros = $scope.data
-         }
-      },  
-      columns: 
-      [
-         {data: 'organismo', name: 'organismo'},
-         {data: 'diferencia', name: 'diferencia'},
-      ],
-      columnDefs: 
-      [
-         { "title": "Organismo", "targets": 0 },
-         { "title": "Total a cobrar", "targets": 1 },
-      ],
-      footerCallback: function ( row, data, start, end, display )
-      {
-         var api = this.api(), data;
- 
-         // Remove the formatting to get integer data for summation
-         var intVal = function ( i ) 
-         {
-            return typeof i === 'string' ?
-            i.replace(/[\$,]/g, '')*1 :
-            typeof i === 'number' ?
-            i : 0;
-         };
- 
 
-         // Total over this page
-         pageTotal = api
-            .column( 1, { page: 'current'} )
-            .data()
-            .reduce( function (a, b) {
-               return intVal(a) + intVal(b);
-            }, 0 );
- 
-         // Update footer
-         $( api.column( 1 ).footer() ).html(
-            '$'+pageTotal
-         );
-      },
-      select: true,
-      fixedHeader: 
-      {
-         header:true,
-         footer: true,
-      },
-      language: 
-      {
-         info: "Mostrando del _PAGE_ al _END_ de _TOTAL_ registros",
-         zeroRecords: "No se encontraron resultados",
-         infoFiltered: "(filtrado de _MAX_ registros)",
-         lengthMenu: "Mostrar _MENU_ registros",
-         paginate: 
-         {
-            next: "Siguiente",
-            previous: "Anterior"
-         },
-         search: "Buscar:"
-      },
-      dom: 'Blrtip',
-      buttons: 
-      [
-         {
-            extend: 'pdf',
-            text: 'Generar reporte',
-            exportOptions: 
-            {
-               columns: ':visible',
-              
-            }
-         },
-         'print',
-      ],
-      lengthChange: true,
-      aLengthMenu: [
-        [25, 50, 100, 200, -1],
-        [25, 50, 100, 200, "Todos"]
-      ],
-   });
 
    $('#tablaOrganismos tbody').on( 'click', 'tr', function () {
        $("#cobrarSocio").show();
@@ -565,17 +474,38 @@ app.controller('cobrar', function($scope, $http, $compile, $sce) {
       tabla.draw();
    }
 
-   $scope.seleccionarTodo = function()
-   {
-      $('#datatable-responsive > tbody > tr').each(function (tr){
-         //console.log(tabla.row(tr).data());
-         $(this).toggleClass('selected');
-      })
-   }
+   $scope.llenar = function() {
+          $http({
+            url: 'cobrar/datos',
+            method: 'post'
+        }).then(function successCallback(response)
+        {
+            if(typeof response.data === 'string')
+            {
+                return [];
+            }
+            else
+            {
+                console.log(response);
+                $scope.datosCobro = response.data;
+                $scope.paramsCobro = new NgTableParams({
+                    page: 1,
+                    count: 10
+                }, {
+                    total: $scope.datosCobro.length,
+                    getData: function (params) {
+                        $scope.datosCobro = $filter('orderBy')($scope.datosCobro, params.orderBy());
+                        return $scope.datosCobro.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    }
+                });
+            }
 
-   $('#datatable-responsive tbody').on( 'click', 'tr', function () {
-      $(this).toggleClass('selected');
-   });
+        }, function errorCallback(data)
+        {
+            console.log(data.data);
+        });
+   }
+   $scope.llenar();
 
   /* $scope.cobrar = function()
    {

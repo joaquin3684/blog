@@ -3,6 +3,7 @@ var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).conf
 });
 app.controller('ventas', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter) {
     
+$scope.ActualDate = moment().format('YYYY-MM-DD');
 
 //mostrarPorSocio en todos mando el id del de atras boludo es asi
     //mostrarPorVenta

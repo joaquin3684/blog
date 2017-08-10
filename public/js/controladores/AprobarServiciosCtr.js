@@ -111,6 +111,7 @@ $scope.ArrayAprobar = [];
         //$scope.PagarProveedores();
 
     }
+    $scope.criterios = ['Criterio 1','Criterio 2','Criterio 3'];
 
 });
 

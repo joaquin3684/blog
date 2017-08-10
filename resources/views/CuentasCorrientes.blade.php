@@ -86,6 +86,7 @@
                                                 </md-autocomplete>
                                             </div>
                                             <div id="filterSocio" ng-if="vistaactual=='Socios'">
+                                                <div class="row">
                                                 <md-autocomplete  md-item-text="item.socio" md-no-cache="true" md-search-text-change="buscandoSocios(searchText)" md-selected-item-change="filtrar()" md-items="item in query(searchText)" md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..." >
                                                 <md-item-template>
                                                     <span md-highlight-text="searchText">
@@ -97,6 +98,34 @@
           
                                                     </md-not-found>
                                                 </md-autocomplete>
+                                                </div>
+                                                </br>
+                                                <div class="row">
+                                                    <div class="item form-group col-sm-5 col-xs-8">
+                                                        <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
+                                                            Minimo importe cuota
+                                                        </label>
+                                                        <md-slider aria-label="red" class="md-primary" ng-change="filtrar()"  flex="" id="red-slider" max="255" min="0" ng-model="minimo_importe_cuota">
+                                                        </md-slider>
+                                                    </div>
+                                                    <div class="col-md-1 col-sm-1 col-xs-4">
+                                                        <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_importe_cuota" type="number">
+                                                            {[{errores.porcentaje_retencion[0]}]}
+                                                        </input>
+                                                    </div>
+                                                    <div class="item form-group col-sm-5 col-xs-8">
+                                                        <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
+                                                            Maximo importe cuota
+                                                        </label>
+                                                        <md-slider aria-label="red" class="md-primary" ng-change="filtrar()"  flex="" id="red-slider" max="255" min="0" ng-model="maximo_importe_cuota">
+                                                        </md-slider>
+                                                    </div>
+                                                    <div class="col-md-1 col-sm-1 col-xs-4">
+                                                        <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_importe_cuota" type="number">
+                                                            {[{errores.porcentaje_retencion[0]}]}
+                                                        </input>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div id="filterProveedor" ng-if="vistaactual=='Ventas' || vistaactual =='Cuotas'">
                                                 <md-autocomplete  md-item-text="item.proovedor" md-no-cache="true"  md-search-text-change="buscandoProovedores(searchText2)" md-items="item in query(searchText2)" md-selected-item-change="filtrar()" md-search-text="searchText2" md-selected-item="proovedor" placeholder="Buscar proovedor...">
@@ -111,6 +140,7 @@
                                                     </md-not-found>
                                                 </md-autocomplete>
                                             </div>
+                                            </br>
                                             <div id="filterProducto" ng-if="vistaactual=='Ventas'">
                                                 <md-autocomplete  md-item-text="item.producto" md-no-cache="true"  md-search-text-change="buscandoProductos(searchText3)" md-items="item in query(searchText3)" md-selected-item-change="filtrar()" md-search-text="searchText3" md-selected-item="producto" placeholder="Buscar producto...">
                                                 <md-item-template>
@@ -126,7 +156,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="row" style="margin-top:20px;" id="filterCuota">
+                                        <div class="row" style="margin-top:20px;" id="filterCuota" ng-show="vistaactual=='Ventas || Cuotas'">
                                             <div class="item form-group col-sm-5 col-xs-8">
                                                 <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
                                                     Minimo importe cuota
@@ -152,10 +182,10 @@
                                                 </input>
                                             </div>
                                         </div>
-                                        <div class="row" id="filterCuota2">
+                                        <div class="row" id="filterCuota2" ng-show="vistaactual=='Ventas || Cuotas'">
                                             <div class="item form-group col-sm-5 col-xs-8">
                                                 <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Minimo N�� cuota
+                                                    Minimo Nº cuota
                                                 </label>
                                                 <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0" 
                                                  ng-model="minimo_nro_cuota">
@@ -168,7 +198,7 @@
                                             </div>
                                             <div class="item form-group col-sm-5 col-xs-8">
                                                 <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Maximo N�� cuota
+                                                    Maximo Nº cuota
                                                 </label>
                                                 <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0" ng-model="maximo_nro_cuota">
                                                 </md-slider>
@@ -179,7 +209,58 @@
                                                 </input>
                                             </div>
                                         </div>
-                                        <div class="row" style="margin-top:20px;" id="filterFecha">
+                                        <div class="row" style="margin-top:20px;" id="filterCuota" ng-show="vistaactual=='Organismos'">
+                                            <div class="item form-group col-sm-5 col-xs-8">
+                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
+                                                    Minimo importe Total a Cobrar
+                                                </label>
+                                            </div>
+                                            <div class="col-md-1 col-sm-1 col-xs-4">
+                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_importe_cuota" type="number">
+                                                    {[{errores.porcentaje_retencion[0]}]}
+                                                </input>
+                                            </div>
+                                            <div class="item form-group col-sm-5 col-xs-8">
+                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
+                                                    Maximo importe Total a Cobrar
+                                                </label>
+                                               <!--  <md-slider aria-label="red" class="md-primary" ng-change="filtrar()"  flex="" id="red-slider" max="255" min="0" ng-model="maximo_importe_cuota">
+                                                </md-slider> -->
+                                            </div>
+                                            <div class="col-md-1 col-sm-1 col-xs-4">
+                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="maximo_importe_cuota" type="number">
+                                                    {[{errores.porcentaje_retencion[0]}]}
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="filterCuota2" ng-show="vistaactual=='Organismos'">
+                                            <div class="item form-group col-sm-5 col-xs-8">
+                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
+                                                    Minimo importe Total Cobrado
+                                                </label>
+                                                <!-- <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0" 
+                                                 ng-model="minimo_nro_cuota">
+                                                </md-slider> -->
+                                            </div>
+                                            <div class="col-md-1 col-sm-1 col-xs-4">
+                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_nro_cuota" type="number">
+                                                    {[{errores.porcentaje_retencion[0]}]}
+                                                </input>
+                                            </div>
+                                            <div class="item form-group col-sm-5 col-xs-8">
+                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
+                                                    Maximo importe Total Cobrado
+                                                </label>
+                                               <!--  <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0" ng-model="maximo_nro_cuota">
+                                                </md-slider> -->
+                                            </div>
+                                            <div class="col-md-1 col-sm-1 col-xs-4">
+                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="maximo_nro_cuota" type="number">
+                                                    {[{errores.porcentaje_retencion[0]}]}
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top:20px;" id="filterFecha" ng-show="vistaactual == 'Ventas'">
                                             <div class="item form-group col-sm-6 col-xs-12">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desde">
                                                     Desde:
@@ -200,9 +281,10 @@
                                                     </input>
                                                 </div>
                                             </div>
-                                            <input type="submit" ng-click="filtro()" class="btn btn-success" value="Filtrar">
+                                            
                                            
                                         </div>
+                                        <input type="submit" ng-click="filtro()" class="btn btn-success" value="Filtrar">
                                         </form>
                                     </div>
                                 </div>
@@ -258,7 +340,12 @@
                             <div class="clearfix">
                             </div>
                         </div>
-                        <div class="x_content">
+                        <div class="x_content" id="impr">
+                     <center>
+                     <button id="exportButton1" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
+                     </button>
+                     <button id="exportButton2" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
+                     </center>
  <div class="row">
     <ol class="breadcrumb breadcrumb-arrow">
         <li><a href="" id="bread-organismos" ng-click="setVista('Organismos')"><i class="fa fa-home"></i> ORGANISMOS</a></li>
@@ -277,6 +364,12 @@
                                     </td>
 							        <td title="'Diferencia'" sortable="'diferencia'">
 							            {[{organismo.diferencia}]}
+                                    </td>
+                                    <td title="'Total a Cobrar'" sortable="'totalACobrar'">
+                                        {[{organismo.totalACobrar}]}
+                                    </td>
+                                    <td title="'Total Cobrado'" sortable="'totalCobrado'">
+                                        {[{organismo.totalCobrado}]}
                                     </td>
 							   	</tr>
 								</table>
@@ -343,6 +436,9 @@
                                     <td title="'Cobrado'" sortable="'cobrado'">
                                         {[{cuota.cobrado}]}
                                     </td>
+                                    <td title="'Estado'" sortable="'estado'">
+                                        {[{cuota.estado}]}
+                                    </td>
                                 </tr>
                             </table>
                         </div>--}}
@@ -367,10 +463,15 @@
                                                 </td>
 
                                                 <td title="'Importe'" sortable="'totalACobrar'">
-                                                    {[{cuota.importe}]}
+                                                    <span style="color: red" ng-if="(cuota.fecha_vencimiento < ActualDate) && (cuota.cobrado < cuota.importe)">{[{cuota.importe}]}</span>
+                                                    <span style="" ng-if="cuota.fecha_vencimiento >= ActualDate">{[{cuota.importe}]}</span>
+                                                    <span style="" ng-if="(cuota.fecha_vencimiento < ActualDate) && (cuota.cobrado >= cuota.importe)">{[{cuota.importe}]}</span>
                                                 </td>
                                                 <td title="'Cobrado'" sortable="'totalCobrado'">
                                                     {[{cuota.cobrado}]}
+                                                </td>
+                                                <td title="'Estado'" sortable="'estado'">
+                                                    {[{cuota.estado}]}
                                                 </td>
                                             </tr>
                                             <tr data-ng-switch-when="true">

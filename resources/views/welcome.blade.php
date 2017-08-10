@@ -109,6 +109,10 @@
                     </li>
                     <li><a href="ventas">Cuentas corrientes</a>
                     </li>
+                    <li><a href="aprobacion">Aprobar Servicios</a>
+                    </li>
+                    <li><a href="pago_proovedores">Pago a Proveedores</a>
+                    </li>
 
                   </ul>
                 </li>

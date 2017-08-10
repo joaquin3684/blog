@@ -53,11 +53,13 @@ class ComercializadorTest extends TestCase
 
     public function testGenerarSolicitudConUnAgenteFinancieroComoResultadoDelFiltro()
     {
-        $ventas = DB::table('agentes_financieros')
-            ->select('agentes_financieros.*');
+        $ventas = DB::table('proovedores')
+            ->join('productos', 'proovedores.id', '=', 'productos.id_proovedor')
+            ->where('productos.tipo', 'Credito')
+            ->select('proovedores.*', 'productos.*');
 
         $filtro = ['nombre' => 'pedro'];
-        $agentesFiltrados = \App\Repositories\Eloquent\Filtros\AgentesFinancierosFilter::apply($filtro, $ventas);
+        $agentesFiltrados = \App\Repositories\Eloquent\Filtros\ProovedoresFilter::apply($filtro, $ventas);
         $agentes = $agentesFiltrados->map(function($agente){
             return $this->agenteMapper->map($agente);
         });

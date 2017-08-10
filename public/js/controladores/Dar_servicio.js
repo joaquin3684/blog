@@ -8,7 +8,6 @@ $scope.vencimiento = moment().format('L');
 	// machea a los socios en base al searchText
 	$scope.query = function(searchText, ruta)
 	{
-
 		return $http({
 			url: 'dar_servicio/'+ruta,
 			method: 'post',
@@ -19,13 +18,6 @@ $scope.vencimiento = moment().format('L');
 				}, function errorCallback(data){
 					console.log(data);
 				});
-		sddf
-		asd
-		fas
-		df
-		asdf
-		asd
-		f
 	}
 
  	$scope.traerProductos = function(searchText)
@@ -52,7 +44,7 @@ $scope.vencimiento = moment().format('L');
  		$http({
 			url: 'ventas',
 			method: 'post',
-			data: {'id_asociado': $scope.socio.id, 'id_producto': $scope.producto.id, 'importe': $scope.importe, 'nro_cuotas': $scope.nro_cuotas, 'tipo':$scope.tipo_servicio, 'vencimiento':vencimiento, 'plata_recibida':$scope.$parent.plata_recibida}
+			data: {'id_asociado': $scope.socio.id, 'id_producto': $scope.producto.id, 'importe': $scope.importe, 'nro_cuotas': $scope.nro_cuotas, 'tipo':$scope.tipo_servicio, 'fecha_vencimiento':vencimiento, 'plata_recibida':$scope.$parent.plata_recibida}
 			}).then(function successCallback(response)
 				{
 					console.log(response);
@@ -90,7 +82,7 @@ $scope.vencimiento = moment().format('L');
  			console.log($scope.vencimiento);*/
  		var j = vto.format("DD/MM/YYYY");
  			 			
- 			var objeto = {'cuota': i, 'importe': importe, 'fecha': j};
+ 			var objeto = {'cuota': i+1, 'importe': importe, 'fecha': j};
  			planDePago.push(objeto);
  			vto.add(30, 'd');
  		}

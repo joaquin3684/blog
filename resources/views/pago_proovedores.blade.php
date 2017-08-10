@@ -186,7 +186,7 @@
                                         <table ng-table="paramsProveedores" class="table table-hover table-bordered">
 
                                             <tbody data-ng-repeat="proveedor in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                            <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,cuota.id_cuota)" >
+                                            <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,proveedor.id)" >
                                                 <td title="'Proveedor'" sortable="'proovedor'">
                                                     <input type="checkbox" ng-model="check" ng-change="Corroborar(proveedor.id,check)">{[{proveedor.nombre}]}
                                                 </td>
@@ -208,7 +208,7 @@
                                                                     <th>Gastos Administrativos</th>
                                                                 </tr>
                                                                 </thead>
-                                                   {{--             <tbody>
+                                                                <tbody>
                                                                 <tr style="background-color: #A6A6A6; color: white;" data-ng-repeat="movimiento in cuota.movimientos">
 
                                                                     <td><center>{[{movimiento.fecha}]}</center></td>
@@ -218,13 +218,13 @@
                                                                     <td><center>{[{movimiento.gastos_administrativos}]}</center></td>
 
                                                                 </tr>
-                                                                </tbody>--}}
+                                                                </tbody>
                                                             </table>
                                                         </div>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            {{--</tbody>--}}
+                                            </tbody>
                                         </table>
                                     </div>
                                     <!-- END TABLE -->

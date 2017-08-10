@@ -25,9 +25,9 @@
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>
-                                       Pago a Proveedores
+                                       Aprobación de Servicios
                                         <small>
-                                            Pagar a un Proveedor
+                                            Aprobar un Servicio
                                         </small>
                                     </h2>
                                     <ul class="nav navbar-right panel_toolbox">
@@ -135,9 +135,9 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>
-                                Proovedores
+                                Aprobaciones
                                 <small>
-                                    Todos los proovedores disponibles para pagarles
+                                    Todos los servicios disponibles para aprobar
                                 </small>
                             </h2>
                         
@@ -206,7 +206,8 @@
                                                     {[{aprobacion.fecha_vencimiento}]}
                                                 </td>
                                                 <td>
-                                                    <input type="text" id="observacion{[{aprobacion.id}]}" placeholder="Observacion..">
+                                                <select id="observacion{[{aprobacion.id}]}" style="width: 60%;" ng-model="perfilnew" ng-options="x for x in criterios">
+                                                </select>
                                                     <input type="button" ng-click="Aprobar('ok',aprobacion.id)" class="btn btn-primary" value="✓">
                                                     <input type="button" ng-click="Aprobar('no',aprobacion.id)" class="btn btn-danger" value="X">
                                                 </td>

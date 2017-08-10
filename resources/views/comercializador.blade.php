@@ -53,6 +53,16 @@
                    {{ csrf_field() }}
                     
                     <span class="section">Datos del Prestamo</span>
+                    
+                    <div class="item form-group"> 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12"> 
+                          <select ng-options="x for x in organismos" class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="tipo_servicio">
+                            
+                          </select>
+                      </div>
+                    </div>
 
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
@@ -66,35 +76,35 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Apellido <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Apellido">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Apellido">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Cuit <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="cuota_social" name="cuota_social" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{[{errores.cuota_social[0]}]}
+                        <input type="number" id="cuota_social" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{[{errores.cuota_social[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Domicilio <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Telefono <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Codigo Postal <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Codigo Postal">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Codigo Postal">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
