@@ -23,43 +23,31 @@ class Comercializador
         $this->solicitudes = $this->solicitudes == null ? collect() : $solicitudes;
     }
 
-    public function generarSolicitud($nombre, $apellido, $cuit, $domicilio, $telefono, $codigo_postal, $doc_documento, $doc_recibo, $doc_domicilio, $doc_cbu, $doc_endeudamiento, $agentesFiltrados)
+    public function generarSolicitud($solicitud, $agentesFiltrados)
     {
-
         $designador = new DesignarAgenteFinanciero($agentesFiltrados);
-
         $agente = $designador->elegirAgente() == null ? null : $designador->elegirAgente()->getId();
-
         $designarEstado = new DesignadorDeEstado();
         $estado = $designarEstado->buscarEstado($agente);
 
-        $repoSolicitud = new SolicitudRepo();
-        $solicitud = $repoSolicitud->create(['nombre' => $nombre,
-                                             'apellido' => $apellido,
-                                             'cuit' => $cuit,
-                                             'domicilio' => $domicilio,
-                                             'telefono' => $telefono,
-                                             'codigo_postal' => $codigo_postal,
-                                             'comercializador' => $this->id,
-                                             'doc_documento' => $doc_documento,
-                                             'doc_recibo' => $doc_recibo,
-                                             'doc_domicilio' => $doc_domicilio,
-                                             'doc_cbu' => $doc_cbu,
-                                             'doc_endeudamiento' => $doc_endeudamiento,
-                                             'agente_financiero' => $agente,
-                                             'estado' => $estado]);
+        $solicitud->put('agente_financiero', $agente);
+        $solicitud->put('estado', $estado);
+        $solicitud->put('comercializador', $this->id);
 
+        $repoSolicitud = new SolicitudRepo();
+        $solicitud =  $repoSolicitud->create($solicitud->toArray());
+        $this->addSolicitud($solicitud);
 
         $repo = new SolicitudesSinInversionistaRepo();
         if($agentesFiltrados->count() > 1){
             $agentesFiltrados->each(function($agente) use ($solicitud, $repo){
                 $repo->create(['solicitud' => $solicitud->getId(), 'agente_financiero' => $agente->getId()]);
-
             });
         }
 
 
-        $this->addSolicitud($solicitud);
+
+
     }
 
     public function addSolicitud($solicitud)

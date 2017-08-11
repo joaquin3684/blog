@@ -10,6 +10,7 @@ namespace App\Repositories\Eloquent;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
 use App\Repositories\Eloquent\Repos\MovimientosRepo;
 use App\Traits\Conversion;
+use Carbon\Carbon;
 
 class Cuota
 {
@@ -22,6 +23,7 @@ class Cuota
     private $fecha_inicio;
     private $nro_cuota;
     private $estado;
+    private $cuotasRepo;
 
     public function __construct($id, $importe, $fecha_vencimiento, $fecha_inicio, $nro_cuota, $estado)
     {
@@ -31,6 +33,7 @@ class Cuota
         $this->fecha_inicio = $fecha_inicio;
         $this->nro_cuota = $nro_cuota;
         $this->estado = $estado;
+        $this->cuotasRepo = new CuotasRepo();
     }
 
 
@@ -42,8 +45,7 @@ class Cuota
         $array = array('identificadores_id' => $this->id, 'identificadores_type' => 'App\Cuotas', 'entrada' => $cobrado, 'fecha' => $fecha);
         $this->addMovimiento($array);
         $data = $this->toArray($this);
-        $cuotasRepo = new CuotasRepo();
-        $cuotasRepo->update($data, $this->id);
+        $this->cuotasRepo->update($data, $this->id);
         return $cobrado;
     }
 
@@ -87,6 +89,13 @@ class Cuota
         $this->movimientos->each(function ($movimiento) use ($ganancia){
             $movimiento->pagarProovedor($ganancia);
         });
+    }
+
+    public function correrVto($dias)
+    {
+        $fechaVto = Carbon::createFromFormat('Y-m-d', $this->fecha_vencimiento)->addDays($dias)->toDateString();
+        $fechaInicio = Carbon::createFromFormat('Y-m-d', $this->fecha_inicio)->addDays($dias)->toDateString();
+        $this->cuotasRepo->update(['fecha_vencimiento' => $fechaVto, 'fecha_inicio' => $fechaInicio], $this->id);
     }
 
     public function getMovimientos()

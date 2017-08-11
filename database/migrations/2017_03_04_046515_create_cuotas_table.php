@@ -22,7 +22,7 @@ class CreateCuotasTable extends Migration
             $table->date('fecha_vencimiento');
             $table->date('fecha_inicio');
             $table->integer('nro_cuota');
-            $table->string('estado');
+            $table->string('estado')->nullable();
             $table->softDeletes();
         });
     }

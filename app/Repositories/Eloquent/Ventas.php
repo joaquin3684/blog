@@ -10,8 +10,11 @@ namespace App\Repositories\Eloquent;
 use App\Repositories\Eloquent\Cobranza\CobrarPorVenta;
 use App\Repositories\Eloquent\Mapper\CuotasMapper;
 use App\Repositories\Eloquent\Mapper\VentasMapper;
+use App\Repositories\Eloquent\Repos\VentasRepo;
 use App\Ventas as ModelVentas;
 use App\Traits\Conversion;
+use Carbon\Carbon;
+
 class Ventas
 {
     use Conversion;
@@ -20,21 +23,21 @@ class Ventas
     private $producto;
     private $descripcion;
     private $nro_cuotas;
-    private $fecha;
     private $estados;
     private $importe;
     private $fecha_vencimiento;
+    private $ventaRepo;
 
 
 
-    public function __construct($id, $descripcion, $nro_cuotas, $fecha, $importe, $fecha_vencimiento)
+    public function __construct($id, $descripcion, $nro_cuotas, $importe, $fecha_vencimiento)
     {
         $this->id = $id;
         $this->descripcion = $descripcion;
         $this->nro_cuotas = $nro_cuotas;
-        $this->fecha = $fecha;
         $this->importe = $importe;
         $this->fecha_vencimiento = $fecha_vencimiento;
+        $this->ventaRepo = new VentasRepo();
     }
 
     public function cuotasVencidas()
@@ -60,6 +63,15 @@ class Ventas
         $ganancia = $this->getPorcentajeGanancia();
         $this->cuotas->each(function ($cuota) use ($ganancia) {
            $cuota->pagarProovedor($ganancia);
+        });
+    }
+
+    public function correrVto($dias)
+    {
+        $fecha = Carbon::createFromFormat('Y-m-d', $this->fecha_vencimiento)->addDays($dias)->toDateString();
+        $this->ventaRepo->update(['fecha_vencimiento' => $fecha], $this->id);
+        $this->getCuotas()->each(function($cuota) use ($dias){
+            $cuota->correrVto($dias);
         });
     }
 

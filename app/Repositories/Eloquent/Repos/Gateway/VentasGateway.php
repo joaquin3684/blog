@@ -38,4 +38,9 @@ class VentasGateway extends Gateway
             $query->where('id', $id_proovedor);
         })->get();
     }
+
+    public function findWithCuotas($id)
+    {
+        return Ventas::with('cuotas')->find($id);
+    }
 }

@@ -14,6 +14,7 @@ abstract class Filtro
      */
     public static function apply(array $filters, $queryNueva)
     {
+
         $query =
             static::applyDecoratorsFromRequest(
                 $filters, $queryNueva

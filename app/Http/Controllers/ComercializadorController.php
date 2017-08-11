@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Eloquent\DesignadorDeEstado;
+use App\Repositories\Eloquent\DesignarAgenteFinanciero;
 use App\Repositories\Eloquent\Repos\ComercializadorRepo;
 use App\Repositories\Eloquent\Repos\Gateway\ComercializadorGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use App\Repositories\Eloquent\Repos\Mapper\AgenteFinancieroMapper;
 use App\Repositories\Eloquent\Repos\Mapper\ProveedoresMapper;
+use App\Repositories\Eloquent\Repos\ProveedoresRepo;
+use App\Repositories\Eloquent\Repos\SolicitudesSinInversionistaRepo;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
@@ -26,6 +30,7 @@ class ComercializadorController extends Controller
         $this->solicitudGateway = new SolicitudGateway();
         $this->proovedorMapper = new ProveedoresMapper();
         $this->comerGateway = new ComercializadorGateway();
+        $this->proveedorRepo = new ProveedoresRepo();
     }
 
     public function index()
@@ -39,37 +44,27 @@ class ComercializadorController extends Controller
     public function altaSolicitud(Request $request)
     {
         $elementos = $request->all();
-        $nombre            = $elementos['nombre'];
-        $apellido          = $elementos['apellido'];
-        $cuit              = $elementos['cuit'];
-        $domicilio         = $elementos['domicilio'];
-        $telefono          = $elementos['telefono'];
-        $codigo_postal     = $elementos['codigo_postal'];
-        $doc_documento     = $elementos['doc_documento'];
-        $doc_recibo        = $elementos['doc_recibo'];
-        $doc_domicilio     = $elementos['doc_domicilio'];
-        $doc_cbu           = $elementos['doc_cbu'];
-        $doc_endeudamiento = $elementos['doc_endeudamiento'];
-
-
+        $col = collect($request->all());
         $filtro = $elementos['filtro'] == '' ? [] : $elementos['filtro'];
-       // $a = Sentinel::authenticate(['usuario' => $elementos['usuario'], 'password' => $elementos['password']]);
+
+        $a = Sentinel::authenticate(['usuario' => $elementos['usuario'], 'password' => $elementos['password']]);
         $usuario = Sentinel::check();
 
         //TODO::falta mover los archivos;
         $agentes = DB::table('proovedores')
             ->join('productos', 'proovedores.id', '=', 'productos.id_proovedor')
             ->where('productos.tipo', 'Credito')
-            ->select('proovedores.*', 'productos.*');
+            ->select('proovedores.*', 'productos.tipo');
 
         $agentesFiltrados = \App\Repositories\Eloquent\Filtros\ProovedoresFilter::apply($filtro, $agentes);
 
         $agentes = $agentesFiltrados->map(function($agente){
-           return $this->proovedorMapper->map($agente);
+           return $this->proveedorRepo->find($agente->id);
         });
 
         $comercializador = $this->comerRepo->findByUser($usuario->usuario);
-        $comercializador->generarSolicitud($nombre, $apellido, $cuit, $domicilio, $telefono, $codigo_postal, $doc_documento, $doc_recibo, $doc_domicilio, $doc_cbu, $doc_endeudamiento, $agentes);
+        $comercializador->generarSolicitud($col, $agentes);
+
     }
 
     public function solicitudes()

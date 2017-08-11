@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\Eloquent\Repos\CuotasRepo;
 use App\Repositories\Eloquent\Repos\Gateway\AgenteFinancieroGateway;
+use App\Repositories\Eloquent\Repos\Gateway\ProveedoresGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use App\Repositories\Eloquent\Repos\ProveedoresRepo;
 use App\Repositories\Eloquent\Repos\SociosRepo;
@@ -24,7 +25,7 @@ class AgenteFinancieroController extends Controller
     public function __construct()
     {
         $this->solicitudGateway = new SolicitudGateway();
-        $this->agenteGateway = new AgenteFinancieroGateway();
+        $this->agenteGateway = new ProveedoresGateway();
     }
 
     public function index()
@@ -53,6 +54,7 @@ class AgenteFinancieroController extends Controller
         $elem = $request->all();
         $this->solicitudGateway->update($elem, $elem['id']);
     }
+
 
     public function otorgarCapital(Request $request)
     {
@@ -133,10 +135,6 @@ class AgenteFinancieroController extends Controller
             ]);
             $fechaInicio = $fechaInicio->addMonth();
         }
-
-
-
-
     }
 
 }

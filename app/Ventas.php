@@ -10,7 +10,7 @@ class Ventas extends Model
 	use SoftDeletes;
 
 	protected $fillable = [
-        'id_asociado', 'id_producto', 'descripcion', 'nro_cuotas', 'fecha', 'importe', 'nro_credito', 'fecha_vencimiento'
+        'id_asociado', 'id_producto', 'descripcion', 'nro_cuotas', 'importe', 'nro_credito', 'fecha_vencimiento'
     ];
 
     protected $dates = ['deleted_at'];

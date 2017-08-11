@@ -46,5 +46,11 @@ class VentasRepo extends Repositorio
         return $colleccionNueva;
     }
 
+    public function findWithCuotas($id)
+    {
+        $venta = $this->gateway->findWithCuotas($id);
+        return $this->mapper->map($venta);
+    }
+
 
 }

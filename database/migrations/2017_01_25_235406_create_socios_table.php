@@ -27,7 +27,7 @@ class CreateSociosTable extends Migration
             $table->foreign('id_organismo')->references('id')->on('organismos');
             $table->date('fecha_ingreso');
             $table->integer('legajo');
-            $table->string('grupo_familiar');
+
             $table->softDeletes();
             $table->timestamps();
         });

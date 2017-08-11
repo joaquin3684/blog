@@ -295,4 +295,17 @@ Route::post('agente_financiero/contraPropuesta', 'AgenteFinancieroController@acc
 Route::post('agente_financiero/reservarCapital', 'AgenteFinancieroController@reservarCapital');
 Route::post('agente_financiero/otorgarCapital', 'AgenteFinancieroController@otorgarCapital');
 
+//------------------- CORRER VTO DE SERVICIOS ----------------------------
+
+Route::get('correrVto', 'CorrerVtoServiciosController@index');
+Route::post('correrVto/correrServicio', 'CorrerVtoServiciosController@correrVto');
+
+//--------------------- Proveedor Cuenta Corriente --------------------
+
+Route::get('proveedorCC', 'ProveedorCCController@index');
+Route::post('proveedorCC/CCporOrganismo', 'ProveedorCCController@cuentaCorrientePorOrganismo');
+Route::post('proveedorCC/CCporSocio', 'ProveedorCCController@cuentaCorrientePorSocio');
+Route::post('proveedorCC/CCporVentas', 'ProveedorCCController@cuentaCorrientePorVentas');
+Route::post('proveedorCC/CCporCuotas', 'ProveedorCCController@cuentaCorrientePorCuotas');
+
 

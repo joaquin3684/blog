@@ -18,12 +18,11 @@ class CreateVentasTable extends Migration
             $table->integer('id_producto')->unsigned();
             $table->foreign('id_asociado')->references('id')->on('socios');
             $table->foreign('id_producto')->references('id')->on('productos');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->integer('nro_cuotas');
             $table->integer('importe');
-            $table->date('fecha');
             $table->date('fecha_vencimiento');
-            $table->integer('nro_credito');
+            $table->integer('nro_credito')->nullable();
             $table->softDeletes();
         });
     }
