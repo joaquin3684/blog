@@ -2,12 +2,11 @@ var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).conf
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
 app.controller('comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter) {
-/*
-$scope.ArrayAprobar = [];
-    $scope.pullAprobar = function (){
+
+    $scope.pullComercializadores = function (){
 
         $http({
-            url: 'aprobacion/datos',
+            url: 'comercializador/solicitudes',
             method: 'get'
         }).then(function successCallback(response)
         {
@@ -18,15 +17,15 @@ $scope.ArrayAprobar = [];
             else
             {
                 console.log(response);
-                $scope.aprobaciones = response.data;
-                $scope.paramsAprobaciones = new NgTableParams({
+                $scope.solicitudes = response.data;
+                $scope.paramssolicitudes = new NgTableParams({
                     page: 1,
                     count: 10
                 }, {
-                    total: $scope.aprobaciones.length,
+                    total: $scope.solicitudes.length,
                     getData: function (params) {
-                        $scope.aprobaciones = $filter('orderBy')($scope.aprobaciones, params.orderBy());
-                        return $scope.aprobaciones.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                        $scope.solicitudes = $filter('orderBy')($scope.solicitudes, params.orderBy());
+                        return $scope.solicitudes.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
             }
@@ -39,11 +38,12 @@ $scope.ArrayAprobar = [];
 
 
     }
-*/
+
 
     $scope.AltaComercializador = function (Dato){
         
-    $scope.Dato = [{'nombre':$scope.nombre,'apellido':$scope.apellido,'cuit':$scope.cuit,'domicilio':$scope.domicilio,'codigo_postal':$scope.codigo_postal,'telefono':$scope.telefono}];
+    $scope.Dato = [{'nombre':$scope.nombre,'apellido':$scope.apellido,'cuit':$scope.cuit,'domicilio':$scope.domicilio,'codigo_postal':$scope.codigo_postal,'telefono':$scope.telefono,'doc_documento':'archivos/documento.png','doc_cbu':'archivos/cbu.png','doc_endeudamiento':'archivos/endeudamiento.png','doc_recibo':'archivos/recibo.png','doc_domicilio':'archivos/domicilio.png'}];
+    // 'nombre', 'comercializador', 'cuit', 'domicilio', 'apellido', 'codigo_postal', 'telefono', 'doc_documento', 'doc_recibo', 'doc_domicilio', 'doc_cbu', 'doc_endeudamiento', 'agente_financiero', 'estado', 'total', 'monto_por_cuota', 'cuotas', 'organismo'];
 
         $http({
             url: 'comercializador/altaSolicitud',
@@ -58,8 +58,7 @@ $scope.ArrayAprobar = [];
             }
             else
             {
-                $scope.pullAprobar();
-                $scope.ArrayAprobar = [];
+                $scope.pullComercializadores();
                 console.log('Di el alta');
             }
 
@@ -71,11 +70,11 @@ $scope.ArrayAprobar = [];
 
 
     }
-/*
-    var self = this;
-    $scope.pullAprobar();
-    
 
+    var self = this;
+    $scope.pullComercializadores();
+    
+/*
     $scope.Corroborar = function(serv,check){
     var esta = '';
     var i = 0;

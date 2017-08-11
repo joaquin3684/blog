@@ -58,7 +58,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12"> 
-                          <select ng-options="x for x in organismos" class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="tipo_servicio">
+                          <select ng-options="x for x in organismos" class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="organismocomplete">
                             
                           </select>
                       </div>
@@ -155,7 +155,7 @@
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
                         <button type="button" onclick="console.log('hola');" class="btn btn-primary">Cancel</button>
-                        <button id="send" type="submit" class="btn btn-success">Alta</button>
+                        <button id="send" type="submit" ng-click="AltaComercializador()" class="btn btn-success">Alta</button>
                       </div>
                     </div>
                   </form>
@@ -200,6 +200,7 @@
                      </button>
                      <button id="exportButton2" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
                      <button id="exportButton3" ng-click="Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
+                     
                      </center>
                             <div id="pruebaExpandir">
                                 <div class="span12 row-fluid">
@@ -207,40 +208,30 @@
                                     <!-- END $scope.[model] updates -->
                                     <!-- START TABLE -->
                                     <div id="exportTable">
-                                        <table id="tablita" class="table table-hover table-bordered">
-                                        <thead style="">
-                                        <th style="">Nombre</th>
-                                        <th style="">Apellido</th>
-                                        <th style="">Cuit</th>
-                                        <th style="">Domicilio</th>
-                                        <th style="">Telefono</th>
-                                        <th style="">CP</th>
-                                        <th style="">Estado</th>
-                                        <th style="">Comprobantes</th>
-                                        <th></th>
-                                        </thead>
-                                            <tbody>
+                                        <table id="tablita" ng-table="paramssolicitudes" class="table table-hover table-bordered">
+                                        
+                                            <tbody data-ng-repeat="solicitud in $data" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="Datos">
                                                 <td title="'Nombre'" sortable="'nombre'">
-                                                    Juan
+                                                    {[{solicitud.nombre}]}
                                                 </td>
-                                                <td title="'Apellido'" sortable="'Apellido'">
-                                                    Perez
+                                                <td title="'Apellido'" sortable="'apellido'">
+                                                    {[{solicitud.apellido}]}
                                                 </td>
-                                                <td title="'Cuit'" sortable="'cuota_social'">
-                                                    20-37628932-1
+                                                <td title="'Cuit'" sortable="'cuit'">
+                                                    {[{solicitud.cuit}]}
                                                 </td>
-                                                <td title="'Cuit'" sortable="'cuota_social'">
-                                                    Pedro Lozano 4049
+                                                <td title="'Domicilio'" sortable="'domicilio'">
+                                                    {[{solicitud.domicilio}]}
                                                 </td>
-                                                <td title="'Cuit'" sortable="'cuota_social'">
-                                                    4679-2293
+                                                <td title="'Telefono'" sortable="'telefono'">
+                                                    {[{solicitud.telefono}]}
                                                 </td>
-                                                <td title="'Cuit'" sortable="'cuota_social'">
-                                                    1409
+                                                <td title="'Codigo Postal'" sortable="'codigo_postal'">
+                                                    {[{solicitud.codigo_postal}]}
                                                 </td>
-                                                <td title="'Cuit'" sortable="'cuota_social'">
-                                                    Respondido
+                                                <td title="'Estado'" sortable="'estado'">
+                                                    {[{solicitud.estado}]}
                                                 </td>
                                                 <td title="'Cuit'" sortable="'cuota_social'">
                                                     <input type="button" data-toggle="modal" data-target="#Comprobantes" class="btn btn-default" value="Ver comprobantes">
