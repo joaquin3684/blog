@@ -3,7 +3,7 @@
 @section('contenido')
 
 
-{!! Html::script('js/controladores/comercializador.js') !!}
+{!! Html::script('js/controladores/agente_financiero.js') !!}
 
   <!-- CSS TABLAS -->
   <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -11,7 +11,7 @@
   <link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
-<div class="nav-md" ng-controller="comercializador" >
+<div class="nav-md" ng-controller="agente_financiero" >
 
   <div class="container body" >
   
@@ -25,11 +25,11 @@
          
           <div class="clearfix"></div>
           <div id="mensaje"></div>
-          <div class="row" >
+<!--           <div class="row" >
             <div class="col-md-12 col-sm-12 col-xs-12" >
               <div class="x_panel"  >
                 <div class="x_title">
-                  <h2>Alta Prestamo Comercializador<small>Dar de alta un prestamo a un comercializador</small></h2>
+                  <h2>Agente Financiero<small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -165,7 +165,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
 
 
