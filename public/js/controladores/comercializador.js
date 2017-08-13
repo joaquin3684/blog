@@ -1,7 +1,7 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable','Mutual.services']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
-app.controller('comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter) {
+app.controller('comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv) {
 
     $scope.pullComercializadores = function (){
 
@@ -47,6 +47,13 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
     }
 
+    $scope.IDPropuesta = function(id,importe,monto,cantcuotas) {
+        $scope.idpropuestae = id;
+        $scope.importe = importe;
+        $scope.monto_por_cuota = monto;
+        $scope.cuotas = cantcuotas;
+    }
+
     $scope.getOrganismos = function (){
         $http({
             url: 'organismos/traerElementos',
@@ -83,10 +90,57 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     }
 
 
+
+    $scope.AceptarPropuesta = function () {
+
+        $http({
+            url: 'comercializador/aceptarPropuesta',
+            method: 'post',
+            data: {'id':$scope.idpropuestae,'estado':'Aceptada'}
+        }).then(function successCallback(response)
+        {
+            
+                UserSrv.MostrarMensaje("OK","La propuesta fue aceptada correctamente.","OK");
+                $scope.pullComercializadores();
+
+        }, function errorCallback(data)
+        {
+
+                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error");
+
+        });
+
+    }
+
+    $scope.PropuestaModificada = function () {
+
+        $http({
+            url: 'comercializador/modificarPropuesta',
+            method: 'post',
+            data: {'id':$scope.idpropuestae,'cuotas':$scope.cuotas,'monto_por_cuota':$scope.monto_por_cuota,'estado':'Modificada'}
+        }).then(function successCallback(response)
+        {
+            
+                UserSrv.MostrarMensaje("OK","La propuesta fue aceptada correctamente.","OK");
+                $scope.pullComercializadores();
+
+        }, function errorCallback(data)
+        {
+
+                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error");
+
+        });
+
+    }
+
+    $scope.ModificarPropuesta = function (valor) {
+        $scope.modificandopropuesta = valor;
+    }
+
     $scope.AltaComercializador = function (Dato){
         
-    $scope.Dato = [{
-    'nombre':'juan',//$scope.nombre,
+    $scope.Dato = {
+    'nombre':$scope.nombre,//$scope.nombre,
     'apellido':$scope.apellido,
     'cuit':$scope.cuit,
     'domicilio':$scope.domicilio,
@@ -97,8 +151,12 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     'doc_endeudamiento':'archivos/endeudamiento.png',
     'doc_recibo':'archivos/recibo.png',
     'doc_domicilio':'archivos/domicilio.png',
-    'filtro':''
-    }];
+    'filtro':'',
+    'organismo':$scope.organismocomplete,
+    'dni':$scope.dni,
+    'localidad':$scope.localidad,
+    'legajo':$scope.legajo
+    };
     // 'nombre', 'comercializador', 'cuit', 'domicilio', 'apellido', 'codigo_postal', 'telefono', 'doc_documento', 'doc_recibo', 'doc_domicilio', 'doc_cbu', 'doc_endeudamiento', 'agente_financiero', 'estado', 'total', 'monto_por_cuota', 'cuotas', 'organismo'];
 
         $http({
@@ -107,20 +165,18 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             data: $scope.Dato
         }).then(function successCallback(response)
         {
-            console.log(response.data.ventas);
-            if(typeof response.data === 'string')
-            {
-                return [];
-            }
-            else
-            {
+            
+        
+                
+                UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK");
                 $scope.pullComercializadores();
-                console.log('Di el alta');
-            }
+                
+                
+           
 
         }, function errorCallback(data)
         {
-            console.log(data.data);
+            UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error");
         });
 
 

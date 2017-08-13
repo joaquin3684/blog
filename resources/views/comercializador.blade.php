@@ -59,7 +59,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12"> 
                           <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="organismocomplete">
-                            <option value="x.id" ng-repeat="x in organismos">
+                            <option value="{[{x.id}]}" ng-repeat="x in organismos">
                             {[{x.nombre}]}
                             </option>
                           </select>
@@ -78,35 +78,56 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Apellido <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Apellido">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="apellido" ng-model="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Apellido">{[{errores.cuit[0]}]}
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">DNI <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" id="dni" name="dni" ng-model="dni" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el DNI">{[{errores.dni[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Cuit <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="cuota_social" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{[{errores.cuota_social[0]}]}
+                        <input type="number" id="cuota_social" name="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{[{errores.cuota_social[0]}]}
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Legajo <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" id="legajo" name="legajo" ng-model="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Legajo">{[{errores.legajo[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Domicilio <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{[{errores.cuit[0]}]}
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Localidad <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="localidad" name="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Localidad">{[{errores.localidad[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Telefono <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="telefono" ng-model="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Codigo Postal <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Codigo Postal">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="codigo_postal" ng-model="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Codigo Postal">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
@@ -239,7 +260,7 @@
                                                     <input type="button" data-toggle="modal" data-target="#Comprobantes" ng-click="DatosModal(solicitud.doc_documento,solicitud.doc_recibo,solicitud.doc_cbu,solicitud.doc_domicilio,solicitud.doc_endeudamiento)" class="btn btn-default" value="Ver comprobantes">
                                                 </td>
                                                 <td title="'Cuit'" sortable="'cuota_social'">
-                                                    <input type="button" data-toggle="modal" data-target="#ContraPropuesta" class="btn btn-primary" value="ContraPropuesta">
+                                                    <input type="button" ng-click="IDPropuesta(solicitud.id,solicitud.total,solicitud.monto_por_cuota,solicitud.cuotas)" data-toggle="modal" data-target="#ContraPropuesta" class="btn btn-primary" value="ContraPropuesta">
                                                 </td>
                                             </tr>
                                         </table>
@@ -277,25 +298,26 @@
       </div>
       <div class="modal-body">
          <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
+                   
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Importe <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Importe: 
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="Importe" placeholder="Ingrese el importe" type="number" ng-model="importe" step="0.01">{[{errores.nombre[0]}]}
+                      <div class="col-md-6 col-sm-6 col-xs-12" style="vertical-align: text-middle; color: blue;">
+                        <label class="control-label"><b>{[{importe}]}</b></label>
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Cuotas">Cuotas <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="Cuotas" placeholder="Ingrese el nro de cuotas" type="number" ng-model="cuotas" step="0.01">{[{errores.nombre[0]}]}
+                        <input id="nombre" ng-disabled="!modificandopropuesta" class="form-control col-md-7 col-xs-12" name="Cuotas" placeholder="Ingrese el nro de cuotas" type="number" ng-model="cuotas" step="0.01">{[{errores.nombre[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="MontoPorCuota">Monto por Cuota <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="MontoPorCuota" placeholder="Ingrese el nro de cuotas" ng-model="monto_por_cuota" type="number" step="0.01">{[{errores.nombre[0]}]}
+                        <input ng-disabled="!modificandopropuesta" id="nombre" class="form-control col-md-7 col-xs-12" name="MontoPorCuota" placeholder="Ingrese el nro de cuotas" ng-model="monto_por_cuota" type="number" step="0.01">{[{errores.nombre[0]}]}
                       </div>
                     </div>
                     
@@ -303,9 +325,14 @@
                     <input type="hidden" name="id">
                     <div class="ln_solid"></div>
                     <div class="form-group">
-                      <div class="col-md-6 col-md-offset-3">
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
-                        <button id="send" class="btn btn-success">MODIFICAR</button>
+                      <div class="col-md-12">
+                      <center>
+                      <button type="button" ng-show="!modificandopropuesta" ng-click="AceptarPropuesta()" class="btn btn-primary" data-dismiss="modal">ACEPTAR PROPUESTA</button>
+                        <button id="send" ng-show="!modificandopropuesta" ng-click="ModificarPropuesta(true)" class="btn btn-warning">MODIFICAR</button>
+
+                        <button id="send" data-dismiss="modal" ng-show="modificandopropuesta" ng-click="PropuestaModificada()" class="btn btn-success">ENVIAR PROPUESTA</button>
+                        <button id="send" ng-show="modificandopropuesta" ng-click="ModificarPropuesta(false)" class="btn btn-danger">CANCELAR</button>
+                        </center>
                       </div>
                     </div>
                   </form>
