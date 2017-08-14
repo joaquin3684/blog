@@ -37,7 +37,7 @@
       <div id="mensaje"></div>
                     <div class="x_panel">
                       <div class="x_title">
-                        <h2>Solicitudes </h2>
+                        <h2>Solicitudes Pendientes Mutual</h2>
 
                         <ul class="nav navbar-right panel_toolbox">
                           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -96,7 +96,7 @@
                                                 <td title="'Estado'" sortable="'estado'">
                                                     {[{solicitud.estado}]}
                                                 </td>
-                                                <td title="'Acciones Disponibles'">
+                                                <td title="'Acciones Disponibles'"  style="color: #21a9d6;">
                                                 
                                                       <span ng-click="IDModal(solicitud.id)" data-toggle="modal" data-target="#AgenteFinanciero" ng-show="solicitud.agente_financiero == null" class="fa fa-user fa-2x" titulo="Asignar Agente Financiero"></span>
 

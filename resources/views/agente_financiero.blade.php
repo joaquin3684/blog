@@ -37,7 +37,7 @@
       <div id="mensaje"></div>
                     <div class="x_panel">
                       <div class="x_title">
-                        <h2>Solicitudes </h2>
+                        <h2>Solicitudes Disponibles (AF) </h2>
 
                         <ul class="nav navbar-right panel_toolbox">
                           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -67,9 +67,7 @@
                      </center>
                             <div id="pruebaExpandir">
                                 <div class="span12 row-fluid">
-                                    <!-- START $scope.[model] updates -->
-                                    <!-- END $scope.[model] updates -->
-                                    <!-- START TABLE -->
+                                    
                                     <div id="exportTable">
                                         <table id="tablita" ng-table="paramssolicitudes" class="table table-hover table-bordered">
                                         
@@ -96,7 +94,7 @@
                                                 <td title="'Estado'" sortable="'estado'">
                                                     {[{solicitud.estado}]}
                                                 </td>
-                                                <td title="'Acciones Disponibles'">
+                                                <td title="'Acciones Disponibles'" style="color: #21a9d6;">
                                                 
                                                       <span ng-click="IDModal(solicitud.id)" ng-show="solicitud.estado == 'Inversionista Asignado'" data-toggle="modal" data-target="#Propuesta" class="fa fa-send fa-2x" titulo="Enviar Propuesta"></span>
 

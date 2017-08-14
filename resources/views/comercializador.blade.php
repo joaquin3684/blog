@@ -262,7 +262,7 @@
                                                 <td title="'Estado'" sortable="'estado'">
                                                     {[{solicitud.estado}]}
                                                 </td>
-                                                <td title="'Acciones Disponibles'">
+                                                <td title="'Acciones Disponibles'" style="color: #21a9d6;">
                                                     
                                                     <span data-toggle="modal" data-target="#Comprobantes" ng-click="DatosModal(solicitud.doc_documento,solicitud.doc_recibo,solicitud.doc_cbu,solicitud.doc_domicilio,solicitud.doc_endeudamiento)" class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
                                                     <span ng-show="solicitud.estado == 'Esperando Respuesta Comercializador'" ng-click="IDPropuesta(solicitud.id,solicitud.total,solicitud.monto_por_cuota,solicitud.cuotas)" data-toggle="modal" data-target="#ContraPropuesta" class="fa fa-eye fa-2x" titulo="Analizar Propuesta"></span>
