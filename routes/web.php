@@ -203,6 +203,13 @@ Route::get('roles/traerRelacionroles', 'ABM_roles@traerRelacionpantallas');
 Route::get('roles/traerRoles', 'ABM_roles@traerRoles');
 Route::resource('roles', 'ABM_roles');
 
+
+//--------------- ABM COMERCIALIZADOR ---------------------
+
+Route::get('abm_comercializador/comercializadores', 'ABM_comercializador@comercializadores');
+Route::resource('abm_comercializador', 'ABM_comercializador');
+
+
 //---------------- USUARIOS --------------------
 
 Route::resource('usuarios', 'ABM_usuarios');
