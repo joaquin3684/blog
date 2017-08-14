@@ -103,7 +103,7 @@
                       <li><a href="roles">Roles</a></li>
                   </ul>
                 </li>
-                 <li><a><i class="fa fa-edit"></i> Operaciones <span class="fa fa-chevron-down"></span></a>
+                 <li><a><i class="fa fa-gears"></i> Operaciones <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="dar_servicio">Dar servicio</a>
                     </li>
@@ -114,6 +114,14 @@
                     <li><a href="pago_proovedores">Pago a Proveedores</a>
                     </li>
 
+                  </ul>
+                </li>
+                 <li><a><i class="fa fa-plug"></i> Atajos para Test <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="comercializador">Comercializador</a>
+                    </li>
+                    <li><a href="agente_financiero">Agente Financiero</a>
+                    </li>
                   </ul>
                 </li>
                

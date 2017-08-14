@@ -6,6 +6,11 @@
 {!! Html::script('js/controladores/comercializador.js') !!}
 
   <!-- CSS TABLAS -->
+  <script>
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+  </script>
   <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -24,9 +29,10 @@
         <div class="" >
          
           <div class="clearfix"></div>
-          <div id="mensaje"></div>
+          
           <div class="row" >
             <div class="col-md-12 col-sm-12 col-xs-12" >
+            <div id="mensaje"></div>
               <div class="x_panel"  >
                 <div class="x_title">
                   <h2>Alta Prestamo Comercializador<small>Dar de alta un prestamo a un comercializador</small></h2>
@@ -256,11 +262,12 @@
                                                 <td title="'Estado'" sortable="'estado'">
                                                     {[{solicitud.estado}]}
                                                 </td>
-                                                <td title="'Cuit'" sortable="'cuota_social'">
-                                                    <input type="button" data-toggle="modal" data-target="#Comprobantes" ng-click="DatosModal(solicitud.doc_documento,solicitud.doc_recibo,solicitud.doc_cbu,solicitud.doc_domicilio,solicitud.doc_endeudamiento)" class="btn btn-default" value="Ver comprobantes">
-                                                </td>
-                                                <td title="'Cuit'" sortable="'cuota_social'">
-                                                    <input type="button" ng-click="IDPropuesta(solicitud.id,solicitud.total,solicitud.monto_por_cuota,solicitud.cuotas)" data-toggle="modal" data-target="#ContraPropuesta" class="btn btn-primary" value="ContraPropuesta">
+                                                <td title="'Acciones Disponibles'">
+                                                    
+                                                    <span data-toggle="modal" data-target="#Comprobantes" ng-click="DatosModal(solicitud.doc_documento,solicitud.doc_recibo,solicitud.doc_cbu,solicitud.doc_domicilio,solicitud.doc_endeudamiento)" class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
+                                                    <span ng-show="solicitud.estado == 'Esperando Respuesta Comercializador'" ng-click="IDPropuesta(solicitud.id,solicitud.total,solicitud.monto_por_cuota,solicitud.cuotas)" data-toggle="modal" data-target="#ContraPropuesta" class="fa fa-eye fa-2x" titulo="Analizar Propuesta"></span>
+                                                    <span ng-show="solicitud.estado == 'Capital Reservado'" class="fa fa-print fa-2x" ng-click="ImprimirFormulario()" titulo="Imprimir Formulario"></span>
+                                                    <span ng-show="solicitud.estado == 'Capital Reservado'" class="fa fa-send fa-2x" ng-click="EnviarFormulario(solicitud.id)" titulo="Enviar Formulario"></span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -293,28 +300,29 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
+      <div id="mensajemodal"></div>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">ContraPropuesta</h4>
+        <h4 class="modal-title">Analizar Propuesta</h4>
       </div>
       <div class="modal-body">
          <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
                    
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Importe: 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Importe 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12" style="vertical-align: text-middle; color: blue;">
-                        <label class="control-label"><b>{[{importe}]}</b></label>
+                        <input id="importe" ng-disabled="!modificandopropuesta" class="form-control col-md-7 col-xs-12" name="importe" placeholder="Ingrese el importe" type="number" ng-model="importe" step="0.01">{[{errores.importe[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Cuotas">Cuotas <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Cuotas">Cuotas
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input id="nombre" ng-disabled="!modificandopropuesta" class="form-control col-md-7 col-xs-12" name="Cuotas" placeholder="Ingrese el nro de cuotas" type="number" ng-model="cuotas" step="0.01">{[{errores.nombre[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="MontoPorCuota">Monto por Cuota <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="MontoPorCuota">Monto por Cuota
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input ng-disabled="!modificandopropuesta" id="nombre" class="form-control col-md-7 col-xs-12" name="MontoPorCuota" placeholder="Ingrese el nro de cuotas" ng-model="monto_por_cuota" type="number" step="0.01">{[{errores.nombre[0]}]}
@@ -327,10 +335,10 @@
                     <div class="form-group">
                       <div class="col-md-12">
                       <center>
-                      <button type="button" ng-show="!modificandopropuesta" ng-click="AceptarPropuesta()" class="btn btn-primary" data-dismiss="modal">ACEPTAR PROPUESTA</button>
+                      <button type="button" ng-show="!modificandopropuesta" ng-click="AceptarPropuesta()" class="btn btn-primary">ACEPTAR PROPUESTA</button>
                         <button id="send" ng-show="!modificandopropuesta" ng-click="ModificarPropuesta(true)" class="btn btn-warning">MODIFICAR</button>
 
-                        <button id="send" data-dismiss="modal" ng-show="modificandopropuesta" ng-click="PropuestaModificada()" class="btn btn-success">ENVIAR PROPUESTA</button>
+                        <button id="send" ng-show="modificandopropuesta" ng-click="PropuestaModificada()" class="btn btn-success">ENVIAR CONTRAPROPUESTA</button>
                         <button id="send" ng-show="modificandopropuesta" ng-click="ModificarPropuesta(false)" class="btn btn-danger">CANCELAR</button>
                         </center>
                       </div>
@@ -351,6 +359,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
+      
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Visualización de Comprobantes</h4>
       </div>

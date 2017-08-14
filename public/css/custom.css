@@ -6,6 +6,37 @@ body.nav-sm .container.body .left_col {
   z-index: 200;
   background: #106cc8;
 }
+span:hover{
+  color: green;
+  position: relative;
+}
+span[titulo]:hover:after {
+  content: attr(titulo);
+  font-size: 14px;
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  padding: 4px 8px;
+  color: white;
+  white-space: nowrap;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+/*  white-space: nowrap;
+  z-index: 20px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;*/
+  border-radius: 10px;
+/*  -moz-box-shadow: 0px 0px 4px #222;
+  -webkit-box-shadow: 0px 0px 4px #222;*/
+  box-shadow: 0px 0px 4px #222;
+  background-color: black;
+/*  background-image: -moz-linear-gradient(top, black, white);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, black),color-stop(1, white));
+  background-image: -webkit-linear-gradient(top, black, white);
+  background-image: -moz-linear-gradient(top, black, white);
+  background-image: -ms-linear-gradient(top, black, white);
+  background-image: -o-linear-gradient(top, black, white);*/
+}
 body.nav-sm .container.body .right_col {
   padding: 10px 20px;
   margin-left: 70px;

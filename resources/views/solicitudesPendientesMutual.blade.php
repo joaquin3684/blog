@@ -3,7 +3,7 @@
 @section('contenido')
 
 
-{!! Html::script('js/controladores/agente_financiero.js') !!}
+{!! Html::script('js/controladores/solicitudesPendientesMutual.js') !!}
 
   <!-- CSS TABLAS -->
   <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -11,7 +11,7 @@
   <link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
-<div class="nav-md" ng-controller="agente_financiero" >
+<div class="nav-md" ng-controller="solicitudesPendientesMutual" >
 
   <div class="container body" >
   

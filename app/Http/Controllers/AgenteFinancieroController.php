@@ -45,7 +45,7 @@ class AgenteFinancieroController extends Controller
     {
         $usuario = Sentinel::check();
         $agente =  $this->agenteGateway->findSolicitudesByAgenteFinanciero($usuario->usuario);
-        return $agente->solicitudes();
+        return $agente->solicitudes;
     }
 
     public function reservarCapital(Request $request)

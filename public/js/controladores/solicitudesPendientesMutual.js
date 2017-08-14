@@ -1,7 +1,7 @@
 var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable','Mutual.services']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
-app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv) {
+app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv) {
 
     $scope.pullSolicitudes = function (){
 
