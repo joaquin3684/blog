@@ -85,7 +85,7 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
 
     $scope.EnviarPropuesta = function () {
         
-        if(($scope.monto_por_cuota * $scope.cuotas) == $scope.importe){
+        if(($scope.monto_por_cuota * $scope.cuotas) >= $scope.importe){
 
             $http({
                 url: 'agente_financiero/enviarPropuesta',

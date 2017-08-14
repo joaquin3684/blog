@@ -19,7 +19,7 @@ class DesignadorDeEstado
 
         } else
         {
-            return 'Esperando Inversionista';
+            return 'Inversionista Asignado';
         }
     }
 }
