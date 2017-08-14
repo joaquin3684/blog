@@ -206,8 +206,8 @@ Route::resource('roles', 'ABM_roles');
 
 //--------------- ABM COMERCIALIZADOR ---------------------
 
-Route::get('abm_comercializador/comercializadores', 'ABM_comercializador@comercializadores');
-Route::resource('abm_comercializador', 'ABM_comercializador');
+Route::get('abm_comercializador/comercializadores', 'ABM_Comercializador@comercializadores');
+Route::resource('abm_comercializador', 'ABM_Comercializador');
 
 
 //---------------- USUARIOS --------------------
