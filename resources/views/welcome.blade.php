@@ -122,6 +122,8 @@
                     </li>
                     <li><a href="agente_financiero">Agente Financiero</a>
                     </li>
+                    <li><a href="solicitudesPendientesMutual">Solicitudes Pendientes Mutual</a>
+                    </li>
                   </ul>
                 </li>
                

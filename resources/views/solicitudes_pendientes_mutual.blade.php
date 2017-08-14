@@ -98,12 +98,11 @@
                                                 </td>
                                                 <td title="'Acciones Disponibles'">
                                                 
-                                                      <span ng-click="IDModal(solicitud.id)" ng-show="solicitud.estado == 'Inversionista Asignado'" data-toggle="modal" data-target="#Propuesta" class="fa fa-send fa-2x" titulo="Enviar Propuesta"></span>
+                                                      <span ng-click="IDModal(solicitud.id)" data-toggle="modal" data-target="#AgenteFinanciero" ng-show="solicitud.agente_financiero == null" class="fa fa-user fa-2x" titulo="Asignar Agente Financiero"></span>
 
-                                                      <span ng-click="ReservarCapital(solicitud.id)" ng-show="solicitud.estado == 'Aceptada por Comercializador'" class="fa fa-dollar fa-2x" titulo="Reservar Capital"></span>
+                                                      <span ng-click="IDModal(solicitud.id)" data-toggle="modal" data-target="#Endeudamiento" ng-show="solicitud.doc_endeudamiento == null" class="fa fa-file-text fa-2x" titulo="Numero Endeudamiento"></span>
+
                                                       
-                                                      <span ng-click="OtorgarCapital(solicitud.id)" ng-show="solicitud.estado == 'Formulario Enviado'" class="fa fa-money fa-2x" titulo="Otorgar Capital"></span>
-                                                    
                                                       
                                                 </td>
                                             </tr>
@@ -130,57 +129,75 @@
     <div id="notif-group" class="tabbed_notifications"></div>
   </div>
 
- <!-- Modal -->
-<div id="Propuesta" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
+ 
+<div id="AgenteFinanciero" class="modal fade" role="dialog">
+  <div class="modal-dialog"> 
     <div class="modal-content">
       <div class="modal-header">
       <div id="mensajemodal"></div>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">ENVIAR PROPUESTA AL COMERCIALIZADOR</h4>
+        <h4 class="modal-title">ASIGNAR AGENTE FINANCIERO</h4>
       </div>
       <div class="modal-body">
-         <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Importe <span class="required">*</span>
+         <form class="form-horizontal form-label-left">
+                    <div class="item form-group"> 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Agente Financiero 
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="Importe" placeholder="Ingrese el importe" type="number" ng-model="importe" step="0.01">{[{errores.nombre[0]}]}
+                      <div class="col-md-6 col-sm-6 col-xs-12"> 
+                          <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="agente">
+                            <option>
+                            Ejemplo 1
+                            </option>
+                            <option>
+                            Ejemplo 2
+                            </option>
+                            <option>
+                            Ejemplo 3
+                            </option><!-- <option value="{[{x.id}]}" ng-repeat="x in agentes">
+                            {[{x.nombre}]}
+                            </option> -->
+                          </select>
                       </div>
                     </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Cuotas">Cuotas <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="Cuotas" placeholder="Ingrese el nro de cuotas" type="number" ng-model="cuotas" step="0.01">{[{errores.nombre[0]}]}
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="MontoPorCuota">Monto por Cuota <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="MontoPorCuota" placeholder="Ingrese el nro de cuotas" ng-model="monto_por_cuota" type="number" step="0.01">{[{errores.nombre[0]}]}
-                      </div>
-                    </div>
-                    
-                   
-                    <input type="hidden" name="id">
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                      <button type="button" ng-click="EnviarPropuesta()" class="btn btn-primary">ENVIAR PROPUESTA</button>
+                      <button type="button" ng-click="AsignarAF()" class="btn btn-primary">ASIGNAR AGENTE FINANCIERO</button>
                       </div>
                     </div>
-                  </form>
-      </div>
-      
+          </form>
+      </div>      
     </div>
-
   </div>
+</div>
 
-
+<div id="Endeudamiento" class="modal fade" role="dialog">
+  <div class="modal-dialog"> 
+    <div class="modal-content">
+      <div class="modal-header">
+      <div id="mensajemodal2"></div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">ASIGNAR ENDEUDAMIENTO</h4>
+      </div>
+      <div class="modal-body">
+         <form class="form-horizontal form-label-left">
+                    <div class="item form-group"> 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">ENDEUDAMIENTO 
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12"> 
+                          <input id="endeudamiento" class="form-control col-md-7 col-xs-12" name="endeudamiento" placeholder="Ingrese el Endeudamiento" ng-model="endeudamiento" type="number">
+                      </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-6 col-md-offset-3">
+                      <button type="button" ng-click="AsignarEndeudamiento()" class="btn btn-primary">ASIGNAR ENDEUDAMIENTO</button>
+                      </div>
+                    </div>
+          </form>
+      </div>      
+    </div>
+  </div>
 </div>
 
   <!-- bootstrap progress js -->

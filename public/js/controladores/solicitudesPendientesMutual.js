@@ -6,7 +6,7 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
     $scope.pullSolicitudes = function (){
 
         $http({
-            url: 'agente_financiero/solicitudes',
+            url: 'solicitudesPendientesMutual/solicitudes',
             method: 'get'
         }).then(function successCallback(response)
         {
@@ -43,70 +43,42 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
         $scope.idpropuestae = id;
     }
 
-    $scope.ReservarCapital = function(id) {
+    $scope.AsignarAF = function() {
         $http({
-                url: 'agente_financiero/reservarCapital',
+                url: 'solicitudesPendientesMutual/actualizar',
                 method: 'post',
-                data: {'id':id,'estado':'Capital Reservado'}
+                data: {'id':$scope.idpropuestae,'agente_financiero':$scope.agente}
             }).then(function successCallback(response)
             {
                 
-                    UserSrv.MostrarMensaje("OK","El capital fue reservado correctamente.","OK","mensaje");
+                    UserSrv.MostrarMensaje("OK","El agente financiero fué asignado correctamente.","OK","mensajemodal","AgenteFinanciero");
                     $scope.pullSolicitudes();
 
             }, function errorCallback(data)
             {
 
-                    UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
+                    UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensajemodal","AgenteFinanciero");
 
             });
     }
 
-    $scope.OtorgarCapital = function(id) {
-        
+    $scope.AsignarEndeudamiento = function() {
         $http({
-            url: 'agente_financiero/otorgarCapital',
-            method: 'post',
-            data: {'id':id,'estado':'Capital Otorgado'}
-        }).then(function successCallback(response)
-        {
-            
-                UserSrv.MostrarMensaje("OK","El capital fue otorgado correctamente.","OK","mensaje");
-                $scope.pullComercializadores();
-
-        }, function errorCallback(data)
-        {
-
-                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
-
-        });
-    
-    }
-
-    $scope.EnviarPropuesta = function () {
-        
-        if(($scope.monto_por_cuota * $scope.cuotas) == $scope.importe){
-
-            $http({
-                url: 'agente_financiero/enviarPropuesta',
+                url: 'solicitudesPendientesMutual/actualizar',
                 method: 'post',
-                data: {'id':$scope.idpropuestae,'total':$scope.importe,'cuotas':$scope.cuotas,'monto_por_cuota':$scope.monto_por_cuota,'estado':'Esperando Respuesta Comercializador'}
+                data: {'id':$scope.idpropuestae,'doc_endeudamiento':$scope.endeudamiento}
             }).then(function successCallback(response)
             {
                 
-                    UserSrv.MostrarMensaje("OK","La propuesta fue enviada correctamente.","OK","mensajemodal","ContraPropuesta");
+                    UserSrv.MostrarMensaje("OK","El endeudamiento fué asignado correctamente.","OK","mensajemodal2","Endeudamiento");
                     $scope.pullSolicitudes();
 
             }, function errorCallback(data)
             {
 
-                    UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensajemodal");
+                    UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensajemodal","Endeudamiento");
 
             });
-
-        } else {
-            UserSrv.MostrarMensaje("Error","El monto por cuota y las cuotas son incongruentes con el importe total.","Error","mensajemodal");
-        }
     }
 
 
