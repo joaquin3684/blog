@@ -19,7 +19,11 @@ use Illuminate\Support\Facades\Storage;
 Route::resource('asociados', 'ABM_asociados');
 
 //---------------- PRUEBAS ------------------------------
-Route::get('prueba', function(){return view('prueba');});
+Route::get('pruebas', function(){
+     App\Socios::withTrashed()->find(16)->restore();
+    return DB::table('socios')
+                ->get();
+});
 Route::post('pruebas', function(Request $request){
 
 

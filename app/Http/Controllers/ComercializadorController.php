@@ -47,7 +47,7 @@ class ComercializadorController extends Controller
         $col = collect($request->all());
         //$filtro = $elementos['filtro'] == '' ? [] : $elementos['filtro'];
         $filtro = [];
-        //$a = Sentinel::authenticate(['usuario' => $elementos['usuario'], 'password' => $elementos['password']]);
+        $a = Sentinel::authenticate(['usuario' => $elementos['usuario'], 'password' => $elementos['password']]);
         $usuario = Sentinel::check();
 
         //TODO::falta mover los archivos;

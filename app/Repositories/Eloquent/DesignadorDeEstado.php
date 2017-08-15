@@ -15,7 +15,7 @@ class DesignadorDeEstado
     {
         if($agente == null)
         {
-            return 'Buscando Inversionista';
+            return 'Procesando Solicitud';
 
         } else
         {

@@ -9,6 +9,7 @@
 namespace App\Repositories\Eloquent;
 
 
+use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Repositories\Eloquent\Repos\SolicitudesSinInversionistaRepo;
 use App\Repositories\Eloquent\Repos\SolicitudRepo;
 
@@ -29,6 +30,16 @@ class Comercializador
         $agente = $designador->elegirAgente() == null ? null : $designador->elegirAgente()->getId();
         $designarEstado = new DesignadorDeEstado();
         $estado = $designarEstado->buscarEstado($agente);
+
+        if(empty($solicitud['id_socio']))
+        {
+            $socioRepo = new SociosRepo();
+            $solicitud->put('pertenece', 0);
+            $socio = $socioRepo->create($solicitud->toArray());
+            $solicitud->put('id_socio', $socio->getId());
+            $socioRepo->destroy($socio->getId());
+        }
+
 
         $solicitud->put('agente_financiero', $agente);
         $solicitud->put('estado', $estado);

@@ -11,7 +11,12 @@ class Solicitud extends Model
     protected $table = 'solicitudes';
 
     protected $fillable = [
-        'nombre', 'comercializador', 'cuit', 'domicilio', 'apellido', 'codigo_postal', 'telefono', 'doc_documento', 'doc_recibo', 'doc_domicilio', 'doc_cbu', 'doc_endeudamiento', 'agente_financiero', 'estado', 'total', 'monto_por_cuota', 'cuotas', 'organismo', 'dni', 'fecha_nacimiento', 'legajo', 'localidad'];
+        'id_socio', 'comercializador', 'doc_documento', 'doc_recibo', 'doc_domicilio', 'doc_cbu', 'doc_endeudamiento', 'agente_financiero', 'estado', 'total', 'monto_por_cuota', 'cuotas'];
+
+    public function socio()
+    {
+        return $this->belongsTo('App\Socio', 'id_socio', 'id')->withTrashed();
+    }
 
     protected $dates = ['deleted_at'];
 }
