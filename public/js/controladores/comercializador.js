@@ -42,9 +42,9 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     $scope.query = function(searchText, ruta)
     {
         return $http({
-            url: 'dar_servicio/'+ruta,
+            url: 'comercializador/buscarSocios',
             method: 'post',
-            data: {'nombre' : searchText}
+            data: {'nombre' : searchText,'id_organismo':$scope.organismocomplete}
             }).then(function successCallback(response)
                 {
                     return response.data;
