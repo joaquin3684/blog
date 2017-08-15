@@ -20,9 +20,7 @@ Route::resource('asociados', 'ABM_asociados');
 
 //---------------- PRUEBAS ------------------------------
 Route::get('pruebas', function(){
-     App\Socios::withTrashed()->find(16)->restore();
-    return DB::table('socios')
-                ->get();
+     return view('prueba');
 });
 Route::post('pruebas', function(Request $request){
 
@@ -33,6 +31,7 @@ Route::post('pruebas', function(Request $request){
     $request->foto->move('/images/p', 'a.png');
     $request->foto->storeAs('ifd', 'filename.png', 'public');
     Storage::disk('public')->put('prufdefba.png', $request->foto);
+
    // $q = $request->foto->storeAs('images', 'prueba.png');
     return 1;
     $a =  Socios::with('cuotasSociales.movimientos')->find($request['id']);
