@@ -20,7 +20,7 @@ class ComercializadorGateway extends Gateway
 
     public function findSolicitudesFromUser($id)
     {
-        return Comercializador::with('solicitudes')->where('usuario', $id)->get()->first();
+        return Comercializador::with('solicitudes.socio')->where('usuario', $id)->get()->first();
     }
 
 }

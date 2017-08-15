@@ -67,40 +67,43 @@ class AgenteFinancieroController extends Controller
         $elem = $request->all();
         $sol = $this->solicitudGateway->update($elem, $elem['id']);
 
-        $idOrganismo = $sol->organismo;
-        $nombre = $sol->nombre;
-        $apellido = $sol->apellido;
-        $cuit = $sol->cuit;
-        $telefono = $sol->telefono;
-        $fecha_nacimiento = $sol->fecha_nacimiento;
-        $domicilio = $sol->domicilio;
-        $codigo_postal = $sol->codigo_postal;
-        $proveedor = $sol->agente_financiero;
-        $legajo = $sol->legajo;
-        $dni = $sol->dni;
-        $localidad = $sol->localidad;
+        /* $idOrganismo = $sol->organismo;
+         $nombre = $sol->nombre;
+         $apellido = $sol->apellido;
+         $cuit = $sol->cuit;
+         $telefono = $sol->telefono;
+         $fecha_nacimiento = $sol->fecha_nacimiento;
+         $domicilio = $sol->domicilio;
+         $codigo_postal = $sol->codigo_postal;
+
+         $legajo = $sol->legajo;
+         $dni = $sol->dni;
+         $localidad = $sol->localidad;
+
+ */
+        $socio = $sol->id_socio;
         $cuotas = $sol->cuotas;
         $montoPorCuota = $sol->monto_por_cuota;
         $total = $montoPorCuota * $cuotas;
-
+        $proveedor = $sol->agente_financiero;
         $proveedor = $proveedorRepo->findProductos($proveedor);
         $producto = $proveedor->getProductos()->first();
+        /*
+                $col = collect();
+                $col->put('id_organismo', $idOrganismo);
+                $col->put('nombre', $nombre);
+                $col->put('apellido', $apellido);
+                $col->put('cuit', $cuit);
+                $col->put('domicilio', $domicilio);
+                $col->put('codigo_postal', $codigo_postal);
+                $col->put('fecha_nacimiento', $fecha_nacimiento);
+                $col->put('dni', $dni);
+                $col->put('fecha_ingreso', $fecha->today()->toDateString());
+                $col->put('localidad', $localidad);
+                $col->put('telefono', $telefono);
+                $col->put('legajo', $legajo);
 
-        $col = collect();
-        $col->put('id_organismo', $idOrganismo);
-        $col->put('nombre', $nombre);
-        $col->put('apellido', $apellido);
-        $col->put('cuit', $cuit);
-        $col->put('domicilio', $domicilio);
-        $col->put('codigo_postal', $codigo_postal);
-        $col->put('fecha_nacimiento', $fecha_nacimiento);
-        $col->put('dni', $dni);
-        $col->put('fecha_ingreso', $fecha->today()->toDateString());
-        $col->put('localidad', $localidad);
-        $col->put('telefono', $telefono);
-        $col->put('legajo', $legajo);
-
-        $socio = $socioRepo->create($col->toArray());
+                $socio = $socioRepo->create($col->toArray());*/
         $fechaVto = new Carbon();
         $fechaInicio = new Carbon();
         $fechaInicioDeVto = $fechaVto->today()->addMonths(2);
