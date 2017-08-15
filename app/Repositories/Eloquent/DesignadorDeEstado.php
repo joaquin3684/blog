@@ -11,9 +11,15 @@ namespace App\Repositories\Eloquent;
 
 class DesignadorDeEstado
 {
+    private $solicitud;
+    public function __construct($solicitud)
+    {
+        $this->solicitud = $solicitud;
+    }
+
     public function buscarEstado($agente)
     {
-        if($agente == null)
+        if($agente == null && empty($this->solicitud->doc_endeudamiento))
         {
             return 'Procesando Solicitud';
 

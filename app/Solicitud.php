@@ -15,7 +15,7 @@ class Solicitud extends Model
 
     public function socio()
     {
-        return $this->belongsTo('App\Socio', 'id_socio', 'id')->withTrashed();
+        return $this->belongsTo('App\Socios', 'id_socio', 'id')->withTrashed();
     }
 
     protected $dates = ['deleted_at'];

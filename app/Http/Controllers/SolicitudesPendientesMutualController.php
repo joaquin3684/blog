@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Eloquent\Repos\Gateway\SolicitudesSinInversionistaGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,7 @@ class SolicitudesPendientesMutualController extends Controller
     private $solicitudesGateway;
     public function __construct()
     {
-        $this->solicitudesGateway = new SolicitudGateway();
+        $this->solicitudesGateway = new SolicitudesSinInversionistaGateway();
     }
 
     public function index()
@@ -22,16 +23,17 @@ class SolicitudesPendientesMutualController extends Controller
     {
         $elem = $request->all();
         $col = collect();
-        if($request->has('doc_endeudamiento'))
+        if(empty($request['doc_endeudamiento']))
         {
             $endeudamiento = $elem['doc_endeudamiento'];
             $col->put('doc_endeudamiento', $endeudamiento);
         }
-        if ($request->has('agente_financiero'))
+        if (empty($request['agente_financiero']))
         {
             $agente = $elem['agente_financiero'];
             $col->put('agente_financiero', $agente);
         }
+        $col->put('estado', 'Inversionista Asignado');
 
         $this->solicitudesGateway->update($col->toArray(), $elem['id']);
 
@@ -41,4 +43,5 @@ class SolicitudesPendientesMutualController extends Controller
     {
         return $this->solicitudesGateway->solicitudesSinAsignar();
     }
+
 }

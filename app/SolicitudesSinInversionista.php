@@ -14,4 +14,14 @@ class SolicitudesSinInversionista extends Model
         'agente_financiero', 'solicitud'];
 
     protected $dates = ['deleted_at'];
+
+    public function agentes_financieros()
+    {
+        return $this->belongsToMany('App\Proovedores', 'agente_financiero', 'id');
+    }
+
+    public function solicitud()
+    {
+        return $this->belongsTo('App\Solicitud', 'solicitud', 'id');
+    }
 }

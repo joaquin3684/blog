@@ -288,6 +288,7 @@ Route::post('comercializador/altaSolicitud', 'ComercializadorController@altaSoli
 Route::get('comercializador/solicitudes', 'ComercializadorController@solicitudes');
 Route::post('comercializador/aceptarPropuesta', 'ComercializadorController@modificarPropuesta');
 Route::post('comercializador/modificarPropuesta', 'ComercializadorController@modificarPropuesta');
+Route::post('comercializador/buscarSocios', 'ComercializadorController@sociosQueCumplenConFiltro');
 
 //------------------ SOLICITUDES PENDIENTES DE LA MUTUAL --------------
 

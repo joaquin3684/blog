@@ -47,7 +47,7 @@ class ComercializadorController extends Controller
         $col = collect($request->all());
         //$filtro = $elementos['filtro'] == '' ? [] : $elementos['filtro'];
         $filtro = [];
-        $a = Sentinel::authenticate(['usuario' => $elementos['usuario'], 'password' => $elementos['password']]);
+        //$a = Sentinel::authenticate(['usuario' => $elementos['usuario'], 'password' => $elementos['password']]);
         $usuario = Sentinel::check();
 
         //TODO::falta mover los archivos;
@@ -79,6 +79,17 @@ class ComercializadorController extends Controller
     {
         $elem = $request->all();
         $this->solicitudGateway->update($elem, $elem['id']);
+    }
+
+    public function sociosQueCumplenConFiltro(Request $request)
+    {
+
+        $socios = DB::table('socios')
+            ->join('organismos', 'socios.id_organismo', 'socios.id')
+            ->where('organismo.id', $request['id_organismo'])
+            ->where('nombre', 'LIKE', '%'.$request['nombre'].'%')->get();
+        return $socios;
+
     }
 
 

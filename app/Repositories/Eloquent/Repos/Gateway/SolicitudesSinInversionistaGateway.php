@@ -3,6 +3,8 @@
 namespace App\Repositories\Eloquent\Repos\Gateway;
 
 
+use App\SolicitudesSinInversionista;
+
 class SolicitudesSinInversionistaGateway extends Gateway
 {
     function model()
@@ -10,4 +12,8 @@ class SolicitudesSinInversionistaGateway extends Gateway
         return 'App\SolicitudesSinInversionista';
     }
 
+    public function solicitudesSinAsignar()
+    {
+        return SolicitudesSinInversionista::with('solicitud', 'agentes_financieros')->get();
+    }
 }

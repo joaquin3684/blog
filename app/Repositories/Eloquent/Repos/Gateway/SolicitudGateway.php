@@ -18,11 +18,5 @@ class SolicitudGateway extends Gateway
         return 'App\Solicitud';
     }
 
-    public function solicitudesSinAsignar()
-    {
-        return Solicitud::whereNull('agente_financiero')
-                        ->orWhere('doc_endeudamiento', '')->get();
-    }
-
 
 }

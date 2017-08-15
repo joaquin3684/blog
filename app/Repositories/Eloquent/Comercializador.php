@@ -28,7 +28,7 @@ class Comercializador
     {
         $designador = new DesignarAgenteFinanciero($agentesFiltrados);
         $agente = $designador->elegirAgente() == null ? null : $designador->elegirAgente()->getId();
-        $designarEstado = new DesignadorDeEstado();
+        $designarEstado = new DesignadorDeEstado($solicitud);
         $estado = $designarEstado->buscarEstado($agente);
 
         if(empty($solicitud['id_socio']))

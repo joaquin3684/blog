@@ -81,6 +81,7 @@ class AgenteFinancieroController extends Controller
          $localidad = $sol->localidad;
 
  */
+        $sol->socio()->restore();
         $socio = $sol->id_socio;
         $cuotas = $sol->cuotas;
         $montoPorCuota = $sol->monto_por_cuota;
