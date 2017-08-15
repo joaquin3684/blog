@@ -167,6 +167,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     'apellido':$scope.apellido,
     'cuit':$scope.cuit,
     'domicilio':$scope.domicilio,
+    'fecha_nacimiento':$scope.fecha_nacimiento,
     'codigo_postal':$scope.codigo_postal,
     'telefono':$scope.telefono,
     'doc_documento':'archivos/documento.png',
@@ -178,7 +179,8 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     'organismo':$scope.organismocomplete,
     'dni':$scope.dni,
     'localidad':$scope.localidad,
-    'legajo':$scope.legajo
+    'legajo':$scope.legajo,
+    'id_socio':1
     };
     // 'nombre', 'comercializador', 'cuit', 'domicilio', 'apellido', 'codigo_postal', 'telefono', 'doc_documento', 'doc_recibo', 'doc_domicilio', 'doc_cbu', 'doc_endeudamiento', 'agente_financiero', 'estado', 'total', 'monto_por_cuota', 'cuotas', 'organismo'];
 

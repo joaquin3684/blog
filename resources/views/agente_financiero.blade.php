@@ -95,7 +95,9 @@
                                                     {[{solicitud.estado}]}
                                                 </td>
                                                 <td title="'Acciones Disponibles'" style="color: #21a9d6;">
-                                                
+                                                      
+                                                      <span data-toggle="modal" data-target="#Comprobantes" ng-click="DatosModal(solicitud.doc_documento,solicitud.doc_recibo,solicitud.doc_cbu,solicitud.doc_domicilio,solicitud.doc_endeudamiento)" class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
+
                                                       <span ng-click="IDModal(solicitud.id)" ng-show="solicitud.estado == 'Inversionista Asignado'" data-toggle="modal" data-target="#Propuesta" class="fa fa-send fa-2x" titulo="Enviar Propuesta"></span>
 
                                                       <span ng-click="ReservarCapital(solicitud.id)" ng-show="solicitud.estado == 'Aceptada por Comercializador'" class="fa fa-dollar fa-2x" titulo="Reservar Capital"></span>
@@ -180,6 +182,49 @@
 
 
 </div>
+
+
+<div id="Comprobantes" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+      
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Visualización de Comprobantes</h4>
+      </div>
+      <div class="modal-body">
+         <form class="form-horizontal form-label-left">
+                    <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comprob">Comprobante: 
+                        </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        
+                        <select class="form-control" placeholder="Comprobante a visualizar.." ng-model="comprobantevisualizar" ng-change="Comprobante()">
+                          <option ng-repeat="x in DatosModalActual" ng-value="{[{x.archivo}]}">
+                            {[{x.comprobante}]}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                   
+
+                    </br>
+                    <center>Previsualización</center>
+                    </br>
+                    <center><img src="images/preload.png" height="300px" width="300px" id="previsualizacion"></center>
+         </form>
+      </div>
+      
+    </div>
+
+  </div>
+
+
+</div>
+
 
   <!-- bootstrap progress js -->
 
