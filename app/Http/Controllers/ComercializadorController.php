@@ -86,7 +86,7 @@ class ComercializadorController extends Controller
 
         $socios = DB::table('socios')
             ->join('organismos', 'socios.id_organismo', 'socios.id')
-            ->where('organismo.id', $request['id_organismo'])
+            ->where('organismos.id', $request['id_organismo'])
             ->where('nombre', 'LIKE', '%'.$request['nombre'].'%')->get();
         return $socios;
 
