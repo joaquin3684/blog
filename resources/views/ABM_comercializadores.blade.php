@@ -13,7 +13,7 @@
   <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
 <div class="nav-md" ng-controller="ABM_comercializador" >
 
-  <div class="container body" >
+  <div class="container body">
 
     <div class="main_container" >
 
@@ -83,6 +83,13 @@
                       <input type="text" id="documento" name="documento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Documento" ng-model="documentoComerc">{[{errores.cuit[0]}]}
                     </div>
                   </div>
+                  <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="documento" >Email<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el email" ng-model="emailComerc">{[{errores.cuit[0]}]}
+                  </div>
+                </div>
                   <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Domicilio<span class="required">*</span>
                   </label>
@@ -163,7 +170,7 @@
                      <button id="exportButton3" ng-click="Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
                      </center>
                             <div id="pruebaExpandir">
-                                <div class="span12 row-fluid">
+                                <div class="span12 row-fluid">Unexpected
                                     <!-- START $scope.[model] updates -->
                                     <!-- END $scope.[model] updates -->
                                     <!-- START TABLE -->
@@ -174,14 +181,15 @@
                                         <th style="">Nombre</th>
                                         <th style="">Apellido</th>
                                         <th style="">Documento</th>
+                                        <th style="">Email</th>
                                         <th style="">Cuit</th>
                                         <th style="">Domicilio</th>
                                         <th style="">Telefono</th>
                                         <th style="">Usuario</th>
-                                        <th style="">Contraseña</th>
-                            
+                                        <th style=""></th>
+
                                         </thead>
-                                            <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
+                                            <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
                                             <tr class="clickableRow" title="Datos">
                                                 <td title="'Nombre'" sortable="'nombre'">
                                                     {{abm.nombre}}
@@ -190,7 +198,10 @@
                                                     {{abm.apellido}}
                                                 </td>
                                                 <td title="'Documento'" sortable="'documento'">
-                                                    {{abm.documento}}
+                                                    {{abm.dni}}
+                                                </td>
+                                                <td title="'Email'" sortable="'email'">
+                                                    {{abm.email}}
                                                 </td>
                                                 <td title="'Cuit'" sortable="'cuit'">
                                                     {{abm.cuit}}
@@ -206,7 +217,7 @@
                                                 </td>
 
                                                 <td id="botones">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerElemento()"><span class="glyphicon glyphicon-pencil"></span></button>
                                                 <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
                                                 </td>
                                             </tr>
@@ -246,28 +257,70 @@
       </div>
       <div class="modal-body">
          <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{[{errores.nombre[0]}]}
-                      </div>
-                    </div>
+           <div class="item form-group">
+             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre" >Nombre <span class="required">*</span>
+             </label>
+             <div class="col-md-6 col-sm-6 col-xs-12">
+               <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del comercializador" type="text" ng-model="nombreComerc">{[{errores.nombre[0]}]}
+             </div>
+           </div>
+           <div class="item form-group">
+             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="apellido">Apellido<span class="required">*</span>
+             </label>
+             <div class="col-md-6 col-sm-6 col-xs-12">
+               <input type="number" step="0.01" id="apellido" name="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el apellido del comercializador" ng-model="apellidoComerc">{[{errores.cuota_social[0]}]}
+             </div>
+           </div>
 
-                      <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12">{[{errores.cuit[0]}]}
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Cuota Social <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="cuota_social" id="cuota_social" name="cuota_social" class="form-control col-md-7 col-xs-12">{[{errores.cuota_social[0]}]}
-                      </div>
-                    </div>
+             <div class="item form-group">
+             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Cuit<span class="required">*</span>
+             </label>
+             <div class="col-md-6 col-sm-6 col-xs-12">
+               <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit" ng-model="cuitComerc">{[{errores.cuit[0]}]}
+             </div>
+           </div>
+           <div class="item form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="documento" >Documento<span class="required">*</span>
+           </label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+             <input type="text" id="documento" name="documento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Documento" ng-model="documentoComerc">{[{errores.cuit[0]}]}
+           </div>
+         </div>
+         <div class="item form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="documento" >Email<span class="required">*</span>
+         </label>
+         <div class="col-md-6 col-sm-6 col-xs-12">
+           <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el email" ng-model="emailComerc">{[{errores.cuit[0]}]}
+         </div>
+       </div>
+         <div class="item form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Domicilio<span class="required">*</span>
+         </label>
+         <div class="col-md-6 col-sm-6 col-xs-12">
+           <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio" ng-model="domicilioComerc">{[{errores.cuit[0]}]}
+         </div>
+       </div>
+       <div class="item form-group">
+       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Telefono<span class="required">*</span>
+       </label>
+       <div class="col-md-6 col-sm-6 col-xs-12">
+         <input type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el telefono" ng-model="telefonoComerc">{[{errores.cuit[0]}]}
+       </div>
+     </div>
+     <div class="item form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Usuario<span class="required">*</span>
+     </label>
+     <div class="col-md-6 col-sm-6 col-xs-12">
+       <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el usuario" ng-model="usuarioComerc">{[{errores.cuit[0]}]}
+     </div>
+   </div>
+   <div class="item form-group">
+   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Contraseña<span class="required">*</span>
+   </label>
+   <div class="col-md-6 col-sm-6 col-xs-12">
+     <input type="text" id="contraseña" name="tcontraseña" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la contraseña" ng-model="contraseniaComerc">{[{errores.cuit[0]}]}
+   </div>
+ </div>
 
                     <input type="hidden" name="id">
                     <div class="ln_solid"></div>
