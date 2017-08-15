@@ -110,7 +110,26 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
     }
 
 
+    $scope.Comprobante = function (){
 
+        archivo = $scope.comprobantevisualizar;
+        
+        document.getElementById('previsualizacion').src = "images/"+archivo+".png";
+
+    }
+
+    $scope.DatosModal = function (documento,recibo,cbu,domicilio,endeudamiento){
+
+        $scope.DatosModalActual = [
+        {'comprobante':'Documento','archivo':documento},
+        {'comprobante':'Recibo','archivo':recibo},
+        {'comprobante':'CBU','archivo':cbu},
+        {'comprobante':'Domicilio','archivo':domicilio},
+        {'comprobante':'Endeudamiento','archivo':endeudamiento}
+        ];
+
+    }
+    
     var self = this;
     $scope.pullSolicitudes();
     
