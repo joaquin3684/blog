@@ -39,6 +39,20 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
     }
 
+    $scope.query = function(searchText, ruta)
+    {
+        return $http({
+            url: 'dar_servicio/'+ruta,
+            method: 'post',
+            data: {'nombre' : searchText}
+            }).then(function successCallback(response)
+                {
+                    return response.data;
+                }, function errorCallback(data){
+                    console.log(data);
+                });
+    }
+
     $scope.Comprobante = function (){
 
         archivo = $scope.comprobantevisualizar;

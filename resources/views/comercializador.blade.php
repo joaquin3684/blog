@@ -71,6 +71,19 @@
                           </select>
                       </div>
                     </div>
+                    
+
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in query(searchText, 'filtroSocios')" md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado...">
+                                                <span md-highlight-text="searchText">
+                                                    {[{item.nombre}]}
+                                                </span>
+                        </md-autocomplete>
+                      </div>
+                    </div>
 
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
