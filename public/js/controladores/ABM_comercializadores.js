@@ -6,23 +6,32 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
   $scope.submitComerc = function() {
 
     var data = {
-      nombre: $scope.nombreComerc,
-      apellido: $scope.apellidoComerc,
-      dni: $scope.documentoComerc,
-      cuit: $scope.cuitComerc,
-      domicilio: $scope.domicilioComerc,
-      telefono: $scope.telefonoComerc,
-      usuario: $scope.usuarioComerc,
-      password: $scope.contraseniaComerc
+      'nombre': $scope.nombreComerc,
+      'apellido': $scope.apellidoComerc,
+    'dni': $scope.documentoComerc,
+      'cuit': $scope.cuitComerc,
+      'domicilio': $scope.domicilioComerc,
+      'telefono': $scope.telefonoComerc,
+      'usuario': $scope.usuarioComerc,
+      'password': $scope.contraseniaComerc,
+      'email': $scope.emailComerc
     };
     console.log(data);
     return $http({
-      url: "abm_comercializador",
-      method: "post",
-      data: data,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
+      url: 'abm_comercializador',
+      method: 'post',
+      data: {
+        'nombre': $scope.nombreComerc,
+        'apellido': $scope.apellidoComerc,
+      'dni': $scope.documentoComerc,
+        'cuit': $scope.cuitComerc,
+        'domicilio': $scope.domicilioComerc,
+        'telefono': $scope.telefonoComerc,
+        'usuario': $scope.usuarioComerc,
+        'password': $scope.contraseniaComerc,
+        'email': $scope.emailComerc
+      },
+
     }).then(function successCallback(response) {
       $scope.traerElementos();
     }, function errorCallback(response) {
@@ -60,5 +69,9 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
 
 });
 }
-$scope.traerElementos();
+
+  $scope.traerElemento = function() {
+    console.log("algo");
+  }
+
 });
