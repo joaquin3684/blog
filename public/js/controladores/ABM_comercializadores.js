@@ -50,28 +50,31 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
         if (typeof response.data === 'string') {
           return [];
         } else {
-          console.log(response);
-          $scope.datosabm = response.data;
-          $scope.paramsABMS = new NgTableParams({
-            page: 1,
-            count: 10
-          }, {
-            total: $scope.datosabm.length,
-            getData: function(params) {
-              $scope.datosabm = $filter('orderBy')($scope.datosabm, params.orderBy());
-              return $scope.datosabm.slice((params.page() - 1) * params.count(), params.page() * params.count());
-            }
-          });
-        }
+            console.log(response);
+            $scope.datosabm = response.data;
+            $scope.paramsABMS = new NgTableParams({
+              page: 1,
+              count: 10
+            }, {
+              total: $scope.datosabm.length,
+              getData: function(params) {
+                $scope.datosabm = $filter('orderBy')($scope.datosabm, params.orderBy());
+                return $scope.datosabm.slice((params.page() - 1) * params.count(), params.page() * params.count());
+              }
+            });
+          }
 
 
-}, function errorCallback(response) {
+      }, function errorCallback(response) {
 
-});
-}
+      });
+  }
+
+  $scope.traerElementos();
 
   $scope.traerElemento = function() {
     console.log("algo");
   }
+
 
 });

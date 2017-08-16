@@ -177,18 +177,7 @@
                                     <div id="exportTable">
                                       @verbatim
                                         <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
-                                        <thead style="">
-                                        <th style="">Nombre</th>
-                                        <th style="">Apellido</th>
-                                        <th style="">Documento</th>
-                                        <th style="">Email</th>
-                                        <th style="">Cuit</th>
-                                        <th style="">Domicilio</th>
-                                        <th style="">Telefono</th>
-                                        <th style="">Usuario</th>
-                                        <th style=""></th>
-
-                                        </thead>
+                                      
                                             <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
                                             <tr class="clickableRow" title="Datos">
                                                 <td title="'Nombre'" sortable="'nombre'">
@@ -232,7 +221,7 @@
                     </div>
                   </div>
 
-
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerElemento()"><span class="glyphicon glyphicon-pencil"></span></button>
       <!-- /page content -->
     </div>
 
