@@ -22,6 +22,11 @@ Route::resource('asociados', 'ABM_asociados');
 Route::get('pruebas', function(){
      return view('prueba');
 });
+Route::get('imagenes', function(){
+   $path = storage_path('app/public/ifd/filename.png');
+   $file = File::get($path);
+   return response($file, 200)->header('Content-Type', 'image/jpeg');
+});
 Route::post('pruebas', function(Request $request){
 
 
