@@ -48,6 +48,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             }).then(function successCallback(response)
                 {
                     return response.data;
+                    console.log(data);
                 }, function errorCallback(data){
                     console.log(data);
                 });
@@ -154,7 +155,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         $http({
             url: 'comercializador/modificarPropuesta',
             method: 'post',
-            data: {'id':$scope.idpropuestae,'total':$scope.importe,'cuotas':$scope.cuotas,'monto_por_cuota':$scope.monto_por_cuota,'estado':'Modificada'}
+            data: {'id':$scope.idpropuestae,'total':$scope.importe,'cuotas':$scope.cuotas,'monto_por_cuota':$scope.monto_por_cuota,'estado':'Modificada por Comercializador'}
         }).then(function successCallback(response)
         {
             
@@ -175,27 +176,49 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     }
 
     $scope.AltaComercializador = function (Dato){
-        
-    $scope.Dato = {
-    'nombre':$scope.nombre,//$scope.nombre,
-    'apellido':$scope.apellido,
-    'cuit':$scope.cuit,
-    'domicilio':$scope.domicilio,
-    'fecha_nacimiento':$scope.fecha_nacimiento,
-    'codigo_postal':$scope.codigo_postal,
-    'telefono':$scope.telefono,
-    'doc_documento':'archivos/documento.png',
-    'doc_cbu':'archivos/cbu.png',
-    'doc_endeudamiento':'archivos/endeudamiento.png',
-    'doc_recibo':'archivos/recibo.png',
-    'doc_domicilio':'archivos/domicilio.png',
-    'filtro':'',
-    'organismo':$scope.organismocomplete,
-    'dni':$scope.dni,
-    'localidad':$scope.localidad,
-    'legajo':$scope.legajo,
-    'id_socio':1
-    };
+    
+    if($scope.socio != null) {
+        $scope.Dato = {
+        'nombre':$scope.nombre,//$scope.nombre,
+        'apellido':$scope.apellido,
+        'cuit':$scope.cuit,
+        'domicilio':$scope.domicilio,
+        'fecha_nacimiento':$scope.fecha_nacimiento,
+        'codigo_postal':$scope.codigo_postal,
+        'telefono':$scope.telefono,
+        'doc_documento':'archivos/documento.png',
+        'doc_cbu':'archivos/cbu.png',
+        'doc_endeudamiento':'archivos/endeudamiento.png',
+        'doc_recibo':'archivos/recibo.png',
+        'doc_domicilio':'archivos/domicilio.png',
+        'filtro':'',
+        'organismo':$scope.organismocomplete,
+        'dni':$scope.dni,
+        'localidad':$scope.localidad,
+        'legajo':$scope.legajo,
+        'id_socio':$scope.socio.id
+        };
+    } else {
+        $scope.Dato = {
+        'nombre':$scope.nombre,//$scope.nombre,
+        'apellido':$scope.apellido,
+        'cuit':$scope.cuit,
+        'domicilio':$scope.domicilio,
+        'fecha_nacimiento':$scope.fecha_nacimiento,
+        'codigo_postal':$scope.codigo_postal,
+        'telefono':$scope.telefono,
+        'doc_documento':'archivos/documento.png',
+        'doc_cbu':'archivos/cbu.png',
+        'doc_endeudamiento':'archivos/endeudamiento.png',
+        'doc_recibo':'archivos/recibo.png',
+        'doc_domicilio':'archivos/domicilio.png',
+        'filtro':'',
+        'organismo':$scope.organismocomplete,
+        'dni':$scope.dni,
+        'localidad':$scope.localidad,
+        'legajo':$scope.legajo
+        };
+    }
     // 'nombre', 'comercializador', 'cuit', 'domicilio', 'apellido', 'codigo_postal', 'telefono', 'doc_documento', 'doc_recibo', 'doc_domicilio', 'doc_cbu', 'doc_endeudamiento', 'agente_financiero', 'estado', 'total', 'monto_por_cuota', 'cuotas', 'organismo'];
 
         $http({

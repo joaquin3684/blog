@@ -8,9 +8,8 @@ angular.module('Mutual.services', [])
             $('#'+sector).html('<div class="alert alert-success" role="alert"><strong>¡'+titulo+'!</strong> '+mensaje+'</div>');
             setTimeout(function(){ 
                 $('#'+sector).html('');
-                if(sector == 'mensajemodal'){
-                    $('#'+nombremodal).modal('hide');
-                } 
+                $('#'+nombremodal).modal('hide');
+                 
                 }, 2000);
         } else {
             $('#'+sector).html('<div class="alert alert-danger" role="alert"><strong>¡'+titulo+'!</strong> '+mensaje+'</div>');

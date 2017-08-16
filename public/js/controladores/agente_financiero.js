@@ -43,6 +43,13 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
         $scope.idpropuestae = id;
     }
 
+    $scope.IDPropuesta = function(id,importe,monto,cantcuotas) {
+        $scope.idpropuestae = id;
+        $scope.importe = importe;
+        $scope.monto_por_cuota = monto;
+        $scope.cuotas = cantcuotas;
+    }
+
     $scope.ReservarCapital = function(id) {
         $http({
                 url: 'agente_financiero/reservarCapital',
@@ -72,7 +79,7 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
         {
             
                 UserSrv.MostrarMensaje("OK","El capital fue otorgado correctamente.","OK","mensaje");
-                $scope.pullComercializadores();
+                $scope.pullSolicitudes();
 
         }, function errorCallback(data)
         {
@@ -109,6 +116,48 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
         }
     }
 
+    $scope.AceptarContraPropuesta = function () {
+
+        $http({
+            url: 'agente_financiero/aceptarPropuesta',
+            method: 'post',
+            data: {'id':$scope.idpropuestae,'estado':'Aceptada por Comercializador'}
+        }).then(function successCallback(response)
+        {
+            
+                UserSrv.MostrarMensaje("OK","La contra propuesta fue aceptada correctamente.","OK","mensajemodal2","AnalizarPropuesta");
+                $scope.pullSolicitudes();
+
+        }, function errorCallback(data)
+        {
+
+                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensajemodal2");
+
+        });
+
+    }
+
+        $scope.RechazarContraPropuesta = function () {
+
+        $http({
+            url: 'agente_financiero/rechazarPropuesta',
+            method: 'post',
+            data: {'id':$scope.idpropuestae,'estado':'Rechazada por Inversionista'}
+        }).then(function successCallback(response)
+        {
+            
+                UserSrv.MostrarMensaje("OK","La contra propuesta fue rechazada correctamente.","OK","mensajemodal2","AnalizarPropuesta");
+                $scope.pullSolicitudes();
+
+        }, function errorCallback(data)
+        {
+
+                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensajemodal2");
+
+        });
+
+        }
+
 
     $scope.Comprobante = function (){
 
@@ -116,6 +165,31 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
         
         document.getElementById('previsualizacion').src = "images/"+archivo+".png";
 
+    }
+
+    $scope.PropuestaModificada = function () {
+
+        $http({
+            url: 'agente_financiero/contraPropuesta',
+            method: 'post',
+            data: {'id':$scope.idpropuestae,'total':$scope.importe,'cuotas':$scope.cuotas,'monto_por_cuota':$scope.monto_por_cuota,'estado':'Esperando Respuesta Comercializador'}
+        }).then(function successCallback(response)
+        {
+            
+                UserSrv.MostrarMensaje("OK","La contra propuesta fue enviada correctamente.","OK","mensajemodal2","AnalizarPropuesta");
+                $scope.pullSolicitudes();
+
+        }, function errorCallback(data)
+        {
+
+                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensajemodal2");
+
+        });
+
+    }
+
+    $scope.ModificarPropuesta = function (valor) {
+        $scope.modificandopropuesta = valor;
     }
 
     $scope.DatosModal = function (documento,recibo,cbu,domicilio,endeudamiento){

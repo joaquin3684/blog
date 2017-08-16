@@ -262,22 +262,22 @@
                                             <tbody data-ng-repeat="solicitud in $data" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="Datos">
                                                 <td title="'Nombre'" sortable="'nombre'">
-                                                    {[{solicitud.nombre}]}
+                                                    {[{solicitud.socio.nombre}]}
                                                 </td>
                                                 <td title="'Apellido'" sortable="'apellido'">
-                                                    {[{solicitud.apellido}]}
+                                                    {[{solicitud.socio.apellido}]}
                                                 </td>
                                                 <td title="'Cuit'" sortable="'cuit'">
-                                                    {[{solicitud.cuit}]}
+                                                    {[{solicitud.socio.cuit}]}
                                                 </td>
                                                 <td title="'Domicilio'" sortable="'domicilio'">
-                                                    {[{solicitud.domicilio}]}
+                                                    {[{solicitud.socio.domicilio}]}
                                                 </td>
                                                 <td title="'Telefono'" sortable="'telefono'">
-                                                    {[{solicitud.telefono}]}
+                                                    {[{solicitud.socio.telefono}]}
                                                 </td>
                                                 <td title="'Codigo Postal'" sortable="'codigo_postal'">
-                                                    {[{solicitud.codigo_postal}]}
+                                                    {[{solicitud.socio.codigo_postal}]}
                                                 </td>
                                                 <td title="'Estado'" sortable="'estado'">
                                                     {[{solicitud.estado}]}
