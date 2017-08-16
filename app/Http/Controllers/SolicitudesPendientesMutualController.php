@@ -23,12 +23,12 @@ class SolicitudesPendientesMutualController extends Controller
     {
         $elem = $request->all();
         $col = collect();
-        if(empty($request['doc_endeudamiento']))
+        if($request->has('doc_endeudamiento'))
         {
             $endeudamiento = $elem['doc_endeudamiento'];
             $col->put('doc_endeudamiento', $endeudamiento);
         }
-        if (empty($request['agente_financiero']))
+        if ($request->has('agente_financiero'))
         {
             $agente = $elem['agente_financiero'];
             $col->put('agente_financiero', $agente);
@@ -42,6 +42,12 @@ class SolicitudesPendientesMutualController extends Controller
     public function solicitudes()
     {
         return $this->solicitudesGateway->solicitudesSinAsignar();
+    }
+
+    public function fotos(Request $request)
+    {
+        $id = $request['id'];
+        return FileManager::buscarImagenesSolicitud($id);
     }
 
 }

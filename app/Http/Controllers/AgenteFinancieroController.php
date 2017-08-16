@@ -110,7 +110,7 @@ class AgenteFinancieroController extends Controller
         $fechaInicioDeVto = $fechaVto->today()->addMonths(2);
 
         $venta = $ventasRepo->create([
-                            'id_asociado' => $socio->getId(),
+                            'id_asociado' => $socio,
                             'id_producto' => $producto->getId(),
                             'nro_cuotas'  => $cuotas,
                             'importe'     => $total,
@@ -139,6 +139,12 @@ class AgenteFinancieroController extends Controller
             ]);
             $fechaInicio = $fechaInicio->addMonth();
         }
+    }
+
+    public function fotos(Request $request)
+    {
+        $id = $request['id'];
+        return FileManager::buscarImagenesSolicitud($id);
     }
 
 }

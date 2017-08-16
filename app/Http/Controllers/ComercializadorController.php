@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\Eloquent\DesignadorDeEstado;
 use App\Repositories\Eloquent\DesignarAgenteFinanciero;
+use App\Repositories\Eloquent\FileManager;
 use App\Repositories\Eloquent\Repos\ComercializadorRepo;
 use App\Repositories\Eloquent\Repos\Gateway\ComercializadorGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
@@ -45,10 +46,12 @@ class ComercializadorController extends Controller
     {
         $elementos = $request->all();
         $col = collect($request->all());
-        //$filtro = $elementos['filtro'] == '' ? [] : $elementos['filtro'];
+        $filtro = $elementos['filtro'] == '' ? [] : $elementos['filtro'];
         $filtro = [];
         //$a = Sentinel::authenticate(['usuario' => $elementos['usuario'], 'password' => $elementos['password']]);
         $usuario = Sentinel::check();
+
+
 
         //TODO::falta mover los archivos;
         $agentes = DB::table('proovedores')
@@ -63,7 +66,27 @@ class ComercializadorController extends Controller
         });
 
         $comercializador = $this->comerRepo->findByUser($usuario->usuario);
-        $comercializador->generarSolicitud($col, $agentes);
+        $solicitud = $comercializador->generarSolicitud($col, $agentes);
+
+        $ruta = 'solicitudes/solicitud'.$solicitud->getId();
+
+        $doc_endeudamiento = $request->file('doc_endeudamiento')->isValid() ? $request->doc_endeudamiento : '';
+        $doc_domicilio = $request->doc_domicilio;
+        $doc_recibo = $request->doc_recibo;
+        $doc_cbu = $request->doc_cbu;
+        $doc_documento = $request->doc_documento;
+
+        FileManager::uploadImage($doc_domicilio, $ruta, 'doc_domicilio.png');
+        FileManager::uploadImage($doc_recibo, $ruta, 'doc_recibo.png');
+        FileManager::uploadImage($doc_cbu, $ruta, 'doc_cbu.png');
+        FileManager::uploadImage($doc_documento, $ruta, 'doc_documento.png');
+        if($request->file('doc_endeudamiento')->isValid())
+        {
+            FileManager::uploadImage($doc_endeudamiento, $ruta, 'doc_endeudamiento.png');
+        }
+
+
+
 
     }
 
@@ -72,6 +95,12 @@ class ComercializadorController extends Controller
         $usuario = Sentinel::check();
         $comercializador = $this->comerGateway->findSolicitudesFromUser($usuario->usuario);
         return $comercializador->solicitudes;
+    }
+
+    public function fotos(Request $request)
+    {
+        $id = $request['id'];
+        return FileManager::buscarImagenesSolicitud($id);
     }
 
 

@@ -14,6 +14,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 
 Route::resource('asociados', 'ABM_asociados');
@@ -24,18 +25,18 @@ Route::get('pruebas', function(){
 });
 Route::get('imagenes', function(){
    $path = storage_path('app/public/ifd/filename.png');
-   $file = File::get($path);
-   return response($file, 200)->header('Content-Type', 'image/jpeg');
+   return Image::make($path)->encode('data-url');
 });
 Route::post('pruebas', function(Request $request){
 
-
-
-    $j = $request->file('foto')->move('/images/p', 'a.png');
+    $j = Storage::disk('public')->exists('ifd/filename.png');
+    \App\Repositories\Eloquent\FileManager::uploadImage($request->foto, 'estoAnda', 'holaaa.png');
+   return Storage::disk('public')->exists('ifd/filename.png');
+    $j = $request->file('foto')->move(public_path('images'), 'a.png');
     $h = $request->hasFile('pum');
-    $request->foto->move('/images/p', 'a.png');
+   // $request->foto->move('/images/p', 'a.png');
     $request->foto->storeAs('ifd', 'filename.png', 'public');
-    Storage::disk('public')->put('prufdefba.png', $request->foto);
+    Storage::disk('uploads')->put('prufdefba.png', $request->foto);
 
    // $q = $request->foto->storeAs('images', 'prueba.png');
     return 1;
@@ -293,12 +294,14 @@ Route::get('comercializador/solicitudes', 'ComercializadorController@solicitudes
 Route::post('comercializador/aceptarPropuesta', 'ComercializadorController@modificarPropuesta');
 Route::post('comercializador/modificarPropuesta', 'ComercializadorController@modificarPropuesta');
 Route::post('comercializador/buscarSocios', 'ComercializadorController@sociosQueCumplenConFiltro');
+Route::post('comercializador/fotos', 'ComercializadorController@fotos');
 
 //------------------ SOLICITUDES PENDIENTES DE LA MUTUAL --------------
 
 Route::get('solicitudesPendientesMutual', 'SolicitudesPendientesMutualController@index');
 Route::post('solicitudesPendientesMutual/actualizar', 'SolicitudesPendientesMutualController@actualizar');
 Route::get('solicitudesPendientesMutual/solicitudes', 'SolicitudesPendientesMutualController@solicitudes');
+Route::get('solicitudesPendientesMutual/fotos', 'SolicitudesPendientesMutualController@fotos');
 
 //------------------- SOLICITUDES DE AGENTE FINANCIERO -----------------------
 
@@ -310,6 +313,7 @@ Route::post('agente_financiero/aceptarPropuesta', 'AgenteFinancieroController@ac
 Route::post('agente_financiero/contraPropuesta', 'AgenteFinancieroController@accionesSobrePropuesta');
 Route::post('agente_financiero/reservarCapital', 'AgenteFinancieroController@reservarCapital');
 Route::post('agente_financiero/otorgarCapital', 'AgenteFinancieroController@otorgarCapital');
+Route::post('agente_financiero/fotos', 'AgenteFinancieroController@fotos');
 
 //------------------- CORRER VTO DE SERVICIOS ----------------------------
 
