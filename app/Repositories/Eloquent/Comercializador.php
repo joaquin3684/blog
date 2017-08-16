@@ -50,7 +50,7 @@ class Comercializador
         $this->addSolicitud($solicitud);
 
         $repo = new SolicitudesSinInversionistaRepo();
-        if($agentesFiltrados->count() > 1){
+        if($estado == 'Procesando Solicitud'){
             $agentesFiltrados->each(function($agente) use ($solicitud, $repo){
                 $repo->create(['solicitud' => $solicitud->getId(), 'agente_financiero' => $agente->getId()]);
             });
