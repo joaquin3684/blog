@@ -221,7 +221,6 @@
                     </div>
                   </div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerElemento()"><span class="glyphicon glyphicon-pencil"></span></button>
       <!-- /page content -->
     </div>
 
