@@ -81,10 +81,33 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
             });
     }
 
+    $scope.getAgentes = function (){
+        $http({
+            url: 'organismos/traerElementos',
+            method: 'get'
+        }).then(function successCallback(response)
+        {
+          
+            if(typeof response.data === 'string')
+            {
+                return [];
+            }
+            else
+            {
+                $scope.organismos = response.data;
+                console.log(response);
+            }
+
+        }, function errorCallback(data)
+        {
+            console.log(data.data);
+        });
+    }
 
 
     var self = this;
     $scope.pullSolicitudes();
+    $scope.getAgentes();
     
 
 });

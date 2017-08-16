@@ -74,29 +74,29 @@
                                             <tbody data-ng-repeat="solicitud in $data" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="Datos">
                                                 <td title="'Nombre'" sortable="'nombre'">
-                                                    {[{solicitud.nombre}]}
+                                                    {[{solicitud.socio.nombre}]}
                                                 </td>
                                                 <td title="'Apellido'" sortable="'apellido'">
-                                                    {[{solicitud.apellido}]}
+                                                    {[{solicitud.socio.apellido}]}
                                                 </td>
                                                 <td title="'Cuit'" sortable="'cuit'">
-                                                    {[{solicitud.cuit}]}
+                                                    {[{solicitud.socio.cuit}]}
                                                 </td>
                                                 <td title="'Domicilio'" sortable="'domicilio'">
-                                                    {[{solicitud.domicilio}]}
+                                                    {[{solicitud.socio.domicilio}]}
                                                 </td>
                                                 <td title="'Telefono'" sortable="'telefono'">
-                                                    {[{solicitud.telefono}]}
+                                                    {[{solicitud.socio.telefono}]}
                                                 </td>
                                                 <td title="'Codigo Postal'" sortable="'codigo_postal'">
-                                                    {[{solicitud.codigo_postal}]}
+                                                    {[{solicitud.socio.codigo_postal}]}
                                                 </td>
                                                 <td title="'Estado'" sortable="'estado'">
                                                     {[{solicitud.estado}]}
                                                 </td>
                                                 <td title="'Acciones Disponibles'" style="color: #21a9d6;">
                                                       
-                                                      <span data-toggle="modal" data-target="#Comprobantes" ng-click="DatosModal(solicitud.doc_documento,solicitud.doc_recibo,solicitud.doc_cbu,solicitud.doc_domicilio,solicitud.doc_endeudamiento)" class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
+                                                      <span data-toggle="modal" data-target="#Comprobantes" ng-click="DatosModal(solicitud.socio.doc_documento,solicitud.socio.doc_recibo,solicitud.socio.doc_cbu,solicitud.socio.doc_domicilio,solicitud.socio.doc_endeudamiento)" class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
 
                                                       <span ng-click="IDModal(solicitud.id)" ng-show="solicitud.estado == 'Inversionista Asignado'" data-toggle="modal" data-target="#Propuesta" class="fa fa-send fa-2x" titulo="Enviar Propuesta"></span>
 
