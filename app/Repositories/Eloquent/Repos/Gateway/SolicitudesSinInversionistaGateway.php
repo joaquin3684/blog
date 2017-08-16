@@ -14,7 +14,7 @@ class SolicitudesSinInversionistaGateway extends Gateway
 
     public function solicitudesSinAsignar()
     {
-        return SolicitudesSinInversionista::with('solicitud', 'agentes_financieros')
+        return SolicitudesSinInversionista::with('solicitud.socio', 'agentes_financieros')
                                 ->whereHas('solicitud', function($query){
                                     $query->where('estado', 'Procesando Solicitud');
                                 })->get();
