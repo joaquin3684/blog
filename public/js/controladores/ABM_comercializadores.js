@@ -25,7 +25,7 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
     }).then(function successCallback(response) {
       $scope.traerElementos();
     }, function errorCallback(response) {
-
+      $scope.errores = response.data;
     });
 
   }
