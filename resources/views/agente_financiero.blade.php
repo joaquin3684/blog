@@ -103,6 +103,8 @@
                                                       <span ng-click="ReservarCapital(solicitud.id)" ng-show="solicitud.estado == 'Aceptada por Comercializador'" class="fa fa-dollar fa-2x" titulo="Reservar Capital"></span>
                                                       
                                                       <span ng-click="OtorgarCapital(solicitud.id)" ng-show="solicitud.estado == 'Formulario Enviado'" class="fa fa-money fa-2x" titulo="Otorgar Capital"></span>
+
+                                                      <span ng-show="solicitud.estado == 'Modificada por Comercializador'" ng-click="IDPropuesta(solicitud.id,solicitud.total,solicitud.monto_por_cuota,solicitud.cuotas)" data-toggle="modal" data-target="#AnalizarPropuesta" class="fa fa-eye fa-2x" titulo="Analizar Propuesta"></span>
                                                     
                                                       
                                                 </td>
@@ -131,6 +133,72 @@
   </div>
 
  <!-- Modal -->
+
+ <div id="AnalizarPropuesta" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+      <div id="mensajemodal2"></div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Analizar Contra Propuesta</h4>
+      </div>
+      <div class="modal-body">
+         <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
+                   
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Importe 
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12" style="vertical-align: text-middle; color: blue;">
+                        <input id="importe" ng-disabled="!modificandopropuesta" class="form-control col-md-7 col-xs-12" name="importe" placeholder="Ingrese el importe" type="number" ng-model="importe" step="0.01">{[{errores.importe[0]}]}
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Cuotas">Cuotas
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="nombre" ng-disabled="!modificandopropuesta" class="form-control col-md-7 col-xs-12" name="Cuotas" placeholder="Ingrese el nro de cuotas" type="number" ng-model="cuotas" step="0.01">{[{errores.nombre[0]}]}
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="MontoPorCuota">Monto por Cuota
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-disabled="!modificandopropuesta" id="nombre" class="form-control col-md-7 col-xs-12" name="MontoPorCuota" placeholder="Ingrese el nro de cuotas" ng-model="monto_por_cuota" type="number" step="0.01">{[{errores.nombre[0]}]}
+                      </div>
+                    </div>
+                    
+                   
+                    <input type="hidden" name="id">
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-12">
+                      <center>
+                      <button type="button" ng-show="!modificandopropuesta" ng-click="AceptarContraPropuesta()" class="btn btn-primary">ACEPTAR CONTRAPROPUESTA</button>
+
+                        <button id="send" ng-show="!modificandopropuesta" ng-click="RechazarContraPropuesta()" class="btn btn-danger">RECHAZAR</button>
+
+                        <button id="send" ng-show="!modificandopropuesta" ng-click="ModificarPropuesta(true)" class="btn btn-warning">MODIFICAR</button>
+
+                        <button id="send" ng-show="modificandopropuesta" ng-click="PropuestaModificada()" class="btn btn-success">ENVIAR CONTRAPROPUESTA</button>
+
+                        <button id="send" ng-show="modificandopropuesta" ng-click="ModificarPropuesta(false)" class="btn btn-danger">CANCELAR</button>
+
+                        
+                        </center>
+                      </div>
+                    </div>
+                  </form>
+      </div>
+      
+    </div>
+
+  </div>
+
+
+</div>
+
 <div id="Propuesta" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -224,6 +292,8 @@
 
 
 </div>
+
+
 
 
   <!-- bootstrap progress js -->

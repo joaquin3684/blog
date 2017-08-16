@@ -155,7 +155,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         $http({
             url: 'comercializador/modificarPropuesta',
             method: 'post',
-            data: {'id':$scope.idpropuestae,'total':$scope.importe,'cuotas':$scope.cuotas,'monto_por_cuota':$scope.monto_por_cuota,'estado':'Modificada'}
+            data: {'id':$scope.idpropuestae,'total':$scope.importe,'cuotas':$scope.cuotas,'monto_por_cuota':$scope.monto_por_cuota,'estado':'Modificada por Comercializador'}
         }).then(function successCallback(response)
         {
             
