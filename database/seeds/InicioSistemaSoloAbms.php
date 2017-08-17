@@ -14,10 +14,13 @@ class InicioSistemaSoloAbms extends Seeder
     public function run()
     {
 
-        $this->call(ComercializadorSeed::class);
-        $this->call(ProovedoresTablaSeeder::class);
-        $this->call(ProductosTablaSeeder::class);
-        $this->call(OrganismosTablaSeeder::class);
-        $this->call(SociosTablaSeeder::class);
+        DB::transaction(function () {
+            $this->call(ComercializadorSeed::class);
+            $this->call(ProovedoresTablaSeeder::class);
+            $this->call(ProductosTablaSeeder::class);
+            $this->call(OrganismosTablaSeeder::class);
+            $this->call(SociosTablaSeeder::class);
+        });
+
     }
 }

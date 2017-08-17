@@ -22,7 +22,7 @@ class CreateSolicitudesSinInversionistasTable extends Migration
             $table->integer('solicitud')->unsigned();
             $table->foreign('solicitud')->references('id')->on('solicitudes');
             $table->integer('agente_financiero')->unsigned();
-            $table->foreign('agente_financiero')->references('id')->on('agentes_financieros');
+            $table->foreign('agente_financiero')->references('id')->on('proovedores');
 
         });
         Schema::enableForeignKeyConstraints();

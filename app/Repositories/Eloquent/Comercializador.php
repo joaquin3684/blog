@@ -34,7 +34,6 @@ class Comercializador
         if(!$solicitud->has('id_socio'))
         {
             $socioRepo = new SociosRepo();
-            $solicitud->put('pertenece', 0);
             $socio = $socioRepo->create($solicitud->toArray());
             $solicitud->put('id_socio', $socio->getId());
             $socioRepo->destroy($socio->getId());

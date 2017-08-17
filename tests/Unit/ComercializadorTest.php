@@ -21,7 +21,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ComercializadorTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTransactions;
     use Conversion;
     /**
      * A basic test example.
@@ -66,6 +66,11 @@ class ComercializadorTest extends TestCase
         ]);
     }
 
+    public function getData2()
+    {
+
+    }
+
     public function testDeGenerarSolicitud()
     {
         $agente = collect([new Proveedor(1, 'pedro', 'sdfsd')]);
@@ -97,6 +102,7 @@ class ComercializadorTest extends TestCase
     public function testTraerLasSolicitudesPorElUsuario()
     {
         $data = $this->getData();
+
         $data->put('estado', '2');
         $this->solicitudGateway->create($data->toArray());
         $comercializador = $this->comerGateway->findSolicitudesFromUser(1);

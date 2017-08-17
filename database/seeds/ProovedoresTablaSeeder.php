@@ -14,6 +14,7 @@ class ProovedoresTablaSeeder extends Seeder
         	'nombre' => $faker->name,
 	        'descripcion' => $faker->realText(200, 3),
                 'id_prioridad' => $faker->numberBetween(1, 2),
+                'usuario' => $i,
         	]);
         }
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

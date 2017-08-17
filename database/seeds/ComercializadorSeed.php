@@ -24,6 +24,7 @@ class ComercializadorSeed extends Seeder
                 'dni' => $faker->randomNumber(8),
                 'telefono' => $faker->randomNumber(8),
                 'email' => $faker->email,
+                'usuario' => $i,
             ]);
         }
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
