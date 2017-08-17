@@ -13,6 +13,8 @@ class CreatePrioridadesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('prioridades', function (Blueprint $table) {
             $table->increments('id');
             $table->softDeletes();
@@ -20,6 +22,8 @@ class CreatePrioridadesTable extends Migration
             $table->integer('orden');
             $table->timestamps();
         });
+        Schema::enableForeignKeyConstraints();
+
     }
 
     /**

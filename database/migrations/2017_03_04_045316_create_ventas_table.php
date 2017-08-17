@@ -11,6 +11,8 @@ class CreateVentasTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('ventas', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
@@ -25,6 +27,8 @@ class CreateVentasTable extends Migration
             $table->integer('nro_credito')->nullable();
             $table->softDeletes();
         });
+        Schema::enableForeignKeyConstraints();
+
     }
     /**
      * Reverse the migrations.

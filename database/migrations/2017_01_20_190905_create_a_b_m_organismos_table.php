@@ -8,7 +8,7 @@ class CreateABMOrganismosTable extends Migration
 {
     public function up()
     {
-        //Schema::rename('a_b_m_organismos', 'ORGANISMOS');
+        Schema::disableForeignKeyConstraints();
         Schema::create('organismos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
@@ -17,6 +17,8 @@ class CreateABMOrganismosTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+        Schema::enableForeignKeyConstraints();
+
     }
 
     /**

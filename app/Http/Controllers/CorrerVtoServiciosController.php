@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Repositories\Eloquent\Repos\Gateway\VentasGateway;
 use App\Repositories\Eloquent\Repos\VentasRepo;
-use App\Ventas;
 use Illuminate\Http\Request;
 
 class CorrerVtoServiciosController extends Controller
@@ -23,7 +22,6 @@ class CorrerVtoServiciosController extends Controller
         $venta = $ventasRepo->findWithCuotas($id);
 
         $venta->correrVto($dias);
-
     }
 
     public function servicios()

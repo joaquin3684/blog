@@ -11,6 +11,8 @@ class Movimientos extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('movimientos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
@@ -22,6 +24,8 @@ class Movimientos extends Migration
             $table->double('ganancia');
             $table->softDeletes();
         });
+        Schema::enableForeignKeyConstraints();
+
     }
     /**
      * Reverse the migrations.

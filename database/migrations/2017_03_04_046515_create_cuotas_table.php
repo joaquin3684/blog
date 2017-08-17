@@ -13,6 +13,8 @@ class CreateCuotasTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('cuotas', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
@@ -25,6 +27,8 @@ class CreateCuotasTable extends Migration
             $table->string('estado')->nullable();
             $table->softDeletes();
         });
+        Schema::enableForeignKeyConstraints();
+
     }
 
     /**

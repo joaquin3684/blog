@@ -59,7 +59,7 @@ class AgenteFinancieroController extends Controller
 
     public function otorgarCapital(Request $request)
     {
-        $fecha = new Carbon();
+        $fecha_ingreso = Carbon::today()->toDateString();
         $ventasRepo = new VentasRepo();
         $socioRepo = new SociosRepo();
         $proveedorRepo = new ProveedoresRepo();
@@ -83,6 +83,10 @@ class AgenteFinancieroController extends Controller
 
  */
         $sol->socio()->restore();
+        $socioPosta = $sol->socio;
+        $socioPosta->fecha_ingreso = $fecha_ingreso;
+        $socioPosta->save();
+
         $socio = $sol->id_socio;
         $cuotas = $sol->cuotas;
         $montoPorCuota = $sol->monto_por_cuota;

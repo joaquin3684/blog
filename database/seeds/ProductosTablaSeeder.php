@@ -14,13 +14,22 @@ class ProductosTablaSeeder extends Seeder
     {
          DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     	$faker = F::create('App\Proovedores');
-           for($i=0; $i < 100; $i++){
+           for($i=0; $i < 2; $i++){
 	        	DB::table('productos')->insert([
 	        		'id_proovedor' => $faker->numberBetween(1,10),
 	        		'nombre' => $faker->name,
 	        		'ganancia' => $faker->numberBetween(0, 100),
+                    'tipo' => 'Producto'
 	        		]);
-        } 
-         DB::statement('SET FOREIGN_KEY_CHECKS=1;'); 
+            }
+        for($i=0; $i < 2; $i++){
+            DB::table('productos')->insert([
+                'id_proovedor' => $faker->numberBetween(1,10),
+                'nombre' => $faker->name,
+                'ganancia' => $faker->numberBetween(0, 100),
+                'tipo' => 'Credito'
+            ]);
+        }
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

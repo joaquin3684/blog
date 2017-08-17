@@ -11,6 +11,8 @@ class CreateEstadoVentasTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('estado_ventas', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
@@ -22,6 +24,8 @@ class CreateEstadoVentasTable extends Migration
             $table->string('observacion');
             $table->softDeletes();
         });
+        Schema::enableForeignKeyConstraints();
+
     }
     /**
      * Reverse the migrations.

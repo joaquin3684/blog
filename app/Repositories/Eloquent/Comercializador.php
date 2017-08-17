@@ -31,7 +31,7 @@ class Comercializador
         $designarEstado = new DesignadorDeEstado($solicitud);
         $estado = $designarEstado->buscarEstado($agente);
 
-        if($solicitud->has('id_socio'))
+        if(!$solicitud->has('id_socio'))
         {
             $socioRepo = new SociosRepo();
             $solicitud->put('pertenece', 0);

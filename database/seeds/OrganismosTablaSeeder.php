@@ -13,7 +13,7 @@ class OrganismosTablaSeeder extends Seeder
     public function run()
     {
         $faker = F::create('App\Organismos');
-        for ($i=0; $i < 100; $i++)
+        for ($i=0; $i < 3; $i++)
         {
         	DB::table('organismos')->insert([
         	'nombre' => $faker->name,

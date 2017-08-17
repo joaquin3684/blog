@@ -11,6 +11,7 @@ class CreateProductosTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
 
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
@@ -23,6 +24,8 @@ class CreateProductosTable extends Migration
             $table->string('nombre');
             $table->softDeletes();
         });
+        Schema::enableForeignKeyConstraints();
+
     }
     /**
      * Reverse the migrations.

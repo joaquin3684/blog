@@ -16,7 +16,7 @@ class SociosTablaSeeder extends Seeder
     	$faker = F::create('App\Proovedores');
            for($i=0; $i < 10; $i++){
 	        	DB::table('socios')->insert([
-	        		'id_organismo' => $faker->numberBetween(1,10),
+	        		'id_organismo' => $faker->numberBetween(1,3),
 	        		'nombre' => $faker->name,
 	        		]);
         } 

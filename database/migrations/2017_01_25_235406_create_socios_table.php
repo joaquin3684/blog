@@ -13,6 +13,8 @@ class CreateSociosTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('socios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
@@ -25,12 +27,14 @@ class CreateSociosTable extends Migration
             $table->integer('telefono');
             $table->integer('id_organismo')->unsigned();
             $table->foreign('id_organismo')->references('id')->on('organismos');
-            $table->date('fecha_ingreso');
+            $table->date('fecha_ingreso')->nullable();
             $table->integer('legajo');
 
             $table->softDeletes();
             $table->timestamps();
         });
+        Schema::enableForeignKeyConstraints();
+
     }
 
     /**

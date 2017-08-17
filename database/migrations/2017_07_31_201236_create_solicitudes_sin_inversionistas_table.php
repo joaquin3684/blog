@@ -13,6 +13,8 @@ class CreateSolicitudesSinInversionistasTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('solicitudes_sin_inversionistas', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
@@ -23,6 +25,8 @@ class CreateSolicitudesSinInversionistasTable extends Migration
             $table->foreign('agente_financiero')->references('id')->on('agentes_financieros');
 
         });
+        Schema::enableForeignKeyConstraints();
+
     }
 
     /**

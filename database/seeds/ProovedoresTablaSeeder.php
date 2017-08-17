@@ -8,11 +8,12 @@ class ProovedoresTablaSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $faker = F::create('App\Proovedores');
-        for ($i=0; $i < 100; $i++)
+        for ($i=0; $i < 10; $i++)
         {
         	DB::table('proovedores')->insert([
         	'nombre' => $faker->name,
 	        'descripcion' => $faker->realText(200, 3),
+                'id_prioridad' => $faker->numberBetween(1, 2),
         	]);
         }
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

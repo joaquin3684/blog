@@ -13,12 +13,16 @@ class CreatePantallasTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('pantallas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
             $table->string('permiso');
             $table->timestamps();
         });
+        Schema::enableForeignKeyConstraints();
+
     }
 
     /**

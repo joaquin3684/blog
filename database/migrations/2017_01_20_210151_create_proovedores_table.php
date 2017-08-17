@@ -13,6 +13,8 @@ class CreateProovedoresTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('proovedores', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
@@ -24,6 +26,8 @@ class CreateProovedoresTable extends Migration
             $table->foreign('usuario')->references('id')->on('users');
             $table->timestamps();
         });
+        Schema::enableForeignKeyConstraints();
+
     }
 
     /**

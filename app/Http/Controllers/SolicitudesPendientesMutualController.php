@@ -28,16 +28,17 @@ class SolicitudesPendientesMutualController extends Controller
         {
             $endeudamiento = $elem['doc_endeudamiento'];
             $col->put('doc_endeudamiento', $endeudamiento);
+
         }
         if ($request->has('agente_financiero'))
         {
             $agente = $elem['agente_financiero'];
             $col->put('agente_financiero', $agente);
         }
-        $col->put('estado', 'Inversionista Asignado');
 
-        $this->solicitudesGateway->update($col->toArray(), $elem['id']);
-
+        $sol = $this->solicitudesGateway->update($col->toArray(), $elem['id']);
+        $sol->estado = $sol->doc_endeudamiento != null && $sol->agente_financiero != null ? 'Inversionista Asignado' : 'Procesando Solicitud';
+        $sol->save();
     }
 
     public function solicitudes()

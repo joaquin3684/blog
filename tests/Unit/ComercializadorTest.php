@@ -9,6 +9,7 @@ use App\Repositories\Eloquent\Repos\Gateway\ComercializadorGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use App\Repositories\Eloquent\Repos\Mapper\AgenteFinancieroMapper;
 use App\Repositories\Eloquent\Repos\Mapper\ComercializadorMapper;
+use App\Repositories\Eloquent\Repos\Mapper\SolicitudMapper;
 use App\Repositories\Eloquent\Repos\SolicitudesSinInversionistaRepo;
 use App\Repositories\Eloquent\Solicitud;
 use App\SolicitudesSinInversionista;
@@ -20,7 +21,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ComercializadorTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
     use Conversion;
     /**
      * A basic test example.
@@ -31,6 +32,7 @@ class ComercializadorTest extends TestCase
     private $agenteMapper;
     private $comerGateway;
     private $solicitudGateway;
+    private $solicitudMapper;
     public function setUp()
     {
         parent::setUp();
@@ -38,6 +40,7 @@ class ComercializadorTest extends TestCase
         $this->agenteMapper = new AgenteFinancieroMapper();
         $this->comerGateway = new ComercializadorGateway();
         $this->solicitudGateway = new SolicitudGateway();
+        $this->solicitudMapper = new SolicitudMapper();
 
 
     }
@@ -52,20 +55,13 @@ class ComercializadorTest extends TestCase
             'domicilio' => '1',
             'telefono' => '1',
             'codigo_postal' => '1',
-            'comercializador' => '1',
-            'doc_recibo' => '1',
-            'doc_documento' => '1',
-            'doc_domicilio' => '1',
-            'doc_cbu' => '1',
             'doc_endeudamiento' => '1',
-            'total' => '1',
-            'cuotas' => '1',
-            'monto_por_cuota' => '1',
             'organismo' => '1',
             'fecha_nacimiento' => '2017-02-04',
             'dni' => '1',
             'localidad' => '1',
             'legajo' => '1',
+            'id_organismo' => '1',
 
         ]);
     }
@@ -75,10 +71,10 @@ class ComercializadorTest extends TestCase
         $agente = collect([new Proveedor(1, 'pedro', 'sdfsd')]);
         $data = $this->getData();
         $comercializador = new Comercializador(1);
-        $comercializador->generarSolicitud($data, $agente);
-        $comer = \App\Comercializador::with('solicitudes')->find(1);
-        $comerExpected = $this->comerMapper->map($comer);
-        $this->assertEquals($comerExpected->getSolicitudes(), $comercializador->getSolicitudes());
+        $solicitud = $comercializador->generarSolicitud($data, $agente);
+        $solExpected = \App\Solicitud::find($solicitud->getId());
+        $solExpected = $this->solicitudMapper->map($solExpected);
+        $this->assertEquals($solExpected, $solicitud);
     }
 
 
@@ -89,7 +85,7 @@ class ComercializadorTest extends TestCase
         $data = $this->getData();
         $agentes = collect([$proveedor1, $proveedor2]);
         $comercializador = new Comercializador(1);
-        $comercializador->generarSolicitud($data, $agentes);
+        $solicitud = $comercializador->generarSolicitud($data, $agentes);
         $comer = \App\Comercializador::with('solicitudes')->find(1);
         $comerExpected = $this->comerMapper->map($comer);
         $solicitudesSinInversionistas = SolicitudesSinInversionista::all();

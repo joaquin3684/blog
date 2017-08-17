@@ -13,14 +13,25 @@ class CreateComercializadorsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('comercializadores', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->softDeletes();
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->string('domicilio');
+            $table->integer('dni');
+            $table->integer('cuit');
+            $table->integer('telefono');
+            $table->string('email');
             $table->integer('usuario')->unsigned();
             $table->foreign('usuario')->references('id')->on('users');
 
         });
+        Schema::enableForeignKeyConstraints();
+
     }
 
     /**
