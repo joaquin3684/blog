@@ -89,7 +89,7 @@ class ComercializadorController extends Controller
     public function solicitudes()
     {
         $usuario = Sentinel::check();
-        $comercializador = $this->comerGateway->findSolicitudesFromUser($usuario->usuario);
+        $comercializador = $this->comerGateway->findSolicitudesFromUser($usuario->id);
         return $comercializador->solicitudes;
     }
 
