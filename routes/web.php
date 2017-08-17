@@ -22,9 +22,7 @@ Route::resource('asociados', 'ABM_asociados');
 
 //---------------- PRUEBAS ------------------------------
 Route::get('pruebas', function(){
-    return Ventas::whereHas('cuotas', function($query){
-        $query->doesntHave('movimientos');
-    })->get();
+    return Ventas::doesntHave('movimientos')->get();
      return view('prueba');
 });
 Route::get('imagenes', function(){

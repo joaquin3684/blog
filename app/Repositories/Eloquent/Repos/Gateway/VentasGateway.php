@@ -46,6 +46,6 @@ class VentasGateway extends Gateway
 
     public function ventasQueNoFueronCobradas()
     {
-        return Ventas::doesntHave('movimientos')->get();
+        return Ventas::doesntHave('movimientos')->with('socio','producto.proovedor')->get();
     }
 }
