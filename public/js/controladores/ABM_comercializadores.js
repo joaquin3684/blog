@@ -15,7 +15,8 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
       'usuario': $scope.usuarioComerc,
       'password': $scope.contraseniaComerc,
       'email': $scope.emailComerc
-    };
+
+    };// en view llamarla correr_vto_servicios, cuando toca correr vencimiento mostrar pop confirm, libreria moment para menejar las fechas
 
     return $http({
       url: 'abm_comercializador',

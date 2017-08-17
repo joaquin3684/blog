@@ -332,5 +332,3 @@ Route::post('proveedorCC/CCporOrganismo', 'ProveedorCCController@cuentaCorriente
 Route::post('proveedorCC/CCporSocio', 'ProveedorCCController@cuentaCorrientePorSocio');
 Route::post('proveedorCC/CCporVentas', 'ProveedorCCController@cuentaCorrientePorVentas');
 Route::post('proveedorCC/CCporCuotas', 'ProveedorCCController@cuentaCorrientePorCuotas');
-
-
