@@ -12,6 +12,7 @@
 */
 
 
+use App\Ventas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -21,6 +22,9 @@ Route::resource('asociados', 'ABM_asociados');
 
 //---------------- PRUEBAS ------------------------------
 Route::get('pruebas', function(){
+    return Ventas::whereHas('cuotas', function($query){
+        $query->doesntHave('movimientos');
+    })->get();
      return view('prueba');
 });
 Route::get('imagenes', function(){
@@ -319,6 +323,7 @@ Route::post('agente_financiero/fotos', 'AgenteFinancieroController@fotos');
 
 Route::get('correrVto', 'CorrerVtoServiciosController@index');
 Route::post('correrVto/correrServicio', 'CorrerVtoServiciosController@correrVto');
+Route::get('correrVto/servicios', 'CorrerVtoServiciosController@servicios');
 
 //--------------------- Proveedor Cuenta Corriente --------------------
 

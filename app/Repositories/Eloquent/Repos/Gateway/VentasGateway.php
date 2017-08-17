@@ -43,4 +43,9 @@ class VentasGateway extends Gateway
     {
         return Ventas::with('cuotas')->find($id);
     }
+
+    public function ventasQueNoFueronCobradas()
+    {
+        return Ventas::doesntHave('movimientos')->get();
+    }
 }

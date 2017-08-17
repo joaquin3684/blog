@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Eloquent\FileManager;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
 use App\Repositories\Eloquent\Repos\Gateway\AgenteFinancieroGateway;
 use App\Repositories\Eloquent\Repos\Gateway\ProveedoresGateway;

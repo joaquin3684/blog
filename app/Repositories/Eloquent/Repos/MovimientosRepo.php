@@ -11,6 +11,7 @@ namespace App\Repositories\Eloquent\Repos;
 
 use App\Repositories\Eloquent\Repos\Gateway\MovimientosGateway;
 use App\Repositories\Eloquent\Repos\Mapper\MovimientoMapper;
+use Illuminate\Contracts\Cache\Repository;
 
 class MovimientosRepo extends Repositorio
 {
@@ -24,5 +25,6 @@ class MovimientosRepo extends Repositorio
     {
         return 'App\Repositories\Eloquent\Repos\MovimientosRepo';
     }
+
 
 }

@@ -47,13 +47,9 @@ class ComercializadorController extends Controller
         $elementos = $request->all();
         $col = collect($request->all());
         $filtro = $elementos['filtro'] == '' ? [] : $elementos['filtro'];
-        $filtro = [];
         //$a = Sentinel::authenticate(['usuario' => $elementos['usuario'], 'password' => $elementos['password']]);
         $usuario = Sentinel::check();
 
-
-
-        //TODO::falta mover los archivos;
         $agentes = DB::table('proovedores')
             ->join('productos', 'proovedores.id', '=', 'productos.id_proovedor')
             ->where('productos.tipo', 'Credito')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Eloquent\FileManager;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudesSinInversionistaGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use Illuminate\Http\Request;
