@@ -26,9 +26,9 @@ class CorrerVtoServiciosController extends Controller
 
     }
 
-    public function ventas()
+    public function servicios()
     {
         $ventasRepo = new VentasGateway();
-        $ventas = $ventasRepo->ventasQueNoFueronCobradas();
+        return $ventasRepo->ventasQueNoFueronCobradas();
     }
 }
