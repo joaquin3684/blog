@@ -54,6 +54,21 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
                 });
     }
 
+    $scope.getFotos = function(idsolicitud)
+    {
+        return $http({
+            url: 'comercializador/fotos',
+            method: 'post',
+            data: {'id' : idsolicitud}
+            }).then(function successCallback(response)
+                {
+                    return response.data;
+                    console.log(data);
+                }, function errorCallback(data){
+                    console.log(data);
+                });
+    }
+
     $scope.Comprobante = function (){
 
         archivo = $scope.comprobantevisualizar;
@@ -186,13 +201,13 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         'fecha_nacimiento':$scope.fecha_nacimiento,
         'codigo_postal':$scope.codigo_postal,
         'telefono':$scope.telefono,
-        'doc_documento':'archivos/documento.png',
-        'doc_cbu':'archivos/cbu.png',
-        'doc_endeudamiento':'archivos/endeudamiento.png',
-        'doc_recibo':'archivos/recibo.png',
-        'doc_domicilio':'archivos/domicilio.png',
+        'doc_documento':$scope.doc_documento,
+        'doc_cbu':$scope.doc_cbu,
+        'doc_endeudamiento':$scope.doc_endeudamiento,
+        'doc_recibo':$scope.doc_recibo,
+        'doc_domicilio':$scope.doc_domicilio,
         'filtro':'',
-        'organismo':$scope.organismocomplete,
+        'id_organismo':$scope.organismocomplete,
         'dni':$scope.dni,
         'localidad':$scope.localidad,
         'legajo':$scope.legajo,
@@ -207,13 +222,13 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         'fecha_nacimiento':$scope.fecha_nacimiento,
         'codigo_postal':$scope.codigo_postal,
         'telefono':$scope.telefono,
-        'doc_documento':'archivos/documento.png',
-        'doc_cbu':'archivos/cbu.png',
-        'doc_endeudamiento':'archivos/endeudamiento.png',
-        'doc_recibo':'archivos/recibo.png',
-        'doc_domicilio':'archivos/domicilio.png',
+        'doc_documento':$scope.doc_documento,
+        'doc_cbu':$scope.doc_cbu,
+        'doc_endeudamiento':$scope.doc_endeudamiento,
+        'doc_recibo':$scope.doc_recibo,
+        'doc_domicilio':$scope.doc_domicilio,
         'filtro':'',
-        'organismo':$scope.organismocomplete,
+        'id_organismo':$scope.organismocomplete,
         'dni':$scope.dni,
         'localidad':$scope.localidad,
         'legajo':$scope.legajo

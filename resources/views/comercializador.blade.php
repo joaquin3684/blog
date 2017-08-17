@@ -84,7 +84,7 @@
                         </md-autocomplete>
                       </div>
                     </div>
-
+                    <div ng-show="socio == null || socio == ''">
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                       </label>
@@ -156,36 +156,37 @@
                         <input type="text" id="cuit" name="codigo_postal" ng-model="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Codigo Postal">{[{errores.cuit[0]}]}
                       </div>
                     </div>
+                  </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Copia del Documento <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
+                        <input type="file" id="cuit" name="cuit" ng-model="doc_documento" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Copia del Recibo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
+                        <input type="file" id="cuit" name="cuit" ng-model="doc_recibo" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Copia del Domicilio <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" ng-model="doc_domicilio" for="cuit">Copia del Domicilio <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="file" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Copia del CBU <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" ng-model="doc_cbu" for="cuit">Copia del CBU <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="file" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Certificado de Endeudamiento
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" ng-model="doc_endeudamiento" for="cuit">Certificado de Endeudamiento
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="file" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
@@ -284,7 +285,7 @@
                                                 </td>
                                                 <td title="'Acciones Disponibles'" style="color: #21a9d6;">
                                                     
-                                                    <span data-toggle="modal" data-target="#Comprobantes" ng-click="DatosModal(solicitud.doc_documento,solicitud.doc_recibo,solicitud.doc_cbu,solicitud.doc_domicilio,solicitud.doc_endeudamiento)" class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
+                                                    <span data-toggle="modal" data-target="#Comprobantes" ng-click="getFotos(solicitud.id)" class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
                                                     <span ng-show="solicitud.estado == 'Esperando Respuesta Comercializador'" ng-click="IDPropuesta(solicitud.id,solicitud.total,solicitud.monto_por_cuota,solicitud.cuotas)" data-toggle="modal" data-target="#ContraPropuesta" class="fa fa-eye fa-2x" titulo="Analizar Propuesta"></span>
                                                     <span ng-show="solicitud.estado == 'Capital Reservado'" class="fa fa-print fa-2x" ng-click="ImprimirFormulario()" titulo="Imprimir Formulario"></span>
                                                     <span ng-show="solicitud.estado == 'Capital Reservado'" class="fa fa-send fa-2x" ng-click="EnviarFormulario(solicitud.id)" titulo="Enviar Formulario"></span>
