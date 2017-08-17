@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as F;
 
 class UserSeed extends Seeder
 {

@@ -61,7 +61,7 @@ class ComercializadorController extends Controller
            return $this->proveedorRepo->find($agente->id);
         });
 
-        $comercializador = $this->comerRepo->findByUser($usuario->usuario);
+        $comercializador = $this->comerRepo->findByUser($usuario->id);
         $solicitud = $comercializador->generarSolicitud($col, $agentes);
 
         $ruta = 'solicitudes/solicitud'.$solicitud->getId();

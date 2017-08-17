@@ -162,7 +162,7 @@ Route::post('pruebas', function(Request $request){
 
 //-------------- Creacion automatica de cosas para cuando se hace una migracion ----
 Route::get('creacionAutomatica', function(){
-    $user = Sentinel::registerAndActivate(array('usuario'=>'1', 'email'=>'1', 'password'=> '1'));
+    $user = Sentinel::registerAndActivate(array('usuario'=>'200', 'email'=>'1', 'password'=> '200'));
     $role = Sentinel::getRoleRepository()->createModel()->create([
         'name' => 'genio',
         'slug' => 'genio',

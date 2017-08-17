@@ -15,11 +15,13 @@ class InicioSistemaSoloAbms extends Seeder
     {
 
         DB::transaction(function () {
+            $this->call(UserSeed::class);
             $this->call(ComercializadorSeed::class);
             $this->call(ProovedoresTablaSeeder::class);
             $this->call(ProductosTablaSeeder::class);
             $this->call(OrganismosTablaSeeder::class);
             $this->call(SociosTablaSeeder::class);
+
         });
 
     }
