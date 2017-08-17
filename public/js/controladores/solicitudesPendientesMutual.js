@@ -47,7 +47,7 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
         $http({
                 url: 'solicitudesPendientesMutual/actualizar',
                 method: 'post',
-                data: {'id':$scope.idpropuestae,'agente_financiero':$scope.agente,'estado':'Inversionista Asignado'}
+                data: {'id':$scope.idpropuestae,'agente_financiero':$scope.agente}
             }).then(function successCallback(response)
             {
                 
