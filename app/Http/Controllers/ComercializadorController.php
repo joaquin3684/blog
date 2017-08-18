@@ -66,7 +66,7 @@ class ComercializadorController extends Controller
 
         $ruta = 'solicitudes/solicitud'.$solicitud->getId();
 
-        $doc_endeudamiento = $request->doc_endeudamiento->isValid() ? $request->doc_endeudamiento : '';
+        $doc_endeudamiento = $request->hasFile('doc_endeudamiento') ? $request->doc_endeudamiento : null;
         $doc_domicilio = $request->doc_domicilio;
         $doc_recibo = $request->doc_recibo;
         $doc_cbu = $request->doc_cbu;
