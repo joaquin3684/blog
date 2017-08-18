@@ -29,7 +29,7 @@ class ProveedorCCController extends Controller
             ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
             ->groupBy('organismos.id');
 
-        $organismos = VentasFilter::apply($request, $ventas);
+        $organismos = VentasFilter::apply($request->all(), $ventas);
 
         $movimientos = DB::table('ventas')
             ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
@@ -44,7 +44,7 @@ class ProveedorCCController extends Controller
             ->groupBy('organismos.id')
             ->select('organismos.id AS id_organismo', DB::raw('SUM(movimientos.entrada) AS totalCobrado'));
 
-        $organismos2 = VentasFilter::apply($request, $movimientos);
+        $organismos2 = VentasFilter::apply($request->all(), $movimientos);
 
         $ventasPorOrganismo = $this->unirColecciones($organismos, $organismos2, ["id_organismo"], ['totalCobrado' => 0]);
 
@@ -74,7 +74,7 @@ class ProveedorCCController extends Controller
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->select('socios.nombre AS socio', 'socios.id AS id_socio',  DB::raw('SUM(cuotas.importe) AS totalACobrar'));
 
-        $socios = VentasFilter::apply($request, $ventas);
+        $socios = VentasFilter::apply($request->all(), $ventas);
 
 
         $movimientos = DB::table('ventas')
@@ -91,7 +91,7 @@ class ProveedorCCController extends Controller
             ->where('organismos.id', '=', $request['id'])
             ->select('socios.id AS id_socio', DB::raw('SUM(movimientos.entrada) AS totalCobrado'));
 
-        $socios2 = VentasFilter::apply($request, $movimientos);
+        $socios2 = VentasFilter::apply($request->all(), $movimientos);
 
 
         $ventasPorSocio = $this->unirColecciones($socios, $socios2, ["id_socio"], ['totalCobrado' => 0]);
@@ -120,7 +120,7 @@ class ProveedorCCController extends Controller
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->select('socios.nombre AS socio', 'ventas.id AS id_venta', 'ventas.fecha', 'proovedores.nombre AS proovedor', 'productos.nombre AS producto', 'ventas.nro_cuotas', DB::raw('SUM(cuotas.importe) AS totalACobrar'));
 
-        $ventas1 = VentasFilter::apply($request, $ventas);
+        $ventas1 = VentasFilter::apply($request->all(), $ventas);
 
         $movimientos = DB::table('ventas')
             ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
@@ -135,7 +135,7 @@ class ProveedorCCController extends Controller
             ->where('socios.id', '=', $request['id'])
             ->select('ventas.id AS id_venta', DB::raw('SUM(movimientos.entrada) AS totalCobrado'));
 
-        $ventas2 = VentasFilter::apply($request, $movimientos);
+        $ventas2 = VentasFilter::apply($request->all(), $movimientos);
 
 
         $ventasPorVenta = $this->unirColecciones($ventas1, $ventas2, ["id_venta"], ['totalCobrado' => 0]);
