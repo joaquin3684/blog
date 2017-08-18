@@ -148,7 +148,8 @@ class VentasControlador extends Controller
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
             ->groupBy('organismos.id');
-        $organismos = VentasFilter::apply($request, $ventas);
+
+        $organismos = VentasFilter::apply($request->all(), $ventas);
 
         $movimientos = DB::table('ventas')
             ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
@@ -163,7 +164,7 @@ class VentasControlador extends Controller
             ->groupBy('organismos.id')
             ->select('organismos.id AS id_organismo', DB::raw('SUM(movimientos.entrada) AS totalCobrado'));
 
-        $organismos2 = VentasFilter::apply($request, $movimientos);
+        $organismos2 = VentasFilter::apply($request->all(), $movimientos);
 
         $ventasPorOrganismo = $this->unirColecciones($organismos, $organismos2, ["id_organismo"], ['totalCobrado' => 0]);
 

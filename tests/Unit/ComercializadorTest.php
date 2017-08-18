@@ -66,10 +66,6 @@ class ComercializadorTest extends TestCase
         ]);
     }
 
-    public function getData2()
-    {
-
-    }
 
     public function testDeGenerarSolicitud()
     {
@@ -96,16 +92,30 @@ class ComercializadorTest extends TestCase
         $solicitudesSinInversionistas = SolicitudesSinInversionista::all();
 
         $this->assertEquals($solicitudesSinInversionistas->count(), 2);
+        $this->assertEquals($solicitud->getEstado(), 'Procesando Solicitud');
 
     }
 
     public function testTraerLasSolicitudesPorElUsuario()
     {
-        $data = $this->getData();
 
-        $data->put('estado', '2');
+        $data = collect([
+            'id_socio' => 1,
+            'comercializador' => '1',
+            'estado' => 'Esperando Inversionista',
+        ]);
+
+        $data1 = collect([
+            'id_socio' => 1,
+            'comercializador' => '2',
+            'estado' => 'Esperando Inversionista',
+        ]);
+
         $this->solicitudGateway->create($data->toArray());
+        $this->solicitudGateway->create($data1->toArray());
+
         $comercializador = $this->comerGateway->findSolicitudesFromUser(1);
         $this->assertEquals($comercializador->solicitudes()->count(), 1);
     }
+
 }
