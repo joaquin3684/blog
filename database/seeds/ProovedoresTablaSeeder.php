@@ -12,7 +12,7 @@ class ProovedoresTablaSeeder extends Seeder
         {
         	DB::table('proovedores')->insert([
         	'nombre' => $faker->name,
-	        'descripcion' => $faker->realText(200, 3),
+	        'descripcion' => $faker->realText(100, 3),
                 'id_prioridad' => $faker->numberBetween(1, 2),
                 'usuario' => $i,
         	]);
