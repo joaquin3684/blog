@@ -49,42 +49,46 @@
                 </div>
                 <div class="x_content">
 
-                    <span class="section">Datos del prestamo</span>
+                    <span class="section">Datos del servicio</span>
+
 
                   @verbatim
                     <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
 
                         <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
                         <tr class="clickableRow" title="Datos">
-                            <td title="'Nombre'" sortable="'nombre'">
-                                <!-- {{abm.nombre}} -->
+                            <td title="'Asociado'" sortable="'nombre'">
+                              {{abm.socio.nombre}}
                             </td>
-                            <td title="'Apellido'" sortable="'apellido'">
-                                <!-- {{abm.apellido}} -->
+                            <td title="'Proveedor'" sortable="'nombre'">
+                              {{abm.producto.proovedor.nombre}}
                             </td>
-                            <td title="'Documento'" sortable="'documento'">
-                                <!-- {{abm.dni}} -->
+                            <td title="'Producto'" sortable="'apellido'">
+                                {{abm.producto.nombre}}
                             </td>
-                            <td title="'Email'" sortable="'email'">
-                                <!-- {{abm.email}} -->
+                            <td title="'Importe'" sortable="'documento'">
+                                {{abm.importe}}
                             </td>
-                            <td title="'Cuit'" sortable="'cuit'">
-                                <!-- {{abm.cuit}} -->
+                            <td title="'Numero de cuotas'" sortable="'email'">
+                                {{abm.nro_cuotas}}
                             </td>
-                            <td title="'Domicilio'" sortable="'domicilio'">
-                                <!-- {{abm.domicilio}} -->
+                            <td title="'Numero de credito'" sortable="'cuit'">
+                                {{abm.nro_credito}}
                             </td>
-                            <td title="'Telefono'" sortable="'telefono'">
-                                <!-- {{abm.telefono}} -->
-                            </td>
-                            <td title="'Usuario'" sortable="'usuario'">
-                                <!-- {{abm.usuario}} -->
+                            <td title="'Fecha de vencimiento'" sortable="'domicilio'">
+                                {{abm.fecha_vencimiento | date: "dd/MM/y"}}
                             </td>
 
-                            <td id="botones">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerElemento(abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
-                            <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
-                            </td>
+                              <td title="'Postergar'" sortable="'domicilio'">
+                                <div class="input-group">
+                                  <input type="text" class="form-control" placeholder="Cantidad de dias" ng-model="cantDias">
+                                  <div class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" ng-click="confirmarCambios(abm.fecha_vencimiento, cantDias, abm.id)">
+                                      <i class="glyphicon glyphicon-chevron-right"></i>
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
                         </tr>
                     </table>
                     @endverbatim

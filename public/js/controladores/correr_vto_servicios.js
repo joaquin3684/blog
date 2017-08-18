@@ -36,19 +36,35 @@ app.controller('correr_vto_servicios', function($scope, $http, $compile, $sce, N
 
   $scope.traerElementos();
 
-  // $scope.traerElemento = function(id) {
-  //
-  //   return $http({
-  //     url: 'abm_comercializador/'+ id,
-  //     method: 'get',
-  //     // data: data,
-  //   }).then(function successCallback(response) {
-  //     $scope.abmConsultado = response.data;
-  //   }, function errorCallback(response) {
-  //
-  //   });
-  // }
-  //
+ $scope.confirmarCambios = function (fecha_vencimiento, cantDias, id){
+   cantDias = Number(cantDias);
+   console.log(fecha_vencimiento);
+   moment.locale('es');
+   var fecha= moment(fecha_vencimiento, 'YYYY-MM-DD').add(cantDias, 'days').format('L');
+   if(confirm("La fecha de vencimiendo se postergara al "+ fecha)){
+     $scope.actualizarFecha(cantDias, id)
+   }
+ }
+
+
+  $scope.actualizarFecha = function(cantDias, id) {
+
+    var data = {
+    'dias': cantDias,
+    'id': id,
+    };
+
+    return $http({
+      url: 'correrVto/correrServicio',
+      method: 'post',
+      data: data,
+    }).then(function successCallback(response) {
+      $scope.traerElementos();
+    }, function errorCallback(response) {
+
+    });
+  }
+
   // $scope.editarFormulario = function (id) {
   //
   //   var data = {
