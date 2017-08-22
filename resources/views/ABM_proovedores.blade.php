@@ -21,7 +21,7 @@
       <div class="left-col" role="main" >
 
         <div class="" >
-         
+
           <div class="clearfix"></div>
 <div id="mensaje"></div>
           <div class="row" >
@@ -50,17 +50,17 @@
 
                   <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario" >
                    {{ csrf_field() }}
-                    
+
                     <span class="section">Datos de proovedor</span>
 
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razonSocial">Razon social <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del Proveedor" type="text">{[{errores.nombre[0]}]}
+                        <input id="razonSocial" class="form-control col-md-7 col-xs-12" name="razon_social" placeholder="Ingrese la Razon social" type="text">{[{errores.nombre[0]}]}
                       </div>
                     </div>
-                    
+
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descripcion">Descripcion <span class="required">*</span>
                       </label>
@@ -68,6 +68,46 @@
                         <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Descripcion">{[{errores.descripcion[0]}]}
                       </div>
                     </div>
+
+                    <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el domicilio">{[{errores.descripcion[0]}]}
+                    </div>
+                  </div>
+
+                  <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Descripcion">{[{errores.descripcion[0]}]}
+                  </div>
+                </div>
+
+                <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Telefono<span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" id="cuit" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Descripcion">{[{errores.descripcion[0]}]}
+                </div>
+              </div>
+
+              <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Usuario<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="cuit" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Descripcion">{[{errores.descripcion[0]}]}
+              </div>
+            </div>
+
+            <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Contraseña<span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="text" id="cuit" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Descripcion">{[{errores.descripcion[0]}]}
+            </div>
+          </div>
 <!--                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
                       </label>
@@ -105,12 +145,12 @@
           </div>
         </div>
 
-       
+
 
       </div>
-     
 
-  
+
+
       <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                       <div class="x_title">
@@ -133,7 +173,7 @@
                         <div class="clearfix"></div>
                       </div>
 <!--                       <div class="x_content">
-                        
+
                         <table id="datatable-responsive" cellspacing="0" class="table table-striped table-bordered dt-responsive nowrap order-colum compact" cellspacing="0" width="100%">
                           <thead>
                             <tr>
@@ -143,7 +183,7 @@
                               <th>% Gastos Administrativos </th>
                                 <th>Prioridad</th>
                               <th></th>
-                              
+
                             </tr>
                           </thead>
                         <tbody>
@@ -181,16 +221,22 @@
                                         <table ng-table="paramsABMS" class="table table-hover table-bordered">
                                             <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="Datos">
-                                                <td title="'Nombre'" sortable="'nombre'">
-                                                    {[{abm.nombre}]}
+                                                <td title="'Razon social'" sortable="'razonSocial'">
+                                                    {[{abm.razonSocial}]}
                                                 </td>
                                                 <td title="'Descripcion'" sortable="'descripcion'">
                                                     {[{abm.descripcion}]}
                                                 </td>
+                                                <td title="'Domicilio'" sortable="'domicilio'">
+                                                    {[{abm.domicilio}]}
+                                                </td>
+                                                <td title="'Cuit'" sortable="'cuit'">
+                                                    {[{abm.cuit}]}
+                                                </td>
 <!--                                                 <td title="'$ de Ganancia'" sortable="'porcentaje_retencion'">
                                                     {[{abm.porcentaje_retencion}]}
                                                 </td>
-                                                
+
                                                 <td title="'$ Gastos Administrativos'" sortable="'porcentaje_gastos_administrativos'">
                                                     {[{abm.porcentaje_gastos_administrativos}]}
                                                 </td> -->
@@ -213,7 +259,7 @@
                         </div>
                     </div>
                   </div>
-      
+
       <!-- /page content -->
     </div>
 
@@ -250,7 +296,7 @@
                         <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{[{errores.nombre[0]}]}
                       </div>
                     </div>
-                    
+
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descripcion">Descripcion <span class="required">*</span>
                       </label>
@@ -284,14 +330,14 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                        
+
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                         <button id="send" type="submit" class="btn btn-success">Enviar</button>
                       </div>
                     </div>
                   </form>
       </div>
-      
+
     </div>
 
   </div>
@@ -301,12 +347,12 @@
 
 
   <!-- icheck -->
-  
+
   <!-- pace -->
- 
+
 
   <!-- form validation -->
- 
+
         {!! Html::script('js/datatables/jquery.dataTables.min.js') !!}
         {!! Html::script('js/datatables/dataTables.bootstrap.js') !!}
         {!! Html::script('js/datatables/dataTables.buttons.min.js') !!}
@@ -326,7 +372,7 @@
 
 
          <script>
-          
+
         </script>
         <script type="text/javascript">
           $(document).ready(function() {
