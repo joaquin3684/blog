@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\Eloquent\Filtros\VentasFilter;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProveedorCCController extends Controller
 {
