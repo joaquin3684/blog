@@ -26,7 +26,7 @@ class ProveedorCCController extends Controller
             ->join('productos', 'productos.id', '=', 'ventas.id_producto')
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->where('proovedores.usuario', $usuario->usuario)
+            ->where('proovedores.usuario', $usuario->id)
             ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
             ->groupBy('organismos.id');
 
@@ -39,7 +39,7 @@ class ProveedorCCController extends Controller
             ->join('productos', 'productos.id', '=', 'ventas.id_producto')
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
             ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
-            ->where('proovedores.usuario', $usuario->usuario)
+            ->where('proovedores.usuario', $usuario->id)
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->groupBy('organismos.id')
@@ -70,7 +70,7 @@ class ProveedorCCController extends Controller
             ->join('productos', 'productos.id', '=', 'ventas.id_producto')
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
             ->groupBy('socios.id')
-            ->where('proovedores.usuario', $usuario->usuario)
+            ->where('proovedores.usuario', $usuario->id)
             ->where('organismos.id', '=', $request['id'])
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->select('socios.nombre AS socio', 'socios.id AS id_socio',  DB::raw('SUM(cuotas.importe) AS totalACobrar'));
@@ -86,7 +86,7 @@ class ProveedorCCController extends Controller
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
             ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
             ->groupBy('socios.id')
-            ->where('proovedores.usuario', $usuario->usuario)
+            ->where('proovedores.usuario', $usuario->id)
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->where('organismos.id', '=', $request['id'])
@@ -116,7 +116,7 @@ class ProveedorCCController extends Controller
             ->join('productos', 'productos.id', '=', 'ventas.id_producto')
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
             ->groupBy('ventas.id')
-            ->where('proovedores.usuario', $usuario->usuario)
+            ->where('proovedores.usuario', $usuario->id)
             ->where('socios.id', '=', $request['id'])
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->select('socios.nombre AS socio', 'ventas.id AS id_venta', 'proovedores.nombre AS proovedor', 'productos.nombre AS producto', 'ventas.nro_cuotas', DB::raw('SUM(cuotas.importe) AS totalACobrar'));
@@ -130,7 +130,7 @@ class ProveedorCCController extends Controller
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
             ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
             ->groupBy('ventas.id')
-            ->where('proovedores.usuario', $usuario->usuario)
+            ->where('proovedores.usuario', $usuario->id)
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->where('socios.id', '=', $request['id'])
@@ -155,7 +155,7 @@ class ProveedorCCController extends Controller
         $usuario = Sentinel::check();
 
         $a =  Ventas::with('cuotas.movimientos', 'producto.proovedor')->whereHas('producto.proovedor', function($query) use ($usuario){
-            $query->where('usuario', $usuario->usuario);
+            $query->where('usuario', $usuario->id);
         })->find($request['id']);
         $a->cuotas->each(function ($cuota){
             $s = $cuota->movimientos->sum(function($movimiento) {
