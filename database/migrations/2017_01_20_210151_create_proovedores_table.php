@@ -17,7 +17,10 @@ class CreateProovedoresTable extends Migration
 
         Schema::create('proovedores', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('razon_social');
+            $table->integer('cuit');
+            $table->string('domicilio');
+            $table->integer('telefono');
             $table->string('descripcion');
             $table->softDeletes();
             $table->integer('id_prioridad')->unsigned();

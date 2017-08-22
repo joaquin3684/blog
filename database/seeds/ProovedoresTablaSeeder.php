@@ -11,7 +11,10 @@ class ProovedoresTablaSeeder extends Seeder
         for ($i=0; $i < 10; $i++)
         {
         	DB::table('proovedores')->insert([
-        	'nombre' => $faker->name,
+        	'razon_social' => $faker->company,
+	        'cuit' => $faker->randomNumber(8),
+        	'domicilio' => $faker->address,
+	        'telefono' => $faker->randomNumber(8),
 	        'descripcion' => $faker->realText(100, 3),
                 'id_prioridad' => $faker->numberBetween(1, 2),
                 'usuario' => $i,

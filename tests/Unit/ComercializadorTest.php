@@ -49,19 +49,8 @@ class ComercializadorTest extends TestCase
     public function getData()
     {
         return collect([
-            'nombre' => 'pepe',
-            'apellido' => 'gutierrez',
-            'cuit' => '1',
-            'domicilio' => '1',
-            'telefono' => '1',
-            'codigo_postal' => '1',
-            'doc_endeudamiento' => '1',
-            'organismo' => '1',
-            'fecha_nacimiento' => '2017-02-04',
-            'dni' => '1',
-            'localidad' => '1',
-            'legajo' => '1',
-            'id_organismo' => '1',
+            'id_socio' => 1,
+            'comercializador' => '1',
 
         ]);
     }

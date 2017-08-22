@@ -69,10 +69,43 @@ class Ventas
     public function correrVto($dias)
     {
         $fecha = Carbon::createFromFormat('Y-m-d', $this->fecha_vencimiento)->addDays($dias)->toDateString();
+        $this->setFechaVencimiento($fecha);
         $this->ventaRepo->update(['fecha_vencimiento' => $fecha], $this->id);
         $this->getCuotas()->each(function($cuota) use ($dias){
             $cuota->correrVto($dias);
         });
+    }
+
+    /**
+     * @param mixed $descripcion
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    }
+
+    /**
+     * @param mixed $nro_cuotas
+     */
+    public function setNroCuotas($nro_cuotas)
+    {
+        $this->nro_cuotas = $nro_cuotas;
+    }
+
+    /**
+     * @param mixed $importe
+     */
+    public function setImporte($importe)
+    {
+        $this->importe = $importe;
+    }
+
+    /**
+     * @param mixed $fecha_vencimiento
+     */
+    public function setFechaVencimiento($fecha_vencimiento)
+    {
+        $this->fecha_vencimiento = $fecha_vencimiento;
     }
 
     public function setProducto($producto)

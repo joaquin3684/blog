@@ -20,7 +20,7 @@ class CreateSolicitudsTable extends Migration
             $table->integer('comercializador')->unsigned();
             $table->foreign('comercializador')->references('id')->on('comercializadores');
             $table->integer('agente_financiero')->unsigned()->nullable();
-            $table->foreign('agente_financiero')->references('id')->on('agentes_financieros');
+            $table->foreign('agente_financiero')->references('id')->on('proovedores');
             $table->string('estado');
             $table->string('doc_endeudamiento')->nullable();
             $table->integer('total')->nullable();

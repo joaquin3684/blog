@@ -95,7 +95,57 @@ class Cuota
     {
         $fechaVto = Carbon::createFromFormat('Y-m-d', $this->fecha_vencimiento)->addDays($dias)->toDateString();
         $fechaInicio = Carbon::createFromFormat('Y-m-d', $this->fecha_inicio)->addDays($dias)->toDateString();
+        $this->setFechaVencimiento($fechaVto);
+        $this->setFechaInicio($fechaInicio);
         $this->cuotasRepo->update(['fecha_vencimiento' => $fechaVto, 'fecha_inicio' => $fechaInicio], $this->id);
+    }
+
+    /**
+     * @param mixed $importe
+     */
+    public function setImporte($importe)
+    {
+        $this->importe = $importe;
+    }
+
+    /**
+     * @param mixed $fecha_vencimiento
+     */
+    public function setFechaVencimiento($fecha_vencimiento)
+    {
+        $this->fecha_vencimiento = $fecha_vencimiento;
+    }
+
+    /**
+     * @param mixed $fecha_inicio
+     */
+    public function setFechaInicio($fecha_inicio)
+    {
+        $this->fecha_inicio = $fecha_inicio;
+    }
+
+    /**
+     * @param mixed $nro_cuota
+     */
+    public function setNroCuota($nro_cuota)
+    {
+        $this->nro_cuota = $nro_cuota;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * @param mixed $estado
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
     }
 
     public function getMovimientos()
