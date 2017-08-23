@@ -11,7 +11,7 @@ class Socios extends Model
  	protected $table = 'socios';
 	
     protected $fillable = [
-        'nombre', 'fecha_nacimiento', 'cuit', 'dni', 'domicilio', 'localidad', 'codigo_postal', 'telefono', 'id_organismo', 'legajo', 'fecha_ingreso'];
+        'nombre', 'apellido', 'fecha_nacimiento', 'cuit', 'dni', 'domicilio', 'localidad', 'codigo_postal', 'telefono', 'id_organismo', 'legajo', 'fecha_ingreso'];
 
     protected $dates = ['deleted_at'];
 

@@ -191,14 +191,15 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     }
 
     $scope.AltaComercializador = function (Dato){
-    
+
+        console.log(moment($scope.fecha_nacimiento).format('YYYY-MM-DD'));
     if($scope.socio != null) {
         $scope.Dato = {
         'nombre':$scope.nombre,//$scope.nombre,
         'apellido':$scope.apellido,
         'cuit':$scope.cuit,
         'domicilio':$scope.domicilio,
-        'fecha_nacimiento':$scope.fecha_nacimiento,
+        'fecha_nacimiento':moment($scope.fecha_nacimiento).format('YYYY-MM-DD'),
         'codigo_postal':$scope.codigo_postal,
         'telefono':$scope.telefono,
         'doc_documento':$scope.doc_documento,
@@ -219,7 +220,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         'apellido':$scope.apellido,
         'cuit':$scope.cuit,
         'domicilio':$scope.domicilio,
-        'fecha_nacimiento':$scope.fecha_nacimiento,
+            'fecha_nacimiento':moment($scope.fecha_nacimiento).format('YYYY-MM-DD'),
         'codigo_postal':$scope.codigo_postal,
         'telefono':$scope.telefono,
         'doc_documento':$scope.doc_documento,
@@ -234,6 +235,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         'legajo':$scope.legajo
         };
     }
+    console.log($scope.Dato);
     // 'nombre', 'comercializador', 'cuit', 'domicilio', 'apellido', 'codigo_postal', 'telefono', 'doc_documento', 'doc_recibo', 'doc_domicilio', 'doc_cbu', 'doc_endeudamiento', 'agente_financiero', 'estado', 'total', 'monto_por_cuota', 'cuotas', 'organismo'];
 
         $http({
