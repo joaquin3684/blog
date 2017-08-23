@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidacionABMproovedores;
+use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Facades\Datatables;
 use App\Proovedores;
 class ABM_proovedores extends Controller
@@ -20,14 +21,16 @@ class ABM_proovedores extends Controller
    public function store(ValidacionABMproovedores $request)
     {
         $elem = collect($request->all());
+        DB::transaction(function () use ($elem) {
         $usuario = $elem['usuario'];
         $pass = $elem['password'];
         $email = $elem['email'];
-        $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
-        $elem['usuario'] = $user->id;
-        Proovedores::create($elem->toArray());
 
-        return ['created' => true];
+            $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
+            $elem['usuario'] = $user->id;
+            Proovedores::create($elem->toArray());
+
+        });
     }
 
     public function traerElementos()

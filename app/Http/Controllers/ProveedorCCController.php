@@ -148,9 +148,7 @@ class ProveedorCCController extends Controller
             return $item;
         });
 
-        $ventasPorVenta = $ventasPorVenta->map(function($item) {
-           return $item->fecha = Carbon::createFromFormat('Y-m-d', $item->fecha)->toDateString();
-        });
+
 
         return $ventasPorVenta->toJson();
     }
