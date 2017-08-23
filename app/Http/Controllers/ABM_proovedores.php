@@ -18,12 +18,13 @@ class ABM_proovedores extends Controller
 
    public function store(ValidacionABMproovedores $request)
     {
-        $elem = $request->all();
-        Proovedores::create($request->all());
+        $elem = collect($request->all());
         $usuario = $elem['usuario'];
         $pass = $elem['password'];
         $email = $elem['email'];
         $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
+        $elem['usuario'] = $user->id;
+        Proovedores::create($elem);
 
         return ['created' => true];
     }
