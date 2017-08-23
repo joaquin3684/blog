@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidacionABMproovedores;
 use Yajra\Datatables\Facades\Datatables;
