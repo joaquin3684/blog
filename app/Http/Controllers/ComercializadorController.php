@@ -81,9 +81,6 @@ class ComercializadorController extends Controller
             FileManager::uploadImage($doc_endeudamiento, $ruta, 'doc_endeudamiento.png');
         }
 
-
-
-
     }
 
     public function solicitudes()

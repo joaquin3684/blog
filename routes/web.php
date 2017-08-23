@@ -304,15 +304,16 @@ Route::get('solicitudesPendientesMutual', 'SolicitudesPendientesMutualController
 Route::post('solicitudesPendientesMutual/actualizar', 'SolicitudesPendientesMutualController@actualizar');
 Route::get('solicitudesPendientesMutual/solicitudes', 'SolicitudesPendientesMutualController@solicitudes');
 Route::get('solicitudesPendientesMutual/fotos', 'SolicitudesPendientesMutualController@fotos');
+Route::get('solicitudesPendientesMutual/proveedores', 'SolicitudesPendientesMutualController@proveedores');
 
 //------------------- SOLICITUDES DE AGENTE FINANCIERO -----------------------
 
 Route::get('agente_financiero', 'AgenteFinancieroController@index');
-Route::post('agente_financiero/enviarPropuesta', 'AgenteFinancieroController@accionesSobrePropuesta');
+Route::post('agente_financiero/enviarPropuesta', 'AgenteFinancieroController@generarPropuesta');
 Route::get('agente_financiero/solicitudes', 'AgenteFinancieroController@solicitudes');
-Route::post('agente_financiero/rechazarPropuesta', 'AgenteFinancieroController@accionesSobrePropuesta');
-Route::post('agente_financiero/aceptarPropuesta', 'AgenteFinancieroController@accionesSobrePropuesta');
-Route::post('agente_financiero/contraPropuesta', 'AgenteFinancieroController@accionesSobrePropuesta');
+Route::post('agente_financiero/rechazarPropuesta', 'AgenteFinancieroController@rechazarPropuesta');
+Route::post('agente_financiero/aceptarPropuesta', 'AgenteFinancieroController@aceptarPropuesta');
+Route::post('agente_financiero/contraPropuesta', 'AgenteFinancieroController@generarPropuesta');
 Route::post('agente_financiero/reservarCapital', 'AgenteFinancieroController@reservarCapital');
 Route::post('agente_financiero/otorgarCapital', 'AgenteFinancieroController@otorgarCapital');
 Route::post('agente_financiero/fotos', 'AgenteFinancieroController@fotos');
