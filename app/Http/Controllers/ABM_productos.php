@@ -23,7 +23,7 @@ class ABM_productos extends Controller
     public function index()
     {
 
-        $registros = $this->producto->all();
+        $registros = $this->producto->allWithRelationship();
         return view('ABM_productos', compact('registros'));
     }
 

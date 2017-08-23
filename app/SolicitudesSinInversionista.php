@@ -17,7 +17,7 @@ class SolicitudesSinInversionista extends Model
 
     public function agentes_financieros()
     {
-        return $this->belongsToMany('App\Proovedores', 'solicitudes_sin_inversionistas', 'id', 'agente_financiero');
+        return $this->belongsTo('App\Proovedores',  'agente_financiero', 'id');
     }
 
     public function solicitud()

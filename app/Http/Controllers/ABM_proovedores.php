@@ -67,6 +67,10 @@ class ABM_proovedores extends Controller
 
     public function traerRelacion()
     {
-        return Proovedores::all();
+        return Proovedores::all()->map(function($proveedor){
+            $p = collect($proveedor);
+            $p->put('nombre', $proveedor->razon_social);
+            return $p;
+        });
     }
 }

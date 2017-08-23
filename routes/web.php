@@ -304,7 +304,7 @@ Route::get('solicitudesPendientesMutual', 'SolicitudesPendientesMutualController
 Route::post('solicitudesPendientesMutual/actualizar', 'SolicitudesPendientesMutualController@actualizar');
 Route::get('solicitudesPendientesMutual/solicitudes', 'SolicitudesPendientesMutualController@solicitudes');
 Route::get('solicitudesPendientesMutual/fotos', 'SolicitudesPendientesMutualController@fotos');
-Route::get('solicitudesPendientesMutual/proveedores', 'SolicitudesPendientesMutualController@proveedores');
+Route::post('solicitudesPendientesMutual/proveedores', 'SolicitudesPendientesMutualController@proveedores');
 
 //------------------- SOLICITUDES DE AGENTE FINANCIERO -----------------------
 
@@ -318,6 +318,7 @@ Route::post('agente_financiero/reservarCapital', 'AgenteFinancieroController@res
 Route::post('agente_financiero/otorgarCapital', 'AgenteFinancieroController@otorgarCapital');
 Route::post('agente_financiero/fotos', 'AgenteFinancieroController@fotos');
 Route::post('agente_financiero/proveedores', 'AgenteFinancieroController@proveedores');
+
 //------------------- CORRER VTO DE SERVICIOS ----------------------------
 
 Route::get('correrVto', 'CorrerVtoServiciosController@index');

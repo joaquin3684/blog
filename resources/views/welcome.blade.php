@@ -101,6 +101,8 @@
                       <li><a href="productos">Productos</a></li>
                       <li><a href="usuarios">Usuarios</a></li>
                       <li><a href="roles">Roles</a></li>
+                      <li><a href="comercializador">Comercializador</a></li>
+
                   </ul>
                 </li>
                  <li><a><i class="fa fa-gears"></i> Operaciones <span class="fa fa-chevron-down"></span></a>
@@ -124,6 +126,8 @@
                     </li>
                     <li><a href="solicitudesPendientesMutual">Solicitudes Pendientes Mutual</a>
                     </li>
+                      <li><a href="correrVto">Correr vto</a>
+                      </li>
                   </ul>
                 </li>
                

@@ -1,4 +1,5 @@
 <?php   namespace App\Repositories\Eloquent\Repos\Gateway;
+use App\Productos;
 
 /**
  * Created by PhpStorm.
@@ -11,5 +12,10 @@ class ProductosGateway extends Gateway
     function model()
     {
         return 'App\Productos';
+    }
+
+    public function allWithRelationship()
+    {
+       return Productos::with('proovedor')->get();
     }
 }

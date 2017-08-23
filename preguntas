@@ -1,47 +1,13 @@
 COMERCIALIZADOR
 
 
-agregar en pantalla fecha de nacimiento y sexo y organismo
+agregar sexo en socio y tambien en el alta de solicitud del comer
 
 
-que datos quieren registrar del comercializador? digamos cuando se da el alta del comer?
-nombre apellido documento cuit domicilio
-
-criterios agente financiero
-
-situacion del asociado
+Como determino la situacion del usuario ?
+el tema del filtro por edad como seria ? porque depende del organismo ?
 
 
-por edad no te pueden dar credito (mayor de 18)
-edad maxima  65 hombres 60 mujeres (esto depende del organismo)
-
-
-// dentro del circuito el comer tiene que afiliar al asociado o buscar a uno que ya este afiliado
-
-
-una ves que se aprobo el credito como se registran las cuotas en la cuenta corriente?
-como se establece el vencimiento de las cuotas?
-
-
-el primer periodo es de 60 dias y apartir de ahi 30 en todas las siguientes,
-se tiene que poder correjir el vencimiento de TODO el prestamo, es decir correr todas las fechas de inicio
-y vencimiento SIEMPRE PARA ADELANTE
-
-como es el tema del dar servicio nuestro ??
-
-hay dos posibilidades o un proveedor te vende un producto a cambio de una comision osea toda la plata de una
-o el mismo te lo vende en cuotas y te lo financia
-
-
-como es el proceso de cobro de cuotas ?
-
-el agente financiero te dice que y a quien se les tiene que descontar, y recien ahi podes enviar a descontar al organismo
-una ves el organismo te pago se tiene que cobrar y habilitar la accion de pagar
-
-
-AGENTE FINANCIERO
-
-razon social, cuit , direccion , telefono, descripcion del producto
 
 
 

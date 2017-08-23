@@ -43,8 +43,6 @@ dar_servicio
 
 abm_productos
 
-- sacar el input nombre
-- poner input razon_social, telefono, domicilio, cuit, usuario, password (el json con esas keys)
 - poner para imprimir
 - poner para pasar a pdf, excel
 - poner sentinel
@@ -89,6 +87,7 @@ abm_proovedores
 
 abm_socios
 
+- agregar input sexo, tiene que ser un radio ('Masculino', 'Femenino')
 - poner para imprimir
 - poner para pasar a pdf, excel
 - Filtros columnas
@@ -118,6 +117,19 @@ Aprobacion
 
 Cancelacion de servicio
 - tiene que haber una tabla con los servicios para cancelar --> no sería el "Cancelar" de la pantalla aprobacion??
+
+Alta solicitud Comercializador
+
+- hacer tema imagenes
+- agregar input sexo, tiene que ser un radio ('Masculino', 'Femenino')
+
+Solicitudes pendientes mutual
+
+- hacer tema imagenes
+
+Agente financiero solicitudes
+
+- hacer tema imagenes
 
 
 ---------------- FIN -----------------------

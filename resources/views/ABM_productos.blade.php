@@ -71,7 +71,7 @@
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input type="number" step="0.01" id="retencion" name="retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{[{errores.porcentaje_retencion[0]}]}
+                                                    <input type="number" step="0.01" id="retencion" name="ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{[{errores.porcentaje_retencion[0]}]}
                                                 </div>
                                             </div>
                                             <div class="item form-group">
@@ -79,6 +79,17 @@
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <select id="proovedor" name="id_proovedor" class="form-control col-md-7 col-xs-12" ></select>
+                                                </div>
+
+                                            </div>
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Tipo <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <select name="tipo" class="form-control col-md-7 col-xs-12" >
+                                                        <option value="Credito">Credito</option>
+                                                        <option value="Producto">Producto</option>
+                                                    </select>
                                                 </div>
 
                                             </div>
@@ -142,7 +153,7 @@
                                         <td>{{ $registro->nombre }}</td>
                                         <td>{{ $registro->descripcion }}</td>
                                         <td>{{ $registro->retencion }}</td>
-                                        <td>{{ $registro->proovedor['nombre'] }}</td>
+                                        <td>{{ $registro->proovedor->razon_social }}</td>
                                         <td>@if(Sentinel::check()->hasAccess('organismos.editar'))<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', {{$registro->id}})"><span class="glyphicon glyphicon-pencil"></span></button>@endif
                                             @if(Sentinel::check()->hasAccess('organismos.borrar'))  <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', {{$registro->id}})"><span class="glyphicon glyphicon-remove"></span></button>@endif
                                         </td>
