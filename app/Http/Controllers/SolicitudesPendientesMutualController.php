@@ -12,7 +12,7 @@ class SolicitudesPendientesMutualController extends Controller
     private $solicitudesGateway;
     public function __construct()
     {
-        $this->solicitudesGateway = new SolicitudesSinInversionistaGateway();
+        $this->solicitudesGateway = new SolicitudGateway();
     }
 
     public function index()
@@ -44,6 +44,11 @@ class SolicitudesPendientesMutualController extends Controller
     public function solicitudes()
     {
         return $this->solicitudesGateway->solicitudesSinAsignar();
+    }
+
+    public function proveedores(Request $request)
+    {
+        return SolicitudesSinInversionistaGateway::proveedores($request['id']);
     }
 
     public function fotos(Request $request)

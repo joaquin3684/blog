@@ -3,6 +3,7 @@
 namespace App\Repositories\Eloquent\Repos\Gateway;
 
 
+use App\Solicitud;
 use App\SolicitudesSinInversionista;
 
 class SolicitudesSinInversionistaGateway extends Gateway
@@ -19,4 +20,10 @@ class SolicitudesSinInversionistaGateway extends Gateway
                                     $query->where('estado', 'Procesando Solicitud');
                                 })->get();
     }
+
+    public static function proveedores($id)
+    {
+        return SolicitudesSinInversionista::where('solicitud', $id)->with('agentes_financieros')->get();
+    }
+
 }

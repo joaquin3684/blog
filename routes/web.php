@@ -316,7 +316,7 @@ Route::post('agente_financiero/contraPropuesta', 'AgenteFinancieroController@acc
 Route::post('agente_financiero/reservarCapital', 'AgenteFinancieroController@reservarCapital');
 Route::post('agente_financiero/otorgarCapital', 'AgenteFinancieroController@otorgarCapital');
 Route::post('agente_financiero/fotos', 'AgenteFinancieroController@fotos');
-
+Route::post('agente_financiero/proveedores', 'AgenteFinancieroController@proveedores');
 //------------------- CORRER VTO DE SERVICIOS ----------------------------
 
 Route::get('correrVto', 'CorrerVtoServiciosController@index');

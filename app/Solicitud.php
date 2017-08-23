@@ -18,5 +18,10 @@ class Solicitud extends Model
         return $this->belongsTo('App\Socios', 'id_socio', 'id')->withTrashed();
     }
 
+    public function proveedor()
+    {
+        return $this->belongsTo('App\Proovedores', 'agente_financiero', 'id');
+    }
+
     protected $dates = ['deleted_at'];
 }

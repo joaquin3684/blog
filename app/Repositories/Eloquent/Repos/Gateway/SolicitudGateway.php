@@ -18,5 +18,10 @@ class SolicitudGateway extends Gateway
         return 'App\Solicitud';
     }
 
+    public function solicitudesSinAsignar()
+    {
+       return Solicitud::doesntHave('proveedor')->orWhere('doc_endeudamiento', null)->with('socio')->get();
+    }
+
 
 }
