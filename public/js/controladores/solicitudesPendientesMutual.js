@@ -84,7 +84,7 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
 
     $scope.getAgentes = function (){
         $http({
-            url: 'agente_financiero/proveedores',
+            url: 'solicitudesPendientesMutual/proveedores',
             method: 'post',
             data: {'id':$scope.idpropuestae}
         }).then(function successCallback(response)
