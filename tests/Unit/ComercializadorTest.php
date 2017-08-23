@@ -85,6 +85,10 @@ class ComercializadorTest extends TestCase
 
     }
 
+
+    //TODO: testear modificacion de propuesta
+    //TODO: testear envio de formulario
+
     public function testTraerLasSolicitudesPorElUsuario()
     {
 

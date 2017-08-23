@@ -23,5 +23,9 @@ class SolicitudGateway extends Gateway
        return Solicitud::doesntHave('proveedor')->orWhere('doc_endeudamiento', null)->with('socio')->get();
     }
 
+    public function buscarPorAgente($id)
+    {
+        return Solicitud::where('agente_financiero', $id)->get();
+    }
 
 }

@@ -24,4 +24,12 @@ class SolicitudRepo extends Repositorio
     {
         return 'App\Repositories\Eloquent\Repos\SolicitudRepo';
     }
+
+    public function buscarPorAgente($id)
+    {
+        $solicitudes = $this->gateway->buscarPorAgente($id);
+        return $solicitudes->map(function($solicitud){
+            return $this->mapper->map($solicitud);
+        });
+    }
 }

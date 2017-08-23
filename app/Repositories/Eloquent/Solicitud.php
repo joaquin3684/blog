@@ -9,136 +9,84 @@
 namespace App\Repositories\Eloquent;
 
 
+use App\Repositories\Eloquent\Repos\SolicitudRepo;
+use App\Traits\Conversion;
+
 class Solicitud
 {
-    private $nombre;
-    private $apellido;
-    private $cuit;
-    private $domicilio;
-    private $telefono;
-    private $codigo_postal;
+
     private $id;
-    private $doc_documento;
-    private $doc_recibo;
-    private $doc_domicilio;
-    private $doc_cbu;
+    private $total;
+    private $monto_por_cuota;
+    private $cuotas;
     private $doc_endeudamiento;
     private $estado;
 
+    use Conversion;
 
-    public function __construct($id, $nombre, $apellido, $cuit, $domicilio, $telefono, $codigo_postal, $doc_documento, $doc_recibo, $doc_domicilio, $doc_cbu, $doc_endeudamiento = null, $estado )
+    public function __construct($id, $total, $montoPorCuota, $cuotas, $doc_endeudamiento = null, $estado )
     {
         $this->id = $id;
-        $this->nombre = $nombre;
-        $this->apellido = $apellido;
-        $this->cuit = $cuit;
-        $this->domicilio = $domicilio;
-        $this->telefono = $telefono;
-        $this->codigo_postal = $codigo_postal;
         $this->doc_endeudamiento = $doc_endeudamiento;
-        $this->doc_cbu = $doc_cbu;
-        $this->doc_domicilio = $doc_domicilio;
-        $this->doc_recibo = $doc_recibo;
-        $this->doc_documento = $doc_documento;
         $this->estado = $estado;
+        $this->cuotas = $cuotas;
+        $this->total = $total;
+        $this->monto_por_cuota = $montoPorCuota;
+        $this->repo  = new SolicitudRepo();
 
+    }
 
+    public function guardar()
+    {
+        $obj = $this->toArray($this);
+        $this->repo->update($obj, $this->id);
+    }
+    /**
+     * @return mixed
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * @param mixed $total
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
     }
 
     /**
      * @return mixed
      */
-    public function getNombre()
+    public function getMontoPorCuota()
     {
-        return $this->nombre;
+        return $this->monto_por_cuota;
     }
 
     /**
-     * @param mixed $nombre
+     * @param mixed $montoPorCuota
      */
-    public function setNombre($nombre)
+    public function setMontoPorCuota($montoPorCuota)
     {
-        $this->nombre = $nombre;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getApellido()
-    {
-        return $this->apellido;
-    }
-
-    /**
-     * @param mixed $apellido
-     */
-    public function setApellido($apellido)
-    {
-        $this->apellido = $apellido;
+        $this->monto_por_cuota = $montoPorCuota;
     }
 
     /**
      * @return mixed
      */
-    public function getCuit()
+    public function getCuotas()
     {
-        return $this->cuit;
+        return $this->cuotas;
     }
 
     /**
-     * @param mixed $cuit
+     * @param mixed $cuotas
      */
-    public function setCuit($cuit)
+    public function setCuotas($cuotas)
     {
-        $this->cuit = $cuit;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDomicilio()
-    {
-        return $this->domicilio;
-    }
-
-    /**
-     * @param mixed $domicilio
-     */
-    public function setDomicilio($domicilio)
-    {
-        $this->domicilio = $domicilio;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTelefono()
-    {
-        return $this->telefono;
-    }
-
-    /**
-     * @param mixed $telefono
-     */
-    public function setTelefono($telefono)
-    {
-        $this->telefono = $telefono;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCodigoPostal()
-    {
-        return $this->codigo_postal;
-    }
-
-    /**
-     * @param mixed $codigo_postal
-     */
-    public function setCodigoPostal($codigo_postal)
-    {
-        $this->codigo_postal = $codigo_postal;
+        $this->cuotas = $cuotas;
     }
 
     /**
@@ -155,70 +103,6 @@ class Solicitud
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDocDocumento()
-    {
-        return $this->doc_documento;
-    }
-
-    /**
-     * @param mixed $doc_documento
-     */
-    public function setDocDocumento($doc_documento)
-    {
-        $this->doc_documento = $doc_documento;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDocRecibo()
-    {
-        return $this->doc_recibo;
-    }
-
-    /**
-     * @param mixed $doc_recibo
-     */
-    public function setDocRecibo($doc_recibo)
-    {
-        $this->doc_recibo = $doc_recibo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDocDomicilio()
-    {
-        return $this->doc_domicilio;
-    }
-
-    /**
-     * @param mixed $doc_domicilio
-     */
-    public function setDocDomicilio($doc_domicilio)
-    {
-        $this->doc_domicilio = $doc_domicilio;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDocCbu()
-    {
-        return $this->doc_cbu;
-    }
-
-    /**
-     * @param mixed $doc_cbu
-     */
-    public function setDocCbu($doc_cbu)
-    {
-        $this->doc_cbu = $doc_cbu;
     }
 
     /**
