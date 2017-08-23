@@ -25,7 +25,7 @@ class ABM_proovedores extends Controller
         $email = $elem['email'];
         $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
         $elem['usuario'] = $user->id;
-        Proovedores::create($elem);
+        Proovedores::create($elem->toArray());
 
         return ['created' => true];
     }
