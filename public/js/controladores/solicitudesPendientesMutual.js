@@ -41,6 +41,7 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
 
     $scope.IDModal = function(id) {
         $scope.idpropuestae = id;
+        $scope.getAgentes();
     }
 
     $scope.AsignarAF = function() {
@@ -83,8 +84,9 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
 
     $scope.getAgentes = function (){
         $http({
-            url: 'organismos/traerElementos',
-            method: 'get'
+            url: 'agente_financiero/proveedores',
+            method: 'post',
+            data: {'id':$scope.idpropuestae}
         }).then(function successCallback(response)
         {
           
@@ -94,7 +96,7 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
             }
             else
             {
-                $scope.organismos = response.data;
+                $scope.agentesasignar = response.data;
                 console.log(response);
             }
 
@@ -107,7 +109,7 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
 
     var self = this;
     $scope.pullSolicitudes();
-    $scope.getAgentes();
+    
     
 
 });
