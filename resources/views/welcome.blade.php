@@ -128,6 +128,8 @@
                     </li>
                       <li><a href="correrVto">Correr vto</a>
                       </li>
+                      <li><a href="proveedorCC">Cuenta Corriente Agente</a>
+                      </li>
                   </ul>
                 </li>
                
