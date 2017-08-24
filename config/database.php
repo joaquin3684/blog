@@ -50,7 +50,7 @@ return [
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'strict' => true,
+            'strict' => false, //TODO: aca cambie a false esta variable para que ande el group by en el hosting cuando accedo a las cuentas corrientes
             'engine' => null,
         ],
 
