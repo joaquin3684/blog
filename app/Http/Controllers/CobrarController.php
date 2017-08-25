@@ -87,7 +87,7 @@ class CobrarController extends Controller
            return $item['diferencia'] > 0;
         });
 
-        return $this->tabla->generarTabla($request, $cobrado);
+        return $cobrado;
     }
     public function mostrarPorVenta(Request $request)
     {
@@ -133,7 +133,7 @@ class CobrarController extends Controller
             return $item['diferencia'] > 0;
         });
 
-        return $this->tabla->generarTabla($request, $cobrado);
+        return $cobrado;
 
 
     }
