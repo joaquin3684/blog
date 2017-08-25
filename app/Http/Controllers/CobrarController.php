@@ -47,13 +47,11 @@ class CobrarController extends Controller
 
     public function index()
     {
-        
         return view('cobrar');
-
     }
+
     public function datos(Request $request)
     {
-
         $cuotas = $this->cuotas->cuotasVencidasDeOrganismos();
         $movimientos = $this->movimientos->movimientosHastaHoyDeOrganismos();
         $cobrado = $this->unirColecciones($cuotas, $movimientos, ['id_organismo'], ['totalCobrado' => 0]);
@@ -69,8 +67,8 @@ class CobrarController extends Controller
         });
 
         return $cobrado;
-
     }
+
     public function mostrarPorSocio(Request $request)
     {
         $cuotas = $this->cuotas->cuotasVencidasDeSociosDelOrganismo($request['id']);
