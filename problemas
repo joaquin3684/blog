@@ -10,7 +10,24 @@ Cobro
 - poner en el input de cada registro lo que falta para saldar la deuda automaticamente
 - mostrar total en el final de esos input
 - poder poner numeros con coma
+{
+Organismo-> Socios -> ventas
 
+En socios y ventas:
+legajo y nombre (solo socios)
+nombre servicio (venta)
+checkbox en cada fila, al arrancar todos tildados, posibilidad de tildar o destildar todos
+monto ha cobrar
+input en cada fila, cuanto cobro de lo que me deben, al principio se carga con el monto toal ha cobrar
+
+Al final:
+boton cobrar, diferente url para socios y ventas, en socios mandar el json "id": id_socio, "monto": monto del imput. Para venta mandar "id" y "monto".
+url socio: mostrar socio: cobrar/porSocio
+            cobrar: cobrar/cobroPorPrioridad
+url ventas: mostrar: cobrar/mostrarPorVenta
+            cobrar: cobrar/cobroPorVenta
+Todos los method son post
+}
 
 Cobro cuotas sociales
 - hacer pantalla
