@@ -364,6 +364,7 @@
                                     </td>
 							        <td title="'Diferencia'" sortable="'diferencia'">
 							            {[{organismo.diferencia}]}
+                                        <div ng-show="false" ng-init="$parent.diferenciaSUM = $parent.diferenciaSUM + organismo.diferencia"></div>
                                     </td>
                                     <td title="'Total a Cobrar'" sortable="'totalACobrar'">
                                         {[{organismo.totalACobrar}]}
@@ -377,10 +378,12 @@
 							   	</tr> 
                                 <tfoot>
                                 <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
-                                    <td colspan="2" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         <b>Total</b>
                                     </td>
-                                    
+                                    <td>
+                                        {[{diferenciaSUM}]}
+                                    </td>
                                     <td>
                                         {[{totalACobrarSUM}]}
                                     </td>
