@@ -69,7 +69,7 @@
                                 <div class="x_content" >
                                     <div class="container">
                                       <form ng-submit="filtro()">
-                                  
+
 
 
                                         <div class="row">
@@ -83,13 +83,13 @@
                                                     </md-item-template>
                                                     <md-not-found>
                                                      No se encontraron resultados para "{[{searchText}]}".
-          
+
                                                     </md-not-found>
                                                 </md-autocomplete>
                                             </div>
 
                                         </div>
-                                        
+
                                         <div class="row" style="margin-top:20px;">
                                             <div class="item form-group col-sm-5 col-xs-8">
                                                 <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
@@ -105,7 +105,7 @@
                                             </div>
                                             <div class="item form-group col-sm-5 col-xs-8">
                                                 <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Maximo importe 
+                                                    Maximo importe
                                                 </label>
                                                 <md-slider aria-label="red" class="md-primary" ng-change="filtrar()"  flex="" id="red-slider" max="255" min="0" ng-model="maximo_importe_cuota">
                                                 </md-slider>
@@ -119,7 +119,7 @@
                                         <div class="row" style="margin-top:20px;">
                                             <input type="submit" ng-click="filtro()" class="btn btn-success" value="Filtrar">
                                             <button type="button" ng-click="seleccionarTodo()" class="btn btn-primary">Seleccionar Todo</button>
-                                            
+
                                         </div>
                                         </form>
                                     </div>
@@ -140,7 +140,7 @@
                                     Todos los servicios disponibles para aprobar
                                 </small>
                             </h2>
-                        
+
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
                                     <a class="collapse-link">
@@ -194,7 +194,7 @@
                                                     {[{aprobacion.producto.nombre}]}
                                                 </td>
                                                 <td title="'Proveedor'" sortable="'nombre'">
-                                                    {[{aprobacion.producto.proovedor.nombre}]}
+                                                    {[{aprobacion.producto.proovedor.razon_social}]}
                                                 </td>
                                                 <td title="'Cuotas'" sortable="'nro_cuotas'">
                                                     {[{aprobacion.nro_cuotas}]}

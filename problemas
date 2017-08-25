@@ -27,15 +27,10 @@ Cuenta corrientes cuotas sociales
 
 dar_servicio
 
-- si selecciono un proovedor y un producto y luego borro el proovedor deberia borrarse el producto y deshabilitarse el input del producto
 - emitir orden de descuento para imprimir
 - primero se tiene que imprimir la orden de descuento y luego manualmente se tiene que enviar el formulario
 - ajustar pagina para celular
-- cambiar titulo y subtiutlo porque aparece con unos puntos suspensivos tiene que decir "Otorgar servicio"
-- poner mensajes cuando se realiza una operacion
-- vaciar los campos caundos e da de alta
 - poner sentinel
-- en el autocomplete de los proveedores se tiene que poner la razon_social en ves del nombre
 
 
 abm_productos
