@@ -30,8 +30,9 @@ Route::get('imagenes', function(){
    return Image::make($path)->encode('data-url');
 });
 Route::post('pruebas', function(Request $request){
+    return $request->hasFile('imagen');
 
-    $j = Storage::disk('public')->exists('ifd/filename.png');
+        $j = Storage::disk('public')->exists('ifd/filename.png');
     \App\Repositories\Eloquent\FileManager::uploadImage($request->foto, 'estoAnda', 'holaaa.png');
    return Storage::disk('public')->exists('ifd/filename.png');
     $j = $request->file('foto')->move(public_path('images'), 'a.png');

@@ -191,10 +191,10 @@ class CobrarController extends Controller
         foreach($request->all() as $venta)
         {
             $ventasRepo = new VentasRepo();
-            $ventaCuotasVencidas = $ventasRepo->cuotasVencidas($venta['id_venta']);
+            $ventaCuotasVencidas = $ventasRepo->cuotasVencidas($venta['id']);
 
             $cobrar = new CobrarPorVenta();
-            $cobrar->cobrar($ventaCuotasVencidas, $venta['cobro']);
+            $cobrar->cobrar($ventaCuotasVencidas, $venta['monto']);
         }
     }
 
