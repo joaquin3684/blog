@@ -27,6 +27,7 @@
   {!! Html::script('js/jquery.min.js') !!}
    {!! Html::script('js/jquery-ui-1.12.1/jquery-ui.min.js') !!}
    {!! Html::style('js/jquery-ui-1.12.1/jquery-ui.min.css') !!}
+   
     {!! Html::script('js/angular.min.js') !!}
     {!! Html::script('js/nprogress.js') !!}
   {!! Html::script('js/misFunciones.js') !!}

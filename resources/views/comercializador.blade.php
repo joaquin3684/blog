@@ -3,7 +3,9 @@
 @section('contenido')
 
 
+{!! Html::script('js/ng-file-upload.min.js') !!}
 {!! Html::script('js/controladores/comercializador.js') !!}
+
 
   <!-- CSS TABLAS -->
   <script>
@@ -192,15 +194,7 @@
                         <input type="file" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
                       </div>
                     </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Criterios
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <label><input type="checkbox" value="Criterio 1" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder=""> Criterio 1 </label>
-                        <label><input type="checkbox" value="Criterio 1" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder=""> Criterio 2 </label>
-                        <label><input type="checkbox" value="Criterio 1" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder=""> Criterio 3 </label>
-                      </div>
-                    </div>
+        
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
@@ -250,7 +244,7 @@
                      </button>
                      <button id="exportButton2" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
                      <button id="exportButton3" ng-click="Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
-                     
+                     <input type="file" ngf-select="onFileSelect($files)" multiple>
                      </center>
                             <div id="pruebaExpandir">
                                 <div class="span12 row-fluid">
