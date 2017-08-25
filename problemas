@@ -6,7 +6,7 @@ hay entidades que tienen son ellas las que hacen sus creditos, entonces tiene qu
 
 Cobro
 - ponerle mensajes al realizar acciones
-- ponerle ajax (al realizar el cobro se tiene que actualizar la tabla)
+- actualizar tabla luego de cobrar
 - poner en el input de cada registro lo que falta para saldar la deuda automaticamente
 - mostrar total en el final de esos input
 - poder poner numeros con coma
@@ -43,9 +43,9 @@ abm_productos
 
 abm_usuarios
 
+- poner las funciones de editar y borrar
 - poner para imprimir
 - poner para pasar a pdf, excel
-- poner las funciones de editar y borrar
 - poner sentinel
 - Filtros columnas
 
@@ -69,7 +69,6 @@ abm_organismos
 
 abm_proovedores
 
-- sacar todos los porcentajes de ganancia y administrativos
 - poner mostrar todos en la paginacion
 - poner para imprimir
 - poner para pasar a pdf, excel
@@ -105,8 +104,6 @@ Pago proovedores
 -> campos de la tabla del detalle (legajo, socio, vto, monto de cuota, nro cuota, id servicio, nro credito, estado cobro
 -> Seleccionar todos.
 
-Aprobacion
-- no aparece el vencimeinto -> Si aparece.. si dice "0000-00-00" es porque lo está mandando asi el back.
 
 Cancelacion de servicio
 - tiene que haber una tabla con los servicios para cancelar --> no sería el "Cancelar" de la pantalla aprobacion??
@@ -156,37 +153,10 @@ Creditos
 - cuando se genera se le tiene que asignar un nro de credito secuencial
 
 
-
-
 dar_servicio
 
 - puede haber colocacion es decir un servicio donde no se haga la gestion de cobanza solo se cobre un porcentaje del total del servicio
 - validaciones de capital y de cuotas
-
-abm_productos
-
-- poner validaciones
-
-abm_usuarios
-
-- poner validaciones
-
-abm_roles
-
-- poner validaciones
-
-abm_organismos
-
-- poner validaciones
-
-abm_proovedores
-
-- poner validaciones
-
-abm_socios
-
-- poner validaciones
-
 
 Cobranza
 

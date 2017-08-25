@@ -68,7 +68,7 @@ class CobrarController extends Controller
             return $item['diferencia'] > 0;
         });
 
-        return $this->tabla->generarTabla($request, $cobrado);
+        return $cobrado;
 
     }
     public function mostrarPorSocio(Request $request)
