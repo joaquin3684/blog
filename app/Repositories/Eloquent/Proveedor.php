@@ -85,6 +85,24 @@ class Proveedor
         $solicitud->setEstado('Aceptada por Comercializador');
         $solicitud->guardar();
     }
+
+    public function reservarCapital($idSolicitud)
+    {
+        $solicitud = $this->getSolicitudes()->first(function($solicitud) use ($idSolicitud){
+            return $solicitud->getId() == $idSolicitud;
+        });
+        $solicitud->setEstado('Capital Reservado');
+        $solicitud->guardar();
+    }
+
+    public function otorgarCapital($idSolicitud)
+    {
+        $solicitud = $this->getSolicitudes()->first(function($solicitud) use ($idSolicitud){
+            return $solicitud->getId() == $idSolicitud;
+        });
+        $solicitud->setEstado('Capital Otorgado');
+        $solicitud->guardar();
+    }
     /**
      * @return mixed
      */

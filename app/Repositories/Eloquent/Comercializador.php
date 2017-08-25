@@ -26,11 +26,6 @@ class Comercializador
 
     public function generarSolicitud($solicitud, $agentesFiltrados)
     {
-        $designador = new DesignarAgenteFinanciero($agentesFiltrados);
-        $agente = $designador->elegirAgente() == null ? null : $designador->elegirAgente()->getId();
-        $designarEstado = new DesignadorDeEstado($solicitud);
-        $estado = $designarEstado->buscarEstado($agente);
-
         if(!$solicitud->has('id_socio'))
         {
             $socioRepo = new SociosRepo();
@@ -39,9 +34,7 @@ class Comercializador
             $socioRepo->destroy($socio->getId());
         }
 
-
-        $solicitud->put('agente_financiero', $agente);
-        $solicitud->put('estado', $estado);
+        $solicitud->put('estado', 'Procesando Solicitud');
         $solicitud->put('comercializador', $this->id);
 
         $repoSolicitud = new SolicitudRepo();
@@ -49,11 +42,11 @@ class Comercializador
         $this->addSolicitud($solicitud);
 
         $repo = new SolicitudesSinInversionistaRepo();
-        if($estado == 'Procesando Solicitud'){
-            $agentesFiltrados->each(function($agente) use ($solicitud, $repo){
-                $repo->create(['solicitud' => $solicitud->getId(), 'agente_financiero' => $agente->getId()]);
-            });
-        }
+
+        $agentesFiltrados->each(function($agente) use ($solicitud, $repo){
+            $repo->create(['solicitud' => $solicitud->getId(), 'agente_financiero' => $agente->getId()]);
+        });
+
 
         return $solicitud;
 

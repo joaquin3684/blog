@@ -305,6 +305,7 @@ Route::post('solicitudesPendientesMutual/actualizar', 'SolicitudesPendientesMutu
 Route::get('solicitudesPendientesMutual/solicitudes', 'SolicitudesPendientesMutualController@solicitudes');
 Route::get('solicitudesPendientesMutual/fotos', 'SolicitudesPendientesMutualController@fotos');
 Route::post('solicitudesPendientesMutual/proveedores', 'SolicitudesPendientesMutualController@proveedores');
+Route::post('solicitudesPendientesMutual/aprobarSolicitud', 'SolicitudesPendientesMutualController@aprobarSolicitud');
 
 //------------------- SOLICITUDES DE AGENTE FINANCIERO -----------------------
 

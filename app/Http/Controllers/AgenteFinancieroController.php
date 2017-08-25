@@ -76,70 +76,24 @@ class AgenteFinancieroController extends Controller
     {
         //TODO: aca se tiene que ejecutar el proceso para que se refleje en la contabilidad
         $elem = $request->all();
-        $this->solicitudGateway->update($elem, $elem['id']);
-    }
+        $usuario = Sentinel::check();
+        $agenteRepo = new ProveedoresRepo();
+        $proveedor = $agenteRepo->findByUser($usuario->id);
+        $proveedor->reservarCapital($elem['id']);
 
+    }
 
     public function otorgarCapital(Request $request)
     {
-
-        DB::transaction(function () use ($request){
-            $fecha_ingreso = Carbon::today()->toDateString();
-            $ventasRepo = new VentasRepo();
-            $socioRepo = new SociosRepo();
-            $proveedorRepo = new ProveedoresRepo();
-            $cuotasRepo = new CuotasRepo();
-            //TODO: aca se tiene que ejecutar el proceso para que se refleje en la contabilidad
-            $elem = $request->all();
-            $sol = $this->solicitudGateway->update($elem, $elem['id']);
-
-            $sol->socio()->restore();
-            $socioPosta = $sol->socio;
-            $socioPosta->fecha_ingreso = $fecha_ingreso;
-            $socioPosta->save();
-
-            $socio = $sol->id_socio;
-            $cuotas = $sol->cuotas;
-            $montoPorCuota = $sol->monto_por_cuota;
-            $total = $montoPorCuota * $cuotas;
-            $proveedor = $sol->agente_financiero;
-            $proveedor = $proveedorRepo->findProductos($proveedor);
-            $producto = $proveedor->getProductos()->first();
-
-            $fechaVto = new Carbon();
-            $fechaInicio = new Carbon();
-            $fechaInicioDeVto = $fechaVto->today()->addMonths(2);
-            $venta = $ventasRepo->create([
-                'id_asociado' => $socio,
-                'id_producto' => $producto->getId(),
-                'nro_cuotas' => $cuotas,
-                'importe' => $total,
-                'fecha_vencimiento' => $fechaInicioDeVto->toDateString(),
-            ]);
-            $fechaInicio->today();
-            $cuotasRepo->create([
-                'cuotable_id' => $venta->getId(),
-                'cuotable_type' => 'App\Ventas',
-                'importe' => $montoPorCuota,
-                'fecha_inicio' => $fechaInicio->toDateString(),
-                'fecha_vencimiento' => $fechaInicioDeVto->toDateString(),
-                'nro_cuota' => '1',
-            ]);
-            $fechaInicio->addMonths(2);
-            for ($i = 2; $i <= $cuotas; $i++) {
-                $fechaInicioDeVto = $fechaInicioDeVto->addMonth();
-                $cuotasRepo->create([
-                    'cuotable_id' => $venta->getId(),
-                    'cuotable_type' => 'App\Ventas',
-                    'importe' => $montoPorCuota,
-                    'fecha_inicio' => $fechaInicio->toDateString(),
-                    'fecha_vencimiento' => $fechaInicioDeVto->toDateString(),
-                    'nro_cuota' => $i,
-                ]);
-                $fechaInicio = $fechaInicio->addMonth();
-            }
-        });
+        $elem = $request->all();
+        $usuario = Sentinel::check();
+        $agenteRepo = new ProveedoresRepo();
+        $proveedor = $agenteRepo->findByUser($usuario->id);
+        $proveedor->otorgarCapital($elem['id']);
     }
+
+
+
 
     public function fotos(Request $request)
     {

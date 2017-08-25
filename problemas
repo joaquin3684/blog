@@ -27,18 +27,15 @@ Cuenta corrientes cuotas sociales
 
 dar_servicio
 
-- sacar el select de tipo -> ????? seguro??
-- se tiene que agregar un input automaticamente cuando se selecciona el producto, si el producto es un credito tiene que aparecer dos input uno que sea el nro de credito y el otro monto Total otorgado, si es un producto normal tiene que aparecer un input que se llame observacion, ACLARACION el el valor del input montoTotalOtorgado y observacion son el mismo campo
 - si selecciono un proovedor y un producto y luego borro el proovedor deberia borrarse el producto y deshabilitarse el input del producto
 - emitir orden de descuento para imprimir
 - primero se tiene que imprimir la orden de descuento y luego manualmente se tiene que enviar el formulario
 - ajustar pagina para celular
-- cambiar titulo y subtiutlo --> Y cual tiene que ser?
+- cambiar titulo y subtiutlo porque aparece con unos puntos suspensivos tiene que decir "Otorgar servicio"
 - poner mensajes cuando se realiza una operacion
 - vaciar los campos caundos e da de alta
 - poner sentinel
-- no funciona el vto
-- nro de credito se tiene que generar automaticamente ---> y cual tiene que ser?
+- en el autocomplete de los proveedores se tiene que poner la razon_social en ves del nombre
 
 
 abm_productos
@@ -100,6 +97,7 @@ Cuentas corrientes
 - poner la opcion de mostrar todos los registros --> Demorado hasta que encuentre como.
 - poder imprimir, pdf, excel
 
+
 Cobranza
 
 - pantalla para hacer la cobranza
@@ -126,10 +124,24 @@ Alta solicitud Comercializador
 Solicitudes pendientes mutual
 
 - hacer tema imagenes
+-en el modificar del comercializador solo se tiene que poder modificar la cantidad de cuotas y el importe total el monto por cuota no se puede
+- agregar una accion llamada verificar comprobante, que se puede ejecutar cuando el estado
+de la solicitud es otorgar capital ... metodo : post ({id: id_solicitud, estado: 'Solicitud Aprobada'}) url: solicitudesPendientesMutual/aprobarSolicitud
 
 Agente financiero solicitudes
 
+- el estado para que el agente pueda realizar la accion de generar propeusta ya no se llama mas
+    inverionista asignado ahora se llama "Agente Financiero Asignado"
 - hacer tema imagenes
+- el agente financiero puede rechazar la solicitud de una sin que haya una modificacion
+en el medio, es decir sin que haya una contrapropuesta por parte del comercializador
+
+Cuenta corriente agente financiero
+
+- en la abstraccion de servicios tiene que haver un boton que se llame sistema frances
+    que habra un modal y que le pegue a la url por post: {id: id_servicio} a la url:
+     proveedorCC/sistemaFrances. esto tiene que mostrar una tabla que despues explico como es
+
 
 
 ---------------- FIN -----------------------
@@ -140,14 +152,21 @@ Cuotas sociales
 se cargan todos los primeros de mes
 
 
+
+
 Cobro cuotas sociales
+
+Creditos
+
+- cuando se genera se le tiene que asignar un nro de credito secuencial
+
+
 
 
 dar_servicio
 
 - puede haber colocacion es decir un servicio donde no se haga la gestion de cobanza solo se cobre un porcentaje del total del servicio
 - validaciones de capital y de cuotas
-- nro de credito tiene que ser automatico, es autoincremental (ojo revisar porque se van a juntar con los productos en el caso de ser un producto no deberia modificar el nro de credito)
 
 abm_productos
 
@@ -173,9 +192,6 @@ abm_socios
 
 - poner validaciones
 
-Cuentas corrientes
-
--programar los filtros
 
 Cobranza
 
@@ -189,90 +205,3 @@ Cancelacion de servicio
 2- cancela pero el proveedor establece una quita, esta es arbitraria (puede ser un porcentaje o un valor) por ejemplo si debiese 400 pesos el proveedor puede decir que me pague 300
 
 ---------------- FIN -----------------------
-
-
-ROLES
-
-mutual como comercializador
-
-- mutual consigue un cliente el cual necesita un prestamo, para esto la mutual le pide al cliente determinada documentacion
-- esta documentacion se la da a un tercero que va a realizar la gestion de cobranza y le dice de cuanto es el credito
-- si este tercero aprueba el credito le tengo que pedir otra documentacion mas se la vuelvo a dar a este tercero
-- este tercero hace un segundo checkeo de la informacion y si esta bien le gira la plata al cliente y me da un porcentaje del total del capital
-- este porcentaje se charlo previamente el cual puede ser variable o fijo
-
-entonces
-
-- registro al cliente ?
-- guardo la documentacion del cliente digitalizada ?
-- la informacion al tercero , la mando por el sistema ? o es fisica ?
-- tengo que registrar la aprobacion o rechazo
-- registro la plata entrante
-
-mutual como gestor de prestamos
-
-- mutual recibe a travez de un comercializador o no un cliente que quiere un prestamo
-- recibe la documentacion correspondiente para este prestamo y la checkea en una primera instancia
-- si ve que es factible que se le pueda dar un prestamo, ELIJE un INVERSIONISTA/PROVEEDOR para mandarle el prestamo
-- este inversionista hace su respectivo analisis para ver si le da el credito o no, y este lo rechaza o lo aprueba
-- si este lo aprueba se le avisa al cliente mediante el comercializador o no, que se le va a otorgar el credito o no y se
-obtiene la documentacion restante para llevar acabo el prestamo
-- una vez aprobado todas las instancias se le gira la plata el cliente, ya sea que lo gira el inversionista o la propia mutual
-
-entonces
-
-- tengo que recibir la documentacion
-- checkeo documentacion
-- elijo inversionista y le envio la informacion
-- recibo aprobacion o rechazo del inversionista
-- notifico al comercializador o cliente
-- si el inversionista lo aprobo el o la mutual le gira la plata al cliente, y al comercializador
-en el caso de que este haya participado
-- la mutual se queda con un porcentaje del total del prestamo
-
-mutual con fondos propios
-
-- el rol del inversor desaparece y el establece sus comisiones
-
-
-
-opcion 1 credito sale bien
-
-1) se genera una solicitud de prestamo, esta solicitud la puede generar un comercializador ajeno
- a la organizacion o un vendedor interno, esta solicitud contiene datos del socio, importe que desea, y capaz podria estar la tasa
-2) esta solicitud lo ve un usuario con la facultad de rechazar o no un prestamo
-3) si esta mutual quiere darla con fondos propios elije la opcion con fondos propios sino elije al inversionista
-4) si decide darla con fondos propios elije la tasa nro de cuotas importe que le presta al cliente, importe total que va a generar, primer vto
-4 bis) si decide darla con fondos de terceros llena el formulario con lo que le dice el inversionista
-
-
-Comercializador
-
-antes de credito
-
-saca solicitud
-
-despues de otorgar el credito
-
-cobra un porcentaje por el total
-
-Gestor de prestamo
-
-antes de credito
-
-se comunica con el inversor para ver si va a otorgar el prestamo
-
-despues de otorgar el credito
-
-se comunica con el ente recaudador (mutual que haga gestion de cobranza ) para recibir la recaudacion y luego le paga al inversor
-quedandose con un porcentaje
-
-Gestor de cobranza
-
-antes del credito
-
-no hace nada
-
-despues de otorgar el credito
-
-se comunica con el organismo para cobrar lo que corresponde , se queda con un porcentaje de lo cobrado y le da el resto al gestor de prestamo
