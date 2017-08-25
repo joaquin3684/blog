@@ -1,7 +1,7 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable','Mutual.services']).config(function($interpolateProvider){
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable','Mutual.services', 'ngFileUpload']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
-app.controller('comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv) {
+app.controller('comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv, Upload) {
 
     $scope.pullComercializadores = function (){
 
@@ -38,6 +38,24 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
 
     }
+
+    $scope.onFileSelect = function($files) {
+        console.log("Entro a la funcion");
+    //$files: an array of files selected, each file has name, size, and type.
+    for (var i = 0; i < $files.length; i++) {
+      var file = $files[i];
+      $scope.upload = Upload.upload({
+        url: 'pruebas', //upload.php script, node.js route, or servlet url
+        data: {'imagen': $scope.myModelObj},
+        file: file,
+      }).progress(function(evt) {
+        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+      }).success(function(data, status, headers, config) {
+        // file is uploaded successfully
+        console.log(data);
+      });
+    }
+    };
 
     $scope.query = function(searchText, ruta)
     {
