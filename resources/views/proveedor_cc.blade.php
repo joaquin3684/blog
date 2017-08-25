@@ -365,17 +365,18 @@
 
                                 <tr ng-repeat="organismo in $data" ng-click="PullSocios(organismo.id_organismo,organismo.organismo)">
 
-                                    <td title="'Organismo'" filter="{ organismo: 'text'}" sortable="'organismo'" >
+                                    <td title="'Organismo'" filter="{organismo: 'text'}" sortable="'organismo'" >
 							                          {{organismo.organismo}}
                                     </td>
-							                      <td title="'Diferencia'" filter="{ diferencia: 'number'}" sortable="'diferencia'" >
-							                          {{organismo.diferencia}}
-                                    </td>
-                                    <td title="'Total a Cobrar'" filter="{ totalACobrar: 'number'}" sortable="'totalACobrar'">
+
+                                    <td title="'Total a Cobrar'" filter="{totalACobrar: 'text'}" sortable="'totalACobrar'">
                                         {{organismo.totalACobrar}}
                                     </td>
-                                    <td title="'Total Cobrado'" filter="{ totalCobrado: 'number'}" sortable="'totalCobrado'">
+                                    <td title="'Total Cobrado'" filter="{totalCobrado: 'text'}" sortable="'totalCobrado'">
                                         {{organismo.totalCobrado}}
+                                    </td>
+                                    <td title="'Diferencia'" filter="{diferencia: 'text'}" sortable="'diferencia'" >
+							                          {{organismo.diferencia}}
                                     </td>
                                     @endverbatim
 							   	</tr>
@@ -389,14 +390,15 @@
                                         <td title="'Socio'" filter="{ socio: 'text'}" sortable="'socio'">
                                             {{socio.socio}}
                                         </td>
-                                        <td title="'Diferencia'" filter="{ diferencia: 'number'}" sortable="'diferencia'">
-                                            {{socio.diferencia}}
-                                        </td>
-                                        <td title="'Total a Cobrar'" filter="{ totalACobrar: 'number'}" sortable="'totalACobrar'">
+
+                                        <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'">
                                             {{socio.totalACobrar}}
                                         </td>
-                                        <td title="'Total Cobrado'" filter="{ totalCobrado: 'number'}"sortable="'totalCobrado'">
+                                        <td title="'Total Cobrado'" filter="{ totalCobrado: 'text'}"sortable="'totalCobrado'">
                                             {{socio.totalCobrado}}
+                                        </td>
+                                        <td title="'Diferencia'" filter="{ diferencia: 'text'}" sortable="'diferencia'">
+                                            {{socio.diferencia}}
                                         </td>
                                     </tr>
                                 </table>
@@ -406,55 +408,56 @@
                           @verbatim
                             <table id="tablaVentas" ng-table="paramsVentas" class="table table-hover table-bordered">
                                 <tr ng-repeat="venta in $data" ng-click="PullCuotas(venta.id_venta,venta.producto)">
-                                    <td title="'Producto'" sortable="'producto'">
+                                    <td title="'Producto'" filter="{ producto: 'text'}" sortable="'producto'">
                                         {{venta.producto}}
                                     </td>
-                                    <td title="'Proveedor'" sortable="'proovedor'">
+                                    <td title="'Proveedor'" filter="{ proovedor: 'text'}" sortable="'proovedor'">
                                         {{venta.proovedor}}
                                     </td>
-                                    <td title="'Fecha'" sortable="'fecha'">
+                                    <td title="'Vto'" filter="{ fecha: 'text'}" sortable="'fecha'">
                                         {{venta.fecha}}
                                     </td>
-                                    <td title="'Diferencia'" sortable="'diferencia'">
-                                        {{venta.diferencia}}
-                                    </td>
-                                    <td title="'Total a Cobrar'" sortable="'totalACobrar'">
+
+                                    <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'">
                                         {{venta.totalACobrar}}
                                     </td>
-                                    <td title="'Total Cobrado'" sortable="'totalCobrado'">
+                                    <td title="'Total Cobrado'" filter="{ totalCobrado: 'text'}" sortable="'totalCobrado'">
                                         {{venta.totalCobrado}}
+                                    </td>
+                                    <td title="'Diferencia'" filter="{ diferencia: 'text'}" sortable="'diferencia'">
+                                        {{venta.diferencia}}
                                     </td>
                                 </tr>
                             </table>
                             @endverbatim
                         </div>
-{{--                        <div id="divTablaCuotas" ng-if="vistaactual=='Cuotas'">
+                       <div id="divTablaCuotas" ng-if="vistaactual=='Cuotas'">
                             @verbatim
                             <table id="tablaCuotas" ng-table="paramsCuotas" class="table table-hover table-bordered">
-                                <tr ng-repeat="cuota in cuotas" ng-click="">
-                                    <td title="'NroCuota'" sortable="'nro_cuota'">
+                                <tr ng-repeat="cuota in $data">
+                                    <td title="'NroCuota'" filter="{ nro_cuota: 'text'}" sortable="'nro_cuota'">
                                         {{cuota.nro_cuota}}
                                     </td>
-                                    <td title="'Proveedor'" sortable="'proovedor'">
-                                        {{cuota.proovedor}}
+                                    <td title="'Proveedor'" filter="{ proovedor: 'text'}" sortable="'proovedor'">
+                                        {{productodelacuota}}
                                     </td>
-                                    <td title="'Vencimiento'" sortable="'fecha_vencimiento'">
+                                    <td title="'Vencimiento'" filter="{ fecha_vencimiento: 'text'}" sortable="'fecha_vencimiento'">
                                         {{cuota.fecha_vencimiento}}
                                     </td>
 
-                                    <td title="'Importe'" sortable="'importe'">
+                                    <td title="'Importe'" filter="{ importe: 'text'}" sortable="'importe'">
                                         {{cuota.importe}}
                                     </td>
-                                    <td title="'Cobrado'" sortable="'cobrado'">
+                                    <td title="'Cobrado'" filter="{ cobrado: 'text'}" sortable="'cobrado'">
                                         {{cuota.cobrado}}
                                     </td>
-                                    <td title="'Estado'" sortable="'estado'">
+                                    <td title="'Estado'" filter="{ estado: 'text'}" sortable="'estado'">
                                         {{cuota.estado}}
                                     </td>
                                 </tr>
                             </table>
                             @endverbatim
-                        </div>--}}
+                        </div>
                             <div id="pruebaExpandir" ng-if="vistaactual=='Cuotas'">
                                 <div class="span12 row-fluid">
                                     <!-- START $scope.[model] updates -->
@@ -464,27 +467,27 @@
                                       @verbatim
                                         <table ng-table="paramsCuotas" class="table table-hover table-bordered">
 
-                                            <tbody data-ng-repeat="cuota in $data" data-ng-switch on="dayDataCollapse[$index]">
+                                            <tbody data-ng-repeat="cuota in $data" data-ng-switch on="dayDataCollapse[$index]" >
                                             <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,cuota.id_cuota)" >
-                                                <td title="'NroCuota'" sortable="'nro_cuota'">
+                                                <td title="'NroCuota'" filter="{ nro_cuota: 'text'}" sortable="'nro_cuota'">
                                                     {{cuota.nro_cuota}}
                                                 </td>
-                                                <td title="'Proveedor'" sortable="'proovedor'">
+                                                <td title="'Proveedor'" filter="{ proovedor: 'text'}" sortable="'proovedor'">
                                                     {{productodelacuota}}
                                                 </td>
-                                                <td title="'Vencimiento'" sortable="'fecha_vencimiento'">
+                                                <td title="'Vencimiento'" filter="{ fecha_vencimiento: 'text'}" sortable="'fecha_vencimiento'">
                                                     {{cuota.fecha_vencimiento}}
                                                 </td>
 
-                                                <td title="'Importe'" sortable="'totalACobrar'">
+                                                <td title="'Importe'" filter="{ importe: 'text'}" sortable="'totalACobrar'">
                                                     <span style="color: red" ng-if="(cuota.fecha_vencimiento < ActualDate) && (cuota.cobrado < cuota.importe)">{{cuota.importe}}</span>
                                                     <span style="" ng-if="cuota.fecha_vencimiento >= ActualDate">{{cuota.importe}}</span>
                                                     <span style="" ng-if="(cuota.fecha_vencimiento < ActualDate) && (cuota.cobrado >= cuota.importe)">{{cuota.importe}}</span>
                                                 </td>
-                                                <td title="'Cobrado'" sortable="'totalCobrado'">
+                                                <td title="'Cobrado'" filter="{ cobrado: 'text'}" sortable="'totalCobrado'">
                                                     {{cuota.cobrado}}
                                                 </td>
-                                                <td title="'Estado'" sortable="'estado'">
+                                                <td title="'Estado'" filter="{ estado: 'text'}"sortable="'estado'">
                                                     {{cuota.estado}}
                                                 </td>
                                             </tr>

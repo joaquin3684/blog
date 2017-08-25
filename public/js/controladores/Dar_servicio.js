@@ -2,8 +2,8 @@ var app = angular.module('Mutual', ['ngMaterial']).config(function($interpolateP
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
 app.controller('Dar_servicio', function($scope, $http, $compile, $q) {
-$scope.vencimiento = moment().add(1, 'month').calendar();
-$scope.vencimiento = moment().format('L');
+moment.locale('es');
+$scope.vencimiento = moment().add(2, 'months').format('L');
 	$scope.mostrar = false;
 	// machea a los socios en base al searchText
 	$scope.query = function(searchText, ruta)
@@ -14,7 +14,9 @@ $scope.vencimiento = moment().format('L');
 			data: {'nombre' : searchText}
 			}).then(function successCallback(response)
 				{
+          console.log(response);
 					return response.data;
+
 				}, function errorCallback(data){
 					console.log(data);
 				});
@@ -56,8 +58,8 @@ $scope.vencimiento = moment().format('L');
  	}
  	$scope.habilitacion = true;
  	$scope.habilitar = function()
- 	{	
- 		
+ 	{
+
  		if($scope.proovedor == null)
  		{
  			$scope.habilitacion = true;
@@ -71,23 +73,23 @@ $scope.vencimiento = moment().format('L');
  		$scope.mostrar = true;
  		var planDePago = [];
  		var importe = $scope.importe / $scope.nro_cuotas;
- 		var vto = moment($scope.vencimiento);
+    moment.locale('es')
+ 		var vto =moment($scope.vencimiento, "DD/MM/YYYY");
  		console.log(vto);
  		for(var i=0; i < $scope.nro_cuotas; i++){
- 			
+
  			/*console.log($scope.vencimiento);
  			planDePago.push($scope.vencimiento);
  			console.log(planDePago);
  			$scope.vencimiento.addDays(30);
  			console.log($scope.vencimiento);*/
- 		var j = vto.format("DD/MM/YYYY");
- 			 			
- 			var objeto = {'cuota': i+1, 'importe': importe, 'fecha': j};
+
+ 			var objeto = {'cuota': i+1, 'importe': importe, 'fecha': vto.format('L')};
  			planDePago.push(objeto);
- 			vto.add(30, 'd');
+ 			vto.add(1, 'months');
  		}
  		$scope.planDePago = planDePago;
- 		
+
  	}
-	
+
 });
