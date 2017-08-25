@@ -12,6 +12,7 @@
 */
 
 
+use App\Repositories\Eloquent\FileManager;
 use App\Ventas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -30,9 +31,11 @@ Route::get('imagenes', function(){
    return Image::make($path)->encode('data-url');
 });
 Route::post('pruebas', function(Request $request){
-    return $request->hasFile('imagen') ? 'true' : 'false';
 
-        $j = Storage::disk('public')->exists('ifd/filename.png');
+     FileManager::uploadImage($request->imagen, '/juan', 'puto.jpg');
+        return 1;
+
+    $j = Storage::disk('public')->exists('ifd/filename.png');
     \App\Repositories\Eloquent\FileManager::uploadImage($request->foto, 'estoAnda', 'holaaa.png');
    return Storage::disk('public')->exists('ifd/filename.png');
     $j = $request->file('foto')->move(public_path('images'), 'a.png');
