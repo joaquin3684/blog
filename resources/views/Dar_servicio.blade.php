@@ -69,9 +69,9 @@
                                                 </span>
                                             </md-autocomplete>
                                             <hr/>
-                                            <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in query(searchText2, 'filtroProovedores')" md-search-text="searchText2" md-selected-item="proovedor" md-selected-item-change="habilitar()" placeholder="Buscar proovedor...">
+                                            <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.razon_social" md-items="item in query(searchText2, 'filtroProovedores')" md-search-text="searchText2" md-selected-item="proovedor" md-selected-item-change="habilitar()" placeholder="Buscar proovedor...">
                                                 <span md-highlight-text="searchText">
-                                                    {[{item.nombre}]}
+                                                    {[{item.razon_social}]}
                                                 </span>
                                             </md-autocomplete>
                                             <hr/>
@@ -117,26 +117,19 @@
                                                         </span>
                                                     </label>
                                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                                        <input class="form-control col-md-7 col-xs-12" id="vencimiento" name="vencimiento" ng-model="vencimiento" type="date">
+                                                        <input class="form-control col-md-7 col-xs-12" id="vencimiento" name="vencimiento" ng-model="vencimiento" type="text" disabled="">
                                                         </input>
                                                     </div>
                                                 </div>
                                                 <div class="item ">
-                                                    <label class="control-label col-md-offset-1 col-md-1 col-sm-3 col-xs-12" for="tipo_servicio">
-                                                        Tipo
+                                                    <label class="control-label col-md-offset-1 col-md-1 col-sm-3 col-xs-12" for="observacion">
+                                                        Observacion
                                                         <span class="required">
                                                             *
                                                         </span>
                                                     </label>
                                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                                        <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="tipo_servicio">
-                                                            <option value="credito">
-                                                                Credito
-                                                            </option>
-                                                            <option value="producto">
-                                                                Producto
-                                                            </option>
-                                                        </select>
+                                                        <input class="form-control col-md-7 col-xs-12" id="observacion" name="observacion" ng-model="observacion" type="text">
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,13 +194,13 @@
                                                 <th>Importe</th>
                                                 <th>Fecha</th>
                                               </tr>
-                                             
+
                                             </thead>
                                             <tbody>
                                               <tr ng-repeat="x in planDePago">
                                                 <td>{[{x.cuota}]}</td>
                                                 <td>{[{x.importe}]}</td>
-                                                <td>{[{x.fecha | date:'dd/M/yyyy'}]}</td>
+                                                <td>{[{x.fecha}]}</td>
                                               </tr>
                                             </tbody>
                                           </table>
@@ -297,9 +290,9 @@
               console.log('forro');
             }
        $("#datatable-responsive").DataTable({
-              
 
-               
+
+
               select: true,
               fixedHeader: true,
                language: {
@@ -318,7 +311,7 @@
                   'copy', 'excel', 'pdf'
                ],
                lengthChange: true,
-               
+
 
           });
           });

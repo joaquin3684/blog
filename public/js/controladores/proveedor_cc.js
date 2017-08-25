@@ -3,6 +3,8 @@ app.controller('proveedor_cc', function($scope, $http, $compile, $sce, $window, 
 
 $scope.ActualDate = moment().format('YYYY-MM-DD');
 
+
+
 //mostrarPorSocio en todos mando el id del de atras boludo es asi
     //mostrarPorVenta
     //mostrarPorCuotas
@@ -30,8 +32,11 @@ $http({
                    }, {
                        total: $scope.organismos.length,
                        getData: function (params) {
-                           $scope.organismos = $filter('orderBy')($scope.organismos, params.orderBy());
-                           return $scope.organismos.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                         var filterObj = params.filter(),
+                         filteredData = $filter('filter')($scope.organismos, filterObj);
+                         var sortObj = params.sorting();
+                           orderedData = $filter('orderBy')(filteredData, filterObj);
+                           return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                        }
                    });
                }
@@ -71,8 +76,11 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
             }, {
                 total: $scope.socios.length,
                 getData: function (params) {
-                    $scope.socios = $filter('orderBy')($scope.socios, params.orderBy());
-                    return $scope.socios.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    var filterObj = params.filter(),
+                    filteredData = $filter('filter')($scope.socios, filterObj);
+                    var sortObj = params.sorting();
+                    orderedData = $filter('orderBy')(filteredData, filterObj);
+                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 }
             });
         }
@@ -88,6 +96,22 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
         $scope.vistaactual = vista;
 
     }
+
+    $scope.cambiarFechaCuotas = function(cuota){
+      moment.locale('es');
+      fecha= cuota.fecha_vencimiento;
+      var fecha= moment(fecha, 'YYYY-MM-DD').format('L');
+      cuota.fecha_vencimiento= fecha;
+      return cuota;
+    }
+
+    $scope.cambiarFechaVentas = function(venta) {
+      moment.locale('es');
+      fecha= venta.fecha;
+      var fecha= moment(fecha, 'YYYY-MM-DD').format('L');
+      venta.fecha= fecha;
+      return venta;
+        }
 
     $scope.PullVentas = function(idsocio,nombresocio){
 
@@ -106,7 +130,8 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
             else
             {
                 // console.log(response);
-                $scope.ventas = response.data;
+                $scope.ventas =response.data.map($scope.cambiarFechaVentas);
+                // $scope.ventas = response.data;
                 $scope.vistaactual = 'Ventas';
                 $scope.socioactual = nombresocio;
                 //self.paramsVentas = new NgTableParams({}, { dataset: $scope.ventas});
@@ -117,8 +142,11 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                 }, {
                     total: $scope.ventas.length,
                     getData: function (params) {
-                        $scope.ventas = $filter('orderBy')($scope.ventas, params.orderBy());
-                        return $scope.ventas.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                      var filterObj = params.filter(),
+                      filteredData = $filter('filter')($scope.ventas, filterObj);
+                      var sortObj = params.sorting();
+                        orderedData = $filter('orderBy')(filteredData, filterObj);
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
             }
@@ -129,6 +157,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
         });
 
     }
+
 
 
     $scope.PullCuotas = function(idventa,nombreproducto){
@@ -140,6 +169,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
             data: {'id': idventa}
         }).then(function successCallback(response)
         {
+
             if(typeof response.data === 'string')
             {
                 return [];
@@ -147,11 +177,12 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
             else
             {
 
-                $scope.cuotas = response.data.cuotas;
+              $scope.cuotas =response.data.cuotas.map($scope.cambiarFechaCuotas)
+                console.log(response.data);
                 //var datacuotas = response.data;
-                $scope.productodelacuota = response.data.producto.proovedor.nombre;
+                $scope.productodelacuota = response.data.producto.proovedor.razon_social;
                 $scope.vistaactual = 'Cuotas';
-                console.log(response);
+
                 $scope.productoactual = nombreproducto;
                 $scope.paramsCuotas = new NgTableParams({
                     page: 1,
@@ -159,8 +190,11 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                 }, {
                     total: $scope.cuotas.length,
                     getData: function (params) {
-                        $scope.cuotas = $filter('orderBy')($scope.cuotas, params.orderBy());
-                        return $scope.cuotas.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                      var filterObj = params.filter(),
+                      filteredData = $filter('filter')($scope.cuotas, filterObj);
+                      var sortObj = params.sorting();
+                        orderedData = $filter('orderBy')(filteredData, filterObj);
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
             }
@@ -171,6 +205,8 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
         });
 
     }
+
+
 
     //PARAMETROS INICIALES
         $scope.vistaactual = 'Organismos';
@@ -424,4 +460,4 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
         }
     };
 
-})
+});
