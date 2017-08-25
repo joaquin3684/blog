@@ -357,9 +357,9 @@
                         <div id="divTablaOrganismos" ng-if="vistaactual=='Organismos'">
                         		<table id="tablaOrganismos" ng-table="paramsOrganismos" class="table table-hover table-bordered">
                                     
-                                    <tr ng-repeat="organismo in $data" ng-click="PullSocios(organismo.id_organismo,organismo.organismo)">
+                                <tr ng-repeat="organismo in $data" ng-click="PullSocios(organismo.id_organismo,organismo.organismo)">
 
-                                        <td title="'Organismo'" sortable="'organismo'">
+                                    <td title="'Organismo'" sortable="'organismo'">
 							            {[{organismo.organismo}]}
                                     </td>
 							        <td title="'Diferencia'" sortable="'diferencia'">
@@ -367,11 +367,42 @@
                                     </td>
                                     <td title="'Total a Cobrar'" sortable="'totalACobrar'">
                                         {[{organismo.totalACobrar}]}
+                                        <div ng-show="false" ng-init="$parent.totalACobrarSUM = $parent.totalACobrarSUM + organismo.totalACobrar"></div>
                                     </td>
                                     <td title="'Total Cobrado'" sortable="'totalCobrado'">
                                         {[{organismo.totalCobrado}]}
+                                        <div ng-show="false" ng-init="$parent.totalCobradoSUM = $parent.totalCobradoSUM + organismo.totalCobrado"></div>
                                     </td>
-							   	</tr>
+                                    
+							   	</tr> 
+                                <tfoot>
+                                <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                    <td colspan="2" style="text-align: right;">
+                                        <b>Total</b>
+                                    </td>
+                                    
+                                    <td>
+                                        {[{totalACobrarSUM}]}
+                                    </td>
+                                    <td>
+                                        {[{totalCobradoSUM}]}
+                                    </td>
+                                </tr>
+                                </tfoot>
+                              <!--   <tr>
+                                    <td title="'Organismo'">
+                                    juan
+                                    </td>
+                                    <td title="'Diferencia'">
+                                    12
+                                    </td>
+                                    <td title="'Total a Cobrar'">
+                                    182
+                                    </td>
+                                    <td title="'Total Cobrado'">
+                                    199
+                                    </td>
+                                </tr> -->
 								</table>
                         </div>
                         <div id="divTablaSocios" ng-if="vistaactual=='Socios'">

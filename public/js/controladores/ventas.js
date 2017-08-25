@@ -131,7 +131,9 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
     }
 
-
+    $scope.log = function(dato){
+        console.log(dato);
+    }
     $scope.PullCuotas = function(idventa,nombreproducto){
 
 
