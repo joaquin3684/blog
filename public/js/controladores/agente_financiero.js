@@ -158,12 +158,44 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
 
         }
 
+        $scope.RechazarSolicitud = function (id) {
+
+        $http({
+            url: 'agente_financiero/rechazarPropuesta',
+            method: 'post',
+            data: {'id':id,'estado':'Rechazada por Inversionista'}
+        }).then(function successCallback(response)
+        {
+                UserSrv.MostrarMensaje("OK","La solicitud fue rechazada correctamente.","OK","mensaje");
+                $scope.pullSolicitudes();
+        }, function errorCallback(data)
+        {
+                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
+        });
+
+        }
+
+
+    $scope.getFotos = function(idsolicitud)
+    {
+        $scope.idpropuestae = idsolicitud;
+        return $http({
+            url: 'comercializador/fotos',
+            method: 'post',
+            data: {'id' : idsolicitud}
+            }).then(function successCallback(response)
+                {
+                    $scope.DatosModalActual = response.data;
+                    console.log(response.data);
+                }, function errorCallback(data){
+                    console.log(data);
+                });
+    }
 
     $scope.Comprobante = function (){
-
+ 
         archivo = $scope.comprobantevisualizar;
-        
-        document.getElementById('previsualizacion').src = "images/"+archivo+".png";
+        document.getElementById('previsualizacion').src = "storage/solicitudes/solicitud" + $scope.idpropuestae + "/"+archivo;
 
     }
 

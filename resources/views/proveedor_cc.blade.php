@@ -431,33 +431,6 @@
                             </table>
                             @endverbatim
                         </div>
-                       <div id="divTablaCuotas" ng-if="vistaactual=='Cuotas'">
-                            @verbatim
-                            <table id="tablaCuotas" ng-table="paramsCuotas" class="table table-hover table-bordered">
-                                <tr ng-repeat="cuota in $data">
-                                    <td title="'NroCuota'" filter="{ nro_cuota: 'text'}" sortable="'nro_cuota'">
-                                        {{cuota.nro_cuota}}
-                                    </td>
-                                    <td title="'Proveedor'" filter="{ proovedor: 'text'}" sortable="'proovedor'">
-                                        {{productodelacuota}}
-                                    </td>
-                                    <td title="'Vencimiento'" filter="{ fecha_vencimiento: 'text'}" sortable="'fecha_vencimiento'">
-                                        {{cuota.fecha_vencimiento}}
-                                    </td>
-
-                                    <td title="'Importe'" filter="{ importe: 'text'}" sortable="'importe'">
-                                        {{cuota.importe}}
-                                    </td>
-                                    <td title="'Cobrado'" filter="{ cobrado: 'text'}" sortable="'cobrado'">
-                                        {{cuota.cobrado}}
-                                    </td>
-                                    <td title="'Estado'" filter="{ estado: 'text'}" sortable="'estado'">
-                                        {{cuota.estado}}
-                                    </td>
-                                </tr>
-                            </table>
-                            @endverbatim
-                        </div>
                             <div id="pruebaExpandir" ng-if="vistaactual=='Cuotas'">
                                 <div class="span12 row-fluid">
                                     <!-- START $scope.[model] updates -->
@@ -521,7 +494,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            {{--</tbody>--}}
+                                            </tbody>
                                         </table>
                                         @endverbatim
                                     </div>

@@ -33,6 +33,7 @@ Route::get('imagenes', function(){
 Route::post('pruebas', function(Request $request){
 
      FileManager::uploadImage($request->imagen, '/juan', 'puto.jpg');
+     FileManager::uploadImage($request->comprobante2, '/juan', 'puto2.jpg');
         return 1;
 
     $j = Storage::disk('public')->exists('ifd/filename.png');

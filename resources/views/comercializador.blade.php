@@ -163,35 +163,40 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Copia del Documento <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" id="cuit" name="cuit" ng-model="doc_documento" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
+                        <input ngf-select name="file" ngf-pattern="'image/*'"
+    ngf-accept="'image/*'" type="file" id="cuit" name="cuit" ng-model="doc_documento" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Copia del Recibo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" id="cuit" name="cuit" ng-model="doc_recibo" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
+                        <input ngf-select name="file" ngf-pattern="'image/*'"
+    ngf-accept="'image/*'" type="file" id="cuit" name="cuit" ng-model="doc_recibo" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" ng-model="doc_domicilio" for="cuit">Copia del Domicilio <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="cuit">Copia del Domicilio <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
+                        <input ngf-select name="file" ngf-pattern="'image/*'"
+    ngf-accept="'image/*'" ng-model="doc_domicilio" type="file" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" ng-model="doc_cbu" for="cuit">Copia del CBU <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
+                        <input ngf-select name="file" ngf-pattern="'image/*'"
+    ngf-accept="'image/*'" type="file" ng-model="doc_cbu" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" ng-model="doc_endeudamiento" for="cuit">Certificado de Endeudamiento
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
+                        <input ngf-select name="file" ngf-pattern="'image/*'"
+    ngf-accept="'image/*'" type="file" ng-model="doc_endeudamiento" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
                       </div>
                     </div>
         
@@ -244,7 +249,11 @@
                      </button>
                      <button id="exportButton2" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
                      <button id="exportButton3" ng-click="Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
-                     <input type="file" ngf-select="onFileSelect($files)" multiple>
+                     Single Image with validations
+  <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+    ngf-accept="'image/*'" ngf-max-size="20MB"
+    ngf-resize="{width: 100, height: 100}">Select</div>
+    <button ng-click="submit()">submit</button>
                      </center>
                             <div id="pruebaExpandir">
                                 <div class="span12 row-fluid">
@@ -280,8 +289,11 @@
                                                 <td title="'Acciones Disponibles'" style="color: #21a9d6;">
                                                     
                                                     <span data-toggle="modal" data-target="#Comprobantes" ng-click="getFotos(solicitud.id)" class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
+
                                                     <span ng-show="solicitud.estado == 'Esperando Respuesta Comercializador'" ng-click="IDPropuesta(solicitud.id,solicitud.total,solicitud.monto_por_cuota,solicitud.cuotas)" data-toggle="modal" data-target="#ContraPropuesta" class="fa fa-eye fa-2x" titulo="Analizar Propuesta"></span>
+
                                                     <span ng-show="solicitud.estado == 'Capital Reservado'" class="fa fa-print fa-2x" ng-click="ImprimirFormulario()" titulo="Imprimir Formulario"></span>
+
                                                     <span ng-show="solicitud.estado == 'Capital Reservado'" class="fa fa-send fa-2x" ng-click="EnviarFormulario(solicitud.id)" titulo="Enviar Formulario"></span>
                                                 </td>
                                             </tr>
@@ -385,12 +397,14 @@
                         </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         
-                        <select class="form-control" placeholder="Comprobante a visualizar.." ng-model="comprobantevisualizar" ng-change="Comprobante()">
-                          <option ng-repeat="x in DatosModalActual" ng-value="{[{x.archivo}]}">
-                            {[{x.comprobante}]}
+                        <select class="form-control" placeholder="Comprobante a visualizar.." ng-model="comprobantevisualizar" >
+                          <option ng-repeat="x in DatosModalActual" ng-value="x.basename" >
+                            {[{x.filename}]}
                           </option>
                         </select>
                       </div>
+
+                      <button ng-click="Comprobante()" class="btn btn-primary">Visualizar</button>
                     </div>
 
                    

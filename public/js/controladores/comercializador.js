@@ -39,22 +39,26 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
     }
 
-    $scope.onFileSelect = function($files) {
-        console.log("Entro a la funcion");
-    //$files: an array of files selected, each file has name, size, and type.
-    for (var i = 0; i < $files.length; i++) {
-      var file = $files[i];
-      $scope.upload = Upload.upload({
-        url: 'pruebas', //upload.php script, node.js route, or servlet url
-        data: {'imagen': $scope.myModelObj},
-        file: file,
-      }).progress(function(evt) {
-        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-      }).success(function(data, status, headers, config) {
-        // file is uploaded successfully
-        console.log(data);
-      });
-    }
+    $scope.submit = function() {
+        console.log("el ng click funciona");
+        $scope.upload($scope.file);
+      
+    };
+
+    // upload on file select or drop
+    $scope.upload = function (file) {
+        Upload.upload({
+            url: 'pruebas',
+            method: 'post',
+            data: {'imagen': file, 'comprobante2': file}
+        }).then(function (resp) {
+            console.log('Success ' + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ');
+        });
     };
 
     $scope.query = function(searchText, ruta)
@@ -74,24 +78,24 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
     $scope.getFotos = function(idsolicitud)
     {
+        $scope.idpropuestae = idsolicitud;
         return $http({
             url: 'comercializador/fotos',
             method: 'post',
             data: {'id' : idsolicitud}
             }).then(function successCallback(response)
                 {
-                    return response.data;
-                    console.log(data);
+                    $scope.DatosModalActual = response.data;
+                    console.log(response.data);
                 }, function errorCallback(data){
                     console.log(data);
                 });
     }
 
     $scope.Comprobante = function (){
-
+ 
         archivo = $scope.comprobantevisualizar;
-        
-        document.getElementById('previsualizacion').src = "images/"+archivo+".png";
+        document.getElementById('previsualizacion').src = "storage/solicitudes/solicitud" + $scope.idpropuestae + "/"+archivo;
 
     }
 
@@ -238,7 +242,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         'apellido':$scope.apellido,
         'cuit':$scope.cuit,
         'domicilio':$scope.domicilio,
-            'fecha_nacimiento':moment($scope.fecha_nacimiento).format('YYYY-MM-DD'),
+        'fecha_nacimiento':moment($scope.fecha_nacimiento).format('YYYY-MM-DD'),
         'codigo_postal':$scope.codigo_postal,
         'telefono':$scope.telefono,
         'doc_documento':$scope.doc_documento,
@@ -253,10 +257,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         'legajo':$scope.legajo
         };
     }
-    console.log($scope.Dato);
-    // 'nombre', 'comercializador', 'cuit', 'domicilio', 'apellido', 'codigo_postal', 'telefono', 'doc_documento', 'doc_recibo', 'doc_domicilio', 'doc_cbu', 'doc_endeudamiento', 'agente_financiero', 'estado', 'total', 'monto_por_cuota', 'cuotas', 'organismo'];
-
-        $http({
+        /*$http({
             url: 'comercializador/altaSolicitud',
             method: 'post',
             data: $scope.Dato
@@ -274,8 +275,20 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         }, function errorCallback(data)
         {
             UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
-        });
+        });*/
 
+        Upload.upload({
+            url: 'comercializador/altaSolicitud',
+            method: 'post',
+            data: $scope.Dato
+        }).then(function (resp) {
+            console.log('Success ' + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ');
+        });
 
 
     }

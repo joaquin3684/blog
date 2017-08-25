@@ -127,23 +127,15 @@ Cancelacion de servicio
 
 Alta solicitud Comercializador
 
-- hacer tema imagenes
 - agregar input sexo, tiene que ser un radio ('Masculino', 'Femenino')
 
 Solicitudes pendientes mutual
 
-- hacer tema imagenes
--en el modificar del comercializador solo se tiene que poder modificar la cantidad de cuotas y el importe total el monto por cuota no se puede
-- agregar una accion llamada verificar comprobante, que se puede ejecutar cuando el estado
-de la solicitud es otorgar capital ... metodo : post ({id: id_solicitud, estado: 'Solicitud Aprobada'}) url: solicitudesPendientesMutual/aprobarSolicitud
+-en el modificar del comercializador solo se tiene que poder modificar la cantidad de cuotas y el importe total el monto por cuota no se puede ---> Esto esta mal.
 
 Agente financiero solicitudes
 
-- el estado para que el agente pueda realizar la accion de generar propeusta ya no se llama mas
-    inverionista asignado ahora se llama "Agente Financiero Asignado"
-- hacer tema imagenes
-- el agente financiero puede rechazar la solicitud de una sin que haya una modificacion
-en el medio, es decir sin que haya una contrapropuesta por parte del comercializador
+-
 
 Cuenta corriente agente financiero
 

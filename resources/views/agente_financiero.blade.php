@@ -96,9 +96,11 @@
                                                 </td>
                                                 <td title="'Acciones Disponibles'" style="color: #21a9d6;">
                                                       
-                                                      <span data-toggle="modal" data-target="#Comprobantes" ng-click="DatosModal(solicitud.socio.doc_documento,solicitud.socio.doc_recibo,solicitud.socio.doc_cbu,solicitud.socio.doc_domicilio,solicitud.socio.doc_endeudamiento)" class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
+                                                      <span data-toggle="modal" data-target="#Comprobantes" ng-click="getFotos(solicitud.id)" class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
 
-                                                      <span ng-click="IDModal(solicitud.id)" ng-show="solicitud.estado == 'Inversionista Asignado'" data-toggle="modal" data-target="#Propuesta" class="fa fa-send fa-2x" titulo="Enviar Propuesta"></span>
+                                                      <span ng-show="solicitud.estado != 'Rechazada por Inversionista' && solicitud.estado != 'Capital Reservado' && solicitud.estado != 'Capital Otorgado'" ng-click="RechazarSolicitud(solicitud.id)" class="fa fa-close fa-2x" titulo="Rechazar Solicitud"></span>
+
+                                                      <span ng-click="IDModal(solicitud.id)" ng-show="solicitud.estado == 'Agente Financiero Asignado'" data-toggle="modal" data-target="#Propuesta" class="fa fa-send fa-2x" titulo="Enviar Propuesta"></span>
 
                                                       <span ng-click="ReservarCapital(solicitud.id)" ng-show="solicitud.estado == 'Aceptada por Comercializador'" class="fa fa-dollar fa-2x" titulo="Reservar Capital"></span>
                                                       
@@ -269,12 +271,14 @@
                         </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         
-                        <select class="form-control" placeholder="Comprobante a visualizar.." ng-model="comprobantevisualizar" ng-change="Comprobante()">
-                          <option ng-repeat="x in DatosModalActual" ng-value="{[{x.archivo}]}">
-                            {[{x.comprobante}]}
+                        <select class="form-control" placeholder="Comprobante a visualizar.." ng-model="comprobantevisualizar" >
+                          <option ng-repeat="x in DatosModalActual" ng-value="x.basename" >
+                            {[{x.filename}]}
                           </option>
                         </select>
                       </div>
+
+                      <button ng-click="Comprobante()" class="btn btn-primary">Visualizar</button>
                     </div>
 
                    
