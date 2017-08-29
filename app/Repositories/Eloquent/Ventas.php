@@ -47,6 +47,13 @@ class Ventas
         });
     }
 
+    public function montoAdeudado()
+    {
+        return $this->cuotasVencidas()->sum(function($cuota){
+           return $cuota->montoAdeudado();
+        });
+    }
+
     public function setCuotas($cuotas)
     {
         $this->cuotas = $cuotas;

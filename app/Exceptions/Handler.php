@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -42,11 +43,42 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+
+        return $this->handle($request, $e);
+        if (config('app.debug')) {
+            return parent::render($request, $e);
+        }
     }
 
+    private function handle($request, Exception $e)
+    {
+
+        if ($e instanceOf MiExceptionClass) {
+            $data   = $e->toArray();
+            $status = $e->getStatus();
+        }
+
+        if ($e instanceOf MasPlataCobradaQueElTotalException) {
+            $data = array_merge([
+                'id'     => 'exceso_de_plata',
+                'status' => '404'
+            ], config('errors.exceso_de_plata'));
+
+            $status = 404;
+        }
+
+        if ($e instanceOf MethodNotAllowedHttpException) {
+            $data = array_merge([
+                'id'     => 'method_not_allowed',
+            'status' => '405'
+        ], config('errors.method_not_allowed'));
+
+        $status = 405;
+    }
+        return response()->json($data, $status);
+    }
     /**
      * Convert an authentication exception into an unauthenticated response.
      *

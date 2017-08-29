@@ -11,6 +11,7 @@ use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Repositories\Eloquent\Repos\VentasRepo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SolicitudesPendientesMutualController extends Controller
 {
@@ -54,6 +55,11 @@ class SolicitudesPendientesMutualController extends Controller
     public function proveedores(Request $request)
     {
         return SolicitudesSinInversionistaGateway::proveedores($request['id']);
+    }
+
+    public function solicitudesAVerificar()
+    {
+        return $this->solicitudesGateway->solicitudesConCapitalOtorgado();
     }
 
     public function aprobarSolicitud(Request $request)

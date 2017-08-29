@@ -77,6 +77,18 @@ class Cuota
            return $this->importe > $this->totalEntradaDeMovimientosDeCuota();
     }
 
+    public function montoAdeudado()
+    {
+        if($this->movimientos == null)
+        {
+            return $this->importe;
+        } else {
+            return $this->movimientos->sum(function($movimiento){
+                return $movimiento->getEntrada();
+            });
+        }
+    }
+
     public function totalEntradaDeMovimientosDeCuota()
     {
         return $this->movimientos->sum(function($movimiento){

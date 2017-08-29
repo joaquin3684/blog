@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\MasPlataCobradaQueElTotalException;
 use App\Repositories\Eloquent\Cobranza\CobrarPorSocio;
 use App\Repositories\Eloquent\Mapper\CuotasMapper;
 use App\Repositories\Eloquent\Mapper\SociosMapper;
@@ -138,13 +139,21 @@ class CobrarController extends Controller
 
     public function cobrarPorPrioridad(Request $request)
     {
+        $errores = collect();
+
         foreach($request->all() as $socio)
         {
             $socioRepo = new SociosRepo();
             $socio = $socioRepo->ventasConCuotasVencidas($socio['id']);
             $cobrar = new CobrarPorSocio($socio);
-            $cobrar->cobrar($socio['monto']);
+            try{
+                $cobrar->cobrar($socio['monto']);
+            } catch (MasPlataCobradaQueElTotalException $e)
+            {
+                $errores->push($e->toArray());
+            }
         }
+        return $errores;
 
     }
 
@@ -186,14 +195,21 @@ class CobrarController extends Controller
 
     public function cobrarPorVenta(Request $request)
     {
+        $errores = collect();
         foreach($request->all() as $venta)
         {
             $ventasRepo = new VentasRepo();
             $ventaCuotasVencidas = $ventasRepo->cuotasVencidas($venta['id']);
 
             $cobrar = new CobrarPorVenta();
-            $cobrar->cobrar($ventaCuotasVencidas, $venta['monto']);
+            try{
+                $cobrar->cobrar($ventaCuotasVencidas, $venta['monto']);
+
+            } catch (MasPlataCobradaQueElTotalException $e){
+                $errores->push($e->toArray());
+            }
         }
+        return $errores;
     }
 
 }

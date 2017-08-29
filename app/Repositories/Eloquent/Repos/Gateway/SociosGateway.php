@@ -30,7 +30,8 @@ class SociosGateway extends Gateway
         $fecha = new Fechas();
         $hoy = $fecha->getFechaHoy();
         return Socios::with(['ventas.cuotas' => function($q) use($hoy){
-            $q->where('fecha_inicio', '>', $hoy);
+            $q->where('fecha_inicio', '>=', $hoy);
+            $q->with('movimientos');
         }, 'ventas.producto.proovedor.prioridad'])->find($id);
 
     }

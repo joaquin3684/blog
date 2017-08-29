@@ -81,13 +81,15 @@ class VentasControlador extends Controller
 
     public function store(Request $request)
     {
-        $user = Sentinel::getUser();
-        $req = $request->all();
-        $ventaRepo = new VentasRepo();
-        $venta = $ventaRepo->create($req);
-        $estadoRepo = new EstadoVentaRepo();
-        $estadoVenta = $estadoRepo->create(['id_venta' => $venta->getId(), 'id_responsable_estado' => $user->id, 'estado' => 'ALTA']);
-
+        DB::transaction(function() use ($request)
+        {
+            $user = Sentinel::getUser();
+            $req = $request->all();
+            $ventaRepo = new VentasRepo();
+            $venta = $ventaRepo->create($req);
+            $estadoRepo = new EstadoVentaRepo();
+            $estadoRepo->create(['id_venta' => $venta->getId(), 'id_responsable_estado' => $user->id, 'estado' => 'ALTA']);
+        });
     }
 
     public function mostrarPorSocio(Request $request)

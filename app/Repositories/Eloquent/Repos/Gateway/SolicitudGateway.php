@@ -28,4 +28,9 @@ class SolicitudGateway extends Gateway
         return Solicitud::where('agente_financiero', $id)->get();
     }
 
+    public function solicitudesConCapitalOtorgado()
+    {
+        return Solicitud::where('estado', 'Capital Otorgado')->get();
+    }
+
 }

@@ -52,6 +52,7 @@ dar_servicio
 
 abm_productos
 
+- poner paginacion
 - poner para imprimir
 - poner para pasar a pdf, excel
 - poner sentinel
@@ -60,6 +61,7 @@ abm_productos
 
 abm_usuarios
 
+- poner paginacion
 - poner las funciones de editar y borrar
 - poner para imprimir
 - poner para pasar a pdf, excel
@@ -69,6 +71,7 @@ abm_usuarios
 
 abm_roles
 
+- poner paginacion
 - poner para imprimir
 - poner para pasar a pdf, excel
 - poner las funciones de editar y borrar
@@ -78,6 +81,7 @@ abm_roles
 
 abm_organismos
 
+- poner paginacion
 - poner para imprimir
 - poner para pasar a pdf, excel
 - Filtros columnas
@@ -86,6 +90,7 @@ abm_organismos
 
 abm_proovedores
 
+- poner paginacion
 - poner mostrar todos en la paginacion
 - poner para imprimir
 - poner para pasar a pdf, excel
@@ -95,6 +100,8 @@ abm_proovedores
 
 abm_socios
 
+- poner paginacion
+- abm socios el mostrar no muestra nada
 - agregar input sexo, tiene que ser un radio ('Masculino', 'Femenino')
 - poner para imprimir
 - poner para pasar a pdf, excel
@@ -131,17 +138,23 @@ Alta solicitud Comercializador
 
 Solicitudes pendientes mutual
 
--en el modificar del comercializador solo se tiene que poder modificar la cantidad de cuotas y el importe total el monto por cuota no se puede ---> Esto esta mal.
+- en la segunda tabla donde estan las solicitudes con el capital otorgado faltan todos los campos
+de la tabla
+
 
 Agente financiero solicitudes
 
--
+- el rechazar solicitud tiene que estar disponible SOLO cuando recibe la solicitud por primera vez
+    o cuando el comer haya enviado una contrapropuesta. no tiene que estar habilitada todo el tiempo
 
 Cuenta corriente agente financiero
 
 - en la abstraccion de servicios tiene que haver un boton que se llame sistema frances
     que habra un modal y que le pegue a la url por post: {id: id_servicio} a la url:
      proveedorCC/sistemaFrances. esto tiene que mostrar una tabla que despues explico como es
+
+
+
 
 
 

@@ -42,7 +42,7 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
         $scope.pullSolicitudes2 = function (){
 
         $http({
-            url: 'solicitudesPendientesMutual/solicitudes2',
+            url: 'solicitudesPendientesMutual/conCapitalOtrogado',
             method: 'get'
         }).then(function successCallback(response)
         {
@@ -107,7 +107,7 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
             }).then(function successCallback(response)
             {
                     UserSrv.MostrarMensaje("OK","El agente financiero fué asignado correctamente.","OK","mensaje");
-                    $scope.pullSolicitudes();
+                    $scope.pullSolicitudes2();
             }, function errorCallback(data)
             {
                     UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");

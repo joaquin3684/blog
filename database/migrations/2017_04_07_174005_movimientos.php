@@ -19,9 +19,9 @@ class Movimientos extends Migration
             $table->integer('identificadores_id')->unsigned();
             $table->string('identificadores_type');
             $table->double('entrada');
-            $table->double('salida');
+            $table->double('salida')->nullable();
             $table->date('fecha');
-            $table->double('ganancia');
+            $table->double('ganancia')->nullable();
             $table->softDeletes();
         });
         Schema::enableForeignKeyConstraints();

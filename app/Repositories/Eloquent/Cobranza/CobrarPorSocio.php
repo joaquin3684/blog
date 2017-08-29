@@ -7,6 +7,10 @@
  */
 
 namespace App\Repositories\Eloquent\Cobranza;
+
+use App\Exceptions\MasPlataCobradaQueElTotalException;
+use App\Repositories\Eloquent\Cobranza\Agrupacion\AgruparPorFecha;
+use App\Repositories\Eloquent\Cobranza\Agrupacion\AgruparPorOrdenDePrioridad;
 use App\Repositories\Eloquent\ConsultasCuotas;
 use App\Repositories\Eloquent\ConsultasMovimientos;
 use App\Repositories\Eloquent\Repos\SociosRepo;
@@ -25,94 +29,82 @@ class CobrarPorSocio
 
     public function cobrar($monto)
     {
-        $collect = collect();
-        $this->socio->getVentas()->each(function ($venta) use ($collect){
-            $cuotasVencidas = $venta->cuotasVencidas();
-            $orden = $venta->getPrioridad();
-            $cuotasVencidas->each(function($cuota) use ($orden){
-                $cuota->orden = $orden;
+        if ($this->socio->montoAdeudado() < $monto) {
+            throw new MasPlataCobradaQueElTotalException('exceso_de_plata');
+        } else {
 
-            });
-
-
-             $collect->push($cuotasVencidas);
-        });
-
-        $flaten = $collect->flatten(1);
-        $p = $flaten->groupBy(function ($cuota) {
-            $fecha = Carbon::createFromFormat('Y-m-d', $cuota->getFechaInicio());
-            return $fecha->month.$fecha->year;
-        })->sortBy(function($item, $key){
-            return $key;
-        });
-
-        $p->transform(function($item){
-             $p = $item->groupBy(function($item){
-                return $item->orden;
-            })->sortBy(function($item, $key){return $key;});
-             return $p;
-        });
-
-        $p->each(function($grupoPorFecha) use (&$monto){
-            if($monto > 0)
-            {
-                $grupoPorFecha->each(function ($grupoPorOrden) use (&$monto){
-                    if($monto > 0)
-                    {
-                        $cantidad = $grupoPorOrden->count();
-                        $montoPorCuota = $monto / $cantidad;
-                        $grupoPorOrden->each(function($cuota) use ($montoPorCuota, &$monto) {
-                            $cobrado =  $cuota->cobrar($montoPorCuota);
-                            $monto -= $cobrado;
-                        });
-                    }
-                });
-            } else { return false; }
-        });
-        if($monto > 0)
-        {
-            $repo = new SociosRepo();
-            $socio = $repo->cuotasFuturas($this->socio->getId());
             $collect = collect();
-            $socio->getVentas()->each(function ($venta) use ($collect){
-                // $orden = $venta->getOrdenPrioridad();
+            $this->socio->getVentas()->each(function ($venta) use ($collect) {
                 $cuotasVencidas = $venta->cuotasVencidas();
-                $cantidadCuotas = $venta->cuotasVencidas()->count();
+                $orden = $venta->getPrioridad();
+                $cuotasVencidas->each(function ($cuota) use ($orden) {
+                    $cuota->orden = $orden;
+
+                });
+
                 $collect->push($cuotasVencidas);
             });
 
             $flaten = $collect->flatten(1);
-            $p = $flaten->groupBy(function ($cuota) {
-                $fecha = Carbon::createFromFormat('Y-m-d', $cuota->getFechaInicio());
-                return $fecha->month.$fecha->year;
-            })->sortBy(function($item, $key){
-                return $key;
+
+            $cuotasAgrupadas = AgruparPorFecha::agrupar($flaten);
+            $cuotasAgrupadas->transform(function ($cuotas) {
+                return AgruparPorOrdenDePrioridad::agrupar($cuotas);
             });
 
-            $p->transform(function($item){
-                $p = $item->groupBy(function($item){
-                    return $item->ordenProovedor();
-                })->sortBy(function($item, $key){return $key;});
-                return $p;
-            });
-
-            $p->each(function($grupoPorFecha) use (&$monto){
-                if($monto > 0)
-                {
-                    $grupoPorFecha->each(function ($grupoPorOrden) use (&$monto){
-                        if($monto > 0)
-                        {
+            $cuotasAgrupadas->each(function ($grupoPorFecha) use (&$monto) {
+                if ($monto > 0) {
+                    $grupoPorFecha->each(function ($grupoPorOrden) use (&$monto) {
+                        if ($monto > 0) {
                             $cantidad = $grupoPorOrden->count();
                             $montoPorCuota = $monto / $cantidad;
-                            $grupoPorOrden->each(function($cuota) use ($montoPorCuota, &$monto) {
-                                $cobrado =  $cuota->cobrar($montoPorCuota);
+                            $grupoPorOrden->each(function ($cuota) use ($montoPorCuota, &$monto) {
+                                $cobrado = $cuota->cobrar($montoPorCuota);
                                 $monto -= $cobrado;
                             });
                         }
                     });
-                } else { return false; }
+                } else {
+                    return false;
+                }
             });
+            if ($monto > 0) {
+                $repo = new SociosRepo();
+                $socio = $repo->cuotasFuturas($this->socio->getId());
+                $collect = collect();
+                $socio->getVentas()->each(function ($venta) use ($collect) {
+                    $cuotasVencidas = $venta->cuotasVencidas();
+                    $orden = $venta->getPrioridad();
+                    $cuotasVencidas->each(function ($cuota) use ($orden) {
+                        $cuota->orden = $orden;
+                    });
+                    $collect->push($cuotasVencidas);
+                });
+                $flaten = $collect->flatten(1);
 
+                $cuotasAgrupadas = AgruparPorFecha::agrupar($flaten);
+                $cuotasAgrupadas->transform(function ($cuotas) {
+                    return AgruparPorOrdenDePrioridad::agrupar($cuotas);
+                });
+
+                $cuotasAgrupadas->each(function ($grupoPorFecha) use (&$monto) {
+                    if ($monto > 0) {
+                        $grupoPorFecha->each(function ($grupoPorOrden) use (&$monto) {
+                            if ($monto > 0) {
+                                $cantidad = $grupoPorOrden->count();
+                                $montoPorCuota = $monto / $cantidad;
+                                $grupoPorOrden->each(function ($cuota) use ($montoPorCuota, &$monto) {
+                                    $cobrado = $cuota->cobrar($montoPorCuota);
+                                    $monto -= $cobrado;
+                                });
+                            }
+                        });
+                    } else {
+                        return false;
+                    }
+                });
+
+            }
         }
     }
 }

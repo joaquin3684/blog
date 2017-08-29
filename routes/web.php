@@ -12,7 +12,10 @@
 */
 
 
+use App\Exceptions\MasPlataCobradaQueElTotalException;
+use App\Repositories\Eloquent\Cobranza\CobrarPorSocio;
 use App\Repositories\Eloquent\FileManager;
+use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Ventas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +26,7 @@ Route::resource('asociados', 'ABM_asociados');
 
 //---------------- PRUEBAS ------------------------------
 Route::get('pruebas', function(){
+
     return Ventas::doesntHave('movimientos')->get();
      return view('prueba');
 });
@@ -311,6 +315,7 @@ Route::get('solicitudesPendientesMutual/solicitudes', 'SolicitudesPendientesMutu
 Route::get('solicitudesPendientesMutual/fotos', 'SolicitudesPendientesMutualController@fotos');
 Route::post('solicitudesPendientesMutual/proveedores', 'SolicitudesPendientesMutualController@proveedores');
 Route::post('solicitudesPendientesMutual/aprobarSolicitud', 'SolicitudesPendientesMutualController@aprobarSolicitud');
+Route::get('solicitudesPendientesMutual/conCapitalOtrogado', 'SolicitudesPendientesMutualController@solicitudesAVerificar');
 
 //------------------- SOLICITUDES DE AGENTE FINANCIERO -----------------------
 

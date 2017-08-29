@@ -72,6 +72,13 @@ class Socio
             return $cuota->estaVencida();
         });
     }
+
+    public function montoAdeudado()
+    {
+        return $this->getVentas()->sum(function ($venta){
+           return $venta->montoAdeudado();
+        });
+    }
     /**
      * @return Socios
      */
