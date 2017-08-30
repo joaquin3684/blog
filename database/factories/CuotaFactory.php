@@ -17,7 +17,7 @@ $factory->define(App\Cuotas::class, function (Faker\Generator $faker) {
         'fecha_inicio' => $hoy->toDateString(),
         'fecha_vencimiento' => $vto->toDateString(),
         'nro_cuota' => 1,
-        'importe' => 500,
+        'importe' => 100,
     ];
 });
 
@@ -32,6 +32,6 @@ $factory->state(App\Cuotas::class, 'cuotas sociales', function(Faker\Generator $
         'fecha_inicio' => $hoy->toDateString(),
         'fecha_vencimiento' => $vto->toDateString(),
         'nro_cuota' => 1,
-        'importe' => 500,
+        'importe' => 100,
     ];
 });

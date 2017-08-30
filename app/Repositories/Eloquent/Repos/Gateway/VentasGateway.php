@@ -48,4 +48,9 @@ class VentasGateway extends Gateway
     {
         return Ventas::doesntHave('movimientos')->with('socio','producto.proovedor')->get();
     }
+
+    public function findLastCredito()
+    {
+        return Ventas::max('nro_credito');
+    }
 }

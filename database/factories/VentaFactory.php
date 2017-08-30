@@ -13,8 +13,8 @@ $factory->define(App\Ventas::class, function (Faker\Generator $faker) {
     return [
         'id_asociado' => 1,
         'id_producto' => 1,
-        'nro_cuotas' => $faker->randomDigit,
-        'importe' => $faker->randomNumber(3),
+        'nro_cuotas' => 5,
+        'importe' => 500,
         'fecha_vencimiento' => $vto->toDateString(),
     ];
 });
@@ -25,8 +25,8 @@ $factory->state(App\Ventas::class, 'vencida 3 meses', function(Faker\Generator $
     return [
         'id_asociado' => 1,
         'id_producto' => 1,
-        'nro_cuotas' => $faker->randomDigit,
-        'importe' => $faker->randomNumber(3),
+        'nro_cuotas' => 5,
+        'importe' => 500,
         'fecha_vencimiento' => $vto->toDateString(),
     ];
 

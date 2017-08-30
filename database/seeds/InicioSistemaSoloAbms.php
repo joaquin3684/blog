@@ -21,7 +21,7 @@ class InicioSistemaSoloAbms extends Seeder
             $this->call(ProductosTablaSeeder::class);
             $this->call(OrganismosTablaSeeder::class);
             $this->call(SociosTablaSeeder::class);
-
+            $this->call(PrioridadesSeed::class);
         });
 
     }
