@@ -48,6 +48,13 @@ class Ventas
         });
     }
 
+    public function cuotasImpagas()
+    {
+        return $this->cuotas->filter(function($cuota){
+            return $cuota->estaImpaga();
+        });
+    }
+
     /**
      * @return mixed
      */

@@ -86,22 +86,41 @@ class CobrarPorSocioTest extends TestCase
      */
     public function testQueSalgaLaExcepcionCuandoPongoPlataDeMas()
     {
-        //TODO: cambiar el factory de las cuotas que cree aunque sea una un mes adelante del dia de la fecha actual
         //todo : pensar como hacer para que la excepcion funcione bien
-        $monto = 4001;
+        $monto = 5001;
         $socioRepo = new SociosRepo();
-        $socio = $socioRepo->ventasConCuotasVencidas(1);
+        $socio = $socioRepo->conTodo(1);
         $cobrar = new CobrarPorSocio($socio);
         $cobrar->cobrar($monto);
     }
 
     public function testCobrarPlataDeMasDelTotalVencidoYQueSePongaEnLasCuotasFuturas()
     {
-        $monto = 3999;
+        $monto = 4600;
         $socioRepo = new SociosRepo();
-        $socio = $socioRepo->ventasConCuotasVencidas(1);
+        $socio = $socioRepo->conTodo(1);
         $cobrar = new CobrarPorSocio($socio);
         $cobrar->cobrar($monto);
+
+        $venta = $socio->getVentas()->filter(function($venta){
+            return $venta->getCuotas()->sum(function($cuota){
+                    return $cuota->totalEntradaDeMovimientosDeCuota();
+                }) > 0;
+        });
+
+        $cuotasVenta1 = $venta->all()[0]->getCuotas();
+        $cuotasVenta2 = $venta->all()[1]->getCuotas();
+
+        $cuota5Venta1 = $cuotasVenta1->all()[4];
+        $cuota5Venta2 = $cuotasVenta2->all()[4];
+        $totalCuota5Venta2 = $cuota5Venta2->totalEntradaDeMovimientosDeCuota();
+        $totalCuota5Venta1 = $cuota5Venta1->totalEntradaDeMovimientosDeCuota();
+
+        $this->assertEquals($venta->count(), 2);
+        $this->assertEquals($totalCuota5Venta1, 500);
+        $this->assertEquals($totalCuota5Venta2, 100);
+        $this->assertEquals($cuota5Venta1->getEstado(), 'Cobro Total');
+        $this->assertEquals($cuota5Venta2->getEstado(), 'Cobro Parcial');
     }
 
 }

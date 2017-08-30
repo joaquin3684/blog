@@ -29,6 +29,15 @@ url ventas: mostrar: cobrar/mostrarPorVenta
 Todos los method son post
 }
 
+SERVICIO DE MENSAJES
+
+- hay que cambiar el servicio de mensajes, con respecto a los errores.
+- desde el backend se va a mandar un array de json con lo siguiente
+{tipo: 'Error', titulo: 'aca va ir el titulo del mensaje', 'detalle':'aca va el detalle del error'}
+
+'Si no es Error deberia lanzar un mensaje del tipo success'
+
+
 Cobro cuotas sociales
 - hacer pantalla
 - tiene que tener una tabla que muestre por organismo, con lo que se debe
@@ -142,6 +151,11 @@ Alta solicitud Comercializador
 
 /////// JUAAAAAAAAAAAAAAAAAAAAAAAAAAAN ////////////
 
+abm_socios
+
+- abm socios el mostrar no muestra nada
+- agregar input sexo, tiene que ser un radio ('Masculino', 'Femenino')
+
 Solicitudes pendientes mutual
 
 - en la segunda tabla donde estan las solicitudes con el capital otorgado faltan todos los campos
@@ -157,10 +171,7 @@ Agente financiero solicitudes
 - el rechazar solicitud tiene que estar disponible SOLO cuando recibe la solicitud por primera vez
     o cuando el comer haya enviado una contrapropuesta. no tiene que estar habilitada todo el tiempo
 
-abm_socios
 
-- abm socios el mostrar no muestra nada
-- agregar input sexo, tiene que ser un radio ('Masculino', 'Femenino')
 
 
 

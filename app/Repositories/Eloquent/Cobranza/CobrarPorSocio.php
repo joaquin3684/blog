@@ -35,18 +35,16 @@ class CobrarPorSocio
 
             $collect = collect();
             $this->socio->getVentas()->each(function ($venta) use ($collect) {
-                $cuotasVencidas = $venta->cuotasVencidas();
+                $cuotas = $venta->cuotasImpagas();
                 $orden = $venta->getPrioridad();
-                $cuotasVencidas->each(function ($cuota) use ($orden) {
+                $cuotas->each(function ($cuota) use ($orden) {
                     $cuota->orden = $orden;
 
                 });
 
-                $collect->push($cuotasVencidas);
+                $collect->push($cuotas);
             });
-
             $flaten = $collect->flatten(1);
-
             $cuotasAgrupadas = AgruparPorFecha::agrupar($flaten);
             $cuotasAgrupadas->transform(function ($cuotas) {
                 return AgruparPorOrdenDePrioridad::agrupar($cuotas);
@@ -68,43 +66,6 @@ class CobrarPorSocio
                     return false;
                 }
             });
-            if ($monto > 0) {
-                $repo = new SociosRepo();
-                $socio = $repo->cuotasFuturas($this->socio->getId());
-                $collect = collect();
-                $socio->getVentas()->each(function ($venta) use ($collect) {
-                    $cuotasVencidas = $venta->cuotasVencidas();
-                    $orden = $venta->getPrioridad();
-                    $cuotasVencidas->each(function ($cuota) use ($orden) {
-                        $cuota->orden = $orden;
-                    });
-                    $collect->push($cuotasVencidas);
-                });
-                $flaten = $collect->flatten(1);
-
-                $cuotasAgrupadas = AgruparPorFecha::agrupar($flaten);
-                $cuotasAgrupadas->transform(function ($cuotas) {
-                    return AgruparPorOrdenDePrioridad::agrupar($cuotas);
-                });
-
-                $cuotasAgrupadas->each(function ($grupoPorFecha) use (&$monto) {
-                    if ($monto > 0) {
-                        $grupoPorFecha->each(function ($grupoPorOrden) use (&$monto) {
-                            if ($monto > 0) {
-                                $cantidad = $grupoPorOrden->count();
-                                $montoPorCuota = $monto / $cantidad;
-                                $grupoPorOrden->each(function ($cuota) use ($montoPorCuota, &$monto) {
-                                    $cobrado = $cuota->cobrar($montoPorCuota);
-                                    $monto -= $cobrado;
-                                });
-                            }
-                        });
-                    } else {
-                        return false;
-                    }
-                });
-
-            }
         }
     }
 }
