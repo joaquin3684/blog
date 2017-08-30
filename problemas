@@ -136,16 +136,36 @@ Alta solicitud Comercializador
 
 - agregar input sexo, tiene que ser un radio ('Masculino', 'Femenino')
 
+
+
+
+
+/////// JUAAAAAAAAAAAAAAAAAAAAAAAAAAAN ////////////
+
 Solicitudes pendientes mutual
 
 - en la segunda tabla donde estan las solicitudes con el capital otorgado faltan todos los campos
 de la tabla
 
 
+COMERCIALIZADOR
+
+- agregar en el alta el input de sexo del asociado
+
 Agente financiero solicitudes
 
 - el rechazar solicitud tiene que estar disponible SOLO cuando recibe la solicitud por primera vez
     o cuando el comer haya enviado una contrapropuesta. no tiene que estar habilitada todo el tiempo
+
+abm_socios
+
+- abm socios el mostrar no muestra nada
+- agregar input sexo, tiene que ser un radio ('Masculino', 'Femenino')
+
+
+
+////// hasta aca tiene que estar si o si //////
+
 
 Cuenta corriente agente financiero
 
