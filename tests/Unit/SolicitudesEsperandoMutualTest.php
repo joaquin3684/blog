@@ -58,7 +58,7 @@ class SolicitudesEsperandoMutualTest extends TestCase
         }
 
         $sol = $this->solicitudGateway->update($col->toArray(), $this->solCreada->id);
-        $sol->estado = $sol->doc_endeudamiento != null && $sol->agente_financiero != null ? 'Inversionista Asignado' : 'Procesando Solicitud';
+        $sol->estado = $sol->doc_endeudamiento != null && $sol->agente_financiero != null ? 'Agente Financiero Asignado' : 'Procesando Solicitud';
         $sol->save();
         $this->assertEquals($sol->doc_endeudamiento, null);
         $this->assertEquals($sol->agente_financiero, 11);
