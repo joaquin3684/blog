@@ -27,16 +27,17 @@ class Ventas
     private $importe;
     private $fecha_vencimiento;
     private $ventaRepo;
+    private $nro_credito;
 
 
-
-    public function __construct($id, $descripcion, $nro_cuotas, $importe, $fecha_vencimiento)
+    public function __construct($id, $descripcion, $nro_cuotas, $importe, $fecha_vencimiento, $nro_credito)
     {
         $this->id = $id;
         $this->descripcion = $descripcion;
         $this->nro_cuotas = $nro_cuotas;
         $this->importe = $importe;
         $this->fecha_vencimiento = $fecha_vencimiento;
+        $this->nro_credito = $nro_credito;
         $this->ventaRepo = new VentasRepo();
     }
 
@@ -47,9 +48,32 @@ class Ventas
         });
     }
 
+    public function cuotasImpagas()
+    {
+        return $this->cuotas->filter(function($cuota){
+            return $cuota->estaImpaga();
+        });
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNroCredito()
+    {
+        return $this->nro_credito;
+    }
+
+    /**
+     * @param mixed $nro_credito
+     */
+    public function setNroCredito($nro_credito)
+    {
+        $this->nro_credito = $nro_credito;
+    }
+
     public function montoAdeudado()
     {
-        return $this->cuotasVencidas()->sum(function($cuota){
+        return $this->getCuotas()->sum(function($cuota){
            return $cuota->montoAdeudado();
         });
     }

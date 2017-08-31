@@ -113,6 +113,20 @@
                       </div>
                       </div>
                       <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sexo">Sexo <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                           
+                           <label class="radio-inline">
+                              <input type="radio" name="sexo" value="Masculino">Masculino
+                           </label>
+                           <label class="radio-inline">
+                              <input type="radio" name="sexo" value="Femenino">Femenino
+                           </label>
+                        
+                      </div>
+                      </div>
+                      <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="legajo">Legajo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -254,6 +268,9 @@
                                                 </td>
                                                 <td title="'Fecha de Nacimiento'" sortable="'fecha_nacimiento'">
                                                     {[{abm.fecha_nacimiento}]}
+                                                </td>
+                                                <td title="'Sexo'" sortable="'sexo'">
+                                                    {[{abm.sexo}]}
                                                 </td>
                                                 <td title="'Cuit'" sortable="'cuit'">
                                                     {[{abm.cuit}]}

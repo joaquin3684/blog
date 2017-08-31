@@ -42,4 +42,10 @@ class SociosRepo extends Repositorio
         return $this->mapper->map($socio);
     }
 
+    public function conTodo($id)
+    {
+        $socio = $this->gateway->conTodo($id);
+        return $this->mapper->map($socio);
+    }
+
 }

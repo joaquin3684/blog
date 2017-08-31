@@ -23,7 +23,7 @@ class ProveedoresMapper
 
     public function map($proveedor)
     {
-        $proveedorNuevo = new Proveedor($proveedor->id, $proveedor->nombre, $proveedor->descripcion);
+        $proveedorNuevo = new Proveedor($proveedor->id, $proveedor->razon_social, $proveedor->descripcion);
         if($proveedor->relationLoaded('prioridad'))
         {
             $prioridad = $this->prioridadMapper->map($proveedor->prioridad);

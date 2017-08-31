@@ -27,7 +27,7 @@ class VentasMapper
 
     public function map(VentasModel $venta)
     {
-        $ventaNueva = new Ventas($venta->id,  $venta->descripcion, $venta->nro_cuotas, $venta->importe, $venta->fecha_vencimiento);
+        $ventaNueva = new Ventas($venta->id,  $venta->descripcion, $venta->nro_cuotas, $venta->importe, $venta->fecha_vencimiento, $venta->nro_credito);
         if($venta->relationLoaded('cuotas'))
         {
             $cuotas = $venta->cuotas->map(function($cuota){

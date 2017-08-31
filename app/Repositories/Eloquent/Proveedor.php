@@ -14,16 +14,16 @@ class Proveedor
 {
     use Conversion;
     private $id;
-    private $nombre;
+    private $razon_social;
     private $descripcion;
     private $prioridad;
     private $productos;
     private $solicitudes;
 
-    public function __construct($id, $nombre, $descripcion)
+    public function __construct($id, $razon_social, $descripcion)
     {
         $this->id = $id;
-        $this->nombre = $nombre;
+        $this->razon_social = $razon_social;
         $this->descripcion = $descripcion;
     }
 
@@ -88,7 +88,7 @@ class Proveedor
 
     public function reservarCapital($idSolicitud)
     {
-        $solicitud = $this->getSolicitudes()->first(function($solicitud) use ($idSolicitud){
+        $solicitud = $this->getSolicitudes()->first(function(Solicitud $solicitud) use ($idSolicitud){
             return $solicitud->getId() == $idSolicitud;
         });
         $solicitud->setEstado('Capital Reservado');
@@ -119,23 +119,22 @@ class Proveedor
         $this->productos = $productos;
     }
 
-
-
     /**
      * @return mixed
      */
-    public function getNombre()
+    public function getRazonSocial()
     {
-        return $this->nombre;
+        return $this->razon_social;
     }
 
     /**
-     * @param mixed $nombre
+     * @param mixed $razon_social
      */
-    public function setNombre($nombre)
+    public function setRazonSocial($razon_social)
     {
-        $this->nombre = $nombre;
+        $this->razon_social = $razon_social;
     }
+
 
     /**
      * @return mixed

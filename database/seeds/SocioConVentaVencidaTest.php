@@ -23,8 +23,8 @@ class SocioConVentaVencidaTest extends Seeder
             $producto1 = factory(\App\Productos::class)->create(['id_proovedor' => $proveedor1->id]);
             $producto2 = factory(\App\Productos::class)->create(['id_proovedor' => $proveedor2->id]);
 
-            $venta1 = factory(\App\Ventas::class)->states('vencida 3 meses')->create(['id_producto' => $producto1->id]);
-            $venta2 = factory(\App\Ventas::class)->states('vencida 3 meses')->create(['id_producto' => $producto2->id]);
+            $venta1 = factory(\App\Ventas::class)->states('vencida 2 meses')->create(['id_producto' => $producto1->id, 'nro_credito' => 1]);
+            $venta2 = factory(\App\Ventas::class)->states('vencida 2 meses')->create(['id_producto' => $producto2->id, 'nro_credito' => 2]);
 
 
             for ($i = 1; $i < 6; $i++) {

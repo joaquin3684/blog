@@ -1,7 +1,7 @@
 var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
-app.controller('pago_proovedores', function($scope, $http, $compile, $sce, NgTableParams, $filter) {
+app.controller('pago_proovedores', function($scope, $http, $compile, $sce, NgTableParams, UserSrv, $filter) {
 
 $scope.ArrayAprobar = [];
     $scope.pullAprobar = function (){
@@ -48,21 +48,14 @@ $scope.ArrayAprobar = [];
             data: Dato
         }).then(function successCallback(response)
         {
-            console.log(response.data.ventas);
-            if(typeof response.data === 'string')
-            {
-                return [];
-            }
-            else
-            {
                 $scope.pullAprobar();
+                UserSrv.MostrarMensaje("OK","Se ha aprobado el servicio.","OK","mensaje");
                 $scope.ArrayAprobar = [];
                 console.log('success');
-            }
 
         }, function errorCallback(data)
         {
-            console.log(data.data);
+            UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
         });
 
 

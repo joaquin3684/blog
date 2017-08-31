@@ -144,7 +144,7 @@ class CobrarController extends Controller
         foreach($request->all() as $socio)
         {
             $socioRepo = new SociosRepo();
-            $socio = $socioRepo->ventasConCuotasVencidas($socio['id']);
+            $socio = $socioRepo->conTodo($socio['id']);
             $cobrar = new CobrarPorSocio($socio);
             try{
                 $cobrar->cobrar($socio['monto']);
@@ -199,7 +199,7 @@ class CobrarController extends Controller
         foreach($request->all() as $venta)
         {
             $ventasRepo = new VentasRepo();
-            $ventaCuotasVencidas = $ventasRepo->cuotasVencidas($venta['id']);
+            $ventaCuotasVencidas = $ventasRepo->findWithCuotas($venta['id']);
 
             $cobrar = new CobrarPorVenta();
             try{

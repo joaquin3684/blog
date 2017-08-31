@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Eloquent\FileManager;
+use App\Repositories\Eloquent\GeneradorNumeroCredito;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudesSinInversionistaGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
@@ -66,9 +67,9 @@ class SolicitudesPendientesMutualController extends Controller
     {
 
         DB::transaction(function () use ($request){
+
             $fecha_ingreso = Carbon::today()->toDateString();
             $ventasRepo = new VentasRepo();
-            $socioRepo = new SociosRepo();
             $proveedorRepo = new ProveedoresRepo();
             $cuotasRepo = new CuotasRepo();
             //TODO: aca se tiene que ejecutar el proceso para que se refleje en la contabilidad
@@ -98,6 +99,7 @@ class SolicitudesPendientesMutualController extends Controller
                 'importe' => $total,
                 'fecha_vencimiento' => $fechaInicioDeVto->toDateString(),
             ]);
+            GeneradorNumeroCredito::generar($venta);
             $fechaInicio->today();
             $cuotasRepo->create([
                 'cuotable_id' => $venta->getId(),

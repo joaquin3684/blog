@@ -22,12 +22,11 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
 
-Route::resource('asociados', 'ABM_asociados');
 
 //---------------- PRUEBAS ------------------------------
 Route::get('pruebas', function(){
 
-    return Ventas::doesntHave('movimientos')->get();
+    return Ventas::max('nro_credito');
      return view('prueba');
 });
 Route::get('imagenes', function(){
@@ -179,8 +178,7 @@ Route::get('creacionAutomatica', function(){
     $role->permissions = ['organismos.crear' => true, 'organismos.visualizar' => true, 'organismos.editar' => true, 'organismos.borrar'=> true, 'socios.editar' => true, 'socios.visualizar' => true, 'socios.crear' => true, 'socios.borrar' => true];
     $role->save();
     $role->users()->attach($user);
-    \App\Prioridades::create(['nombre' => 'alta', 'orden' => '1']);
-    \App\Prioridades::create(['nombre' => 'baja', 'orden' => '2']);
+
 
 });
 

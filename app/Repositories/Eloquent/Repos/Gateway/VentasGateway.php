@@ -41,11 +41,16 @@ class VentasGateway extends Gateway
 
     public function findWithCuotas($id)
     {
-        return Ventas::with('cuotas')->find($id);
+        return Ventas::with('cuotas.movimientos')->find($id);
     }
 
     public function ventasQueNoFueronCobradas()
     {
         return Ventas::doesntHave('movimientos')->with('socio','producto.proovedor')->get();
+    }
+
+    public function findLastCredito()
+    {
+        return Ventas::max('nro_credito');
     }
 }

@@ -19,7 +19,7 @@ class CobrarPorVenta
             throw new MasPlataCobradaQueElTotalException('exceso_de_plata');
         } else {
 
-            $cuotas = $venta->cuotasVencidas();
+            $cuotas = $venta->cuotasImpagas();
             $cuotas->each(function ($cuota) use (&$monto) {
                 if ($monto == 0)
                     return false;

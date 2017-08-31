@@ -74,19 +74,20 @@ class Cuota
 
     public function estaVencida()
     {
-           return $this->importe > $this->totalEntradaDeMovimientosDeCuota();
+        $fechaInicio = Carbon::createFromFormat('Y-m-d', $this->fecha_inicio)->toDateString();
+        $fechaHoy = Carbon::today()->toDateString();
+        return $this->estaImpaga() && $fechaInicio < $fechaHoy;
     }
+
+    public function estaImpaga()
+    {
+        return $this->importe > $this->totalEntradaDeMovimientosDeCuota();
+    }
+
 
     public function montoAdeudado()
     {
-        if($this->movimientos == null)
-        {
-            return $this->importe;
-        } else {
-            return $this->movimientos->sum(function($movimiento){
-                return $movimiento->getEntrada();
-            });
-        }
+        return $this->importe - $this->totalEntradaDeMovimientosDeCuota();
     }
 
     public function totalEntradaDeMovimientosDeCuota()

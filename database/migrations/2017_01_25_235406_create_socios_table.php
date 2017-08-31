@@ -22,6 +22,7 @@ class CreateSociosTable extends Migration
             $table->string('cuit');
             $table->integer('dni');
             $table->string('domicilio');
+            $table->string('sexo');
             $table->string('localidad');
             $table->integer('codigo_postal');
             $table->integer('telefono');
