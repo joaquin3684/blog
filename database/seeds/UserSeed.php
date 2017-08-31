@@ -19,7 +19,6 @@ class UserSeed extends Seeder
                 'usuario' => $i,
                 'password' => $i,
                 'email' => $faker->email,
-
             ]);
         }
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

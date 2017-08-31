@@ -29,6 +29,10 @@ url ventas: mostrar: cobrar/mostrarPorVenta
 Todos los method son post
 }
 
+ABM SOCIOS
+- en el servidor no muestra los registros
+
+
 SERVICIO DE MENSAJES
 
 - hay que cambiar el servicio de mensajes, con respecto a los errores.
@@ -109,9 +113,9 @@ abm_proovedores
 
 abm_socios
 
+- fecha de ingreso se tiene que setear automaticamente al dia actual|
+- en la visualizacion de la tabla tienen que estar todos los datos
 - poner paginacion
-- abm socios el mostrar no muestra nada
-- agregar input sexo, tiene que ser un radio ('Masculino', 'Femenino')
 - poner para imprimir
 - poner para pasar a pdf, excel
 - Filtros columnas
@@ -147,7 +151,15 @@ Alta solicitud Comercializador
 
 
 
+Welcome
 
+- comercializador lo cambiamos por Generar solicitud
+- en el titulo de la pantalla tiene que decir Generar Solicitud
+- donde dice datos de prestamo poner generar solicitud
+- Cambiar Solicitudes Pendientes Mutual por Solicitudes Pendientes
+
+- cambiar en modal el titulo dice asignar endeudamiento y hay que cambiarlo por
+Asignar capacidad de endeudamiento
 
 /////// JUAAAAAAAAAAAAAAAAAAAAAAAAAAAN ////////////
 
