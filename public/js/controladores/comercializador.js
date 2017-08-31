@@ -95,7 +95,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     $scope.Comprobante = function (){
  
         archivo = $scope.comprobantevisualizar;
-        document.getElementById('previsualizacion').src = "storage/solicitudes/solicitud" + $scope.idpropuestae + "/"+archivo;
+        document.getElementById('previsualizacion').src = archivo;
 
     }
 

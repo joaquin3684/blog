@@ -185,6 +185,8 @@
                                                 <td title="'Acciones Disponibles'"  style="color: #21a9d6;">
                                                    
                                                       <span ng-click="AprobarSolicitud(solicitud.id)" ng-show="solicitud.estado == 'Capital Otorgado'" class="fa fa-user fa-2x" titulo="Aprobar Solicitud"></span>
+
+                                                      <span ng-click="getFotos(solicitud.id)" data-toggle="modal" data-target="#Comprobantes"  class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
                                                       
                                                 </td>
                                             </tr>
@@ -229,7 +231,7 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         
                         <select class="form-control" placeholder="Comprobante a visualizar.." ng-model="comprobantevisualizar" >
-                          <option ng-repeat="x in DatosModalActual" ng-value="x.basename" >
+                          <option ng-repeat="x in DatosModalActual" ng-value="x.encoded" >
                             {[{x.filename}]}
                           </option>
                         </select>

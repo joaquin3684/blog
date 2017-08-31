@@ -263,11 +263,6 @@
                      </button>
                      <button id="exportButton2" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
                      <button id="exportButton3" ng-click="Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
-                     Single Image with validations
-  <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-    ngf-accept="'image/*'" ngf-max-size="20MB"
-    ngf-resize="{width: 100, height: 100}">Select</div>
-    <button ng-click="submit()">submit</button>
                      </center>
                             <div id="pruebaExpandir">
                                 <div class="span12 row-fluid">
@@ -415,7 +410,7 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         
                         <select class="form-control" placeholder="Comprobante a visualizar.." ng-model="comprobantevisualizar" >
-                          <option ng-repeat="x in DatosModalActual" ng-value="x.basename" >
+                          <option ng-repeat="x in DatosModalActual" ng-value="x.encoded" >
                             {[{x.filename}]}
                           </option>
                         </select>

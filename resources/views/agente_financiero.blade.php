@@ -272,7 +272,7 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         
                         <select class="form-control" placeholder="Comprobante a visualizar.." ng-model="comprobantevisualizar" >
-                          <option ng-repeat="x in DatosModalActual" ng-value="x.basename" >
+                          <option ng-repeat="x in DatosModalActual" ng-value="x.encoded" >
                             {[{x.filename}]}
                           </option>
                         </select>

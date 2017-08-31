@@ -176,8 +176,8 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
     $scope.Comprobante = function (){
  
         archivo = $scope.comprobantevisualizar;
-        document.getElementById('previsualizacion').src = "storage/solicitudes/solicitud" + $scope.idpropuestae + "/"+archivo;
-
+        document.getElementById('previsualizacion').src = archivo;
+        
     }
 
 
