@@ -123,6 +123,20 @@
                         <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" ng-model="fecha_nacimiento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{[{errores.cuota_social[0]}]}
                       </div>
                     </div>
+                        
+                    <div flex layout="row" class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Sexo <span class="required">*</span>
+                      </label>
+                      <div  class="col-md-6 col-sm-6 col-xs-12">
+                        
+                        <md-radio-group flex layout="row" ng-model="sexo">
+
+                          <md-radio-button flex value="Masculino" class="md-primary">Masculino</md-radio-button>
+                          <md-radio-button flex value="Femenino">Femenino</md-radio-button>
+                        </md-radio-group>
+
+                      </div>
+                    </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Legajo <span class="required">*</span>
                       </label>
@@ -273,6 +287,9 @@
                                                 </td>
                                                 <td title="'Cuit'" sortable="'cuit'">
                                                     {[{solicitud.socio.cuit}]}
+                                                </td>
+                                                <td title="'Sexo'" sortable="'sexo'">
+                                                    {[{solicitud.socio.sexo}]}
                                                 </td>
                                                 <td title="'Domicilio'" sortable="'domicilio'">
                                                     {[{solicitud.socio.domicilio}]}

@@ -98,7 +98,7 @@
                                                       
                                                       <span data-toggle="modal" data-target="#Comprobantes" ng-click="getFotos(solicitud.id)" class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
 
-                                                      <span ng-show="solicitud.estado != 'Rechazada por Inversionista' && solicitud.estado != 'Capital Reservado' && solicitud.estado != 'Capital Otorgado'" ng-click="RechazarSolicitud(solicitud.id)" class="fa fa-close fa-2x" titulo="Rechazar Solicitud"></span>
+                                                      <span ng-show="solicitud.estado == 'Agente Financiero Asignado' || solicitud.estado == 'Modificada por Comercializador'" ng-click="RechazarSolicitud(solicitud.id)" class="fa fa-close fa-2x" titulo="Rechazar Solicitud"></span>
 
                                                       <span ng-click="IDModal(solicitud.id)" ng-show="solicitud.estado == 'Agente Financiero Asignado'" data-toggle="modal" data-target="#Propuesta" class="fa fa-send fa-2x" titulo="Enviar Propuesta"></span>
 
