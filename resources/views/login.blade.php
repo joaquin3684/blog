@@ -10,7 +10,8 @@
     {!! Html::script('js/jquery.min.js') !!}
 </head>
 <body ng-controller="loguear">
-	<div class="container">
+	<div style="margin-top: 5%; width: 50%;" class="container">
+  <center>
 		<div class="panel-group">
     		<div class="panel panel-default">
       			<div class="panel-heading">Login</div>
@@ -41,6 +42,7 @@
       			</div>
     		</div>
 		</div>
+    </center>
 	</div>
 </body>
 </html>
