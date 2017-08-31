@@ -96,7 +96,6 @@ class ComercializadorController extends Controller
         return FileManager::buscarImagenesSolicitud($id);
     }
 
-
     public function modificarPropuesta(Request $request)
     {
         $elem = $request->all();

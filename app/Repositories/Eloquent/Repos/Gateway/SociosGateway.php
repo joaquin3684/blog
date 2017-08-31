@@ -44,4 +44,11 @@ class SociosGateway extends Gateway
             $q->with('movimientos');
         }])->find($id);
     }
+
+    public function conTodo($id)
+    {
+        $fecha = new Fechas();
+        $hoy = $fecha->getFechaHoy();
+        return Socios::with(['ventas.cuotas.movimientos', 'ventas.producto.proovedor.prioridad'])->find($id);
+    }
 }

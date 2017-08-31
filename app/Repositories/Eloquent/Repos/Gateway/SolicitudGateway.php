@@ -30,7 +30,7 @@ class SolicitudGateway extends Gateway
 
     public function solicitudesConCapitalOtorgado()
     {
-        return Solicitud::where('estado', 'Capital Otorgado')->get();
+        return Solicitud::where('estado', 'Capital Otorgado')->with('socio')->get();
     }
 
 }

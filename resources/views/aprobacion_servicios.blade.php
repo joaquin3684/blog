@@ -20,6 +20,7 @@
                     <div class="">
                         <div class="clearfix">
                         </div>
+                        <div id="mensaje"></div>
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">

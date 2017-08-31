@@ -43,7 +43,7 @@ class SolicitudesEsperandoMutualTest extends TestCase
 
     public function testEsperandoEndeudamientoYAgenteYcompletoUno()
     {
-        $elem = collect(['doc_endeudamiento' => '200']);
+        $elem = collect();
         $col = collect();
         if($elem->has('doc_endeudamiento'))
         {
@@ -58,10 +58,10 @@ class SolicitudesEsperandoMutualTest extends TestCase
         }
 
         $sol = $this->solicitudGateway->update($col->toArray(), $this->solCreada->id);
-        $sol->estado = $sol->doc_endeudamiento != null && $sol->agente_financiero != null ? 'Inversionista Asignado' : 'Procesando Solicitud';
+        $sol->estado = $sol->doc_endeudamiento != null && $sol->agente_financiero != null ? 'Agente Financiero Asignado' : 'Procesando Solicitud';
         $sol->save();
-        $this->assertEquals($sol->doc_endeudamiento, 200);
-        $this->assertEquals($sol->agente_financiero, null);
+        $this->assertEquals($sol->doc_endeudamiento, null);
+        $this->assertEquals($sol->agente_financiero, 11);
         $this->assertEquals($sol->estado, 'Procesando Solicitud');
     }
 
