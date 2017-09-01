@@ -119,12 +119,47 @@ app.controller('ABM', function($scope, $http, $compile, $sce) {
          }, function errorCallback(data)
          {
             console.log(data);
-         });
-
-
-         
-     
+         }); 
    }
+
+    $scope.traerElementos = function(relaciones)
+   {  
+      var metodito = 'get';
+      var abm = $("#tipo_tabla").val();
+      var urlabm = abm + "/traerElementos";
+      
+      $http({
+            url: urlabm,
+            method: metodito
+        }).then(function successCallback(response)
+        {
+            if(typeof response.data === 'string')
+            {
+                return [];
+            }
+            else
+            {
+                console.log(response);
+                $scope.datosabm = response.data;
+                $scope.paramsABMS = new NgTableParams({
+                    page: 1,
+                    count: 10
+                }, {
+                    total: $scope.datosabm.length,
+                    getData: function (params) {
+                        $scope.datosabm = $filter('orderBy')($scope.datosabm, params.orderBy());
+                        return $scope.datosabm.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    }
+                });
+            }
+
+        }, function errorCallback(data)
+        {
+            console.log(data.data);
+        });
+   }
+
+   $scope.traerElementos();
 
    
 });

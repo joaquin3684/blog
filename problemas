@@ -62,29 +62,20 @@ dar_servicio
 - ajustar pagina para celular
 - poner sentinel
 
-
-abm_productos
-
-- poner paginacion
-- poner para imprimir
-- poner para pasar a pdf, excel
-- poner sentinel
-- Filtros columnas --> Si para todos los abm
+ABMS TODOS
+- Poner para imprimir.
+- Poner para pdf.
+- Poner sentinel.
+- Filtros Columnas.
 
 
 abm_usuarios
 
-- poner paginacion
 - poner las funciones de editar y borrar
-- poner para imprimir
-- poner para pasar a pdf, excel
-- poner sentinel
-- Filtros columnas
 
 
 abm_roles
 
-- poner paginacion
 - poner para imprimir
 - poner para pasar a pdf, excel
 - poner las funciones de editar y borrar
@@ -94,19 +85,17 @@ abm_roles
 
 abm_organismos
 
-- poner paginacion
 - poner para imprimir
-- poner para pasar a pdf, excel
+- poner para pasar a pdf
 - Filtros columnas
 - Agregar la columna "Organismo"
 
 
 abm_proovedores
 
-- poner paginacion
 - poner mostrar todos en la paginacion
 - poner para imprimir
-- poner para pasar a pdf, excel
+- poner para pasar a pdf
 - poner mensajes cuando se realiza una operacion
 - poder poner numeros con coma
 - Filtros columnas
@@ -115,9 +104,8 @@ abm_socios
 
 - fecha de ingreso se tiene que setear automaticamente al dia actual|
 - en la visualizacion de la tabla tienen que estar todos los datos
-- poner paginacion
 - poner para imprimir
-- poner para pasar a pdf, excel
+- poner para pasar a pdf
 - Filtros columnas
 
 Cuentas corrientes
@@ -145,6 +133,7 @@ Pago proovedores
 Cancelacion de servicio
 - tiene que haber una tabla con los servicios para cancelar --> no sería el "Cancelar" de la pantalla aprobacion??
 
+<<<<<<< HEAD
 Alta solicitud Comercializador
 
 - agregar input sexo, tiene que ser un radio ('Masculino', 'Femenino')
@@ -160,6 +149,8 @@ Welcome
 
 - cambiar en modal el titulo dice asignar endeudamiento y hay que cambiarlo por
 Asignar capacidad de endeudamiento
+=======
+>>>>>>> e5ea4e47d917817e0b52579a25a81dc1faad2a3e
 
 Cuenta corriente agente financiero
 

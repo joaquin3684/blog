@@ -137,7 +137,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_ingreso">Fecha de ingreso <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="fecha_ingreso" name="fecha_ingreso" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la fecha de ingreso">{[{errores.fecha_ingreso[0]}]}
+                        <input type="date" id="fecha_ingreso" ng-model="fechadehoy" ng-value="fechadehoy" value="{[{fechadehoy}]}" name="fecha_ingreso" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la fecha de ingreso">{[{errores.fecha_ingreso[0]}]}
                       </div>
                       </div>
                       <div class="item form-group">
@@ -251,7 +251,7 @@
                                              <center>
                      <button id="exportButton1" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
                      </button>
-                     <button id="exportButton2" ng-click="Excel()" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
+                     <button id="exportButton2" ng-click="$Servicio.Excel()" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
                      <button id="exportButton3" ng-click="Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
                      </center>
                             <div id="pruebaExpandir">
@@ -266,7 +266,7 @@
                                                 <td title="'Nombre'" sortable="'nombre'">
                                                     {[{abm.nombre}]}
                                                 </td>
-                                                <td title="'Fecha de Nacimiento'" sortable="'fecha_nacimiento'">
+                                                <td title="'Nacimiento'" sortable="'fecha_nacimiento'">
                                                     {[{abm.fecha_nacimiento}]}
                                                 </td>
                                                 <td title="'Sexo'" sortable="'sexo'">
@@ -274,6 +274,27 @@
                                                 </td>
                                                 <td title="'Cuit'" sortable="'cuit'">
                                                     {[{abm.cuit}]}
+                                                </td>
+                                                <td title="'DNI'" sortable="'dni'">
+                                                    {[{abm.dni}]}
+                                                </td>
+                                                <td title="'Domicilio'" sortable="'domicilio'">
+                                                    {[{abm.domicilio}]}
+                                                </td>
+                                                <td title="'Localidad'" sortable="'localidad'">
+                                                    {[{abm.localidad}]}
+                                                </td>
+                                                <td title="'CP'" sortable="'codigo_postal'">
+                                                    {[{abm.codigo_postal}]}
+                                                </td>
+                                                <td title="'Telefono'" sortable="'telefono'">
+                                                    {[{abm.telefono}]}
+                                                </td>
+                                                <td title="'Legajo'" sortable="'legajo'">
+                                                    {[{abm.legajo}]}
+                                                </td>
+                                                <td title="'Ingreso'" sortable="'fecha_ingreso'">
+                                                    {[{abm.fecha_ingreso}]}
                                                 </td>
                                                 <td id="botones">
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
