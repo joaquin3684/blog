@@ -37,7 +37,7 @@
             <div id="mensaje"></div>
               <div class="x_panel"  >
                 <div class="x_title">
-                  <h2>Alta Prestamo Comercializador<small>Dar de alta un prestamo a un comercializador</small></h2>
+                  <h2>Generar Solicitud<small>Dar de alta un prestamo a un comercializador</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -60,7 +60,7 @@
                   <form class="form-horizontal form-label-left" id="formulario" >
                    {{ csrf_field() }}
                     
-                    <span class="section">Datos del Prestamo</span>
+                    <span class="section">Generar Solicitud</span>
                     
                     <div class="item form-group"> 
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Organismo <span class="required">*</span>

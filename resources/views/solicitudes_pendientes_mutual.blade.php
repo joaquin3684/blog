@@ -37,7 +37,7 @@
       <div id="mensaje"></div>
                     <div class="x_panel">
                       <div class="x_title">
-                        <h2>Solicitudes Pendientes Mutual</h2>
+                        <h2>Solicitudes Pendientes</h2>
 
                         <ul class="nav navbar-right panel_toolbox">
                           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -67,13 +67,14 @@
                      </center>
                             <div id="pruebaExpandir">
                                 <div class="span12 row-fluid">
-                                    <!-- START $scope.[model] updates -->
-                                    <!-- END $scope.[model] updates -->
-                                    <!-- START TABLE -->
+                                    
                                     <div id="exportTable">
                                         <table id="tablita" ng-table="paramssolicitudes" class="table table-hover table-bordered">
                                         
-                                            <tbody data-ng-repeat="solicitud in $data" data-ng-switch on="dayDataCollapse[$index]">
+                                        <!--<input type="text" class="form-control" ng-model="filtroestado">-->
+                                          
+                                          <tbody data-ng-repeat="solicitud in $data | filter: { estado: filtroestado }" data-ng-switch on="dayDataCollapse[$index]">
+                                            
                                             <tr class="clickableRow" title="Datos">
                                                 <td title="'Nombre'" sortable="'nombre'">
                                                     {[{solicitud.socio.nombre}]}

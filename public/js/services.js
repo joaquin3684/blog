@@ -16,6 +16,28 @@ angular.module('Mutual.services', [])
             setTimeout(function(){ $('#'+sector).html(''); }, 4000);
         }
     }
+
+    this.Excel = function(vista) {
+        var vista = prompt("Guardar como..", "");
+        var divToPrint=document.getElementById('exportTable');
+        var tabla=document.getElementById('tablita').innerHTML;
+        var newWin=window.open('','sexportTable');
+
+        newWin.document.open();
+        var code = '<html><link rel="stylesheet" href="js/angular-material/angular-material.min.css"><link rel="stylesheet" href="css/bootstrap.min.css"<link rel="stylesheet" href="fonts/css/font-awesome.min.css"><link rel="stylesheet" href="ss/animate.min.css"><link rel="stylesheet" href="css/custom.css"><link rel="stylesheet" href="css/icheck/flat/green.css"><link rel="stylesheet" href="css/barrow.css"><link rel="stylesheet" href="css/floatexamples.css"><link rel="stylesheet" href="css/ng-table.min.css"><link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.min.css"><body onload="window.print()"><div id="juan"><table ng-table="paramsABMS" class="table table-hover table-bordered">'+tabla+'</table></div></body></html>';
+        newWin.document.write(code);
+        newWin.document.getElementById('botones').innerHTML = '';
+
+        var data_type = 'data:application/vnd.ms-excel';
+        var table_html = newWin.document.getElementById('juan').outerHTML.replace(/ /g, '%20');
+
+        var a = newWin.document.createElement('a');
+        a.href = data_type + ', ' + table_html;
+        a.download = vista + '.xls';
+        a.click();
+
+   }
+
     this.GetEspecialidades = function(){
 
     }

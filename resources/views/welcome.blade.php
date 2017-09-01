@@ -121,11 +121,11 @@
                 </li>
                  <li><a><i class="fa fa-plug"></i> Atajos para Test <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="comercializador">Comercializador</a>
+                    <li><a href="comercializador">Generar Solicitud</a>
                     </li>
                     <li><a href="agente_financiero">Agente Financiero</a>
                     </li>
-                    <li><a href="solicitudesPendientesMutual">Solicitudes Pendientes Mutual</a>
+                    <li><a href="solicitudesPendientesMutual">Solicitudes Pendientes</a>
                     </li>
                       <li><a href="correrVto">Correr vto</a>
                       </li>

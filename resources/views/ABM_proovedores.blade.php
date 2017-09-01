@@ -218,14 +218,14 @@
                                                <center>
                      <button id="exportButton1" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
                      </button>
-                     <button id="exportButton2" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
+                     <button id="exportButton2" ng-click="$Servicio.Excel()" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
                      </center>
                             <div id="pruebaExpandir">
                                 <div class="span12 row-fluid">
                                     <!-- START $scope.[model] updates -->
                                     <!-- END $scope.[model] updates -->
                                     <!-- START TABLE -->
-                                    <div>
+                                    <div id="exportTable">
                                         <table ng-table="paramsABMS" class="table table-hover table-bordered">
                                             <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="Datos">
