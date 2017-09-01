@@ -107,7 +107,7 @@ class CobrarController extends Controller
             })
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('socios.id', '=', $request['id'])
-            ->select('socios.nombre AS socio', 'ventas.id AS id_venta', 'proovedores.razon_social AS proovedor', DB::raw('SUM(cuotas.importe) AS totalACobrar'))->get();
+            ->select('socios.nombre AS socio', 'ventas.id AS id_venta', 'proovedores.razon_social AS proovedor', 'productos.nombre AS producto', DB::raw('SUM(cuotas.importe) AS totalACobrar'))->get();
 
         $movimientos = DB::table('ventas')
             ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
