@@ -19,12 +19,12 @@
                     <div class="">
                         <div class="clearfix">
                         </div>
-                
+
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>
-                                        Filtro 
+                                        Filtro
                                         <small>
                                           Cuenta corriente
                                         </small>
@@ -68,7 +68,7 @@
                                 <div class="x_content" >
                                     <div class="container">
                                       <form ng-submit="filtro()">
-                                  
+
 
                                         <div class="row">
 
@@ -81,7 +81,7 @@
                                                     </md-item-template>
                                                     <md-not-found>
                                                      No se encontraron resultados para "{[{searchText}]}".
-          
+
                                                     </md-not-found>
                                                 </md-autocomplete>
                                             </div>
@@ -95,7 +95,7 @@
                                                     </md-item-template>
                                                     <md-not-found>
                                                      No se encontraron resultados para "{[{searchText}]}".
-          
+
                                                     </md-not-found>
                                                 </md-autocomplete>
                                                 </div>
@@ -136,7 +136,7 @@
                                                     </md-item-template>
                                                     <md-not-found>
                                                      No se encontraron resultados para "{[{searchText}]}".
-          
+
                                                     </md-not-found>
                                                 </md-autocomplete>
                                             </div>
@@ -150,7 +150,7 @@
                                                     </md-item-template>
                                                     <md-not-found>
                                                      No se encontraron resultados para "{[{searchText}]}".
-          
+
                                                     </md-not-found>
                                                 </md-autocomplete>
                                             </div>
@@ -187,7 +187,7 @@
                                                 <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
                                                     Minimo Nº cuota
                                                 </label>
-                                                <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0" 
+                                                <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0"
                                                  ng-model="minimo_nro_cuota">
                                                 </md-slider>
                                             </div>
@@ -238,7 +238,7 @@
                                                 <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
                                                     Minimo importe Total Cobrado
                                                 </label>
-                                                <!-- <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0" 
+                                                <!-- <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0"
                                                  ng-model="minimo_nro_cuota">
                                                 </md-slider> -->
                                             </div>
@@ -281,8 +281,8 @@
                                                     </input>
                                                 </div>
                                             </div>
-                                            
-                                           
+
+
                                         </div>
                                         <input type="submit" ng-click="filtro()" class="btn btn-success" value="Filtrar">
                                         </form>
@@ -292,7 +292,7 @@
                         </div>
                     </div>
                 </div>
-          
+
 
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -304,7 +304,7 @@
                                     Movimientos de cuenta
                                 </small>
                             </h2>
-                            
+
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
                                     <a class="collapse-link">
@@ -356,14 +356,14 @@
 </div>
                         <div id="divTablaOrganismos" ng-if="vistaactual=='Organismos'">
                         		<table id="tablaOrganismos" ng-table="paramsOrganismos" class="table table-hover table-bordered">
-                                    
+
                                 <tr ng-repeat="organismo in $data" ng-click="PullSocios(organismo.id_organismo,organismo.organismo)">
 
                                     <td title="'Organismo'" sortable="'organismo'">
-							            {[{organismo.organismo}]}
+							                      {[{organismo.organismo}]}
                                     </td>
-							        <td title="'Diferencia'" sortable="'diferencia'">
-							            {[{organismo.diferencia}]}
+							                      <td title="'Diferencia'" sortable="'diferencia'">
+							                      {[{organismo.diferencia}]}
                                         <div ng-show="false" ng-init="$parent.diferenciaSUM = $parent.diferenciaSUM + organismo.diferencia"></div>
                                     </td>
                                     <td title="'Total a Cobrar'" sortable="'totalACobrar'">
@@ -374,8 +374,8 @@
                                         {[{organismo.totalCobrado}]}
                                         <div ng-show="false" ng-init="$parent.totalCobradoSUM = $parent.totalCobradoSUM + organismo.totalCobrado"></div>
                                     </td>
-                                    
-							   	</tr> 
+
+							   	</tr>
                                 <tfoot>
                                 <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
                                     <td style="text-align: right;">
@@ -530,7 +530,7 @@
                                                                     <td><center>{[{movimiento.salida}]}</center></td>
                                                                     <td><center>{[{movimiento.ganancia}]}</center></td>
                                                                     <td><center>{[{movimiento.gastos_administrativos}]}</center></td>
-                                  
+
                                                                 </tr>
                                                                 </tbody>
                                                             </table>
@@ -548,7 +548,7 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <!-- /page content -->
             </input>
         </div>
@@ -561,7 +561,7 @@
         <div class="tabbed_notifications" id="notif-group">
         </div>
     </div>
- 
+
     <!-- bootstrap progress js -->
     <!-- icheck -->
     <!-- pace -->
@@ -583,8 +583,8 @@
     <script>
     </script>
     <script type="text/javascript">
-      
-    
+
+
     </script>
 </div>
 @endsection

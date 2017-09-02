@@ -15,191 +15,18 @@
             <input id="tipo_tabla" name="tipo_tabla" type="hidden" value="proovedores">
             <input type="hidden" id="token" value="{{ csrf_token() }}">
                 <!-- page content -->
-                <div class="left-col" role="main">
-                    <div class="">
-                        <div class="clearfix">
-                        </div>
-    
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>
-                                        Filtros
-                                        <small>
-                                            Dar de alta un proovedor
-                                        </small>
-                                    </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li>
-                                            <a class="collapse-link">
-                                                <i class="fa fa-chevron-up">
-                                                </i>
-                                            </a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                                <i class="fa fa-wrench">
-                                                </i>
-                                            </a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li>
-                                                    <a href="#">
-                                                        Settings 1
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Settings 2
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a class="close-link">
-                                                <i class="fa fa-close">
-                                                </i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                                <!-- ARRANCAN LOS FILTROS -->
-                                <div class="x_content" >
-                                    <div class="container">
-                                      <form ng-submit="filtro()">
-                                  
-                                      <div class="row">
-                                        <div class="col-sm-3 col-xs-12">
-                                                <md-autocomplete  md-item-text="item.organismo" md-no-cache="true" md-search-text-change="buscandoOrganismos(searchText4)" md-selected-item-change="filtrar()" md-items="item in query(searchText)" md-search-text="searchText4" md-selected-item="organismo" placeholder="Buscar organismo..." >
-                                                <md-item-template>
-                                                    <span md-highlight-text="searchText">
-                                                        {[{item.organismo}]}
-                                                    </span>
-                                                    </md-item-template>
-                                                    <md-not-found>
-                                                     No se encontraron resultados para "{[{searchText}]}".
-          
-                                                    </md-not-found>
-                                                </md-autocomplete>
-                                            </div>
-                                            <div class="col-sm-3 col-xs-12">
-                                                <md-autocomplete  md-item-text="item.socio" md-no-cache="true" md-search-text-change="buscandoSocios(searchText)" md-selected-item-change="filtrar()" md-items="item in query(searchText)" md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..." >
-                                                <md-item-template>
-                                                    <span md-highlight-text="searchText">
-                                                        {[{item.socio}]}
-                                                    </span>
-                                                    </md-item-template>
-                                                    <md-not-found>
-                                                     No se encontraron resultados para "{[{searchText}]}".
-          
-                                                    </md-not-found>
-                                                </md-autocomplete>
-                                            </div>
-                                            <div class="col-sm-3 col-xs-12">
-                                                <md-autocomplete  md-item-text="item.proovedor" md-no-cache="true"  md-search-text-change="buscandoProovedores(searchText2)" md-items="item in query(searchText2)" md-selected-item-change="filtrar()" md-search-text="searchText2" md-selected-item="proovedor" placeholder="Buscar proovedor...">
-                                                <md-item-template>
-                                                    <span md-highlight-text="searchText">
-                                                        {[{item.proovedor}]}
-                                                    </span>
-                                                    </md-item-template>
-                                                    <md-not-found>
-                                                     No se encontraron resultados para "{[{searchText}]}".
-          
-                                                    </md-not-found>
-                                                </md-autocomplete>
-                                            </div>
-                                            <div class="col-sm-3 col-xs-12">
-                                                <md-autocomplete  md-item-text="item.producto" md-no-cache="true"  md-search-text-change="buscandoProductos(searchText3)" md-items="item in query(searchText3)" md-selected-item-change="filtrar()" md-search-text="searchText3" md-selected-item="producto" placeholder="Buscar producto...">
-                                                <md-item-template>
-                                                    <span md-highlight-text="searchText">
-                                                        {[{item.producto}]}
-                                                    </span>
-                                                    </md-item-template>
-                                                    <md-not-found>
-                                                     No se encontraron resultados para "{[{searchText}]}".
-          
-                                                    </md-not-found>
-                                                </md-autocomplete>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="row" style="margin-top:20px;">
-                                            <div class="item form-group col-sm-5 col-xs-8">
-                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Minimo importe cuota
-                                                </label>
-                                                <md-slider aria-label="red" class="md-primary" ng-change="filtrar()"  flex="" id="red-slider" max="255" min="0" ng-model="minimo_importe_cuota">
-                                                </md-slider>
-                                            </div>
-                                            <div class="col-md-1 col-sm-1 col-xs-4">
-                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_importe_cuota" type="number">
-                                                    {[{errores.porcentaje_retencion[0]}]}
-                                                </input>
-                                            </div>
-                                            <div class="item form-group col-sm-5 col-xs-8">
-                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Maximo importe cuota
-                                                </label>
-                                                <md-slider aria-label="red" class="md-primary" ng-change="filtrar()"  flex="" id="red-slider" max="255" min="0" ng-model="maximo_importe_cuota">
-                                                </md-slider>
-                                            </div>
-                                            <div class="col-md-1 col-sm-1 col-xs-4">
-                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="maximo_importe_cuota" type="number">
-                                                    {[{errores.porcentaje_retencion[0]}]}
-                                                </input>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="item form-group col-sm-5 col-xs-8">
-                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Minimo N° cuota
-                                                </label>
-                                                <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0" 
-                                                 ng-model="minimo_nro_cuota">
-                                                </md-slider>
-                                            </div>
-                                            <div class="col-md-1 col-sm-1 col-xs-4">
-                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_nro_cuota" type="number">
-                                                    {[{errores.porcentaje_retencion[0]}]}
-                                                </input>
-                                            </div>
-                                            <div class="item form-group col-sm-5 col-xs-8">
-                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Maximo N° cuota
-                                                </label>
-                                                <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0" ng-model="maximo_nro_cuota">
-                                                </md-slider>
-                                            </div>
-                                            <div class="col-md-1 col-sm-1 col-xs-4">
-                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="maximo_nro_cuota" type="number">
-                                                    {[{errores.porcentaje_retencion[0]}]}
-                                                </input>
-                                            </div>
-                                        </div>
-                                        <div class="row" style="margin-top:20px;">
-                                            <input type="submit" ng-click="filtro()" class="btn btn-success" value="Filtrar">
-                                            <button type="button" ng-click="seleccionarTodo()" class="btn btn-primary">Seleccionar Todo</button>
-                                            <button type="button" ng-click="cobrar()" class="btn btn-danger">Cobrar</button>
-                                        </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>
-                                Cobranzas Disponibles {[{saldo}]}
+                                Cobranzas disponibles
                                 <small>
-                                    Todos los proovedores disponibles {[{saldo}]}
+                                    Todos los proveedores disponibles
                                 </small>
                             </h2>
-                        
+
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
                                     <a class="collapse-link">
@@ -235,43 +62,161 @@
                             <div class="clearfix">
                             </div>
                         </div>
-                      <div class="x_content">
+                        <div class="x_content" id="impr">
                      <center>
                      <button id="exportButton1" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
                      </button>
                      <button id="exportButton2" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
                      </center>
-                            <div id="pruebaExpandir">
-                                <div class="span12 row-fluid">
-                                    <!-- START $scope.[model] updates -->
-                                    <!-- END $scope.[model] updates -->
-                                    <!-- START TABLE -->
-                                    <div>
-                                        <table id="exportTable" ng-table="paramsCobro" class="table table-hover table-bordered">
-                                            <tbody data-ng-repeat="cobranza in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                            <tr class="clickableRow" title="Datos">
-                                                <td title="'Organismo'" sortable="'organismo'">
-                                                    {[{cobranza.organismo}]}
-                                                </td>
-                                                <td title="'Diferencia'" sortable="'diferencia'">
-                                                    {[{cobranza.diferencia}]}
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                            <tr>
-                                            <td style="text-align: right;"> Total:</td>
-                                            <td>{[{cobranza.$sum('diferencia')}]}</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <!-- END TABLE -->
-                                </div>
-                            </div>
+ <div class="row">
+   @verbatim
+    <ol class="breadcrumb breadcrumb-arrow">
+        <li><a href="" id="bread-organismos" ng-click="setVista('Organismos')"><i class="fa fa-home"></i> ORGANISMOS</a></li>
+        <li><a href="" id="bread-socios" ng-if="vistaactual !== 'Organismos'" ng-click="setVista('Socios')">SOCIOS (<b>{{organismoactual}}</b>)</a></li>
+        <li><a href="" id="bread-servicios" ng-if="vistaactual !== 'Organismos' && vistaactual !== 'Socios'" ng-click="setVista('Ventas')">SERVICIOS (<b>{{socioactual}}</b>)</a></li>
+    </ol>
+    @endverbatim
+</div>
+                        <div id="divTablaOrganismos" ng-if="vistaactual=='Organismos'">
+                          @verbatim
+                        		<table id="tablaOrganismos" ng-table="paramsOrganismos" class="table table-hover table-bordered">
 
+                                <tr ng-repeat="organismo in $data" ng-click="PullSocios(organismo.id_organismo,organismo.organismo)">
+
+                                    <td title="'Organismo'" filter="{organismo: 'text'}" sortable="'organismo'" >
+							                          {{organismo.organismo}}
+                                    </td>
+
+                                    <td title="'Total a Cobrar'" filter="{totalACobrar: 'text'}" sortable="'totalACobrar'">
+                                        {{organismo.totalACobrar}}
+                                        <div ng-show="false" ng-init="$parent.totalACobrarSUM = $parent.totalACobrarSUM + organismo.totalACobrar"></div>
+                                    </td>
+                                    <td title="'Total Cobrado'" filter="{totalCobrado: 'text'}" sortable="'totalCobrado'">
+                                        {{organismo.totalCobrado}}
+                                        <div ng-show="false" ng-init="$parent.totalCobradoSUM = $parent.totalCobradoSUM + organismo.totalCobrado"></div>
+                                    </td>
+                                    <td title="'Diferencia'" filter="{diferencia: 'text'}" sortable="'diferencia'" >
+							                          {{organismo.diferencia}}
+                                        <div ng-show="false" ng-init="$parent.diferenciaSUM = $parent.diferenciaSUM + organismo.diferencia"></div>
+                                    </td>
+
+                                    </td>
+
+							   	</tr>
+
+                  <tfoot>
+                  <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                      <td style="text-align: right;">
+                          <b>Total</b>
+                      </td>
+                      <td>
+                          {{diferenciaSUM}}
+                      </td>
+                      <td>
+                          {{totalACobrarSUM}}
+                      </td>
+                      <td>
+                          {{totalCobradoSUM}}
+                      </td>
+                  </tr>
+                  </tfoot>
+								</table>
+                @endverbatim
+                        </div>
+                        <div id="divTablaSocios" ng-if="vistaactual=='Socios'">
+                            @verbatim
+                                <table id="tablaSocios" ng-table="paramsSocios" class="table table-hover table-bordered">
+
+                                    <tr ng-repeat="socio in $data">
+
+                                        <td title="'Socio'" filter="{ socio: 'text'}" sortable="'socio'" ng-click="PullVentas(socio.id_socio,socio.socio)">
+                                            {{socio.socio}}
+                                        </td>
+
+                                        <td title="'Legajo'" filter="{ legajo: 'text'}" sortable="'legajo'" ng-click="PullVentas(socio.id_socio,socio.socio)">
+                                            {{socio.legajo}}
+                                        </td>
+                                        <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'" ng-click="PullVentas(socio.id_socio,socio.socio)">
+                                            {{socio.totalACobrar}}
+                                            <div ng-show="false" ng-init="$parent.totalACobrarSUM = $parent.totalACobrarSUM + socio.totalACobrar"></div>
+                                        </td>
+                                        <td title="'Monto a cobrar'" >
+                                          <div class="input-group">
+                                            <input type="text" class="form-control" ng-model="socio.montoACobrar">
+                                            <div ng-show="false">
+                                             <!-- {{setMontoACobrarTotal(socio.montoACobrar)}} -->
+                                            </div>
+                                              <span class="input-group-addon" >
+                                                <input type="checkbox" ng-model="socio.checked">
+                                              </span>
+                                          </div>
+                                        </td>
+
+                                        <tfoot>
+                                        <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                            <td style="text-align: right;">
+                                                <b>Total</b>
+                                            </td>
+                                            <td style="text-align: right;">
+                                                <b></b>
+                                            </td>
+                                            <td>
+                                                {{totalACobrarSUM}}
+                                            </td>
+                                            <td>
+                                                <!-- {{montoACobrarSUM}} -->
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </tr>
+
+
+
+                                </table>
+
+                                      <input type="checkbox" ng-model="check" ng-init="check =true" ng-click="cambiarChecksSocios(check)">Seleccionar todos</input>
+                                      <br />
+                                      <br />
+
+                                <button type="button" class="btn btn-primary" ng-click="cobrarSocios()">Cobrar</button>
+                                @endverbatim
+
+
+                        </div>
+                        @verbatim
+                        <div id="divTablaVentas" ng-if="vistaactual=='Ventas'">
+
+                            <table id="tablaVentas" ng-table="paramsVentas" class="table table-hover table-bordered">
+                                <tr ng-repeat="venta in $data" ng-click="Pullcuotas(venta.id_venta,venta.producto)">
+                                    <td title="'Nombre servicio'" filter="{ producto: 'text'}" sortable="'producto'">
+                                        {{venta.producto}}
+                                    </td>
+                                    <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'">
+                                        {{venta.totalACobrar}}
+                                    </td>
+                                    <td title="'Monto a cobrar'" >
+                                      <div class="input-group">
+                                        <input type="text" class="form-control" ng-model="venta.montoACobrar">
+                                          <span class="input-group-addon" >
+                                            <input type="checkbox" ng-model="venta.checked">
+
+                                          </span>
+                                      </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <input type="checkbox"  ng-model="check" ng-init="check = true" ng-click="cambiarChecksVentas(check)">Seleccionar todos</input>
+                            <br />
+                            <br />
+
+                            <button type="button" class="btn btn-primary" ng-click="cobrarVentas()">Cobrar</button>
+                        </div>
+                        @endverbatim
                         </div>
                     </div>
                 </div>
- 
+
                 <!-- /page content -->
             </input>
         </div>
@@ -284,7 +229,7 @@
         <div class="tabbed_notifications" id="notif-group">
         </div>
     </div>
- 
+
     <!-- bootstrap progress js -->
     <!-- icheck -->
     <!-- pace -->
@@ -306,8 +251,8 @@
     <script>
     </script>
     <script type="text/javascript">
-      
-    
+
+
     </script>
 </div>
 @endsection

@@ -1,501 +1,233 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){
-    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){});
+app.controller('cobrar', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter) {
+
+$scope.ActualDate = moment().format('YYYY-MM-DD');
+
+
+$scope.console = function(socio){
+  console.log(socio);
+}
+
+$scope.cambiarChecksSocios = function(check){
+  $scope.socios.forEach(function(socio) {
+    socio.checked = check;
 });
-app.controller('cobrar', function($scope, $http, $compile, $sce, NgTableParams, $filter) {
-   
+};
+
+$scope.cambiarChecksVentas = function(check){
+  $scope.ventas.forEach(function(venta) {
+    venta.checked = check;
+});
+};
+//mostrarPorSocio en todos mando el id del de atras boludo es asi
+    //mostrarPorVenta
+    //mostrarPorCuotas
 // ESTAS FUNCIONES SON PARA DEFINIR LOS PARAMETROS DE BUSQUEDA EN LA FUNCION QUERY
-   $scope.buscandoSocios = function(searchText)
-   {
-      $scope.campoSocio = 'socios.nombre';
-      $scope.campoOrganismo = 'organismos.id';
-      $scope.campoProovedor = 'proovedores.id';
-      $scope.campoProducto = 'movimientos.id_producto';
-      $scope.operadorSocio = 'LIKE';
-      $scope.operadorOrganismo = '=';
-      $scope.operadorProovedor = '=';
-      $scope.operadorProducto = '=';
-      $scope.valorOrganismo = $scope.organismo == null ? '' : $scope.organismo.id_organismo;
-      $scope.valorSocio = '%'+searchText+'%';
-      $scope.valorProovedor = $scope.proovedor == null ? '' : $scope.proovedor.id_proovedor;
-      $scope.valorProducto = $scope.producto == null ? '' : $scope.producto.id_producto;
-      $scope.groupBy = 'socio';
-   }
+$scope.pullOrganismos = function (){
 
-   $scope.buscandoOrganismos = function(searchText)
-   {
-      $scope.campoOrganismo = 'organismos.nombre';
-      $scope.campoSocio = 'movimientos.id_asociado';
-      $scope.campoProovedor = 'proovedores.id';
-      $scope.campoProducto = 'movimientos.id_producto';
-      $scope.operadorOrganismo = 'LIKE';
-      $scope.operadorProovedor = '=';
-      $scope.operadorProducto = '=';
-      $scope.operadorSocio = '=';
-      $scope.valorOrganismo = '%'+searchText+'%';
-      $scope.valorSocio = $scope.socio == null ? '' : $scope.socio.id_asociado;
-      $scope.valorProovedor = $scope.proovedor == null ? '' : $scope.proovedor.id_proovedor;
-      $scope.valorProducto = $scope.producto == null ? '' : $scope.producto.id_producto;
-      $scope.groupBy = 'organismo';
-   }
-
-   $scope.buscandoProovedores = function(searchText)
-   {
-      $scope.campoSocio = 'movimientos.id_asociado';
-      $scope.campoProovedor = 'proovedores.nombre';
-      $scope.campoProducto = 'movimientos.id_producto';
-      $scope.campoOrganismo = 'organismos.id';
-      $scope.operadorProovedor = 'LIKE';
-      $scope.operadorOrganismo = '=';
-      $scope.operadorProducto = '=';
-      $scope.operadorSocio = '=';
-      $scope.valorProovedor = '%'+searchText+'%';
-      $scope.valorOrganismo = $scope.organismo == null ? '' : $scope.organismo.id_organismo;
-      $scope.valorSocio = $scope.socio == null ? '' : $scope.socio.id_asociado;
-      $scope.valorProducto = $scope.producto == null ? '' : $scope.producto.id_producto;
-      $scope.groupBy = 'proovedor';
-   }
-
-   $scope.buscandoProductos = function(searchText)
-   {
-      $scope.campoSocio = 'movimientos.id_asociado';
-      $scope.campoOrganismo = 'organismos.id';
-      $scope.campoProovedor = 'proovedores.id';
-      $scope.campoProducto = 'productos.nombre';
-      $scope.operadorProducto = 'LIKE';
-      $scope.operadorSocio = '=';
-      $scope.operadorOrganismo = '=';
-      $scope.operadorProovedor = '=';
-      $scope.valorProoducto = '%'+searchText+'%';
-      $scope.valorOrganismo = $scope.organismo == null ? '' : $scope.organismo.id_organismo;
-      $scope.valorSocio = $scope.socio == null ? '' : $scope.socio.id_asociado;
-      $scope.valorProovedor = $scope.proovedor == null ? '' : $scope.proovedor.id_proovedor;
-      $scope.groupBy = 'producto';
-   }
-// FIN DE FUNCIONES
-
-   // ESTA FUNCION ES LA QUE HACE LA BUSQUEDA PARA EL AUTOCOMPLETE
-  $scope.query = function(searchText, ruta)
-   {
-      var proovedor, socio, producto;
-      proovedor = $scope.proovedor == null ? '' : $scope.proovedor.id;
-      socio = $scope.socio == null ? '' : $scope.socio.id;
-      producto = $scope.producto == null ? '' : $scope.producto.id;
-
-      return $http({
-         url: 'movimientos/datosAutocomplete',
-         method: 'post',
-         data: {'filtros': [{'campo': $scope.campoProovedor, 'valor': $scope.valorProovedor, 'operador': $scope.operadorProovedor}, {'campo': $scope.campoSocio, 'valor': $scope.valorSocio, 'operador': $scope.operadorSocio}, {'campo': $scope.campoProducto, 'valor':$scope.valorProducto, 'operador': $scope.operadorProducto}, {'campo': $scope.campoOrganismo, 'valor':$scope.valorOrganismo, 'operador': $scope.operadorOrganismo} ], 'groupBy': $scope.groupBy}
+$http({
+         url: 'cobrar/datos',
+         method: 'post'
          }).then(function successCallback(response)
             {
-               console.log(response.data.movimientos);
-               if(typeof response.data == 'string')
+              console.log(response);
+              //  console.log(response.data.ventas);
+               if(typeof response.data === 'string')
                {
                   return [];
                }
                else
                {
-                  return response.data.movimientos;
+                  // console.log(response);
+                  $scope.organismos = response.data;
+                  $scope.paramsOrganismos = new NgTableParams({
+                       page: 1,
+                       count: 10
+                   }, {
+                       total: $scope.organismos.length,
+                       getData: function (params) {
+                         var filterObj = params.filter(),
+                         filteredData = $filter('filter')($scope.organismos, filterObj);
+                         var sortObj = params.sorting();
+                           orderedData = $filter('orderBy')(filteredData, filterObj);
+                           return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                       }
+                   });
                }
 
             }, function errorCallback(data)
             {
                console.log(data.data);
             });
-   }
-
-   // DATOS PARA FILTRAR LA DATATABLE 
-   $scope.data = [
-      {'campo': 'movimientos.id_asociado', 'valor': $scope.valorSocio, 'operador': '='},
-      {'campo': 'movimientos.id_producto', 'valor': $scope.valorProducto, 'operador': '='},
-      {'campo': 'proovedores.id', 'valor': $scope.valorProovedor, 'operador': '='}, 
-      {'campo': 'organismos.id', 'valor': $scope.valorOrganismo, 'operador': '='},
-      {'campo': 'importeTotal', 'valor':$scope.minimo_importe, 'operador': '>='},
-      {'campo': 'importeTotal', 'valor':$scope.maximo_importe, 'operador': '<='},
-      {'campo': 'cuotas.importe', 'valor':$scope.minimo_importe_cuota, 'operador': '>='},
-      {'campo': 'cuotas.importe', 'valor':$scope.maximo_importe_cuota, 'operador': '<='},
-      {'campo': 'cuotas.nro_cuota', 'valor':$scope.minimo_nro_cuota, 'operador': '>='},
-      {'campo': 'cuotas.nro_cuota', 'valor':$scope.maximo_nro_cuota, 'operador': '<='},
-      {'campo': 'cuotas.fecha_pago', 'valor':$scope.desde, 'operador': '>='},
-      {'campo': 'cuotas.fecha_pago', 'valor':$scope.hasta, 'operador': '<='}
-   ];
-   $scope.cobrarSocio = false;
-   $scope.cobrarVenta = false;
-    $("#cobrarSocio").hide();
-    $("#cobrarVenta").hide();
-   // TABLA DE LA DATATABLE  
 
 
-   $('#tablaOrganismos tbody').on( 'click', 'tr', function () {
-       $("#cobrarSocio").show();
 
-            var id = tabla.row(this).data().id_organismo;
-         $('#tablaOrganismos').dataTable().fnDestroy();
-         $('#tablaOrganismos').remove();
-         var $div = $("<table>", {"class": "table table-striped table-bordered dt-responsive nowrap order-colum compact", id: "tablaSocios", });
-         $('#paraBorrar').append($div);
-         var tfoot = $("<tfoot>");
-         $('#tablaSocios').append(tfoot);
-         var html = '<tr><th style="text-align:right">Total:</th><th></th><th></th></tr>';
-         $('tfoot').append(html);
-         $scope.tabla2 =  $("#tablaSocios").DataTable({
-         processing: true,
-         serverSide: true,
-         ajax:
-         {
-            url:"cobrar/porSocio",
-            type: "POST",
-            headers:
-            {
-               'X-CSRF-TOKEN': $('#token').val()
-            },
-            data: function (d)
-            {
-               d.filtros = $scope.data;
-               d.id = id;
-            }
-         },
-         createdRow: function ( row, data, index ) {
-              
-            if ( parseFloat(data.deuda) * 1 > 0 ) {
-                $('td', row).eq(6).addClass('highlight');
-            }
+}
 
-            $(row).find('input').attr('id', 'input'+data.id_socio);
-      
-        },   
-         columnDefs: 
-         [
-            { "title": "Socio", "targets": 0 },
-            { "title": "Monto a cobrar", "targets": 1 },
+$scope.cobrarSocios = function(){
 
-         ],
-         columns: 
-         [
+  $scope.socios.forEach(function(entry) {
 
-            {data: 'socio', name: 'socio'},
-
-            {data: 'diferencia', name: 'diferencia'},
-            {defaultContent: '<input type="number">'},
-            
-         ],
-         footerCallback: function ( row, data, start, end, display )
-         {
-            var api = this.api(), data;
-  
-            // Remove the formatting to get integer data for summation
-            var intVal = function ( i ) 
-            {
-               return typeof i === 'string' ?
-               i.replace(/[\$,]/g, '')*1 :
-               typeof i === 'number' ?
-               i : 0;
-            };
-    
-            // Total over this page
-              totalACobrars = api
-               .column( 1, { page: 'current'} )
-               .data()
-               .reduce( function (a, b) {
-                  return intVal(a) + intVal(b);
-               }, 0 );
-
-               total = api
-               .column( 2, { page: 'current'} )
-               .data()
-               .reduce( function (a, b) {
-                  return intVal(a) + intVal(b);
-               }, 0 );
-
-                 $( api.column( 1 ).footer() ).html(
-               '$'+totalACobrars
-            );
-
-
-          
-         },
-         select: true,
-         fixedHeader: 
-         {
-            header:true,
-            footer: true,
-         },
-         language: 
-         {
-            info: "Mostrando del _PAGE_ al _END_ de _TOTAL_ registros",
-            zeroRecords: "No se encontraron resultados",
-            infoFiltered: "(filtrado de _MAX_ registros)",
-            lengthMenu: "Mostrar _MENU_ registros",
-            paginate: 
-            {
-               next: "Siguiente",
-               previous: "Anterior"
-            },
-            search: "Buscar:"
-         },
-            dom: 'Blrtip',
-            buttons: 
-            [
-               {
-                  extend: 'pdf',
-                  text: 'Generar reporte',
-                  exportOptions: 
-                  {
-                     columns: ':visible',
-                     modifier:
-                     {
-                       page: 'current'
-                     }
-                  }
-               },
-               'print',
-            ],
-         lengthChange: true,
-         aLengthMenu: [
-           [25, 50, 100, 200, -1],
-           [25, 50, 100, 200, "Todos"]
-         ],
+    if(entry.checked){
+      var data = {
+        'id': entry.id_socio,
+        'monto': entry.montoACobrar,
+      }
+      console.log(data);
+      $http({
+        url:'cobrar/cobroPorPrioridad',
+        method:'post',
+        data:data,
+      }).then(function successCallback(response){
+        UserSrv.MostrarMensaje("OK","Se ha realizado el cobro correctamente.","OK","mensaje");
+      },function errorCallback(data){
+        console.log(data.data);
       });
+      }
+    });
+}
 
-   });
+$scope.cobrarVentas = function(){
 
-    $('#paraBorrar').on( 'click', '#tablaSocios tr', function () {
-        $("#cobrarSocio").hide();
-        $("#cobrarVenta").show();
-        var id = $scope.tabla2.row(this).data().id_socio;
-        $('#tablaSocios').dataTable().fnDestroy();
-        $('#tablaSocios').remove();
-        $scope.tabla2 = undefined;
-        var $div = $("<table>", {"class": "table table-striped table-bordered dt-responsive nowrap order-colum compact", id: "tablaVentas", });
-        $('#paraBorrar').append($div);
-        var tfoot = $("<tfoot>");
-        $('#tablaVentas').append(tfoot);
-        var html = '<tr><th colspan="3" style="text-align:right">Total:</th><th></th><th></th></tr>';
-        $('tfoot').append(html);
-        $scope.tabla3 =  $("#tablaVentas").DataTable({
-            processing: true,
-            serverSide: true,
-            ajax:
-                {
-                    url:"cobrar/mostrarPorVenta",
-                    type: "POST",
-                    headers:
-                        {
-                            'X-CSRF-TOKEN': $('#token').val()
-                        },
-                    data: function (d)
-                    {
-                        d.filtros = $scope.data;
-                        d.id = id;
-                    }
-                },
-            createdRow: function ( row, data, index ) {
+  $scope.ventas.forEach(function(entry) {
 
-                if ( parseFloat(data.diferencia) * 1 > 0 ) {
-                    $('td', row).eq(6).addClass('highlight');
+    if(entry.checked){
+      var data = {
+        'id': entry.id_venta,
+        'monto': entry.montoACobrar,
+      }
+      console.log(data);
+      $http({
+        url:'cobrar/cobroPorVenta',
+        method:'post',
+        data:data,
+      }).then(function successCallback(response){
+        UserSrv.MostrarMensaje("OK","Se ha realizado el cobro correctamente.","OK","mensaje");
+      },function errorCallback(data){
+        console.log(data.data);
+      });
+      }
+    });
+}
+
+$scope.PullSocios = function(idorganismo,nombreorganismo){
+
+    $http({
+        url: 'cobrar/porSocio',
+        method: 'post',
+        data: {'id': idorganismo},
+    }).then(function successCallback(response)
+    {
+        console.log(response);
+        if(typeof response.data === 'string')
+        {
+            return [];
+        }
+        else
+        {
+            // console.log(response);
+            $scope.socios = [];
+            response.data.forEach(function(entry) {
+              $scope.socios.push({
+                'id_socio': entry.id_socio,
+                'totalACobrar': entry.diferencia,
+                'montoACobrar': entry.diferencia,
+                'checked': true,
+                'socio': entry.socio,
+              })
+            });
+
+            console.log($scope.socios);
+            $scope.vistaactual = 'Socios';
+            $scope.organismoactual = nombreorganismo;
+            $scope.paramsSocios = new NgTableParams({
+                page: 1,
+                count: 10
+            }, {
+                total: $scope.socios.length,
+                getData: function (params) {
+                    var filterObj = params.filter(),
+                    filteredData = $filter('filter')($scope.socios, filterObj);
+                    var sortObj = params.sorting();
+                    orderedData = $filter('orderBy')(filteredData, filterObj);
+                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 }
-                $(row).find('input').attr('id', 'input'+data.id_venta);
-            },
-            columnDefs:
-                [
-                    { "title": "Servicio", "targets": 0 },
-                    { "title": "Socio", "targets": 1 },
-                    { "title": "Proovedor", "targets": 2 },
-                    { "title": "Monto a cobrar", "targets": 3 },
+            });
+        }
 
-                ],
-            columns:
-                [
-                    {data: 'id_venta', name:'id_venta'},
-                    {data: 'socio', name: 'socio'},
-                    {data: 'proovedor', name: 'proovedor'},
-                    {data: 'diferencia', name: 'diferencia'},
-                    {defaultContent: '<input type="number">'},
-
-
-                ],
-            footerCallback: function ( row, data, start, end, display )
-            {
-                var api = this.api(), data;
-
-                // Remove the formatting to get integer data for summation
-                var intVal = function ( i )
-                {
-                    return typeof i === 'string' ?
-                        i.replace(/[\$,]/g, '')*1 :
-                        typeof i === 'number' ?
-                            i : 0;
-                };
-
-
-
-                deuda = api
-                    .column( 3, { page: 'current'} )
-                    .data()
-                    .reduce( function (a, b) {
-                        return intVal(a) + intVal(b);
-                    }, 0 );
-
-
-                $( api.column( 3 ).footer() ).html(
-                    '$'+deuda
-                );
-
-            },
-            select: true,
-            fixedHeader:
-                {
-                    header:true,
-                    footer: true,
-                },
-            language:
-                {
-                    info: "Mostrando del _PAGE_ al _END_ de _TOTAL_ registros",
-                    zeroRecords: "No se encontraron resultados",
-                    infoFiltered: "(filtrado de _MAX_ registros)",
-                    lengthMenu: "Mostrar _MENU_ registros",
-                    paginate:
-                        {
-                            next: "Siguiente",
-                            previous: "Anterior"
-                        },
-                    search: "Buscar:"
-                },
-            dom: 'Blrtip',
-            buttons:
-                [
-                    {
-                        extend: 'pdf',
-                        text: 'Generar reporte',
-                        exportOptions:
-                            {
-                                columns: ':visible',
-                                modifier:
-                                    {
-                                        page: 'current'
-                                    }
-                            }
-                    },
-                    'print',
-                ],
-            lengthChange: true,
-            aLengthMenu: [
-                [25, 50, 100, 200, -1],
-                [25, 50, 100, 200, "Todos"]
-            ],
-        });
-
+    }, function errorCallback(data)
+    {
+        console.log(data.data);
     });
 
+}
+    $scope.setVista = function(vista){
+
+        $scope.vistaactual = vista;
+
+    }
+
+    $scope.cambiarFechaCuotas = function(cuota){
+      moment.locale('es');
+      fecha= cuota.fecha_vencimiento;
+      var fecha= moment(fecha, 'YYYY-MM-DD').format('L');
+      cuota.fecha_vencimiento= fecha;
+      return cuota;
+    }
+
+    $scope.cambiarFechaVentas = function(venta) {
+      moment.locale('es');
+      fecha= venta.fecha;
+      var fecha= moment(fecha, 'YYYY-MM-DD').format('L');
+      venta.fecha= fecha;
+      return venta;
+        }
+
+    $scope.PullVentas = function(idsocio,nombresocio){
 
 
-   $scope.cobrar = function()
-   {
-      var p = $scope.tabla2.rows().data();
-   
-      var aux = [];
-      for(var i=0; p.length > i; i++)
-      {
-        var valorInput = $('#input'+p[i].id_socio).val();
-         if(valorInput > 0 )
-         {
-            p[i]['cobro'] = valorInput;
-            aux.push(p[i]); 
-         }
-      }
-      $http({
-         url: 'cobrar/cobroPorPrioridad',
-         method: 'post',
-         headers: {'X-CSRF-TOKEN': $('#token').val()},
-         data: aux
-         }).then(function successCallback(response)
-            {
-               console.log(response.data);
-
-            }, function errorCallback(data)
-            {
-               console.log(data.data);
-            });
-   }
-
-   $scope.cobrarPorVenta = function()
-   {
-       var p = $scope.tabla3.rows().data();
-
-       var aux = [];
-       for(var i=0; p.length > i; i++)
-       {
-           var valorInput = $('#input'+p[i].id_venta).val();
-           if(valorInput > 0 )
-           {
-               p[i]['cobro'] = valorInput;
-               aux.push(p[i]);
-           }
-       }
-       $http({
-           url: 'cobrar/cobroPorVenta',
-           method: 'post',
-           headers: {'X-CSRF-TOKEN': $('#token').val()},
-           data: aux
-       }).then(function successCallback(response)
-       {
-           console.log(response.data);
-
-       }, function errorCallback(data)
-       {
-           console.log(data.data);
-       });
-   }
-   
-   // ESTA FUNCION ES PARA FILTRAR LA DATATABLE
-   $scope.filtro = function()
-   {
-      var desde = $scope.desde == undefined ? '' : formatearFecha($scope.desde.toLocaleDateString("es-ES"));
-      var hasta = $scope.hasta == undefined ? '' : formatearFecha($scope.hasta.toLocaleDateString("es-ES"));
-
-      $scope.valorSocio = $scope.socio == null ? '' : $scope.socio.id_asociado;
-      $scope.valorProovedor = $scope.proovedor == null ? '' : $scope.proovedor.id_proovedor;
-      $scope.valorProducto = $scope.producto == null ? '' : $scope.producto.id_producto;
-      $scope.valorOrganismo = $scope.organismo == null ? '' : $scope.organismo.id_organismo;
-
-      $scope.data = [
-         {'campo': 'movimientos.id_asociado', 'valor': $scope.valorSocio, 'operador': '='},
-         {'campo': 'movimientos.id_producto', 'valor': $scope.valorProducto, 'operador': '='},
-         {'campo': 'proovedores.id', 'valor': $scope.valorProovedor, 'operador': '='},
-         {'campo': 'organismos.id', 'valor': $scope.valorOrganismo, 'operador': '='}, 
-         {'campo': 'importeTotal', 'valor':$scope.minimo_importe, 'operador': '>='},
-         {'campo': 'importeTotal', 'valor':$scope.maximo_importe, 'operador': '<='},
-         {'campo': 'cuotas.importe', 'valor':$scope.minimo_importe_cuota, 'operador': '>='},
-         {'campo': 'cuotas.importe', 'valor':$scope.maximo_importe_cuota, 'operador': '<='},
-         {'campo': 'cuotas.nro_cuota', 'valor':$scope.minimo_nro_cuota, 'operador': '>='},
-         {'campo': 'cuotas.nro_cuota', 'valor':$scope.maximo_nro_cuota, 'operador': '<='},
-         {'campo': 'cuotas.fecha_pago', 'valor':desde, 'operador': '>='},
-         {'campo': 'cuotas.fecha_pago', 'valor':hasta, 'operador': '<='}
-        ];
-      tabla.draw();
-   }
-
-   $scope.llenar = function() {
-          $http({
-            url: 'cobrar/datos',
-            method: 'post'
+        $http({
+            url: 'cobrar/mostrarPorVenta',
+            method: 'post',
+            data: {'id': idsocio}
         }).then(function successCallback(response)
         {
+
             if(typeof response.data === 'string')
             {
                 return [];
             }
             else
             {
-                console.log(response);
-                $scope.datosCobro = response.data;
-                $scope.paramsCobro = new NgTableParams({
+                // console.log(response);
+                $scope.ventas = [];
+                response.data.forEach(function(entry) {
+                  $scope.ventas.push({
+                    'producto': entry.producto,
+                    'totalACobrar': entry.diferencia,
+                    'montoACobrar': entry.diferencia,
+                    'id_venta': entry.id_venta,
+                    'checked': true,
+                  })
+                });
+                console.log($scope.ventas);
+                console.log(response.data);
+                // $scope.ventas = response.data;
+                $scope.vistaactual = 'Ventas';
+                $scope.socioactual = nombresocio;
+                //self.paramsVentas = new NgTableParams({}, { dataset: $scope.ventas});
+
+                $scope.paramsVentas = new NgTableParams({
                     page: 1,
                     count: 10
                 }, {
-                    total: $scope.datosCobro.length,
+                    total: $scope.ventas.length,
                     getData: function (params) {
-                        $scope.datosCobro = $filter('orderBy')($scope.datosCobro, params.orderBy());
-                        return $scope.datosCobro.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                      var filterObj = params.filter(),
+                      filteredData = $filter('filter')($scope.ventas, filterObj);
+                      var sortObj = params.sorting();
+                        orderedData = $filter('orderBy')(filteredData, filterObj);
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
             }
@@ -504,37 +236,266 @@ app.controller('cobrar', function($scope, $http, $compile, $sce, NgTableParams, 
         {
             console.log(data.data);
         });
-   }
-   $scope.llenar();
 
-  /* $scope.cobrar = function()
-   {
-      var cuotas_id = [];
-      $('#datatable-responsive > tbody > tr.selected').each(function (tr){
-         cuotas_id.push(tabla.row(tr).data().id_cuota);
-         console.log(tabla.row(tr).data().id_cuota);
-      });
-         
-         $http({
-         url: 'cobrar/cobrarCuotas',
-         method: 'post',
-         data: {'cuotas': cuotas_id}
-         }).then(function successCallback(response)
-            {
-               console.log(response.data.movimientos);
-               if(typeof response.data == 'string')
-               {
-                  return [];
-               }
-               else
-               {
-                  return response.data.movimientos;
-               }
+    }
 
-            }, function errorCallback(data)
-            {
-               console.log(data.data);
-            });
-   }*/
+var montoACobrarTotal = 0;
+$scope.setMontoACobrarTotal = function (montoACobrar){
+  montoACobrarTotal = montoACobrarTotal+ montoACobrar;
+  $scope.montoACobrarSUM = montoACobrarTotal;
+}
+
+
+    //PARAMETROS INICIALES
+        $scope.vistaactual = 'Organismos';
+        var self = this;
+        $scope.pullOrganismos();
+
+    //EMPIEZA EL CODIGO DEL EXPANDIR
+    $scope.tableRowExpanded = false;
+    $scope.tableRowIndexExpandedCurr = "";
+    $scope.tableRowIndexExpandedPrev = "";
+    $scope.storeIdExpanded = "";
+
+    $scope.dayDataCollapseFn = function () {
+        $scope.dayDataCollapse = [];
+        for (var i = 0; i < $scope.storeDataModel.storedata.length; i += 1) {
+            $scope.dayDataCollapse.push(false);
+        }
+    };
+
+
+    $scope.selectTableRow = function (index, storeId) {
+        if (typeof $scope.dayDataCollapse === 'undefined') {
+            $scope.dayDataCollapseFn();
+        }
+
+        if ($scope.tableRowExpanded === false && $scope.tableRowIndexExpandedCurr === "" && $scope.storeIdExpanded === "") {
+            $scope.tableRowIndexExpandedPrev = "";
+            $scope.tableRowExpanded = true;
+            $scope.tableRowIndexExpandedCurr = index;
+            $scope.storeIdExpanded = storeId;
+            $scope.dayDataCollapse[index] = true;
+        } else if ($scope.tableRowExpanded === true) {
+            if ($scope.tableRowIndexExpandedCurr === index && $scope.storeIdExpanded === storeId) {
+                $scope.tableRowExpanded = false;
+                $scope.tableRowIndexExpandedCurr = "";
+                $scope.storeIdExpanded = "";
+                $scope.dayDataCollapse[index] = false;
+            } else {
+                $scope.tableRowIndexExpandedPrev = $scope.tableRowIndexExpandedCurr;
+                $scope.tableRowIndexExpandedCurr = index;
+                $scope.storeIdExpanded = storeId;
+                $scope.dayDataCollapse[$scope.tableRowIndexExpandedPrev] = false;
+                $scope.dayDataCollapse[$scope.tableRowIndexExpandedCurr] = true;
+            }
+        }
+
+    };
+
+    $scope.storeDataModel = {
+        "metadata": {
+            "storesInTotal": "25",
+            "storesInRepresentation": "6"
+        },
+        "storedata": [{
+            "store": {
+                "storeId": "1000",
+                "storeName": "Store 1",
+                "storePhone": "+46 31 1234567",
+                "storeAddress": "Avenyn 1",
+                "storeCity": "Gothenburg"
+            },
+            "data": {
+                "startDate": "2013-07-01",
+                "endDate": "2013-07-02",
+                "costTotal": "100000",
+                "salesTotal": "150000",
+                "revenueTotal": "50000",
+                "averageEmployees": "3.5",
+                "averageEmployeesHours": "26.5",
+                "dayData": [{
+                    "date": "2013-07-01",
+                    "cost": "50000",
+                    "sales": "71000",
+                    "revenue": "21000",
+                    "employees": "3",
+                    "employeesHoursSum": "24"
+                }, {
+                    "date": "2013-07-02",
+                    "cost": "50000",
+                    "sales": "79000",
+                    "revenue": "29000",
+                    "employees": "4",
+                    "employeesHoursSum": "29"
+                }]
+            }
+        }, {
+            "store": {
+                "storeId": "2000",
+                "storeName": "Store 2",
+                "storePhone": "+46 8 9876543",
+                "storeAddress": "Drottninggatan 100",
+                "storeCity": "Stockholm"
+            },
+            "data": {
+                "startDate": "2013-07-01",
+                "endDate": "2013-07-02",
+                "costTotal": "170000",
+                "salesTotal": "250000",
+                "revenueTotal": "80000",
+                "averageEmployees": "4.5",
+                "averageEmployeesHours": "35",
+                "dayData": [{
+                    "date": "2013-07-01",
+                    "cost": "85000",
+                    "sales": "120000",
+                    "revenue": "35000",
+                    "employees": "5",
+                    "employeesHoursSum": "38"
+                }, {
+                    "date": "2013-07-02",
+                    "cost": "85000",
+                    "sales": "130000",
+                    "revenue": "45000",
+                    "employees": "4",
+                    "employeesHoursSum": "32"
+                }]
+            }
+        }, {
+            "store": {
+                "storeId": "3000",
+                "storeName": "Store 3",
+                "storePhone": "+1 99 555-1234567",
+                "storeAddress": "Elm Street",
+                "storeCity": "New York"
+            },
+            "data": {
+                "startDate": "2013-07-01",
+                "endDate": "2013-07-02",
+                "costTotal": "2400000",
+                "salesTotal": "3800000",
+                "revenueTotal": "1400000",
+                "averageEmployees": "25.5",
+                "averageEmployeesHours": "42",
+                "dayData": [{
+                    "date": "2013-07-01",
+                    "cost": "1200000",
+                    "sales": "1600000",
+                    "revenue": "400000",
+                    "employees": "23",
+                    "employeesHoursSum": "41"
+                }, {
+                    "date": "2013-07-02",
+                    "cost": "1200000",
+                    "sales": "2200000",
+                    "revenue": "1000000",
+                    "employees": "28",
+                    "employeesHoursSum": "43"
+                }]
+            }
+        }, {
+            "store": {
+                "storeId": "4000",
+                "storeName": "Store 4",
+                "storePhone": "0044 34 123-45678",
+                "storeAddress": "Churchill avenue",
+                "storeCity": "London"
+            },
+            "data": {
+                "startDate": "2013-07-01",
+                "endDate": "2013-07-02",
+                "costTotal": "1700000",
+                "salesTotal": "2300000",
+                "revenueTotal": "600000",
+                "averageEmployees": "13.0",
+                "averageEmployeesHours": "39",
+                "dayData": [{
+                    "date": "2013-07-01",
+                    "cost": "850000",
+                    "sales": "1170000",
+                    "revenue": "320000",
+                    "employees": "14",
+                    "employeesHoursSum": "39"
+                }, {
+                    "date": "2013-07-02",
+                    "cost": "850000",
+                    "sales": "1130000",
+                    "revenue": "280000",
+                    "employees": "12",
+                    "employeesHoursSum": "39"
+                }]
+            }
+        }, {
+            "store": {
+                "storeId": "5000",
+                "storeName": "Store 5",
+                "storePhone": "+33 78 432-98765",
+                "storeAddress": "Le Big Mac Rue",
+                "storeCity": "Paris"
+            },
+            "data": {
+                "startDate": "2013-07-01",
+                "endDate": "2013-07-02",
+                "costTotal": "1900000",
+                "salesTotal": "2500000",
+                "revenueTotal": "600000",
+                "averageEmployees": "16.0",
+                "averageEmployeesHours": "37",
+                "dayData": [{
+                    "date": "2013-07-01",
+                    "cost": "950000",
+                    "sales": "1280000",
+                    "revenue": "330000",
+                    "employees": "16",
+                    "employeesHoursSum": "37"
+                }, {
+                    "date": "2013-07-02",
+                    "cost": "950000",
+                    "sales": "1220000",
+                    "revenue": "270000",
+                    "employees": "16",
+                    "employeesHoursSum": "37"
+                }]
+            }
+        }, {
+            "store": {
+                "storeId": "6000",
+                "storeName": "Store 6",
+                "storePhone": "+49 54 7624214",
+                "storeAddress": "Bier strasse",
+                "storeCity": "Berlin"
+            },
+            "data": {
+                "startDate": "2013-07-01",
+                "endDate": "2013-07-02",
+                "costTotal": "1800000",
+                "salesTotal": "2200000",
+                "revenueTotal": "400000",
+                "averageEmployees": "11.0",
+                "averageEmployeesHours": "39",
+                "dayData": [{
+                    "date": "2013-07-01",
+                    "cost": "900000",
+                    "sales": "1100000",
+                    "revenue": "200000",
+                    "employees": "12",
+                    "employeesHoursSum": "39"
+                }, {
+                    "date": "2013-07-02",
+                    "cost": "900000",
+                    "sales": "1100000",
+                    "revenue": "200000",
+                    "employees": "10",
+                    "employeesHoursSum": "39"
+                }]
+            }
+        }],
+        "_links": {
+            "self": {
+                "href": "/storedata/between/2013-07-01/2013-07-02"
+            }
+        }
+    };
+
 });
-

@@ -371,16 +371,39 @@
 
                                     <td title="'Total a Cobrar'" filter="{totalACobrar: 'text'}" sortable="'totalACobrar'">
                                         {{organismo.totalACobrar}}
+                                        <div ng-show="false" ng-init="$parent.totalACobrarSUM = $parent.totalACobrarSUM + organismo.totalACobrar"></div>
                                     </td>
                                     <td title="'Total Cobrado'" filter="{totalCobrado: 'text'}" sortable="'totalCobrado'">
                                         {{organismo.totalCobrado}}
+                                        <div ng-show="false" ng-init="$parent.totalCobradoSUM = $parent.totalCobradoSUM + organismo.totalCobrado"></div>
                                     </td>
                                     <td title="'Diferencia'" filter="{diferencia: 'text'}" sortable="'diferencia'" >
 							                          {{organismo.diferencia}}
+                                        <div ng-show="false" ng-init="$parent.diferenciaSUM = $parent.diferenciaSUM + organismo.diferencia"></div>
                                     </td>
-                                    @endverbatim
+
+                                    </td>
+
 							   	</tr>
+
+                  <tfoot>
+                  <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                      <td style="text-align: right;">
+                          <b>Total</b>
+                      </td>
+                      <td>
+                          {{diferenciaSUM}}
+                      </td>
+                      <td>
+                          {{totalACobrarSUM}}
+                      </td>
+                      <td>
+                          {{totalCobradoSUM}}
+                      </td>
+                  </tr>
+                  </tfoot>
 								</table>
+                @endverbatim
                         </div>
                         <div id="divTablaSocios" ng-if="vistaactual=='Socios'">
                             @verbatim
