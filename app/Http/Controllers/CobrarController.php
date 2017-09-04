@@ -144,8 +144,8 @@ class CobrarController extends Controller
         foreach($request->all() as $socio)
         {
             $socioRepo = new SociosRepo();
-            $socio = $socioRepo->conTodo($socio['id']);
-            $cobrar = new CobrarPorSocio($socio);
+            $socioModelo = $socioRepo->conTodo($socio['id']);
+            $cobrar = new CobrarPorSocio($socioModelo);
             try{
                 $cobrar->cobrar($socio['monto']);
             } catch (MasPlataCobradaQueElTotalException $e)

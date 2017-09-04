@@ -25,7 +25,7 @@ class VentasMapper
         $this->estadoMapper = new EstadoVentaMapper();
     }
 
-    public function map(VentasModel $venta)
+    public function map($venta)
     {
         $ventaNueva = new Ventas($venta->id,  $venta->descripcion, $venta->nro_cuotas, $venta->importe, $venta->fecha_vencimiento, $venta->nro_credito);
         if($venta->relationLoaded('cuotas'))
