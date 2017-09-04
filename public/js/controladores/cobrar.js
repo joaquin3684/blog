@@ -4,9 +4,26 @@ app.controller('cobrar', function($scope, $http, $compile, $sce, $window, NgTabl
 $scope.ActualDate = moment().format('YYYY-MM-DD');
 
 
-$scope.console = function(socio){
-  console.log(socio);
+$scope.sumarMontosACobrarSocios = function (){
+ var montoACobrarTotal = 0;
+  $scope.socios.forEach(function(elem) {
+    if(elem.checked){
+    montoACobrarTotal = montoACobrarTotal + elem.montoACobrar;
+    }
+  });
+  return montoACobrarTotal;
 }
+
+$scope.sumarMontosACobrarVentas = function (){
+ var montoACobrarTotal = 0;
+  $scope.ventas.forEach(function(elem) {
+    if(elem.checked){
+    montoACobrarTotal = montoACobrarTotal + elem.montoACobrar;
+    }
+  });
+  return montoACobrarTotal;
+}
+
 
 $scope.cambiarChecksSocios = function(check){
   $scope.socios.forEach(function(socio) {
@@ -66,13 +83,18 @@ $http({
 
 $scope.cobrarSocios = function(){
 
+  var data = [];
   $scope.socios.forEach(function(entry) {
 
     if(entry.checked){
-      var data = {
+      data.push({
         'id': entry.id_socio,
         'monto': entry.montoACobrar,
-      }
+      });
+    }
+
+  });
+
       console.log(data);
       $http({
         url:'cobrar/cobroPorPrioridad',
@@ -83,8 +105,8 @@ $scope.cobrarSocios = function(){
       },function errorCallback(data){
         console.log(data.data);
       });
-      }
-    });
+
+
 }
 
 $scope.cobrarVentas = function(){
@@ -167,21 +189,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
     }
 
-    $scope.cambiarFechaCuotas = function(cuota){
-      moment.locale('es');
-      fecha= cuota.fecha_vencimiento;
-      var fecha= moment(fecha, 'YYYY-MM-DD').format('L');
-      cuota.fecha_vencimiento= fecha;
-      return cuota;
-    }
 
-    $scope.cambiarFechaVentas = function(venta) {
-      moment.locale('es');
-      fecha= venta.fecha;
-      var fecha= moment(fecha, 'YYYY-MM-DD').format('L');
-      venta.fecha= fecha;
-      return venta;
-        }
 
     $scope.PullVentas = function(idsocio,nombresocio){
 
@@ -239,11 +247,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
     }
 
-var montoACobrarTotal = 0;
-$scope.setMontoACobrarTotal = function (montoACobrar){
-  montoACobrarTotal = montoACobrarTotal+ montoACobrar;
-  $scope.montoACobrarSUM = montoACobrarTotal;
-}
+
 
 
     //PARAMETROS INICIALES

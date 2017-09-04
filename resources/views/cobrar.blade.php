@@ -142,68 +142,83 @@
                                         </td>
                                         <td title="'Monto a cobrar'" >
                                           <div class="input-group">
-                                            <input type="text" class="form-control" ng-model="socio.montoACobrar">
-                                            <div ng-show="false">
-                                             <!-- {{setMontoACobrarTotal(socio.montoACobrar)}} -->
-                                            </div>
+                                            <input type="number" class="form-control" ng-model="socio.montoACobrar">
                                               <span class="input-group-addon" >
                                                 <input type="checkbox" ng-model="socio.checked">
                                               </span>
                                           </div>
                                         </td>
 
-                                        <tfoot>
-                                        <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
-                                            <td style="text-align: right;">
-                                                <b>Total</b>
-                                            </td>
-                                            <td style="text-align: right;">
-                                                <b></b>
-                                            </td>
-                                            <td>
-                                                {{totalACobrarSUM}}
-                                            </td>
-                                            <td>
-                                                <!-- {{montoACobrarSUM}} -->
-                                            </td>
-                                        </tr>
-                                        </tfoot>
                                     </tr>
 
+                                    <tfoot>
 
+                                    <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                        <td style="text-align: right;">
+                                            <b>Total</b>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <b></b>
+                                        </td>
+                                        <td>
+                                            {{totalACobrarSUM}}
+                                        </td>
+                                        <td>
+                                          <!-- <button ng-click="montoACobrarSUM()"></button> -->
+                                          {{sumarMontosACobrarSocios()}}
+
+                                        </td>
+                                    </tr>
+                                    </tfoot>
 
                                 </table>
 
-                                      <input type="checkbox" ng-model="check" ng-init="check =true" ng-click="cambiarChecksSocios(check)">Seleccionar todos</input>
-                                      <br />
-                                      <br />
 
+                                <input type="checkbox" ng-model="check" ng-init="check =true" ng-click="cambiarChecksSocios(check)">Seleccionar todos</input>
+                                <br />
+                                <br />
                                 <button type="button" class="btn btn-primary" ng-click="cobrarSocios()">Cobrar</button>
                                 @endverbatim
 
 
                         </div>
                         @verbatim
-                        <div id="divTablaVentas" ng-if="vistaactual=='Ventas'">
+                        <div id="divTablaVentas" ng-if="vistaactual=='Ventas'" >
 
                             <table id="tablaVentas" ng-table="paramsVentas" class="table table-hover table-bordered">
-                                <tr ng-repeat="venta in $data" ng-click="Pullcuotas(venta.id_venta,venta.producto)">
+                                <tr ng-repeat="venta in $data" ng-click="Pullcuotas(venta.id_venta,venta.producto)" >
                                     <td title="'Nombre servicio'" filter="{ producto: 'text'}" sortable="'producto'">
                                         {{venta.producto}}
                                     </td>
                                     <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'">
                                         {{venta.totalACobrar}}
+                                        <div ng-show="false" ng-init="$parent.totalACobrarSUM = $parent.totalACobrarSUM + venta.totalACobrar"></div>
                                     </td>
                                     <td title="'Monto a cobrar'" >
                                       <div class="input-group">
-                                        <input type="text" class="form-control" ng-model="venta.montoACobrar">
+                                        <input type="number" class="form-control" ng-model="venta.montoACobrar">
                                           <span class="input-group-addon" >
                                             <input type="checkbox" ng-model="venta.checked">
-
                                           </span>
                                       </div>
                                     </td>
                                 </tr>
+
+                                <tfoot>
+                                <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                    <td style="text-align: right;">
+                                        <b>Total</b>
+                                    </td>
+
+                                    <td>
+                                        {{totalACobrarSUM}}
+                                    </td>
+                                    <td>
+                                       {{sumarMontosACobrarVentas()}}
+                                    </td>
+                                </tr>
+                                </tfoot>
+
                             </table>
 
                             <input type="checkbox"  ng-model="check" ng-init="check = true" ng-click="cambiarChecksVentas(check)">Seleccionar todos</input>
