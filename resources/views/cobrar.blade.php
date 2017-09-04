@@ -12,18 +12,19 @@
 <div class="nav-md" ng-controller="cobrar">
     <div class="container body">
         <div class="main_container">
+
             <input id="tipo_tabla" name="tipo_tabla" type="hidden" value="proovedores">
             <input type="hidden" id="token" value="{{ csrf_token() }}">
                 <!-- page content -->
 
-
+                <div id="mensaje"></div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>
                                 Cobranzas disponibles
                                 <small>
-                                    Todos los proveedores disponibles
+                                  Cobrar por socio o por servicio
                                 </small>
                             </h2>
 
@@ -113,37 +114,36 @@
                           {{diferenciaSUM}}
                       </td>
                       <td>
-                          {{totalACobrarSUM}}
+                          {{totalCobradoSUM}}
                       </td>
                       <td>
-                          {{totalCobradoSUM}}
+                          {{diferenciaSUM}}
                       </td>
                   </tr>
                   </tfoot>
 								</table>
                 @endverbatim
                         </div>
-                        <div id="divTablaSocios" ng-if="vistaactual=='Socios'">
+                        <div id="divTablaSocios" ng-if="vistaactual=='Socios'" >
                             @verbatim
-                                <table id="tablaSocios" ng-table="paramsSocios" class="table table-hover table-bordered">
+                                <table id="tablaSocios" ng-table="paramsSocios" class="table table-hover table-bordered" >
 
-                                    <tr ng-repeat="socio in $data">
+                                    <tr ng-repeat="socio in $data" >
 
-                                        <td title="'Socio'" filter="{ socio: 'text'}" sortable="'socio'" ng-click="PullVentas(socio.id_socio,socio.socio)">
+                                        <td title="'Socio'" filter="{ socio: 'text'}" sortable="'socio'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
                                             {{socio.socio}}
                                         </td>
 
-                                        <td title="'Legajo'" filter="{ legajo: 'text'}" sortable="'legajo'" ng-click="PullVentas(socio.id_socio,socio.socio)">
+                                        <td title="'Legajo'" filter="{ legajo: 'text'}" sortable="'legajo'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
                                             {{socio.legajo}}
                                         </td>
-                                        <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'" ng-click="PullVentas(socio.id_socio,socio.socio)">
+                                        <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
                                             {{socio.totalACobrar}}
-                                            <div ng-show="false" ng-init="$parent.totalACobrarSUM = $parent.totalACobrarSUM + socio.totalACobrar"></div>
                                         </td>
-                                        <td title="'Monto a cobrar'" >
-                                          <div class="input-group">
-                                            <input type="number" class="form-control" ng-model="socio.montoACobrar">
-                                              <span class="input-group-addon" >
+                                        <td title="'Monto a cobrar'" filter="{ montoACobrar: 'text'}" sortable="'montoACobrar'">
+                                          <div class="input-group" style="margin-bottom: 0px;">
+                                            <input type="number" class="form-control" ng-model="socio.montoACobrar" style="height: 25px">
+                                              <span class="input-group-addon"  style="padding-bottom: 3px;padding-top: 5px;">
                                                 <input type="checkbox" ng-model="socio.checked">
                                               </span>
                                           </div>
@@ -155,17 +155,18 @@
 
                                     <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
                                         <td style="text-align: right;">
-                                            <b>Total</b>
+                                            <b>Total </b>
                                         </td>
                                         <td style="text-align: right;">
                                             <b></b>
+                                            {{sumarMontosACobrar(socios)}}
                                         </td>
                                         <td>
-                                            {{totalACobrarSUM}}
+                                            {{sumaMontoTotal}}
                                         </td>
                                         <td>
-                                          <!-- <button ng-click="montoACobrarSUM()"></button> -->
-                                          {{sumarMontosACobrarSocios()}}
+
+                                          {{sumaMontoACobrar}}
 
                                         </td>
                                     </tr>
@@ -174,7 +175,7 @@
                                 </table>
 
 
-                                <input type="checkbox" ng-model="check" ng-init="check =true" ng-click="cambiarChecksSocios(check)">Seleccionar todos</input>
+                                <input type="checkbox" ng-model="check" ng-init="check =true" ng-click="cambiarChecks(check, socios)">Seleccionar todos</input>
                                 <br />
                                 <br />
                                 <button type="button" class="btn btn-primary" ng-click="cobrarSocios()">Cobrar</button>
@@ -186,18 +187,17 @@
                         <div id="divTablaVentas" ng-if="vistaactual=='Ventas'" >
 
                             <table id="tablaVentas" ng-table="paramsVentas" class="table table-hover table-bordered">
-                                <tr ng-repeat="venta in $data" ng-click="Pullcuotas(venta.id_venta,venta.producto)" >
-                                    <td title="'Nombre servicio'" filter="{ producto: 'text'}" sortable="'producto'">
+                                <tr ng-repeat="venta in $data" >
+                                    <td title="'Nombre servicio'" filter="{ producto: 'text'}" sortable="'producto'" style="vertical-align: middle">
                                         {{venta.producto}}
                                     </td>
-                                    <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'">
+                                    <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'" style="vertical-align: middle">
                                         {{venta.totalACobrar}}
-                                        <div ng-show="false" ng-init="$parent.totalACobrarSUM = $parent.totalACobrarSUM + venta.totalACobrar"></div>
                                     </td>
-                                    <td title="'Monto a cobrar'" >
-                                      <div class="input-group">
-                                        <input type="number" class="form-control" ng-model="venta.montoACobrar">
-                                          <span class="input-group-addon" >
+                                    <td title="'Monto a cobrar'" filter="{ montoACobrar: 'text'}" sortable="'montoACobrar'" >
+                                      <div class="input-group" style="margin-bottom: 0px;">
+                                        <input type="number" class="form-control" ng-model="venta.montoACobrar" style="height: 25px">
+                                          <span class="input-group-addon" style="padding-bottom: 3px;padding-top: 5px;">
                                             <input type="checkbox" ng-model="venta.checked">
                                           </span>
                                       </div>
@@ -208,20 +208,21 @@
                                 <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
                                     <td style="text-align: right;">
                                         <b>Total</b>
+                                        {{sumarMontosACobrar(ventas)}}
                                     </td>
 
                                     <td>
-                                        {{totalACobrarSUM}}
+                                        {{sumaMontoTotal}}
                                     </td>
                                     <td>
-                                       {{sumarMontosACobrarVentas()}}
+                                       {{sumaMontoACobrar}}
                                     </td>
                                 </tr>
                                 </tfoot>
 
                             </table>
 
-                            <input type="checkbox"  ng-model="check" ng-init="check = true" ng-click="cambiarChecksVentas(check)">Seleccionar todos</input>
+                            <input type="checkbox"  ng-model="check" ng-init="check = true" ng-click="cambiarChecks(check, ventas)">Seleccionar todos</input>
                             <br />
                             <br />
 

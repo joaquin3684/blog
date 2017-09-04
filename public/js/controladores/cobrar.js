@@ -1,41 +1,29 @@
 var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){});
-app.controller('cobrar', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter) {
+app.controller('cobrar', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter, UserSrv) {
 
 $scope.ActualDate = moment().format('YYYY-MM-DD');
 
 
-$scope.sumarMontosACobrarSocios = function (){
- var montoACobrarTotal = 0;
-  $scope.socios.forEach(function(elem) {
+$scope.sumarMontosACobrar = function (elems){
+ var sumaMontoACobrar = 0;
+ var sumaMontoTotal = 0;
+  elems.forEach(function(elem) {
+    sumaMontoTotal = sumaMontoTotal + elem.totalACobrar;
     if(elem.checked){
-    montoACobrarTotal = montoACobrarTotal + elem.montoACobrar;
+    sumaMontoACobrar = sumaMontoACobrar + elem.montoACobrar;
     }
   });
-  return montoACobrarTotal;
-}
-
-$scope.sumarMontosACobrarVentas = function (){
- var montoACobrarTotal = 0;
-  $scope.ventas.forEach(function(elem) {
-    if(elem.checked){
-    montoACobrarTotal = montoACobrarTotal + elem.montoACobrar;
-    }
-  });
-  return montoACobrarTotal;
+  $scope.sumaMontoTotal = sumaMontoTotal;
+  $scope.sumaMontoACobrar = sumaMontoACobrar;
 }
 
 
-$scope.cambiarChecksSocios = function(check){
-  $scope.socios.forEach(function(socio) {
-    socio.checked = check;
+$scope.cambiarChecks = function(check, elems){
+  elems.forEach(function(elem) {
+    elem.checked = check;
 });
 };
 
-$scope.cambiarChecksVentas = function(check){
-  $scope.ventas.forEach(function(venta) {
-    venta.checked = check;
-});
-};
 //mostrarPorSocio en todos mando el id del de atras boludo es asi
     //mostrarPorVenta
     //mostrarPorCuotas
@@ -102,6 +90,8 @@ $scope.cobrarSocios = function(){
         data:data,
       }).then(function successCallback(response){
         UserSrv.MostrarMensaje("OK","Se ha realizado el cobro correctamente.","OK","mensaje");
+        $scope.PullSocios($scope.organismoActual.id, $scope.organismoActual.nombre);
+        $scope.pullOrganismos();
       },function errorCallback(data){
         console.log(data.data);
       });
@@ -111,35 +101,42 @@ $scope.cobrarSocios = function(){
 
 $scope.cobrarVentas = function(){
 
+  var data = [];
   $scope.ventas.forEach(function(entry) {
 
     if(entry.checked){
-      var data = {
+      data.push({
         'id': entry.id_venta,
         'monto': entry.montoACobrar,
-      }
-      console.log(data);
+      });
+    }
+    });
       $http({
         url:'cobrar/cobroPorVenta',
         method:'post',
         data:data,
       }).then(function successCallback(response){
         UserSrv.MostrarMensaje("OK","Se ha realizado el cobro correctamente.","OK","mensaje");
+        $scope.PullVentas($scope.socioActual.id,$scope.socioActual.nombre );
       },function errorCallback(data){
         console.log(data.data);
       });
-      }
-    });
 }
+
 
 $scope.PullSocios = function(idorganismo,nombreorganismo){
 
+    $scope.organismoActual = {
+      id: idorganismo,
+      nombre: nombreorganismo
+    }
     $http({
         url: 'cobrar/porSocio',
         method: 'post',
         data: {'id': idorganismo},
     }).then(function successCallback(response)
     {
+      console.log("Este");
         console.log(response);
         if(typeof response.data === 'string')
         {
@@ -147,7 +144,6 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
         }
         else
         {
-            // console.log(response);
             $scope.socios = [];
             response.data.forEach(function(entry) {
               $scope.socios.push({
@@ -193,7 +189,10 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
     $scope.PullVentas = function(idsocio,nombresocio){
 
-
+      $scope.socioActual = {
+          id: idsocio,
+          nombre: nombresocio
+        }
         $http({
             url: 'cobrar/mostrarPorVenta',
             method: 'post',
