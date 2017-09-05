@@ -22,7 +22,7 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>
-                                Cobranzas disponibles
+                                Cobro cuotas sociales
                                 <small>
                                   Cobrar por socio
                                 </small>
@@ -156,7 +156,7 @@
                                         </td>
                                         <td style="text-align: right;">
                                             <b></b>
-                                            {{sumarMontosACobrar(socios)}}
+                                            {{sumarMontosACobrar(sociosFiltrados, socios)}}
                                         </td>
                                         <td>
                                             {{sumaMontoTotal}}

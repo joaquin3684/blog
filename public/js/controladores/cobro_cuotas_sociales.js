@@ -13,15 +13,17 @@ $scope.actualizarOrganismos= function(){
 }
 
 
-$scope.sumarMontosACobrar = function (elems){
+$scope.sumarMontosACobrar = function (elemsFiltrados, elems){
  var sumaMontoACobrar = 0;
  var sumaMontoTotal = 0;
-  elems.forEach(function(elem) {
+  elemsFiltrados.forEach(function(elem) {
     sumaMontoTotal += elem.totalACobrar;
-    if(elem.checked){
-    sumaMontoACobrar += elem.montoACobrar;
-    }
   });
+  elems.forEach(function(elem) {
+  if(elem.checked){
+  sumaMontoACobrar += elem.montoACobrar;
+  }
+});
   $scope.sumaMontoTotal = sumaMontoTotal;
   $scope.sumaMontoACobrar = sumaMontoACobrar;
 }
@@ -55,7 +57,7 @@ $http({
                   // console.log(response);
                   $scope.organismos = response.data;
                   console.log($scope.organismos);
-                  $scope.sumarMontosOrganismos();
+
                   $scope.paramsOrganismos = new NgTableParams({
                        page: 1,
                        count: 10
@@ -66,6 +68,8 @@ $http({
                          filteredData = $filter('filter')($scope.organismos, filterObj);
                          var sortObj = params.sorting();
                            orderedData = $filter('orderBy')(filteredData, filterObj);
+                           $scope.organismosFiltrados = orderedData;
+                           $scope.sumarMontosOrganismos();
                            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                        }
                    });
@@ -82,8 +86,7 @@ $scope.sumarMontosOrganismos = function(){
   var sumaTotalCobrado = 0;
   var sumaTotalACobrar = 0;
   var sumaDiferencia = 0;
-  console.log($scope.organismos);
-   $scope.organismos.forEach(function(elem) {
+   $scope.organismosFiltrados.forEach(function(elem) {
      sumaTotalCobrado += elem.totalCobrado;
      sumaTotalACobrar += elem.totalACobrar;
      sumaDiferencia += elem.diferencia;
@@ -171,7 +174,9 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                     filteredData = $filter('filter')($scope.socios, filterObj);
                     var sortObj = params.sorting();
                     orderedData = $filter('orderBy')(filteredData, filterObj);
+                    $scope.sociosFiltrados= orderedData;
                     return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+
                 }
             });
         }
