@@ -93,7 +93,6 @@ abm_organismos
 
 abm_proovedores
 
-- poner mostrar todos en la paginacion
 - poner para imprimir
 - poner para pasar a pdf
 - poner mensajes cuando se realiza una operacion
@@ -110,9 +109,6 @@ abm_socios
 
 Cuentas corrientes
 
-- agregar en la abstraccion de socio el legajo y el dni --> ¿De dónde saco esos datos? No están en el json que recibo.
-- modificar los filtros para los distintos niveles de abstraccion, y agregar filtro de que se pago y que no --> Esto lo hago mas adelante porque voy a cambiarles el diseño, así son muy grandes y quedan mal. Y con respecto al filtro de que se pago y que no, yo pondría un filtro del estado de
-- poner graficos -> ????
 - poner la opcion de mostrar todos los registros --> Demorado hasta que encuentre como.
 - poder imprimir, pdf, excel
 
@@ -132,11 +128,6 @@ Pago proovedores
 
 Cancelacion de servicio
 - tiene que haber una tabla con los servicios para cancelar --> no sería el "Cancelar" de la pantalla aprobacion??
-
-<<<<<<< HEAD
-Alta solicitud Comercializador
-
-- agregar input sexo, tiene que ser un radio ('Masculino', 'Femenino')
 
 
 
@@ -178,12 +169,6 @@ Cobro cuotas sociales
 Creditos
 
 - cuando se genera se le tiene que asignar un nro de credito secuencial
-
-
-dar_servicio
-
-- puede haber colocacion es decir un servicio donde no se haga la gestion de cobanza solo se cobre un porcentaje del total del servicio
-- validaciones de capital y de cuotas
 
 Cobranza
 

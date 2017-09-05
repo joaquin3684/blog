@@ -1,42 +1,6 @@
-cuotas sociales se genera automaticamente que se cargo el afiliado un mes des pues el vencimiento ?
-se genera para dentro de dos meses y despues de a un mes desde que el afiliado se registro;
-
-como es el proceso de cobro de las cutoas sociales ?
-
-cancelacion de servicio relevar bien
-
-como es el proceso de los demas servicios?
-
 de los archivos recibidos cuales son los que se tienen que imprimir desde el sistema?
 al realizar que accion o en que momento?
 cuales tienen que imprimirse con los datos ya completados y cuales no ?
-
-
-/// en el producto hay que agregar el porcentaje de colocacion
-
-/// se tiene que poder hacer solo gestion
-
-/// se tiene que poner una alerta 90 dias antes de la ultima fecha de credito
-
-/// se tiene que tener porcentaje de colocacion variable este variable depende del proveedor
-este proveedor dice por ejemplo arriba de 250 mil DEL TOTAL
-
-/// el comercializador tiene porcentajes por colocacion que los establece la mutual
-a partir del porcentaje de colocacion del otro, sea interno o externo el comer
-
-/// en el alta del comer se tiene que poner un porcentaje por cada producto que exista
-
-/// se tiene que poder cargar la cartialla POR PRODUCTO en el caso de los servicios normales se carga una lista de precios
-
-
-/// la cancelacion se puede hacer siempre
-el calculo es tener la mitad mas uno cuotas pagadas y se le cobra el saldo de capital + el 5% del saldo de capital
-si quiero cancelar antes de la mitad mas uno de las cuotas totales tengo que cobrar el monto total de las cuotas hasta llegar
-a la mitad + 1 y eso mas el saldo de capital + 5 % del saldo de capital
-
-se tiene que cancelar un servicio cambiar el estado del servicio a cancelado o puede ser renovado eso lo tienen que setear ellos
-tienen que aparecer todas las cuotas restantes como en gris y con el estado cancelado o renovado
-  se tiene que generar un movimiento final en la fecha de cuanto se cobro que cancele la cuota;
 
 
 casos de cuotas totales impares preguntar para proxima reunion
