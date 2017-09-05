@@ -29,9 +29,8 @@ class CobrarPorSocio
 
     public function cobrar($monto)
     {
-        if ($this->socio->montoAdeudado() < $monto) {
+        if ($this->socio->montoAdeudado() < $monto)
             throw new MasPlataCobradaQueElTotalException('exceso_de_plata');
-        } else {
 
             $collect = collect();
             $this->socio->getVentas()->each(function ($venta) use ($collect) {
@@ -66,6 +65,6 @@ class CobrarPorSocio
                     return false;
                 }
             });
-        }
     }
+
 }

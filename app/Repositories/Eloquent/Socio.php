@@ -61,6 +61,9 @@ class Socio
         $this->cuotasSociales = $cuotas;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCuotasSociales()
     {
         return $this->cuotasSociales;
@@ -79,6 +82,14 @@ class Socio
            return $venta->montoAdeudado();
         });
     }
+
+    public function montoAdeudadoCuotasSociales()
+    {
+        return $this->getCuotasSociales()->sum(function($cuota){
+            return $cuota->montoAdeudado();
+        });
+    }
+
     /**
      * @return Socios
      */

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\MasPlataCobradaQueElTotalException;
 use App\Repositories\Eloquent\Cobranza\CobrarCuotasSociales;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use Carbon\Carbon;
@@ -104,14 +105,21 @@ class CobroCuotasSocialesController extends Controller
 
     public function cobrar(Request $request)
     {
+        $errores = collect();
         foreach ($request->all() as $elem)
         {
             $id_socio = $elem['id'];
             $monto = $elem['monto'];
             $socioRepo = new SociosRepo();
-            $socio = $socioRepo->cuotasSocialesVencidas($id_socio);
+            $socio = $socioRepo->cuotasSociales($id_socio);
             $cobrarObj = new CobrarCuotasSociales();
-            $cobrarObj->cobrar($socio, $monto);
+            try{
+                $cobrarObj->cobrar($socio, $monto);
+            } catch (MasPlataCobradaQueElTotalException $e)
+            {
+                $errores->push($e->toArray());
+            }
         }
+        return $errores;
     }
 }

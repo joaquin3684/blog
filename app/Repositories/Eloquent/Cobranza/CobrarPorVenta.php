@@ -15,9 +15,7 @@ class CobrarPorVenta
     public function cobrar($venta, $monto)
     {
         if($venta->montoAdeudado() < $monto)
-        {
             throw new MasPlataCobradaQueElTotalException('exceso_de_plata');
-        } else {
 
             $cuotas = $venta->cuotasImpagas();
             $cuotas->each(function ($cuota) use (&$monto) {
@@ -26,6 +24,6 @@ class CobrarPorVenta
                 $cobrado = $cuota->cobrar($monto);
                 $monto -= $cobrado;
             });
-        }
     }
+
 }
