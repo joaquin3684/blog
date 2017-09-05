@@ -19,8 +19,7 @@ class CobroCuotasSocialesController extends Controller
     {
         $hoy = Carbon::today()->toDateString();
         $cuotas = DB::table('cuotas')
-            ->join('ventas', 'ventas.id', '=', 'cuotas.cuotable_id')
-            ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
+            ->join('socios', 'socios.id', '=', 'cuotas.cuotable_id')
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->groupBy('organismos.id')
             ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
@@ -33,9 +32,8 @@ class CobroCuotasSocialesController extends Controller
                     });
             })->get();
 
-        $movimientos = DB::table('ventas')
-            ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
-            ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
+        $movimientos = DB::table('cuotas')
+            ->join('socios', 'socios.id', '=', 'cuotas.cuotable_id')
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
             ->where('cuotas.cuotable_type', 'App\Socios')
@@ -64,8 +62,7 @@ class CobroCuotasSocialesController extends Controller
         $id = $request['id'];
         $hoy = Carbon::today()->toDateString();
         $cuotas = DB::table('cuotas')
-            ->join('ventas', 'ventas.id', '=', 'cuotas.cuotable_id')
-            ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
+            ->join('socios', 'socios.id', '=', 'cuotas.cuotable_id')
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->groupBy('socios.id')
             ->select('socios.nombre AS socio', 'socios.id AS id_socio', 'socios.legajo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
@@ -80,9 +77,8 @@ class CobroCuotasSocialesController extends Controller
             ->where('organismos.id', '=', $id)->get();
 
 
-        $movimientos = DB::table('ventas')
-            ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
-            ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
+        $movimientos = DB::table('cuotas')
+            ->join('socios', 'socios.id', '=', 'cuotas.cuotable_id')
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
             ->groupBy('socios.id')
