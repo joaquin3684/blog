@@ -3,14 +3,33 @@ app.controller('cobrar', function($scope, $http, $compile, $sce, $window, NgTabl
 
 $scope.ActualDate = moment().format('YYYY-MM-DD');
 
+$scope.actualizarOrganismos= function(){
+  if($scope.sociosModificados){
+    $scope.pullOrganismos();
+    $scope.sociosModificados = false;
+
+  };
+  if($scope.ventasModificadas){
+    $scope.pullOrganismos();
+    $scope.ventasModificadas = false;
+  };
+  $scope.sumarMontosOrganismos();
+}
+
+$scope.actualizarSocios = function(){
+  if($scope.ventasModificadas){
+    $scope.PullSocios($scope.organismoActual.id, $scope.organismoActual.nombre);
+  }
+}
+
 
 $scope.sumarMontosACobrar = function (elems){
  var sumaMontoACobrar = 0;
  var sumaMontoTotal = 0;
   elems.forEach(function(elem) {
-    sumaMontoTotal = sumaMontoTotal + elem.totalACobrar;
+    sumaMontoTotal += elem.totalACobrar;
     if(elem.checked){
-    sumaMontoACobrar = sumaMontoACobrar + elem.montoACobrar;
+    sumaMontoACobrar += elem.montoACobrar;
     }
   });
   $scope.sumaMontoTotal = sumaMontoTotal;
@@ -45,6 +64,8 @@ $http({
                {
                   // console.log(response);
                   $scope.organismos = response.data;
+                  console.log($scope.organismos);
+                  $scope.sumarMontosOrganismos();
                   $scope.paramsOrganismos = new NgTableParams({
                        page: 1,
                        count: 10
@@ -64,10 +85,25 @@ $http({
             {
                console.log(data.data);
             });
-
-
-
 }
+
+$scope.sumarMontosOrganismos = function(){
+  //Sumar montos de organismos
+  var sumaTotalCobrado = 0;
+  var sumaTotalACobrar = 0;
+  var sumaDiferencia = 0;
+  console.log($scope.organismos);
+   $scope.organismos.forEach(function(elem) {
+     sumaTotalCobrado += elem.totalCobrado;
+     sumaTotalACobrar += elem.totalACobrar;
+     sumaDiferencia += elem.diferencia;
+
+   });
+   $scope.sumaTotalACobrar = sumaTotalACobrar;
+   $scope.sumaTotalCobrado = sumaTotalCobrado;
+   $scope.sumaDiferencia = sumaDiferencia;
+}
+
 
 $scope.cobrarSocios = function(){
 
@@ -91,7 +127,7 @@ $scope.cobrarSocios = function(){
       }).then(function successCallback(response){
         UserSrv.MostrarMensaje("OK","Se ha realizado el cobro correctamente.","OK","mensaje");
         $scope.PullSocios($scope.organismoActual.id, $scope.organismoActual.nombre);
-        $scope.pullOrganismos();
+        $scope.sociosModificados = true;
       },function errorCallback(data){
         console.log(data.data);
       });
@@ -118,6 +154,7 @@ $scope.cobrarVentas = function(){
       }).then(function successCallback(response){
         UserSrv.MostrarMensaje("OK","Se ha realizado el cobro correctamente.","OK","mensaje");
         $scope.PullVentas($scope.socioActual.id,$scope.socioActual.nombre );
+        $scope.ventasModificadas = true;
       },function errorCallback(data){
         console.log(data.data);
       });
@@ -253,6 +290,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
         $scope.vistaactual = 'Organismos';
         var self = this;
         $scope.pullOrganismos();
+
 
     //EMPIEZA EL CODIGO DEL EXPANDIR
     $scope.tableRowExpanded = false;

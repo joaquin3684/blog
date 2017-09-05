@@ -72,8 +72,8 @@
  <div class="row">
    @verbatim
     <ol class="breadcrumb breadcrumb-arrow">
-        <li><a href="" id="bread-organismos" ng-click="setVista('Organismos')"><i class="fa fa-home"></i> ORGANISMOS</a></li>
-        <li><a href="" id="bread-socios" ng-if="vistaactual !== 'Organismos'" ng-click="setVista('Socios')">SOCIOS (<b>{{organismoactual}}</b>)</a></li>
+        <li><a href="" id="bread-organismos" ng-click="setVista('Organismos'); actualizarOrganismos()"><i class="fa fa-home"></i> ORGANISMOS</a></li>
+        <li><a href="" id="bread-socios" ng-if="vistaactual !== 'Organismos'" ng-click="setVista('Socios'); actualizarSocios()">SOCIOS (<b>{{organismoactual}}</b>)</a></li>
         <li><a href="" id="bread-servicios" ng-if="vistaactual !== 'Organismos' && vistaactual !== 'Socios'" ng-click="setVista('Ventas')">SERVICIOS (<b>{{socioactual}}</b>)</a></li>
     </ol>
     @endverbatim
@@ -90,15 +90,12 @@
 
                                     <td title="'Total a Cobrar'" filter="{totalACobrar: 'text'}" sortable="'totalACobrar'">
                                         {{organismo.totalACobrar}}
-                                        <div ng-show="false" ng-init="$parent.totalACobrarSUM = $parent.totalACobrarSUM + organismo.totalACobrar"></div>
                                     </td>
                                     <td title="'Total Cobrado'" filter="{totalCobrado: 'text'}" sortable="'totalCobrado'">
                                         {{organismo.totalCobrado}}
-                                        <div ng-show="false" ng-init="$parent.totalCobradoSUM = $parent.totalCobradoSUM + organismo.totalCobrado"></div>
                                     </td>
                                     <td title="'Diferencia'" filter="{diferencia: 'text'}" sortable="'diferencia'" >
 							                          {{organismo.diferencia}}
-                                        <div ng-show="false" ng-init="$parent.diferenciaSUM = $parent.diferenciaSUM + organismo.diferencia"></div>
                                     </td>
 
                                     </td>
@@ -111,13 +108,13 @@
                           <b>Total</b>
                       </td>
                       <td>
-                          {{diferenciaSUM}}
+                          {{sumaTotalACobrar}}
                       </td>
                       <td>
-                          {{totalCobradoSUM}}
+                          {{sumaTotalCobrado}}
                       </td>
                       <td>
-                          {{diferenciaSUM}}
+                          {{sumaDiferencia}}
                       </td>
                   </tr>
                   </tfoot>
