@@ -1,5 +1,5 @@
 var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){});
-app.controller('cobrar', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter, UserSrv) {
+app.controller('cobro_cuotas_sociales', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter, UserSrv) {
 
 $scope.ActualDate = moment().format('YYYY-MM-DD');
 
@@ -9,17 +9,7 @@ $scope.actualizarOrganismos= function(){
     $scope.sociosModificados = false;
 
   };
-  if($scope.ventasModificadas){
-    $scope.pullOrganismos();
-    $scope.ventasModificadas = false;
-  };
   $scope.sumarMontosOrganismos();
-}
-
-$scope.actualizarSocios = function(){
-  if($scope.ventasModificadas){
-    $scope.PullSocios($scope.organismoActual.id, $scope.organismoActual.nombre);
-  }
 }
 
 
@@ -50,7 +40,7 @@ $scope.cambiarChecks = function(check, elems){
 $scope.pullOrganismos = function (){
 
 $http({
-         url: 'cobrar/datos',
+         url: 'cobroCuotasSociales/porOrganismo',
          method: 'post'
          }).then(function successCallback(response)
             {
@@ -121,7 +111,7 @@ $scope.cobrarSocios = function(){
 
       console.log(data);
       $http({
-        url:'cobrar/cobroPorPrioridad',
+        url:'cobroCuotasSociales/cobrar',
         method:'post',
         data:data,
       }).then(function successCallback(response){
@@ -135,31 +125,6 @@ $scope.cobrarSocios = function(){
 
 }
 
-$scope.cobrarVentas = function(){
-
-  var data = [];
-  $scope.ventas.forEach(function(entry) {
-
-    if(entry.checked){
-      data.push({
-        'id': entry.id_venta,
-        'monto': entry.montoACobrar,
-      });
-    }
-    });
-      $http({
-        url:'cobrar/cobroPorVenta',
-        method:'post',
-        data:data,
-      }).then(function successCallback(response){
-        UserSrv.MostrarMensaje("OK","Se ha realizado el cobro correctamente.","OK","mensaje");
-        $scope.PullVentas($scope.socioActual.id,$scope.socioActual.nombre );
-        $scope.ventasModificadas = true;
-      },function errorCallback(data){
-        console.log(data.data);
-      });
-}
-
 
 $scope.PullSocios = function(idorganismo,nombreorganismo){
 
@@ -168,7 +133,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
       nombre: nombreorganismo
     }
     $http({
-        url: 'cobrar/porSocio',
+        url: 'cobroCuotasSociales/porSocio',
         method: 'post',
         data: {'id': idorganismo},
     }).then(function successCallback(response)
@@ -220,67 +185,6 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
     $scope.setVista = function(vista){
 
         $scope.vistaactual = vista;
-
-    }
-
-
-
-    $scope.PullVentas = function(idsocio,nombresocio){
-
-      $scope.socioActual = {
-          id: idsocio,
-          nombre: nombresocio
-        }
-        $http({
-            url: 'cobrar/mostrarPorVenta',
-            method: 'post',
-            data: {'id': idsocio}
-        }).then(function successCallback(response)
-        {
-
-            if(typeof response.data === 'string')
-            {
-                return [];
-            }
-            else
-            {
-                // console.log(response);
-                $scope.ventas = [];
-                response.data.forEach(function(entry) {
-                  $scope.ventas.push({
-                    'producto': entry.producto,
-                    'totalACobrar': entry.diferencia,
-                    'montoACobrar': entry.diferencia,
-                    'id_venta': entry.id_venta,
-                    'checked': true,
-                  })
-                });
-                console.log($scope.ventas);
-                console.log(response.data);
-                // $scope.ventas = response.data;
-                $scope.vistaactual = 'Ventas';
-                $scope.socioactual = nombresocio;
-                //self.paramsVentas = new NgTableParams({}, { dataset: $scope.ventas});
-
-                $scope.paramsVentas = new NgTableParams({
-                    page: 1,
-                    count: 10
-                }, {
-                    total: $scope.ventas.length,
-                    getData: function (params) {
-                      var filterObj = params.filter(),
-                      filteredData = $filter('filter')($scope.ventas, filterObj);
-                      var sortObj = params.sorting();
-                        orderedData = $filter('orderBy')(filteredData, filterObj);
-                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    }
-                });
-            }
-
-        }, function errorCallback(data)
-        {
-            console.log(data.data);
-        });
 
     }
 
