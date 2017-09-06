@@ -29,9 +29,6 @@ url ventas: mostrar: cobrar/mostrarPorVenta
 Todos los method son post
 }
 
-ABM SOCIOS
-- en el servidor no muestra los registros
-
 
 SERVICIO DE MENSAJES
 
@@ -67,6 +64,8 @@ ABMS TODOS
 - Poner para pdf.
 - Poner sentinel.
 - Filtros Columnas.
+- Poner mostrar todos (SI ES QUE SE PUEDE)
+- Poner mensajes cuando se realizan acciones.
 
 
 abm_usuarios
@@ -83,26 +82,8 @@ abm_roles
 - Filtros columnas
 
 
-abm_organismos
-
-- poner para imprimir
-- poner para pasar a pdf
-- Filtros columnas
-- Agregar la columna "Organismo"
-
-
-abm_proovedores
-
-- poner mostrar todos en la paginacion
-- poner para imprimir
-- poner para pasar a pdf
-- poner mensajes cuando se realiza una operacion
-- poder poner numeros con coma
-- Filtros columnas
-
 abm_socios
 
-- fecha de ingreso se tiene que setear automaticamente al dia actual|
 - en la visualizacion de la tabla tienen que estar todos los datos
 - poner para imprimir
 - poner para pasar a pdf
@@ -132,25 +113,6 @@ Pago proovedores
 
 Cancelacion de servicio
 - tiene que haber una tabla con los servicios para cancelar --> no sería el "Cancelar" de la pantalla aprobacion??
-
-<<<<<<< HEAD
-Alta solicitud Comercializador
-
-- agregar input sexo, tiene que ser un radio ('Masculino', 'Femenino')
-
-
-
-Welcome
-
-- comercializador lo cambiamos por Generar solicitud
-- en el titulo de la pantalla tiene que decir Generar Solicitud
-- donde dice datos de prestamo poner generar solicitud
-- Cambiar Solicitudes Pendientes Mutual por Solicitudes Pendientes
-
-- cambiar en modal el titulo dice asignar endeudamiento y hay que cambiarlo por
-Asignar capacidad de endeudamiento
-=======
->>>>>>> e5ea4e47d917817e0b52579a25a81dc1faad2a3e
 
 Cuenta corriente agente financiero
 
