@@ -2,14 +2,14 @@
 
 @section('contenido')
 
-{!! Html::script('js/controladores/cobrar.js') !!}
+{!! Html::script('js/controladores/cobro_cuotas_sociales.js') !!}
 <!-- CSS TABLAS -->
 {!! Html::style('js/datatables/jquery.dataTables.min.css') !!}
   {!! Html::style('js/datatables/buttons.bootstrap.min.css') !!}
   {!! Html::style('js/datatables/fixedHeader.bootstrap.min.css') !!}
   {!! Html::style('js/datatables/responsive.bootstrap.min.css') !!}
   {!! Html::style('js/datatables/scroller.bootstrap.min.css') !!}
-<div class="nav-md" ng-controller="cobrar">
+<div class="nav-md" ng-controller="cobro_cuotas_sociales">
     <div class="container body">
         <div class="main_container">
 
@@ -22,9 +22,9 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>
-                                Cobranzas disponibles
+                                Cobro cuotas sociales
                                 <small>
-                                  Cobrar por socio o por servicio
+                                  Cobrar por socio
                                 </small>
                             </h2>
 
@@ -74,7 +74,7 @@
     <ol class="breadcrumb breadcrumb-arrow">
         <li><a href="" id="bread-organismos" ng-click="setVista('Organismos'); actualizarOrganismos()"><i class="fa fa-home"></i> ORGANISMOS</a></li>
         <li><a href="" id="bread-socios" ng-if="vistaactual !== 'Organismos'" ng-click="setVista('Socios'); actualizarSocios()">SOCIOS (<b>{{organismoactual}}</b>)</a></li>
-        <li><a href="" id="bread-servicios" ng-if="vistaactual !== 'Organismos' && vistaactual !== 'Socios'" ng-click="setVista('Ventas')">SERVICIOS (<b>{{socioactual}}</b>)</a></li>
+
     </ol>
     @endverbatim
 </div>
@@ -180,52 +180,7 @@
 
 
                         </div>
-                        @verbatim
-                        <div id="divTablaVentas" ng-if="vistaactual=='Ventas'" >
 
-                            <table id="tablaVentas" ng-table="paramsVentas" class="table table-hover table-bordered">
-                                <tr ng-repeat="venta in $data" >
-                                    <td title="'Nombre servicio'" filter="{ producto: 'text'}" sortable="'producto'" style="vertical-align: middle">
-                                        {{venta.producto}}
-                                    </td>
-                                    <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'" style="vertical-align: middle">
-                                        {{venta.totalACobrar}}
-                                    </td>
-                                    <td title="'Monto a cobrar'" filter="{ montoACobrar: 'text'}" sortable="'montoACobrar'" >
-                                      <div class="input-group" style="margin-bottom: 0px;">
-                                        <input type="number" class="form-control" ng-model="venta.montoACobrar" style="height: 25px">
-                                          <span class="input-group-addon" style="padding-bottom: 3px;padding-top: 5px;">
-                                            <input type="checkbox" ng-model="venta.checked">
-                                          </span>
-                                      </div>
-                                    </td>
-                                </tr>
-
-                                <tfoot>
-                                <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
-                                    <td style="text-align: right;">
-                                        <b>Total</b>
-                                        {{sumarMontosACobrar(ventasFiltradas, ventas)}}
-                                    </td>
-
-                                    <td>
-                                        {{sumaMontoTotal}}
-                                    </td>
-                                    <td>
-                                       {{sumaMontoACobrar}}
-                                    </td>
-                                </tr>
-                                </tfoot>
-
-                            </table>
-
-                            <input type="checkbox"  ng-model="check" ng-init="check = true" ng-click="cambiarChecks(check, ventas)">Seleccionar todos</input>
-                            <br />
-                            <br />
-
-                            <button type="button" class="btn btn-primary" ng-click="cobrarVentas()">Cobrar</button>
-                        </div>
-                        @endverbatim
                         </div>
                     </div>
                 </div>

@@ -36,13 +36,9 @@ class SociosGateway extends Gateway
 
     }
 
-    public function cuotasSocialesVencidas($id)
+    public function cuotasSociales($id)
     {
-        $hoy = Fechas::getFechaHoy();
-        return Socios::with(['cuotasSociales' => function($q) use($hoy){
-            $q->where('fecha_inicio', '<', $hoy);
-            $q->with('movimientos');
-        }])->find($id);
+        return Socios::with('cuotasSociales.movimientos')->find($id);
     }
 
     public function conTodo($id)

@@ -46,7 +46,7 @@ class ConsultasCuotas
             ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->groupBy('socios.id')
-            ->select('socios.nombre AS socio', 'socios.id AS id_socio', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
+            ->select('socios.nombre AS socio', 'socios.id AS id_socio', 'socios.legajo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where(function($query) use ($hoy){
                 $query->where('cuotas.fecha_vencimiento', '<=', $hoy)

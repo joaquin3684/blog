@@ -53,8 +53,33 @@ class CobrarController extends Controller
 
     public function datos(Request $request)
     {
-        $cuotas = $this->cuotas->cuotasVencidasDeOrganismos();
-        $movimientos = $this->movimientos->movimientosHastaHoyDeOrganismos();
+        $hoy = Carbon::today()->toDateString();
+        $cuotas = DB::table('cuotas')
+            ->join('ventas', 'ventas.id', '=', 'cuotas.cuotable_id')
+            ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
+            ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
+            ->groupBy('organismos.id')
+            ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
+            ->where('cuotas.cuotable_type', 'App\Ventas')
+            ->where(function($query) use ($hoy){
+                $query->where('cuotas.fecha_vencimiento', '<=', $hoy)
+                    ->orWhere(function($query2) use ($hoy){
+                        $query2->where('cuotas.fecha_vencimiento', '>=', $hoy)
+                            ->where('cuotas.fecha_inicio', '<=', $hoy);
+                    });
+            })->get();
+
+        $movimientos = DB::table('ventas')
+            ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
+            ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
+            ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
+            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+            ->where('cuotas.cuotable_type', 'App\Ventas')
+            ->where('movimientos.identificadores_type', 'App\Cuotas')
+            ->groupBy('organismos.id')
+            ->select('organismos.id AS id_organismo', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))
+            ->get();
+
         $cobrado = $this->unirColecciones($cuotas, $movimientos, ['id_organismo'], ['totalCobrado' => 0]);
 
         $cobrado = $cobrado->each(function ($item, $key){
@@ -72,8 +97,36 @@ class CobrarController extends Controller
 
     public function mostrarPorSocio(Request $request)
     {
-        $cuotas = $this->cuotas->cuotasVencidasDeSociosDelOrganismo($request['id']);
-        $movimientos = $this->movimientos->movimientosHastaHoyDeSociosDelOrganismo($request['id']);
+        $id = $request['id'];
+        $hoy = Carbon::today()->toDateString();
+        $cuotas = DB::table('cuotas')
+            ->join('ventas', 'ventas.id', '=', 'cuotas.cuotable_id')
+            ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
+            ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
+            ->groupBy('socios.id')
+            ->select('socios.nombre AS socio', 'socios.id AS id_socio', 'socios.legajo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
+            ->where('cuotas.cuotable_type', 'App\Ventas')
+            ->where(function($query) use ($hoy){
+                $query->where('cuotas.fecha_vencimiento', '<=', $hoy)
+                    ->orWhere(function($query2) use ($hoy){
+                        $query2->where('cuotas.fecha_vencimiento', '>=', $hoy)
+                            ->where('cuotas.fecha_inicio', '<=', $hoy);
+                    });
+            })
+            ->where('organismos.id', '=', $id)->get();
+
+
+        $movimientos = DB::table('ventas')
+            ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
+            ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
+            ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
+            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+            ->groupBy('socios.id')
+            ->where('organismos.id', '=', $id)
+            ->where('cuotas.cuotable_type', 'App\Ventas')
+            ->where('movimientos.identificadores_type', 'App\Cuotas')
+            ->select('socios.id AS id_socio', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))
+            ->get();
         $cobrado = $this->unirColecciones($cuotas, $movimientos, ['id_socio'], ['totalCobrado' => 0]);
 
         $cobrado = $cobrado->each(function ($item, $key){
@@ -144,8 +197,8 @@ class CobrarController extends Controller
         foreach($request->all() as $socio)
         {
             $socioRepo = new SociosRepo();
-            $socio = $socioRepo->conTodo($socio['id']);
-            $cobrar = new CobrarPorSocio($socio);
+            $socioModelo = $socioRepo->conTodo($socio['id']);
+            $cobrar = new CobrarPorSocio($socioModelo);
             try{
                 $cobrar->cobrar($socio['monto']);
             } catch (MasPlataCobradaQueElTotalException $e)

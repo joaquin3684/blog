@@ -293,6 +293,8 @@ Route::post('cc_cuotasSociales/mostrarCuotas', 'CC_CuotasSocialesController@most
 //----------------- COBRO CUOTAS SOCIALES ----------------------
 
 Route::get('cobroCuotasSociales', 'CobroCuotasSocialesController@index');
+Route::post('cobroCuotasSociales/porOrganismo', 'CobroCuotasSocialesController@mostrarPorOrganismo');
+Route::post('cobroCuotasSociales/porSocio', 'CobroCuotasSocialesController@mostrarPorSocio');
 Route::post('cobroCuotasSociales/cobrar', 'CobroCuotasSocialesController@cobrar');
 
 //------------------- COMERCIALIZADOR -----------------------

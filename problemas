@@ -82,6 +82,25 @@ abm_roles
 - Filtros columnas
 
 
+<<<<<<< HEAD
+=======
+abm_organismos
+
+- poner para imprimir
+- poner para pasar a pdf
+- Filtros columnas
+- Agregar la columna "Organismo"
+
+
+abm_proovedores
+
+- poner para imprimir
+- poner para pasar a pdf
+- poner mensajes cuando se realiza una operacion
+- poder poner numeros con coma
+- Filtros columnas
+
+>>>>>>> 1c9371b90f7813861c1dd8908935bbc52f7130b4
 abm_socios
 
 - en la visualizacion de la tabla tienen que estar todos los datos
@@ -91,9 +110,6 @@ abm_socios
 
 Cuentas corrientes
 
-- agregar en la abstraccion de socio el legajo y el dni --> ¿De dónde saco esos datos? No están en el json que recibo.
-- modificar los filtros para los distintos niveles de abstraccion, y agregar filtro de que se pago y que no --> Esto lo hago mas adelante porque voy a cambiarles el diseño, así son muy grandes y quedan mal. Y con respecto al filtro de que se pago y que no, yo pondría un filtro del estado de
-- poner graficos -> ????
 - poner la opcion de mostrar todos los registros --> Demorado hasta que encuentre como.
 - poder imprimir, pdf, excel
 
@@ -114,6 +130,23 @@ Pago proovedores
 Cancelacion de servicio
 - tiene que haber una tabla con los servicios para cancelar --> no sería el "Cancelar" de la pantalla aprobacion??
 
+<<<<<<< HEAD
+=======
+
+
+Welcome
+
+- comercializador lo cambiamos por Generar solicitud
+- en el titulo de la pantalla tiene que decir Generar Solicitud
+- donde dice datos de prestamo poner generar solicitud
+- Cambiar Solicitudes Pendientes Mutual por Solicitudes Pendientes
+
+- cambiar en modal el titulo dice asignar endeudamiento y hay que cambiarlo por
+Asignar capacidad de endeudamiento
+=======
+>>>>>>> e5ea4e47d917817e0b52579a25a81dc1faad2a3e
+
+>>>>>>> 1c9371b90f7813861c1dd8908935bbc52f7130b4
 Cuenta corriente agente financiero
 
 - en la abstraccion de servicios tiene que haver un boton que se llame sistema frances
@@ -140,12 +173,6 @@ Cobro cuotas sociales
 Creditos
 
 - cuando se genera se le tiene que asignar un nro de credito secuencial
-
-
-dar_servicio
-
-- puede haber colocacion es decir un servicio donde no se haga la gestion de cobanza solo se cobre un porcentaje del total del servicio
-- validaciones de capital y de cuotas
 
 Cobranza
 

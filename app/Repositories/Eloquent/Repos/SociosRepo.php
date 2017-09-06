@@ -36,9 +36,9 @@ class SociosRepo extends Repositorio
         return $this->mapper->map($socio);
     }
 
-    public function cuotasSocialesVencidas($id)
+    public function cuotasSociales($id)
     {
-        $socio = $this->gateway->cuotasSocialesVencidas($id);
+        $socio = $this->gateway->cuotasSociales($id);
         return $this->mapper->map($socio);
     }
 
