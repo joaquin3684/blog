@@ -154,9 +154,8 @@
                                         <td style="text-align: right;">
                                             <b>Total </b>
                                         </td>
-                                        <td style="text-align: right;">
-                                            <b></b>
-                                            {{sumarMontosACobrar(sociosFiltrados, socios)}}
+                                        {{sumarMontosACobrar(sociosFiltrados,socios)}}
+                                        <td>
                                         </td>
                                         <td>
                                             {{sumaMontoTotal}}

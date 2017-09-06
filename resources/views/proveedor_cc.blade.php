@@ -363,7 +363,7 @@
                           @verbatim
                         		<table id="tablaOrganismos" ng-table="paramsOrganismos" class="table table-hover table-bordered">
 
-                                <tr ng-repeat="organismo in $data" ng-click="PullSocios(organismo.id_organismo,organismo.organismo)">
+                                <tr ng-repeat="organismo in $data" ng-click="PullSocios(organismo.id_organismo,organismo.organismo)" >
 
                                     <td title="'Organismo'" filter="{organismo: 'text'}" sortable="'organismo'" >
 							                          {{organismo.organismo}}
@@ -371,15 +371,12 @@
 
                                     <td title="'Total a Cobrar'" filter="{totalACobrar: 'text'}" sortable="'totalACobrar'">
                                         {{organismo.totalACobrar}}
-                                        <div ng-show="false" ng-init="$parent.totalACobrarSUM = $parent.totalACobrarSUM + organismo.totalACobrar"></div>
                                     </td>
                                     <td title="'Total Cobrado'" filter="{totalCobrado: 'text'}" sortable="'totalCobrado'">
                                         {{organismo.totalCobrado}}
-                                        <div ng-show="false" ng-init="$parent.totalCobradoSUM = $parent.totalCobradoSUM + organismo.totalCobrado"></div>
                                     </td>
                                     <td title="'Diferencia'" filter="{diferencia: 'text'}" sortable="'diferencia'" >
 							                          {{organismo.diferencia}}
-                                        <div ng-show="false" ng-init="$parent.diferenciaSUM = $parent.diferenciaSUM + organismo.diferencia"></div>
                                     </td>
 
                                     </td>
@@ -390,15 +387,16 @@
                   <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
                       <td style="text-align: right;">
                           <b>Total</b>
+
                       </td>
                       <td>
-                          {{diferenciaSUM}}
+                          {{sumaMontoACobrar}}
                       </td>
                       <td>
-                          {{totalACobrarSUM}}
+                          {{sumaMontoCobrado}}
                       </td>
                       <td>
-                          {{totalCobradoSUM}}
+                          {{sumaDiferencia}}
                       </td>
                   </tr>
                   </tfoot>
@@ -424,6 +422,25 @@
                                             {{socio.diferencia}}
                                         </td>
                                     </tr>
+
+                                    <tfoot>
+                                    <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                        <td style="text-align: right;">
+                                            <b>Total</b>
+
+                                        </td>
+                                        <td>
+                                            {{sumaMontoACobrar}}
+                                        </td>
+                                        <td>
+                                            {{sumaMontoCobrado}}
+                                        </td>
+                                        <td>
+                                            {{sumaDiferencia}}
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+
                                 </table>
                                 @endverbatim
                         </div>
@@ -451,6 +468,27 @@
                                         {{venta.diferencia}}
                                     </td>
                                 </tr>
+
+                                <tfoot>
+                                <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                    <td style="text-align: right;">
+                                        <b>Total</b>
+
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        {{sumaMontoACobrar}}
+                                    </td>
+                                    <td>
+                                        {{sumaMontoCobrado}}
+                                    </td>
+                                    <td>
+                                        {{sumaDiferencia}}
+                                    </td>
+                                </tr>
+                                </tfoot>
+
                             </table>
                             @endverbatim
                         </div>
@@ -474,11 +512,11 @@
                                                 <td title="'Vencimiento'" filter="{ fecha_vencimiento: 'text'}" sortable="'fecha_vencimiento'">
                                                     {{cuota.fecha_vencimiento}}
                                                 </td>
-
-                                                <td title="'Importe'" filter="{ importe: 'text'}" sortable="'totalACobrar'">
-                                                    <span style="color: red" ng-if="(cuota.fecha_vencimiento < ActualDate) && (cuota.cobrado < cuota.importe)">{{cuota.importe}}</span>
-                                                    <span style="" ng-if="cuota.fecha_vencimiento >= ActualDate">{{cuota.importe}}</span>
-                                                    <span style="" ng-if="(cuota.fecha_vencimiento < ActualDate) && (cuota.cobrado >= cuota.importe)">{{cuota.importe}}</span>
+                                                <!-- La fecha_vencimiento viene con formato DD/MM/YYYY, la  funcion cambiarFormato() la convierte al formato YYYY-MM-DD para poder compararla con ActualDate -->
+                                                <td title="'Importe'" filter="{ importe: 'text'}"  sortable="'totalACobrar'">
+                                                    <span style="" ng-if="(cambiarFormato(cuota.fecha_vencimiento)> ActualDate)">{{cuota.importe}}</span>
+                                                    <span style="color: red" ng-if="(cambiarFormato(cuota.fecha_vencimiento) < ActualDate)  && (cuota.cobrado < cuota.importe)">{{cuota.importe}}</span>
+                                                    <span style="" ng-if="(cambiarFormato(cuota.fecha_vencimiento) < ActualDate) && (cuota.cobrado >= cuota.importe)">{{cuota.importe}}</span>
                                                 </td>
                                                 <td title="'Cobrado'" filter="{ cobrado: 'text'}" sortable="'totalCobrado'">
                                                     {{cuota.cobrado}}
@@ -518,6 +556,25 @@
                                                 </td>
                                             </tr>
                                             </tbody>
+
+                                            <tfoot>
+                                            <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                                <td style="text-align: right;">
+                                                    <b>Total</b>
+
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    {{sumaMontoACobrar}}
+                                                </td>
+                                                <td>
+                                                    {{sumaMontoCobrado}}
+                                                </td>
+                                                <td></td>
+                                                
+                                            </tr>
+                                            </tfoot>
                                         </table>
                                         @endverbatim
                                     </div>

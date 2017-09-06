@@ -1,9 +1,54 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){
-    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
-});
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){});
 app.controller('ventas', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter) {
-    
+
 $scope.ActualDate = moment().format('YYYY-MM-DD');
+
+$scope.sumarMontosACobrar = function (elemsFiltrados){
+ var sumaMontoACobrar = 0;
+ var sumaMontoCobrado = 0;
+ var sumaDiferencia = 0;
+  elemsFiltrados.forEach(function(elem) {
+    sumaMontoCobrado += elem.totalCobrado;
+    sumaMontoACobrar += elem.totalACobrar;
+    sumaDiferencia += elem.diferencia;
+  });
+
+  $scope.sumaTotalCobrado = sumaMontoCobrado;
+  $scope.sumaTotalACobrar = sumaMontoACobrar;
+  $scope.sumaDiferencia = sumaDiferencia;
+}
+
+$scope.sumarCuotas = function (){
+  var sumaMontoACobrar = 0;
+  var sumaMontoCobrado = 0;
+   $scope.cuotasFiltradas.forEach(function(elem) {
+     sumaMontoACobrar += elem.importe;
+     sumaMontoCobrado += elem.cobrado;
+   });
+   $scope.sumaMontoCobrado = sumaMontoCobrado;
+   $scope.sumaMontoACobrar = sumaMontoACobrar;
+}
+
+$scope.cambiarFechaCuotas = function(cuota){
+  moment.locale('es');
+  fecha= cuota.fecha_vencimiento;
+  var fecha= moment(fecha, 'YYYY-MM-DD').format('L');
+  cuota.fecha_vencimiento= fecha;
+  return cuota;
+}
+
+$scope.cambiarFechaVentas = function(venta) {
+  moment.locale('es');
+  fecha= venta.fecha;
+  var fecha= moment(fecha, 'YYYY-MM-DD').format('L');
+  venta.fecha= fecha;
+  return venta;
+    }
+
+$scope.cambiarFormato = function (fecha_vencimiento){
+  var fecha= moment(fecha_vencimiento, 'DD/MM/YYYY').format('YYYY-MM-DD');
+  return fecha;
+}
 
 //mostrarPorSocio en todos mando el id del de atras boludo es asi
     //mostrarPorVenta
@@ -16,7 +61,7 @@ $http({
          method: 'post'
          }).then(function successCallback(response)
             {
-               console.log(response.data.ventas);
+               console.log(response.data);
                if(typeof response.data === 'string')
                {
                   return [];
@@ -24,6 +69,7 @@ $http({
                else
                {
                   console.log(response);
+                  $scope.ventas =response.data.map($scope.cambiarFechaVentas);
                   $scope.organismos = response.data;
                   $scope.paramsOrganismos = new NgTableParams({
                        page: 1,
@@ -31,8 +77,13 @@ $http({
                    }, {
                        total: $scope.organismos.length,
                        getData: function (params) {
-                           $scope.organismos = $filter('orderBy')($scope.organismos, params.orderBy());
-                           return $scope.organismos.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                         var filterObj = params.filter(),
+                         filteredData = $filter('filter')($scope.organismos, filterObj);
+                         var sortObj = params.sorting();
+                           orderedData = $filter('orderBy')(filteredData, sortObj);
+                           $scope.organismosFiltrados = orderedData;
+                           $scope.sumarMontosACobrar($scope.organismosFiltrados);
+                           return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                        }
                    });
                }
@@ -72,8 +123,13 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
             }, {
                 total: $scope.socios.length,
                 getData: function (params) {
-                    $scope.socios = $filter('orderBy')($scope.socios, params.orderBy());
-                    return $scope.socios.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                  var filterObj = params.filter(),
+                  filteredData = $filter('filter')($scope.socios, filterObj);
+                  var sortObj = params.sorting();
+                  orderedData = $filter('orderBy')(filteredData, filterObj);
+                  $scope.sociosFiltrados= orderedData;
+                  $scope.sumarMontosACobrar($scope.sociosFiltrados);
+                  return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 }
             });
         }
@@ -107,7 +163,8 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
             else
             {
                 console.log(response);
-                $scope.ventas = response.data;
+                $scope.ventas =response.data.map($scope.cambiarFechaVentas);
+                // $scope.ventas = response.data;
                 $scope.vistaactual = 'Ventas';
                 $scope.socioactual = nombresocio;
                 //self.paramsVentas = new NgTableParams({}, { dataset: $scope.ventas});
@@ -118,8 +175,13 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                 }, {
                     total: $scope.ventas.length,
                     getData: function (params) {
-                        $scope.ventas = $filter('orderBy')($scope.ventas, params.orderBy());
-                        return $scope.ventas.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                      var filterObj = params.filter(),
+                      filteredData = $filter('filter')($scope.ventas, filterObj);
+                      var sortObj = params.sorting();
+                        orderedData = $filter('orderBy')(filteredData, sortObj);
+                        $scope.ventasFiltradas = orderedData;
+                        $scope.sumarMontosACobrar($scope.ventasFiltradas);
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
             }
@@ -150,9 +212,10 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
             else
             {
 
-                $scope.cuotas = response.data.cuotas;
+                $scope.cuotas =response.data.cuotas.map($scope.cambiarFechaCuotas)
+                // $scope.cuotas = response.data.cuotas;
                 //var datacuotas = response.data;
-                $scope.productodelacuota = response.data.producto.proovedor.nombre;
+                $scope.productodelacuota = response.data.producto.proovedor.razon_social;
                 $scope.vistaactual = 'Cuotas';
                 console.log(response);
                 $scope.productoactual = nombreproducto;
@@ -162,8 +225,13 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                 }, {
                     total: $scope.cuotas.length,
                     getData: function (params) {
-                        $scope.cuotas = $filter('orderBy')($scope.cuotas, params.orderBy());
-                        return $scope.cuotas.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                      var filterObj = params.filter(),
+                      filteredData = $filter('filter')($scope.cuotas, filterObj);
+                      var sortObj = params.sorting();
+                        orderedData = $filter('orderBy')(filteredData, filterObj);
+                        $scope.cuotasFiltradas = orderedData;
+                        $scope.sumarCuotas();
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
             }
@@ -428,4 +496,3 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
     };
 
 })
-

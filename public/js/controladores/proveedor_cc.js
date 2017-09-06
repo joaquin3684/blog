@@ -5,6 +5,7 @@ $scope.ActualDate = moment().format('YYYY-MM-DD');
 
 
 
+
 //mostrarPorSocio en todos mando el id del de atras boludo es asi
     //mostrarPorVenta
     //mostrarPorCuotas
@@ -32,10 +33,12 @@ $http({
                    }, {
                        total: $scope.organismos.length,
                        getData: function (params) {
-                         var filterObj = params.filter(),
+                         var filterObj = params.filter();
                          filteredData = $filter('filter')($scope.organismos, filterObj);
                          var sortObj = params.sorting();
                            orderedData = $filter('orderBy')(filteredData, filterObj);
+                           $scope.organismosFiltrados = orderedData;
+                           $scope.sumarMontosACobrar($scope.organismosFiltrados)
                            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                        }
                    });
@@ -80,6 +83,8 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                     filteredData = $filter('filter')($scope.socios, filterObj);
                     var sortObj = params.sorting();
                     orderedData = $filter('orderBy')(filteredData, filterObj);
+                    $scope.sociosFiltrados= orderedData;
+                    $scope.sumarMontosACobrar($scope.sociosFiltrados);
                     return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 }
             });
@@ -113,6 +118,10 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
       return venta;
         }
 
+    $scope.cambiarFormato = function (fecha_vencimiento){
+      var fecha= moment(fecha_vencimiento, 'DD/MM/YYYY').format('YYYY-MM-DD');
+      return fecha;
+    }
     $scope.PullVentas = function(idsocio,nombresocio){
 
 
@@ -146,6 +155,8 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                       filteredData = $filter('filter')($scope.ventas, filterObj);
                       var sortObj = params.sorting();
                         orderedData = $filter('orderBy')(filteredData, filterObj);
+                        $scope.ventasFiltradas = orderedData;
+                        $scope.sumarMontosACobrar($scope.ventasFiltradas);
                         return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
@@ -177,7 +188,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
             else
             {
 
-              $scope.cuotas =response.data.cuotas.map($scope.cambiarFechaCuotas)
+              $scope.cuotas =response.data.cuotas.map($scope.cambiarFechaCuotas);
                 console.log(response.data);
                 //var datacuotas = response.data;
                 $scope.productodelacuota = response.data.producto.proovedor.razon_social;
@@ -194,6 +205,8 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                       filteredData = $filter('filter')($scope.cuotas, filterObj);
                       var sortObj = params.sorting();
                         orderedData = $filter('orderBy')(filteredData, filterObj);
+                        $scope.cuotasFiltradas = orderedData;
+                        $scope.sumarCuotas();
                         return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
@@ -206,7 +219,34 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
     }
 
+    $scope.sumarMontosACobrar = function (elemsFiltrados){
+      var sumaMontoACobrar = 0;
+      var sumaMontoCobrado = 0;
+      var sumaDiferencia = 0;
+       elemsFiltrados.forEach(function(elem) {
+         sumaMontoACobrar += elem.totalACobrar;
+         sumaMontoCobrado += elem.totalCobrado;
+         sumaDiferencia += elem.diferencia;
+       });
+       $scope.sumaDiferencia = sumaDiferencia;
+       $scope.sumaMontoCobrado = sumaMontoCobrado;
+       $scope.sumaMontoACobrar = sumaMontoACobrar;
+    }
 
+    $scope.mostrarPorPantalla = function(cuota){
+    console.log(cuota)
+    }
+
+    $scope.sumarCuotas = function (){
+      var sumaMontoACobrar = 0;
+      var sumaMontoCobrado = 0;
+       $scope.cuotasFiltradas.forEach(function(elem) {
+         sumaMontoACobrar += elem.importe;
+         sumaMontoCobrado += elem.cobrado;
+       });
+       $scope.sumaMontoCobrado = sumaMontoCobrado;
+       $scope.sumaMontoACobrar = sumaMontoACobrar;
+    }
 
     //PARAMETROS INICIALES
         $scope.vistaactual = 'Organismos';

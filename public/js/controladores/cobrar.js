@@ -30,10 +30,9 @@ $scope.sumarMontosACobrar = function (elemsFiltrados, elems){
     sumaMontoTotal += elem.totalACobrar;
   });
   elems.forEach(function(elem) {
-    if(elem.checked){
     sumaMontoACobrar += elem.montoACobrar;
-    }
   });
+
   $scope.sumaMontoTotal = sumaMontoTotal;
   $scope.sumaMontoACobrar = sumaMontoACobrar;
 }
@@ -76,7 +75,7 @@ $http({
                          var filterObj = params.filter(),
                          filteredData = $filter('filter')($scope.organismos, filterObj);
                          var sortObj = params.sorting();
-                           orderedData = $filter('orderBy')(filteredData, filterObj);
+                           orderedData = $filter('orderBy')(filteredData, sortObj);
                            $scope.organismosFiltrados = orderedData;
                            $scope.sumarMontosOrganismos();
                            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
@@ -210,6 +209,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                     var sortObj = params.sorting();
                     orderedData = $filter('orderBy')(filteredData, filterObj);
                     $scope.sociosFiltrados= orderedData;
+
                     return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 }
             });
@@ -275,8 +275,9 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                       var filterObj = params.filter(),
                       filteredData = $filter('filter')($scope.ventas, filterObj);
                       var sortObj = params.sorting();
-                        orderedData = $filter('orderBy')(filteredData, filterObj);
+                        orderedData = $filter('orderBy')(filteredData, sortObj);
                         $scope.ventasFiltradas = orderedData;
+
                         return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
