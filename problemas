@@ -29,9 +29,6 @@ url ventas: mostrar: cobrar/mostrarPorVenta
 Todos los method son post
 }
 
-ABM SOCIOS
-- en el servidor no muestra los registros
-
 
 SERVICIO DE MENSAJES
 
@@ -67,6 +64,8 @@ ABMS TODOS
 - Poner para pdf.
 - Poner sentinel.
 - Filtros Columnas.
+- Poner mostrar todos (SI ES QUE SE PUEDE)
+- Poner mensajes cuando se realizan acciones.
 
 
 abm_usuarios
@@ -83,6 +82,8 @@ abm_roles
 - Filtros columnas
 
 
+<<<<<<< HEAD
+=======
 abm_organismos
 
 - poner para imprimir
@@ -99,9 +100,9 @@ abm_proovedores
 - poder poner numeros con coma
 - Filtros columnas
 
+>>>>>>> 1c9371b90f7813861c1dd8908935bbc52f7130b4
 abm_socios
 
-- fecha de ingreso se tiene que setear automaticamente al dia actual|
 - en la visualizacion de la tabla tienen que estar todos los datos
 - poner para imprimir
 - poner para pasar a pdf
@@ -129,6 +130,8 @@ Pago proovedores
 Cancelacion de servicio
 - tiene que haber una tabla con los servicios para cancelar --> no sería el "Cancelar" de la pantalla aprobacion??
 
+<<<<<<< HEAD
+=======
 
 
 Welcome
@@ -143,6 +146,7 @@ Asignar capacidad de endeudamiento
 =======
 >>>>>>> e5ea4e47d917817e0b52579a25a81dc1faad2a3e
 
+>>>>>>> 1c9371b90f7813861c1dd8908935bbc52f7130b4
 Cuenta corriente agente financiero
 
 - en la abstraccion de servicios tiene que haver un boton que se llame sistema frances
