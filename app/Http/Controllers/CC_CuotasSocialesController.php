@@ -23,7 +23,7 @@ class CC_CuotasSocialesController extends Controller
             ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
             ->groupBy('organismos.id');
 
-        $organismos = CC_CuotasSocialesFilter::apply($request, $ventas);
+      //  $organismos = CC_CuotasSocialesFilter::apply($request, $ventas);
 
         $movimientos = DB::table('socios')
             ->join('cuotas', 'cuotas.cuotable_id', '=', 'socios.id')
