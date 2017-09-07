@@ -29,9 +29,6 @@ url ventas: mostrar: cobrar/mostrarPorVenta
 Todos los method son post
 }
 
-ABM SOCIOS
-- en el servidor no muestra los registros
-
 
 SERVICIO DE MENSAJES
 
@@ -67,6 +64,8 @@ ABMS TODOS
 - Poner para pdf.
 - Poner sentinel.
 - Filtros Columnas.
+- Poner mostrar todos (SI ES QUE SE PUEDE)
+- Poner mensajes cuando se realizan acciones.
 
 
 abm_usuarios
@@ -81,6 +80,7 @@ abm_roles
 - poner las funciones de editar y borrar
 - poner sentinel
 - Filtros columnas
+
 
 
 abm_organismos
@@ -98,6 +98,7 @@ abm_proovedores
 - poner mensajes cuando se realiza una operacion
 - poder poner numeros con coma
 - Filtros columnas
+
 
 abm_socios
 

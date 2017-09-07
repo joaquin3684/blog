@@ -156,7 +156,7 @@
                                         </td>
                                         <td style="text-align: right;">
                                             <b></b>
-                                            {{sumarMontosACobrar(socios)}}
+                                            {{sumarMontosACobrar(sociosFiltrados, socios)}}
                                         </td>
                                         <td>
                                             {{sumaMontoTotal}}
@@ -205,7 +205,7 @@
                                 <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
                                     <td style="text-align: right;">
                                         <b>Total</b>
-                                        {{sumarMontosACobrar(ventas)}}
+                                        {{sumarMontosACobrar(ventasFiltradas, ventas)}}
                                     </td>
 
                                     <td>
