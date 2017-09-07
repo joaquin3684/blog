@@ -323,7 +323,7 @@
                     @verbatim
                         <table id="tablaSocios" ng-table="paramsSocios" class="table table-hover table-bordered">
 
-                            <tr ng-repeat="socio in $data" ng-click="PullVentas(socio.id_socio,socio.socio)">
+                            <tr ng-repeat="socio in $data" ng-click="PullCuotas(socio.id_socio,socio.socio)">
                                 <td title="'Socio'" filter="{ socio: 'text'}" sortable="'socio'">
                                     {{socio.socio}}
                                 </td>
@@ -375,9 +375,7 @@
                                         <td title="'NroCuota'" filter="{ nro_cuota: 'text'}" sortable="'nro_cuota'">
                                             {{cuota.nro_cuota}}
                                         </td>
-                                        <td title="'Proveedor'" filter="{ proovedor: 'text'}" sortable="'proovedor'">
-                                            {{productodelacuota}}
-                                        </td>
+
                                         <td title="'Vencimiento'" filter="{ fecha_vencimiento: 'text'}" sortable="'fecha_vencimiento'">
                                             {{cuota.fecha_vencimiento}}
                                         </td>
@@ -402,10 +400,8 @@
                                                         <thead class="levelTwo" style="background-color: #73879C; color: white;">
                                                         <tr>
                                                             <th>Fecha</th>
-                                                            <th>Entrada</th>
-                                                            <th>Salida</th>
-                                                            <th>Ganancia</th>
-                                                            <th>Gastos Administrativos</th>
+                                                            <th>Cobro</th>
+
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -413,9 +409,6 @@
 
                                                             <td><center>{{movimiento.fecha}}</center></td>
                                                             <td><center>{{movimiento.entrada}}</center></td>
-                                                            <td><center>{{movimiento.salida}}</center></td>
-                                                            <td><center>{{movimiento.ganancia}}</center></td>
-                                                            <td><center>{{movimiento.gastos_administrativos}}</center></td>
 
                                                         </tr>
                                                         </tbody>
@@ -432,7 +425,6 @@
                                             <b>Total</b>
 
                                         </td>
-                                        <td></td>
                                         <td></td>
                                         <td>
                                             {{sumaMontoACobrar}}

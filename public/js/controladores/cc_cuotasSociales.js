@@ -1,5 +1,5 @@
 var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){});
-app.controller('proveedor_cc', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter) {
+app.controller('cc_cuotasSocialesCtrl', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter) {
 
 $scope.ActualDate = moment().format('YYYY-MM-DD');
 
@@ -142,10 +142,9 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
             else
             {
 
-              $scope.cuotas =response.data.cuotas.map($scope.cambiarFechaCuotas);
+              $scope.cuotas =response.data.cuotas_sociales.map($scope.cambiarFechaCuotas);
                 console.log(response.data);
                 //var datacuotas = response.data;
-                $scope.productodelacuota = response.data.producto.proovedor.razon_social;
                 $scope.vistaactual = 'Cuotas';
 
                 $scope.socioactual = nombresocio;

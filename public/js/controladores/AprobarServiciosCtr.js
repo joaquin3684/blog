@@ -1,4 +1,4 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
 app.controller('pago_proovedores', function($scope, $http, $compile, $sce, NgTableParams, UserSrv, $filter) {
@@ -64,7 +64,7 @@ $scope.ArrayAprobar = [];
 
     var self = this;
     $scope.pullAprobar();
-    
+
 
     $scope.Corroborar = function(serv,check){
     var esta = '';
@@ -107,4 +107,3 @@ $scope.ArrayAprobar = [];
     $scope.criterios = ['Criterio 1','Criterio 2','Criterio 3'];
 
 });
-
