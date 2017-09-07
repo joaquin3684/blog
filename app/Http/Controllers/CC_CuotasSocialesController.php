@@ -21,7 +21,7 @@ class CC_CuotasSocialesController extends Controller
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->where('cuotas.cuotable_type', 'App\Socios')
             ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
-            ->groupBy('organismos.id');
+            ->groupBy('organismos.id')->get();
 
       //  $organismos = CC_CuotasSocialesFilter::apply($request, $ventas);
 
@@ -31,7 +31,7 @@ class CC_CuotasSocialesController extends Controller
             ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->groupBy('organismos.id')
-            ->select('organismos.id AS id_organismo', DB::raw('SUM(movimientos.entrada) AS totalCobrado'));
+            ->select('organismos.id AS id_organismo', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))->get();
 
         //$organismos2 = CC_CuotasSocialesFilter::apply($request, $movimientos);
 
@@ -54,7 +54,7 @@ class CC_CuotasSocialesController extends Controller
             ->groupBy('socios.id')
             ->where('organismos.id', '=', $request['id'])
             ->where('cuotas.cuotable_type', 'App\Socios')
-            ->select('socios.nombre AS socio', 'socios.id AS id_socio',  DB::raw('SUM(cuotas.importe) AS totalACobrar'));
+            ->select('socios.nombre AS socio', 'socios.id AS id_socio',  DB::raw('SUM(cuotas.importe) AS totalACobrar'))->get();
 
         //$socios = CC_CuotasSocialesFilter::apply($request, $ventas);
 
@@ -66,7 +66,7 @@ class CC_CuotasSocialesController extends Controller
             ->groupBy('socios.id')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->where('organismos.id', '=', $request['id'])
-            ->select('socios.id AS id_socio', DB::raw('SUM(movimientos.entrada) AS totalCobrado'));
+            ->select('socios.id AS id_socio', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))->get();
 
         //$socios2 = CC_CuotasSocialesFilter::apply($request, $movimientos);
 
