@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cuotas;
 use App\Repositories\Eloquent\FileManager;
 use App\Repositories\Eloquent\GeneradorNumeroCredito;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
@@ -76,7 +77,20 @@ class SolicitudesPendientesMutualController extends Controller
             $elem = $request->all();
             $sol = $this->solicitudesGateway->update($elem, $elem['id']);
 
+
             $sol->socio()->restore();
+            if($sol->socio->cuotasSociales->count() == 0)
+            {
+                $fechaInicioCuota = Carbon::today()->toDateString();
+                $fechaVencimientoCuota = Carbon::today()->addMonths(2)->toDateString();
+                $cuota = Cuotas::create([
+                    'fecha_inicio' => $fechaInicioCuota,
+                    'fecha_vencimiento' => $fechaVencimientoCuota,
+                    'importe' => $sol->socio->organismo->cuota_social,
+                    'nro_cuota' => 1,
+                ]);
+                $sol->socio->cuotasSociales()->save($cuota);
+            }
             $socioPosta = $sol->socio;
             $socioPosta->fecha_ingreso = $fecha_ingreso;
             $socioPosta->save();
