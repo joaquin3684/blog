@@ -13,7 +13,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\GenerateRepository::class, Commands\GenerateGateway::class, Commands\GenerateMapper::class
+        Commands\GenerateRepository::class,
+        Commands\GenerateGateway::class,
+        Commands\GenerateMapper::class,
+        Commands\GeneracionCuotaSocial::class,
     ];
 
     /**
@@ -26,6 +29,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        $schedule->command('cuota_social:crear')->daily();
     }
 
     /**

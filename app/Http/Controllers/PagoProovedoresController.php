@@ -28,10 +28,15 @@ class PagoProovedoresController extends Controller
             $q->has('ventas.movimientos');
             $q->with(['ventas' => function($q){
                 $q->has('movimientos');
-                $q->with('cuotas');
+                $q->with(['cuotas' => function($q) {
+                    $q->whereHas('movimientos', function($q){
+                        $q->where('salida', null);
+                        $q->where('entrada', '>', 0);
+                    });
+                }]);
                 $q->with('socio');
                 $q->with(['movimientos' => function($q){
-                    $q->where('salida', 0);
+                    $q->where('salida', null);
                     $q->where('entrada', '>', 0);
                 }]);
             }]);
@@ -42,7 +47,7 @@ class PagoProovedoresController extends Controller
         $proovedores->each(function($proovedor) {
 
             $totalAPagar = $proovedor->productos->sum(function ($producto) {
-                $porcentaje = $producto->ganancia + $producto->gastos_administrativos;
+                $porcentaje = $producto->ganancia;
                 return $producto->ventas->sum(function ($venta) use ($porcentaje) {
 
                     $total = $venta->movimientos->sum(function ($movimiento) {
@@ -95,10 +100,10 @@ class PagoProovedoresController extends Controller
 
     public function pagarCuotas(Request $request)
     {
-        foreach($request['proveedores'] as $id)
+        foreach($request->all() as $proveedor)
         {
             $ventasRepo = new VentasRepo();
-            $ventas = $ventasRepo->cuotasAPagarProovedor($id);
+            $ventas = $ventasRepo->cuotasAPagarProovedor($proveedor['id']);
             $ventas->each(function ($venta) {
                 $venta->pagarProovedor();
             });
