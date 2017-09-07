@@ -35,7 +35,7 @@ class CC_CuotasSocialesController extends Controller
 
         //$organismos2 = CC_CuotasSocialesFilter::apply($request, $movimientos);
 
-        $ventasPorOrganismo = $this->unirColecciones($organismos, $organismos2, ["id_organismo"], ['totalCobrado' => 0]);
+        $ventasPorOrganismo = $this->unirColecciones($ventas, $movimientos, ["id_organismo"], ['totalCobrado' => 0]);
 
         $ventasPorOrganismo = $ventasPorOrganismo->each(function ($item, $key){
             $diferencia = $item['totalACobrar'] - $item['totalCobrado'];
@@ -56,7 +56,7 @@ class CC_CuotasSocialesController extends Controller
             ->where('cuotas.cuotable_type', 'App\Socios')
             ->select('socios.nombre AS socio', 'socios.id AS id_socio',  DB::raw('SUM(cuotas.importe) AS totalACobrar'));
 
-        $socios = CC_CuotasSocialesFilter::apply($request, $ventas);
+        //$socios = CC_CuotasSocialesFilter::apply($request, $ventas);
 
 
         $movimientos = DB::table('socios')
@@ -71,7 +71,7 @@ class CC_CuotasSocialesController extends Controller
         //$socios2 = CC_CuotasSocialesFilter::apply($request, $movimientos);
 
 
-        $ventasPorSocio = $this->unirColecciones($socios, $socios2, ["id_socio"], ['totalCobrado' => 0]);
+        $ventasPorSocio = $this->unirColecciones($ventas, $movimientos, ["id_socio"], ['totalCobrado' => 0]);
 
         $ventasPorSocio = $ventasPorSocio->each(function ($item, $key){
             $diferencia = $item['totalACobrar'] - $item['totalCobrado'];
