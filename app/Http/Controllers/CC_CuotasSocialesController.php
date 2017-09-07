@@ -33,7 +33,7 @@ class CC_CuotasSocialesController extends Controller
             ->groupBy('organismos.id')
             ->select('organismos.id AS id_organismo', DB::raw('SUM(movimientos.entrada) AS totalCobrado'));
 
-        $organismos2 = CC_CuotasSocialesFilter::apply($request, $movimientos);
+        //$organismos2 = CC_CuotasSocialesFilter::apply($request, $movimientos);
 
         $ventasPorOrganismo = $this->unirColecciones($organismos, $organismos2, ["id_organismo"], ['totalCobrado' => 0]);
 
@@ -68,7 +68,7 @@ class CC_CuotasSocialesController extends Controller
             ->where('organismos.id', '=', $request['id'])
             ->select('socios.id AS id_socio', DB::raw('SUM(movimientos.entrada) AS totalCobrado'));
 
-        $socios2 = CC_CuotasSocialesFilter::apply($request, $movimientos);
+        //$socios2 = CC_CuotasSocialesFilter::apply($request, $movimientos);
 
 
         $ventasPorSocio = $this->unirColecciones($socios, $socios2, ["id_socio"], ['totalCobrado' => 0]);

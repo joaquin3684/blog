@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Cuotas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidacionABMsocios;
 use App\Repositories\Eloquent\Repos\Gateway\SociosGateway as Socio;
+use Illuminate\Support\Facades\DB;
 
 class ABM_asociados extends Controller
 {
@@ -23,7 +26,19 @@ class ABM_asociados extends Controller
 
     public function store(ValidacionABMsocios $request)
     {
-        $this->socio->create($request->all());
+        $elem = $request->all();
+        DB::transaction(function () use ($elem) {
+            $fechaInicioCuota = Carbon::today()->toDateString();
+            $fechaVencimientoCuota = Carbon::today()->addMonths(2);
+            $socio = $this->socio->create($elem);
+            $cuota = Cuotas::create([
+                'fecha_inicio' => $fechaInicioCuota,
+                'fecha_vencimiento' => $fechaVencimientoCuota,
+                'importe' => $socio->organismo->cuota_social,
+                'nro_cuota' => 1,
+            ]);
+            $socio->cuotasSociales()->save($cuota);
+        });
         return ['created' => true];
     }
 

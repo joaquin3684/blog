@@ -26,147 +26,16 @@ use Intervention\Image\ImageManagerStatic as Image;
 //---------------- PRUEBAS ------------------------------
 Route::get('pruebas', function(){
 
-    return Ventas::max('nro_credito');
      return view('prueba');
 });
 Route::get('imagenes', function(){
-   $path = storage_path('app/public/ifd/filename.png');
-   return Image::make($path)->encode('data-url');
+
 });
+
 Route::post('pruebas', function(Request $request){
 
-     FileManager::uploadImage($request->imagen, '/juan', 'puto.jpg');
-     FileManager::uploadImage($request->comprobante2, '/juan', 'puto2.jpg');
-        return 1;
-
-    $j = Storage::disk('public')->exists('ifd/filename.png');
-    \App\Repositories\Eloquent\FileManager::uploadImage($request->foto, 'estoAnda', 'holaaa.png');
-   return Storage::disk('public')->exists('ifd/filename.png');
-    $j = $request->file('foto')->move(public_path('images'), 'a.png');
-    $h = $request->hasFile('pum');
-   // $request->foto->move('/images/p', 'a.png');
-    $request->foto->storeAs('ifd', 'filename.png', 'public');
-    Storage::disk('uploads')->put('prufdefba.png', $request->foto);
-
-   // $q = $request->foto->storeAs('images', 'prueba.png');
-    return 1;
-    $a =  Socios::with('cuotasSociales.movimientos')->find($request['id']);
-    $a->cuotasSociales->each(function ($cuota){
-        $s = $cuota->movimientos->sum(function($movimiento) {
-            return $movimiento->entrada;
-        });
-        $cuota->cobrado = $s;
-    });
-    return $a;
-
-
-    $ventas = DB::table('ventas')
-        ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
-        ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
-        ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
-        ->join('productos', 'productos.id', '=', 'ventas.id_producto')
-        ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
-        ->select('organismos.nombre')
-        ->groupBy('organismos.id');
-    $organismos = \App\Repositories\Eloquent\Filtros\VentasFilter::apply($request, $ventas);
-
-    return $organismos;
-    $socioRepo = new SociosRepo();
-    $socio = $socioRepo->cuotasSocialesVencidas(1);
-    $cobrarObj = new CobrarCuotasSociales();
-    $cobrarObj->cobrar($socio, 60);
-
-    return 1;
-    return $f = \App\Organismos::find(1)->with('socios')->get();
-
-
-
-
-
-
-
-
-
-
-    $organismos->each(function($organismo){
-        $totalCobrado = $organismo->socios->sum(function($socio){
-            return $socio->ventas->sum(function($venta){
-                return $venta->cuotas->sum(function($cuota){
-                    return $cuota->movimientos->sum(function($movimiento){
-                        return $movimiento->entrada;
-                    });
-                });
-            });
-
-        });
-        $totalACobrar = $organismo->socios->sum(function($socio){
-            return $socio->ventas->sum(function($venta){
-                return $venta->cuotas->sum(function($cuota){
-                    return $cuota->importe;
-                });
-            });
-
-        });
-        $organismo->totalCobrado = $totalCobrado;
-        $organismo->totalACobrar = $totalACobrar;
-        $organismo->diferencia = $totalACobrar - $totalCobrado;
-    });
-
-    return $organismos;
-    // $cu = Cuotas::with('movimientos')->has('movimientos')->get();
-    $ventasRepo = new VentasRepo();
-    $ventaCuotasVencidas = $ventasRepo->cuotasVencidas(1);
-
-    $cobrar = new CobrarPorVenta();
-    $cobrar->cobrar($ventaCuotasVencidas, 30);
-    return 1;
-
-    /*
-        $request = ['nombre' => ''];
-        $organismo = new OrganismoFilter();
-        $organismo = $organismo->apply($request);
-
-
-
-       /* $user = Sentinel::getUser()->id;
-
-
-            $estadoRepo = new EstadoVentaRepo();
-            $estadoRepo->create(['id_venta' => 6, 'id_responsable_estado' => 1, 'estado' => 'APROBADO', 'observacion' => 'HOLA']);
-
-                $cuotaRepo = new CuotasRepo();
-                $ventasRepo = new VentasRepo();
-                $venta = $ventasRepo->find(6);
-                $fecha = $venta->getFechaVencimiento();
-                $carbon = Carbon::createFromFormat('Y-m-d', $fecha);
-                $fechaHoy = Carbon::today();
-                $importeCuota = $venta->getImporte() / $venta->getNroCuotas();
-
-                for ($i = 1; $venta->getNroCuotas() >= $i; $i++) {
-                    $cuotaRepo->create(['nro_cuota' => $i, 'importe' => $importeCuota, 'id_venta' => $venta->getId(), 'fecha_vencimiento' => $carbon->toDateString(), 'fecha_inicio' => $fechaHoy->toDateString()]);
-
-                    $fechaHoy = Carbon::create($carbon->year, $carbon->month, $carbon->day);
-                    $carbon->addMonth();
-                }
-
-
-
-
-    */
-    /*
-        $ventasRepo = new VentasRepo();
-        $ventas = $ventasRepo->cuotasAPagarProovedor(2);
-        $ventas->each(function ($venta) {
-            $venta->pagarProovedor();
-        });*/
-
 });
 
-//--------- INICIO ----------
-
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
 
 //-------------- Creacion automatica de cosas para cuando se hace una migracion ----
 Route::get('creacionAutomatica', function(){

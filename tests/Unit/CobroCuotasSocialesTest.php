@@ -53,4 +53,28 @@ class CobroCuotasSocialesTest extends TestCase
         $cobrarObj = new CobrarCuotasSociales();
         $cobrarObj->cobrar($socio, $monto);
     }
+
+    public function testCuotasSocialesConCobroParcial()
+    {
+        $id_socio = 11;
+        $monto = 123;
+        $socioRepo = new SociosRepo();
+        $socio = $socioRepo->cuotasSociales($id_socio);
+        $cobrarObj = new CobrarCuotasSociales();
+        $cobrarObj->cobrar($socio, $monto);
+
+        $cobrado = $socio->getCuotasSociales()->sum(function($cuota){
+            return $cuota->totalEntradaDeMovimientosDeCuota();
+        });
+
+        $cuota1 = $socio->getCuotasSociales()->all()[0];
+        $cuota2 = $socio->getCuotasSociales()->all()[1];
+
+
+        $this->assertEquals($cobrado, $monto);
+        $this->assertEquals(100, $cuota1->totalEntradaDeMovimientosDeCuota());
+        $this->assertEquals(23, $cuota2->totalEntradaDeMovimientosDeCuota());
+        $this->assertEquals('Cobro Total', $cuota1->getEstado());
+        $this->assertEquals('Cobro Parcial', $cuota2->getEstado());
+    }
 }

@@ -82,8 +82,7 @@ abm_roles
 - Filtros columnas
 
 
-<<<<<<< HEAD
-=======
+
 abm_organismos
 
 - poner para imprimir
@@ -100,7 +99,7 @@ abm_proovedores
 - poder poner numeros con coma
 - Filtros columnas
 
->>>>>>> 1c9371b90f7813861c1dd8908935bbc52f7130b4
+
 abm_socios
 
 - en la visualizacion de la tabla tienen que estar todos los datos
@@ -110,43 +109,21 @@ abm_socios
 
 Cuentas corrientes
 
-- poner la opcion de mostrar todos los registros --> Demorado hasta que encuentre como.
 - poder imprimir, pdf, excel
 
-
-Cobranza
-
-- pantalla para hacer la cobranza
-- se tiene que poder exportar a los modelos locos --> (QUE CARAJO SON LOS MODELOS LOCOS??)
 
 Pago proovedores
 
 -> un boton pagar que pague todo y uno de imprimir por proveedor
 -> pero se tiene que poder ver el detalle
 -> campos de la tabla del detalle (legajo, socio, vto, monto de cuota, nro cuota, id servicio, nro credito, estado cobro
--> Seleccionar todos.
+
 
 
 Cancelacion de servicio
 - tiene que haber una tabla con los servicios para cancelar --> no sería el "Cancelar" de la pantalla aprobacion??
 
-<<<<<<< HEAD
-=======
 
-
-Welcome
-
-- comercializador lo cambiamos por Generar solicitud
-- en el titulo de la pantalla tiene que decir Generar Solicitud
-- donde dice datos de prestamo poner generar solicitud
-- Cambiar Solicitudes Pendientes Mutual por Solicitudes Pendientes
-
-- cambiar en modal el titulo dice asignar endeudamiento y hay que cambiarlo por
-Asignar capacidad de endeudamiento
-=======
->>>>>>> e5ea4e47d917817e0b52579a25a81dc1faad2a3e
-
->>>>>>> 1c9371b90f7813861c1dd8908935bbc52f7130b4
 Cuenta corriente agente financiero
 
 - en la abstraccion de servicios tiene que haver un boton que se llame sistema frances
@@ -165,18 +142,6 @@ Cuenta corriente agente financiero
 Cuotas sociales
 se cargan todos los primeros de mes
 
-
-
-
-Cobro cuotas sociales
-
-Creditos
-
-- cuando se genera se le tiene que asignar un nro de credito secuencial
-
-Cobranza
-
--listar cosas
 
 
 Cancelacion de servicio
