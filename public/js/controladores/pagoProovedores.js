@@ -1,8 +1,14 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){
-    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
-});
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){});
 app.controller('pago_proovedores', function($scope, $http, $compile, $sce, NgTableParams, $filter) {
 
+  $scope.sumarMontosACobrar = function (){
+   var sumaMontoTotal = 0;
+    $scope.ArrayPago.forEach(function(elem) {
+      sumaMontoTotal += elem.total;
+    });
+
+    $scope.sumaMontoTotal = sumaMontoTotal;
+  }
 
 $scope.ArrayPago = [];
     $scope.pullProveedores = function (){
@@ -27,8 +33,11 @@ $scope.ArrayPago = [];
                 }, {
                     total: $scope.proveedores.length,
                     getData: function (params) {
-                        $scope.proveedores = $filter('orderBy')($scope.proveedores, params.orderBy());
-                        return $scope.proveedores.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                      var filterObj = params.filter(),
+                      filteredData = $filter('filter')($scope.proveedores, filterObj);
+                      var sortObj = params.sorting();
+                        orderedData = $filter('orderBy')(filteredData, sortObj);
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
             }
@@ -72,7 +81,7 @@ $scope.ArrayPago = [];
 
     var self = this;
     $scope.pullProveedores();
-    
+
 
     $scope.Corroborar = function(prov,check){
     var esta = '';
@@ -345,7 +354,6 @@ $scope.ArrayPago = [];
             }
         }
     };
-    
+
 
 });
-

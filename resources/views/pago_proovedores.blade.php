@@ -68,8 +68,9 @@
                                 <!-- ARRANCAN LOS FILTROS -->
                                 <div class="x_content" >
                                     <div class="container">
+                                      @verbatim
                                       <form ng-submit="filtro()">
-                                  
+
 
 
                                         <div class="row">
@@ -78,18 +79,18 @@
                                                 <md-autocomplete  md-item-text="item.proovedor" md-no-cache="true"  md-search-text-change="buscandoProovedores(searchText2)" md-items="item in query(searchText2)" md-selected-item-change="filtrar()" md-search-text="searchText2" md-selected-item="proovedor" placeholder="Buscar proovedor...">
                                                 <md-item-template>
                                                     <span md-highlight-text="searchText">
-                                                        {[{item.proovedor}]}
+                                                        {{item.proovedor}}
                                                     </span>
                                                     </md-item-template>
                                                     <md-not-found>
-                                                     No se encontraron resultados para "{[{searchText}]}".
-          
+                                                     No se encontraron resultados para "{{searchText}}".
+
                                                     </md-not-found>
                                                 </md-autocomplete>
                                             </div>
 
                                         </div>
-                                        
+
                                         <div class="row" style="margin-top:20px;">
                                             <div class="item form-group col-sm-5 col-xs-8">
                                                 <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
@@ -100,28 +101,29 @@
                                             </div>
                                             <div class="col-md-1 col-sm-1 col-xs-4">
                                                 <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_importe_cuota" type="number">
-                                                    {[{errores.porcentaje_retencion[0]}]}
+                                                    {{errores.porcentaje_retencion[0]}}
                                                 </input>
                                             </div>
                                             <div class="item form-group col-sm-5 col-xs-8">
                                                 <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Maximo importe 
+                                                    Maximo importe
                                                 </label>
                                                 <md-slider aria-label="red" class="md-primary" ng-change="filtrar()"  flex="" id="red-slider" max="255" min="0" ng-model="maximo_importe_cuota">
                                                 </md-slider>
                                             </div>
                                             <div class="col-md-1 col-sm-1 col-xs-4">
                                                 <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="maximo_importe_cuota" type="number">
-                                                    {[{errores.porcentaje_retencion[0]}]}
+                                                    {{errores.porcentaje_retencion[0]}}
                                                 </input>
                                             </div>
                                         </div>
                                         <div class="row" style="margin-top:20px;">
                                             <input type="submit" ng-click="filtro()" class="btn btn-success" value="Filtrar">
                                             <button type="button" ng-click="seleccionarTodo()" class="btn btn-primary">Seleccionar Todo</button>
-                                            
+
                                         </div>
                                         </form>
+                                        @endverbatim
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +142,7 @@
                                     Todos los proovedores disponibles para pagarles
                                 </small>
                             </h2>
-                        
+
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
                                     <a class="collapse-link">
@@ -183,15 +185,16 @@
                                     <!-- END $scope.[model] updates -->
                                     <!-- START TABLE -->
                                     <div>
+                                      @verbatim
                                         <table ng-table="paramsProveedores" class="table table-hover table-bordered">
 
                                             <tbody data-ng-repeat="proveedor in $data" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,proveedor.id)" >
                                                 <td title="'Proveedor'" sortable="'proovedor'">
-                                                    <input type="checkbox" ng-model="check" ng-change="Corroborar(proveedor.id,check)">{[{proveedor.nombre}]}
+                                                    {{proveedor.razon_social}}
                                                 </td>
                                                 <td title="'Total a Pagar'" sortable="'pagar'">
-                                                    {[{proveedor.total}]}
+                                                    {{proveedor.total}}
                                                 </td>
                                             </tr>
                                             <tr data-ng-switch-when="true">
@@ -208,14 +211,23 @@
                                                                     <th>Gastos Administrativos</th>
                                                                 </tr>
                                                                 </thead>
+                                                                <thead class="levelTwo" style="background-color: #73879C; color: white;">
+                                                                <tr>
+                                                                    <th>Fecha</th>
+                                                                    <th>Entrada</th>
+                                                                    <th>Salida</th>
+                                                                    <th>Ganancia</th>
+                                                                    <th>Gastos Administrativos</th>
+                                                                </tr>
+                                                                </thead>
                                                                 <tbody>
                                                                 <tr style="background-color: #A6A6A6; color: white;" data-ng-repeat="movimiento in cuota.movimientos">
 
-                                                                    <td><center>{[{movimiento.fecha}]}</center></td>
-                                                                    <td><center>{[{movimiento.entrada}]}</center></td>
-                                                                    <td><center>{[{movimiento.salida}]}</center></td>
-                                                                    <td><center>{[{movimiento.ganancia}]}</center></td>
-                                                                    <td><center>{[{movimiento.gastos_administrativos}]}</center></td>
+                                                                    <td><center>{{movimiento.fecha}}</center></td>
+                                                                    <td><center>{{movimiento.entrada}}</center></td>
+                                                                    <td><center>{{movimiento.salida}}</center></td>
+                                                                    <td><center>{{movimiento.ganancia}}</center></td>
+                                                                    <td><center>{{movimiento.gastos_administrativos}}</center></td>
 
                                                                 </tr>
                                                                 </tbody>
@@ -225,10 +237,27 @@
                                                 </td>
                                             </tr>
                                             </tbody>
+
+                                            <tfoot>
+
+                                            <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                                <td style="text-align: right;">
+                                                    <b>Total </b>
+                                                    {{sumarMontosACobrar()}}
+                                                </td>
+
+                                                <td>
+                                                    {{sumaMontoTotal}}
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+
                                         </table>
+                                        @endverbatim
                                     </div>
                                     <!-- END TABLE -->
                                 </div>
+
                                 <button type="button" ng-click="pagar()" class="btn btn-primary">Pagar</button>
                             </div>
 

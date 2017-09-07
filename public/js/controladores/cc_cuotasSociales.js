@@ -1,93 +1,129 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){
-    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
-});
-app.controller('cc_cuotasSocialesCtrl', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter) {
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){});
+app.controller('proveedor_cc', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter) {
+
+$scope.ActualDate = moment().format('YYYY-MM-DD');
+
+
 
 
 //mostrarPorSocio en todos mando el id del de atras boludo es asi
     //mostrarPorVenta
     //mostrarPorCuotas
 // ESTAS FUNCIONES SON PARA DEFINIR LOS PARAMETROS DE BUSQUEDA EN LA FUNCION QUERY
-    $scope.pullOrganismos = function (){
+$scope.pullOrganismos = function (){
 
-        $http({
-            url: 'cc_cuotasSociales/mostrarOrganismos',
-            method: 'post'
-        }).then(function successCallback(response)
-        {
-            console.log(response.data.ventas);
-            if(typeof response.data === 'string')
+$http({
+         url: 'cobroCuotasSociales/porOrganismo',
+         method: 'post'
+         }).then(function successCallback(response)
             {
-                return [];
-            }
-            else
+              console.log(response.data);
+              //  console.log(response.data.ventas);
+               if(typeof response.data === 'string')
+               {
+                  return [];
+               }
+               else
+               {
+                  // console.log(response);
+                  $scope.organismos = response.data;
+                  $scope.paramsOrganismos = new NgTableParams({
+                       page: 1,
+                       count: 10
+                   }, {
+                       total: $scope.organismos.length,
+                       getData: function (params) {
+                         var filterObj = params.filter();
+                         filteredData = $filter('filter')($scope.organismos, filterObj);
+                         var sortObj = params.sorting();
+                           orderedData = $filter('orderBy')(filteredData, filterObj);
+                           $scope.organismosFiltrados = orderedData;
+                           $scope.sumarMontosACobrar($scope.organismosFiltrados)
+                           return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                       }
+                   });
+               }
+
+            }, function errorCallback(data)
             {
-                console.log(response);
-                $scope.organismos = response.data;
-                $scope.paramsOrganismos = new NgTableParams({
-                    page: 1,
-                    count: 10
-                }, {
-                    total: $scope.organismos.length,
-                    getData: function (params) {
-                        $scope.organismos = $filter('orderBy')($scope.organismos, params.orderBy());
-                        return $scope.organismos.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    }
-                });
-            }
+               console.log(data.data);
+            });
 
-        }, function errorCallback(data)
+
+
+}
+
+$scope.PullSocios = function(idorganismo,nombreorganismo){
+
+
+    $http({
+        url: 'cobroCuotasSociales/porSocio',
+        method: 'post',
+        data: {'id': idorganismo}
+    }).then(function successCallback(response)
+    {
+        console.log(response.data);
+        if(typeof response.data === 'string')
         {
-            console.log(data.data);
-        });
-
-
-
-    }
-
-    $scope.PullSocios = function(idorganismo,nombreorganismo){
-
-
-        $http({
-            url: 'cc_cuotasSociales/mostrarSocios',
-            method: 'post',
-            data: {'id': idorganismo}
-        }).then(function successCallback(response)
+            return [];
+        }
+        else
         {
-            console.log(response.data.ventas);
-            if(typeof response.data === 'string')
-            {
-                return [];
-            }
-            else
-            {
-                console.log(response);
-                $scope.socios = response.data;
-                $scope.vistaactual = 'Socios';
-                $scope.organismoactual = nombreorganismo;
-                $scope.paramsSocios = new NgTableParams({
-                    page: 1,
-                    count: 10
-                }, {
-                    total: $scope.socios.length,
-                    getData: function (params) {
-                        $scope.socios = $filter('orderBy')($scope.socios, params.orderBy());
-                        return $scope.socios.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    }
-                });
-            }
+            // console.log(response);
+            $scope.socios = response.data;
+            $scope.vistaactual = 'Socios';
+            $scope.organismoactual = nombreorganismo;
+            $scope.paramsSocios = new NgTableParams({
+                page: 1,
+                count: 10
+            }, {
+                total: $scope.socios.length,
+                getData: function (params) {
+                    var filterObj = params.filter(),
+                    filteredData = $filter('filter')($scope.socios, filterObj);
+                    var sortObj = params.sorting();
+                    orderedData = $filter('orderBy')(filteredData, filterObj);
+                    $scope.sociosFiltrados= orderedData;
+                    $scope.sumarMontosACobrar($scope.sociosFiltrados);
+                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                }
+            });
+        }
 
-        }, function errorCallback(data)
-        {
-            console.log(data.data);
-        });
+    }, function errorCallback(data)
+    {
+        console.log(data.data);
+    });
 
-    }
+}
     $scope.setVista = function(vista){
 
         $scope.vistaactual = vista;
 
     }
+
+    $scope.cambiarFechaCuotas = function(cuota){
+      moment.locale('es');
+      fecha= cuota.fecha_vencimiento;
+      var fecha= moment(fecha, 'YYYY-MM-DD').format('L');
+      cuota.fecha_vencimiento= fecha;
+      return cuota;
+    }
+
+    $scope.cambiarFechaVentas = function(venta) {
+      moment.locale('es');
+      fecha= venta.fecha;
+      var fecha= moment(fecha, 'YYYY-MM-DD').format('L');
+      venta.fecha= fecha;
+      return venta;
+        }
+
+    $scope.cambiarFormato = function (fecha_vencimiento){
+      var fecha= moment(fecha_vencimiento, 'DD/MM/YYYY').format('YYYY-MM-DD');
+      return fecha;
+    }
+
+
 
     $scope.PullCuotas = function(idsocio,nombresocio){
 
@@ -98,6 +134,7 @@ app.controller('cc_cuotasSocialesCtrl', function($scope, $http, $compile, $sce, 
             data: {'id': idsocio}
         }).then(function successCallback(response)
         {
+
             if(typeof response.data === 'string')
             {
                 return [];
@@ -105,19 +142,26 @@ app.controller('cc_cuotasSocialesCtrl', function($scope, $http, $compile, $sce, 
             else
             {
 
-                $scope.cuotas = response.data.cuotas_sociales;
+              $scope.cuotas =response.data.cuotas.map($scope.cambiarFechaCuotas);
+                console.log(response.data);
                 //var datacuotas = response.data;
+                $scope.productodelacuota = response.data.producto.proovedor.razon_social;
                 $scope.vistaactual = 'Cuotas';
-                console.log(response);
-                $scope.socioActual = nombresocio;
+
+                $scope.socioactual = nombresocio;
                 $scope.paramsCuotas = new NgTableParams({
                     page: 1,
                     count: 10
                 }, {
                     total: $scope.cuotas.length,
                     getData: function (params) {
-                        $scope.cuotas = $filter('orderBy')($scope.cuotas, params.orderBy());
-                        return $scope.cuotas.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                      var filterObj = params.filter(),
+                      filteredData = $filter('filter')($scope.cuotas, filterObj);
+                      var sortObj = params.sorting();
+                        orderedData = $filter('orderBy')(filteredData, filterObj);
+                        $scope.cuotasFiltradas = orderedData;
+                        $scope.sumarCuotas();
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
             }
@@ -129,10 +173,39 @@ app.controller('cc_cuotasSocialesCtrl', function($scope, $http, $compile, $sce, 
 
     }
 
+    $scope.sumarMontosACobrar = function (elemsFiltrados){
+      var sumaMontoACobrar = 0;
+      var sumaMontoCobrado = 0;
+      var sumaDiferencia = 0;
+       elemsFiltrados.forEach(function(elem) {
+         sumaMontoACobrar += elem.totalACobrar;
+         sumaMontoCobrado += elem.totalCobrado;
+         sumaDiferencia += elem.diferencia;
+       });
+       $scope.sumaDiferencia = sumaDiferencia;
+       $scope.sumaMontoCobrado = sumaMontoCobrado;
+       $scope.sumaMontoACobrar = sumaMontoACobrar;
+    }
+
+    $scope.mostrarPorPantalla = function(cuota){
+    console.log(cuota)
+    }
+
+    $scope.sumarCuotas = function (){
+      var sumaMontoACobrar = 0;
+      var sumaMontoCobrado = 0;
+       $scope.cuotasFiltradas.forEach(function(elem) {
+         sumaMontoACobrar += elem.importe;
+         sumaMontoCobrado += elem.cobrado;
+       });
+       $scope.sumaMontoCobrado = sumaMontoCobrado;
+       $scope.sumaMontoACobrar = sumaMontoACobrar;
+    }
+
     //PARAMETROS INICIALES
-    $scope.vistaactual = 'Organismos';
-    var self = this;
-    $scope.pullOrganismos();
+        $scope.vistaactual = 'Organismos';
+        var self = this;
+        $scope.pullOrganismos();
 
     //EMPIEZA EL CODIGO DEL EXPANDIR
     $scope.tableRowExpanded = false;
@@ -381,7 +454,4 @@ app.controller('cc_cuotasSocialesCtrl', function($scope, $http, $compile, $sce, 
         }
     };
 
-})
-/**
- * Created by joaquin on 20/06/17.
- */
+});
