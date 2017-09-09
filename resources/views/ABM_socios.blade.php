@@ -367,6 +367,21 @@
                       </div>
                       </div>
                       <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Sexo <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control" id="sexo" name="sexo">
+                        <option value="Masculino">
+                          Masculino
+                        </option>
+                        <option value="Femenino">
+                          Femenino
+                        </option>
+                      </select>
+                      </div>
+                      
+                      </div>
+                      <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -438,36 +453,7 @@
 
   </div>
 </div>
-<!-- Fin Modal -->
-  <!-- bootstrap progress js -->
 
-
-  <!-- icheck -->
-  
-  <!-- pace -->
- 
-
-  <!-- form validation -->
- 
-        <script src="js/datatables/jquery.dataTables.min.js"></script>
-        <script src="js/datatables/dataTables.bootstrap.js"></script>
-        <script src="js/datatables/dataTables.buttons.min.js"></script>
-        <script src="js/datatables/buttons.bootstrap.min.js"></script>
-        <script src="js/datatables/jszip.min.js"></script>
-        <script src="js/datatables/pdfmake.min.js"></script>
-        <script src="js/datatables/vfs_fonts.js"></script>
-        <script src="js/datatables/buttons.html5.min.js"></script>
-        <script src="js/datatables/buttons.print.min.js"></script>
-        <script src="js/datatables/dataTables.fixedHeader.min.js"></script>
-        <script src="js/datatables/dataTables.keyTable.min.js"></script>
-        <script src="js/datatables/dataTables.responsive.min.js"></script>
-        <script src="js/datatables/responsive.bootstrap.min.js"></script>
-        <script src="js/datatables/dataTables.scroller.min.js"></script>
-
-
-
-
-     
 </div>
 
 

@@ -231,14 +231,12 @@
                         </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         
-                        <select class="form-control" placeholder="Comprobante a visualizar.." ng-model="comprobantevisualizar" >
+                        <select ng-change="Comprobante()" class="form-control" placeholder="Comprobante a visualizar.." ng-model="comprobantevisualizar" >
                           <option ng-repeat="x in DatosModalActual" ng-value="x.encoded" >
                             {[{x.filename}]}
                           </option>
                         </select>
                       </div>
-
-                      <button ng-click="Comprobante()" class="btn btn-primary">Visualizar</button>
                     </div>
 
                    
@@ -270,7 +268,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Agente Financiero 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12"> 
-                          <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="agente">
+                          <select ng-keyup="$event.keyCode == 13 && AsignarAF()" class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="agente">
                             <option value="{[{x.agentes_financieros.id}]}" ng-repeat="x in agentesasignar">
                             {[{x.agentes_financieros.razon_social}]}
                             </option>
@@ -303,7 +301,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">ENDEUDAMIENTO 
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12"> 
-                          <input id="endeudamiento" class="form-control col-md-7 col-xs-12" name="endeudamiento" placeholder="Ingrese el Endeudamiento" ng-model="endeudamiento" type="number">
+                          <input ng-keyup="$event.keyCode == 13 && AsignarEndeudamiento()" id="endeudamiento" class="form-control col-md-7 col-xs-12" name="endeudamiento" placeholder="Ingrese el Endeudamiento" ng-model="endeudamiento" type="number">
                       </div>
                     </div>
                     <div class="ln_solid"></div>
@@ -317,46 +315,6 @@
     </div>
   </div>
 </div>
-
-  <!-- bootstrap progress js -->
-
-
-  <!-- icheck -->
-  
-  <!-- pace -->
- 
-
-  <!-- form validation -->
- 
-        <script src="js/datatables/jquery.dataTables.min.js"></script>
-        <script src="js/datatables/dataTables.bootstrap.js"></script>
-        <script src="js/datatables/dataTables.buttons.min.js"></script>
-        <script src="js/datatables/buttons.bootstrap.min.js"></script>
-        <script src="js/datatables/jszip.min.js"></script>
-        <script src="js/datatables/pdfmake.min.js"></script>
-        <script src="js/datatables/vfs_fonts.js"></script>
-        <script src="js/datatables/buttons.html5.min.js"></script>
-        <script src="js/datatables/buttons.print.min.js"></script>
-        <script src="js/datatables/dataTables.fixedHeader.min.js"></script>
-        <script src="js/datatables/dataTables.keyTable.min.js"></script>
-        <script src="js/datatables/dataTables.responsive.min.js"></script>
-        <script src="js/datatables/responsive.bootstrap.min.js"></script>
-        <script src="js/datatables/dataTables.scroller.min.js"></script>
-
-
-<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
-<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
-<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
-
-<script type="text/javascript">
-    
-</script>
-
-
-
-         <script>
-          
-        </script>
 
 </div>
 

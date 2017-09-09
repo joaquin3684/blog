@@ -78,6 +78,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
     $scope.getFotos = function(idsolicitud)
     {
+        document.getElementById('previsualizacion').src = 'images/preload.png';
         $scope.idpropuestae = idsolicitud;
         return $http({
             url: 'comercializador/fotos',
@@ -215,6 +216,9 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     $scope.AltaComercializador = function (Dato){
 
         console.log(moment($scope.fecha_nacimiento).format('YYYY-MM-DD'));
+        if($scope.doc_endeudamiento == ''){
+            $scope.doc_endeudamiento = null;
+        }
     if($scope.socio != null) {
         $scope.Dato = {
         'nombre':$scope.nombre,//$scope.nombre,

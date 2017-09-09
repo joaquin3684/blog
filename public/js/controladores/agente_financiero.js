@@ -178,6 +178,7 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
 
     $scope.getFotos = function(idsolicitud)
     {
+        document.getElementById('previsualizacion').src = 'images/preload.png';
         $scope.idpropuestae = idsolicitud;
         return $http({
             url: 'comercializador/fotos',

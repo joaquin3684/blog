@@ -87,7 +87,8 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
                 data: {'id':$scope.idpropuestae,'agente_financiero':$scope.agente}
             }).then(function successCallback(response)
             {
-                
+
+                    console.log(response);
                     UserSrv.MostrarMensaje("OK","El agente financiero fué asignado correctamente.","OK","mensajemodal","AgenteFinanciero");
                     $scope.pullSolicitudes();
 
@@ -121,7 +122,7 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
                 data: {'id':$scope.idpropuestae,'doc_endeudamiento':$scope.endeudamiento}
             }).then(function successCallback(response)
             {
-                
+                    console.log(response);
                     UserSrv.MostrarMensaje("OK","El endeudamiento fué asignado correctamente.","OK","mensajemodal2","Endeudamiento");
                     $scope.pullSolicitudes();
 
@@ -159,6 +160,7 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
 
     $scope.getFotos = function(idsolicitud)
     {
+        document.getElementById('previsualizacion').src = 'images/preload.png';
         $scope.idpropuestae = idsolicitud;
         return $http({
             url: 'comercializador/fotos',

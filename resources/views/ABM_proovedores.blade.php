@@ -386,38 +386,7 @@
 
   </div>
 </div>
-<!-- Fin Modal -->
-  <!-- bootstrap progress js -->
 
-
-  <!-- icheck -->
-
-  <!-- pace -->
-
-
-  <!-- form validation -->
-
-        {!! Html::script('js/datatables/jquery.dataTables.min.js') !!}
-        {!! Html::script('js/datatables/dataTables.bootstrap.js') !!}
-        {!! Html::script('js/datatables/dataTables.buttons.min.js') !!}
-        {!! Html::script('js/datatables/buttons.bootstrap.min.js') !!}
-        {!! Html::script('js/datatables/jszip.min.js') !!}
-        {!! Html::script('js/datatables/pdfmake.min.js') !!}
-        {!! Html::script('js/datatables/vfs_fonts.js') !!}
-        {!! Html::script('js/datatables/buttons.html5.min.js') !!}
-        {!! Html::script('js/datatables/buttons.print.min.js') !!}
-        {!! Html::script('js/datatables/dataTables.fixedHeader.min.js') !!}
-        {!! Html::script('js/datatables/dataTables.keyTable.min.js') !!}
-        {!! Html::script('js/datatables/dataTables.responsive.min.js') !!}
-        {!! Html::script('js/datatables/responsive.bootstrap.min.js') !!}
-        {!! Html::script('js/datatables/dataTables.scroller.min.js') !!}
-
-
-
-
-         <script>
-
-        </script>
         <script type="text/javascript">
           $(document).ready(function() {
           var tabla =  $("#datatable-responsive").DataTable({
