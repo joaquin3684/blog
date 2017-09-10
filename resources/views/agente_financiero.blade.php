@@ -12,6 +12,13 @@
   <link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
 <div class="nav-md" ng-controller="agente_financiero" >
+<div style="margin-left: -250px; margin-top: -10px; padding: 0px; width: 100%; height: 100%; float: left; background-color: rgba(157, 157, 157, 0.3); z-index: 1000; position: fixed;">
+<center>
+  <div style="margin-top: 25%; color: black; font-size: 40pt;">
+    <i class="fa fa-spinner fa-spin"></i>
+  </div>
+</center>
+</div> <!-- del div de loading -->
 
   <div class="container body" >
   
@@ -294,7 +301,6 @@
 
 
 </div>
-
 
 
 </div>

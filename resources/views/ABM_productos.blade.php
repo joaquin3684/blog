@@ -291,35 +291,7 @@
         <script>
 
         </script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var tabla =  $("#datatable-responsive").DataTable({
-                    select: true,
-                    fixedHeader: true,
-                    language: {
-                        info: "Mostrando del _PAGE_ al _END_ de _TOTAL_ registros",
-                        lengthMenu: "Mostrar _MENU_ registros",
-                        paginate: {
-                            next: "Siguiente",
-                            previous: "Anterior"
-                        },
-                        search: "Buscar:"
 
-
-                    },
-                    dom: 'Blfrtip',
-                    buttons: [
-                        'copy', 'excel', 'pdf'
-                    ],
-                    lengthChange: true,
-
-                });
-                function prueba(){
-                    console.log('entrra');
-                    tabla.draw();
-                }
-            });
-        </script>
     </div>
 
 
