@@ -12,13 +12,14 @@
   <link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
 <div class="nav-md" ng-controller="agente_financiero" >
-<div style="margin-left: -250px; margin-top: -10px; padding: 0px; width: 100%; height: 100%; float: left; background-color: rgba(157, 157, 157, 0.3); z-index: 1000; position: fixed;">
+<!-- <div style="margin-left: -250px; margin-top: -10px; padding: 0px; width: 100%; height: 100%; float: left; background-color: rgba(157, 157, 157, 0.3); z-index: 1000; position: fixed;">
 <center>
-  <div style="margin-top: 25%; color: black; font-size: 40pt;">
-    <i class="fa fa-spinner fa-spin"></i>
+  <div style="width: 300px; padding: 15px; border-radius: 5px; margin-top: 20%; background-color: rgba(255, 255, 255, 0.7); color: grey; font-size: 30pt;">
+    <i style="font-size: 40pt;" class="fa fa-spinner fa-spin"></i></br>
+    CARGANDO
   </div>
 </center>
-</div> <!-- del div de loading -->
+</div> -->
 
   <div class="container body" >
   
