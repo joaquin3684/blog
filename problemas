@@ -4,32 +4,6 @@ hay entidades que tienen son ellas las que hacen sus creditos, entonces tiene qu
 
 ---------------FRONTEND---------------
 
-Cobro
-- ponerle mensajes al realizar acciones
-- actualizar tabla luego de cobrar
-- poner en el input de cada registro lo que falta para saldar la deuda automaticamente
-- mostrar total en el final de esos input
-- poder poner numeros con coma
-{
-Organismo-> Socios -> ventas
-
-En socios y ventas:
-legajo y nombre (solo socios)
-nombre servicio (venta)
-checkbox en cada fila, al arrancar todos tildados, posibilidad de tildar o destildar todos
-monto ha cobrar
-input en cada fila, cuanto cobro de lo que me deben, al principio se carga con el monto toal ha cobrar
-
-Al final:
-boton cobrar, diferente url para socios y ventas, en socios mandar el json "id": id_socio, "monto": monto del imput. Para venta mandar "id" y "monto".
-url socio: mostrar socio: cobrar/porSocio
-            cobrar: cobrar/cobroPorPrioridad
-url ventas: mostrar: cobrar/mostrarPorVenta
-            cobrar: cobrar/cobroPorVenta
-Todos los method son post
-}
-
-
 SERVICIO DE MENSAJES
 
 - hay que cambiar el servicio de mensajes, con respecto a los errores.
@@ -38,20 +12,6 @@ SERVICIO DE MENSAJES
 
 'Si no es Error deberia lanzar un mensaje del tipo success'
 
-
-Cobro cuotas sociales
-- hacer pantalla
-- tiene que tener una tabla que muestre por organismo, con lo que se debe
-- al presionar un registro de la tabla organismos se tiene que mostrar una por socio con un input para poder registrar el cobro,
-- se tiene que poder poner un valor que sea para todos igual (pongo por ejemplo 120 y en todos los demas se pone 120)
-- tiene que estar el boton para realizar la accion de cobro
-- poder poner numeros con coma
-
-Cuenta corrientes cuotas sociales
-
-- poner filtros
-
-
 dar_servicio
 
 - emitir orden de descuento para imprimir
@@ -59,9 +19,10 @@ dar_servicio
 - ajustar pagina para celular
 - poner sentinel
 
+
 ABMS TODOS
 - Poner para imprimir.
-- Poner para pdf.
+- Poner para pdf, excel.
 - Poner sentinel.
 - Filtros Columnas.
 - Poner mostrar todos (SI ES QUE SE PUEDE)
@@ -75,53 +36,24 @@ abm_usuarios
 
 abm_roles
 
-- poner para imprimir
-- poner para pasar a pdf, excel
 - poner las funciones de editar y borrar
-- poner sentinel
-- Filtros columnas
 
 
 
 abm_organismos
 
-- poner para imprimir
-- poner para pasar a pdf
-- Filtros columnas
 - Agregar la columna "Organismo"
 
 
 abm_proovedores
 
-- poner para imprimir
-- poner para pasar a pdf
-- poner mensajes cuando se realiza una operacion
 - poder poner numeros con coma
-- Filtros columnas
+
 
 
 abm_socios
 
 - en la visualizacion de la tabla tienen que estar todos los datos
-- poner para imprimir
-- poner para pasar a pdf
-- Filtros columnas
-
-Cuentas corrientes
-
-- poder imprimir, pdf, excel
-
-
-Pago proovedores
-
--> un boton pagar que pague todo y uno de imprimir por proveedor
--> pero se tiene que poder ver el detalle
--> campos de la tabla del detalle (legajo, socio, vto, monto de cuota, nro cuota, id servicio, nro credito, estado cobro
-
-
-
-Cancelacion de servicio
-- tiene que haber una tabla con los servicios para cancelar --> no sería el "Cancelar" de la pantalla aprobacion??
 
 
 Cuenta corriente agente financiero
@@ -139,15 +71,5 @@ Cuenta corriente agente financiero
 
 ---------------- BACKEND -----------------------
 
-Cuotas sociales
-se cargan todos los primeros de mes
-
-
-
-Cancelacion de servicio
--listar los servicios para cancelar
-- un socio puede deber muchas cuotas y abonarlas todas de una, pueden pasar dos cosas en la gestion de cobranza
-1- si por ejemplo debe 400 pesos se cancela por 400 pesos es decir se da todo de pagado normal
-2- cancela pero el proveedor establece una quita, esta es arbitraria (puede ser un porcentaje o un valor) por ejemplo si debiese 400 pesos el proveedor puede decir que me pague 300
 
 ---------------- FIN -----------------------

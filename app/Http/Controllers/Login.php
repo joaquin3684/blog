@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 
+use App\Exceptions\UsuarioOPasswordErroneosException;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 
@@ -18,16 +19,13 @@ class Login extends Controller
 
 	public function login(Request $request)
 	{
-		$pum = Sentinel::authenticate($request->all());
 		if(Sentinel::check())
 		{
 		    $registros = [];
 		    return view('ABM_socios',compact('registros'));
-			return redirect('/asociados');
 		} else {
-			return ['mierda' => 'caca'];
+            throw new UsuarioOPasswordErroneosException('login_incorrecto');
 		}
-		return Sentinel::check();
 	}
 
 	public function logout()

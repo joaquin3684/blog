@@ -23,14 +23,19 @@ return [
         'detail' => 'The resource you were looking for was not found.'
     ],
 
-    'precondition_failed' => [
-        'title'  => 'The server does not meet one of the preconditions that the requester put on the request.',
-        'detail' => 'Your request did not satisfy the required preconditions.'
+    'error_sistema' => [
+        'title'  => 'Hay un error en el sistema.',
+        'detail' => 'Por favor contactase con el personal de sistemas para solucionar estos problemas.'
     ],
 
     'exceso_de_plata' => [
     'title'  => 'Cantidad de dinero ingresada erronea.',
     'detail' => 'La cantidad de dinero ingresada es superior al monto que se puede cobrar.'
+    ],
+
+    'login_incorrecto' => [
+        'title'  => 'El usuario/contraseña ingresados incorrectos.',
+        'detail' => 'Por favor ingresar un usuario y contraseña validos.'
     ],
 
 ];

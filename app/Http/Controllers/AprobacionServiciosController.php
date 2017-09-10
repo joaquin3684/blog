@@ -51,7 +51,8 @@ class AprobacionServiciosController extends Controller
                 {
                     $cuotaRepo->create(['nro_cuota' => $i, 'importe' => $importeCuota, 'cuotable_id' => $venta->getId(), 'cuotable_type' => 'App\Ventas', 'fecha_vencimiento' => $carbon->toDateString(), 'fecha_inicio' => $fechaHoy->toDateString()]);
 
-                    $fechaHoy = Carbon::create($carbon->year, $carbon->month, $carbon->day);
+                    $aux = Carbon::create($carbon->year, $carbon->month, $carbon->day);
+                    $fechaHoy = $aux->addDay();
                     $carbon->addMonth();
                 }
 

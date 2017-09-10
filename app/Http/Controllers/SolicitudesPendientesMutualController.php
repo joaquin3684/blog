@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Cuotas;
 use App\Repositories\Eloquent\FileManager;
+use App\Repositories\Eloquent\Generadores\GeneradorCuotas;
+use App\Repositories\Eloquent\Generadores\GeneradorVenta;
 use App\Repositories\Eloquent\GeneradorNumeroCredito;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudesSinInversionistaGateway;
@@ -69,75 +71,32 @@ class SolicitudesPendientesMutualController extends Controller
 
         DB::transaction(function () use ($request){
 
-            $fecha_ingreso = Carbon::today()->toDateString();
-            $ventasRepo = new VentasRepo();
-            $proveedorRepo = new ProveedoresRepo();
-            $cuotasRepo = new CuotasRepo();
             //TODO: aca se tiene que ejecutar el proceso para que se refleje en la contabilidad
             $elem = $request->all();
             $sol = $this->solicitudesGateway->update($elem, $elem['id']);
-
-
+            $proveedorRepo = new ProveedoresRepo();
             $sol->socio()->restore();
             if($sol->socio->cuotasSociales->count() == 0)
             {
-                $fechaInicioCuota = Carbon::today()->toDateString();
-                $fechaVencimientoCuota = Carbon::today()->addMonths(2)->toDateString();
-                $cuota = Cuotas::create([
-                    'fecha_inicio' => $fechaInicioCuota,
-                    'fecha_vencimiento' => $fechaVencimientoCuota,
-                    'importe' => $sol->socio->organismo->cuota_social,
-                    'nro_cuota' => 1,
-                ]);
-                $sol->socio->cuotasSociales()->save($cuota);
+                GeneradorCuotas::generarCuotaSocial($sol->socio->organismo->cuota_social, $sol->socio->id);
             }
+
             $socioPosta = $sol->socio;
+            $fecha_ingreso = Carbon::today()->toDateString();
             $socioPosta->fecha_ingreso = $fecha_ingreso;
             $socioPosta->save();
 
             $socio = $sol->id_socio;
             $cuotas = $sol->cuotas;
             $montoPorCuota = $sol->monto_por_cuota;
-            $total = $montoPorCuota * $cuotas;
             $proveedor = $sol->agente_financiero;
             $proveedor = $proveedorRepo->findProductos($proveedor);
             $producto = $proveedor->getProductos()->first();
 
-            $fechaVto = new Carbon();
-            $fechaInicio = new Carbon();
-            $fechaInicioDeVto = $fechaVto->today()->addMonths(2);
-            $venta = $ventasRepo->create([
-                'id_asociado' => $socio,
-                'id_producto' => $producto->getId(),
-                'nro_cuotas' => $cuotas,
-                'importe' => $total,
-                'fecha_vencimiento' => $fechaInicioDeVto->toDateString(),
-            ]);
-            GeneradorNumeroCredito::generar($venta);
-            $fechaInicio->today();
-            $cuotasRepo->create([
-                'cuotable_id' => $venta->getId(),
-                'cuotable_type' => 'App\Ventas',
-                'importe' => $montoPorCuota,
-                'fecha_inicio' => $fechaInicio->toDateString(),
-                'fecha_vencimiento' => $fechaInicioDeVto->toDateString(),
-                'nro_cuota' => '1',
-            ]);
-            $fechaInicio->addMonths(2);
-            for ($i = 2; $i <= $cuotas; $i++) {
-                $fechaInicioDeVto = $fechaInicioDeVto->addMonth();
-                $cuotasRepo->create([
-                    'cuotable_id' => $venta->getId(),
-                    'cuotable_type' => 'App\Ventas',
-                    'importe' => $montoPorCuota,
-                    'fecha_inicio' => $fechaInicio->toDateString(),
-                    'fecha_vencimiento' => $fechaInicioDeVto->toDateString(),
-                    'nro_cuota' => $i,
-                ]);
-                $fechaInicio = $fechaInicio->addMonth();
-            }
+            GeneradorVenta::generarVenta($socio, $producto, $cuotas, $montoPorCuota);
         });
     }
+
 
     public function fotos(Request $request)
     {
