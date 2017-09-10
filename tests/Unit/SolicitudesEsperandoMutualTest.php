@@ -34,7 +34,6 @@ class SolicitudesEsperandoMutualTest extends TestCase
     }
 
 
-    // TODO:: hay que testear que cuando aprobas la solicitud de un socio que nunca fue socio cree la cuota social y vicebersa
     public function getData()
     {
         return collect([

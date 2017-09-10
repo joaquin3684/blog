@@ -79,11 +79,10 @@ class ComercializadorController extends Controller
             FileManager::uploadImage($doc_recibo, $ruta, 'doc_recibo.png');
             FileManager::uploadImage($doc_cbu, $ruta, 'doc_cbu.png');
             FileManager::uploadImage($doc_documento, $ruta, 'doc_documento.png');
-            if($request->file('doc_endeudamiento')->isValid())
+            if($request->hasFile('doc_endeudamiento'))
             {
                 FileManager::uploadImage($doc_endeudamiento, $ruta, 'doc_endeudamiento.png');
             }
-            throw new MasPlataCobradaQueElTotalException('exceso_de_plata');
         });
 
     }

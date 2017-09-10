@@ -86,7 +86,6 @@ class CobrarPorSocioTest extends TestCase
      */
     public function testQueSalgaLaExcepcionCuandoPongoPlataDeMas()
     {
-        //todo : pensar como hacer para que la excepcion funcione bien
         $monto = 5001;
         $socioRepo = new SociosRepo();
         $socio = $socioRepo->conTodo(1);
