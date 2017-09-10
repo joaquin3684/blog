@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Eloquent\Generadores\GeneradorCuotas;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
 use App\Repositories\Eloquent\Repos\EstadoVentaRepo;
 use App\Repositories\Eloquent\Repos\VentasRepo;
 use App\Ventas;
-use Sentinel;
 use Carbon\Carbon;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 
 class AprobacionServiciosController extends Controller
@@ -41,20 +42,8 @@ class AprobacionServiciosController extends Controller
             $venta = $ventasRepo->find($id);
             if($estado == 'APROBADO')
             {
-                $cuotaRepo = new CuotasRepo();
-                $fecha = $venta->getFechaVencimiento();
-                $carbon = Carbon::createFromFormat('Y-m-d', $fecha);
-                $fechaHoy = Carbon::today();
-                $importeCuota = $venta->getImporte() / $venta->getNroCuotas();
+                GeneradorCuotas::generarCuotasVenta($venta);
 
-                for($i=1; $venta->getNroCuotas() >= $i; $i++)
-                {
-                    $cuotaRepo->create(['nro_cuota' => $i, 'importe' => $importeCuota, 'cuotable_id' => $venta->getId(), 'cuotable_type' => 'App\Ventas', 'fecha_vencimiento' => $carbon->toDateString(), 'fecha_inicio' => $fechaHoy->toDateString()]);
-
-                    $aux = Carbon::create($carbon->year, $carbon->month, $carbon->day);
-                    $fechaHoy = $aux->addDay();
-                    $carbon->addMonth();
-                }
 
             }
             if($estado == 'RECHAZADO')
