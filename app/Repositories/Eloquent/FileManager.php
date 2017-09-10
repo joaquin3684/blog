@@ -8,6 +8,7 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -37,13 +38,14 @@ class FileManager
 
         $j = Storage::disk('public')->exists('solicitudes/solicitud'.$id.'/doc_endeudamiento.png');
 
-        $endeudamiento =  $j == true ? Image::make($path5)->encode('data-url') : null;
+        $solGate = new SolicitudGateway();
+        $endeudamiento =  $j == true ? Image::make($path5)->encode('data-url') : $solGate->find($id)->doc_endeudamiento;
 
         $imagenes->put('doc_domicilio', $domicilio);
         $imagenes->put('doc_recibo', $recibo);
         $imagenes->put('doc_documento', $documento);
         $imagenes->put('doc_cbu', $cbu);
-        $h = $j == true ? $imagenes->put('doc_endeudamiento', $endeudamiento) : false;
+        $imagenes->put('doc_endeudamiento', $endeudamiento);
 
         return $imagenes;
 
