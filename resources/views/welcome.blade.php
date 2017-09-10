@@ -106,35 +106,47 @@
 
                   </ul>
                 </li>
-                 <li><a><i class="fa fa-gears"></i> Operaciones <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-bank"></i> Cuentas Corrientes <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="dar_servicio">Dar servicio</a>
+                    <li><a href="ventas">CC Servicios/Prestamos</a>
                     </li>
-                    <li><a href="ventas">Cuentas corrientes</a>
+                    <li><a href="cc_cuotasSociales">CC Cuotas Sociales</a>
                     </li>
-                    <li><a href="aprobacion">Aprobar Servicios</a>
+                  </ul>
+                </li>
+                  <li><a><i class="fa fa-dollar"></i> Cobros <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="cobrar">Cobrar Servicios/Prestamos</a>
                     </li>
-                    <li><a href="pago_proovedores">Pago a Proveedores</a>
+                    <li><a href="cobroCuotasSociales">Cobrar Cuotas Sociales</a>
+                    </li>
+                  </ul>
+                </li><li><a><i class="fa fa-gears"></i> Gestion de cobranza <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="dar_servicio">Alta Gestion Servicio/Prestamo</a>
+                    </li>
+                    <li><a href="aprobacion">Aprobacion Servicio/Prestamo</a>
+                    </li>
+                  </ul>
+                </li>
+                 <li><a><i class="fa fa-briefcase"></i> Agente Financiero <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="agente_financiero">Solicitudes</a>
                     </li>
 
-                  </ul>
-                </li>
-                 <li><a><i class="fa fa-plug"></i> Atajos para Test <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="comercializador">Generar Solicitud</a>
-                    </li>
-                    <li><a href="agente_financiero">Agente Financiero</a>
-                    </li>
-                    <li><a href="solicitudesPendientesMutual">Solicitudes Pendientes</a>
-                    </li>
-                      <li><a href="correrVto">Correr vto</a>
-                      </li>
-                      <li><a href="proveedorCC">Cuenta Corriente Agente</a>
+
+                      <li><a href="proveedorCC">Cuenta Corriente</a>
                       </li>
                   </ul>
                 </li>
-               
-                </li>
+
+                  </li>
+                  <li><a href="comercializador"><i class="fa fa-pencil"></i>Generar Solicitud</a>
+                  </li>
+                  <li><a href="correrVto"><i class="fa fa-calendar"></i>Correr Vto Servicio/Prestamo</a>
+                  </li>
+                  <li><a href="solicitudesPendientesMutual"><i class="fa fa-clock-o"></i>Solicitudes Pendientes</a>
+                  </li>
               </ul>
             </div>
 

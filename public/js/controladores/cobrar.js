@@ -30,7 +30,10 @@ $scope.sumarMontosACobrar = function (elemsFiltrados, elems){
     sumaMontoTotal += elem.totalACobrar;
   });
   elems.forEach(function(elem) {
-    sumaMontoACobrar += elem.montoACobrar;
+    if(elem.checked){
+      sumaMontoACobrar += elem.montoACobrar;    
+    }
+
   });
 
   $scope.sumaMontoTotal = sumaMontoTotal;

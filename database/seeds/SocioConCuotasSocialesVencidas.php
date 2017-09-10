@@ -13,6 +13,7 @@ class SocioConCuotasSocialesVencidas extends Seeder
     public function run()
     {
         $hoy = Carbon::today()->subMonths(4);
+        $hoy->addDay();
         $vto = Carbon::today()->subMonths(3);
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 

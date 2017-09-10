@@ -12,6 +12,6 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        'pruebas', 'correrVto/correrServicio', 'comercializador/altaSolicitud'
+        'pruebas', 'correrVto/correrServicio', 'solicitudesPendientesMutual/aprobarSolicitud'
     ];
 }

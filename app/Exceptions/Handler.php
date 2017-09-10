@@ -53,13 +53,13 @@ class Handler extends ExceptionHandler
         return $this->handle($request, $e);
     }
 
+    /**
+     * @param $request
+     * @param Exception $e
+     * @return \Illuminate\Http\JsonResponse
+     */
     private function handle($request, Exception $e)
     {
-
-        /*if ($e instanceOf MiExceptionClass) {
-            $data   = $e->toArray();
-            $status = $e->getStatus();
-        }*/
 
         if ($e instanceOf MasPlataCobradaQueElTotalException) {
             $data = array_merge([
@@ -68,15 +68,27 @@ class Handler extends ExceptionHandler
             ], config('errors.exceso_de_plata'));
 
             $status = 404;
-        }
+        } else if ($e instanceOf UsuarioOPasswordErroneosException) {
+            $data = array_merge([
+                'id'     => 'login_incorrecto',
+                'status' => '404'
+            ], config('errors.login_incorrecto'));
 
-        if ($e instanceOf MethodNotAllowedHttpException) {
+            $status = 404;
+        } else if ($e instanceOf MethodNotAllowedHttpException) {
             $data = array_merge([
                 'id'     => 'method_not_allowed',
-            'status' => '405'
-        ], config('errors.method_not_allowed'));
+                'status' => '405'
+            ], config('errors.method_not_allowed'));
 
-        $status = 405;
+            $status = 405;
+        } else {
+            $data = array_merge([
+                'id'     => 'error_sistema',
+                'status' => '404'
+            ], config('errors.error_sistema'));
+
+            $status = 405;
         }
 
         return response()->json($data, $status);

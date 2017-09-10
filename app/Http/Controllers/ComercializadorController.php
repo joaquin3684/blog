@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\MasPlataCobradaQueElTotalException;
 use App\Repositories\Eloquent\DesignadorDeEstado;
 use App\Repositories\Eloquent\DesignarAgenteFinanciero;
 use App\Repositories\Eloquent\FileManager;
@@ -44,42 +45,45 @@ class ComercializadorController extends Controller
      */
     public function altaSolicitud(Request $request)
     {
-        $elementos = $request->all();
-        $col = collect($request->all());
-        $filtro = $elementos['filtro'] == '' ? [] : $elementos['filtro'];
-        //$a = Sentinel::authenticate(['usuario' => $elementos['usuario'], 'password' => $elementos['password']]);
-        $usuario = Sentinel::check();
+        DB::transaction(function () use ($request){
 
-        $agentes = DB::table('proovedores')
-            ->join('productos', 'proovedores.id', '=', 'productos.id_proovedor')
-            ->where('productos.tipo', 'Credito')
-            ->select('proovedores.*', 'productos.tipo');
 
-        $agentesFiltrados = \App\Repositories\Eloquent\Filtros\ProovedoresFilter::apply($filtro, $agentes);
+            $elementos = $request->all();
+            $col = collect($request->all());
+            $filtro = $elementos['filtro'] == '' ? [] : $elementos['filtro'];
+            $usuario = Sentinel::check();
 
-        $agentes = $agentesFiltrados->map(function($agente){
-           return $this->proveedorRepo->find($agente->id);
+            $agentes = DB::table('proovedores')
+                ->join('productos', 'proovedores.id', '=', 'productos.id_proovedor')
+                ->where('productos.tipo', 'Credito')
+                ->select('proovedores.*', 'productos.tipo');
+
+            $agentesFiltrados = \App\Repositories\Eloquent\Filtros\ProovedoresFilter::apply($filtro, $agentes);
+
+            $agentes = $agentesFiltrados->map(function($agente){
+               return $this->proveedorRepo->find($agente->id);
+            });
+
+            $comercializador = $this->comerRepo->findByUser($usuario->id);
+            $solicitud = $comercializador->generarSolicitud($col, $agentes);
+
+            $ruta = 'solicitudes/solicitud'.$solicitud->getId();
+
+            $doc_endeudamiento = $request->hasFile('doc_endeudamiento') ? $request->doc_endeudamiento : null;
+            $doc_domicilio = $request->doc_domicilio;
+            $doc_recibo = $request->doc_recibo;
+            $doc_cbu = $request->doc_cbu;
+            $doc_documento = $request->doc_documento;
+
+            FileManager::uploadImage($doc_domicilio, $ruta, 'doc_domicilio.png');
+            FileManager::uploadImage($doc_recibo, $ruta, 'doc_recibo.png');
+            FileManager::uploadImage($doc_cbu, $ruta, 'doc_cbu.png');
+            FileManager::uploadImage($doc_documento, $ruta, 'doc_documento.png');
+            if($request->hasFile('doc_endeudamiento'))
+            {
+                FileManager::uploadImage($doc_endeudamiento, $ruta, 'doc_endeudamiento.png');
+            }
         });
-
-        $comercializador = $this->comerRepo->findByUser($usuario->id);
-        $solicitud = $comercializador->generarSolicitud($col, $agentes);
-
-        $ruta = 'solicitudes/solicitud'.$solicitud->getId();
-
-        $doc_endeudamiento = $request->hasFile('doc_endeudamiento') ? $request->doc_endeudamiento : null;
-        $doc_domicilio = $request->doc_domicilio;
-        $doc_recibo = $request->doc_recibo;
-        $doc_cbu = $request->doc_cbu;
-        $doc_documento = $request->doc_documento;
-
-        FileManager::uploadImage($doc_domicilio, $ruta, 'doc_domicilio.png');
-        FileManager::uploadImage($doc_recibo, $ruta, 'doc_recibo.png');
-        FileManager::uploadImage($doc_cbu, $ruta, 'doc_cbu.png');
-        FileManager::uploadImage($doc_documento, $ruta, 'doc_documento.png');
-        if($request->file('doc_endeudamiento')->isValid())
-        {
-            FileManager::uploadImage($doc_endeudamiento, $ruta, 'doc_endeudamiento.png');
-        }
 
     }
 

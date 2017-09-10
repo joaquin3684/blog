@@ -6,7 +6,7 @@
  * Time: 16:21
  */
 
-namespace App\Repositories\Eloquent;
+namespace App\Repositories\Eloquent\Generadores;
 
 
 use App\Repositories\Eloquent\Repos\VentasRepo;

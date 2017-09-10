@@ -84,6 +84,18 @@ class Cuota
         return $this->importe > $this->totalEntradaDeMovimientosDeCuota();
     }
 
+    public function cancelar($motivo)
+    {
+
+        $cobrado = $this->montoAdeudado();
+        $this->estado = $motivo;
+        $fecha = Fechas::getFechaHoy();
+        $array = array('identificadores_id' => $this->id, 'identificadores_type' => 'App\Cuotas', 'entrada' => $cobrado, 'fecha' => $fecha);
+        $this->addMovimiento($array);
+        $data = $this->toArray($this);
+        $this->cuotasRepo->update($data, $this->id);
+    }
+
 
     public function montoAdeudado()
     {

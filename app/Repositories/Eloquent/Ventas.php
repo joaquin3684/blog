@@ -10,6 +10,7 @@ namespace App\Repositories\Eloquent;
 use App\Repositories\Eloquent\Cobranza\CobrarPorVenta;
 use App\Repositories\Eloquent\Mapper\CuotasMapper;
 use App\Repositories\Eloquent\Mapper\VentasMapper;
+use App\Repositories\Eloquent\Repos\MovimientosRepo;
 use App\Repositories\Eloquent\Repos\VentasRepo;
 use App\Ventas as ModelVentas;
 use App\Traits\Conversion;
@@ -54,6 +55,18 @@ class Ventas
             return $cuota->estaImpaga();
         });
     }
+
+    public function cancelar($motivo)
+    {
+        $cuotasImpagas = $this->getCuotas()->filter(function($cuota){
+            return $cuota->estaImpaga();
+        })->sortBy('nro_cuota');
+        
+        $cuotasImpagas->each(function($cuota) use ($motivo){
+            $cuota->cancelar($motivo);
+        });
+    }
+
 
     /**
      * @return mixed

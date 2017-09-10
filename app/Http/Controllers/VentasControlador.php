@@ -215,4 +215,15 @@ class VentasControlador extends Controller
             }
     }
 
+    public function cancelarVenta(Request $request)
+    {
+        DB::transaction(function() use ($request) {
+            $ventaRepo = new VentasRepo();
+            $elem = $request->all();
+            $id = $elem['id_venta'];
+            $motivo = $elem['motivo'];
+            $venta = $ventaRepo->findWithCuotas($id);
+            $venta->cancelar($motivo);
+        });
+    }
 }
