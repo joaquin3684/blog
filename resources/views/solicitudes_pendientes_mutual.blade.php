@@ -278,7 +278,7 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                      <button type="button" ng-click="AsignarAF()" class="btn btn-primary">ASIGNAR AGENTE FINANCIERO</button>
+                      <button type="button" ng-click="AsignarAF()" data-dismiss="modal" class="btn btn-primary">ASIGNAR AGENTE FINANCIERO</button>
                       </div>
                     </div>
           </form>
@@ -307,7 +307,7 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                      <button type="button" ng-click="AsignarEndeudamiento()" class="btn btn-primary">ASIGNAR ENDEUDAMIENTO</button>
+                      <button data-dismiss="modal" type="button" ng-click="AsignarEndeudamiento()" class="btn btn-primary">ASIGNAR ENDEUDAMIENTO</button>
                       </div>
                     </div>
           </form>

@@ -89,15 +89,17 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
             {
 
                     console.log(response);
-                    UserSrv.MostrarMensaje("OK","El agente financiero fué asignado correctamente.","OK","mensajemodal","AgenteFinanciero");
+                    UserSrv.MostrarMensaje("OK","El agente financiero fué asignado correctamente.","OK","mensaje");
                     $scope.pullSolicitudes();
 
             }, function errorCallback(data)
             {
 
-                    UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensajemodal","AgenteFinanciero");
+                    UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
 
             });
+
+            $('#AgenteFinanciero').modal('hide');
     }
 
     $scope.AprobarSolicitud = function(id) {
@@ -123,15 +125,16 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
             }).then(function successCallback(response)
             {
                     console.log(response);
-                    UserSrv.MostrarMensaje("OK","El endeudamiento fué asignado correctamente.","OK","mensajemodal2","Endeudamiento");
+                    UserSrv.MostrarMensaje("OK","El endeudamiento fué asignado correctamente.","OK","mensaje");
                     $scope.pullSolicitudes();
 
             }, function errorCallback(data)
             {
 
-                    UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensajemodal","Endeudamiento");
+                    UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
 
             });
+            $('#Endeudamiento').modal('hide');
     }
 
     $scope.getAgentes = function (){

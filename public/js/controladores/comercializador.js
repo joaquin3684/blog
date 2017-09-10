@@ -35,6 +35,9 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             console.log(data.data);
         });
 
+        //ESTOY ARMANDO UN SERVICE INTEGRAL -- NO TOCAR
+        //$scope.paramssolicitudes = UserSrv.RequestTable('comercializador/solicitudes','get');
+        
 
 
     }
@@ -44,6 +47,10 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         $scope.upload($scope.file);
       
     };
+
+    $scope.funcion = function(){
+        
+    }
 
     // upload on file select or drop
     $scope.upload = function (file) {
@@ -176,13 +183,13 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         }).then(function successCallback(response)
         {
             
-                UserSrv.MostrarMensaje("OK","La propuesta fue aceptada correctamente.","OK","mensajemodal","ContraPropuesta");
+                UserSrv.MostrarMensaje("OK","La propuesta fue aceptada correctamente.","OK","mensaje");
                 $scope.pullComercializadores();
 
         }, function errorCallback(data)
         {
 
-                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensajemodal");
+                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
 
         });
 
@@ -197,13 +204,13 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         }).then(function successCallback(response)
         {
             
-                UserSrv.MostrarMensaje("OK","La contra propuesta fue enviada correctamente.","OK","mensajemodal","ContraPropuesta");
+                UserSrv.MostrarMensaje("OK","La contra propuesta fue enviada correctamente.","OK","mensaje");
                 $scope.pullComercializadores();
 
         }, function errorCallback(data)
         {
 
-                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensajemodal");
+                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
 
         });
 

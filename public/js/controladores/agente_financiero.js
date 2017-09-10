@@ -101,19 +101,21 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
             }).then(function successCallback(response)
             {
                 
-                    UserSrv.MostrarMensaje("OK","La propuesta fue enviada correctamente.","OK","mensajemodal","ContraPropuesta");
+                    UserSrv.MostrarMensaje("OK","La propuesta fue enviada correctamente.","OK","mensaje");
                     $scope.pullSolicitudes();
 
             }, function errorCallback(data)
             {
 
-                    UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensajemodal");
+                    UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
 
             });
 
         } else {
-            UserSrv.MostrarMensaje("Error","El monto por cuota y las cuotas son incongruentes con el importe total.","Error","mensajemodal");
+            UserSrv.MostrarMensaje("Error","El monto por cuota y las cuotas son incongruentes con el importe total.","Error","mensaje");
         }
+
+        $('#Propuesta').modal('hide');
     }
 
     $scope.AceptarContraPropuesta = function () {
@@ -125,15 +127,17 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
         }).then(function successCallback(response)
         {
             
-                UserSrv.MostrarMensaje("OK","La contra propuesta fue aceptada correctamente.","OK","mensajemodal2","AnalizarPropuesta");
+                UserSrv.MostrarMensaje("OK","La contra propuesta fue aceptada correctamente.","OK","mensaje");
                 $scope.pullSolicitudes();
 
         }, function errorCallback(data)
         {
 
-                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensajemodal2");
+                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
 
         });
+
+        $('#AnalizarPropuesta').modal('hide');
 
     }
 
@@ -156,6 +160,8 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
 
         });
 
+        $('#AnalizarPropuesta').modal('hide');
+
         }
 
         $scope.RechazarSolicitud = function (id) {
@@ -172,6 +178,8 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
         {
                 UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
         });
+
+        $('#AnalizarPropuesta').modal('hide');
 
         }
 

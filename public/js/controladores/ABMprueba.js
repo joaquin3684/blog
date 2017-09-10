@@ -93,6 +93,14 @@ $scope.traerRelaciones = function(relaciones)
         
    }
 
+   $scope.cambiarFecha = function(dato){
+      moment.locale('es');
+      fecha= dato.fecha_nacimiento;
+      var fecha= moment(fecha, 'YYYY-MM-DD').format('L');
+      dato.fecha_nacimiento= fecha;
+      return dato;
+    }
+
    $scope.traerElementos = function(relaciones)
    {  
       var metodito = 'get';
@@ -111,7 +119,11 @@ $scope.traerRelaciones = function(relaciones)
             else
             {
                 console.log(response);
+                if(abm == 'asociados'){
+                $scope.datosabm =response.data.map($scope.cambiarFecha);
+                } else {
                 $scope.datosabm = response.data;
+                }
                 $scope.paramsABMS = new NgTableParams({
                     page: 1,
                     count: 10

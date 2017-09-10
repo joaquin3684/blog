@@ -1,8 +1,9 @@
-angular.module('Mutual.services', [])
+angular.module('Mutual.services', ['ngTable'])
 
 
-.service('UserSrv', function($http,$mdDialog){
+.service('UserSrv', function($http,$mdDialog, NgTableParams,$filter){
 
+    var that = this;
     this.MostrarMensaje = function(titulo,mensaje,tipo,sector,nombremodal){
         if(tipo != 'Error'){
             $('#'+sector).html('<div class="alert alert-success" role="alert"><strong>¡'+titulo+'!</strong> '+mensaje+'</div>');
@@ -38,12 +39,52 @@ angular.module('Mutual.services', [])
 
    }
 
-    this.GetEspecialidades = function(){
+   this.Params = function(array){
+   
+            
+        newParams = new NgTableParams({
+                    page: 1,
+                    count: 10
+                }, {
+                    total: array.length,
+                    getData: function (params) {
+                        array = $filter('orderBy')(array, params.orderBy());
+                        return array.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    }
+                });
+        console.log(newParams);
+        return newParams;
+    }
+
+    this.RequestTable = function(url,metodo){
+
+        $http({
+            url: url,
+            method: metodo
+        }).then(function successCallback(response)
+        {
+            if(typeof response.data === 'string')
+            {
+                return [];
+            }
+            else
+            {
+                recibido = that.Params(response.data);
+                return recibido;
+            }
+
+        }, function errorCallback(data)
+        {
+            console.log(data.data);
+        });
 
     }
+
     this.ShowLoading = function(){
        var path = '';
        return path;
     }
+
+    
 
 });
