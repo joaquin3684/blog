@@ -577,7 +577,7 @@
                                     <!-- END TABLE -->
                                 </div>
                                 <!-- Trigger the modal with a button -->
-                                <button type="button" class="btn btn-primary clearfix" data-toggle="modal" data-target="#myModal">Cancelar</button>
+                                <button type="button" class="btn btn-primary clearfix" data-toggle="modal" data-target="#myModal" ng-hide="cuotas[0].estado == 'Renovado' || cuotas[0].estado == 'Cancelado'">Cancelar Servicio</button>
 
                                 <!-- Modal -->
                                 <div id="myModal" class="modal fade" role="dialog">

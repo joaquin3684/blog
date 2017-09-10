@@ -212,9 +212,10 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
             else
             {
 
-                $scope.cuotas =response.data.cuotas.map($scope.cambiarFechaCuotas)
+                $scope.cuotas =response.data.cuotas.map($scope.cambiarFechaCuotas);
                 // $scope.cuotas = response.data.cuotas;
                 //var datacuotas = response.data;
+                console.log($scope.cuotas[0].estado);
                 $scope.productodelacuota = response.data.producto.proovedor.razon_social;
                 $scope.vistaactual = 'Cuotas';
                 console.log(response);
@@ -254,6 +255,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
       {
         $scope.PullCuotas($scope.ventaActual, $scope.productoactual)
         console.log("Exito al cancelar");
+        $('#myModal').modal('hide');
       }, function errorCallback(data)
         {
             console.log(data.data);
