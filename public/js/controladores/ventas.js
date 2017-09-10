@@ -219,6 +219,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                 $scope.vistaactual = 'Cuotas';
                 console.log(response);
                 $scope.productoactual = nombreproducto;
+                $scope.ventaActual = idventa;
                 $scope.paramsCuotas = new NgTableParams({
                     page: 1,
                     count: 10
@@ -242,6 +243,24 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
         });
 
     }
+
+    $scope.cancelar = function (motivo){
+
+      $http({
+          url: 'ventas/cancelarVenta',
+          method: 'post',
+          data: {'id_venta': $scope.ventaActual, 'motivo': motivo}
+      }).then(function successCallback(response)
+      {
+        $scope.PullCuotas($scope.ventaActual, $scope.productoactual)
+        console.log("Exito al cancelar");
+      }, function errorCallback(data)
+        {
+            console.log(data.data);
+        });
+
+    }
+
 
     //PARAMETROS INICIALES
         $scope.vistaactual = 'Organismos';

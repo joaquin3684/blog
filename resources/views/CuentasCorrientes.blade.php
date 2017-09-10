@@ -9,6 +9,12 @@
   {!! Html::style('js/datatables/fixedHeader.bootstrap.min.css') !!}
   {!! Html::style('js/datatables/responsive.bootstrap.min.css') !!}
   {!! Html::style('js/datatables/scroller.bootstrap.min.css') !!}
+
+  <style>
+  .Cancelado {background-color: rgba(92, 184, 92, 0.5); color: black;}
+  .Renovado {background-color: rgba(217, 83, 79, 0.5); color: black;}
+  </style>
+
 <div class="nav-md" ng-controller="ventas">
     <div class="container body">
         <div class="main_container">
@@ -495,7 +501,7 @@
                                         <table ng-table="paramsCuotas" class="table table-hover table-bordered">
 
                                             <tbody data-ng-repeat="cuota in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                            <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,cuota.id_cuota)" >
+                                            <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,cuota.id_cuota)"  ng-class="cuota.estado">
                                                 <td title="'NroCuota'" filter="{ nro_cuota: 'text'}" sortable="'nro_cuota'">
                                                     {{cuota.nro_cuota}}
                                                 </td>
@@ -510,10 +516,10 @@
                                                   <span style="" ng-if="(cambiarFormato(cuota.fecha_vencimiento)> ActualDate)">{{cuota.importe}}</span>
                                                   <span style="color: red" ng-if="(cambiarFormato(cuota.fecha_vencimiento) < ActualDate)  && (cuota.cobrado < cuota.importe)">{{cuota.importe}}</span>
                                                   <span style="" ng-if="(cambiarFormato(cuota.fecha_vencimiento) < ActualDate) && (cuota.cobrado >= cuota.importe)">{{cuota.importe}}</span>
-                                                <td title="'Cobrado'" filter="{ cobrado: 'text'}" sortable="'totalCobrado'">
+                                                <td title="'Cobrado'" filter="{ cobrado: 'text'}" sortable="'totalCobrado'" >
                                                     {{cuota.cobrado}}
                                                 </td>
-                                                <td title="'Estado'" filter="{ estado: 'text'}" sortable="'estado'">
+                                                <td title="'Estado'" filter="{ estado: 'text'}" sortable="'estado'" >
                                                     {{cuota.estado}}
                                                 </td>
                                             </tr>
@@ -570,7 +576,37 @@
                                     </div>
                                     <!-- END TABLE -->
                                 </div>
+                                <!-- Trigger the modal with a button -->
+                                <button type="button" class="btn btn-primary clearfix" data-toggle="modal" data-target="#myModal">Cancelar</button>
 
+                                <!-- Modal -->
+                                <div id="myModal" class="modal fade" role="dialog">
+                                  <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Cancelacion</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <p>Seleccione un motivo de cancelacion.</p>
+                                        <div class="form-group">
+
+                                          <select class="form-control" ng-model="motivo" id="exampleFormControlSelect1">
+                                            <option value="Renovado">Renovar</option>
+                                            <option value="Cancelado">Cancelar</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary"  ng-click="cancelar(motivo)" style="position: absolute; left: 20px;">Realizar accion</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
                             </div>
                         </div>
                     </div>
