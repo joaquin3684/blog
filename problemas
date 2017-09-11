@@ -4,13 +4,6 @@ hay entidades que tienen son ellas las que hacen sus creditos, entonces tiene qu
 
 ---------------FRONTEND---------------
 
-SERVICIO DE MENSAJES
-
-- hay que cambiar el servicio de mensajes, con respecto a los errores.
-- desde el backend se va a mandar un array de json con lo siguiente
-{tipo: 'Error', titulo: 'aca va ir el titulo del mensaje', 'detalle':'aca va el detalle del error'}
-
-'Si no es Error deberia lanzar un mensaje del tipo success'
 
 dar_servicio
 
@@ -20,40 +13,6 @@ dar_servicio
 - poner sentinel
 
 
-ABMS TODOS
-- Poner para imprimir.
-- Poner para pdf, excel.
-- Poner sentinel.
-- Filtros Columnas.
-- Poner mostrar todos (SI ES QUE SE PUEDE)
-- Poner mensajes cuando se realizan acciones.
-
-
-abm_usuarios
-
-- poner las funciones de editar y borrar
-
-
-abm_roles
-
-- poner las funciones de editar y borrar
-
-
-
-abm_organismos
-
-- Agregar la columna "Organismo"
-
-
-abm_proovedores
-
-- poder poner numeros con coma
-
-
-
-abm_socios
-
-- en la visualizacion de la tabla tienen que estar todos los datos
 
 
 Cuenta corriente agente financiero

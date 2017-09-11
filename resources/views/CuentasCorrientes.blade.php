@@ -513,7 +513,7 @@
                                                 </td>
 
                                                 <td title="'Importe'" filter="{ importe: 'text'}" sortable="'totalACobrar'">
-                                                  <span style="" ng-if="(cambiarFormato(cuota.fecha_vencimiento)> ActualDate)">{{cuota.importe}}</span>
+                                                  <span style="" ng-if="(cambiarFormato(cuota.fecha_vencimiento)>= ActualDate)">{{cuota.importe}}</span>
                                                   <span style="color: red" ng-if="(cambiarFormato(cuota.fecha_vencimiento) < ActualDate)  && (cuota.cobrado < cuota.importe)">{{cuota.importe}}</span>
                                                   <span style="" ng-if="(cambiarFormato(cuota.fecha_vencimiento) < ActualDate) && (cuota.cobrado >= cuota.importe)">{{cuota.importe}}</span>
                                                 <td title="'Cobrado'" filter="{ cobrado: 'text'}" sortable="'totalCobrado'" >
