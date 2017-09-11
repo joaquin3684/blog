@@ -163,6 +163,8 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
 
     $scope.getFotos = function(idsolicitud)
     {
+        document.getElementById('endeudamientodiv').style.display = 'none';
+        document.getElementById('previsualizaciondiv').style.display = 'block';
         document.getElementById('previsualizacion').src = 'images/preload.png';
         $scope.idpropuestae = idsolicitud;
         return $http({
@@ -181,7 +183,17 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
     $scope.Comprobante = function (){
  
         archivo = $scope.comprobantevisualizar;
-        document.getElementById('previsualizacion').src = archivo;
+        if(!isNaN(archivo) && archivo != null){
+            document.getElementById('previsualizaciondiv').style.display = 'none';
+            document.getElementById('endeudamientodiv').style.display = 'block';
+            document.getElementById('endeud').innerHTML = archivo;
+        } else {
+            if(archivo != null){
+                document.getElementById('endeudamientodiv').style.display = 'none';    
+                document.getElementById('previsualizaciondiv').style.display = 'block';
+                document.getElementById('previsualizacion').src = archivo;
+            }
+        }
         
     }
 

@@ -232,19 +232,25 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         
                         <select ng-change="Comprobante()" class="form-control" placeholder="Comprobante a visualizar.." ng-model="comprobantevisualizar" >
-                          <option ng-repeat="x in DatosModalActual" ng-value="x.encoded" >
+                          <option ng-if="x.filename != null" ng-repeat="x in DatosModalActual" ng-value="x.encoded" >
                             {[{x.filename}]}
+                          </option>
+                          <option ng-if="x.filename == null" ng-repeat="x in DatosModalActual" ng-value="x">
+                              doc_endeudamiento
                           </option>
                         </select>
                       </div>
                     </div>
-
-                   
-
+                    <center>
+                    <div id="endeudamientodiv" style="color: black; display: none; font-size: 20pt;">
+                    Número de Endeudamiento: <b><a id="endeud" style="color: blue;"></a></b>
+                    </div></center>
+                    <div id="previsualizaciondiv">
                     </br>
                     <center>Previsualización</center>
                     </br>
                     <center><img src="images/preload.png" height="300px" width="300px" id="previsualizacion"></center>
+                    </div>
          </form>
       </div>
       

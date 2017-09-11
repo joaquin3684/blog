@@ -186,6 +186,8 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
 
     $scope.getFotos = function(idsolicitud)
     {
+        document.getElementById('endeudamientodiv').style.display = 'none';
+        document.getElementById('previsualizaciondiv').style.display = 'block';
         document.getElementById('previsualizacion').src = 'images/preload.png';
         $scope.idpropuestae = idsolicitud;
         return $http({
@@ -204,8 +206,18 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
     $scope.Comprobante = function (){
  
         archivo = $scope.comprobantevisualizar;
-        document.getElementById('previsualizacion').src = archivo;
-    
+        if(!isNaN(archivo) && archivo != null){
+            document.getElementById('previsualizaciondiv').style.display = 'none';
+            document.getElementById('endeudamientodiv').style.display = 'block';
+            document.getElementById('endeud').innerHTML = archivo;
+        } else {
+            if(archivo != null){
+                document.getElementById('endeudamientodiv').style.display = 'none';    
+                document.getElementById('previsualizaciondiv').style.display = 'block';
+                document.getElementById('previsualizacion').src = archivo;
+            }
+        }
+        
     }
 
     $scope.PropuestaModificada = function () {
