@@ -98,7 +98,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
                     $scope.DatosModalActual = response.data;
                     console.log(response.data);
                 }, function errorCallback(data){
-                    console.log(data);
+                    UserSrv.MensajeError(data.data);
                 });
     }
 

@@ -62,7 +62,11 @@
 
 
     <div class="main_container">
-
+<center>
+<div id="ContenedorMensaje" style="margin-left: 25%; margin-top: 20px; width: 50%; height: 150px; z-index: 1000000; position: fixed;" hidden>
+      ACA VA EL MENSAJE
+</div>
+</center>
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
 
