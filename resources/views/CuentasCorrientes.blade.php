@@ -500,7 +500,7 @@
                                     <div>
                                         <table ng-table="paramsCuotas" class="table table-hover table-bordered">
 
-                                            <tbody data-ng-repeat="cuota in $data" data-ng-switch on="dayDataCollapse[$index]">
+                                            <tbody data-ng-repeat="cuota in $data | orderBy:sortable" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,cuota.id_cuota)"  ng-class="cuota.estado">
                                                 <td title="'NroCuota'" filter="{ nro_cuota: 'text'}" sortable="'nro_cuota'">
                                                     {{cuota.nro_cuota}}
@@ -513,7 +513,7 @@
                                                 </td>
 
                                                 <td title="'Importe'" filter="{ importe: 'text'}" sortable="'totalACobrar'">
-                                                  <span style="" ng-if="(cambiarFormato(cuota.fecha_vencimiento)> ActualDate)">{{cuota.importe}}</span>
+                                                  <span style="" ng-if="(cambiarFormato(cuota.fecha_vencimiento)>= ActualDate)">{{cuota.importe}}</span>
                                                   <span style="color: red" ng-if="(cambiarFormato(cuota.fecha_vencimiento) < ActualDate)  && (cuota.cobrado < cuota.importe)">{{cuota.importe}}</span>
                                                   <span style="" ng-if="(cambiarFormato(cuota.fecha_vencimiento) < ActualDate) && (cuota.cobrado >= cuota.importe)">{{cuota.importe}}</span>
                                                 <td title="'Cobrado'" filter="{ cobrado: 'text'}" sortable="'totalCobrado'" >

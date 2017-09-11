@@ -31,7 +31,7 @@ $scope.sumarMontosACobrar = function (elemsFiltrados, elems){
   });
   elems.forEach(function(elem) {
     if(elem.checked){
-      sumaMontoACobrar += elem.montoACobrar;    
+      sumaMontoACobrar += elem.montoACobrar;
     }
 
   });
@@ -77,7 +77,7 @@ $http({
                        getData: function (params) {
                          var filterObj = params.filter(),
                          filteredData = $filter('filter')($scope.organismos, filterObj);
-                         var sortObj = params.sorting();
+                         var sortObj = params.orderBy();
                            orderedData = $filter('orderBy')(filteredData, sortObj);
                            $scope.organismosFiltrados = orderedData;
                            $scope.sumarMontosOrganismos();
@@ -209,8 +209,8 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                 getData: function (params) {
                     var filterObj = params.filter(),
                     filteredData = $filter('filter')($scope.socios, filterObj);
-                    var sortObj = params.sorting();
-                    orderedData = $filter('orderBy')(filteredData, filterObj);
+                    var sortObj = params.orderBy();
+                    orderedData = $filter('orderBy')(filteredData, sortObj);
                     $scope.sociosFiltrados= orderedData;
 
                     return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
@@ -277,7 +277,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                     getData: function (params) {
                       var filterObj = params.filter(),
                       filteredData = $filter('filter')($scope.ventas, filterObj);
-                      var sortObj = params.sorting();
+                      var sortObj = params.orderBy();
                         orderedData = $filter('orderBy')(filteredData, sortObj);
                         $scope.ventasFiltradas = orderedData;
 

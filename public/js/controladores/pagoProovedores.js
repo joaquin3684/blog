@@ -35,7 +35,7 @@ $scope.ArrayPago = [];
                     getData: function (params) {
                       var filterObj = params.filter(),
                       filteredData = $filter('filter')($scope.proveedores, filterObj);
-                      var sortObj = params.sorting();
+                      var sortObj = params.orderBy();
                         orderedData = $filter('orderBy')(filteredData, sortObj);
                         return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
