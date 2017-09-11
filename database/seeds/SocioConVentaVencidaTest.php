@@ -30,8 +30,8 @@ class SocioConVentaVencidaTest extends Seeder
 
             for ($i = 1; $i < 6; $i++) {
 
-                $cuota = factory(\App\Cuotas::class)->create(['fecha_inicio' => $hoy->toDateString(), 'fecha_vencimiento' => $vto->toDateString(), 'cuotable_id' => $venta1->id]);
-                $cuota2 = factory(\App\Cuotas::class)->create(['fecha_inicio' => $hoy->toDateString(), 'fecha_vencimiento' => $vto->toDateString(), 'cuotable_id' => $venta2->id]);
+                $cuota = factory(\App\Cuotas::class)->create(['nro_cuota' => $i, 'fecha_inicio' => $hoy->toDateString(), 'fecha_vencimiento' => $vto->toDateString(), 'cuotable_id' => $venta1->id]);
+                $cuota2 = factory(\App\Cuotas::class)->create(['nro_cuota' => $i, 'fecha_inicio' => $hoy->toDateString(), 'fecha_vencimiento' => $vto->toDateString(), 'cuotable_id' => $venta2->id]);
                 $hoy->addMonth();
                 $vto->addMonth();
             }

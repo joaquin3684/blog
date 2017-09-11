@@ -27,8 +27,8 @@ class SocioConCuotasSocialesVencidas extends Seeder
 
             for ($i = 1; $i < 6; $i++) {
 
-                $cuota = factory(\App\Cuotas::class)->states('cuotas sociales')->create(['fecha_inicio' => $hoy->toDateString(), 'fecha_vencimiento' => $vto->toDateString(), 'cuotable_id' => $socio1->id]);
-                $cuota2 = factory(\App\Cuotas::class)->states('cuotas sociales')->create(['fecha_inicio' => $hoy->toDateString(), 'fecha_vencimiento' => $vto->toDateString(), 'cuotable_id' => $socio2->id]);
+                $cuota = factory(\App\Cuotas::class)->states('cuotas sociales')->create(['nro_cuota' => $i, 'fecha_inicio' => $hoy->toDateString(), 'fecha_vencimiento' => $vto->toDateString(), 'cuotable_id' => $socio1->id]);
+                $cuota2 = factory(\App\Cuotas::class)->states('cuotas sociales')->create(['nro_cuota' => $i, 'fecha_inicio' => $hoy->toDateString(), 'fecha_vencimiento' => $vto->toDateString(), 'cuotable_id' => $socio2->id]);
                 $hoy->addMonth();
                 $vto->addMonth();
             }
