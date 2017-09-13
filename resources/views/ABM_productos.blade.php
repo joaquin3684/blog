@@ -47,7 +47,7 @@
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="x_content">
-
+                                      @verbatim
                                         <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario" >
                                             {{ csrf_field() }}
 
@@ -57,21 +57,21 @@
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del producto" type="text">{[{errores.nombre[0]}]}
+                                                    <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del producto" type="text">{{errores.nombre[0]}}
                                                 </div>
                                             </div>
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Descripcion <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input id="descripcion" class="form-control col-md-7 col-xs-12" name="descripcion" placeholder="Ingrese la descripcion" type="text">{[{errores.nombre[0]}]}
+                                                    <input id="descripcion" class="form-control col-md-7 col-xs-12" name="descripcion" placeholder="Ingrese la descripcion" type="text">{{errores.nombre[0]}}
                                                 </div>
                                             </div>
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input type="number" step="0.01" id="retencion" name="ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{[{errores.porcentaje_retencion[0]}]}
+                                                    <input type="number" step="0.01" id="retencion" name="ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
                                                 </div>
                                             </div>
                                             <div class="item form-group">
@@ -101,6 +101,7 @@
                                                 </div>
                                             </div>
                                         </form>
+                                        @endverbatim
 
                                     </div>
                                 </div>
@@ -165,7 +166,7 @@
                             </table>
 
                         </div> -->
-                        
+
                     <div class="x_content" id="impr">
                     <center>
                      <button id="exportButton1" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
@@ -177,21 +178,22 @@
                                     <!-- START $scope.[model] updates -->
                                     <!-- END $scope.[model] updates -->
                                     <!-- START TABLE -->
-                                    <div id="exportTable">
+                                    <div class="table-responsive">
+                                      @verbatim
                                         <table ng-table="paramsABMS" class="table table-hover table-bordered">
                                             <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="Datos">
-                                                <td title="'Nombre'" sortable="'nombre'">
-                                                    {[{abm.nombre}]}
+                                                <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                    {{abm.nombre}}
                                                 </td>
-                                                <td title="'Descripcion'" sortable="'descripcion'">
-                                                    {[{abm.descripcion}]}
+                                                <td title="'Descripcion'" filter="{ descripcion: 'text'}" sortable="'descripcion'">
+                                                    {{abm.descripcion}}
                                                 </td>
-                                                <td title="'Retencion'" sortable="'retencion'">
-                                                    {[{abm.ganancia}]}
+                                                <td title="'Retencion'" filter="{ ganancia: 'text'}" sortable="'ganancia'">
+                                                    {{abm.ganancia}}
                                                 </td>
-                                                <td title="'Proveedor'" sortable="'proovedor'">
-                                                    {[{abm.proovedor}]}
+                                                <td title="'Proveedor'" filter="{ proovedor: 'text'}" sortable="'proovedor'">
+                                                    {{abm.proovedor}}
                                                 </td>
                                                 <td>
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -199,6 +201,7 @@
                                                 </td>
                                             </tr>
                                         </table>
+                                        @endverbatim
                                     </div>
                                     <!-- END TABLE -->
                                 </div>
@@ -231,6 +234,7 @@
                         <h4 class="modal-title">Editar</h4>
                     </div>
                     <div class="modal-body">
+                      @verbatim
                         <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
                             {{ csrf_field() }}
                             <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
@@ -241,21 +245,21 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del producto" type="text">{[{errores.nombre[0]}]}
+                                    <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del producto" type="text">{{errores.nombre[0]}}
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Descripcion <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="descripcion" class="form-control col-md-7 col-xs-12" name="descripcion" placeholder="Ingrese la descripcion" type="text">{[{errores.nombre[0]}]}
+                                    <input id="descripcion" class="form-control col-md-7 col-xs-12" name="descripcion" placeholder="Ingrese la descripcion" type="text">{{errores.nombre[0]}}
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="retencion" name="retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{[{errores.porcentaje_retencion[0]}]}
+                                    <input type="number" id="retencion" name="retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -270,13 +274,14 @@
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
-                                    
+
                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                     <button id="send" type="submit" class="btn btn-success">Enviar</button>
-                                    
+
                                 </div>
                             </div>
                         </form>
+                        @endverbatim
                     </div>
 
                 </div>

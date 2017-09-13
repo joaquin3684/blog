@@ -1,8 +1,6 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize']).config(function($interpolateProvider){
-    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
-});
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize']).config(function($interpolateProvider){});
 app.controller('ABM', function($scope, $http, $compile, $sce) {
-   
+
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
    $scope.enviarFormulario = function(tipoSolicitud, id = '')
    {
@@ -29,9 +27,9 @@ app.controller('ABM', function($scope, $http, $compile, $sce) {
                console.log("el tipo de solicitud no existe");
                break;
          }
-         
+
          var url = id == '' ? abm : abm+'/'+id;
-         
+
          $http({
             url: url,
             method: metodo,
@@ -43,7 +41,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce) {
                   {
                      console.log(response);
                      llenarFormulario('formularioEditar',response.data);
-                  } 
+                  }
                $scope.mensaje = response;
                $('#formulario')[0].reset();
                $scope.errores = '';
@@ -57,18 +55,18 @@ app.controller('ABM', function($scope, $http, $compile, $sce) {
    }
 
    $scope.traerRelaciones = function(relaciones)
-   {  
-     
+   {
+
       for(x in relaciones)
       {
-       
+
          var url = relaciones[x].tabla + '/traerRelacion'+relaciones[x].tabla;
          $http({
             url: url,
             method: 'get',
          }).then(function successCallback(response)
          {
-          
+
           console.log(response);
             $.each(response.data, function(val, text) {
                console.log(relaciones[x].select);
@@ -84,7 +82,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce) {
 
    $scope.agregarPantalla = function()
    {
-     
+
       var codigo = '';
       var array = [];
       for(var i = 0; $scope.numeroDeRoles > i; i++){
@@ -104,30 +102,30 @@ app.controller('ABM', function($scope, $http, $compile, $sce) {
             method: 'get',
          }).then(function successCallback(response)
          {
-          
+
           console.log(response);
             $.each(response.data, function(val, text) {
-              
+
                for(var j = 0; $scope.numeroDeRoles > j; j++){
-                
+
                $('#roles'+j).append($("<option />").val(text.name).text(text.name));
-              
-                 
+
+
                }
-               
+
             });
          }, function errorCallback(data)
          {
             console.log(data);
-         }); 
+         });
    }
 
     $scope.traerElementos = function(relaciones)
-   {  
+   {
       var metodito = 'get';
       var abm = $("#tipo_tabla").val();
       var urlabm = abm + "/traerElementos";
-      
+
       $http({
             url: urlabm,
             method: metodito
@@ -147,8 +145,12 @@ app.controller('ABM', function($scope, $http, $compile, $sce) {
                 }, {
                     total: $scope.datosabm.length,
                     getData: function (params) {
-                        $scope.datosabm = $filter('orderBy')($scope.datosabm, params.orderBy());
-                        return $scope.datosabm.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                      var filterObj = params.filter();
+                      filteredData = $filter('filter')($scope.datosabm, filterObj);
+                      var sortObj = params.orderBy();
+                      orderedData = $filter('orderBy')(filteredData, sortObj);
+                      $scope.datosabmfiltrados = orderedData;
+                      return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
             }
@@ -161,6 +163,5 @@ app.controller('ABM', function($scope, $http, $compile, $sce) {
 
    $scope.traerElementos();
 
-   
-});
 
+});

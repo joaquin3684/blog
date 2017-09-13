@@ -13,6 +13,7 @@
   <style>
   .Cancelado {background-color: rgba(92, 184, 92, 0.5); color: black;}
   .Renovado {background-color: rgba(217, 83, 79, 0.5); color: black;}
+  .CaracteresRojos {color: red;}
   </style>
 
 <div class="nav-md" ng-controller="ventas">
@@ -500,7 +501,7 @@
                                     <div>
                                         <table ng-table="paramsCuotas" class="table table-hover table-bordered">
 
-                                            <tbody data-ng-repeat="cuota in $data | orderBy:sortable" data-ng-switch on="dayDataCollapse[$index]">
+                                            <tbody data-ng-repeat="cuota in $data" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,cuota.id_cuota)"  ng-class="cuota.estado">
                                                 <td title="'NroCuota'" filter="{ nro_cuota: 'text'}" sortable="'nro_cuota'">
                                                     {{cuota.nro_cuota}}
@@ -512,10 +513,9 @@
                                                     {{cuota.fecha_vencimiento}}
                                                 </td>
 
-                                                <td title="'Importe'" filter="{ importe: 'text'}" sortable="'totalACobrar'">
-                                                  <span style="" ng-if="(cambiarFormato(cuota.fecha_vencimiento)>= ActualDate)">{{cuota.importe}}</span>
-                                                  <span style="color: red" ng-if="(cambiarFormato(cuota.fecha_vencimiento) < ActualDate)  && (cuota.cobrado < cuota.importe)">{{cuota.importe}}</span>
-                                                  <span style="" ng-if="(cambiarFormato(cuota.fecha_vencimiento) < ActualDate) && (cuota.cobrado >= cuota.importe)">{{cuota.importe}}</span>
+                                                <td title="'Importe'" filter="{ importe: 'text'}" sortable="'totalACobrar'" ng-class="{CaracteresRojos: (cambiarFormato(cuota.fecha_vencimiento)< ActualDate) && (cuota.cobrado < cuota.importe)}">
+                                                  <span>{{cuota.importe}}</span>
+                                                </td>
                                                 <td title="'Cobrado'" filter="{ cobrado: 'text'}" sortable="'totalCobrado'" >
                                                     {{cuota.cobrado}}
                                                 </td>

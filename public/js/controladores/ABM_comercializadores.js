@@ -48,8 +48,12 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
             }, {
               total: $scope.datosabm.length,
               getData: function(params) {
-                $scope.datosabm = $filter('orderBy')($scope.datosabm, params.orderBy());
-                return $scope.datosabm.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                var filterObj = params.filter();
+                filteredData = $filter('filter')($scope.datosabm, filterObj);
+                var sortObj = params.orderBy();
+                orderedData = $filter('orderBy')(filteredData, sortObj);
+                $scope.datosabmfiltrados = orderedData;
+                return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
               }
             });
           }

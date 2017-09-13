@@ -47,7 +47,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-
+                  @verbatim
                   <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario" >
                    {{ csrf_field() }}
 
@@ -57,7 +57,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razonSocial">Razon social <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="razonSocial" class="form-control col-md-7 col-xs-12" name="razon_social" placeholder="Ingrese la Razon social" type="text">{[{errores.nombre[0]}]}
+                        <input id="razonSocial" class="form-control col-md-7 col-xs-12" name="razon_social" placeholder="Ingrese la Razon social" type="text">{{errores.nombre[0]}}
                       </div>
                     </div>
 
@@ -65,7 +65,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descripcion">Descripcion <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Descripcion">{[{errores.descripcion[0]}]}
+                        <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Descripcion">{{errores.descripcion[0]}}
                       </div>
                     </div>
 
@@ -73,7 +73,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{[{errores.descripcion[0]}]}
+                      <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{{errores.descripcion[0]}}
                     </div>
                   </div>
 
@@ -81,7 +81,7 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{[{errores.descripcion[0]}]}
+                    <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{{errores.descripcion[0]}}
                   </div>
                 </div>
 
@@ -89,7 +89,7 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telefono">Telefono<span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono">{[{errores.descripcion[0]}]}
+                  <input type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono">{{errores.descripcion[0]}}
                 </div>
               </div>
 
@@ -97,7 +97,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Email<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Email">{[{errores.descripcion[0]}]}
+                <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Email">{{errores.descripcion[0]}}
               </div>
             </div>
 
@@ -105,7 +105,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Usuario<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="cuit" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Usuario">{[{errores.descripcion[0]}]}
+                <input type="text" id="cuit" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Usuario">{{errores.descripcion[0]}}
               </div>
             </div>
 
@@ -113,21 +113,21 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Contraseña<span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="cuit" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Contraseña">{[{errores.descripcion[0]}]}
+              <input type="text" id="cuit" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Contraseña">{{errores.descripcion[0]}}
             </div>
           </div>
 <!--                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="porcentaje_retencion" name="porcentaje_retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese % Ganancia">{[{errores.porcentaje_retencion[0]}]}
+                        <input type="number" id="porcentaje_retencion" name="porcentaje_retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese % Ganancia">{{errores.porcentaje_retencion[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_gastos_administrativos">Porcentaje de Gastos administrtivos <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="porcentaje_gastos_administrativos" name="porcentaje_gastos_administrativos" class="form-control col-md-7 col-xs-12" placeholder="Ingrese % G.A.">{[{errores.porcentaje_gastos_administrativos[0]}]}
+                        <input type="number" id="porcentaje_gastos_administrativos" name="porcentaje_gastos_administrativos" class="form-control col-md-7 col-xs-12" placeholder="Ingrese % G.A.">{{errores.porcentaje_gastos_administrativos[0]}}
                       </div>
                     </div> -->
                      <div class="item form-group">
@@ -146,6 +146,7 @@
                       </div>
                     </div>
                   </form>
+                  @endverbatim
 
                 </div>
               </div>
@@ -225,36 +226,37 @@
                                     <!-- START $scope.[model] updates -->
                                     <!-- END $scope.[model] updates -->
                                     <!-- START TABLE -->
-                                    <div id="exportTable">
+                                    <div class="table-responsive">
+                                      @verbatim
                                         <table ng-table="paramsABMS" class="table table-hover table-bordered">
                                             <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="Datos">
-                                                <td title="'Razon social'" sortable="'razonSocial'">
-                                                    {[{abm.razon_social}]}
+                                                <td title="'Razon social'" filter="{ razon_social: 'text'}" sortable="'razonSocial'">
+                                                    {{abm.razon_social}}
                                                 </td>
-                                                <td title="'Descripcion'" sortable="'descripcion'">
-                                                    {[{abm.descripcion}]}
+                                                <td title="'Descripcion'" filter="{ descripcion: 'text'}" sortable="'descripcion'">
+                                                    {{abm.descripcion}}
                                                 </td>
-                                                <td title="'Domicilio'" sortable="'domicilio'">
-                                                    {[{abm.domicilio}]}
+                                                <td title="'Domicilio'" filter="{ domicilio: 'text'}" sortable="'domicilio'">
+                                                    {{abm.domicilio}}
                                                 </td>
-                                                <td title="'Cuit'" sortable="'cuit'">
-                                                    {[{abm.cuit}]}
+                                                <td title="'Cuit'" filter="{ cuit: 'text'}" sortable="'cuit'">
+                                                    {{abm.cuit}}
                                                 </td>
-                                                <td title="'Telefono'" sortable="'telefono'">
-                                                    {[{abm.telefono}]}
+                                                <td title="'Telefono'" filter="{ telefono: 'text'}" sortable="'telefono'">
+                                                    {{abm.telefono}}
                                                 </td>
-                                                <td title="'Usuario'" sortable="'usuario'">
-                                                    {[{abm.usuario}]}
+                                                <td title="'Usuario'" filter="{ usuario: 'text'}" sortable="'usuario'">
+                                                    {{abm.usuario}}
                                                 </td>
 <!--                                                 <td title="'$ de Ganancia'" sortable="'porcentaje_retencion'">
-                                                    {[{abm.porcentaje_retencion}]}
+                                                    {{abm.porcentaje_retencion}}
                                                 </td>
 
                                                 <td title="'$ Gastos Administrativos'" sortable="'porcentaje_gastos_administrativos'">
-                                                    {[{abm.porcentaje_gastos_administrativos}]}
+                                                    {{abm.porcentaje_gastos_administrativos}}
                                                 </td> -->
-                                                <td title="'Prioridad'" sortable="'prioridad.nombre'">
+                                                <td title="'Prioridad'" filter="{ id_prioridad: 'text'}" sortable="'id_prioridad'">
                                                     <span ng-if="abm.id_prioridad == 1">Alta</span>
                                                     <span ng-if="abm.id_prioridad == 2">Baja</span>
                                                 </td>
@@ -265,6 +267,7 @@
                                                 </td>
                                             </tr>
                                         </table>
+                                        @endverbatim
                                     </div>
                                     <!-- END TABLE -->
                                 </div>
@@ -297,6 +300,7 @@
         <h4 class="modal-title">Editar</h4>
       </div>
       <div class="modal-body">
+        @verbatim
          <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
                    {{ csrf_field() }}
 
@@ -305,7 +309,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razon_social">Razon social<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="razon_social" class="form-control col-md-7 col-xs-12" name="razon_social" type="text">{[{errores.nombre[0]}]}
+                        <input id="razon_social" class="form-control col-md-7 col-xs-12" name="razon_social" type="text">{{errores.nombre[0]}}
                       </div>
                     </div>
 
@@ -313,7 +317,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descripcion">Descripcion <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12" >{[{errores.descripcion[0]}]}
+                        <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12" >{{errores.descripcion[0]}}
                       </div>
                     </div>
 
@@ -321,7 +325,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio<span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" >{[{errores.descripcion[0]}]}
+                      <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" >{{errores.descripcion[0]}}
                     </div>
                   </div>
 
@@ -329,7 +333,7 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" >{[{errores.descripcion[0]}]}
+                    <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" >{{errores.descripcion[0]}}
                   </div>
                 </div>
 
@@ -337,7 +341,7 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telefono">Telefono<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" >{[{errores.descripcion[0]}]}
+                    <input type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" >{{errores.descripcion[0]}}
                   </div>
                 </div>
 
@@ -345,21 +349,21 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario">Usuario<span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12" >{[{errores.descripcion[0]}]}
+                  <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12" >{{errores.descripcion[0]}}
                 </div>
               </div>
 <!--                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="porcentaje_retencion" name="porcentaje_retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{[{errores.porcentaje_retencion[0]}]}
+                        <input type="number" id="porcentaje_retencion" name="porcentaje_retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.porcentaje_retencion[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_gastos_administrativos">Porcentaje de Gastos administrtivos <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="porcentaje_gastos_administrativos" name="porcentaje_gastos_administrativos" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{[{errores.porcentaje_gastos_administrativos[0]}]}
+                        <input type="number" id="porcentaje_gastos_administrativos" name="porcentaje_gastos_administrativos" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.porcentaje_gastos_administrativos[0]}}
                       </div>
                     </div> -->
                    <div class="item form-group">
@@ -380,6 +384,7 @@
                       </div>
                     </div>
                   </form>
+                  @endverbatim
       </div>
 
     </div>
@@ -387,7 +392,7 @@
   </div>
 </div>
 
-    
+
 </div>
 
 

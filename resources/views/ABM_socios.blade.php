@@ -9,7 +9,8 @@
   <link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
-  
+
+
 <div class="nav-md" ng-controller="ABM" >
 
   <div class="container body" >
@@ -22,7 +23,7 @@
       <div class="left-col" role="main" >
 
         <div class="" >
-         
+
           <div class="clearfix"></div>
 @if(Sentinel::check()->hasAccess('socios.crear'))
           <div class="row" >
@@ -49,102 +50,102 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-
+                  @verbatim
                   <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario" >
                    {{ csrf_field() }}
-                   
+
                     <span class="section">Datos de socio</span>
 
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del Socio" type="text">{[{errores.nombre[0]}]}
+                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del Socio" type="text">{{errores.nombre[0]}}
                       </div>
                     </div>
-                    
+
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_nacimiento">Fecha de nacimiento <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control col-md-7 col-xs-12" >{[{errores.fecha_nacimiento[0]}]}
+                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control col-md-7 col-xs-12" >{{errores.fecha_nacimiento[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{{errores.cuit[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">DNI <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="dni" name="dni" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el DNI">{[{errores.dni[0]}]}
+                        <input type="number" id="dni" name="dni" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el DNI">{{errores.dni[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{[{errores.domicilio[0]}]}
+                        <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{{errores.domicilio[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="localidad">Localidad <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="localidad" name="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Localidad">{[{errores.localidad[0]}]}
+                        <input type="text" id="localidad" name="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Localidad">{{errores.localidad[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="codigo_postal">Codigo Postal <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="codigo_postal" name="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Código Postal">{[{errores.codigo_postal[0]}]}
+                        <input type="number" id="codigo_postal" name="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Código Postal">{{errores.codigo_postal[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telefono">Telefono <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Teléfono">{[{errores.telefono[0]}]}
+                        <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Teléfono">{{errores.telefono[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sexo">Sexo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                           
+
                            <label class="radio-inline">
                               <input type="radio" name="sexo" value="Masculino">Masculino
                            </label>
                            <label class="radio-inline">
                               <input type="radio" name="sexo" value="Femenino">Femenino
                            </label>
-                        
+
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="legajo">Legajo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="legajo" name="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Legajo">{[{errores.legajo[0]}]}
+                        <input type="number" id="legajo" name="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Legajo">{{errores.legajo[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_ingreso">Fecha de ingreso <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="fecha_ingreso" ng-model="fechadehoy" ng-value="fechadehoy" value="{[{fechadehoy}]}" name="fecha_ingreso" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la fecha de ingreso">{[{errores.fecha_ingreso[0]}]}
+                        <input type="date" id="fecha_ingreso" ng-value="fechadehoy" value="{{fechadehoy}}" name="fecha_ingreso" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la fecha de ingreso">{{errores.fecha_ingreso[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="grupo_familiar">Grupo Familiar <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="grupo_familiar" name="grupo_familiar" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Grupo Familiar">{[{errores.grupo_familiar[0]}]}
+                        <input type="text" id="grupo_familiar" name="grupo_familiar" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Grupo Familiar">{{errores.grupo_familiar[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
@@ -163,6 +164,7 @@
                       </div>
                     </div>
                   </form>
+                  @endverbatim
 
                 </div>
               </div>
@@ -197,7 +199,7 @@
                         <div class="clearfix"></div>
                       </div>
 <!--                       <div class="x_content">
-                       
+
                         <table id="datatable-responsive" cellspacing="0" class="table table-striped table-bordered dt-responsive nowrap order-colum compact" cellspacing="0" width="100%">
                           <thead>
                             <tr>
@@ -216,7 +218,7 @@
                               <th></th>
                             </tr>
                           </thead>
-                          
+
                           <tbody>
                             @foreach ($registros as $registro)
                               <tr>
@@ -232,13 +234,13 @@
                                 <td>{{ $registro->fecha_ingreso }}</td>
                                 <td>{{ $registro->grupo_familiar }}</td>
                                 <td>{{ $registro->organismo->nombre }}</td>
-                                
+
 
                                 <td>@if(Sentinel::check()->hasAccess('socios.editar'))<button type="button" data-toggle="modal" data-target="#editar" onclick="enviarFormulario('Mostrar', {{$registro->id}})" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil"></span></button>@endif
                                @if(Sentinel::check()->hasAccess('socios.borrar')) <button type="button" class="btn btn-danger" onclick="enviarFormulario('Borrar', {{$registro->id}})"><span class="glyphicon glyphicon-remove"></span></button>
                                @endif
                                 </td>
-                               
+
 
                               </tr>
                             @endforeach
@@ -247,8 +249,8 @@
 
                       </div> -->
 
-                                            <div class="x_content">
-                                             <center>
+                      <div class="x_content">
+                      <center>
                      <button id="exportButton1" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
                      </button>
                      <button id="exportButton2" ng-click="$Servicio.Excel()" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
@@ -260,48 +262,85 @@
                                     <!-- END $scope.[model] updates -->
                                     <!-- START TABLE -->
                                     <div>
+
+                                      <div class="table-responsive">
+                                        @verbatim
                                         <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
-                                            <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                            <tr class="clickableRow" title="Datos">
-                                                <td title="'Nombre'" sortable="'nombre'">
-                                                    {[{abm.nombre}]}
+                                            <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
+                                            <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)"  ng-class="socio.id">
+                                                <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                    {{abm.nombre}}
                                                 </td>
-                                                <td title="'Nacimiento'" sortable="'fecha_nacimiento'">
-                                                    {[{abm.fecha_nacimiento}]}
+                                                <td title="'DNI'" filter="{ dni: 'text'}" sortable="'dni'">
+                                                    {{abm.dni}}
                                                 </td>
-                                                <td title="'Sexo'" sortable="'sexo'">
-                                                    {[{abm.sexo}]}
+                                                <td title="'Organismo'" filter="{ organismo: 'text'}" sortable="'organismo'">
+                                                    {{abm.organismo}}
                                                 </td>
-                                                <td title="'Cuit'" sortable="'cuit'">
-                                                    {[{abm.cuit}]}
+                                                <td title="'Legajo'" filter="{ legajo: 'text'}"sortable="'legajo'">
+                                                    {{abm.legajo}}
                                                 </td>
-                                                <td title="'DNI'" sortable="'dni'">
-                                                    {[{abm.dni}]}
+                                                <td title="'Ingreso'" filter="{ fecha_ingreso: 'text'}" sortable="'fecha_ingreso'">
+                                                    {{abm.fecha_ingreso}}
                                                 </td>
-                                                <td title="'Domicilio'" sortable="'domicilio'">
-                                                    {[{abm.domicilio}]}
+                                                <td title="'Nacimiento'" filter="{ fecha_nacimiento: 'text'}" sortable="'fecha_nacimiento'">
+                                                    {{abm.fecha_nacimiento}}
                                                 </td>
-                                                <td title="'Localidad'" sortable="'localidad'">
-                                                    {[{abm.localidad}]}
+                                                <td title="'Sexo'" filter="{ sexo: 'text'}" sortable="'sexo'">
+                                                    {{abm.sexo}}
                                                 </td>
-                                                <td title="'CP'" sortable="'codigo_postal'">
-                                                    {[{abm.codigo_postal}]}
+                                                <td title="'Cuit'" filter="{ cuit: 'text'}" sortable="'cuit'">
+                                                    {{abm.cuit}}
                                                 </td>
-                                                <td title="'Telefono'" sortable="'telefono'">
-                                                    {[{abm.telefono}]}
+                                                <td title="'Domicilio'" filter="{ domicilio: 'text'}" sortable="'domicilio'">
+                                                    {{abm.domicilio}}
                                                 </td>
-                                                <td title="'Legajo'" sortable="'legajo'">
-                                                    {[{abm.legajo}]}
+                                                <td title="'Localidad'" filter="{ localidad: 'text'}" sortable="'localidad'">
+                                                    {{abm.localidad}}
                                                 </td>
-                                                <td title="'Ingreso'" sortable="'fecha_ingreso'">
-                                                    {[{abm.fecha_ingreso}]}
+                                                <td title="'CP'" filter="{ codigo_postal: 'text'}" sortable="'codigo_postal'">
+                                                    {{abm.codigo_postal}}
+                                                </td>
+                                                <td title="'Telefono'" filter="{ telefono: 'text'}" sortable="'telefono'">
+                                                    {{abm.telefono}}
                                                 </td>
                                                 <td id="botones">
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
                                                 <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
                                                 </td>
                                             </tr>
+                                            <!--
+                                            <tr data-ng-switch-when="true">
+
+                                                                  <td colspan="5">
+                                                                    <table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;" class="table">
+                                                                    <tbody>
+                                                                      <tr>
+                                                                        <td>Full name:</td>
+                                                                        <td>Bradley Greer</td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                        <td>Extension number:</td>
+                                                                        <td>2558</td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                        <td>Extra info:</td>
+                                                                        <td>And any further details here (images etc)...</td>
+                                                                      </tr>
+                                                                    </tbody>
+                                                                  </table>
+                                                                </td>
+
+
+
+                                            </tr>
+                                             -->
+                                          </tbody>
                                         </table>
+                                        @endverbatim
+                                      </div>
+
+
                                     </div>
                                     <!-- END TABLE -->
                                 </div>
@@ -309,7 +348,7 @@
 
                         </div>
                     </div>
-                   
+
                   </div>
                   @endif
       <!-- /page content -->
@@ -329,41 +368,43 @@
   <div class="modal-dialog">
 
     <!-- Modal content-->
+
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Editar</h4>
       </div>
       <div class="modal-body">
+        @verbatim
          <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
 
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{[{errores.nombre[0]}]}
+                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{{errores.nombre[0]}}
                       </div>
                     </div>
-                    
+
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_nacimiento">Fecha de nacimiento <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control col-md-7 col-xs-12" >{[{errores.fecha_nacimiento[0]}]}
+                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control col-md-7 col-xs-12" >{{errores.fecha_nacimiento[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit">{{errores.cuit[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">DNI <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="dni" name="dni" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{[{errores.dni[0]}]}
+                        <input type="number" id="dni" name="dni" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.dni[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
@@ -379,62 +420,62 @@
                         </option>
                       </select>
                       </div>
-                      
+
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{[{errores.domicilio[0]}]}
+                        <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.domicilio[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="localidad">Localidad <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="localidad" name="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{[{errores.localidad[0]}]}
+                        <input type="text" id="localidad" name="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.localidad[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="codigo_postal">Codigo Postal <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="codigo_postal" name="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{[{errores.codigo_postal[0]}]}
+                        <input type="number" id="codigo_postal" name="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.codigo_postal[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telefono">Telefono <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{[{errores.telefono[0]}]}
+                        <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.telefono[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="legajo">Legajo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="legajo" name="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{[{errores.legajo[0]}]}
+                        <input type="number" id="legajo" name="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.legajo[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_ingreso">Fecha de ingreso <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="fecha_ingreso" name="fecha_ingreso" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{[{errores.fecha_ingreso[0]}]}
+                        <input type="date" id="fecha_ingreso" name="fecha_ingreso" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.fecha_ingreso[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="grupo_familiar">Grupo Familiar <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="grupo_familiar" name="grupo_familiar" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{[{errores.grupo_familiar[0]}]}
+                        <input type="text" id="grupo_familiar" name="grupo_familiar" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.grupo_familiar[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Organismo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="forro_Editar" name="id_organismo" class="form-control col-md-7 col-xs-12" ></select>{[{errores.dni[0]}]}
+                        <select id="forro_Editar" name="id_organismo" class="form-control col-md-7 col-xs-12" ></select>{{errores.dni[0]}}
                       </div>
 
                     </div>
@@ -447,9 +488,11 @@
                       </div>
                     </div>
                   </form>
+                  @endverbatim
       </div>
-      
+
     </div>
+
 
   </div>
 </div>

@@ -82,7 +82,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <input type="text" id="documento" name="documento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Documento" ng-model="documentoComerc">{{errores.cuit[0]}}
                     </div>
-                  </div>
+                  </div>usuario
                   <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="documento" >Email<span class="required">*</span>
                   </label>
@@ -175,34 +175,34 @@
                                     <!-- START $scope.[model] updates -->
                                     <!-- END $scope.[model] updates -->
                                     <!-- START TABLE -->
-                                    <div id="exportTable">
+                                    <div  class="table-responsive">
                                       @verbatim
                                         <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
 
                                             <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
                                             <tr class="clickableRow" title="Datos">
-                                                <td title="'Nombre'" sortable="'nombre'">
+                                                <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
                                                     {{abm.nombre}}
                                                 </td>
-                                                <td title="'Apellido'" sortable="'apellido'">
+                                                <td title="'Apellido'" filter="{ apellido: 'text'}" sortable="'apellido'">
                                                     {{abm.apellido}}
                                                 </td>
-                                                <td title="'Documento'" sortable="'documento'">
+                                                <td title="'Documento'" filter="{ dni: 'text'}"sortable="'dni'">
                                                     {{abm.dni}}
                                                 </td>
-                                                <td title="'Email'" sortable="'email'">
+                                                <td title="'Email'" filter="{ email: 'text'}" sortable="'email'">
                                                     {{abm.email}}
                                                 </td>
-                                                <td title="'Cuit'" sortable="'cuit'">
+                                                <td title="'Cuit'"  filter="{ cuit: 'text'}" sortable="'cuit'">
                                                     {{abm.cuit}}
                                                 </td>
-                                                <td title="'Domicilio'" sortable="'domicilio'">
+                                                <td title="'Domicilio'" filter="{ domicilio: 'text'}" sortable="'domicilio'">
                                                     {{abm.domicilio}}
                                                 </td>
-                                                <td title="'Telefono'" sortable="'telefono'">
+                                                <td title="'Telefono'" filter="{ telefono: 'text'}" sortable="'telefono'">
                                                     {{abm.telefono}}
                                                 </td>
-                                                <td title="'Usuario'" sortable="'usuario'">
+                                                <td title="'Usuario'" filter="{ usuario: 'text'}" sortable="'usuario'">
                                                     {{abm.usuario}}
                                                 </td>
 

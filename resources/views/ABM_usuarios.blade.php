@@ -12,7 +12,7 @@
 <div class="nav-md" ng-controller="ABM" >
 
   <div class="container body" >
-  
+
     <div class="main_container" >
 
       <input type="hidden" id="tipo_tabla" value="usuarios">
@@ -20,14 +20,14 @@
       <div class="left-col" role="main" >
 
         <div class="" >
-         
+
           <div class="clearfix"></div>
 
           <div class="row" >
             <div class="col-md-12 col-sm-12 col-xs-12" >
               <div class="x_panel"  >
                 <div class="x_title">
-                  <h2>Forrmulario de usuarios <small>Dar de alta un usuario</small></h2>
+                  <h2>Formulario de usuarios <small>Dar de alta un usuario</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -46,51 +46,52 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-
+                  @verbatim
                   <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario" >
                    {{ csrf_field() }}
-                    
+
                     <span class="section">Datos de usuario</span>
 
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario">Usuario <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="usuario" class="form-control col-md-7 col-xs-12" name="usuario" placeholder="Ingrese usuario" type="text">{[{errores.usuario[0]}]}
+                        <input id="usuario" class="form-control col-md-7 col-xs-12" name="usuario" placeholder="Ingrese usuario" type="text">{{errores.usuario[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="email" class="form-control col-md-7 col-xs-12" name="email" placeholder="Ingrese email del usuario" type="text">{[{errores.email[0]}]}
+                        <input id="email" class="form-control col-md-7 col-xs-12" name="email" placeholder="Ingrese email del usuario" type="text">{{errores.email[0]}}
                       </div>
                     </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Contraseña <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="password" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la contraseña">{[{errores.password[0]}]}
+                        <input type="text" id="password" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la contraseña">{{errores.password[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="numeroDeRoles">Cantidad de roles <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="numeroDeRoles" name="numeroDeRoles" ng-model="numeroDeRoles" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cantidad de roles">{[{errores.password[0]}]}
+                        <input type="text" id="numeroDeRoles" name="numeroDeRoles" ng-model="numeroDeRoles" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cantidad de roles">{{errores.password[0]}}
                       </div><button type="button" ng-click="agregarPantalla()" class="btn btn-primary">Añadir Roles</button>
                     </div>
 
-                     <div id="agregarCodigo">                     
+                     <div id="agregarCodigo">
                     </div>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                       
+
                         <button id="send" type="submit" class="btn btn-success">Alta</button>
                       </div>
                     </div>
                   </form>
+                  @endverbatim
 
                 </div>
               </div>
@@ -98,14 +99,16 @@
           </div>
         </div>
 
-       
+
 
       </div>
- 
-            <div class="col-md-12 col-sm-12 col-xs-12">
+
+      <!-- Tabla -->
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                       <div class="x_title">
-                        <h2>Usuarios <small>Todos los proovedores disponibles</small></h2>
+                        <h2>Usuarios <small>Todos los usuarios disponibles</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                           </li>
@@ -124,45 +127,42 @@
                         <div class="clearfix"></div>
                       </div>
 
-                      <div class="x_content">
-                                               <center>
-                     <button id="exportButton1" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
-                     </button>
-                     <button id="exportButton2" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
-                     </center>
-                            <div id="pruebaExpandir">
-                                <div class="span12 row-fluid">
-                                    
+                                    <!-- START $scope.[model] updates -->
+                                    <!-- END $scope.[model] updates -->
+                                    <!-- START TABLE -->
                                     <div>
-                                        <table ng-table="paramsABMS" class="table table-hover table-bordered">
+                                      <div class="table-responsive">
+                                        @verbatim
+                                        <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
                                             <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="Datos">
-                                                <td title="'Nombre'" sortable="'nombre'">
-                                                    {[{abm.nombre}]}
+                                                <td title="'Usuario'" filter="{ usuario: 'text'}" sortable="'usuario'">
+                                                    {{abm.usuario}}
                                                 </td>
-                                                <td title="'Descripcion'" sortable="'descripcion'">
-                                                    {[{abm.descripcion}]}
+                                                <td title="'Email'" filter="{ email: 'text'}"sortable="'email'">
+                                                    {{abm.email}}
                                                 </td>
-                                                <td title="'Prioridad'" sortable="'prioridad.nombre'">
-                                                    <span ng-if="abm.id_prioridad == 1">Alta</span>
-                                                    <span ng-if="abm.id_prioridad == 2">Baja</span>
+                                                <td title="'Contraseña'" filter="{ contraseña: 'text'}" sortable="'contraseña'">
+                                                    {{abm.contraseña}}
                                                 </td>
-
-                                                <td>
+                                                <td title="Cant. roles" filter="{ cantRoles: 'text'}" sortable="'cantRoles'">
+                                                    {{abm.cantRoles}}
+                                                </td>
+                                                <td id="botones">
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
                                                 <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
                                                 </td>
                                             </tr>
+                                          </tbody>
                                         </table>
+                                        @endverbatim
+                                      </div>
+
                                     </div>
                                     <!-- END TABLE -->
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-                  </div>
-      
       <!-- /page content -->
     </div>
 
@@ -186,6 +186,7 @@
         <h4 class="modal-title">Editar</h4>
       </div>
       <div class="modal-body">
+        @verbatim
          <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
                    {{ csrf_field() }}
                     <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
@@ -196,25 +197,25 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario">Usuario <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="usuario" class="form-control col-md-7 col-xs-12" name="usuario" placeholder="Ingrese usuario del organismo" type="text">{[{errores.usuario[0]}]}
+                        <input id="usuario" class="form-control col-md-7 col-xs-12" name="usuario" placeholder="Ingrese usuario del organismo" type="text">{{errores.usuario[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="email" class="form-control col-md-7 col-xs-12" name="email" placeholder="Ingrese email del organismo" type="text">{[{errores.email[0]}]}
+                        <input id="email" class="form-control col-md-7 col-xs-12" name="email" placeholder="Ingrese email del organismo" type="text">{{errores.email[0]}}
                       </div>
                     </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Contraseña <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="password" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el password">{[{errores.password[0]}]}
+                        <input type="text" id="password" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el password">{{errores.password[0]}}
                       </div>
                     </div>
-                    
-                   
+
+
                     <input type="hidden" name="id">
                     <div class="ln_solid"></div>
                     <div class="form-group">
@@ -224,8 +225,9 @@
                       </div>
                     </div>
                   </form>
+                  @endverbatim
       </div>
-      
+
     </div>
 
   </div>
