@@ -1,13 +1,11 @@
-var app = angular.module('Login', []).config(function($interpolateProvider){
-    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
-});
+var app = angular.module('Login', []).config(function($interpolateProvider){});
 app.controller('loguear', function($scope, $http, $compile, $location, $window) {
-   
+
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
    $scope.enviarFormulario = function()
    {
          var form = $("#formulario").serializeArray();
-                  
+
          $http({
             url: 'login',
             method: 'post',
@@ -25,6 +23,5 @@ app.controller('loguear', function($scope, $http, $compile, $location, $window) 
 
    }
 
-   
-});
 
+});
