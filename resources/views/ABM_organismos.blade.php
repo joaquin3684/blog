@@ -5,12 +5,7 @@
 
 {!! Html::script('js/controladores/ABMprueba.js') !!}
 
-  <!-- CSS TABLAS -->
-  <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-  <link href="js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
 <div class="nav-md" ng-controller="ABM" >
 
   <div class="container body" >
@@ -260,46 +255,7 @@
 
   </div>
 </div>
-<!-- Fin Modal -->
-  <!-- bootstrap progress js -->
 
-
-  <!-- icheck -->
-
-  <!-- pace -->
-
-
-  <!-- form validation -->
-
-        <script src="js/datatables/jquery.dataTables.min.js"></script>
-        <script src="js/datatables/dataTables.bootstrap.js"></script>
-        <script src="js/datatables/dataTables.buttons.min.js"></script>
-        <script src="js/datatables/buttons.bootstrap.min.js"></script>
-        <script src="js/datatables/jszip.min.js"></script>
-        <script src="js/datatables/pdfmake.min.js"></script>
-        <script src="js/datatables/vfs_fonts.js"></script>
-        <script src="js/datatables/buttons.html5.min.js"></script>
-        <script src="js/datatables/buttons.print.min.js"></script>
-        <script src="js/datatables/dataTables.fixedHeader.min.js"></script>
-        <script src="js/datatables/dataTables.keyTable.min.js"></script>
-        <script src="js/datatables/dataTables.responsive.min.js"></script>
-        <script src="js/datatables/responsive.bootstrap.min.js"></script>
-        <script src="js/datatables/dataTables.scroller.min.js"></script>
-
-
-<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
-<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
-<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
-
-<script type="text/javascript">
-
-</script>
-
-
-
-         <script>
-
-        </script>
 
 </div>
 

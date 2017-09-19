@@ -3,12 +3,7 @@
 @section('contenido')
 
     {!! Html::script('js/controladores/ABMprueba.js') !!}
-    <!-- CSS TABLAS -->
-    {!! Html::style('js/datatables/jquery.dataTables.min.css') !!}
-    {!! Html::style('js/datatables/buttons.bootstrap.min.css') !!}
-    {!! Html::style('js/datatables/fixedHeader.bootstrap.min.css') !!}
-    {!! Html::style('js/datatables/responsive.bootstrap.min.css') !!}
-    {!! Html::style('js/datatables/scroller.bootstrap.min.css') !!}
+
     <div class="nav-md" ng-controller="ABM" >
 
         <div class="container body" >
@@ -293,9 +288,6 @@
 
 
 
-        <script>
-
-        </script>
 
     </div>
 
