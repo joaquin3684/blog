@@ -36,7 +36,7 @@ angular.module('Login.services', [])
         $('#LoadingGlobal').hide(1);
         var data = rejection.data;
         var div = '#mensajito';
-        $('#ContenedorMensaje').html('<div id="mensajito" class="alert alert-danger" role="alert"><button type="button" onclick="$(ContenedorMensaje).hide(500); "class="close">&times;</button><strong style="font-size: 20pt;">'+data.title+'</strong></br> <font style="font-size: 15pt;">'+data.detail+'</font></div>');
+        $('#ContenedorMensaje').html('<div id="mensajito" class="alert alert-danger" style="color: white; background-color: rgba(231, 76, 60, 0.88); border-color: rgba(231, 76, 60, 0.88);" role="alert"><button type="button" onclick="$(ContenedorMensaje).hide(500); "class="close">&times;</button><strong style="font-size: 20pt;">'+data.title+'</strong></br> <font style="font-size: 15pt;">'+data.detail+'</font></div>');
         $('#ContenedorMensaje').show(500);
         setTimeout(function(){$('#ContenedorMensaje').hide(500);},4000);
     }

@@ -46,7 +46,7 @@
 
     <body ng-controller="loguear">
     <center>
-<div id="ContenedorMensaje" style="margin-left: 25%; margin-top: 20px; width: 50%; height: 150px; z-index: 1000000; position: fixed;" hidden>
+<div id="ContenedorMensaje" style="color: white; margin-left: 25%; margin-top: 20px; width: 50%; height: 150px; z-index: 1000000; position: fixed;" hidden>
       ACA VA EL MENSAJE
 </div>
 <!--<div id="LoadingGlobal" style="background-color: rgba(255, 255, 255, 0.9); position: fixed; width: 100%; height: 100%;" hidden>-->
