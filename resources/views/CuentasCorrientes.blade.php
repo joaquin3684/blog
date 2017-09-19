@@ -3,12 +3,7 @@
 @section('contenido')
 
 {!! Html::script('js/controladores/ventas.js') !!}
-<!-- CSS TABLAS -->
-{!! Html::style('js/datatables/jquery.dataTables.min.css') !!}
-  {!! Html::style('js/datatables/buttons.bootstrap.min.css') !!}
-  {!! Html::style('js/datatables/fixedHeader.bootstrap.min.css') !!}
-  {!! Html::style('js/datatables/responsive.bootstrap.min.css') !!}
-  {!! Html::style('js/datatables/scroller.bootstrap.min.css') !!}
+
 
   <style>
   .Cancelado {background-color: rgba(92, 184, 92, 0.5); color: black;}

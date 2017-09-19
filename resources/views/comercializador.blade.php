@@ -13,11 +13,7 @@
     $('[data-toggle="tooltip"]').tooltip(); 
 });
   </script>
-  <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-  <link href="js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
 <div class="nav-md" ng-controller="comercializador" >
 
   <div class="container body" >

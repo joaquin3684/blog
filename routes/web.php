@@ -17,6 +17,7 @@ use App\Repositories\Eloquent\Cobranza\CobrarPorSocio;
 use App\Repositories\Eloquent\FileManager;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Ventas;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -33,7 +34,11 @@ Route::get('imagenes', function(){
 });
 
 Route::post('pruebas', function(Request $request){
-
+    $user = Sentinel::authenticate($request->all());
+    $solicitud = new stdClass();
+    $solicitud->estado = 'pancho';
+    $user->notify(new \App\Notifications\SolicitudEnProceso($solicitud));
+    return 1;
 });
 
 

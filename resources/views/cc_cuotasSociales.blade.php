@@ -3,12 +3,7 @@
 @section('contenido')
 
     {!! Html::script('js/controladores/cc_cuotasSociales.js') !!}
-    <!-- CSS TABLAS -->
-    {!! Html::style('js/datatables/jquery.dataTables.min.css') !!}
-    {!! Html::style('js/datatables/buttons.bootstrap.min.css') !!}
-    {!! Html::style('js/datatables/fixedHeader.bootstrap.min.css') !!}
-    {!! Html::style('js/datatables/responsive.bootstrap.min.css') !!}
-    {!! Html::style('js/datatables/scroller.bootstrap.min.css') !!}
+
     <div class="nav-md" ng-controller="cc_cuotasSocialesCtrl">
     <div class="container body">
     <div class="main_container">

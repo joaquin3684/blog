@@ -2,12 +2,7 @@
 
 @section('contenido')
   {!! Html::script('js/controladores/Dar_servicio.js') !!}
-<!-- CSS TABLAS -->
-<link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-<link href="js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
 <div class="nav-md" ng-controller="Dar_servicio">
     <div class="container body">
         <div class="main_container">

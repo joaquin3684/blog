@@ -5,12 +5,7 @@
 
 {!! Html::script('js/controladores/agente_financiero.js') !!}
 
-  <!-- CSS TABLAS -->
-  <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-  <link href="js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
 <div class="nav-md" ng-controller="agente_financiero" >
 <!-- <div style="margin-left: -250px; margin-top: -10px; padding: 0px; width: 100%; height: 100%; float: left; background-color: rgba(157, 157, 157, 0.3); z-index: 1000; position: fixed;">
 <center>

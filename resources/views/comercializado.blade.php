@@ -3,12 +3,8 @@
 @section('contenido')
 
     {!! Html::script('js/controladores/ABMprueba.js') !!}
-    <!-- CSS TABLAS -->
-    <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-    <link href="js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+
     <div class="nav-md" ng-controller="ABM" >
 
         <div class="container body" >
@@ -214,33 +210,7 @@
             </div>
         </div>
 
-        <script type="text/javascript">
-            $(document).ready(function() {
 
-
-                $("#datatable-responsive").DataTable({
-                    select: true,
-                    fixedHeader: true,
-                    language: {
-                        info: "Mostrando del _PAGE_ al _END_ de _TOTAL_ registros",
-                        lengthMenu: "Mostrar _MENU_ registros",
-                        paginate: {
-                            next: "Siguiente",
-                            previous: "Anterior"
-                        },
-                        search: "Buscar:"
-
-
-                    },
-                    dom: 'Blfrtip',
-                    buttons: [
-                        'copy', 'excel', 'pdf'
-                    ],
-                    lengthChange: true,
-
-                });
-            });
-        </script>
     </div>
 
 
