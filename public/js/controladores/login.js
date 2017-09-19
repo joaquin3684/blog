@@ -13,7 +13,9 @@ app.controller('loguear', function($scope, $http, $compile, $location, $window) 
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function successCallback(response)
             {
-               console.log(response);
+               if(response == 'si'){
+                  $window.location.href = 'asociados';
+               }
                
             }, function errorCallback(data)
             {
