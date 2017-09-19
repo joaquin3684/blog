@@ -26,6 +26,7 @@ angular.module('Login.services', [])
         var div = '#mensajito';
         $('#ContenedorMensaje').html('<div id="mensajito" class="alert alert-success" role="alert"><button type="button" onclick="$(ContenedorMensaje).hide(500); "class="close">&times;</button><strong style="font-size: 20pt;">'+data.title+'</strong></br> <font style="font-size: 15pt;">'+data.detail+'</font></div>');
         $('#ContenedorMensaje').show(100);
+        $window.location.href = 'asociados';
       return response;
     },
     // optional method

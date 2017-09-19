@@ -1,4 +1,4 @@
-var app = angular.module('Login', []).config(function($interpolateProvider){});
+var app = angular.module('Login', ['Login.services']).config(function($interpolateProvider){});
 app.controller('loguear', function($scope, $http, $compile, $location, $window) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
@@ -14,7 +14,7 @@ app.controller('loguear', function($scope, $http, $compile, $location, $window) 
             }).then(function successCallback(response)
             {
                console.log(response);
-               $window.location.href = 'asociados';
+               
             }, function errorCallback(data)
             {
                console.log(data);
