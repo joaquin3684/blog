@@ -17,7 +17,10 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component mounted. asd fd11fffffffffff11');
+
+            Echo.private('Cartalyst.Sentinel.Users.EloquentUser.11')
+            .notification((data) =>  {console.log(data);console.log("asdfasdf")});
         }
     }
 </script>

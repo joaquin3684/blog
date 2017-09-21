@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class SolicitudEnProceso extends Notification
+class SolicitudAsignada extends Notification
 {
     use Queueable;
 
@@ -31,7 +31,7 @@ class SolicitudEnProceso extends Notification
      */
     public function via($notifiable)
     {
-        return ['broadcast', 'database'];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -57,14 +57,14 @@ class SolicitudEnProceso extends Notification
     public function toArray($notifiable)
     {
         return [
-            'mensaje' => 'La solicitud esta en estado '. $this->solicitud->estado,
+            'mensaje' => 'Se te ha asignado una solicitud'
         ];
     }
 
     public function toBroadcast($notifable)
     {
         return new BroadcastMessage([
-            'mensaje' => 'Hay una solicitud en proceso',
-            ]);
+            'mensaje' => 'Se te ha asignado una solicitud',
+        ]);
     }
 }

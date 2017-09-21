@@ -14,6 +14,7 @@ class AgruparPorFecha
 {
     public static function agrupar(Collection $col)
     {
+        //TODO: aca cuando agrupa, esta agrupando por mes y año entonces si el 02/04/2018 queda 42018 y el 02/11/2017 queda 112017 que es un nuemro mas grande
         return $col->groupBy(function ($cuota) {
             $fecha = Carbon::createFromFormat('Y-m-d', $cuota->getFechaInicio());
             return $fecha->month.$fecha->year;

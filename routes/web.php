@@ -38,7 +38,7 @@ Route::post('pruebas', function(Request $request){
     $solicitud = new stdClass();
     $solicitud->estado = 'pancho';
     $user->notify(new \App\Notifications\SolicitudEnProceso($solicitud));
-    return 1;
+        return 1;
 });
 
 

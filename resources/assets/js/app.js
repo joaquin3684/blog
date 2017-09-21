@@ -19,12 +19,5 @@ Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
     el: '#app',
-    mounted() {
-        console.log('Component mounted. asd 1111');
-        Echo.private('users.11')
-            .notification((notification) => {
-                console.log(notification);
-
-            });
-    }
+    
 });
