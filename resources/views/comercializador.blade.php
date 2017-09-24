@@ -53,7 +53,7 @@
                 </div>
                 <div class="x_content">
 
-                  <form class="form-horizontal form-label-left" id="formulario" >
+                  <form class="form-horizontal form-label-left" ng-submit="AltaComercializador()" id="formulario" >
                    {{ csrf_field() }}
                     
                     <span class="section">Generar Solicitud</span>
@@ -62,7 +62,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Organismo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12"> 
-                          <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="organismocomplete">
+                          <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="organismocomplete" ng-required="true">
                             <option value="{[{x.id}]}" ng-repeat="x in organismos">
                             {[{x.nombre}]}
                             </option>
@@ -75,7 +75,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in query(searchText, 'filtroSocios')" md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado...">
+                        <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in query(searchText, 'filtroSocios')" md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..." ng-required="true">
                                                 <span md-highlight-text="searchText">
                                                     {[{item.nombre}]}
                                                 </span>
@@ -87,7 +87,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" ng-model="nombre" type="text">{[{errores.nombre[0]}]}
+                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" ng-model="nombre" type="text" ng-required="socio == null || socio == ''">{[{errores.nombre[0]}]}
                       </div>
                     </div>
                     
@@ -95,28 +95,28 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Apellido <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="apellido" ng-model="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Apellido">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="apellido" ng-model="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Apellido" ng-required="socio == null || socio == ''">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">DNI <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="dni" name="dni" ng-model="dni" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el DNI">{[{errores.dni[0]}]}
+                        <input type="number" id="dni" name="dni" ng-model="dni" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el DNI" ng-required="socio == null || socio == ''">{[{errores.dni[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Cuit <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="cuota_social" name="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{[{errores.cuota_social[0]}]}
+                        <input type="number" id="cuota_social" name="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit" ng-required="socio == null || socio == ''">{[{errores.cuota_social[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Fecha Nacimiento <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" ng-model="fecha_nacimiento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{[{errores.cuota_social[0]}]}
+                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" ng-model="fecha_nacimiento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit" ng-required="socio == null || socio == ''">{[{errores.cuota_social[0]}]}
                       </div>
                     </div>
                         
@@ -125,7 +125,7 @@
                       </label>
                       <div  class="col-md-6 col-sm-6 col-xs-12">
                         
-                        <md-radio-group flex layout="row" ng-model="sexo">
+                        <md-radio-group flex layout="row" ng-model="sexo" ng-required="socio == null || socio == ''">
 
                           <md-radio-button flex value="Masculino" class="md-primary">Masculino</md-radio-button>
                           <md-radio-button flex value="Femenino">Femenino</md-radio-button>
@@ -137,35 +137,35 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Legajo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="legajo" name="legajo" ng-model="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Legajo">{[{errores.legajo[0]}]}
+                        <input type="number" id="legajo" name="legajo" ng-model="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Legajo" ng-required="socio == null || socio == ''">{[{errores.legajo[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Domicilio <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio" ng-required="socio == null || socio == ''">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Localidad <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="localidad" name="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Localidad">{[{errores.localidad[0]}]}
+                        <input type="text" id="localidad" name="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Localidad" ng-required="socio == null || socio == ''">{[{errores.localidad[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Telefono <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="telefono" ng-model="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="telefono" ng-model="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono" ng-required="socio == null || socio == ''">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Codigo Postal <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="codigo_postal" ng-model="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Codigo Postal">{[{errores.cuit[0]}]}
+                        <input type="text" id="cuit" name="codigo_postal" ng-model="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Codigo Postal" ng-required="socio == null || socio == ''">{[{errores.cuit[0]}]}
                       </div>
                     </div>
                   </div>
@@ -174,7 +174,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input ngf-select name="file" ngf-pattern="'image/*'"
-    ngf-accept="'image/*'" type="file" id="cuit" name="cuit" ng-model="doc_documento" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
+    ngf-accept="'image/*'" type="file" id="cuit" name="cuit" ng-model="doc_documento" class="form-control col-md-7 col-xs-12" placeholder="" required>{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
@@ -182,7 +182,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input ngf-select name="file" ngf-pattern="'image/*'"
-    ngf-accept="'image/*'" type="file" id="cuit" name="cuit" ng-model="doc_recibo" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
+    ngf-accept="'image/*'" type="file" id="cuit" name="cuit" ng-model="doc_recibo" class="form-control col-md-7 col-xs-12" placeholder="" required>{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
@@ -190,7 +190,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input ngf-select name="file" ngf-pattern="'image/*'"
-    ngf-accept="'image/*'" ng-model="doc_domicilio" type="file" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
+    ngf-accept="'image/*'" ng-model="doc_domicilio" type="file" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="" required>{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
@@ -198,7 +198,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input ngf-select name="file" ngf-pattern="'image/*'"
-    ngf-accept="'image/*'" type="file" ng-model="doc_cbu" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
+    ngf-accept="'image/*'" type="file" ng-model="doc_cbu" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="" required>{[{errores.cuit[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
@@ -214,7 +214,7 @@
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
                         <button type="button" onclick="console.log('hola');" class="btn btn-primary">Cancel</button>
-                        <button id="send" type="submit" ng-click="AltaComercializador()" class="btn btn-success">Alta</button>
+                        <button id="send" type="submit" class="btn btn-success">Alta</button>
                       </div>
                     </div>
                   </form>
