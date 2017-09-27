@@ -38,4 +38,9 @@ return [
         'detail' => 'Por favor ingresar un usuario y contraseña validos.'
     ],
 
+    'modificacion_incorrecta' => [
+        'title' => 'Los campos unicos erroneos.',
+        'detail' => 'Los campos unicos ingresados ya existen porfavor ingrese valores unicos.'
+    ]
+
 ];

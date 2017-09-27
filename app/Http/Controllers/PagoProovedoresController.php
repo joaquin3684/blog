@@ -43,7 +43,6 @@ class PagoProovedoresController extends Controller
         }])->has('productos.ventas.movimientos')->get();
 
 
-
         $proovedores->each(function($proovedor) {
 
             $totalAPagar = $proovedor->productos->sum(function ($producto) {

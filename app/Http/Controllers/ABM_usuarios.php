@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\NoSePuedeModificarElUsuarioException;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
-use Sentinel;
+use Illuminate\Queue\SerializesModels;
 
 class ABM_usuarios extends Controller
 {
@@ -26,25 +28,30 @@ class ABM_usuarios extends Controller
 
     public function show($id)
     {
-        $registro = Proovedores::find($id);
-        return $registro;
-       
+        return Sentinel::findById($id);
     }
 
-
-
-    public function update(ValidacionABMproovedores $request, $id)
+    public function all()
     {
-        $registro = Proovedores::find($id);
-        $registro->fill($request->all())->save();
-        return ['updated' => true];
+        return Sentinel::getUserRepository()->get();
+    }
+
+    public function update($request, $id)
+    {
+        $user = Sentinel::findById($id);
+        if(Sentinel::validForUpdate($user, $request->all()))
+        {
+            return Sentinel::update($user, $request->all());
+        } else {
+            throw new NoSePuedeModificarElUsuarioException('modificacion_incorrecta');
+        }
+
     }
 
 
     public function destroy($id)
     {
-        $registro = Proovedores::find($id);
-        $registro->delete();
-        return ['deleted' => true];
+        $user = Sentinel::findById($id);
+        $user->delete();
     }
 }

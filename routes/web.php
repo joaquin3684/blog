@@ -104,6 +104,7 @@ Route::resource('abm_comercializador', 'ABM_Comercializador');
 
 //---------------- USUARIOS --------------------
 
+Route::get('usuarios/traerElementos', 'ABM_usuarios@all');
 Route::resource('usuarios', 'ABM_usuarios');
 
 //-------------- APROBACION SERVICIOS -------------
@@ -219,3 +220,27 @@ Route::post('proveedorCC/CCporOrganismo', 'ProveedorCCController@cuentaCorriente
 Route::post('proveedorCC/CCporSocio', 'ProveedorCCController@cuentaCorrientePorSocio');
 Route::post('proveedorCC/CCporVentas', 'ProveedorCCController@cuentaCorrientePorVentas');
 Route::post('proveedorCC/CCporCuotas', 'ProveedorCCController@cuentaCorrientePorCuotas');
+
+//-------------------- CAPITULO ----------------------------------
+
+Route::resource('capitulo', 'ABM_Capitulos');
+
+//-------------------- DEPARTAMENTO ----------------------------------
+
+Route::resource('departamento', 'ABM_Departamento');
+
+//-------------------- IMPUTACION ----------------------------------
+
+Route::resource('imputacion', 'ABM_Imputacion');
+
+//-------------------- MONEDA ----------------------------------
+
+Route::resource('moneda', 'ABM_Moneda');
+
+//-------------------- RUBRO ----------------------------------
+
+Route::resource('rubro', 'ABM_Rubros');
+
+//-------------------- SUB RUBRO ----------------------------------
+
+Route::resource('subRubro', 'ABM_SubRubro');

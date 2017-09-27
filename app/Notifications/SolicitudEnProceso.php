@@ -31,7 +31,7 @@ class SolicitudEnProceso extends Notification
      */
     public function via($notifiable)
     {
-        return ['broadcast', 'database'];
+        return ['broadcast', 'database', 'mail'];
     }
 
     /**
@@ -43,9 +43,10 @@ class SolicitudEnProceso extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+            ->view('agente_financiero');/*
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Thank you for using our application!');*/
     }
 
     /**

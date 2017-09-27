@@ -77,9 +77,16 @@ class Handler extends ExceptionHandler
             $status = 404;
         } else if ($e instanceOf MethodNotAllowedHttpException) {
             $data = array_merge([
-                'id'     => 'method_not_allowed',
+                'id' => 'method_not_allowed',
                 'status' => '405'
             ], config('errors.method_not_allowed'));
+
+            $status = 405;
+        } else if($e instanceof NoSePuedeModificarElUsuarioException){
+            $data = array_merge([
+                'id' => 'modificacion_incorrecta',
+                'status' => '405'
+            ], config('errors.modificacion_incorrecta'));
 
             $status = 405;
         } else {
