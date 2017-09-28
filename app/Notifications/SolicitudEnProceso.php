@@ -31,7 +31,7 @@ class SolicitudEnProceso extends Notification
      */
     public function via($notifiable)
     {
-        return ['broadcast', 'database', 'mail'];
+        return ['broadcast', 'database'];//todo lo del mail esta semi configurado hay que preguntarle cosas a la mutual
     }
 
     /**
