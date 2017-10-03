@@ -52,7 +52,7 @@ Route::get('creacionAutomatica', function(){
     $role->permissions = ['organismos.crear' => true, 'organismos.visualizar' => true, 'organismos.editar' => true, 'organismos.borrar'=> true, 'socios.editar' => true, 'socios.visualizar' => true, 'socios.crear' => true, 'socios.borrar' => true];
     $role->save();
     $role->users()->attach($user);
-    return 1;
+    return $user;
 
 });
 
@@ -244,3 +244,9 @@ Route::resource('rubro', 'ABM_Rubros');
 //-------------------- SUB RUBRO ----------------------------------
 
 Route::resource('subRubro', 'ABM_SubRubro');
+
+//------------------- NOTIFICACIONES ------------------------------
+
+Route::post('notificacion/marcarComoLeida', 'NotificacionController@marcarComoLeida');
+Route::get('notificaciones', 'NotificacionController@notificaciones');
+Route::post('notificacion/marcarTodasLeidas', 'NotificacionController@marcarTodasLeidas');
