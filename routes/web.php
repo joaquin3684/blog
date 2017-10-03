@@ -52,7 +52,7 @@ Route::get('creacionAutomatica', function(){
     $role->permissions = ['organismos.crear' => true, 'organismos.visualizar' => true, 'organismos.editar' => true, 'organismos.borrar'=> true, 'socios.editar' => true, 'socios.visualizar' => true, 'socios.crear' => true, 'socios.borrar' => true];
     $role->save();
     $role->users()->attach($user);
-
+    return 1;
 
 });
 
