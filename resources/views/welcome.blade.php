@@ -26,6 +26,7 @@
   {!! Html::style('css/ng-table.min.css') !!}
 
   {!! Html::script('js/jquery.min.js') !!}
+
    {!! Html::script('js/jquery-ui-1.12.1/jquery-ui.min.js') !!}
    {!! Html::style('js/jquery-ui-1.12.1/jquery-ui.min.css') !!}
    
@@ -41,6 +42,8 @@
 
 {!! Html::script('js/angular-sanitize/angular-sanitize.min.js') !!}
 {!! Html::script('js/services.js') !!}
+
+
 
 
 
@@ -327,11 +330,12 @@
 
   <!-- bootstrap progress js -->
   {!! Html::script('js/progressbar/bootstrap-progressbar.min.js') !!}
-
+{!! Html::script('js/wizard/jquery.smartWizard.js') !!}
 
   <!-- chart js -->
  {!! Html::script('js/custom.js') !!}
  {!! Html::script('js/app.js') !!}
+
 
 
   <script>
