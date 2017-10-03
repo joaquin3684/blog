@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\MasPlataCobradaQueElTotalException;
+use App\Notifications\SolicitudEnProceso;
 use App\Repositories\Eloquent\DesignadorDeEstado;
 use App\Repositories\Eloquent\DesignarAgenteFinanciero;
 use App\Repositories\Eloquent\FileManager;
@@ -83,6 +84,13 @@ class ComercializadorController extends Controller
             {
                 FileManager::uploadImage($doc_endeudamiento, $ruta, 'doc_endeudamiento.png');
             }
+            $usuarios = Sentinel::getUserRepository()->whereHas('roles', function($q){
+                $q->where('name', 'gestorSolicitudes');
+            })->get();
+            $usuarios->each(function($usuario) use($solicitud){
+                $usuario->notify(new SolicitudEnProceso($solicitud));
+            });
+
         });
 
     }
@@ -103,7 +111,7 @@ class ComercializadorController extends Controller
     public function modificarPropuesta(Request $request)
     {
         $elem = $request->all();
-        $this->solicitudGateway->update($elem, $elem['id']);
+        $sol = $this->solicitudGateway->update($elem, $elem['id']);
     }
 
     public function sociosQueCumplenConFiltro(Request $request)

@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class SolicitudPropuesta extends Notification
+class SolicitudPropuesta extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -57,7 +57,9 @@ class SolicitudPropuesta extends Notification
     public function toArray($notifiable)
     {
         return [
-            'mensaje' => 'Se ha hecho una propuesta para una solicitud'
+            'titulo' => 'Propuesta recibida',
+            'detalle' => 'Se ha recibido una propuesta por una solicitud',
+            'url' => '/comercializador'
         ];
     }
 

@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class SolicitudCapitalOtorgado extends Notification
+class SolicitudCapitalOtorgado extends Notification implements ShouldQueue
 {
     use Queueable;
 

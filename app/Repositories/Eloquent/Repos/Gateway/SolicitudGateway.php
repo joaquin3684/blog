@@ -33,4 +33,8 @@ class SolicitudGateway extends Gateway
         return Solicitud::where('estado', 'Capital Otorgado')->with('socio')->get();
     }
 
+    public function solicitudWithComer($id)
+    {
+        return Solicitud::with('comercializador')->find($id);
+    }
 }

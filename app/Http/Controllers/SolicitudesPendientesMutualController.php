@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Cuotas;
+use App\Notifications\SolicitudAsignada;
 use App\Repositories\Eloquent\FileManager;
 use App\Repositories\Eloquent\Generadores\GeneradorCuotas;
 use App\Repositories\Eloquent\Generadores\GeneradorVenta;
 use App\Repositories\Eloquent\GeneradorNumeroCredito;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
+use App\Repositories\Eloquent\Repos\Gateway\AgenteFinancieroGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudesSinInversionistaGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use App\Repositories\Eloquent\Repos\ProveedoresRepo;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Repositories\Eloquent\Repos\VentasRepo;
 use Carbon\Carbon;
+use Cartalyst\Sentinel\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,23 +35,32 @@ class SolicitudesPendientesMutualController extends Controller
 
     public function actualizar(Request $request)
     {
-        $elem = $request->all();
-        $col = collect();
-        if($request->has('doc_endeudamiento'))
-        {
-            $endeudamiento = $elem['doc_endeudamiento'];
-            $col->put('doc_endeudamiento', $endeudamiento);
+        DB::transaction(function () use ($request) {
+            $elem = $request->all();
+            $col = collect();
+            if ($request->has('doc_endeudamiento')) {
+                $endeudamiento = $elem['doc_endeudamiento'];
+                $col->put('doc_endeudamiento', $endeudamiento);
 
-        }
-        if ($request->has('agente_financiero'))
-        {
-            $agente = $elem['agente_financiero'];
-            $col->put('agente_financiero', $agente);
-        }
+            }
+            if ($request->has('agente_financiero')) {
+                $agente = $elem['agente_financiero'];
+                $col->put('agente_financiero', $agente);
 
-        $sol = $this->solicitudesGateway->update($col->toArray(), $elem['id']);
-        $sol->estado = $sol->doc_endeudamiento != null && $sol->agente_financiero != null ? 'Agente Financiero Asignado' : 'Procesando Solicitud';
-        $sol->save();
+            }
+
+            $sol = $this->solicitudesGateway->update($col->toArray(), $elem['id']);
+            $sol->estado = $sol->doc_endeudamiento != null && $sol->agente_financiero != null ? 'Agente Financiero Asignado' : 'Procesando Solicitud';
+            $sol->save();
+            if($sol->agente_financiero != null)
+            {
+                $agenteRepo = new AgenteFinancieroGateway();
+                $ag = $agenteRepo->find($agente);
+                $usuario = Sentinel::findById($ag->usuario);
+                $usuario->notify(new SolicitudAsignada($sol));
+            }
+
+        });
     }
 
     public function solicitudes()

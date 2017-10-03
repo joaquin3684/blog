@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class SolicitudEnProceso extends Notification
+class SolicitudEnProceso extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -58,7 +58,9 @@ class SolicitudEnProceso extends Notification
     public function toArray($notifiable)
     {
         return [
-            'mensaje' => 'La solicitud esta en estado '. $this->solicitud->estado,
+            'titulo' => 'Solicitud en proceso',
+            'detalle' => 'La solicitud esta en estado '. $this->solicitud->getEstado(),
+            'url' => '/solicitudesPendientesMutual'
         ];
     }
 

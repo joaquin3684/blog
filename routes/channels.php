@@ -22,3 +22,5 @@ Broadcast::channel('Cartalyst.Sentinel.Users.EloquentUser.{id}', function ($user
 
 
 
+
+

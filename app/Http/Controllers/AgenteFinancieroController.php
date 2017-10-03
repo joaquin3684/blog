@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\SolicitudPropuesta;
 use App\Repositories\Eloquent\FileManager;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
 use App\Repositories\Eloquent\Repos\Gateway\AgenteFinancieroGateway;
@@ -9,6 +10,7 @@ use App\Repositories\Eloquent\Repos\Gateway\ProveedoresGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use App\Repositories\Eloquent\Repos\ProveedoresRepo;
 use App\Repositories\Eloquent\Repos\SociosRepo;
+use App\Repositories\Eloquent\Repos\SolicitudRepo;
 use App\Repositories\Eloquent\Repos\VentasRepo;
 use App\Traits\FechasManager;
 use Carbon\Carbon;
@@ -41,10 +43,16 @@ class AgenteFinancieroController extends Controller
         $montoPorCuota = $request['monto_por_cuota'];
         $cuotas = $request['cuotas'];
         $solicitud = $request['id'];
+        $solicitudRepo = new SolicitudGateway();
+        $sol = $solicitudRepo->solicitudWithComer($solicitud);
         $usuario = Sentinel::check();
         $agenteRepo = new ProveedoresRepo();
         $proveedor = $agenteRepo->findByUser($usuario->id);
         $proveedor->generarPropuesta($importe, $montoPorCuota, $cuotas, $solicitud);
+        $comer = $sol->comercializador;
+        $userANotif = Sentinel::findById($comer->usuario);
+        $userANotif->notify(new SolicitudPropuesta($sol));
+
     }
 
     public function rechazarPropuesta(Request $request)

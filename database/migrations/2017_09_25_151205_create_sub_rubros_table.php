@@ -16,6 +16,9 @@ class CreateSubRubrosTable extends Migration
         Schema::create('sub_rubros', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->string('nombre');
+            $table->integer('codigo');
+            $table->softDeletes();
         });
     }
 

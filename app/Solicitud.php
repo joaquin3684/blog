@@ -23,5 +23,10 @@ class Solicitud extends Model
         return $this->belongsTo('App\Proovedores', 'agente_financiero', 'id');
     }
 
+    public function comercializador()
+    {
+        return $this->belongsTo('App\Comercializador', 'comercializador', 'id');
+
+    }
     protected $dates = ['deleted_at'];
 }

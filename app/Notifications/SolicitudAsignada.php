@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class SolicitudAsignada extends Notification
+class SolicitudAsignada extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -57,7 +57,9 @@ class SolicitudAsignada extends Notification
     public function toArray($notifiable)
     {
         return [
-            'mensaje' => 'Se te ha asignado una solicitud'
+            'titulo' => 'Solicitud asignada',
+            'detalle' => 'Se te ha asignado una nueva solicitud',
+            'url' => '/agente_financiero'
         ];
     }
 
