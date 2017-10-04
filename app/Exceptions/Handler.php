@@ -82,11 +82,18 @@ class Handler extends ExceptionHandler
             ], config('errors.method_not_allowed'));
 
             $status = 405;
-        } else if($e instanceof NoSePuedeModificarElUsuarioException){
+        } else if($e instanceof NoSePuedeModificarElUsuarioException) {
             $data = array_merge([
                 'id' => 'modificacion_incorrecta',
                 'status' => '405'
             ], config('errors.modificacion_incorrecta'));
+
+            $status = 405;
+        } else if($e instanceof NotFoundException){
+            $data = array_merge([
+                'id' => 'not_found',
+                'status' => '405'
+            ], config('errors.not_found'));
 
             $status = 405;
         } else {

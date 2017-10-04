@@ -13,6 +13,7 @@ use App\Repositories\Eloquent\FileManager;
 use App\Repositories\Eloquent\Repos\ComercializadorRepo;
 use App\Repositories\Eloquent\Repos\Gateway\AgenteFinancieroGateway;
 use App\Repositories\Eloquent\Repos\Gateway\ComercializadorGateway;
+use App\Repositories\Eloquent\Repos\Gateway\ProveedoresGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use App\Repositories\Eloquent\Repos\Mapper\AgenteFinancieroMapper;
 use App\Repositories\Eloquent\Repos\Mapper\ProveedoresMapper;
@@ -53,23 +54,20 @@ class ComercializadorController extends Controller
         DB::transaction(function () use ($request){
 
 
-            $elementos = $request->all();
             $col = collect($request->all());
-            $filtro = $elementos['filtro'] == '' ? [] : $elementos['filtro'];
             $usuario = Sentinel::check();
+            $comercializador = $this->comerRepo->findByUser($usuario->id);
 
             $agentes = DB::table('proovedores')
                 ->join('productos', 'proovedores.id', '=', 'productos.id_proovedor')
                 ->where('productos.tipo', 'Credito')
-                ->select('proovedores.*', 'productos.tipo');
+                ->select('proovedores.*', 'productos.tipo')->get();
 
-            $agentesFiltrados = \App\Repositories\Eloquent\Filtros\ProovedoresFilter::apply($filtro, $agentes);
 
-            $agentes = $agentesFiltrados->map(function($agente){
+            $agentes = $agentes->map(function($agente){
                return $this->proveedorRepo->find($agente->id);
             });
 
-            $comercializador = $this->comerRepo->findByUser($usuario->id);
             $solicitud = $comercializador->generarSolicitud($col, $agentes);
 
             $ruta = 'solicitudes/solicitud'.$solicitud->getId();
@@ -114,36 +112,41 @@ class ComercializadorController extends Controller
 
     public function modificarPropuesta(Request $request)
     {
-        $elem = $request->all();
-        $sol = $this->solicitudGateway->update($elem, $elem['id']);
-        $agenteGate = new AgenteFinancieroGateway();
-        $agente = $agenteGate->find($sol->agente_financiero);
-        $user = Sentinel::findById($agente->usuario);
-        $user->notify(new SolicitudContraPropuestada($sol));
-
+        DB::transaction(function () use ($request) {
+            $elem = $request->all();
+            $sol = $this->solicitudGateway->update($elem, $elem['id']);
+            $agenteGate = new ProveedoresGateway();
+            $agente = $agenteGate->find($sol->agente_financiero);
+            $user = Sentinel::findById($agente->usuario);
+            $user->notify(new SolicitudContraPropuestada($sol));
+        });
 
     }
 
     public function enviarFormulario(Request $request)
     {
-        $elem = $request->all();
-        $sol = $this->solicitudGateway->update($elem, $elem['id']);
-        $agenteGate = new AgenteFinancieroGateway();
-        $agente = $agenteGate->find($sol->agente_financiero);
-        $user = Sentinel::findById($agente->usuario);
-        $user->notify(new SolicitudFormularioEnviado($sol));
+        DB::transaction(function () use ($request) {
+            $elem = $request->all();
+            $sol = $this->solicitudGateway->update($elem, $elem['id']);
+            $agenteGate = new ProveedoresGateway();
+            $agente = $agenteGate->find($sol->agente_financiero);
+            $user = Sentinel::findById($agente->usuario);
+            $user->notify(new SolicitudFormularioEnviado($sol));
+        });
     }
 
 
 
     public function aceptarPropuesta(Request $request)
     {
-        $elem = $request->all();
-        $sol = $this->solicitudGateway->update($elem, $elem['id']);
-        $agenteGate = new AgenteFinancieroGateway();
-        $agente = $agenteGate->find($sol->agente_financiero);
-        $user = Sentinel::findById($agente->usuario);
-        $user->notify(new SolicitudAceptada($sol));
+        DB::transaction(function () use ($request) {
+            $elem = $request->all();
+            $sol = $this->solicitudGateway->update($elem, $elem['id']);
+            $agenteGate = new ProveedoresGateway();
+            $agente = $agenteGate->find($sol->agente_financiero);
+            $user = Sentinel::findById($agente->usuario);
+            $user->notify(new SolicitudAceptada($sol));
+        });
     }
 
     public function sociosQueCumplenConFiltro(Request $request)

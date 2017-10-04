@@ -70,7 +70,10 @@ class SolicitudAceptada extends Notification implements ShouldQueue
     public function toBroadcast($notifable)
     {
         return new BroadcastMessage([
-            'mensaje' => 'La propuesta a una solicitud ha sido aceptada',
+            'titulo' => 'Solicitud aceptada',
+            'detalle' => 'La propuesta ha sido aceptada',
+            'url' => '/agente_financiero',
+            'tipo' => 'success'
         ]);
     }
 }

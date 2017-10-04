@@ -250,4 +250,4 @@ Route::resource('subRubro', 'ABM_SubRubro');
 
 Route::post('notificacion/marcarComoLeida', 'NotificacionController@marcarComoLeida');
 Route::get('notificaciones', 'NotificacionController@notificaciones');
-Route::post('notificacion/marcarTodasLeidas', 'NotificacionController@marcarTodasLeidas');
+Route::get('notificacion/marcarTodasLeidas', 'NotificacionController@marcarTodasLeidas');

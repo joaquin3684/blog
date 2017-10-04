@@ -52,9 +52,10 @@ class SolicitudesPendientesMutualController extends Controller
             $sol = $this->solicitudesGateway->update($col->toArray(), $elem['id']);
             $sol->estado = $sol->doc_endeudamiento != null && $sol->agente_financiero != null ? 'Agente Financiero Asignado' : 'Procesando Solicitud';
             $sol->save();
-            if($sol->agente_financiero != null)
+            if($sol->agente_financiero != null && $request->has('agente_financiero'))
             {
                 $agenteRepo = new AgenteFinancieroGateway();
+                $agente = $elem['agente_financiero'];
                 $ag = $agenteRepo->find($agente);
                 $usuario = Sentinel::findById($ag->usuario);
                 $usuario->notify(new SolicitudAsignada($sol));

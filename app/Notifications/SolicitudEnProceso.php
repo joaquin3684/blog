@@ -68,7 +68,10 @@ class SolicitudEnProceso extends Notification implements ShouldQueue
     public function toBroadcast($notifable)
     {
         return new BroadcastMessage([
-            'mensaje' => 'Hay una solicitud en proceso',
-            ]);
+            'titulo' => 'Solicitud en proceso',
+            'detalle' => 'La solicitud esta en estado '. $this->solicitud->getEstado(),
+            'url' => '/solicitudesPendientesMutual',
+            'tipo' => 'info'
+        ]);
     }
 }

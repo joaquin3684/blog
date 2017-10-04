@@ -70,7 +70,13 @@ class SolicitudContraPropuestada extends Notification implements ShouldQueue
     public function toBroadcast($notifable)
     {
         return new BroadcastMessage([
-            'mensaje' => 'Se ha hecho una contra propuesta en una solicitud',
+            'titulo' => 'Contrapropuesta Recibida',
+            'detalle' => 'Se ha recibido una contrapropuesta por una solicitud.',
+            'url' => '/agente_financiero',//todo aca depende de quien haya hecho la contra propuesta
+            // hay que ver ocmo hacer para solucionar este tema una
+            // solucion es crear una notif distinta para la contra propuesta
+            // del comer y otra para la del agetne
+            'tipo' => 'info'
         ]);
     }
 }

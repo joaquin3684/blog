@@ -67,7 +67,10 @@ class SolicitudAprobada extends Notification implements ShouldQueue
     public function toBroadcast($notifable)
     {
         return new BroadcastMessage([
-            'mensaje' => 'La solicitud ha sido aprobada',
+            'titulo' => 'Solicitud ha sido aprobada',
+            'detalle' => 'La solicitud ha sido aprobada.',
+            'url' => '/comercializador',
+            'tipo' => 'success'
         ]);
     }
 }
