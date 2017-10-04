@@ -59,14 +59,18 @@ class SolicitudAsignada extends Notification implements ShouldQueue
         return [
             'titulo' => 'Solicitud asignada',
             'detalle' => 'Se te ha asignado una nueva solicitud',
-            'url' => '/agente_financiero'
+            'url' => '/agente_financiero',
+            'tipo' => 'info'
         ];
     }
 
     public function toBroadcast($notifable)
     {
         return new BroadcastMessage([
-            'mensaje' => 'Se te ha asignado una solicitud',
+            'titulo' => 'Solicitud asignada',
+            'detalle' => 'Se te ha asignado una nueva solicitud',
+            'url' => '/agente_financiero',
+            'tipo' => 'info'
         ]);
     }
 }

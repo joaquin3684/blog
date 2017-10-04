@@ -19,8 +19,9 @@ return [
     ],
 
     'not_found' => [
-        'title'  => 'The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible.',
-        'detail' => 'The resource you were looking for was not found.'
+
+        'title'  => 'El recurso buscado no se encontro.',
+        'detail' => 'El recurso requerido no pudo ser encontrado pero puede estar disponible en un futuro.'
     ],
 
     'error_sistema' => [

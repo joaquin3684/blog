@@ -59,14 +59,18 @@ class SolicitudPropuesta extends Notification implements ShouldQueue
         return [
             'titulo' => 'Propuesta recibida',
             'detalle' => 'Se ha recibido una propuesta por una solicitud',
-            'url' => '/comercializador'
+            'url' => '/comercializador',
+            'tipo' => 'info'
         ];
     }
 
     public function toBroadcast($notifable)
     {
         return new BroadcastMessage([
-            'mensaje' => 'Se ha hecho una propuesta para una solicitud',
+            'titulo' => 'Propuesta recibida',
+            'detalle' => 'Se ha recibido una propuesta por una solicitud',
+            'url' => '/comercializador',
+            'tipo' => 'info'
         ]);
     }
 }

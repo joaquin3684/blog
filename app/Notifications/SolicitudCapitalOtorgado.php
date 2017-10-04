@@ -57,14 +57,20 @@ class SolicitudCapitalOtorgado extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'mensaje' => 'Se ha otorgado el capital'
+            'titulo' => 'Capital otorgado',
+            'detalle' => 'Se le ha otorgado el capital a una solicitud.',
+            'url' => '/solicitudesPendientesMutual',
+            'tipo' => 'info'
         ];
     }
 
     public function toBroadcast($notifable)
     {
         return new BroadcastMessage([
-            'mensaje' => 'Se ha otorgado el capital',
+            'titulo' => 'Capital otorgado',
+            'detalle' => 'Se le ha otorgado el capital a una solicitud.',
+            'url' => '/solicitudesPendientesMutual',
+            'tipo' => 'info'
         ]);
     }
 }

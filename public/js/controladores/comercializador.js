@@ -155,7 +155,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
     $scope.EnviarFormulario = function(id) {
         $http({
-            url: 'comercializador/modificarPropuesta',
+            url: 'comercializador/enviarFormulario',
             method: 'post',
             data: {'id':id,'estado':'Formulario Enviado'}
         }).then(function successCallback(response)

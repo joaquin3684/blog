@@ -179,8 +179,9 @@ Route::post('cobroCuotasSociales/cobrar', 'CobroCuotasSocialesController@cobrar'
 Route::get('comercializador', 'ComercializadorController@index');
 Route::post('comercializador/altaSolicitud', 'ComercializadorController@altaSolicitud');
 Route::get('comercializador/solicitudes', 'ComercializadorController@solicitudes');
-Route::post('comercializador/aceptarPropuesta', 'ComercializadorController@modificarPropuesta');
+Route::post('comercializador/aceptarPropuesta', 'ComercializadorController@aceptarPropuesta');
 Route::post('comercializador/modificarPropuesta', 'ComercializadorController@modificarPropuesta');
+Route::post('comercializador/enviarFormulario', 'ComercializadorController@enviarFormulario');
 Route::post('comercializador/buscarSocios', 'ComercializadorController@sociosQueCumplenConFiltro');
 Route::post('comercializador/fotos', 'ComercializadorController@fotos');
 
@@ -249,4 +250,4 @@ Route::resource('subRubro', 'ABM_SubRubro');
 
 Route::post('notificacion/marcarComoLeida', 'NotificacionController@marcarComoLeida');
 Route::get('notificaciones', 'NotificacionController@notificaciones');
-Route::post('notificacion/marcarTodasLeidas', 'NotificacionController@marcarTodasLeidas');
+Route::get('notificacion/marcarTodasLeidas', 'NotificacionController@marcarTodasLeidas');

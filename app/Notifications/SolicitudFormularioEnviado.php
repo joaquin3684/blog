@@ -57,14 +57,20 @@ class SolicitudFormularioEnviado extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'mensaje' => 'Se ha enviado el formulario para una solicitud'
+            'titulo' => 'Formulario enviado',
+            'detalle' => 'Se ha enviado el formulario para una solicitud.',
+            'url' => '/agente_financiero',
+            'tipo' => 'info'
         ];
     }
 
     public function toBroadcast($notifable)
     {
         return new BroadcastMessage([
-            'mensaje' => 'Se ha enviado el formulario para una solicitud',
+            'titulo' => 'Formulario enviado',
+            'detalle' => 'Se ha enviado el formulario para una solicitud.',
+            'url' => '/agente_financiero',
+            'tipo' => 'info'
         ]);
     }
 }

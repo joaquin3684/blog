@@ -57,14 +57,20 @@ class SolicitudRechazada extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'mensaje' => 'La solicitud ha sido rechazada'
+            'titulo' => 'Solicitud rechazada',
+            'detalle' => 'La solicitud ha sido rechazada.',
+            'url' => '/comercializador',
+            'tipo' => 'danger'
         ];
     }
 
     public function toBroadcast($notifable)
     {
         return new BroadcastMessage([
-            'mensaje' => 'La solicitud ha sido rechazada',
+            'titulo' => 'Solicitud rechazada',
+            'detalle' => 'La solicitud ha sido rechazada.',
+            'url' => '/comercializador',
+            'tipo' => 'danger'
         ]);
     }
 }

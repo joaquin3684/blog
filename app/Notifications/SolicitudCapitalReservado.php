@@ -57,14 +57,20 @@ class SolicitudCapitalReservado extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'mensaje' => 'Se ha reservado el capital para una solicitud'
+            'titulo' => 'Capital reservado',
+            'detalle' => 'Se ha reservado el capital para una solicitud.',
+            'url' => '/comercializador',
+            'tipo' => 'info'
         ];
     }
 
     public function toBroadcast($notifable)
     {
         return new BroadcastMessage([
-            'mensaje' => 'Se ha reservado el capital para una solicitud',
+            'titulo' => 'Capital reservado',
+            'detalle' => 'Se ha reservado el capital para una solicitud.',
+            'url' => '/comercializador',
+            'tipo' => 'info'
         ]);
     }
 }

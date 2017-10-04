@@ -46981,10 +46981,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log('Component mounted. asd fd11fffffffffff11');
-        Echo.channel('prueba').listen('.SolicitudEnProceso', function (data) {
-            console.log(data);
-        });
-        Echo.private('Cartalyst.Sentinel.Users.EloquentUser.11').notification(function (data) {
+
+        Echo.private('Cartalyst.Sentinel.Users.EloquentUser.1').notification(function (data) {
             console.log(data);console.log("asdfasdf");
         });
     }
