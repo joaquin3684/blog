@@ -13,7 +13,6 @@ class NotificacionController extends Controller
 
     public function marcarComoLeida(Request $request)
     {
-        DB::transaction(function () use ($request){
             $id = $request['id'];
             $user = Sentinel::check();
             $notification = $user->notifications()->where('id', $id)->first();
@@ -23,7 +22,6 @@ class NotificacionController extends Controller
             } else {
                 throw new NotFoundException('not_found');
             }
-        });
 
     }
 
