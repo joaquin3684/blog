@@ -12,22 +12,18 @@
       </a>
 
       <ul id="menu1" class="dropdown-menu dropdown-notification list-unstyled msg_list animated bounceInDown"role="menu">
-
-
-
-
-    <li v-for="notificacion in notificaciones" v-bind:id="notificacion.idNumero" class="notification" style="'PT Sans Caption', sans-serif; background: rgba(50, 123, 184, 0.6) ">
-
+<!-- v-bind:id="notificacion.idNumero" -->
+    <li v-for="notificacion in notificaciones"  class="notification" style="'PT Sans Caption', sans-serif; background: rgba(50, 123, 184, 0.6) ">
 
         <a v-bind:href="notificacion.url">
           <span class="image" style="color:white"><i class="fa fa-bell-o" aria-hidden="true" ></i></span>
           <span class="time" style="color: white; right: 15px" v-on:click="eliminarNotificacion(notificacion)"><i class="fa fa-times" aria-hidden="true"></i></span>
             <span>
-            <span style="font-size: 14px; color:white"> <strong>&nbsp;Notificacion!</strong></span>
+            <span style="font-size: 14px; color:white" > <strong>&nbsp;{{notificacion.titulo}}</strong></span>
             </span>
             <span class="message" style="font-size: 14px;">
 
-            {{notificacion.mensaje}}
+            {{notificacion.detalle}}
             </span>
             <!-- <div class="divider"></div> -->
         </a>
@@ -52,12 +48,15 @@
 
     export default {
 
+        props: ['idUsuario'],
+
         data() {
           return{
 
             notificaciones: [],
             cantNotificaciones: 0,
             titulo: "titulo",
+            usuario: this.idUsuario,
           }
         },
 
@@ -70,7 +69,9 @@
           traerNotificaciones: function(){
             this.$http.get('/notificaciones').then(response => {
               console.log(response.body);
+              console.log(this.notificaciones);
 
+              this.notificaciones.concat(response.body);
     // get body data
               //this.someData = response.body;
 
@@ -117,7 +118,15 @@
                 this.notificaciones.splice(i, 1)
               }}
 
+              var idABorrar = i;
+              this.$http.post('notificacion/marcarComoLeida',{id: idABorrar}).then((response) => {
+                console.log(response);
+                // get body data
+                //this.someData = response.body;
 
+              }, response => {
+                // error callback
+              });
 
             // return $http({
             //    url: 'notificacion/marcarComoLeida',
@@ -201,38 +210,29 @@
         mounted() {
             // //
              this.traerNotificaciones();
-            console.log('Component mounted. asd fd11fffffffffff11');
+            console.log(this.usuario);
             Echo.private('Cartalyst.Sentinel.Users.EloquentUser.11')
 
             .notification((data) =>  {
-              this.notificaciones.push(
-                {'mensaje': data.detalle,
-                'id': data.id,
-                'idNumero': 'notification'+String(this.cantNotificaciones),
-                'url': data.type
-              }
-              );
-
+              this.notificaciones.push(data);
+//'idNumero': 'notification'+String(this.cantNotificaciones),
               this.sumarCantNotificaciones(1);
               console.log(data);
               console.log("asdfasdf10");
 
-              var tipoDeMensaje = 'success';
+              var tipoDeMensaje = data.tipo;
               var iconoMensaje;
               var tituloMensaje;
 
               switch(tipoDeMensaje) {
                 case 'success':
                   iconoMensaje ='glyphicon glyphicon-ok-circle';
-                  tituloMensaje ='<strong> &nbsp Exito!</strong> <br>';
                   break;
                 case 'info':
                   iconoMensaje ='glyphicon glyphicon-bell';
-                  tituloMensaje ='<strong> &nbsp Notificacion!</strong> <br>';
                     break;
                 case 'danger':
                   iconoMensaje ='glyphicon glyphicon-exclamation-sign';
-                  tituloMensaje ='<strong> &nbsp Advertencia!</strong> <br>';
                     break;
                 default:
                   console.log("tipo de mensaje desconocido");
@@ -241,8 +241,8 @@
               $.notify({
 	               // options
                  icon: iconoMensaje,
-                 title: tituloMensaje,
-	                message: data.mensaje,
+                 title: '<strong> &nbsp'+ data.titulo +'!</strong> <br>',
+	                message: data.detalle,
                   target: "_self",
                   url: 'http://lucas.app:8000/solicitudesPendientesMutual',
                 },{
