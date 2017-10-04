@@ -69,8 +69,9 @@
 
           traerNotificaciones: function(){
             this.$http.get('/notificaciones').then(response => {
-              console.log(response);
-              // get body data
+              console.log(response.body);
+
+    // get body data
               //this.someData = response.body;
 
             }, response => {

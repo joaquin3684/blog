@@ -11,7 +11,7 @@ require('./Animate/animate.css');
 
 
 window.Vue = require('vue');
- Vue.use(VueResource);
+Vue.use(VueResource);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

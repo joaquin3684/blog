@@ -6,6 +6,7 @@ use App\Exceptions\NotFoundException;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 class NotificacionController extends Controller
 {
@@ -28,10 +29,10 @@ class NotificacionController extends Controller
 
     public function notificaciones()
     {
-        DB::transaction(function () {
-           $user = Sentinel::check();
-           return $user->notifications;
-        });
+        $user = Sentinel::check();
+
+        return $user->notifications;
+
     }
 
     public function marcarTodasLeidas()
