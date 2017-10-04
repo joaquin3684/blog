@@ -35,7 +35,7 @@ Route::get('imagenes', function(){
 
 Route::post('pruebas', function(Request $request){
     $user = Sentinel::authenticate($request->all());
-
+$solicitud = 1;
     $user->notify(new \App\Notifications\SolicitudEnProceso($solicitud));
         return 1;
 });
