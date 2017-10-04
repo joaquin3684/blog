@@ -3,7 +3,7 @@
 @section('contenido')
 
 
-{!! Html::script('js/controladores/ABM_comercializadores.js') !!}
+{!! Html::script('js/controladores/ABMprueba.js') !!}
 {!! Html::script('js/forwizards.js') !!}
 <style>
 .wizard .nav-tabs > li {
@@ -12,13 +12,13 @@
 
 </style>
 
-<div class="nav-md" ng-controller="ABM_comercializador" >
+<div class="nav-md" ng-controller="ABM" >
 
   <div class="container body">
 
     <div class="main_container" >
 
-      <input type="hidden" id="tipo_tabla" value="organismos">
+      <input type="hidden" id="tipo_tabla" value="capitulo">
       <!-- page content -->
       <div class="left-col" role="main" >
 
@@ -107,37 +107,44 @@
 
             <form role="form">
                 <div class="tab-content">
-                    <div class="tab-pane active" role="tabpanel" id="capitulo">
-                        <center><h3>Alta de Capítulo</h3>
+                    <div class="tab-pane active" role="tabpanel" id="capitulos">
+                        <h3>Alta de Capítulo</h3>
                         
                         @verbatim
                   <form class="form-horizontal" ng-submit="enviarFormulario('Alta')" id="formulario" >
                   
-
-                    <div class="item form-group">
-                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="nombre">Nombre <span class="required">*</span>
+                    <div class="row">
+                    <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                      <label class="" for="codigo">Código <span class="required">*</span>
                       </label>
-                      <div class="col-md- col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{{errores.nombre[0]}}
-                      </div>
                     </div>
+                    <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                        <input id="codigo" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{{errores.nombre[0]}}
+                    </div>
+                  </div>
 
-                    <div class="col-md- col-sm-6 col-xs-12">
+                  <div class="row">
+                    <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                      <label class="" for="nombre">Nombre <span class="required">*</span>
+                      </label>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-4 col-xs-12">
                         <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{{errores.nombre[0]}}
-                      </div>
-
+                    </div>
+                  </div>
+                  <div class="row">
                     <div class="form-group">
-                      <div class="col-md-6 col-md-offset-3">
-                        <button type="button" onclick="console.log('hola');" class="btn btn-primary">Cancel</button>
-                        <button id="send" type="submit" class="btn btn-success">Alta</button>
+                      <div class="col-md-2 col-md-offset-6">
+                        <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta Capítulo</button>
                       </div>
                     </div>
+                  </div>
                   </form>
                   @endverbatim
 
 
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                            <li><button type="button" class="btn btn-primary next-step">Continuar a Rubros <i class="fa fa-arrow-right"></i> </button></li>
                         </ul></center>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="rubro">
