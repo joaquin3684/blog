@@ -15,15 +15,15 @@
 <!-- v-bind:id="notificacion.idNumero" -->
     <li v-for="notificacion in notificaciones"  class="notification" style="'PT Sans Caption', sans-serif; background: rgba(50, 123, 184, 0.6) ">
 
-        <a v-bind:href="notificacion.url">
+        <a v-bind:href="notificacion.data.url">
           <span class="image" style="color:white"><i class="fa fa-bell-o" aria-hidden="true" ></i></span>
           <span class="time" style="color: white; right: 15px" v-on:click="eliminarNotificacion(notificacion)"><i class="fa fa-times" aria-hidden="true"></i></span>
             <span>
-            <span style="font-size: 14px; color:white" > <strong>&nbsp;{{notificacion.titulo}}</strong></span>
+            <span style="font-size: 14px; color:white" > <strong>&nbsp;{{notificacion.data.titulo}}</strong></span>
             </span>
             <span class="message" style="font-size: 14px;">
 
-            {{notificacion.detalle}}
+            {{notificacion.data.detalle}}
             </span>
             <!-- <div class="divider"></div> -->
         </a>
@@ -71,7 +71,7 @@
               console.log(response.body);
               console.log(this.notificaciones);
 
-              this.notificaciones.concat(response.body);
+              this.notificaciones= response.body;
     // get body data
               //this.someData = response.body;
 

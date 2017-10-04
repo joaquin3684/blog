@@ -47746,7 +47746,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(response.body);
         console.log(_this.notificaciones);
 
-        _this.notificaciones.concat(response.body);
+        _this.notificaciones = response.body;
         // get body data
         //this.someData = response.body;
       }, function (response) {
@@ -47963,7 +47963,7 @@ var render = function() {
                 staticStyle: { background: "rgba(50, 123, 184, 0.6)" }
               },
               [
-                _c("a", { attrs: { href: notificacion.url } }, [
+                _c("a", { attrs: { href: notificacion.data.url } }, [
                   _vm._m(1, true),
                   _vm._v(" "),
                   _c(
@@ -47991,7 +47991,7 @@ var render = function() {
                       { staticStyle: { "font-size": "14px", color: "white" } },
                       [
                         _c("strong", [
-                          _vm._v(" " + _vm._s(notificacion.titulo))
+                          _vm._v(" " + _vm._s(notificacion.data.titulo))
                         ])
                       ]
                     )
@@ -48006,7 +48006,7 @@ var render = function() {
                     [
                       _vm._v(
                         "\n\n            " +
-                          _vm._s(notificacion.detalle) +
+                          _vm._s(notificacion.data.detalle) +
                           "\n            "
                       )
                     ]
