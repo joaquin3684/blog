@@ -120,10 +120,9 @@ app.controller('ABM', function($scope, $http, $compile, $sce) {
             console.log(data);
          });
 
-
-
-
    }
+
+   $scope.traerElementos();
 
 
 });

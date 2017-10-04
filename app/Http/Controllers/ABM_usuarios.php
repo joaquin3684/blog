@@ -11,18 +11,18 @@ class ABM_usuarios extends Controller
 {
     public function index()
   {
-  
+
     return view('ABM_usuarios');
   }
 
    public function store(Request $request)
-    {   
+    {
         $user = Sentinel::registerAndActivate($request->all());
         for($i = 0; $request['numeroDeRoles'] > $i; $i++)
         {
             $role = Sentinel::findRoleByName($request['roles'.$i]);
             $role->users()->attach($user);
-        } 
+        }
         return ['created' => true];
     }
 

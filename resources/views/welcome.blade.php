@@ -14,11 +14,12 @@
 {!! Html::style('js/angular-material/angular-material.min.css') !!}
   {!! Html::style('css/bootstrap.min.css') !!}
   {!! Html::style('fonts/css/font-awesome.min.css') !!}
-  
+    {!! Html::style('https://fonts.googleapis.com/css?family=PT+Sans+Caption') !!}
+
   {!! Html::style('css/animate.min.css') !!}
 {!! Html::script('js/moment/moment.min.js') !!}
   <!-- Custom styling plus plugins -->
- 
+
   {!! Html::style('css/custom.css') !!}
   {!! Html::style('css/icheck/flat/green.css') !!}
   {!! Html::style('css/barrow.css') !!}
@@ -29,7 +30,7 @@
 
    {!! Html::script('js/jquery-ui-1.12.1/jquery-ui.min.js') !!}
    {!! Html::style('js/jquery-ui-1.12.1/jquery-ui.min.css') !!}
-   
+
     {!! Html::script('js/angular.min.js') !!}
     {!! Html::script('js/nprogress.js') !!}
   {!! Html::script('js/misFunciones.js') !!}
@@ -42,6 +43,7 @@
 
 {!! Html::script('js/angular-sanitize/angular-sanitize.min.js') !!}
 {!! Html::script('js/services.js') !!}
+{!! Html::script('js/vue-resource/dist/vue-resource.min.js') !!}
 
 
 
@@ -109,7 +111,7 @@
             <div class="menu_section">
               <h3>General</h3>
               <ul class="nav side-menu">
-               
+
                 <li><a><i class="fa fa-edit"></i> ABM <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                       <li><a href="asociados">Socios</a>
@@ -182,7 +184,7 @@
             </a>
             <a data-toggle="tooltip" data-placement="top" title="Lock" style="background-color: #106cc8; color:#e4e5e7;">
               <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-            </a> 
+            </a>
             <a data-toggle="tooltip" href="logout" data-placement="top" title="Salir" style="background-color: #106cc8; color:#e4e5e7;">
               <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
@@ -223,78 +225,10 @@
                 </ul>
               </li>
 
-              <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="badge bg-green">6</span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
-                      <a href="inbox.html">
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
+              <div id="app">
+                    <example></example>
+                  </div>
+
 
             </ul>
           </nav>
@@ -323,8 +257,8 @@
     <div class="clearfix"></div>
     <div id="notif-group" class="tabbed_notifications"></div>
   </div>
-  
-    {!! Html::script('js/bootstrap.min.js') !!}
+
+
 
 
 

@@ -70,6 +70,13 @@
                                                 </div>
                                             </div>
                                             <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de colocacion<span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="number" step="0.01" id="colocacion" name="colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_colocacion[0]}}
+                                                </div>
+                                            </div>
+                                            <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Proovedor <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -255,6 +262,13 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="number" id="retencion" name="retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Colocacion <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" id="colocacion" name="colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_colocacion[0]}}
                                 </div>
                             </div>
                             <div class="item form-group">

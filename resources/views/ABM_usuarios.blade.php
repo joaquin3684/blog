@@ -137,8 +137,8 @@
                                                 <td title="'Email'" filter="{ email: 'text'}"sortable="'email'">
                                                     {{abm.email}}
                                                 </td>
-                                                <td title="'Contraseña'" filter="{ contraseña: 'text'}" sortable="'contraseña'">
-                                                    {{abm.contraseña}}
+                                                <td title="'Contraseña'" filter="{ password: 'text'}" sortable="'password'">
+                                                    {{abm.password}}
                                                 </td>
                                                 <td title="Cant. roles" filter="{ cantRoles: 'text'}" sortable="'cantRoles'">
                                                     {{abm.cantRoles}}

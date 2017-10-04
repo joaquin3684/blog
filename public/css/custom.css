@@ -1,3 +1,12 @@
+.alert-fixed {
+    position:fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index:9999;
+    border-radius:0px
+}
+
 body.nav-sm .container.body .left_col {
   width: 70px;
   padding: 0;
@@ -197,7 +206,7 @@ body.nav-sm span.fa, body.nav-sm .menu_section h3 {
 body.nav-md .container.body .col-md-3.left_col {
   width: 230px;
   padding: 0;
-  
+
   display: flex;
   padding: 0;
   position: fixed;
@@ -582,7 +591,7 @@ li.current-page {
 .nav.side-menu> li.active > a {
   color: #ff0000;
   text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
-  
+
   background-color: #267ed5;
   -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
   -moz-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
@@ -1312,7 +1321,7 @@ span.round-tab i{
 .wizard li.active span.round-tab {
     background: #fff;
     border: 2px solid #5bc0de;
-    
+
 }
 .wizard li.active span.round-tab i{
     color: #5bc0de;

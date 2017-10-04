@@ -585,13 +585,29 @@
                                         <h4 class="modal-title">Cancelacion</h4>
                                       </div>
                                       <div class="modal-body">
-                                        <p>Seleccione un motivo de cancelacion.</p>
+                                        <p>Seleccionar una forma de cancelacion.</p>
                                         <div class="form-group">
 
                                           <select class="form-control" ng-model="motivo" id="exampleFormControlSelect1">
+                                            <option value="" selected disabled>Seleccione un motivo de cancelacion</option>
                                             <option value="Renovado">Renovar</option>
                                             <option value="Cancelado">Cancelar</option>
                                           </select>
+
+                                          <!-- <div class="modal-body">
+                                            <p>Seleccione un motivo de cancelacion.</p>
+                                            <div class="form-group"> -->
+                                          <br>
+                                          <select class="form-control" id="exampleFormControlSelect1">
+                                            <option value="" selected disabled>Seleccione una forma de cobro</option>
+                                            <option value="Renovado">Saldo de capital</option>
+                                            <option value="Cancelado">Porcentaje</option>
+                                          </select>
+                                          <br>
+                                          <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1" >Total a cobrar</span>
+                                            <input type="text" class="form-control" placeholder="Total a cobrar" aria-describedby="basic-addon1" disabled="true">
+                                          </div>
                                         </div>
                                       </div>
                                       <div class="modal-footer">

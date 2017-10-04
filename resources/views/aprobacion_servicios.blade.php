@@ -203,8 +203,6 @@
                                                     {[{aprobacion.fecha_vencimiento}]}
                                                 </td>
                                                 <td>
-                                                <select id="observacion{[{aprobacion.id}]}" style="width: 60%;" ng-model="perfilnew" ng-options="x for x in criterios">
-                                                </select>
                                                     <input type="button" ng-click="Aprobar('ok',aprobacion.id)" class="btn btn-primary" value="✓">
                                                     <input type="button" ng-click="Aprobar('no',aprobacion.id)" class="btn btn-danger" value="X">
                                                 </td>

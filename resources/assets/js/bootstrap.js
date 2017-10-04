@@ -52,3 +52,6 @@ if (token) {
      cluster: 'us2',
      encrypted: true,
  });
+
+
+ import VueResource from 'vue-resource'

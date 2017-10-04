@@ -3,7 +3,8 @@ var app = angular.module('Mutual',  ['ngMaterial','Mutual.services']).config(fun
 });
 app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
   moment.locale('es');
-  $scope.vencimiento = moment().add(2, 'months').format('L');
+
+  $scope.vencimiento = moment().startOf('month').add(24, 'days').add(2, 'months').format('L');
   $scope.mostrar = false;
   // machea a los socios en base al searchText
   $scope.query = function(searchText, ruta) {

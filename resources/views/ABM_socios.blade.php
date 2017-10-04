@@ -2,7 +2,7 @@
 
 @section('contenido')
   {!! Html::script('js/controladores/ABMprueba.js') !!}
-
+  {!! Html::script('js/bootstrap-menu/BootstrapMenu.min.js') !!}
 
 <div class="nav-md" ng-controller="ABM" >
 
@@ -20,8 +20,9 @@
           <div class="clearfix"></div>
 @if(Sentinel::check()->hasAccess('socios.crear'))
           <div class="row" >
-          <div id="mensaje"></div>
+
             <div class="col-md-12 col-sm-12 col-xs-12" >
+              <div id="mensaje"></div>
               <div class="x_panel"  >
                 <div class="x_title">
                   <h2>Formulario de socios <small>Dar de alta un socio</small></h2>

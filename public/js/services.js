@@ -1,16 +1,17 @@
 angular.module('Mutual.services', ['ngTable'])
 
+//La clase alert-fixed permite que el mensaje aparezca siempre en la parte superior de la pantalla
 
 .service('UserSrv', function($http,$mdDialog, NgTableParams,$filter){
 
     var that = this;
     this.MostrarMensaje = function(titulo,mensaje,tipo,sector,nombremodal){
         if(tipo != 'Error'){
-            $('#'+sector).html('<div class="alert alert-success" role="alert"><strong>¡'+titulo+'!</strong> '+mensaje+'</div>');
-            setTimeout(function(){ 
+            $('#'+sector).html('<div class="alert alert-success alert-fixed" role="alert"><strong>¡'+titulo+'!</strong> '+mensaje+'</div>');
+            setTimeout(function(){
                 $('#'+sector).html('');
                 $('#'+nombremodal).modal('hide');
-                 
+
                 }, 2000);
         } else {
             $('#'+sector).html('<div class="alert alert-danger" role="alert"><strong>¡'+titulo+'!</strong> '+mensaje+'</div>');
@@ -46,8 +47,8 @@ angular.module('Mutual.services', ['ngTable'])
    }
 
    this.Params = function(array){
-   
-            
+
+
         newParams = new NgTableParams({
                     page: 1,
                     count: 10
@@ -91,7 +92,7 @@ angular.module('Mutual.services', ['ngTable'])
        return path;
     }
 
-    
+
 
 })
 
@@ -131,6 +132,6 @@ angular.module('Mutual.services', ['ngTable'])
   };
 })
 
-.config(['$httpProvider', function($httpProvider) {  
+.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('myHttpInterceptor');
 }]);

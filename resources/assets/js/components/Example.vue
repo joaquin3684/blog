@@ -1,26 +1,264 @@
-<template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Example Component</div>
 
-                    <div class="panel-body">
-                        I'm an example component!
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<template>
+
+<div id="app">
+
+  <li role="presentation" class="dropdown">
+
+      <a href="javascript:;" class="dropdown-toggle info-number" type="button" data-toggle="dropdown" aria-expanded="false">
+        <i class="fa fa-envelope-o"></i>
+        <span class="badge bg-green" >6</span>
+
+      </a>
+
+      <ul id="menu1" class="dropdown-menu dropdown-notification list-unstyled msg_list animated bounceInDown"role="menu">
+
+
+
+
+    <li v-for="notificacion in notificaciones" v-bind:id="notificacion.idNumero" class="notification" style="'PT Sans Caption', sans-serif; background: rgba(50, 123, 184, 0.6) ">
+
+
+        <a v-bind:href="notificacion.url">
+          <span class="image" style="color:white"><i class="fa fa-bell-o" aria-hidden="true" ></i></span>
+          <span class="time" style="color: white; right: 15px" v-on:click="eliminarNotificacion(notificacion)"><i class="fa fa-times" aria-hidden="true"></i></span>
+            <span>
+            <span style="font-size: 14px; color:white"> <strong>&nbsp;Notificacion!</strong></span>
+            </span>
+            <span class="message" style="font-size: 14px;">
+
+            {{notificacion.mensaje}}
+            </span>
+            <!-- <div class="divider"></div> -->
+        </a>
+    </li>
+    <li>
+      <div class="text-center">
+        <a>
+          <strong v-on:click="eliminarNotificaciones">Marcar todas como leidas</strong>
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
+    </li>
+  </ul>
+  </li>
+
+  </div>
+
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted. asd fd11fffffffffff11');
 
+
+    export default {
+
+        data() {
+          return{
+
+            notificaciones: [],
+            cantNotificaciones: 0,
+            titulo: "titulo",
+          }
+        },
+
+        methods:{
+          sumarCantNotificaciones: function(cant){
+            this.cantNotificaciones += cant;
+            // bus.$emit('cantNotificaciones', 1)
+          },
+
+          traerNotificaciones: function(){
+            this.$http.get('/notificaciones').then(response => {
+              console.log(response);
+              // get body data
+              //this.someData = response.body;
+
+            }, response => {
+              // error callback
+            });
+
+            //  return $http({
+            //    url: 'notificaciones',
+            //    method: 'get',
+             //
+            //    }).then(function successCallback(response)
+            //       {
+            //          console.log(response.data);
+            //          if(typeof response.data == 'string')
+            //          {
+            //             return [];
+            //          }
+            //          else
+            //          {
+            //            this.notificaciones.push(
+            //              {'mensaje': data.mensaje,
+            //              'id': data.id,
+            //              'idNumero': 'notification'+String(this.cantNotificaciones),
+            //              'url': data.type,
+            //            }
+            //            );
+            //          }
+             //
+            //       }, function errorCallback(data)
+            //       {
+            //          console.log(data.data);
+            //       });
+          },
+
+          eliminarNotificacion: function(notificacion){
+
+            $('.dropdown-notification').on('click', function(e) {
+              e.stopPropagation();
+            });
+
+            for(var i = this.notificaciones.length - 1; i >= 0; i--) {
+              if(this.notificaciones[i].id === notificacion.id) {
+                this.notificaciones.splice(i, 1)
+              }}
+
+
+
+            // return $http({
+            //    url: 'notificacion/marcarComoLeida',
+            //    method: 'get',
+            //    data: {'id': notificacion.id}
+            //
+            //    }).then(function successCallback(response)
+            //       {
+            //          console.log(response.data);
+            //          if(typeof response.data == 'string')
+            //          {
+            //             return [];
+            //          }
+            //          else
+            //          {
+            //            $('.dropdown-notification').on('click', function(e) {
+            //              e.stopPropagation();
+            //            });
+            //
+            //            for(var i = this.notificaciones.length - 1; i >= 0; i--) {
+            //              if(this.notificaciones[i].id === notificacion.id) {
+            //                this.notificaciones.splice(i, 1)
+            //                // var identificador = '#'+notificacion.idNumero;
+            //                // $(identificador).hide('slow').animate(
+            //                //   200, function(){
+            //                // );
+            //              }
+            //              this.sumarCantNotificaciones(-1);
+            //            }
+            //            }
+            //
+            //
+            //       }, function errorCallback(data)
+            //       {
+            //          console.log(data.data);
+            //       });
+          },
+          eliminarNotificaciones: function(){
+
+            $('.dropdown-notification').on('click', function(e) {
+              e.stopPropagation();
+            });
+
+            $('.notification').hide('slow').animate(
+              400, function(){this.notificaciones = [];}
+            );
+
+            this.sumarCantNotificaciones(-this.cantNotificaciones);
+
+            // return $http({
+            //    url: 'notificacion/marcarComoLeida',
+            //    method: 'get',
+            //    data: {'id': notificacion.id}
+            //
+            //    }).then(function successCallback(response)
+            //       {
+            //          console.log(response.data);
+            //          if(typeof response.data == 'string')
+            //          {
+            //             return [];
+            //          }
+            //          else
+            //          {
+            //             $('.dropdown-notification').on('click', function(e) {
+            //               e.stopPropagation();
+            //             });
+            //
+            //             $('.notification').hide('slow').animate(
+            //               400, function(){this.notificaciones = [];}
+            //             );
+            //           }
+            //
+            //       }, function errorCallback(data)
+            //       {
+            //          console.log(data.data);
+            //       });
+
+
+          }
+        },
+        mounted() {
+            // //
+             this.traerNotificaciones();
+            console.log('Component mounted. asd fd11fffffffffff11');
             Echo.private('Cartalyst.Sentinel.Users.EloquentUser.11')
-            .notification((data) =>  {console.log(data);console.log("asdfasdf")});
-        }
+
+            .notification((data) =>  {
+              this.notificaciones.push(
+                {'mensaje': data.detalle,
+                'id': data.id,
+                'idNumero': 'notification'+String(this.cantNotificaciones),
+                'url': data.type
+              }
+              );
+
+              this.sumarCantNotificaciones(1);
+              console.log(data);
+              console.log("asdfasdf10");
+
+              var tipoDeMensaje = 'success';
+              var iconoMensaje;
+              var tituloMensaje;
+
+              switch(tipoDeMensaje) {
+                case 'success':
+                  iconoMensaje ='glyphicon glyphicon-ok-circle';
+                  tituloMensaje ='<strong> &nbsp Exito!</strong> <br>';
+                  break;
+                case 'info':
+                  iconoMensaje ='glyphicon glyphicon-bell';
+                  tituloMensaje ='<strong> &nbsp Notificacion!</strong> <br>';
+                    break;
+                case 'danger':
+                  iconoMensaje ='glyphicon glyphicon-exclamation-sign';
+                  tituloMensaje ='<strong> &nbsp Advertencia!</strong> <br>';
+                    break;
+                default:
+                  console.log("tipo de mensaje desconocido");
+                }
+
+              $.notify({
+	               // options
+                 icon: iconoMensaje,
+                 title: tituloMensaje,
+	                message: data.mensaje,
+                  target: "_self",
+                  url: 'http://lucas.app:8000/solicitudesPendientesMutual',
+                },{
+	                 // settings
+                   mouse_over: 'pause',
+	                  type: tipoDeMensaje,
+                    placement: {
+                          from: "bottom",
+                            align: "right"
+                    },
+                    animate: {
+		                    enter: 'animated bounceInRight',
+		                      exit: 'animated bounceOutRight'
+	                       },
+                  });
+            });
+        },
+
     }
 </script>

@@ -82,7 +82,7 @@ $scope.traerRelaciones = function(relaciones)
                   }
                $scope.mensaje = response;
                $('#formulario')[0].reset();
-               if(tipoSolicitud != 'Mostrar'){UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK"); $('#editar').modal('hide');}
+               if(tipoSolicitud != 'Mostrar'){UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje"); $('#editar').modal('hide');}
                $scope.errores = '';
                console.log(response.data);
                $scope.traerElementos();
@@ -96,9 +96,12 @@ $scope.traerRelaciones = function(relaciones)
 
    $scope.cambiarFecha = function(dato){
       moment.locale('es');
-      fecha= dato.fecha_nacimiento;
-      var fecha= moment(fecha, 'YYYY-MM-DD').format('L');
-      dato.fecha_nacimiento= fecha;
+      fechaNacimiento= dato.fecha_nacimiento;
+      fechaIngreso= dato.fecha_ingreso;
+      var fechaNacimiento= moment(fechaNacimiento, 'YYYY-MM-DD').format('L');
+      var fechaIngreso= moment(fechaIngreso, 'YYYY-MM-DD').format('L');
+      dato.fecha_nacimiento= fechaNacimiento;
+      dato.fecha_ingreso= fechaIngreso;
       return dato;
     }
 
