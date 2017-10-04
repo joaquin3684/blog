@@ -57,7 +57,13 @@ class SolicitudAceptada extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'mensaje' => 'La propuesta a una solicitud ha sido aceptada'
+            'titulo' => 'Solicitud aceptada',
+            'detalle' => 'La propuesta ha sido aceptada',
+            'url' => '/agente_financiero',
+            'tipo' => 'success'//todo aca depende de quien haya hecho la contra propuesta
+            // hay que ver ocmo hacer para solucionar este tema una
+            // solucion es crear una notif distinta para la contra propuesta
+            // del comer y otra para la del agetne
         ];
     }
 

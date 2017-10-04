@@ -55,6 +55,7 @@ class Proveedor
         $solicitud->setCuotas($cuotas);
         $solicitud->setEstado('Esperando Respuesta Comercializador');
         $solicitud->guardar();
+        return $solicitud;
     }
 
     public function getSolicitudes()
@@ -75,6 +76,7 @@ class Proveedor
         });
         $solicitud->setEstado('Rechazada por Inversionista');
         $solicitud->guardar();
+        return $solicitud;
     }
 
     public function aceptarPropuesta($idSolicitud)
@@ -84,6 +86,7 @@ class Proveedor
         });
         $solicitud->setEstado('Aceptada por Comercializador');
         $solicitud->guardar();
+        return $solicitud;
     }
 
     public function reservarCapital($idSolicitud)
@@ -93,6 +96,7 @@ class Proveedor
         });
         $solicitud->setEstado('Capital Reservado');
         $solicitud->guardar();
+        return $solicitud;
     }
 
     public function otorgarCapital($idSolicitud)
@@ -102,6 +106,7 @@ class Proveedor
         });
         $solicitud->setEstado('Capital Otorgado');
         $solicitud->guardar();
+        return $solicitud;
     }
     /**
      * @return mixed

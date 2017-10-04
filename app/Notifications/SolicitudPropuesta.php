@@ -59,7 +59,8 @@ class SolicitudPropuesta extends Notification implements ShouldQueue
         return [
             'titulo' => 'Propuesta recibida',
             'detalle' => 'Se ha recibido una propuesta por una solicitud',
-            'url' => '/comercializador'
+            'url' => '/comercializador',
+            'tipo' => 'info'
         ];
     }
 

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\MasPlataCobradaQueElTotalException;
+use App\Notifications\SolicitudAceptada;
+use App\Notifications\SolicitudContraPropuestada;
 use App\Notifications\SolicitudEnProceso;
+use App\Notifications\SolicitudFormularioEnviado;
 use App\Repositories\Eloquent\DesignadorDeEstado;
 use App\Repositories\Eloquent\DesignarAgenteFinanciero;
 use App\Repositories\Eloquent\FileManager;
 use App\Repositories\Eloquent\Repos\ComercializadorRepo;
+use App\Repositories\Eloquent\Repos\Gateway\AgenteFinancieroGateway;
 use App\Repositories\Eloquent\Repos\Gateway\ComercializadorGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use App\Repositories\Eloquent\Repos\Mapper\AgenteFinancieroMapper;
@@ -112,6 +116,34 @@ class ComercializadorController extends Controller
     {
         $elem = $request->all();
         $sol = $this->solicitudGateway->update($elem, $elem['id']);
+        $agenteGate = new AgenteFinancieroGateway();
+        $agente = $agenteGate->find($sol->agente_financiero);
+        $user = Sentinel::findById($agente->usuario);
+        $user->notify(new SolicitudContraPropuestada($sol));
+
+
+    }
+
+    public function enviarFormulario(Request $request)
+    {
+        $elem = $request->all();
+        $sol = $this->solicitudGateway->update($elem, $elem['id']);
+        $agenteGate = new AgenteFinancieroGateway();
+        $agente = $agenteGate->find($sol->agente_financiero);
+        $user = Sentinel::findById($agente->usuario);
+        $user->notify(new SolicitudFormularioEnviado($sol));
+    }
+
+
+
+    public function aceptarPropuesta(Request $request)
+    {
+        $elem = $request->all();
+        $sol = $this->solicitudGateway->update($elem, $elem['id']);
+        $agenteGate = new AgenteFinancieroGateway();
+        $agente = $agenteGate->find($sol->agente_financiero);
+        $user = Sentinel::findById($agente->usuario);
+        $user->notify(new SolicitudAceptada($sol));
     }
 
     public function sociosQueCumplenConFiltro(Request $request)

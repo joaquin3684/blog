@@ -57,7 +57,10 @@ class SolicitudAprobada extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'mensaje' => 'La solicitud ha sido aprobada'
+            'titulo' => 'Solicitud ha sido aprobada',
+            'detalle' => 'La solicitud ha sido aprobada.',
+            'url' => '/comercializador',
+            'tipo' => 'success'
         ];
     }
 

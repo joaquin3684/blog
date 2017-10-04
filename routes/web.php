@@ -179,8 +179,9 @@ Route::post('cobroCuotasSociales/cobrar', 'CobroCuotasSocialesController@cobrar'
 Route::get('comercializador', 'ComercializadorController@index');
 Route::post('comercializador/altaSolicitud', 'ComercializadorController@altaSolicitud');
 Route::get('comercializador/solicitudes', 'ComercializadorController@solicitudes');
-Route::post('comercializador/aceptarPropuesta', 'ComercializadorController@modificarPropuesta');
+Route::post('comercializador/aceptarPropuesta', 'ComercializadorController@aceptarPropuesta');
 Route::post('comercializador/modificarPropuesta', 'ComercializadorController@modificarPropuesta');
+Route::post('comercializador/enviarFormulario', 'ComercializadorController@enviarFormulario');
 Route::post('comercializador/buscarSocios', 'ComercializadorController@sociosQueCumplenConFiltro');
 Route::post('comercializador/fotos', 'ComercializadorController@fotos');
 
