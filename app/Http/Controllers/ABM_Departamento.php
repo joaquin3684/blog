@@ -22,7 +22,7 @@ class ABM_Departamento extends Controller
 
     public function index()
     {
-        return view('ABM_departamentos');
+        return view('ABM_Departamentos');
     }
 
 

@@ -22,7 +22,7 @@ class ABM_SubRubro extends Controller
 
     public function index()
     {
-        return view('ABM_subrubros');
+        return view('ABM_SubRubros');
     }
 
 

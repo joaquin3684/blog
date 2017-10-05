@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -28,6 +29,10 @@ class CreateABMOrganismosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ORGANISMOS');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists('organismos');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+
+
     }
 }

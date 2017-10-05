@@ -22,7 +22,7 @@ class ABM_Moneda extends Controller
 
     public function index()
     {
-        return view('ABM_moneda');
+        return view('ABM_Moneda');
     }
 
 

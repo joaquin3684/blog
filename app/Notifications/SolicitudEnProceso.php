@@ -59,7 +59,7 @@ class SolicitudEnProceso extends Notification implements ShouldQueue
     {
         return [
             'titulo' => 'Solicitud en proceso',
-            'detalle' => 'La solicitud esta en estado.',
+            'detalle' => 'Hay una solicitud en proceso.',
             'url' => '/solicitudesPendientesMutual',
             'tipo' => 'info'
         ];
