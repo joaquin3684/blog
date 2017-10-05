@@ -11050,6 +11050,7 @@ module.exports = __webpack_require__(48);
 __webpack_require__(11);
 __webpack_require__(37);
 __webpack_require__(38);
+__webpack_require__(63);
 
 window.Vue = __webpack_require__(43);
 Vue.use(VueResource);
@@ -11084,8 +11085,8 @@ Vue.use(VueResource);
 Vue.component('example', __webpack_require__(44));
 
 var app = new Vue({
-  el: '#app',
-  http: { emulateJSON: true, emulateHTTP: true }
+  el: '#app'
+
 });
 
 /***/ }),
@@ -47716,7 +47717,67 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -47734,6 +47795,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
+    classIcon: function classIcon(tipoDeMensaje) {
+
+      switch (tipoDeMensaje) {
+        case 'success':
+          return 'fa fa-check-circle-o fa-2x succes';
+          break;
+        case 'info':
+          return 'fa fa-bell-o fa-2x info';
+          break;
+        case 'danger':
+          return 'fa fa-exclamation-triangle fa-2x danger';
+          break;
+        default:
+          console.log("tipo de mensaje desconocido");
+      }
+    },
+
     sumarCantNotificaciones: function sumarCantNotificaciones(cant) {
       this.cantNotificaciones += cant;
       // bus.$emit('cantNotificaciones', 1)
@@ -47747,6 +47825,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(_this.notificaciones);
 
         _this.notificaciones = response.body;
+        _this.cantNotificaciones = response.body.length;
         // get body data
         //this.someData = response.body;
       }, function (response) {
@@ -47782,22 +47861,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     eliminarNotificacion: function eliminarNotificacion(notificacion) {
+      var _this2 = this;
 
-      $('.dropdown-notification').on('click', function (e) {
-        e.stopPropagation();
-      });
-
-      for (var i = this.notificaciones.length - 1; i >= 0; i--) {
-        if (this.notificaciones[i].id === notificacion.id) {
-          this.notificaciones.splice(i, 1);
-        }
-      }
-
-      var idABorrar = i;
-      this.$http.post('notificacion/marcarComoLeida', { id: idABorrar }).then(function (response) {
+      this.$http.post('notificacion/marcarComoLeida', {
+        id: notificacion.id
+      }).then(function (response) {
         console.log(response);
-        // get body data
-        //this.someData = response.body;
+        $('.dropdown-container').on('click', function (e) {
+          e.stopPropagation();
+        });
+
+        for (var i = _this2.notificaciones.length - 1; i >= 0; i--) {
+          if (_this2.notificaciones[i].id === notificacion.id) {
+            _this2.notificaciones.splice(i, 1);
+            _this2.cantNotificaciones = _this2.notificaciones.length;
+          }
+        }
       }, function (response) {
         // error callback
       });
@@ -47839,13 +47918,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       //       });
     },
     eliminarNotificaciones: function eliminarNotificaciones() {
+      var _this3 = this;
 
-      $('.dropdown-notification').on('click', function (e) {
-        e.stopPropagation();
-      });
+      this.$http.get('notificacion/marcarTodasLeidas').then(function (response) {
+        console.log(response.body);
+        console.log(_this3.notificaciones);
 
-      $('.notification').hide('slow').animate(400, function () {
-        this.notificaciones = [];
+        // get body data
+        //this.someData = response.body;
+        $('.dropdown-menu').on('click', function (e) {
+          e.stopPropagation();
+        });
+
+        $('.notification').hide('slow').animate(400, function () {
+          this.notificaciones = [];
+          this.cantNotificaciones = this.notificaciones.length;
+        });
+      }, function (response) {
+        // error callback
       });
 
       this.sumarCantNotificaciones(-this.cantNotificaciones);
@@ -47881,15 +47971,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this4 = this;
 
     // //
     this.traerNotificaciones();
     console.log(this.usuario);
     Echo.private('Cartalyst.Sentinel.Users.EloquentUser.11').notification(function (data) {
-      _this2.notificaciones.push(data);
+      _this4.notificaciones.push(data);
       //'idNumero': 'notification'+String(this.cantNotificaciones),
-      _this2.sumarCantNotificaciones(1);
+      _this4.sumarCantNotificaciones(1);
       console.log(data);
       console.log("asdfasdf10");
 
@@ -47944,134 +48034,124 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "app" } }, [
-    _c("li", { staticClass: "dropdown", attrs: { role: "presentation" } }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "ul",
-        {
-          staticClass:
-            "dropdown-menu dropdown-notification list-unstyled msg_list animated bounceInDown",
-          attrs: { id: "menu1", role: "menu" }
-        },
-        [
-          _vm._l(_vm.notificaciones, function(notificacion) {
-            return _c(
-              "li",
+    _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "collapse navbar-collapse" }, [
+        _c("ul", { staticClass: "nav navbar-nav navbar-right" }, [
+          _c("li", { staticClass: "dropdown dropdown-notifications" }, [
+            _c(
+              "a",
               {
-                staticClass: "notification",
-                staticStyle: { background: "rgba(50, 123, 184, 0.6)" }
+                staticClass: "dropdown-toggle",
+                attrs: {
+                  href: "#notifications-panel",
+                  "data-toggle": "dropdown"
+                }
               },
               [
-                _c("a", { attrs: { href: notificacion.data.url } }, [
-                  _vm._m(1, true),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      staticClass: "time",
-                      staticStyle: { color: "white", right: "15px" },
-                      on: {
-                        click: function($event) {
-                          _vm.eliminarNotificacion(notificacion)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-times",
-                        attrs: { "aria-hidden": "true" }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("span", [
-                    _c(
-                      "span",
-                      { staticStyle: { "font-size": "14px", color: "white" } },
-                      [
-                        _c("strong", [
-                          _vm._v(" " + _vm._s(notificacion.data.titulo))
-                        ])
-                      ]
+                _c("i", {
+                  staticClass: "fa fa-envelope-o notification-icon",
+                  attrs: { "data-count": _vm.cantNotificaciones }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "dropdown-container dropdown-position-bottomright animated bounceInDown"
+              },
+              [
+                _c("div", { staticClass: "dropdown-toolbar" }, [
+                  _c("h3", { staticClass: "dropdown-toolbar-title" }, [
+                    _vm._v(
+                      "Notificaciones (" + _vm._s(_vm.cantNotificaciones) + ")"
                     )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      staticClass: "message",
-                      staticStyle: { "font-size": "14px" }
-                    },
-                    [
-                      _vm._v(
-                        "\n\n            " +
-                          _vm._s(notificacion.data.detalle) +
-                          "\n            "
-                      )
-                    ]
-                  )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "dropdown-menu",
+                    staticStyle: { position: "relative", border: "0px" }
+                  },
+                  _vm._l(_vm.notificaciones, function(notificacion) {
+                    return _c("li", { staticClass: "notification" }, [
+                      _c("div", { staticClass: "media" }, [
+                        _c("div", { staticClass: "media-left" }, [
+                          _c("div", { staticClass: "media-object" }, [
+                            _c("i", {
+                              class: _vm.classIcon(notificacion.data.tipo),
+                              staticStyle: { "padding-top": "20px" },
+                              attrs: { "aria-hidden": "true" }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "media-body" }, [
+                          _c("strong", { staticClass: "notification-title" }, [
+                            _c(
+                              "a",
+                              {
+                                staticStyle: { padding: "0px", color: "black" },
+                                attrs: { href: notificacion.data.url }
+                              },
+                              [_vm._v(_vm._s(notificacion.data.titulo))]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "notification-title",
+                              staticStyle: {
+                                position: "absolute",
+                                right: "10px"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.eliminarNotificacion(notificacion)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fa fa-times",
+                                attrs: { "aria-hidden": "true" }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "notification-desc" }, [
+                            _vm._v(_vm._s(notificacion.data.detalle))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "notification-meta" }, [
+                            _c("small", { staticClass: "timestamp" }, [
+                              _vm._v(_vm._s(notificacion.created_at))
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  })
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "dropdown-footer text-center" }, [
+                  _c("a", { on: { click: _vm.eliminarNotificaciones } }, [
+                    _vm._v("Marcar todas como leidas")
+                  ])
                 ])
               ]
             )
-          }),
-          _vm._v(" "),
-          _c("li", [
-            _c("div", { staticClass: "text-center" }, [
-              _c("a", [
-                _c("strong", { on: { click: _vm.eliminarNotificaciones } }, [
-                  _vm._v("Marcar todas como leidas")
-                ]),
-                _vm._v(" "),
-                _c("i", { staticClass: "fa fa-angle-right" })
-              ])
-            ])
           ])
-        ],
-        2
-      )
+        ])
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "dropdown-toggle info-number",
-        attrs: {
-          href: "javascript:;",
-          type: "button",
-          "data-toggle": "dropdown",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _c("i", { staticClass: "fa fa-envelope-o" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "badge bg-green" }, [_vm._v("6")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      { staticClass: "image", staticStyle: { color: "white" } },
-      [
-        _c("i", {
-          staticClass: "fa fa-bell-o",
-          attrs: { "aria-hidden": "true" }
-        })
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -49675,6 +49755,57 @@ if (typeof window !== 'undefined' && window.Vue) {
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(64);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(41)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!./bootstrap-notifications.min.css", function() {
+			var newContent = require("!!../../../../../../node_modules/css-loader/index.js!./bootstrap-notifications.min.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(40)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "/*!\n * bootstrap-notifications v1.0.3 (https://skywalkapps.github.io/bootstrap-notifications)\n * Copyright 2017 Martin Staněk\n * Licensed under MIT\n */.dropdown-container{position:absolute;top:100%;left:0;z-index:1000;display:none;float:left;min-width:200px;max-width:330px;margin:2px 0 0;list-style:none;font-size:14px;background-color:#fff;border:1px solid #ccc;border:1px solid rgba(0,0,0,0.15);border-radius:4px;-webkit-box-shadow:0 6px 12px rgba(0,0,0,0.175);box-shadow:0 6px 12px rgba(0,0,0,0.175);background-clip:padding-box}.dropdown-container>.dropdown-menu{position:static;z-index:1000;float:none !important;padding:10px 0;margin:0;border:0;background:transparent;border-radius:0;-webkit-box-shadow:none;box-shadow:none;max-height:330px;overflow-y:auto}.dropdown-container>.dropdown-menu+.dropdown-menu{padding-top:0}.dropdown-menu>li>a{overflow:hidden;white-space:nowrap;word-wrap:normal;text-decoration:none;text-overflow:ellipsis;-o-text-overflow:ellipsis;-webkit-transition:none;-o-transition:none;transition:none}.dropdown-toggle{cursor:pointer}.dropdown-header{white-space:nowrap}.open>.dropdown-container>.dropdown-menu,.open>.dropdown-container{display:block}.dropdown-toolbar{padding-top:6px;padding-left:20px;padding-right:20px;padding-bottom:5px;background-color:#fff;border-bottom:1px solid rgba(0,0,0,0.15);border-radius:4px 4px 0 0}.dropdown-toolbar>.form-group{margin:5px -10px}.dropdown-toolbar .dropdown-toolbar-actions{float:right}.dropdown-toolbar .dropdown-toolbar-title{margin:0;font-size:14px}.dropdown-footer{padding:5px 20px;border-top:1px solid #ccc;border-top:1px solid rgba(0,0,0,0.15);border-radius:0 0 4px 4px}.anchor-block small{display:none}@media (min-width:992px){.anchor-block small{display:block;font-weight:normal;color:#777777}.dropdown-menu>li>a.anchor-block{padding-top:6px;padding-bottom:6px}}@media (min-width:992px){.dropdown.hoverable:hover>ul{display:block}}.dropdown-position-topright{top:auto;right:0;bottom:100%;left:auto;margin-bottom:2px}.dropdown-position-topleft{top:auto;right:auto;bottom:100%;left:0;margin-bottom:2px}.dropdown-position-bottomright{right:0;left:auto}.dropmenu-item-label{white-space:nowrap}.dropmenu-item-content{position:absolute;text-align:right;max-width:60px;right:20px;color:#777777;overflow:hidden;white-space:nowrap;word-wrap:normal;-o-text-overflow:ellipsis;text-overflow:ellipsis}small.dropmenu-item-content{line-height:20px}.dropdown-menu>li>a.dropmenu-item{position:relative;padding-right:66px}.dropdown-submenu .dropmenu-item-content{right:40px}.dropdown-menu>li.dropdown-submenu>a.dropmenu-item{padding-right:86px}.dropdown-inverse .dropdown-menu{background-color:rgba(0,0,0,0.8);border:1px solid rgba(0,0,0,0.9)}.dropdown-inverse .dropdown-menu .divider{height:1px;margin:9px 0;overflow:hidden;background-color:#2b2b2b}.dropdown-inverse .dropdown-menu>li>a{color:#cccccc}.dropdown-inverse .dropdown-menu>li>a:hover,.dropdown-inverse .dropdown-menu>li>a:focus{color:#fff;background-color:#262626}.dropdown-inverse .dropdown-menu>.active>a,.dropdown-inverse .dropdown-menu>.active>a:hover,.dropdown-inverse .dropdown-menu>.active>a:focus{color:#fff;background-color:#337ab7}.dropdown-inverse .dropdown-menu>.disabled>a,.dropdown-inverse .dropdown-menu>.disabled>a:hover,.dropdown-inverse .dropdown-menu>.disabled>a:focus{color:#777777}.dropdown-inverse .dropdown-header{color:#777777}.table>thead>tr>th.col-actions{padding-top:0;padding-bottom:0}.table>thead>tr>th.col-actions .dropdown-toggle{color:#777777}.notifications{list-style:none;padding:0}.notification{display:block;padding:9.6px 12px;border-width:0 0 1px 0;border-style:solid;border-color:#eeeeee;background-color:#fff;color:#333333;text-decoration:none}.notification:last-child{border-bottom:0}.notification:hover,.notification.active:hover{background-color:#f9f9f9;border-color:#eeeeee}.notification.active{background-color:#f4f4f4}a.notification:hover{text-decoration:none}.notification-title{font-size:15px;margin-bottom:0}.notification-desc{margin-bottom:0}.notification-meta{color:#777777}.dropdown-notifications>.dropdown-container,.dropdown-notifications>.dropdown-menu{width:450px;max-width:450px}.dropdown-notifications .dropdown-menu{padding:0}.dropdown-notifications .dropdown-toolbar,.dropdown-notifications .dropdown-footer{padding:9.6px 12px}.dropdown-notifications .dropdown-toolbar{background:#fff}.dropdown-notifications .dropdown-footer{background:#eeeeee}.notification-icon{margin-right:6.8775px}.notification-icon:after{position:absolute;content:attr(data-count);margin-left:-6.8775px;margin-top:-6.8775px;padding:0 4px;min-width:13.755px;height:13.755px;line-height:13.755px;background:red;border-radius:10px;color:#fff;text-align:center;vertical-align:middle;font-size:11.004px;font-weight:600;font-family:\"Helvetica Neue\",Helvetica,Arial,sans-serif}.notification .media-body{padding-top:5.6px}.btn-lg .notification-icon:after{margin-left:-8.253px;margin-top:-8.253px;min-width:16.506px;height:16.506px;line-height:16.506px;font-size:13.755px}.btn-xs .notification-icon:after{content:'';margin-left:-4.1265px;margin-top:-2.06325px;min-width:6.25227273px;height:6.25227273px;line-height:6.25227273px;padding:0}.btn-xs .notification-icon{margin-right:3.43875px}", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

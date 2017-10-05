@@ -8,7 +8,7 @@
 require('./bootstrap');
 require('./bootstrap-notify/bootstrap-notify.min.js');
 require('./Animate/animate.css');
-
+require('./bootstrap-notifications-master/dist/stylesheets/bootstrap-notifications.min.css');
 
 window.Vue = require('vue');
 Vue.use(VueResource);
@@ -44,5 +44,5 @@ Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
     el: '#app',
-    http:{emulateJSON:true, emulateHTTP:true}
+    
 });

@@ -25,6 +25,7 @@
   {!! Html::style('css/barrow.css') !!}
   {!! Html::style('css/floatexamples.css') !!}
   {!! Html::style('css/ng-table.min.css') !!}
+  {!! Html::style('css/bootstrap-notifications-master/dist/stylesheets/bootstrap-notifications.min.css') !!}
 
   {!! Html::script('js/jquery.min.js') !!}
 
