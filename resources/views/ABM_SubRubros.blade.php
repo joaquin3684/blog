@@ -7,7 +7,7 @@
 {!! Html::script('js/forwizards.js') !!}
 <style>
 .wizard .nav-tabs > li {
-    width: 16.66%;
+    width: 50%;
 }
 
 </style>
@@ -18,7 +18,7 @@
 
     <div class="main_container" >
 
-      <input type="hidden" id="tablon" ng-value="capitulo">
+      <input type="hidden" id="tablon" ng-value="subrubro">
       <!-- page content -->
       <div class="left-col" role="main" >
 
@@ -30,7 +30,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel"  >
                 <div class="x_title">
-                  <h2>ABM Capitulos<small>Dar de alta un capitulo</small></h2>
+                  <h2>ABM SubRubros<small>Dar de alta un subrubro</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -57,38 +57,8 @@
                 <div class="connecting-line"></div>
                 <ul class="nav nav-tabs" role="tablist">
 
+           
                     <li role="presentation" class="active">
-                        <a href="#capitulor" data-toggle="tab" aria-controls="capitulor" role="tab" title="Capitulo">
-                            <span class="round-tab">
-                               <i class="fa fa-file-o"></i>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li role="presentation" class="disabled">
-                        <a href="#rubro" data-toggle="tab" aria-controls="rubro" role="tab" title="Rubro">
-                            <span class="round-tab">
-                                <i class="fa fa-tint"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="disabled">
-                        <a href="#moneda" data-toggle="tab" aria-controls="moneda" role="tab" title="Moneda">
-                            <span class="round-tab">
-                                <i class="fa fa-dollar"></i>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li role="presentation" class="disabled">
-                        <a href="#departamento" data-toggle="tab" aria-controls="departamento" role="tab" title="Departamento">
-                            <span class="round-tab">
-                                <i class="fa fa-sitemap"></i>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li role="presentation" class="disabled">
                         <a href="#subrubro" data-toggle="tab" aria-controls="subrubro" role="tab" title="Subrubro">
                             <span class="round-tab">
                                 <i class="fa fa-info"></i>
@@ -107,223 +77,9 @@
 
             
                 <div class="tab-content">
-                    <div class="tab-pane active" role="tabpanel" id="capitulor">
-                        <h3>Alta de Capítulo</h3>
-                        
-                  @verbatim
-                  <form role="form" class="" ng-submit="enviarFormulario('capitulo','Alta')" id="capituloform">
-                  
-                      <div class="row">
-                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="codigo">Código <span class="required">*</span>
-                          </label>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
-                        </div>
-                      </div>
+                    
 
-                      <div class="row">
-                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="nombre">Nombre <span class="required">*</span>
-                          </label>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="form-group">
-                          <div class="col-md-2 col-md-offset-6">
-                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta Capítulo</button>
-                          </div>
-                        </div>
-                      </div>
-                  </form>
-                  @endverbatim
-
-
-                        <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-primary next-step">Continuar a Rubros <i class="fa fa-arrow-right"></i> </button></li>
-                        </ul>
-                </div>
-                <div class="tab-pane" role="tabpanel" id="rubro">
-                        
-
-
-
-                    <h3>Alta de Rubro</h3>
-                        
-                  @verbatim
-                  <form role="form" class="" ng-submit="enviarFormulario('rubro','Alta')" id="rubroform">
-                  
-                      <div class="row">
-                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="id_capitulo">Capitulo <span class="required">*</span>
-                          </label>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <select id="id_rubro" class="form-control col-md-7 col-xs-12" name="id_rubro" ng-model="nose">
-                            <option value="{{x.id}}" ng-repeat="x in selectcapitulos">
-                            {{x.nombre}}
-                            </option>
-                            </select>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="codigo">Código <span class="required">*</span>
-                          </label>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="nombre">Nombre <span class="required">*</span>
-                          </label>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="form-group">
-                          <div class="col-md-2 col-md-offset-6">
-                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta Rubro</button>
-                          </div>
-                        </div>
-                      </div>
-                  </form>
-                  @endverbatim
-
-
-                        <ul class="list-inline pull-right">
-                        <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-arrow-left"></i> Regresar a Capitulo</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Continuar a Moneda <i class="fa fa-arrow-right"></i> </button></li>
-                        </ul>
-
-
-
-
-                </div>
-                <div class="tab-pane" role="tabpanel" id="moneda">
-                         <h3>Alta de Moneda</h3>
-                        
-                  @verbatim
-                  <form role="form" class="" ng-submit="enviarFormulario('moneda','Alta')" id="monedaform">
-                  
-                      <div class="row">
-                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="id_rubro">Rubro <span class="required">*</span>
-                          </label>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <select id="id_rubro" class="form-control col-md-7 col-xs-12" name="id_rubro" ng-model="nose">
-                            <option value="{{x.id}}" ng-repeat="x in selectrubros">
-                            {{x.nombre}}
-                            </option>
-                            </select>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="codigo">Código <span class="required">*</span>
-                          </label>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="nombre">Nombre <span class="required">*</span>
-                          </label>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="form-group">
-                          <div class="col-md-2 col-md-offset-6">
-                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta Moneda</button>
-                          </div>
-                        </div>
-                      </div>
-                  </form>
-                  @endverbatim
-
-
-                        <ul class="list-inline pull-right">
-                        <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-arrow-left"></i> Regresar a Rubro</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Continuar a Departamento <i class="fa fa-arrow-right"></i> </button></li>
-                        </ul>
-                </div>
-                <div class="tab-pane" role="tabpanel" id="departamento">
-                        
-                        <h3>Alta de Departamento</h3>
-                        
-                  @verbatim
-                  <form role="form" class="" ng-submit="enviarFormulario('departamento','Alta')" id="departamentoform">
-                  
-                      <div class="row">
-                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="id_moneda">Moneda <span class="required">*</span>
-                          </label>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <select id="id_moneda" class="form-control col-md-7 col-xs-12" name="id_moneda" ng-model="nose">
-                            <option value="{{x.id}}" ng-repeat="x in selectmonedas">
-                            {{x.nombre}}
-                            </option>
-                            </select>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="codigo">Código <span class="required">*</span>
-                          </label>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="nombre">Nombre <span class="required">*</span>
-                          </label>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="form-group">
-                          <div class="col-md-2 col-md-offset-6">
-                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta DPTO</button>
-                          </div>
-                        </div>
-                      </div>
-                  </form>
-                  @endverbatim
-
-
-                        <ul class="list-inline pull-right">
-                        <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-arrow-left"></i> Regresar a Moneda</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Continuar a SubRubro <i class="fa fa-arrow-right"></i> </button></li>
-                        </ul>
-
-                </div>
-
-                <div class="tab-pane" role="tabpanel" id="subrubro">
+                <div class="tab-pane active" role="tabpanel" id="subrubro">
                         
                       <h3>Alta de SubRubro</h3>
                         
@@ -375,7 +131,7 @@
 
 
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-arrow-left"></i> Regresar a Dpto</button></li>
+                            
                             <li><button type="button" class="btn btn-primary next-step">Continuar a Imputaciones <i class="fa fa-arrow-right"></i> </button></li>
                         </ul>
 

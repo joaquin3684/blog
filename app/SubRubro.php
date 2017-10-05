@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SubRubro extends Model
 {
     use SoftDeletes;
-    protected $table = 'rubros';
+    protected $table = 'sub_rubros';
 
     protected $fillable = [
         'codigo', 'nombre', 'id_departamento'

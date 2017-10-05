@@ -38,10 +38,10 @@ $scope.traerRelaciones = function(relaciones)
    $scope.ExportarPDF = function(pantalla) {UserSrv.ExportPDF(pantalla);}
 
 
-   $scope.enviarFormulario = function(tipoSolicitud, id = '')
+   $scope.enviarFormulario = function(abm,tipoSolicitud, id = '')
    {
          var form = '';
-         var abm = $("#tipo_tabla").val();
+         var formu = abm + 'form';
          console.log('el id es: ' + id);
          switch(tipoSolicitud)
          {
@@ -52,7 +52,7 @@ $scope.traerRelaciones = function(relaciones)
                break;
             case 'Alta':
                var metodo = 'post';
-               var form = $("#formulario").serializeArray();
+               var form = $("#"+formu).serializeArray();
                break;
             case 'Borrar':
                var metodo = 'delete';
@@ -81,7 +81,7 @@ $scope.traerRelaciones = function(relaciones)
                      llenarFormulario('formularioEditar',response.data);
                   }
                $scope.mensaje = response;
-               $('#formulario')[0].reset();
+               $('#'+formu)[0].reset();
                if(tipoSolicitud != 'Mostrar'){UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje"); $('#editar').modal('hide');}
                $scope.errores = '';
                console.log(response.data);
@@ -105,14 +105,9 @@ $scope.traerRelaciones = function(relaciones)
       return dato;
     }
 
-   $scope.traerElementos = function(relaciones)
-   {
-
-      var metodito = 'get';
-      var abm = $("#tipo_tabla").val();
-      var urlabm = abm + "/traerElementos";
-
-      $http({
+  $scope.traigo = function(urlabm,metodito,coso){
+    var retorno;
+    $http({
             url: urlabm,
             method: metodito
         }).then(function successCallback(response)
@@ -123,19 +118,46 @@ $scope.traerRelaciones = function(relaciones)
             }
             else
             {
-                console.log(response.data);
-                if(abm == 'asociados'){
-                $scope.datosabm = response.data.map($scope.cambiarFecha);
-                } else {
-                $scope.datosabm = response.data;
+                
+                switch(coso){
+                  case 'cap':
+                    $scope.selectcapitulos = response.data;
+                  break;
+                  case 'rub':
+                    $scope.selectrubros = response.data;
+                  break;
+                  case 'mon':
+                    $scope.selectmonedas = response.data;
+                  break;
+                  case 'dep':
+                    $scope.selectdepartamentos = response.data;
+                  break;
+                  case 'sub':
+                    $scope.selectsubrubros = response.data;
+                  break;
                 }
+                
                 
             }
 
         }, function errorCallback(data)
         {
             console.log(data.data);
-        });
+        })
+  }
+
+   $scope.traerElementos = function(relaciones)
+   {
+
+      var metodito = 'get';
+      var abm = $("#tipo_tabla").val();
+      var urlabm = abm + "/traerElementos";
+      $scope.traigo('capitulo/traerElementos','get','cap');
+      $scope.traigo('rubro/traerElementos','get','rub');
+      $scope.traigo('moneda/traerElementos','get','mon');
+      $scope.traigo('departamento/traerElementos','get','dep');
+      $scope.traigo('subRubro/traerElementos','get','sub');
+      
    }
 
    $scope.agregarPantalla = function()

@@ -141,7 +141,8 @@
                     <li><a href="cobroCuotasSociales">Cobrar Cuotas Sociales</a>
                     </li>
                   </ul>
-                </li><li><a><i class="fa fa-gears"></i> Gestion de cobranza <span class="fa fa-chevron-down"></span></a>
+                </li>
+                <li><a><i class="fa fa-gears"></i> Gestion de cobranza <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="dar_servicio">Alta Gestion Servicio/Prestamo</a>
                     </li>
@@ -159,6 +160,19 @@
                       </li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-area-chart"></i> CONTABILIDAD <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                      <li><a href="capitulo">Capitulos</a>
+                      </li>
+                      <li><a href="rubro">Rubros</a>
+                      </li>
+                      <li><a href="moneda">Monedas</a></li>
+                      <li><a href="departamento">Departamentos</a></li>
+                      <li><a href="subRubro">SubRubros</a></li>
+                      <li><a href="imputacion">Imputaciones</a></li>
+
+                  </ul>
+                </li>
 
                   </li>
                   <li><a href="comercializador"><i class="fa fa-pencil"></i>Generar Solicitud</a>
@@ -167,6 +181,7 @@
                   </li>
                   <li><a href="solicitudesPendientesMutual"><i class="fa fa-clock-o"></i>Solicitudes Pendientes</a>
                   </li>
+
               </ul>
             </div>
 
