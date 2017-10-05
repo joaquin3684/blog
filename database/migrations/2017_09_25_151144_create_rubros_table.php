@@ -18,6 +18,8 @@ class CreateRubrosTable extends Migration
             $table->timestamps();
             $table->string('nombre');
             $table->integer('codigo');
+            $table->foreign('id_capitulo')->references('id')->on('capitulos');
+            $table->integer('id_capitulo')->unsigned()->nullable();
             $table->softDeletes();
         });
     }

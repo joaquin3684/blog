@@ -18,6 +18,8 @@ class CreateSubRubrosTable extends Migration
             $table->timestamps();
             $table->string('nombre');
             $table->integer('codigo');
+            $table->foreign('id_departamento')->references('id')->on('departamentos');
+            $table->integer('id_departamento')->unsigned()->nullable();
             $table->softDeletes();
         });
     }

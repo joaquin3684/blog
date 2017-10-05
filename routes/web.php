@@ -223,26 +223,32 @@ Route::post('proveedorCC/CCporCuotas', 'ProveedorCCController@cuentaCorrientePor
 
 //-------------------- CAPITULO ----------------------------------
 
+Route::get('capitulo/traerElementos', 'ABM_Capitulos@all');
 Route::resource('capitulo', 'ABM_Capitulos');
 
 //-------------------- DEPARTAMENTO ----------------------------------
 
+Route::get('departamento/traerElementos', 'ABM_Departamento@all');
 Route::resource('departamento', 'ABM_Departamento');
 
 //-------------------- IMPUTACION ----------------------------------
 
+Route::get('imputacion/traerElementos', 'ABM_Imputacion@all');
 Route::resource('imputacion', 'ABM_Imputacion');
 
 //-------------------- MONEDA ----------------------------------
 
+Route::get('moneda/traerElementos', 'ABM_Moneda@all');
 Route::resource('moneda', 'ABM_Moneda');
 
 //-------------------- RUBRO ----------------------------------
 
+Route::get('rubro/traerElementos', 'ABM_Rubros@all');
 Route::resource('rubro', 'ABM_Rubros');
 
 //-------------------- SUB RUBRO ----------------------------------
 
+Route::get('subRubro/traerElementos', 'ABM_SubRubro@all');
 Route::resource('subRubro', 'ABM_SubRubro');
 
 //------------------- NOTIFICACIONES ------------------------------
