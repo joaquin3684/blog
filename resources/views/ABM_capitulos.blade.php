@@ -3,7 +3,7 @@
 @section('contenido')
 
 
-{!! Html::script('js/controladores/ABMprueba.js') !!}
+{!! Html::script('js/controladores/ABMWizard.js') !!}
 {!! Html::script('js/forwizards.js') !!}
 <style>
 .wizard .nav-tabs > li {
@@ -12,13 +12,13 @@
 
 </style>
 
-<div class="nav-md" ng-controller="ABM" >
+<div class="nav-md" ng-controller="ABMWizard" >
 
   <div class="container body">
 
     <div class="main_container" >
 
-      <input type="hidden" id="tipo_tabla" value="capitulo">
+      <input type="hidden" id="tipo_tabla" value="organismos">
       <!-- page content -->
       <div class="left-col" role="main" >
 
@@ -58,7 +58,7 @@
                 <ul class="nav nav-tabs" role="tablist">
 
                     <li role="presentation" class="active">
-                        <a href="#capitulo" data-toggle="tab" aria-controls="capitulo" role="tab" title="Capitulo">
+                        <a href="#capitulor" data-toggle="tab" aria-controls="capitulor" role="tab" title="Capitulo">
                             <span class="round-tab">
                                <i class="fa fa-file-o"></i>
                             </span>
@@ -105,57 +105,109 @@
                 </ul>
             </div>
 
-            <form role="form">
+            
                 <div class="tab-content">
-                    <div class="tab-pane active" role="tabpanel" id="capitulos">
+                    <div class="tab-pane active" role="tabpanel" id="capitulor">
                         <h3>Alta de Capítulo</h3>
                         
-                        @verbatim
-                  <form class="form-horizontal" ng-submit="enviarFormulario('Alta')" id="formulario" >
+                  @verbatim
+                  <form role="form" class="" ng-submit="enviarFormulario('Alta')" id="formulario">
                   
-                    <div class="row">
-                    <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                      <label class="" for="codigo">Código <span class="required">*</span>
-                      </label>
-                    </div>
-                    <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                        <input id="codigo" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{{errores.nombre[0]}}
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                      <label class="" for="nombre">Nombre <span class="required">*</span>
-                      </label>
-                    </div>
-                    <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{{errores.nombre[0]}}
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group">
-                      <div class="col-md-2 col-md-offset-6">
-                        <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta Capítulo</button>
+                      <div class="row">
+                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                          <label class="" for="codigo">Código <span class="required">*</span>
+                          </label>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                        </div>
                       </div>
-                    </div>
-                  </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                          <label class="" for="nombre">Nombre <span class="required">*</span>
+                          </label>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                            <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group">
+                          <div class="col-md-2 col-md-offset-6">
+                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta Capítulo</button>
+                          </div>
+                        </div>
+                      </div>
                   </form>
                   @endverbatim
 
 
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-primary next-step">Continuar a Rubros <i class="fa fa-arrow-right"></i> </button></li>
-                        </ul></center>
-                    </div>
-                    <div class="tab-pane" role="tabpanel" id="rubro">
-                        <h3>Rubro</h3>
-                        <p>This is step 2</p>
-                        <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
                         </ul>
-                    </div>
-                    <div class="tab-pane" role="tabpanel" id="moneda">
+                </div>
+                <div class="tab-pane" role="tabpanel" id="rubro">
+                        
+
+
+
+                    <h3>Alta de Rubro</h3>
+                        
+                  @verbatim
+                  <form role="form" class="" ng-submit="enviarFormulario('Alta')" id="formulario">
+                  
+                      <div class="row">
+                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                          <label class="" for="codigo">Rubro <span class="required">*</span>
+                          </label>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                            <select id="id_rubro" class="form-control col-md-7 col-xs-12" name="id_rubro" ng-model="datosabm">
+                            
+                            </select>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                          <label class="" for="codigo">Código <span class="required">*</span>
+                          </label>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                          <label class="" for="nombre">Nombre <span class="required">*</span>
+                          </label>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                            <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group">
+                          <div class="col-md-2 col-md-offset-6">
+                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta Rubro</button>
+                          </div>
+                        </div>
+                      </div>
+                  </form>
+                  @endverbatim
+
+
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-primary next-step">Continuar a Moneda <i class="fa fa-arrow-right"></i> </button></li>
+                        </ul>
+
+
+
+
+                </div>
+                <div class="tab-pane" role="tabpanel" id="moneda">
                         <h3>Moneda</h3>
                         <p>This is step 3</p>
                         <ul class="list-inline pull-right">
@@ -163,8 +215,8 @@
                             <li><button type="button" class="btn btn-default next-step">Skip</button></li>
                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
                         </ul>
-                    </div>
-                    <div class="tab-pane" role="tabpanel" id="departamento">
+                </div>
+                <div class="tab-pane" role="tabpanel" id="departamento">
                         <h3>Departamento</h3>
                         <p>This is step 3</p>
                         <ul class="list-inline pull-right">
@@ -172,9 +224,9 @@
                             <li><button type="button" class="btn btn-default next-step">Skip</button></li>
                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
                         </ul>
-                    </div>
+                </div>
 
-                    <div class="tab-pane" role="tabpanel" id="subrubro">
+                <div class="tab-pane" role="tabpanel" id="subrubro">
                         <h3>SubRubro</h3>
                         <p>This is step 3</p>
                         <ul class="list-inline pull-right">
@@ -182,8 +234,8 @@
                             <li><button type="button" class="btn btn-default next-step">Skip</button></li>
                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
                         </ul>
-                    </div>
-                    <div class="tab-pane" role="tabpanel" id="imputacion">
+                </div>
+                <div class="tab-pane" role="tabpanel" id="imputacion">
                         <h3>imputacion</h3>
                         <p>This is step 3</p>
                         <ul class="list-inline pull-right">
@@ -194,7 +246,7 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-            </form>
+            
         </div>
     </section>
    </div>
