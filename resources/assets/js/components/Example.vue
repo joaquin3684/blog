@@ -307,7 +307,11 @@ export default {
     Echo.private('Cartalyst.Sentinel.Users.EloquentUser.11')
 
       .notification((data) => {
-        this.notificaciones.push(data);
+        this.notificaciones.push({
+          'data':data,
+          'id': data.id,
+          'created_at':"2017-10-05 04:22:47"
+        });
         //'idNumero': 'notification'+String(this.cantNotificaciones),
         this.sumarCantNotificaciones(1);
         console.log(data);
