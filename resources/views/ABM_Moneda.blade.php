@@ -49,7 +49,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-              
+
                 <div class="row">
     <section>
         <div class="wizard">
@@ -57,7 +57,7 @@
                 <div class="connecting-line"></div>
                 <ul class="nav nav-tabs" role="tablist">
 
-                    
+
                     <li role="presentation" class="active">
                         <a href="#moneda" data-toggle="tab" aria-controls="moneda" role="tab" title="Moneda">
                             <span class="round-tab">
@@ -91,15 +91,15 @@
                 </ul>
             </div>
 
-            
+
                 <div class="tab-content">
-                    
+
                 <div class="tab-pane active" role="tabpanel" id="moneda">
                          <h3>Alta de Moneda</h3>
-                        
+
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('moneda','Alta')" id="monedaform">
-                  
+
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="id_rubro">Rubro <span class="required">*</span>
@@ -145,17 +145,17 @@
 
 
                         <ul class="list-inline pull-right">
-                        
+
                             <li><button type="button" class="btn btn-primary next-step">Continuar a Departamento <i class="fa fa-arrow-right"></i> </button></li>
                         </ul>
                 </div>
                 <div class="tab-pane" role="tabpanel" id="departamento">
-                        
+
                         <h3>Alta de Departamento</h3>
-                        
+
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('departamento','Alta')" id="departamentoform">
-                  
+
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="id_moneda">Moneda <span class="required">*</span>
@@ -208,12 +208,12 @@
                 </div>
 
                 <div class="tab-pane" role="tabpanel" id="subrubro">
-                        
+
                       <h3>Alta de SubRubro</h3>
-                        
+
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('subRubro','Alta')" id="subRubroform">
-                  
+
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="id_departamento">Dpto <span class="required">*</span>
@@ -265,12 +265,12 @@
 
                 </div>
                 <div class="tab-pane" role="tabpanel" id="imputacion">
-                        
+
                         <h3>Alta de Imputación</h3>
-                        
+
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('imputacion','Alta')" id="imputacionform">
-                  
+
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="id_subrubro">Dpto <span class="required">*</span>
@@ -317,23 +317,23 @@
 
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-arrow-left"></i> Regresar a SubRubros</button></li>
-                            
+
                         </ul>
 
                     </div>
                     <div class="clearfix"></div>
                 </div>
-            
+
         </div>
     </section>
    </div>
 
                 </div>
                     <!-- End SmartWizard Content -->
-                  
-                
-          
-                  
+
+
+
+
 
                 </div>
               </div>
@@ -437,7 +437,7 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary" ng-click="borrarFormulario()">Cancelar</button>
                         <button id="send" type="submit" class="btn btn-success">Enviar</button>
 
                       </div>

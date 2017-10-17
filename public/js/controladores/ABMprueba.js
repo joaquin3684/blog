@@ -1,12 +1,15 @@
 var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){
 });
-app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
+app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, clonarHtmlService) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
 
 
 $scope.fechadehoy = moment().format('YYYY-MM-DD');
 
+$scope.borrarFormulario = function(){
+  $('#formulario')[0].reset();
+};
 
 $scope.$Servicio = UserSrv;
 $scope.traerRelaciones = function(relaciones)
@@ -53,6 +56,8 @@ $scope.traerRelaciones = function(relaciones)
             case 'Alta':
                var metodo = 'post';
                var form = $("#formulario").serializeArray();
+               console.log(form);
+               console.log($.param(form));
                break;
             case 'Borrar':
                var metodo = 'delete';
@@ -80,9 +85,15 @@ $scope.traerRelaciones = function(relaciones)
                      console.log(response);
                      llenarFormulario('formularioEditar',response.data);
                   }
+
                $scope.mensaje = response;
-               $('#formulario')[0].reset();
-               if(tipoSolicitud != 'Mostrar'){UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje"); $('#editar').modal('hide');}
+              $('#formulario')[0].reset();
+               if(tipoSolicitud != 'Mostrar'){
+                 UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
+                 $('#editar').modal('hide');
+
+               }
+              //  if(tipoSolicitud == 'Alta'){UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje"); $('#editar').modal('hide');}
                $scope.errores = '';
                console.log(response.data);
                $scope.traerElementos();
@@ -204,10 +215,24 @@ $scope.traerRelaciones = function(relaciones)
 
   newWin.document.close();
 
+};
 
 
+  $scope.hasta = [];
+  $scope.desde =[];
+  var cantComponentes= 1;
+  $scope.agregarHtml = function() {
+    var htmlClonado = clonarHtmlService.clonarHtml("#aClonar");
+    htmlClonado.find('#desde').html('<input type="number"   name="producto.desde.'+cantComponentes+'" ng-value="hasta['+cantComponentes+']" class="form-control col-md-2 col-xs-12" placeholder="Desde">');
+    htmlClonado.find('#hasta').html('<input type="number"   name="producto.hasta.'+cantComponentes+'" ng-model="hasta['+(cantComponentes+1)+']" class="form-control col-md-2 col-xs-12" placeholder="Hasta">');
+    htmlClonado.find('#porc').html('<input type="number" step="0.01" name="producto.porc.'+cantComponentes+'" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">');
+    htmlClonado.find('#categoria').html('<input type="number"  name="cuota.categoria.'+cantComponentes+'" class="form-control col-md-2 col-xs-12" placeholder="Categoria">{{errores.cuota_social[0]}}');
+    htmlClonado.find('#valor').html('<input type="number" step="0.01"  name="cuota.valor.'+cantComponentes+'" class="form-control col-md-2 col-xs-12" placeholder="Valor">{{errores.cuota_social[0]}}');
+    var compilado = $compile(htmlClonado.html())($scope);
+    $('#loadhtml').append(compilado);
 
-   }
+    cantComponentes +=1;
+  }
 
 
    $scope.traerElementos();

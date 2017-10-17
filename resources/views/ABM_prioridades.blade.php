@@ -18,7 +18,7 @@
       <div class="left-col" role="main" >
 
         <div class="" >
-         
+
           <div class="clearfix"></div>
 
           <div class="row" >
@@ -47,7 +47,7 @@
 
                   <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario" >
                    {{ csrf_field() }}
-                    
+
                     <span class="section">Datos de proovedor</span>
 
                     <div class="item form-group">
@@ -57,8 +57,8 @@
                         <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre de la prioridad" type="text">{[{errores.nombre[0]}]}
                       </div>
                     </div>
-                    
-                      
+
+
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
@@ -96,16 +96,16 @@
                         <div class="clearfix"></div>
                       </div>
                       <div class="x_content">
-                        
+
                         <table id="datatable-responsive" cellspacing="0" class="table table-striped " cellspacing="0" width="100%">
                           <thead>
                             <tr>
                               <th>Nombre</th>
                               <th></th>
-                                                           
+
                             </tr>
                           </thead>
-                          
+
                           <tbody ui-sortable="sortableOptions" ng-model="datos">
                             <tr ng-repeat="x in datos">
                               <td>{[{x.nombre}]}</td>
@@ -113,7 +113,7 @@
                               <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', x.id)"><span class="glyphicon glyphicon-remove"></span></button>
                                 </td>
                             </tr>
-    
+
                           </tbody>
                         </table>
                         <button class="btn btn-success" ng-click="guardarConfiguracion()">Guardar</button>
@@ -121,7 +121,7 @@
                     </div>
                   </div>
 
-       
+
 
       </div>
 
@@ -151,19 +151,19 @@
                         <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{[{errores.nombre[0]}]}
                       </div>
                     </div>
-                    
-                   
+
+
                     <input type="hidden" name="id">
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
                         <button id="send" type="submit" class="btn btn-success">Enviar</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" ngclick="borrarFormulario()">Cancelar</button>
                       </div>
                     </div>
                   </form>
       </div>
-      
+
     </div>
 
   </div>
@@ -176,7 +176,7 @@
 
 
 
-        
+
 </div>
 
 

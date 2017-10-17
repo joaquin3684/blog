@@ -14,7 +14,7 @@ angular.module('Mutual.services', ['ngTable'])
 
                 }, 2000);
         } else {
-            $('#'+sector).html('<div class="alert alert-danger" role="alert"><strong>¡'+titulo+'!</strong> '+mensaje+'</div>');
+            $('#'+sector).html('<div class="alert alert-danger alert-fixed" role="alert"><strong>¡'+titulo+'!</strong> '+mensaje+'</div>');
             setTimeout(function(){ $('#'+sector).html(''); }, 4000);
         }
     }
@@ -91,9 +91,14 @@ angular.module('Mutual.services', ['ngTable'])
        var path = '';
        return path;
     }
+})
 
-
-
+.factory('clonarHtmlService', function(){
+    return {
+      clonarHtml: function (elemAClonar){
+        return clonado = $(elemAClonar).clone();
+      }
+    }
 })
 
 .factory('myHttpInterceptor', function($q) {

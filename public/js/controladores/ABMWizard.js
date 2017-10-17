@@ -4,6 +4,9 @@ app.controller('ABMWizard', function($scope, $http, $compile, $sce, NgTableParam
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
 
+$scope.borrarFormulario = function(){
+  $('#formulario')[0].reset();
+};
 
 $scope.fechadehoy = moment().format('YYYY-MM-DD');
 
@@ -118,7 +121,7 @@ $scope.traerRelaciones = function(relaciones)
             }
             else
             {
-                
+
                 switch(coso){
                   case 'cap':
                     $scope.selectcapitulos = response.data;
@@ -136,8 +139,8 @@ $scope.traerRelaciones = function(relaciones)
                     $scope.selectsubrubros = response.data;
                   break;
                 }
-                
-                
+
+
             }
 
         }, function errorCallback(data)
@@ -157,7 +160,7 @@ $scope.traerRelaciones = function(relaciones)
       $scope.traigo('moneda/traerElementos','get','mon');
       $scope.traigo('departamento/traerElementos','get','dep');
       $scope.traigo('subRubro/traerElementos','get','sub');
-      
+
    }
 
    $scope.agregarPantalla = function()

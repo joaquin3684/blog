@@ -57,7 +57,13 @@
                         <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del Socio" type="text">{{errores.nombre[0]}}
                       </div>
                     </div>
-
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="apellido">Apellido<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="apellido" class="form-control col-md-7 col-xs-12" name="apellido" placeholder="Ingrese apellido del Socio" type="text">{{errores.apellido[0]}}
+                      </div>
+                    </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_nacimiento">Fecha de nacimiento <span class="required">*</span>
                       </label>
@@ -66,19 +72,36 @@
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{{errores.cuit[0]}}
-                      </div>
-                    </div>
-                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">DNI <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="dni" name="dni" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el DNI">{{errores.dni[0]}}
+                        <input type="number" id="dni" name="dni" ng-model="dni"  class="form-control col-md-7 col-xs-12" placeholder="Ingrese el DNI">{{errores.dni[0]}}
                       </div>
                       </div>
+
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="cuit" name="cuit" ng-model="cuit" ng-value="'--'+dni+'-'" class="form-control col-md-7 col-xs-12" maxlength="11" placeholder="Ingrese el cuit">{{errores.cuit[0]}}
+                        </div>
+                        </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="input-group">
+                        <input type="text" class="form-control" maxlength="2" placeholder="Tipo" style="text-align: right">
+                        <span class="input-group-addon" ng-value="dni">-{{dni}}-</span>
+                        <input type="text" class="form-control" maxlength="1" placeholder="Codigo verif.">
+                      </div>
+                      </div>
+                    </div>
+                      <!-- <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{{errores.cuit[0]}}
+                      </div>
+                    </div> -->
+
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
                       </label>
@@ -153,7 +176,7 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                        <button type="button" ng-click="puto()" class="btn btn-primary">Cancel</button>
+                        <button type="button" ng-click="borrarFormulario()" class="btn btn-primary">Cancelar</button>
                         <button id="send" type="submit" class="btn btn-success">Alta</button>
                       </div>
                     </div>
@@ -264,6 +287,9 @@
                                             <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)"  ng-class="socio.id">
                                                 <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
                                                     {{abm.nombre}}
+                                                </td>
+                                                <td title="'Apellido'" filter="{ apellido: 'text'}" sortable="'apellido'">
+                                                    {{abm.apellido}}
                                                 </td>
                                                 <td title="'DNI'" filter="{ dni: 'text'}" sortable="'dni'">
                                                     {{abm.dni}}
@@ -477,7 +503,7 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                         <button id="send" type="submit" class="btn btn-success">Enviar</button>
                       </div>
                     </div>

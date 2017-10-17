@@ -1,5 +1,6 @@
+
 var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider) {});
-app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
+app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv,clonarHtmlService) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
 
@@ -7,23 +8,31 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
     $('#formulario')[0].reset();
   };
 
-  $scope.submitComerc = function() {
+  $scope.$Servicio = UserSrv;
+  $scope.ExportarPDF = function(pantalla) {UserSrv.ExportPDF(pantalla);}
+  $scope.Impresion = function() {
+    var divToPrint=document.getElementById('exportTable');
+    var tabla=document.getElementById('tablita').innerHTML;
+    var newWin=window.open('','sexportTable');
+
+    newWin.document.open();
+    var code = '<html><link rel="stylesheet" href="js/angular-material/angular-material.min.css"><link rel="stylesheet" href="css/bootstrap.min.css"<link rel="stylesheet" href="fonts/css/font-awesome.min.css"><link rel="stylesheet" href="ss/animate.min.css"><link rel="stylesheet" href="css/custom.css"><link rel="stylesheet" href="css/icheck/flat/green.css"><link rel="stylesheet" href="css/barrow.css"><link rel="stylesheet" href="css/floatexamples.css"><link rel="stylesheet" href="css/ng-table.min.css"><link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.min.css"><body onload="window.print()"><table ng-table="paramsABMS" class="table table-hover table-bordered">'+tabla+'</table></body></html>';
+    newWin.document.write(code);
+    newWin.document.getElementById('botones').innerHTML = '';
+
+    newWin.document.close();
+  };
+
+  $scope.submit = function() {
 
     var data = {
-      'nombre': $scope.nombreComerc,
-      'apellido': $scope.apellidoComerc,
-      'dni': $scope.documentoComerc,
-      'cuit': $scope.cuitComerc,
-      'domicilio': $scope.domicilioComerc,
-      'telefono': $scope.telefonoComerc,
-      'usuario': $scope.usuarioComerc,
-      'password': $scope.contraseniaComerc,
-      'email': $scope.emailComerc
-
+      'nombre': $scope.nombre,
+      'cuit': $scope.cuit,
+      'cuota_social': $scope.cuentaCorriente,
     };
 
     return $http({
-      url: 'abm_comercializador',
+      url: 'abm_organismos',
       method: 'post',
       data: data,
 
@@ -38,7 +47,7 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
   $scope.traerElementos = function() {
 
     return $http({
-      url: "abm_comercializador/comercializadores",
+      url: "abm_organismos/organismos",
       method: "get",
     }).then(function successCallback(response) {
         if (typeof response.data === 'string') {
@@ -73,7 +82,7 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
   $scope.traerElemento = function(id) {
 
     return $http({
-      url: 'abm_comercializador/'+ id,
+      url: 'abm_organismos/'+ id,
       method: 'get',
       // data: data,
     }).then(function successCallback(response) {
@@ -87,17 +96,11 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
 
     var data = {
       'nombre': $scope.abmConsultado.nombre,
-      'apellido': $scope.abmConsultado.apellido,
-      'dni': $scope.abmConsultado.documento,
       'cuit': $scope.abmConsultado.cuit,
-      'domicilio': $scope.abmConsultado.domicilio,
-      'telefono': $scope.abmConsultado.telefono,
-      'usuario': $scope.abmConsultado.usuario,
-      'email': $scope.abmConsultado.email
+      'cuota_social': $scope.abmConsultado.cuentaCorriente,
     };
-
     return $http({
-      url: 'abm_comercializador/'+ id,
+      url: 'abm_organismos/'+ id,
       method: 'put',
       data: data,
     }).then(function successCallback(response) {
@@ -113,7 +116,7 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
   $scope.borrarElemento = function (id) {
 
     return $http({
-      url: 'abm_comercializador/'+ id,
+      url: 'abm_organismos/'+ id,
       method: 'delete',
     }).then(function successCallback(response) {
       $scope.traerElementos();
@@ -123,5 +126,16 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
     });
   }
 
+  $scope.cuentaCorriente = []
+  var cantComponentes = 1
+    $scope.agregarHtml = function() {
+    var htmlClonado = clonarHtmlService.clonarHtml("#aClonar");
+    htmlClonado.find('#categoria').html('<input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria" ng-model="cuentaCorriente['+cantComponentes+'].categoria">{{errores.cuota_social[0]}}');
+    htmlClonado.find('#valor').html('<input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Valor" ng-model="cuentaCorriente['+cantComponentes+'].valor">{{errores.cuota_social[0]}}');
+    var compilado = $compile(htmlClonado.html())($scope);
+    $('#loadhtml').append(compilado);
 
+    cantComponentes +=1;
+
+  }
 });

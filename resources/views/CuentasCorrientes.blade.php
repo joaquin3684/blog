@@ -17,285 +17,7 @@
             <input id="tipo_tabla" name="tipo_tabla" type="hidden" value="proovedores">
             <input type="hidden" id="token" value="{{ csrf_token() }}">
                 <!-- page content -->
-                <div class="left-col" role="main">
-                    <div class="">
-                        <div class="clearfix">
-                        </div>
 
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>
-                                        Filtro
-                                        <small>
-                                          Cuenta corriente
-                                        </small>
-                                    </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li>
-                                            <a class="collapse-link">
-                                                <i class="fa fa-chevron-up">
-                                                </i>
-                                            </a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                                <i class="fa fa-wrench">
-                                                </i>
-                                            </a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li>
-                                                    <a href="#">
-                                                        Settings 1
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Settings 2
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a class="close-link">
-                                                <i class="fa fa-close">
-                                                </i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                                <!-- ARRANCAN LOS FILTROS -->
-                                @verbatim
-                                <div class="x_content" >
-                                    <div class="container">
-                                      <form ng-submit="filtro()">
-
-
-                                        <div class="row">
-
-                                            <div id="filterOrganismo" ng-if="vistaactual=='Organismos'">
-                                                <md-autocomplete md-item-text="item.organismo" md-no-cache="true" md-search-text-change="buscandoOrganismos(searchText4)" md-selected-item-change="filtrar()" md-items="item in query(searchText4)" md-search-text="searchText4" md-selected-item="organismo" placeholder="Buscar organismo..." >
-                                                <md-item-template>
-                                                    <span md-highlight-text="searchText">
-                                                        {{item.organismo}}
-                                                    </span>
-                                                    </md-item-template>
-                                                    <md-not-found>
-                                                     No se encontraron resultados para "{{searchText}}".
-
-                                                    </md-not-found>
-                                                </md-autocomplete>
-                                            </div>
-                                            <div id="filterSocio" ng-if="vistaactual=='Socios'">
-                                                <div class="row">
-                                                <md-autocomplete  md-item-text="item.socio" md-no-cache="true" md-search-text-change="buscandoSocios(searchText)" md-selected-item-change="filtrar()" md-items="item in query(searchText)" md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..." >
-                                                <md-item-template>
-                                                    <span md-highlight-text="searchText">
-                                                        {{item.socio}}
-                                                    </span>
-                                                    </md-item-template>
-                                                    <md-not-found>
-                                                     No se encontraron resultados para "{{searchText}}".
-
-                                                    </md-not-found>
-                                                </md-autocomplete>
-                                                </div>
-                                                </br>
-                                                <div class="row">
-                                                    <div class="item form-group col-sm-5 col-xs-8">
-                                                        <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                            Minimo importe cuota
-                                                        </label>
-                                                        <md-slider aria-label="red" class="md-primary" ng-change="filtrar()"  flex="" id="red-slider" max="255" min="0" ng-model="minimo_importe_cuota">
-                                                        </md-slider>
-                                                    </div>
-                                                    <div class="col-md-1 col-sm-1 col-xs-4">
-                                                        <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_importe_cuota" type="number">
-                                                            {{errores.porcentaje_retencion[0]}}
-                                                        </input>
-                                                    </div>
-                                                    <div class="item form-group col-sm-5 col-xs-8">
-                                                        <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                            Maximo importe cuota
-                                                        </label>
-                                                        <md-slider aria-label="red" class="md-primary" ng-change="filtrar()"  flex="" id="red-slider" max="255" min="0" ng-model="maximo_importe_cuota">
-                                                        </md-slider>
-                                                    </div>
-                                                    <div class="col-md-1 col-sm-1 col-xs-4">
-                                                        <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_importe_cuota" type="number">
-                                                            {{errores.porcentaje_retencion[0]}}
-                                                        </input>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="filterProveedor" ng-if="vistaactual=='Ventas' || vistaactual =='Cuotas'">
-                                                <md-autocomplete  md-item-text="item.proovedor" md-no-cache="true"  md-search-text-change="buscandoProovedores(searchText2)" md-items="item in query(searchText2)" md-selected-item-change="filtrar()" md-search-text="searchText2" md-selected-item="proovedor" placeholder="Buscar proovedor...">
-                                                <md-item-template>
-                                                    <span md-highlight-text="searchText">
-                                                        {{item.proovedor}}
-                                                    </span>
-                                                    </md-item-template>
-                                                    <md-not-found>
-                                                     No se encontraron resultados para "{{searchText}}".
-
-                                                    </md-not-found>
-                                                </md-autocomplete>
-                                            </div>
-                                            </br>
-                                            <div id="filterProducto" ng-if="vistaactual=='Ventas'">
-                                                <md-autocomplete  md-item-text="item.producto" md-no-cache="true"  md-search-text-change="buscandoProductos(searchText3)" md-items="item in query(searchText3)" md-selected-item-change="filtrar()" md-search-text="searchText3" md-selected-item="producto" placeholder="Buscar producto...">
-                                                <md-item-template>
-                                                    <span md-highlight-text="searchText">
-                                                        {{item.producto}}
-                                                    </span>
-                                                    </md-item-template>
-                                                    <md-not-found>
-                                                     No se encontraron resultados para "{{searchText}}".
-
-                                                    </md-not-found>
-                                                </md-autocomplete>
-                                            </div>
-
-                                        </div>
-                                        <div class="row" style="margin-top:20px;" id="filterCuota" ng-show="vistaactual=='Ventas || Cuotas'">
-                                            <div class="item form-group col-sm-5 col-xs-8">
-                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Minimo importe cuota
-                                                </label>
-                                                <md-slider aria-label="red" class="md-primary" ng-change="filtrar()"  flex="" id="red-slider" max="255" min="0" ng-model="minimo_importe_cuota">
-                                                </md-slider>
-                                            </div>
-                                            <div class="col-md-1 col-sm-1 col-xs-4">
-                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_importe_cuota" type="number">
-                                                    {{errores.porcentaje_retencion[0]}}
-                                                </input>
-                                            </div>
-                                            <div class="item form-group col-sm-5 col-xs-8">
-                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Maximo importe cuota
-                                                </label>
-                                                <md-slider aria-label="red" class="md-primary" ng-change="filtrar()"  flex="" id="red-slider" max="255" min="0" ng-model="maximo_importe_cuota">
-                                                </md-slider>
-                                            </div>
-                                            <div class="col-md-1 col-sm-1 col-xs-4">
-                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="maximo_importe_cuota" type="number">
-                                                    {{errores.porcentaje_retencion[0]}}
-                                                </input>
-                                            </div>
-                                        </div>
-                                        <div class="row" id="filterCuota2" ng-show="vistaactual=='Ventas || Cuotas'">
-                                            <div class="item form-group col-sm-5 col-xs-8">
-                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Minimo Nº cuota
-                                                </label>
-                                                <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0"
-                                                 ng-model="minimo_nro_cuota">
-                                                </md-slider>
-                                            </div>
-                                            <div class="col-md-1 col-sm-1 col-xs-4">
-                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_nro_cuota" type="number">
-                                                    {{errores.porcentaje_retencion[0]}}
-                                                </input>
-                                            </div>
-                                            <div class="item form-group col-sm-5 col-xs-8">
-                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Maximo Nº cuota
-                                                </label>
-                                                <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0" ng-model="maximo_nro_cuota">
-                                                </md-slider>
-                                            </div>
-                                            <div class="col-md-1 col-sm-1 col-xs-4">
-                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="maximo_nro_cuota" type="number">
-                                                    {{errores.porcentaje_retencion[0]}}
-                                                </input>
-                                            </div>
-                                        </div>
-                                        <div class="row" style="margin-top:20px;" id="filterCuota" ng-show="vistaactual=='Organismos'">
-                                            <div class="item form-group col-sm-5 col-xs-8">
-                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Minimo importe Total a Cobrar
-                                                </label>
-                                            </div>
-                                            <div class="col-md-1 col-sm-1 col-xs-4">
-                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_importe_cuota" type="number">
-                                                    {{errores.porcentaje_retencion[0]}}
-                                                </input>
-                                            </div>
-                                            <div class="item form-group col-sm-5 col-xs-8">
-                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Maximo importe Total a Cobrar
-                                                </label>
-                                               <!--  <md-slider aria-label="red" class="md-primary" ng-change="filtrar()"  flex="" id="red-slider" max="255" min="0" ng-model="maximo_importe_cuota">
-                                                </md-slider> -->
-                                            </div>
-                                            <div class="col-md-1 col-sm-1 col-xs-4">
-                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="maximo_importe_cuota" type="number">
-                                                    {{errores.porcentaje_retencion[0]}}
-                                                </input>
-                                            </div>
-                                        </div>
-                                        <div class="row" id="filterCuota2" ng-show="vistaactual=='Organismos'">
-                                            <div class="item form-group col-sm-5 col-xs-8">
-                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Minimo importe Total Cobrado
-                                                </label>
-                                                <!-- <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0"
-                                                 ng-model="minimo_nro_cuota">
-                                                </md-slider> -->
-                                            </div>
-                                            <div class="col-md-1 col-sm-1 col-xs-4">
-                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="minimo_nro_cuota" type="number">
-                                                    {{errores.porcentaje_retencion[0]}}
-                                                </input>
-                                            </div>
-                                            <div class="item form-group col-sm-5 col-xs-8">
-                                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="minimo">
-                                                    Maximo importe Total Cobrado
-                                                </label>
-                                               <!--  <md-slider aria-label="red" flex="" id="red-slider" ng-change="filtrar()"  max="255" min="0" ng-model="maximo_nro_cuota">
-                                                </md-slider> -->
-                                            </div>
-                                            <div class="col-md-1 col-sm-1 col-xs-4">
-                                                <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="minimo" name="minimo" ng-model="maximo_nro_cuota" type="number">
-                                                    {{errores.porcentaje_retencion[0]}}
-                                                </input>
-                                            </div>
-                                        </div>
-                                        <div class="row" style="margin-top:20px;" id="filterFecha" ng-show="vistaactual == 'Ventas'">
-                                            <div class="item form-group col-sm-6 col-xs-12">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desde">
-                                                    Desde:
-                                                </label>
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="desde" ng-model="desde" name="desde" placeholder="Ingrese la cuota social" type="date">
-                                                        {{errores.porcentaje_retencion[0]}}
-                                                    </input>
-                                                </div>
-                                            </div>
-                                            <div class="item form-group col-sm-6 col-xs-12">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hasta">
-                                                    Hasta:
-                                                </label>
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" ng-change="filtrar()"  id="hasta" ng-model="hasta" name="hasta" placeholder="Ingrese la cuota social" type="date">
-                                                        {{errores.porcentaje_retencion[0]}}
-                                                    </input>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                        <input type="submit" ng-click="filtro()" class="btn btn-success" value="Filtrar">
-                                        </form>
-                                    </div>
-                                </div>
-                                @endverbatim
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
 
                 @verbatim
@@ -303,7 +25,7 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>
-                                Socios
+                                Cuenta corriente servicios/prestamos
                                 <small>
                                     Movimientos de cuenta
                                 </small>
@@ -437,13 +159,14 @@
                                         <td>
                                             {{sumaDiferencia}}
                                         </td>
+
                                     </tr>
                                     </tfoot>
                                 </table>
                         </div>
                         <div id="divTablaVentas" ng-if="vistaactual=='Ventas'">
                             <table id="tablaVentas" ng-table="paramsVentas" class="table table-hover table-bordered">
-                                <tr ng-repeat="venta in $data" ng-click="PullCuotas(venta.id_venta,venta.producto)">
+                                <tr ng-repeat="venta in $data" ng-click="PullCuotas(venta.id_venta,venta.producto, $event)">
                                     <td title="'Producto'"  filter="{producto: 'text'}" sortable="'producto'">
                                         {{venta.producto}}
                                     </td>
@@ -463,6 +186,10 @@
                                     <td title="'Diferencia'" filter="{diferencia: 'text'}" sortable="'diferencia'">
                                         {{venta.diferencia}}
                                     </td>
+                                    <td title="'Accion'" filter="{}">
+                                      <button id="modalService" type="button" ng-click="PullMovimientos(venta.id_venta)" class="btn btn-primary clearfix" data-toggle="modal" data-target="#modalServicios">Ver Movimientos</button>
+                                    </td>
+
                                 </tr>
 
                                 <tfoot>
@@ -483,9 +210,53 @@
                                     <td>
                                         {{sumaDiferencia}}
                                     </td>
+                                    <td>
+
+                                    </td>
                                 </tr>
                                 </tfoot>
                             </table>
+                        </div>
+
+                        <!-- Modal -->
+                        <div id="modalServicios" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Movimientos</h4>
+                              </div>
+                              <div class="modal-body" style="padding-bottom: 50px;">
+                                <table class="table table-hover table-bordered" ng-table="paramsMovimientos">
+
+                                    <tr ng-repeat="movimiento in $data">
+                                      <td title="'Cuota'" filter="{cuota: 'text'}" sortable="'cuota'">
+                                        {{movimiento.cuota}}
+                                      </td>
+                                      <td title="'Fecha'" filter="{fecha: 'text'}" sortable="'fecha'">
+                                        {{movimiento.fecha}}
+                                      </td>
+                                      <td title="'Entrada'" filter="{entrada: 'text'}" sortable="'entrada'">
+                                        {{movimiento.entrada}}
+                                      </td>
+                                      <td title="'Salida'" filter="{salida: 'text'}" sortable="'salida'">
+                                        {{movimiento.salida}}
+                                      </td>
+                                      <td title="'Comision'" filter="{comision: 'text'}" sortable="'comision'">
+                                        {{movimiento.comision}}
+                                      </td>
+                                    </tr>
+
+                                </table>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                              </div>
+                            </div>
+
+                          </div>
                         </div>
 
                             <div id="pruebaExpandir" ng-if="vistaactual=='Cuotas'">
@@ -528,8 +299,8 @@
                                                                     <th>Fecha</th>
                                                                     <th>Entrada</th>
                                                                     <th>Salida</th>
-                                                                    <th>Ganancia</th>
-                                                                    <th>Gastos Administrativos</th>
+                                                                    <th>Comision</th>
+
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -539,7 +310,7 @@
                                                                     <td><center>{{movimiento.entrada}}</center></td>
                                                                     <td><center>{{movimiento.salida}}</center></td>
                                                                     <td><center>{{movimiento.ganancia}}</center></td>
-                                                                    <td><center>{{movimiento.gastos_administrativos}}</center></td>
+
 
                                                                 </tr>
                                                                 </tbody>
@@ -594,24 +365,25 @@
                                             <option value="Cancelado">Cancelar</option>
                                           </select>
 
-                                          <!-- <div class="modal-body">
-                                            <p>Seleccione un motivo de cancelacion.</p>
-                                            <div class="form-group"> -->
                                           <br>
-                                          <select class="form-control" id="exampleFormControlSelect1">
+                                          <select class="form-control" id="exampleFormControlSelect1" ng-model="formaCobro" >
                                             <option value="" selected disabled>Seleccione una forma de cobro</option>
-                                            <option value="Renovado">Saldo de capital</option>
-                                            <option value="Cancelado">Porcentaje</option>
+                                            <option value="saldo">Saldo de capital</option>
+                                            <option value="porcentaje">Porcentaje</option>
                                           </select>
+                                          
+                                          <br />
+                                          <input type="text" class="form-control" ng-if="formaCobro === 'porcentaje'" ng-model="$parent.porc" placeholder="Ingrese un porcentaje">
                                           <br>
+
                                           <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1" >Total a cobrar</span>
-                                            <input type="text" class="form-control" placeholder="Total a cobrar" aria-describedby="basic-addon1" disabled="true">
+                                            <input type="text" class="form-control" placeholder="Total a cobrar"  ng-value="calcularTotalModal(formaCobro, porc)" aria-describedby="basic-addon1" disabled="true">
                                           </div>
                                         </div>
                                       </div>
                                       <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary"  ng-click="cancelar(motivo)" style="position: absolute; left: 20px;">Realizar accion</button>
+                                        <button type="button" class="btn btn-primary"  ng-click="cancelar(motivo, porcentaje)" style="position: absolute; left: 20px;">Realizar accion</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                       </div>
                                     </div>
