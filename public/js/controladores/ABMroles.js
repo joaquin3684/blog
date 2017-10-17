@@ -1,6 +1,10 @@
 var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize']).config(function($interpolateProvider){});
 app.controller('ABM', function($scope, $http, $compile, $sce) {
 
+  $scope.borrarFormulario = function(){
+    $('#formulario')[0].reset();
+  }
+  
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
    $scope.enviarFormulario = function(tipoSolicitud, id = '')
    {

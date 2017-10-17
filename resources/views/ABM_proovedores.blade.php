@@ -53,12 +53,12 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razonSocial">Razon social <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="razonSocial" class="form-control col-md-7 col-xs-12" name="razon_social" placeholder="Ingrese la Razon social" type="text">{{errores.nombre[0]}}
+                        <input required id="razonSocial" class="form-control col-md-7 col-xs-12" name="razon_social" placeholder="Ingrese la Razon social" type="text">{{errores.nombre[0]}}
                       </div>
                     </div>
 
                       <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descripcion">Descripcion <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descripcion">Descripcion
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Descripcion">{{errores.descripcion[0]}}
@@ -69,7 +69,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{{errores.descripcion[0]}}
+                      <input required type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{{errores.descripcion[0]}}
                     </div>
                   </div>
 
@@ -77,7 +77,7 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{{errores.descripcion[0]}}
+                    <input required type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{{errores.descripcion[0]}}
                   </div>
                 </div>
 
@@ -85,7 +85,7 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telefono">Telefono<span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono">{{errores.descripcion[0]}}
+                  <input required type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono">{{errores.descripcion[0]}}
                 </div>
               </div>
 
@@ -93,7 +93,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Email<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Email">{{errores.descripcion[0]}}
+                <input required type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Email">{{errores.descripcion[0]}}
               </div>
             </div>
 
@@ -101,7 +101,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Usuario<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="cuit" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Usuario">{{errores.descripcion[0]}}
+                <input required type="text" id="cuit" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Usuario">{{errores.descripcion[0]}}
               </div>
             </div>
 
@@ -109,7 +109,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Contraseña<span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="cuit" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Contraseña">{{errores.descripcion[0]}}
+              <input required type="text" id="cuit" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Contraseña">{{errores.descripcion[0]}}
             </div>
           </div>
 <!--                     <div class="item form-group">
@@ -130,14 +130,14 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Prioridad <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="prioridad" name="id_prioridad" class="form-control col-md-7 col-xs-12" ></select>
+                        <select required id="prioridad" name="id_prioridad" class="form-control col-md-7 col-xs-12" ></select>
                       </div>
 
                     </div>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary">Cancel</button>
+                        <button  type="button" ng-click="borrarFormulario()" class="btn btn-primary">Cancel</button>
                         <button id="send" type="submit" name="enviar" class="btn btn-success">Alta</button>
                       </div>
                     </div>
@@ -375,7 +375,7 @@
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
 
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                         <button id="send" type="submit" class="btn btn-success">Enviar</button>
                       </div>
                     </div>

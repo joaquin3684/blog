@@ -3,7 +3,7 @@
 @section('contenido')
 
 
-{!! Html::script('js/controladores/ABMprueba.js') !!}
+{!! Html::script('js/controladores/ABM_organismos.js') !!}
 
 
 <div class="nav-md" ng-controller="ABM" >
@@ -16,8 +16,8 @@
       <!-- page content -->
       <div class="left-col" role="main" >
 
-        <div class="" >
 
+          </div>
           <div class="clearfix"></div>
           <div id="mensaje"></div>
           <div class="row" >
@@ -44,7 +44,7 @@
                 </div>
                 <div class="x_content">
                   @verbatim
-                  <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario" >
+                  <form class="form-horizontal form-label-left" ng-submit="submit()" id="formulario" >
                    {{ csrf_field() }}
 
                     <span class="section">Datos del organismo</span>
@@ -53,7 +53,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{{errores.nombre[0]}}
+                        <input id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese nombre del organismo" type="text">{{errores.nombre[0]}}
                       </div>
                     </div>
 
@@ -61,20 +61,37 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit">{{errores.cuit[0]}}
+                        <input type="text" id="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit">{{errores.cuit[0]}}
                       </div>
                     </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Cuota Social <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" step="0.01" id="cuota_social" name="cuota_social" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.cuota_social[0]}}
+
+
+                      <div id="aClonar">
+                        <div class="item form-group" >
+
+                            <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social<span class="required">*</span>
+                            </label>
+                            <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
+                              <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuentaCorriente[0].categoria" >{{errores.cuota_social[0]}}
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6" id="valor">
+                              <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Valor" ng-model="cuentaCorriente[0].valor">{{errores.cuota_social[0]}}
+                            </div>
                       </div>
-                    </div>
+                      </div>
+
+                      <div id="loadhtml"></div>
+
+                    <button id="sumahtml" type="button" class="btn btn-primary"  style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml()">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
+                    </button>
+
+
+
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                        <button type="button" onclick="console.log('hola');" class="btn btn-primary">Cancel</button>
+                        <button type="button" ng-click="borrarFormulario()" class="btn btn-primary">Cancel</button>
                         <button id="send" type="submit" class="btn btn-success">Alta</button>
                       </div>
                     </div>
@@ -172,11 +189,11 @@
                                               </td>
 
                                               <td id="botones">
-                                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
-                                              <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="editarFormulario(abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                              <button type="button" class="btn btn-danger" ng-click="borrarFormulario(abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
                                               </td>
                                           </tr>
-                                          
+
                                         </tbody>
                                       </table>
                                         @endverbatim
@@ -231,10 +248,13 @@
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Cuota Social <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social<span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="cuota_social" id="cuota_social" name="cuota_social" class="form-control col-md-7 col-xs-12">{{errores.cuota_social[0]}}
+                      <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
+                        <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuentaCorriente[0].categoria">{{errores.cuota_social[0]}}
+                      </div>
+                      <div class="col-md-3 col-sm-3 col-xs-6" id="valor">
+                        <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Valor" ng-model="cuentaCorriente[0].valor">{{errores.cuota_social[0]}}
                       </div>
                     </div>
 
@@ -242,7 +262,7 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                         <button id="send" type="submit" class="btn btn-success">Enviar</button>
 
                       </div>

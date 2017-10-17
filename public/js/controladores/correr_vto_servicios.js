@@ -40,8 +40,14 @@ app.controller('correr_vto_servicios', function($scope, $http, $compile, $sce, N
    cantDias = Number(cantDias);
    console.log(fecha_vencimiento);
    moment.locale('es');
-   var fecha= moment(fecha_vencimiento, 'YYYY-MM-DD').add(cantDias, 'days').format('L');
-   if(confirm("La fecha de vencimiendo se postergara al "+ fecha)){
+   var fecha= moment(fecha_vencimiento, 'YYYY-MM-DD').add(cantDias, 'days');
+
+   var fechaActual = moment();
+   if(fechaActual.isAfter(fecha, 'day')){
+     cantDias = fechaActual.diff(fecha.subtract(cantDias, 'days'), 'days');
+     fecha = fechaActual;
+   }
+   if(confirm("La fecha de vencimiendo se cambiara al "+ fecha.format('L'))){
      $scope.actualizarFecha(cantDias, id)
    }
  }

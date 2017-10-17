@@ -196,8 +196,11 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
     $scope.log = function(dato){
         console.log(dato);
     }
-    $scope.PullCuotas = function(idventa,nombreproducto){
+    $scope.PullCuotas = function(idventa,nombreproducto, evento){
 
+      if( evento.target.id ==='modalService'){
+        return; // skip click event handler
+      }
 
         $http({
             url: 'ventas/mostrarPorCuotas',
@@ -260,7 +263,52 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
         {
             console.log(data.data);
         });
+      }
 
+        $scope.PullMovimientos = function (idServicio){
+
+          $http({
+              url: 'https://api.myjson.com/bins/76rk1',
+              method: 'get',
+              // data: {'id_servicio': idServicio}
+          }).then(function successCallback(response)
+          {
+
+            $scope.movimientos = response.data;
+
+            $scope.paramsMovimientos = new NgTableParams({
+                page: 1,
+                count: 10
+            }, {
+                total: $scope.movimientos.length,
+                getData: function (params) {
+                    var filterObj = params.filter();
+                    filteredData = $filter('filter')($scope.movimientos, filterObj);
+                    var sortObj = params.orderBy();
+                    orderedData = $filter('orderBy')(filteredData, sortObj);
+                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                }
+            });
+          }, function errorCallback(data)
+            {
+                console.log(data.data);
+            });
+
+    }
+
+    $scope.calcularTotalModal = function (formaCobro, porcentaje){
+      switch(formaCobro) {
+        case 'porcentaje':
+        if(porcentaje != undefined){
+          return $scope.sumaMontoACobrar*(1+(porcentaje/100));
+        }
+          break;
+        case 'saldo':
+          return $scope.sumaMontoACobrar;
+          break;
+        default:
+          return $scope.sumaMontoACobrar;
+}
     }
 
 

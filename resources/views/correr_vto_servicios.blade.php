@@ -74,7 +74,7 @@
                                 {{abm.fecha_vencimiento | date: "dd/MM/y"}}
                             </td>
 
-                              <td title="'Postergar'" sortable="'domicilio'">
+                              <!-- <td title="'Postergar'" sortable="'domicilio'">
                                 <div class="input-group">
                                   <input type="text" class="form-control" placeholder="Cantidad de dias" ng-model="cantDias">
                                   <div class="input-group-btn">
@@ -83,7 +83,19 @@
                                     </button>
                                   </div>
                                 </div>
-                              </td>
+                              </td> -->
+                              <td title="'Cambiar fecha'" sortable="'cantDias'">
+                              <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Cantidad de dias" ng-model="cantDias">
+                                <div class="input-group-btn">
+                                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accion <span class="caret"></span></button>
+                                  <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#" ng-click="confirmarCambios(abm.fecha_vencimiento, cantDias, abm.id)">Postergar</a></li>
+                                    <li><a href="#" ng-click="confirmarCambios(abm.fecha_vencimiento, cantDias * -1, abm.id)">Adelantar</a></li>
+                                  </ul>
+                                </div><!-- /btn-group -->
+                              </div><!-- /input-group -->
+                              <td>
                         </tr>
                     </table>
                     @endverbatim

@@ -2,7 +2,7 @@
 
 @section('contenido')
 
-    {!! Html::script('js/controladores/ABMprueba.js') !!}
+    {!! Html::script('js/controladores/ABM_productos.js') !!}
 
     <div class="nav-md" ng-controller="ABM" >
 
@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="x_content">
                                       @verbatim
-                                        <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario" >
+                                        <form class="form-horizontal form-label-left" ng-submit="submit()" id="formulario" >
                                             {{ csrf_field() }}
 
                                             <span class="section">Datos del Producto</span>
@@ -52,53 +52,76 @@
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del producto" type="text">{{errores.nombre[0]}}
+                                                    <input id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese nombre del producto" type="text">{{errores.nombre[0]}}
                                                 </div>
                                             </div>
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Descripcion <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input id="descripcion" class="form-control col-md-7 col-xs-12" name="descripcion" placeholder="Ingrese la descripcion" type="text">{{errores.nombre[0]}}
+                                                    <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="descripcion" placeholder="Ingrese la descripcion" type="text">{{errores.nombre[0]}}
                                                 </div>
                                             </div>
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input type="number" step="0.01" id="retencion" name="ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
+                                                    <input type="number" step="0.01" id="retencion" ng-model="ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
                                                 </div>
                                             </div>
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de colocacion<span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input type="number" step="0.01" id="colocacion" name="colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_colocacion[0]}}
+                                                    <input type="number" step="0.01" id="colocacion" ng-model="colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_colocacion[0]}}
                                                 </div>
                                             </div>
                                             <div class="item form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Proovedor <span class="required">*</span>
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Proveedor <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <select id="proovedor" name="id_proovedor" class="form-control col-md-7 col-xs-12" ></select>
+                                                    <select id="proovedor" ng-model="id_proovedor" class="form-control col-md-7 col-xs-12" ></select>
                                                 </div>
-
                                             </div>
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Tipo <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <select name="tipo" class="form-control col-md-7 col-xs-12" >
+                                                    <select ng-model="tipo" class="form-control col-md-7 col-xs-12" >
                                                         <option value="Credito">Credito</option>
                                                         <option value="Producto">Producto</option>
                                                     </select>
                                                 </div>
+                                            </div>
+                                            <div id="aClonar">
+                                              <div class="item form-group" >
+
+                                                  <label class="control-label col-md-3 col-sm-3 col-xs-8" for="categoria">Modificar<span class="required">*</span>
+                                                  </label>
+                                                  <div class="col-md-2 col-sm-2 col-xs-8" id="desde">
+                                                    <input type="number"  ng-model="porcentajes[0].desde" class="form-control col-md-2 col-xs-12" placeholder="Desde">{{errores.cuota_social[0]}}
+                                                  </div>
+                                                  <div class="col-md-2 col-sm-2 col-xs-8" id="hasta">
+                                                    <input type="number" step="0.01"  ng-model="porcentajes[0].hasta"  class="form-control col-md-2 col-xs-12" placeholder="Hasta">{{errores.cuota_social[0]}}
+                                                  </div>
+                                                  <div class="col-md-2 col-sm-2 col-xs-8" id="porc">
+                                                    <input type="number" step="0.01" ng-model="porcentajes[0].porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">{{errores.cuota_social[0]}}
+                                                  </div>
+
+                                              </div>
 
                                             </div>
+
+
+                                            <div id="loadhtml"></div>
+
+                                          <button id="sumahtml1" type="button" class="btn btn-primary"  style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml()">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
+                                          </button>
                                             <div class="ln_solid"></div>
                                             <div class="form-group">
                                                 <div class="col-md-6 col-md-offset-3">
-                                                    <button type="submit" class="btn btn-primary">Cancel</button>
+                                                    <button type="button" class="btn btn-primary" ng-click="borrarFormulario()">Cancel</button>
                                                     <button id="send" type="submit" name="enviar" class="btn btn-success">Alta</button>
                                                 </div>
                                             </div>
@@ -198,8 +221,8 @@
                                                     {{abm.proovedor}}
                                                 </td>
                                                 <td>
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="editarFormulario(abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
                                                 </td>
                                             </tr>
                                         </table>
@@ -237,45 +260,58 @@
                     </div>
                     <div class="modal-body">
                       @verbatim
-                        <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
+                        <form class="form-horizontal form-label-left" ng-submit="editarFormulario(abmConsultado.id)" id="formularioEditar" >
                             {{ csrf_field() }}
-                            <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
-                            </p>
-                            <span class="section">Personal Info</span>
+
+                            <span class="section">Producto</span>
 
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del producto" type="text">{{errores.nombre[0]}}
+                                    <input id="nombre" class="form-control col-md-7 col-xs-12" ng-model="abmConsultado.nombre" placeholder="Ingrese nombre del producto" type="text">{{errores.nombre[0]}}
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Descripcion <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="descripcion" class="form-control col-md-7 col-xs-12" name="descripcion" placeholder="Ingrese la descripcion" type="text">{{errores.nombre[0]}}
+                                    <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="abmConsultado.descripcion" placeholder="Ingrese la descripcion" type="text">{{errores.nombre[0]}}
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="retencion" name="retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
+                                    <input type="number" id="retencion" ng-model="abmConsultado.retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Colocacion <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="colocacion" name="colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_colocacion[0]}}
+                                    <input type="number" id="colocacion" ng-model="abmConsultado.colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_colocacion[0]}}
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Proovedor <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select id="proovedor_Editar" name="id_proovedor" class="form-control col-md-7 col-xs-12" ></select>
+                                    <select id="proovedor_Editar" ng-model="abmConsultado.id_proovedor" class="form-control col-md-7 col-xs-12" ></select>
+                                </div>
+                            </div>
+                            <div class="item form-group"  ng-repeat="porcentaje in abmConsultado.porcentajes">
+
+                                <label class="control-label col-md-3 col-sm-3 col-xs-8" for="categoria">Modificar<span class="required">*</span>
+                                </label>
+                                <div class="col-md-2 col-sm-2 col-xs-8" id="desde">
+                                  <input type="number"   ng-model="porcentaje.desde"  class="form-control col-md-2 col-xs-12" placeholder="Desde">{{errores.cuota_social[0]}}
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-8" id="hasta">
+                                  <input type="number" step="0.01"  ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta">{{errores.cuota_social[0]}}
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-8" id="porc">
+                                  <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">{{errores.cuota_social[0]}}
                                 </div>
 
                             </div>
@@ -284,7 +320,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
 
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                                     <button id="send" type="submit" class="btn btn-success">Enviar</button>
 
                                 </div>

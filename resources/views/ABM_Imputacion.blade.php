@@ -49,7 +49,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-              
+
                 <div class="row">
     <section>
         <div class="wizard">
@@ -57,7 +57,7 @@
                 <div class="connecting-line"></div>
                 <ul class="nav nav-tabs" role="tablist">
 
-                    
+
                     <li role="presentation" class="active">
                         <a href="#imputacion" data-toggle="tab" aria-controls="imputacion" role="tab" title="Imputacion">
                             <span class="round-tab">
@@ -68,16 +68,16 @@
                 </ul>
             </div>
 
-            
+
                 <div class="tab-content">
-                    
+
                 <div class="tab-pane active" role="tabpanel" id="imputacion">
-                        
+
                         <h3>Alta de Imputación</h3>
-                        
+
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('imputacion','Alta')" id="imputacionform">
-                  
+
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="id_subrubro">Dpto <span class="required">*</span>
@@ -125,17 +125,17 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-            
+
         </div>
     </section>
    </div>
 
                 </div>
                     <!-- End SmartWizard Content -->
-                  
-                
-          
-                  
+
+
+
+
 
                 </div>
               </div>
@@ -239,7 +239,7 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary" ng-click="borrarFormulario()">Cancelar</button>
                         <button id="send" type="submit" class="btn btn-success">Enviar</button>
 
                       </div>

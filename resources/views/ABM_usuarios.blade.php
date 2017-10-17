@@ -81,7 +81,7 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-
+                        <button type="button" class="btn btn-primary" ng-click="borrarFormulario()">Cancelar</button>
                         <button id="send" type="submit" class="btn btn-success">Alta</button>
                       </div>
                     </div>
@@ -216,7 +216,7 @@
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
                         <button id="send" type="submit" class="btn btn-success">Enviar</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                       </div>
                     </div>
                   </form>
