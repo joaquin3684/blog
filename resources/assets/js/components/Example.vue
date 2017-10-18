@@ -304,7 +304,7 @@ export default {
     // //
     this.traerNotificaciones();
     console.log(this.usuario);
-    Echo.private('Cartalyst.Sentinel.Users.EloquentUser.11')
+    Echo.private('Cartalyst.Sentinel.Users.EloquentUser.1')
 
       .notification((data) => {
         this.notificaciones.push({

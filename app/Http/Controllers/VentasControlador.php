@@ -64,6 +64,25 @@ class VentasControlador extends Controller
         return $ventasPorVenta->toJson();
     }
 
+    public function mostrarMovimientosVenta(Request $request)
+    {
+        $ventas = DB::table('ventas')
+            ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
+            ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
+            ->join('productos', 'productos.id', '=', 'ventas.id_producto')
+            ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
+            ->join('movimientos', 'movimientos.identificadores_id', 'cuotas.id')
+            ->groupBy('ventas.id')
+            ->where('ventas.id', '=', $request['id'])
+            ->where('movimientos.identificadores_type', 'App\Cuotas')
+            ->where('cuotas.cuotable_type', 'App\Ventas')
+            ->select('movimientos.*');
+
+        $ventas1 = VentasFilter::apply($request->all(), $ventas);
+
+        return $ventas1->toJson();
+    }
+
     public function mostrarPorCuotas(Request $request)
     {
         $a =  Ventas::with('cuotas.movimientos', 'producto.proovedor')->find($request['id']);

@@ -16,15 +16,19 @@ class ValidacionABMsocios extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            //
+            'dni' => 'required|unique:socios,nombre,'.$this->get('id'),
+            'cuit' => 'required|unique:socios,cuit,'.$this->get('id')
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'unique' => 'El :attribute ya existe',
+            'required' => 'El campo :attribute no puede estar vacio'
         ];
     }
 }

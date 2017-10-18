@@ -49599,7 +49599,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.traerNotificaciones();
     console.log(this.usuario);
     Echo.private('Cartalyst.Sentinel.Users.EloquentUser.1').notification(function (data) {
-      _this4.notificaciones.push(data);
+      _this4.notificaciones.push({
+        'data': data,
+        'id': data.id,
+        'created_at': "2017-10-05 04:22:47"
+      });
       //'idNumero': 'notification'+String(this.cantNotificaciones),
       _this4.sumarCantNotificaciones(1);
       console.log(data);

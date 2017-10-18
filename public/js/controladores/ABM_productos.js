@@ -36,7 +36,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
     };
 
     return $http({
-      url: 'abm_organismos',
+      url: 'productos',
       method: 'post',
       data: data,
 
@@ -51,7 +51,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
   $scope.traerElementos = function() {
 
     return $http({
-      url: "abm_organismos/organismos",
+      url: "productos/traerElementos",
       method: "get",
     }).then(function successCallback(response) {
         if (typeof response.data === 'string') {
@@ -86,7 +86,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
   $scope.traerElemento = function(id) {
 
     return $http({
-      url: 'abm_organismos/'+ id,
+      url: 'productos/'+ id,
       method: 'get',
       // data: data,
     }).then(function successCallback(response) {
@@ -108,7 +108,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       'porcentajes': $scope.abmConsultado.porcentajes,
     };
     return $http({
-      url: 'abm_organismos/'+ id,
+      url: 'productos/'+ id,
       method: 'put',
       data: data,
     }).then(function successCallback(response) {
@@ -124,7 +124,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
   $scope.borrarElemento = function (id) {
 
     return $http({
-      url: 'abm_organismos/'+ id,
+      url: 'productos/'+ id,
       method: 'delete',
     }).then(function successCallback(response) {
       $scope.traerElementos();

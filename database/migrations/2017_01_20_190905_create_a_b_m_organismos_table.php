@@ -14,7 +14,6 @@ class CreateABMOrganismosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('cuit');
-            $table->integer('cuota_social');
             $table->softDeletes();
             $table->timestamps();
         });

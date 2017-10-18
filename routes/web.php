@@ -131,6 +131,7 @@ Route::post('ventas/mostrarPorCuotas', 'VentasControlador@mostrarPorCuotas');
 Route::post('ventas/mostrarPorVenta', 'VentasControlador@mostrarPorVenta');
 Route::post('ventas/mostrarPorSocio', 'VentasControlador@mostrarPorSocio');
 Route::post('ventas/cancelarVenta', 'VentasControlador@cancelarVenta');
+Route::post('ventas/movimientos', 'VentasControlador@mostrarMovimientosVenta');
 
 Route::resource('ventas', 'VentasControlador');
 

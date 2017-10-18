@@ -29,4 +29,9 @@ class Productos extends Model
     {
         return $this->hasMany('App\Ventas', 'id_producto', 'id');
     }
+
+    public function porcentajes()
+    {
+        return $this->hasMany('App\PorcentajeColocacion', 'id_producto', 'id');
+    }
 }

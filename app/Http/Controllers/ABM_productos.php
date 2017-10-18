@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\PorcentajeColocacion;
+use App\Productos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\Eloquent\Repos\Gateway\ProductosGateway as Producto;
@@ -34,7 +36,18 @@ class ABM_productos extends Controller
 
     public function store(Request $request)
     {
-        $this->producto->create($request->all());
+        DB::transaction(function() use($request){
+
+
+            $producto = $this->producto->create($request->all());
+            $id_producto = $producto->id;
+            $porcentajes = collect($request['porcentajes']);
+            $porcentajes->each(function ($porcentaje) use ($id_producto) {
+                $porcentaje['id_producto'] = $id_producto;
+                PorcentajeColocacion::create($porcentaje);
+            });
+        });
+
     }
 
     /**
@@ -45,13 +58,21 @@ class ABM_productos extends Controller
      */
     public function show($id)
     {
-        return $this->producto->find($id);
+        return Productos::with('porcentajes')->find($id);
     }
 
 
     public function update(Request $request, $id)
     {
-        $this->producto->update($request->all(), $id);
+        DB::transaction(function() use($request, $id) {
+            PorcentajeColocacion::where('id_producto', $id)->destroy();
+            $this->producto->update($request->all(), $id);
+            $porcentajes = collect($request['porcentajes']);
+            $porcentajes->each(function ($porcentaje) use ($id) {
+                $porcentaje['id_producto'] = $id;
+                PorcentajeColocacion::create($porcentaje);
+            });
+        });
     }
 
     /**
@@ -63,6 +84,7 @@ class ABM_productos extends Controller
     public function destroy($id)
     {
         $this->producto->destroy($id);
+        PorcentajeColocacion::where('id_producto', $id)->destroy();
     }
 
     public function traerProductos(Request $request)

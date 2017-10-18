@@ -26,6 +26,7 @@ class CreateComercializadorsTable extends Migration
             $table->integer('dni');
             $table->integer('cuit');
             $table->integer('telefono');
+            $table->double('porcentaje_colocacion');
             $table->string('email');
             $table->integer('usuario')->unsigned();
             $table->foreign('usuario')->references('id')->on('users');
