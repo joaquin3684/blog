@@ -103,6 +103,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       'nombre': $scope.abmConsultado.nombre,
       'cuit': $scope.abmConsultado.cuit,
       'cuota_social': $scope.abmConsultado.cuotas,
+      'id': $scope.abmConsultado.id,
     };
     return $http({
       url: 'organismos/'+ id,
