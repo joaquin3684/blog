@@ -10,6 +10,7 @@ use App\Ventas;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AprobacionServiciosController extends Controller
 {
@@ -28,30 +29,32 @@ class AprobacionServiciosController extends Controller
 
     public function aprobarServicios(Request $request)
     {
-        $user = Sentinel::getUser()->id;
-        foreach ($request->all() as $servicio)
-        {
+        DB::transaction(function() use ($request){
 
-            $id = $servicio['id'];
-            $estado = $servicio['estado'];
-            $observacion = $servicio['observacion'];
-            $estadoRepo = new EstadoVentaRepo();
-            $data = array('id_venta' => $id, 'id_responsable_estado' => $user, 'estado' => $estado, 'observacion' => $observacion);
-            $estadoRepo->create($data);
-            $ventasRepo = new VentasRepo();
-            $venta = $ventasRepo->find($id);
-            if($estado == 'APROBADO')
+            $user = Sentinel::getUser()->id;
+            foreach ($request->all() as $servicio)
             {
-                GeneradorCuotas::generarCuotasVenta($venta);
+
+                $id = $servicio['id'];
+                $estado = $servicio['estado'];
+                $estadoRepo = new EstadoVentaRepo();
+                $data = array('id_venta' => $id, 'id_responsable_estado' => $user, 'estado' => $estado);
+                $estadoRepo->create($data);
+                $ventasRepo = new VentasRepo();
+                $venta = $ventasRepo->find($id);
+                if($estado == 'APROBADO')
+                {
+                    GeneradorCuotas::generarCuotasVenta($venta);
+
+
+                }
+                if($estado == 'RECHAZADO')
+                {
+                    $ventasRepo->destroy($id);
+                }
 
 
             }
-            if($estado == 'RECHAZADO')
-            {
-                $ventasRepo->destroy($id);
-            }
-
-
-        }
+        });
     }
 }

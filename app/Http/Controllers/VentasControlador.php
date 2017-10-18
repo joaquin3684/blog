@@ -72,7 +72,6 @@ class VentasControlador extends Controller
             ->join('productos', 'productos.id', '=', 'ventas.id_producto')
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
             ->join('movimientos', 'movimientos.identificadores_id', 'cuotas.id')
-            ->groupBy('ventas.id')
             ->where('ventas.id', '=', $request['id'])
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->where('cuotas.cuotable_type', 'App\Ventas')

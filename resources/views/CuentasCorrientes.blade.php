@@ -233,7 +233,7 @@
 
                                     <tr ng-repeat="movimiento in $data">
                                       <td title="'Cuota'" filter="{cuota: 'text'}" sortable="'cuota'">
-                                        {{movimiento.cuota}}
+                                        {{movimiento.nro_cuota}}
                                       </td>
                                       <td title="'Fecha'" filter="{fecha: 'text'}" sortable="'fecha'">
                                         {{movimiento.fecha}}
@@ -244,8 +244,8 @@
                                       <td title="'Salida'" filter="{salida: 'text'}" sortable="'salida'">
                                         {{movimiento.salida}}
                                       </td>
-                                      <td title="'Comision'" filter="{comision: 'text'}" sortable="'comision'">
-                                        {{movimiento.comision}}
+                                      <td title="'Comision'" filter="{ganancia: 'text'}" sortable="'comision'">
+                                        {{movimiento.ganancia}}
                                       </td>
                                     </tr>
 

@@ -12,7 +12,7 @@
             <input id="tipo_tabla" name="tipo_tabla" type="hidden" value="proovedores">
             <input type="hidden" id="token" value="{{ csrf_token() }}">
                 <!-- page content -->
-                <div class="left-col" role="main">
+                {{--<div class="left-col" role="main">
                     <div class="">
                         <div class="clearfix">
                         </div>
@@ -62,8 +62,9 @@
                                     <div class="clearfix">
                                     </div>
                                 </div>
+
                                 <!-- ARRANCAN LOS FILTROS -->
-                                <div class="x_content" >
+ --}}{{--                               <div class="x_content" >
                                     <div class="container">
                                       <form ng-submit="filtro()">
 
@@ -120,11 +121,11 @@
                                         </div>
                                         </form>
                                     </div>
-                                </div>
+                                </div>--}}{{--
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--}}
 
 
 
