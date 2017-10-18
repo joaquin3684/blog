@@ -38,6 +38,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
 
     }).then(function successCallback(response) {
       $scope.traerElementos();
+      $scope.borrarFormulario();
     }, function errorCallback(response) {
       $scope.errores = response.data;
     });
@@ -82,11 +83,15 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
   $scope.traerElemento = function(id) {
 
     return $http({
-      url: 'organismo/'+ id,
+      url: 'organismos/'+ id,
       method: 'get',
       // data: data,
     }).then(function successCallback(response) {
       $scope.abmConsultado = response.data;
+      $scope.nombreedi = response.data.nombre;
+        $scope.variablepepe = "pepe";
+      console.log($scope.abmConsultado);
+      console.log($scope.nombreedi);
     }, function errorCallback(response) {
 
     });
@@ -97,10 +102,10 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
     var data = {
       'nombre': $scope.abmConsultado.nombre,
       'cuit': $scope.abmConsultado.cuit,
-      'cuota_social': $scope.abmConsultado.cuentaCorriente,
+      'cuota_social': $scope.abmConsultado.cuotas,
     };
     return $http({
-      url: 'organismo/'+ id,
+      url: 'organismos/'+ id,
       method: 'put',
       data: data,
     }).then(function successCallback(response) {
@@ -116,7 +121,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
   $scope.borrarElemento = function (id) {
 
     return $http({
-      url: 'organismo/'+ id,
+      url: 'organismos/'+ id,
       method: 'delete',
     }).then(function successCallback(response) {
       $scope.traerElementos();
@@ -128,12 +133,12 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
 
   $scope.cuentaCorriente = []
   var cantComponentes = 1
-    $scope.agregarHtml = function() {
+    $scope.agregarHtml = function(id) {
     var htmlClonado = clonarHtmlService.clonarHtml("#aClonar");
     htmlClonado.find('#categoria').html('<input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria" ng-model="cuentaCorriente['+cantComponentes+'].categoria">{{errores.cuota_social[0]}}');
     htmlClonado.find('#valor').html('<input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Valor" ng-model="cuentaCorriente['+cantComponentes+'].valor">{{errores.cuota_social[0]}}');
     var compilado = $compile(htmlClonado.html())($scope);
-    $('#loadhtml').append(compilado);
+    $('#'+id+'').append(compilado);
 
     cantComponentes +=1;
 

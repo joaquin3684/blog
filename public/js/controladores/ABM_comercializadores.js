@@ -18,7 +18,8 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
       'telefono': $scope.telefonoComerc,
       'usuario': $scope.usuarioComerc,
       'password': $scope.contraseniaComerc,
-      'email': $scope.emailComerc
+      'email': $scope.emailComerc,
+      'porcentaje_colocacion': $scope.porcentaje_colocacionComerc
 
     };
 
@@ -29,6 +30,7 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
 
     }).then(function successCallback(response) {
       $scope.traerElementos();
+      $scope.borrarFormulario();
     }, function errorCallback(response) {
       $scope.errores = response.data;
     });
@@ -93,7 +95,8 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
       'domicilio': $scope.abmConsultado.domicilio,
       'telefono': $scope.abmConsultado.telefono,
       'usuario': $scope.abmConsultado.usuario,
-      'email': $scope.abmConsultado.email
+      'email': $scope.abmConsultado.email,
+      'porcentaje_colocacion' : $scope.abmConsultado.porcentaje_colocacion
     };
 
     return $http({

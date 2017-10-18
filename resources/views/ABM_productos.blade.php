@@ -80,7 +80,10 @@
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Proveedor <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <select id="proovedor" ng-model="id_proovedor" class="form-control col-md-7 col-xs-12" ></select>
+                                                  <select ng-model="id_proovedor" class="form-control col-md-7 col-xs-12" >
+                                                      <option ng-repeat="proovedor in proovedores" value="{{proovedor.id}}">{{proovedor.razon_social}}</option>
+                                                  </select>
+
                                                 </div>
                                             </div>
                                             <div class="item form-group">
@@ -96,7 +99,7 @@
                                             <div id="aClonar">
                                               <div class="item form-group" >
 
-                                                  <label class="control-label col-md-3 col-sm-3 col-xs-8" for="categoria">Modificar<span class="required">*</span>
+                                                  <label class="control-label col-md-3 col-sm-3 col-xs-8" for="categoria">Colocacion<span class="required">*</span>
                                                   </label>
                                                   <div class="col-md-2 col-sm-2 col-xs-8" id="desde">
                                                     <input type="number"  ng-model="porcentajes[0].desde" class="form-control col-md-2 col-xs-12" placeholder="Desde">{{errores.cuota_social[0]}}
@@ -217,11 +220,11 @@
                                                 <td title="'Retencion'" filter="{ ganancia: 'text'}" sortable="'ganancia'">
                                                     {{abm.ganancia}}
                                                 </td>
-                                                <td title="'Proveedor'" filter="{ proovedor: 'text'}" sortable="'proovedor'">
-                                                    {{abm.proovedor}}
+                                                <td title="'Proveedor'" filter="{ id_proovedor: 'text'}" sortable="'id_proovedor'">
+                                                    {{abm.id_proovedor}}
                                                 </td>
                                                 <td>
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="editarFormulario(abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerElemento(abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
                                                 <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
                                                 </td>
                                             </tr>

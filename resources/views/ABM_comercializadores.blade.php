@@ -113,6 +113,13 @@
               <input type="text" id="contraseña" name="tcontraseña" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la contraseña" ng-model="contraseniaComerc">{{errores.cuit[0]}}
             </div>
           </div>
+          <div class="item form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_colocacion" >Porc. colocacion<span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" id="porcentaje_colocacion" name="porcentaje_colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el porcentaje" ng-model="porcentaje_colocacionComerc">{{errores.cuit[0]}}
+          </div>
+        </div>
 
                     <div class="ln_solid"></div>
                     <div class="form-group">
@@ -199,6 +206,9 @@
                                                 </td>
                                                 <td title="'Usuario'" filter="{ usuario: 'text'}" sortable="'usuario'">
                                                     {{abm.usuario}}
+                                                </td>
+                                                <td title="'Colocacion'" filter="{ porcentaje_colocacion: 'text'}" sortable="'porcentaje_colocacion'">
+                                                    {{abm.porcentaje_colocacion}}
                                                 </td>
 
                                                 <td id="botones">
@@ -299,6 +309,13 @@
        <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el usuario" ng-model="abmConsultado.usuario">{{errores.cuit[0]}}
      </div>
    </div>
+   <div class="item form-group">
+   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_colocacion" >Porc. Colocacion<span class="required">*</span>
+   </label>
+   <div class="col-md-6 col-sm-6 col-xs-12">
+     <input type="text" id="porcentaje_colocacion" name="porcentaje_colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el porcentaje" ng-model="abmConsultado.porcentaje_colocacion">{{errores.cuit[0]}}
+   </div>
+ </div>
 
                     <input type="hidden" name="id">
                     <div class="ln_solid"></div>

@@ -16,8 +16,8 @@
       <!-- page content -->
       <div class="left-col" role="main" >
 
+          <div class="" >
 
-          </div>
           <div class="clearfix"></div>
           <div id="mensaje"></div>
           <div class="row" >
@@ -82,7 +82,7 @@
 
                       <div id="loadhtml"></div>
 
-                    <button id="sumahtml" type="button" class="btn btn-primary"  style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml()">
+                    <button id="sumahtml" type="button" class="btn btn-primary"  style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml('loadhtml')">
                       <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
                     </button>
 
@@ -184,14 +184,13 @@
                                               <td title="'Cuit'" filter="{ cuit: 'text'}" sortable="'cuit'">
                                                   {{abm.cuit}}
                                               </td>
-                                              <td title="'Organismo'" filter="{ cuota_social: 'text'}" sortable="'cuota_social'">
-                                                  {{abm.cuota_social}}
-                                              </td>
+
 
                                               <td id="botones">
-                                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="editarFormulario(abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
-                                              <button type="button" class="btn btn-danger" ng-click="borrarFormulario(abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerElemento(abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                              <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
                                               </td>
+                                              {{variablepepe}}
                                           </tr>
 
                                         </tbody>
@@ -219,10 +218,11 @@
     <div id="notif-group" class="tabbed_notifications"></div>
   </div>
 
+
  <!-- Modal -->
 <div id="editar" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
+@verbatim
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -230,13 +230,16 @@
         <h4 class="modal-title">Editar</h4>
       </div>
       <div class="modal-body">
-        @verbatim
-         <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
+
+
+         <form class="form-horizontal form-label-left" ng-submit="editarFormulario(abmConsultado.id)" id="formularioEditar" >
+           {{variablepepe}}
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{{errores.nombre[0]}}
+                        <input class="form-control col-md-7 col-xs-12" placeholder="Ingrese nombre del organismo" type="text" ng-model="nombreedi" >{{errores.nombre[0]}}
+
                       </div>
                     </div>
 
@@ -244,19 +247,24 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12">{{errores.cuit[0]}}
+                        <input type="text" id="cuit" ng-model="abmConsultado.cuit" class="form-control col-md-7 col-xs-12">{{errores.cuit[0]}}
                       </div>
                     </div>
-                    <div class="item form-group">
+                    <div class="item form-group" ng-repeat="cuota in abmConsultado.cuotas">
                       <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social<span class="required">*</span>
                       </label>
                       <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
-                        <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuentaCorriente[0].categoria">{{errores.cuota_social[0]}}
+                        <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuota.categoria">{{errores.cuota_social[0]}}
                       </div>
                       <div class="col-md-3 col-sm-3 col-xs-6" id="valor">
-                        <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Valor" ng-model="cuentaCorriente[0].valor">{{errores.cuota_social[0]}}
+                        <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Valor" ng-model="cuota.valor">{{errores.cuota_social[0]}}
                       </div>
                     </div>
+                    <div id="loadhtmlModal"></div>
+
+                  <button id="sumahtml" type="button" class="btn btn-primary"  style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml('loadhtmlModal')">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
+                  </button>
 
                     <input type="hidden" name="id">
                     <div class="ln_solid"></div>
@@ -268,11 +276,11 @@
                       </div>
                     </div>
                   </form>
-                  @endverbatim
+
       </div>
 
     </div>
-
+@endverbatim
   </div>
 </div>
 

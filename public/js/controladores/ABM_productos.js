@@ -8,6 +8,31 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
     $('#formulario')[0].reset();
   };
 
+  $scope.traerRelaciones = function(relaciones)
+     {
+        for(x in relaciones)
+        {
+
+           var url = relaciones[x].tabla + '/traerRelacion'+relaciones[x].tabla;
+           $http({
+              url: url,
+              method: 'get',
+           }).then(function successCallback(response)
+           {
+             $scope.proovedores = response.data;
+            console.log(response);
+              // $.each(response.data, function(val, text) {
+              //    console.log(relaciones[x].select);
+              //    $(relaciones[x].select).append($("<option />").val(text.id).text(text.nombre));
+              //    $(relaciones[x].select+'_Editar').append($("<option />").val(text.id).text(text.nombre));
+              // });
+           }, function errorCallback(data)
+           {
+              console.log(data);
+           });
+        }
+     }
+
     $scope.$Servicio = UserSrv;
      $scope.ExportarPDF = function(pantalla) {UserSrv.ExportPDF(pantalla);}
      $scope.Impresion = function() {
@@ -134,17 +159,22 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
     });
   }
 
-  $scope.porcentajes = []
-  var cantComponentes = 1
-    $scope.agregarHtml = function() {
+  $scope.porcentajes = [{
+     'desde': '',
+    'hasta': '',
+     'porcentaje' : '',
+  }];
+
+  var cantComponentes = 1;
+    $scope.agregarHtml = function(id) {
     var htmlClonado = clonarHtmlService.clonarHtml("#aClonar");
-    htmlClonado.find('#desde').html('<input type="number"   ng-model="porcentajes['+cantComponentes+'].desde" class="form-control col-md-2 col-xs-12" placeholder="Desde">');
+    htmlClonado.find('#desde').html('<input type="number"   ng-model="porcentajes['+cantComponentes+'].desde" ng-value="porcentajes['+(cantComponentes-1)+'].hasta" class="form-control col-md-2 col-xs-12" disabled placeholder="Desde">');
     htmlClonado.find('#hasta').html('<input type="number"   ng-model="porcentajes['+cantComponentes+'].hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta">');
     htmlClonado.find('#porc').html('<input type="number" step="0.01" ng-model="porcentajes['+cantComponentes+'].porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">');
     var compilado = $compile(htmlClonado.html())($scope);
-    $('#loadhtml').append(compilado);
+    $('#'+id+'').append(compilado);
 
-    $scope.porcentajes[cantComponentes].desde = $scope.porcentajes[cantComponentes-1].hasta;
+
     cantComponentes +=1;
 
   }
