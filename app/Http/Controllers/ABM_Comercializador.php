@@ -23,11 +23,12 @@ class ABM_Comercializador extends Controller
     public function store(Request $request)
     {
         $elem = $request->all();
-        $this->comercializador->create($elem);
         $usuario = $elem['usuario'];
         $pass = $elem['password'];
         $email = $elem['email'];
         $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
+        $elem['usuario'] = $user->id;
+        $this->comercializador->create($elem);
         //TODO: aca hay que ponerle el rol de comercializador
 
         return ['created' => true];
