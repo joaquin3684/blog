@@ -76,7 +76,7 @@ class VentasControlador extends Controller
             ->where('ventas.id', '=', $request['id'])
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->select('movimientos.*');
+            ->select('movimientos.*', 'cuotas.nro_cuota');
 
         $ventas1 = VentasFilter::apply($request->all(), $ventas);
 

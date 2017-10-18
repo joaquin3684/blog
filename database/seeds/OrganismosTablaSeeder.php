@@ -18,7 +18,6 @@ class OrganismosTablaSeeder extends Seeder
         	DB::table('organismos')->insert([
         	'nombre' => $faker->name,
 	        'cuit' => $faker->randomNumber(8),
-	        'cuota_social' => $faker->numberBetween(0, 1000),
         	]);
 	        }
 	     
