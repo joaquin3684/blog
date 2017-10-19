@@ -150,6 +150,7 @@ $scope.traerRelaciones = function(relaciones)
                         var sortObj = params.orderBy();
                         orderedData = $filter('orderBy')(filteredData, sortObj);
                         $scope.datosabmfiltrados = orderedData;
+                        $scope.datatoexcel = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                         return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });

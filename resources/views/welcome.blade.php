@@ -45,6 +45,8 @@
 {!! Html::script('js/angular-sanitize/angular-sanitize.min.js') !!}
 {!! Html::script('js/services.js') !!}
 {!! Html::script('js/vue-resource/dist/vue-resource.min.js') !!}
+{!! Html::script('js/alasql.min.js') !!}
+{!! Html::script('js/xlsx.core.min.js') !!}
 
 
 
@@ -98,7 +100,7 @@
               <img src="images/img.jpg" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
-              <span>Bienvenido, {{Sentinel::check()->usuario}}</span>
+              <span>Bienvenido, </span>
               <h2></h2>
             </div>
           </div>

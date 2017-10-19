@@ -5,6 +5,17 @@ angular.module('Mutual.services', ['ngTable'])
 .service('UserSrv', function($http,$mdDialog, NgTableParams,$filter){
 
     var that = this;
+    this.Impresion = function() {
+    var divToPrint=document.getElementById('estatablaseexporta');
+    var tabla=document.getElementById('tablaexported').innerHTML;
+    var newWin=window.open('','sexportTable');
+
+    newWin.document.open();
+    var code = '<html><link rel="stylesheet" href="js/angular-material/angular-material.min.css"><link rel="stylesheet" href="css/bootstrap.min.css"<link rel="stylesheet" href="fonts/css/font-awesome.min.css"><link rel="stylesheet" href="ss/animate.min.css"><link rel="stylesheet" href="css/custom.css"><link rel="stylesheet" href="css/icheck/flat/green.css"><link rel="stylesheet" href="css/barrow.css"><link rel="stylesheet" href="css/floatexamples.css"><link rel="stylesheet" href="css/ng-table.min.css"><link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.min.css"><body onload="window.print(); window.close()"><script>$(document).ready(function() {window.print(); window.close();}</script><table class="table table-hover table-bordered">'+tabla+'</table></body></html>';
+    newWin.document.write(code);
+
+    newWin.document.close();
+}
     this.MostrarMensaje = function(titulo,mensaje,tipo,sector,nombremodal){
         if(tipo != 'Error'){
             $('#'+sector).html('<div class="alert alert-success alert-fixed" role="alert"><strong>¡'+titulo+'!</strong> '+mensaje+'</div>');
@@ -45,6 +56,19 @@ angular.module('Mutual.services', ['ngTable'])
         a.click();
 
    }
+
+   this.Excel2 = function(data) {
+    var data_type = 'data:application/vnd.ms-excel';
+    var table_div = document.getElementById('estatablaseexporta');
+    var table_html = table_div.outerHTML.replace(/ /g, '%20');
+
+    var a = document.createElement('a');
+    a.href = data_type + ', ' + table_html;
+    a.download = 'exported_table_' + Math.floor((Math.random() * 9999999) + 1000000) + '.xls';
+    a.click();
+
+   }
+
 
    this.Params = function(array){
 
@@ -139,4 +163,5 @@ angular.module('Mutual.services', ['ngTable'])
 
 .config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('myHttpInterceptor');
-}]);
+}])
+
