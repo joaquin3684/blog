@@ -69,13 +69,7 @@
                                                     <input type="number" step="0.01" id="retencion" ng-model="ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
                                                 </div>
                                             </div>
-                                            <div class="item form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de colocacion<span class="required">*</span>
-                                                </label>
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input type="number" step="0.01" id="colocacion" ng-model="colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_colocacion[0]}}
-                                                </div>
-                                            </div>
+
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Proveedor <span class="required">*</span>
                                                 </label>
@@ -96,19 +90,20 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div id="aClonar">
-                                              <div class="item form-group" >
+                                            <div id="aClonar" ng-repeat="porcentaje in porcentajes">
+                                              <div class="item form-group clonado" >
 
                                                   <label class="control-label col-md-3 col-sm-3 col-xs-8" for="categoria">Colocacion<span class="required">*</span>
                                                   </label>
                                                   <div class="col-md-2 col-sm-2 col-xs-8" id="desde">
-                                                    <input type="number"  ng-model="porcentajes[0].desde" class="form-control col-md-2 col-xs-12" placeholder="Desde">{{errores.cuota_social[0]}}
+                                                    <input type="number"  ng-model="porcentaje.desde" class="form-control col-md-2 col-xs-12" ng-disabled="{{!$first}}" placeholder="Desde">{{errores.cuota_social[0]}}
+                                                    {{asignarDesde($index, $first, porcentajes)}}
                                                   </div>
                                                   <div class="col-md-2 col-sm-2 col-xs-8" id="hasta">
-                                                    <input type="number" step="0.01"  ng-model="porcentajes[0].hasta"  class="form-control col-md-2 col-xs-12" placeholder="Hasta">{{errores.cuota_social[0]}}
+                                                    <input type="number" step="0.01"  ng-model="porcentaje.hasta"  class="form-control col-md-2 col-xs-12" placeholder="Hasta">{{errores.cuota_social[0]}}
                                                   </div>
                                                   <div class="col-md-2 col-sm-2 col-xs-8" id="porc">
-                                                    <input type="number" step="0.01" ng-model="porcentajes[0].porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">{{errores.cuota_social[0]}}
+                                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">{{errores.cuota_social[0]}}
                                                   </div>
 
                                               </div>
@@ -116,9 +111,11 @@
                                             </div>
 
 
-                                            <div id="loadhtml"></div>
 
-                                          <button id="sumahtml1" type="button" class="btn btn-primary"  style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml()">
+                                            <button id="sumahtml" type="button" class="btn btn-danger"  style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado', porcentajes)">
+                                              <span class="glyphicon glyphicon-minus" aria-hidden="true" ></span>
+                                            </button>
+                                          <button id="sumahtml1" type="button" class="btn btn-primary"  style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml(porcentajes)">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
                                           </button>
                                             <div class="ln_solid"></div>
@@ -286,38 +283,46 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="retencion" ng-model="abmConsultado.retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
+                                    <input type="number" id="retencion" ng-model="abmConsultado.ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Colocacion <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="colocacion" ng-model="abmConsultado.colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_colocacion[0]}}
-                                </div>
-                            </div>
+
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Proovedor <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select id="proovedor_Editar" ng-model="abmConsultado.id_proovedor" class="form-control col-md-7 col-xs-12" ></select>
+                                  <select ng-model="abmConsultado.id_proovedor"  class="form-control col-md-7 col-xs-12" >
+                                      <option ng-repeat="proovedor in proovedores" value="{{proovedor.id}}" ng-selected="proovedor.id == abmConsultado.id_proovedor">{{proovedor.razon_social}}</option>
+                                  </select>
                                 </div>
                             </div>
-                            <div class="item form-group"  ng-repeat="porcentaje in abmConsultado.porcentajes">
+                            <div ng-repeat="porcentaje in abmConsultado.porcentajes">
+                              <div class="item form-group clonado1"  >
 
-                                <label class="control-label col-md-3 col-sm-3 col-xs-8" for="categoria">Modificar<span class="required">*</span>
-                                </label>
-                                <div class="col-md-2 col-sm-2 col-xs-8" id="desde">
-                                  <input type="number"   ng-model="porcentaje.desde"  class="form-control col-md-2 col-xs-12" placeholder="Desde">{{errores.cuota_social[0]}}
-                                </div>
-                                <div class="col-md-2 col-sm-2 col-xs-8" id="hasta">
-                                  <input type="number" step="0.01"  ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta">{{errores.cuota_social[0]}}
-                                </div>
-                                <div class="col-md-2 col-sm-2 col-xs-8" id="porc">
-                                  <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">{{errores.cuota_social[0]}}
-                                </div>
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-8" for="categoria">Colocacion<span class="required">*</span>
+                                  </label>
+                                  <div class="col-md-2 col-sm-2 col-xs-8" id="desde">
+                                    <input type="number"   ng-model="porcentaje.desde" class="form-control col-md-2 col-xs-12" ng-disabled="{{!$first}}" placeholder="Desde">{{errores.cuota_social[0]}}
+                                  </div>
+                                  {{asignarDesde($index, $first, abmConsultado.porcentajes)}}
+                                  <div class="col-md-2 col-sm-2 col-xs-8" id="hasta">
+                                    <input type="number" step="0.01"  ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta">{{errores.cuota_social[0]}}
+                                  </div>
+                                  <div class="col-md-2 col-sm-2 col-xs-8" id="porc">
+                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">{{errores.cuota_social[0]}}
+                                  </div>
 
+                              </div>
                             </div>
+
+
+
+                            <button id="sumahtml" type="button" class="btn btn-danger"  style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado1', abmConsultado.porcentajes)">
+                              <span class="glyphicon glyphicon-minus" aria-hidden="true" ></span>
+                            </button>
+                          <button id="sumahtml" type="button" class="btn btn-primary"  style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml(abmConsultado.porcentajes)">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
+                          </button>
                             <input type="hidden" name="id">
                             <div class="ln_solid"></div>
                             <div class="form-group">

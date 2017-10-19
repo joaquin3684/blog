@@ -268,9 +268,9 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
         $scope.PullMovimientos = function (idServicio){
 
           $http({
-              url: 'https://api.myjson.com/bins/76rk1',
+              url: 'ventas/movimientos',
               method: 'get',
-              // data: {'id_servicio': idServicio}
+               data: {'id_servicio': idServicio}
           }).then(function successCallback(response)
           {
 

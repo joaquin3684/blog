@@ -28,7 +28,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
     var data = {
       'nombre': $scope.nombre,
       'cuit': $scope.cuit,
-      'cuota_social': $scope.cuentaCorriente,
+      'cuota_social': $scope.cuotas,
     };
 
     return $http({
@@ -39,6 +39,10 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
     }).then(function successCallback(response) {
       $scope.traerElementos();
       $scope.borrarFormulario();
+      $scope.cuotas = [{
+        'categoria': '',
+        'valor': ''
+      }]
     }, function errorCallback(response) {
       $scope.errores = response.data;
     });
@@ -132,16 +136,28 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
     });
   }
 
-  $scope.cuentaCorriente = []
-  var cantComponentes = 1
-    $scope.agregarHtml = function(id) {
-    var htmlClonado = clonarHtmlService.clonarHtml("#aClonar");
-    htmlClonado.find('#categoria').html('<input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria" ng-model="cuentaCorriente['+cantComponentes+'].categoria">{{errores.cuota_social[0]}}');
-    htmlClonado.find('#valor').html('<input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Valor" ng-model="cuentaCorriente['+cantComponentes+'].valor">{{errores.cuota_social[0]}}');
-    var compilado = $compile(htmlClonado.html())($scope);
-    $('#'+id+'').append(compilado);
 
-    cantComponentes +=1;
+  $scope.cuotas = [{
+    'categoria': '',
+    'valor': ''
+  }]
+  var cantComponentes = 1
+    $scope.agregarHtml = function(destino) {
+
+      destino.push({
+        'categoria': '',
+        'valor' : ''
+      })
 
   }
+
+  $scope.eliminarHtml = function (clon, array){
+
+    var algo = $(clon);
+
+  algo[$(clon).length -1].remove();
+  array.pop();
+};
+
+
 });

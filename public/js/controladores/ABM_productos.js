@@ -54,7 +54,6 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       'nombre': $scope.nombre,
       'descripcion': $scope.descripcion,
       'ganancia': $scope.ganancia,
-      'colocacion': $scope.colocacion,
       'id_proovedor': $scope.id_proovedor,
       'tipo': $scope.tipo,
       'porcentajes': $scope.porcentajes,
@@ -67,6 +66,12 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
 
     }).then(function successCallback(response) {
       $scope.traerElementos();
+      $scope.borrarFormulario();
+      $scope.porcentajes = [{
+         'desde': '',
+        'hasta': '',
+         'porcentaje' : '',
+      }];
     }, function errorCallback(response) {
       $scope.errores = response.data;
     });
@@ -127,7 +132,6 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       'nombre': $scope.abmConsultado.nombre,
       'descripcion': $scope.abmConsultado.descripcion,
       'ganancia': $scope.abmConsultado.ganancia,
-      'colocacion': $scope.abmConsultado.colocacion,
       'id_proovedor': $scope.abmConsultado.id_proovedor,
       'tipo': $scope.abmConsultado.tipo,
       'porcentajes': $scope.abmConsultado.porcentajes,
@@ -153,11 +157,18 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       method: 'delete',
     }).then(function successCallback(response) {
       $scope.traerElementos();
+      $scope.borrarFormulario();
       console.log("Exito al eliminar");
     }, function errorCallback(response) {
 
     });
   }
+
+  $scope.asignarDesde = function(indice, primero, destino){
+    if(!primero){
+      destino[indice].desde = destino[indice-1].hasta;
+    }
+  };
 
   $scope.porcentajes = [{
      'desde': '',
@@ -165,17 +176,34 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
      'porcentaje' : '',
   }];
 
-  var cantComponentes = 1;
-    $scope.agregarHtml = function(id) {
-    var htmlClonado = clonarHtmlService.clonarHtml("#aClonar");
-    htmlClonado.find('#desde').html('<input type="number"   ng-model="porcentajes['+cantComponentes+'].desde" ng-value="porcentajes['+(cantComponentes-1)+'].hasta" class="form-control col-md-2 col-xs-12" disabled placeholder="Desde">');
-    htmlClonado.find('#hasta').html('<input type="number"   ng-model="porcentajes['+cantComponentes+'].hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta">');
-    htmlClonado.find('#porc').html('<input type="number" step="0.01" ng-model="porcentajes['+cantComponentes+'].porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">');
-    var compilado = $compile(htmlClonado.html())($scope);
-    $('#'+id+'').append(compilado);
+  $scope.eliminarHtml = function (clon, array){
 
+    var algo = $(clon);
 
-    cantComponentes +=1;
+  algo[$(clon).length -1].remove();
+  array.pop();
+  };
 
-  }
+  $scope.agregarHtml = function (destino){
+
+    destino.push({
+      'desde': '',
+      'hasta' : '',
+      'porcentaje' : '',
+    })
+  };
+
+  // var cantComponentes = 1;
+  //   $scope.agregarHtml = function(id) {
+  //   var htmlClonado = clonarHtmlService.clonarHtml("#aClonar");
+  //   htmlClonado.find('#desde').html('<input type="number"   ng-model="porcentajes['+cantComponentes+'].desde" ng-init="porcentajes['+cantComponentes+'].desde = porcentajes['+(cantComponentes-1)+'].hasta" class="form-control col-md-2 col-xs-12" disabled placeholder="Desde">');
+  //   htmlClonado.find('#hasta').html('<input type="number"   ng-model="porcentajes['+cantComponentes+'].hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta">');
+  //   htmlClonado.find('#porc').html('<input type="number" step="0.01" ng-model="porcentajes['+cantComponentes+'].porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">');
+  //   var compilado = $compile(htmlClonado.html())($scope);
+  //   $('#'+id+'').append(compilado);
+  //
+  //
+  //   cantComponentes +=1;
+  //
+  // }
 });

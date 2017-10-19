@@ -218,21 +218,6 @@ $scope.traerRelaciones = function(relaciones)
 };
 
 
-  $scope.hasta = [];
-  $scope.desde =[];
-  var cantComponentes= 1;
-  $scope.agregarHtml = function() {
-    var htmlClonado = clonarHtmlService.clonarHtml("#aClonar");
-    htmlClonado.find('#desde').html('<input type="number"   name="producto.desde.'+cantComponentes+'" ng-value="hasta['+cantComponentes+']" class="form-control col-md-2 col-xs-12" placeholder="Desde">');
-    htmlClonado.find('#hasta').html('<input type="number"   name="producto.hasta.'+cantComponentes+'" ng-model="hasta['+(cantComponentes+1)+']" class="form-control col-md-2 col-xs-12" placeholder="Hasta">');
-    htmlClonado.find('#porc').html('<input type="number" step="0.01" name="producto.porc.'+cantComponentes+'" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">');
-    htmlClonado.find('#categoria').html('<input type="number"  name="cuota.categoria.'+cantComponentes+'" class="form-control col-md-2 col-xs-12" placeholder="Categoria">{{errores.cuota_social[0]}}');
-    htmlClonado.find('#valor').html('<input type="number" step="0.01"  name="cuota.valor.'+cantComponentes+'" class="form-control col-md-2 col-xs-12" placeholder="Valor">{{errores.cuota_social[0]}}');
-    var compilado = $compile(htmlClonado.html())($scope);
-    $('#loadhtml').append(compilado);
-
-    cantComponentes +=1;
-  }
 
 
    $scope.traerElementos();

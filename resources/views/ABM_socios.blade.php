@@ -79,21 +79,16 @@
                       </div>
                       </div>
 
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="cuit" name="cuit" ng-model="cuit" ng-value="'--'+dni+'-'" class="form-control col-md-7 col-xs-12" maxlength="11" placeholder="Ingrese el cuit">{{errores.cuit[0]}}
-                        </div>
-                        </div>
+
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="input-group">
-                        <input type="text" class="form-control" maxlength="2" placeholder="Tipo" style="text-align: right">
-                        <span class="input-group-addon" ng-value="dni">-{{dni}}-</span>
-                        <input type="text" class="form-control" maxlength="1" placeholder="Codigo verif.">
+                        <input type="text" class="form-control" maxlength="2" ng-model="tipo" placeholder="Tipo" style="text-align: right">
+                        <span class="input-group-addon">-{{dni}}-</span>
+                        <input type="text" class="form-control" maxlength="1" ng-model="codigoVerif" placeholder="Codigo verif.">
+                        <input type="text" name="cuit" value="{{tipo}}{{dni}}{{codigoVerif}}" style="display: none">
                       </div>
                       </div>
                     </div>
