@@ -87,14 +87,11 @@ $scope.ArrayAprobar = [];
     $scope.Aprobar = function(tipo,id){
         if(tipo == 'ok'){
 
-            var observacion = document.getElementById('observacion'+id).value;
-            $scope.Dato = [{'id':id,'estado':'APROBADO','observacion':observacion}];
+            $scope.Dato = [{'id':id,'estado':'APROBADO'}];
             $scope.AprobarServicio($scope.Dato);
 
         } else {
-
-            var observacion = document.getElementById('observacion'+id).value;
-            $scope.Dato = [{'id':id,'estado':'RECHAZADO','observacion':observacion}];
+            $scope.Dato = [{'id':id,'estado':'RECHAZADO'}];
             $scope.AprobarServicio($scope.Dato);
 
         }

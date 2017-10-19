@@ -62,11 +62,12 @@ class CobrarController extends Controller
             ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where(function($query) use ($hoy){
-                $query->where('cuotas.fecha_vencimiento', '<=', $hoy)
+                /*$query->where('cuotas.fecha_vencimiento', '<=', $hoy)
                     ->orWhere(function($query2) use ($hoy){
                         $query2->where('cuotas.fecha_vencimiento', '>=', $hoy)
                             ->where('cuotas.fecha_inicio', '<=', $hoy);
-                    });
+                    });*/
+                $query->where('cuotas.fecha_inicio', '<=', $hoy);
             })->get();
 
         $movimientos = DB::table('ventas')
@@ -197,7 +198,7 @@ class CobrarController extends Controller
         foreach($request->all() as $socio)
         {
             $socioRepo = new SociosRepo();
-            $socioModelo = $socioRepo->conTodo($socio['id']);
+            $socioModelo = $socioRepo->ventasConCuotasVencidas($socio['id']);
             $cobrar = new CobrarPorSocio($socioModelo);
             try{
                 $cobrar->cobrar($socio['monto']);

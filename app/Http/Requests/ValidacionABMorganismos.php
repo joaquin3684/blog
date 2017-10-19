@@ -25,8 +25,8 @@ class ValidacionABMorganismos extends FormRequest
     public function rules()
     {
         return [
-            // 'nombre' => 'required|unique:organismos,nombre,'.$this->get('id'),
-            // 'cuit' => 'required|unique:organismos,cuit,'.$this->get('id')
+             'nombre' => 'required|unique:organismos,nombre,'.$this->get('id'),
+             'cuit' => 'required|unique:organismos,cuit,'.$this->get('id')
         ];
     }
 

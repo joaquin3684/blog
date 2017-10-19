@@ -65,6 +65,40 @@ class CobrarPorSocio
                     return false;
                 }
             });
+
+        if($monto > 0)
+        {
+            $repo = new SociosRepo();
+            $socio = $repo->cuotasFuturas($this->socio->getId());
+            $collect = collect();
+            $socio->getVentas()->each(function ($venta) use ($collect){
+                // $orden = $venta->getOrdenPrioridad();
+                $cuotasVencidas = $venta->cuotasVencidas();
+                $cantidadCuotas = $venta->cuotasVencidas()->count();
+                $collect->push($cuotasVencidas);
+            });
+            $flaten = $collect->flatten(1);
+            $cuotasAgrupadas2 = AgruparPorFecha::agrupar($flaten);
+            $cuotasAgrupadas2->transform(function ($cuotas) {
+                return AgruparPorOrdenDePrioridad::agrupar($cuotas);
+            });
+            $cuotasAgrupadas2->each(function($grupoPorFecha) use (&$monto){
+                if($monto > 0)
+                {
+                    $grupoPorFecha->each(function ($grupoPorOrden) use (&$monto){
+                        if($monto > 0)
+                        {
+                            $cantidad = $grupoPorOrden->count();
+                            $montoPorCuota = $monto / $cantidad;
+                            $grupoPorOrden->each(function($cuota) use ($montoPorCuota, &$monto) {
+                                $cobrado =  $cuota->cobrar($montoPorCuota);
+                                $monto -= $cobrado;
+                            });
+                        }
+                    });
+                } else { return false; }
+            });
+        }
     }
 
 }

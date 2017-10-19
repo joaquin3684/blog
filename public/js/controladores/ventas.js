@@ -269,8 +269,8 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
           $http({
               url: 'ventas/movimientos',
-              method: 'get',
-               data: {'id_servicio': idServicio}
+              method: 'post',
+              data: {'id': idServicio}
           }).then(function successCallback(response)
           {
 

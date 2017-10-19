@@ -77,7 +77,7 @@ class ABM_organismos extends Controller
 
     public function traerRelacionorganismos()
     {
-        return  $this->organismo->all();
+        return  Organismos::with('cuotas')->get();
     }
 
 }
