@@ -20,7 +20,6 @@ class CorrerVtoServiciosController extends Controller
         $id = $elem['id'];
         $dias = $elem['dias'];
         $venta = $ventasRepo->findWithCuotas($id);
-//todo para que funcione esto hay que hacer que se puedan correr los dias para atras
         $venta->correrVto($dias);
     }
 

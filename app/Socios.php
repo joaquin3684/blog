@@ -29,4 +29,9 @@ class Socios extends Model
     {
         return $this->morphMany(Cuotas::class, 'cuotable');
     }
+
+    public function cuotaSocial()
+    {
+        return $this->belongsTo('App\CategoriaCuotaSocial', 'id_cuota', 'id');
+    }
 }

@@ -22,7 +22,7 @@ class VentasGateway extends Gateway
         $fecha = new Fechas();
         $hoy = $fecha->getFechaHoy();
         return $ventas = Ventas::with(['cuotas' => function($query) use ($hoy) {
-            $query->where('fecha_inicio', '<', $hoy);
+            $query->where('fecha_inicio', '<=', $hoy);
             $query->with('movimientos');
         }])->find($id);
     }

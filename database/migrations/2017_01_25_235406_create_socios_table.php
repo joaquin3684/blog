@@ -15,7 +15,6 @@ class CreateSociosTable extends Migration
     public function up()
     {
         Schema::disableForeignKeyConstraints();
-
         Schema::create('socios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
@@ -34,12 +33,10 @@ class CreateSociosTable extends Migration
             $table->foreign('id_cuota')->references('id')->on('categoria_cuota_sociales');
             $table->date('fecha_ingreso')->nullable();
             $table->integer('legajo');
-
             $table->softDeletes();
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();
-
     }
 
     /**

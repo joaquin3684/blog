@@ -11,5 +11,4 @@ class CategoriaCuotaSocial extends Model
 
     protected $fillable = [ 'id_organismo', 'categoria', 'valor'];
 
-
 }

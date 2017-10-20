@@ -13,4 +13,5 @@ class Departamento extends Model
     protected $fillable = [
         'codigo', 'nombre', 'id_moneda'
     ];
+    protected $dates = ['deleted_at'];
 }

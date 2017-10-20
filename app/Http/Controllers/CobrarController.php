@@ -193,21 +193,17 @@ class CobrarController extends Controller
 
     public function cobrarPorPrioridad(Request $request)
     {
-        $errores = collect();
+        DB::transaction(function() use ($request) {
 
-        foreach($request->all() as $socio)
-        {
-            $socioRepo = new SociosRepo();
-            $socioModelo = $socioRepo->ventasConCuotasVencidas($socio['id']);
-            $cobrar = new CobrarPorSocio($socioModelo);
-            try{
+
+            foreach ($request->all() as $socio) {
+                $socioRepo = new SociosRepo();
+                $socioModelo = $socioRepo->ventasConCuotasVencidas($socio['id']);
+                $cobrar = new CobrarPorSocio($socioModelo);
                 $cobrar->cobrar($socio['monto']);
-            } catch (MasPlataCobradaQueElTotalException $e)
-            {
-                $errores->push($e->toArray());
+
             }
-        }
-        return $errores;
+        });
 
     }
 
@@ -249,21 +245,24 @@ class CobrarController extends Controller
 
     public function cobrarPorVenta(Request $request)
     {
-        $errores = collect();
-        foreach($request->all() as $venta)
-        {
-            $ventasRepo = new VentasRepo();
-            $ventaCuotasVencidas = $ventasRepo->findWithCuotas($venta['id']);
+        DB::transaction(function() use ($request){
 
-            $cobrar = new CobrarPorVenta();
-            try{
-                $cobrar->cobrar($ventaCuotasVencidas, $venta['monto']);
+            $errores = collect();
+            foreach($request->all() as $venta)
+            {
+                $ventasRepo = new VentasRepo();
+                $ventaCuotasVencidas = $ventasRepo->findWithCuotas($venta['id']);
 
-            } catch (MasPlataCobradaQueElTotalException $e){
-                $errores->push($e->toArray());
+                $cobrar = new CobrarPorVenta();
+                try{
+                    $cobrar->cobrar($ventaCuotasVencidas, $venta['monto']);
+
+                } catch (MasPlataCobradaQueElTotalException $e){
+                    $errores->push($e->toArray());
+                }
             }
-        }
-        return $errores;
+            return $errores;
+        });
     }
 
 }

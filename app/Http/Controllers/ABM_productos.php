@@ -65,7 +65,7 @@ class ABM_productos extends Controller
     public function update(Request $request, $id)
     {
         DB::transaction(function() use($request, $id) {
-            PorcentajeColocacion::where('id_producto', $id)->destroy();
+            PorcentajeColocacion::where('id_producto', $id)->delete();
             $this->producto->update($request->all(), $id);
             $porcentajes = collect($request['porcentajes']);
             $porcentajes->each(function ($porcentaje) use ($id) {
@@ -84,7 +84,7 @@ class ABM_productos extends Controller
     public function destroy($id)
     {
         $this->producto->destroy($id);
-        PorcentajeColocacion::where('id_producto', $id)->destroy();
+        PorcentajeColocacion::where('id_producto', $id)->delete();
     }
 
     public function traerProductos(Request $request)
