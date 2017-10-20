@@ -34,7 +34,7 @@ class ABM_asociados extends Controller
             $cuota = Cuotas::create([
                 'fecha_inicio' => $fechaInicioCuota,
                 'fecha_vencimiento' => $fechaVencimientoCuota,
-                'importe' => $socio->cuotaSocial->valor,
+                'importe' => $elem['valor'],
                 'nro_cuota' => 1,
             ]);
             $socio->cuotaSocial()->save($cuota);

@@ -11,7 +11,7 @@ class Socios extends Model
  	protected $table = 'socios';
 	
     protected $fillable = [
-        'nombre', 'apellido', 'fecha_nacimiento', 'cuit', 'dni', 'domicilio', 'localidad', 'codigo_postal', 'telefono', 'id_organismo', 'legajo', 'fecha_ingreso', 'sexo', 'id_cuota'];
+        'nombre', 'apellido', 'fecha_nacimiento', 'cuit', 'dni', 'domicilio', 'localidad', 'codigo_postal', 'telefono', 'id_organismo', 'legajo', 'fecha_ingreso', 'sexo'];
 
     protected $dates = ['deleted_at'];
 
@@ -30,8 +30,4 @@ class Socios extends Model
         return $this->morphMany(Cuotas::class, 'cuotable');
     }
 
-    public function cuotaSocial()
-    {
-        return $this->belongsTo('App\CategoriaCuotaSocial', 'id_cuota', 'id');
-    }
 }
