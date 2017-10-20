@@ -74,6 +74,7 @@
 
     <div class="main_container">
 <center>
+
 <div id="ContenedorMensaje" style="margin-left: 25%; margin-top: 20px; width: 50%; height: 150px; z-index: 1000000; position: fixed;" hidden>
       ACA VA EL MENSAJE
 </div>
@@ -100,7 +101,7 @@
               <img src="images/img.jpg" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
-              <span>Bienvenido, </span>
+              <span>Bienvenido, {{Sentinel::check()->usuario}}</span>
               <h2></h2>
             </div>
           </div>
@@ -246,6 +247,7 @@
 
 
               <div id="app">
+
                     <example id_usuario="11"></example>
                   </div>
 
@@ -261,6 +263,7 @@
       <!-- page content -->
       <div class="right_col" role="main" >
         <div id="app">
+
 <example></example>
         </div>
         @yield('contenido')
@@ -297,6 +300,28 @@
   </script>
   <!-- /datepicker -->
   <!-- /footer content -->
+  <div id="prompted" class="modal fade" role="dialog" ng-controller="Serviced">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Descargar como Excel</h4>
+      </div>
+      <div class="modal-body">
+      <form ng-submit="$Servicio.Excel2(nombreexcel)"> 
+        <div class="input-group" style="width: 80%;">
+          
+          <input type="password" class="form-control" id="pass" name="pass" placeholder="Nombre del archivo.." aria-describedby="basic-addon1" ng-model="nombreexcel">
+          <span class="input-group-btn"><button class="btn btn-primary" type="submit" style="" ><span class="fa fa-file-excel-o"></span> DESCARGAR</button></span>
+        </div>
+     
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
 </body>
 
 </html>

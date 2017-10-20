@@ -81,7 +81,6 @@
                       </div>
 
 
-
                       <button id="sumahtml" type="button" class="btn btn-danger"  style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado', cuotas)">
                         <span class="glyphicon glyphicon-minus" aria-hidden="true" ></span>
                       </button>
@@ -170,8 +169,8 @@
 
                      <button id="exportButton1" ng-click="ExportarPDF('organismos')" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
                      </button>
-                     <button id="exportButton2" ng-click="$Servicio.Excel2()" class="btn btn-success clearfix" ><span class="fa fa-file-excel-o"></span> EXCEL</button>
-                     <button export-to-csv>Download</button>
+                     <button id="exportButton2"  data-toggle="modal" data-target="#prompted" class="btn btn-success clearfix" ><span class="fa fa-file-excel-o"></span> EXCEL</button>
+                     
                      <button id="exportButton3" ng-click="$Servicio.Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
                      </center>
                      
