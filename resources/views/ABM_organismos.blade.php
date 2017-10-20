@@ -81,7 +81,6 @@
                       </div>
 
 
-
                       <button id="sumahtml" type="button" class="btn btn-danger"  style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado', cuotas)">
                         <span class="glyphicon glyphicon-minus" aria-hidden="true" ></span>
                       </button>
@@ -167,11 +166,30 @@
                       </div> -->
                       <div class="x_content">
                      <center>
+
                      <button id="exportButton1" ng-click="ExportarPDF('organismos')" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
                      </button>
-                     <button id="exportButton2" ng-click="$Servicio.Excel()" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
-                     <button id="exportButton3" ng-click="Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
+                     <button id="exportButton2"  data-toggle="modal" data-target="#prompted" class="btn btn-success clearfix" ><span class="fa fa-file-excel-o"></span> EXCEL</button>
+                     
+                     <button id="exportButton3" ng-click="$Servicio.Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
                      </center>
+                     
+                     <div id="estatablaseexporta" style="display: none;">
+                      @verbatim
+                      <table id="tablaexported">
+                          <thead>
+
+                            <td>NOMBRE</td><td>CUIT</td>
+
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="abm in datatoexcel">
+                              <td>{{abm.nombre}}</td><td>{{abm.cuit}}</td>
+                            </tr>
+                          </tbody>
+                      </table>
+                      @endverbatim
+                     </div>
                             <div id="pruebaExpandir">
                                 <div class="span12 row-fluid">
                                     <!-- START $scope.[model] updates -->
@@ -179,8 +197,11 @@
                                     <!-- START TABLE -->
                                     <div class="table-responsive">
                                       @verbatim
+
                                       <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
+                                          
                                           <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
+                                          
                                           <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)"  ng-class="socio.id">
                                               <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
                                                   {{abm.nombre}}

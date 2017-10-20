@@ -1,6 +1,6 @@
 var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){
 });
-app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, clonarHtmlService) {
+app.controller('Serviced', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, clonarHtmlService) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
 

@@ -1,5 +1,6 @@
 
 var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider) {});
+
 app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv,clonarHtmlService) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
@@ -71,6 +72,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
                 var sortObj = params.orderBy();
                 orderedData = $filter('orderBy')(filteredData, sortObj);
                 $scope.datosabmfiltrados = orderedData;
+                $scope.datatoexcel = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
               }
             });
