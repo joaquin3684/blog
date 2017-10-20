@@ -274,7 +274,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
           }).then(function successCallback(response)
           {
 
-            $scope.movimientos = response.data;
+            $scope.movimientos = response.data.map($scope.cambiarFechaVentas);
 
             $scope.paramsMovimientos = new NgTableParams({
                 page: 1,

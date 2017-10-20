@@ -232,7 +232,7 @@
                                 <table class="table table-hover table-bordered" ng-table="paramsMovimientos">
 
                                     <tr ng-repeat="movimiento in $data">
-                                      <td title="'Cuota'" filter="{cuota: 'text'}" sortable="'cuota'">
+                                      <td title="'Cuota'" filter="{nro_cuota: 'text'}" sortable="'nro_cuota'">
                                         {{movimiento.nro_cuota}}
                                       </td>
                                       <td title="'Fecha'" filter="{fecha: 'text'}" sortable="'fecha'">
@@ -244,7 +244,7 @@
                                       <td title="'Salida'" filter="{salida: 'text'}" sortable="'salida'">
                                         {{movimiento.salida}}
                                       </td>
-                                      <td title="'Comision'" filter="{ganancia: 'text'}" sortable="'comision'">
+                                      <td title="'Comision'" filter="{ganancia: 'text'}" sortable="'ganancia'">
                                         {{movimiento.ganancia}}
                                       </td>
                                     </tr>
@@ -371,7 +371,7 @@
                                             <option value="saldo">Saldo de capital</option>
                                             <option value="porcentaje">Porcentaje</option>
                                           </select>
-                                          
+
                                           <br />
                                           <input type="text" class="form-control" ng-if="formaCobro === 'porcentaje'" ng-model="$parent.porc" placeholder="Ingrese un porcentaje">
                                           <br>
