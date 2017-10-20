@@ -17,7 +17,7 @@ class CobrarPorVenta
         if($venta->montoAdeudado() < $monto)
             throw new MasPlataCobradaQueElTotalException('exceso_de_plata');
 
-            $cuotas = $venta->cuotasImpagas();
+            $cuotas = $venta->cuotasImpagas()->sortBy('nro_cuota');
             $cuotas->each(function ($cuota) use (&$monto) {
                 if ($monto == 0)
                     return false;

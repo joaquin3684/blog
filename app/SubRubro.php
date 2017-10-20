@@ -13,4 +13,5 @@ class SubRubro extends Model
     protected $fillable = [
         'codigo', 'nombre', 'id_departamento'
     ];
+    protected $dates = ['deleted_at'];
 }

@@ -13,4 +13,5 @@ class Moneda extends Model
     protected $fillable = [
         'codigo', 'nombre', 'id_rubro'
     ];
+    protected $dates = ['deleted_at'];
 }

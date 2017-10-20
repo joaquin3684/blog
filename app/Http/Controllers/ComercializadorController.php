@@ -92,9 +92,7 @@ class ComercializadorController extends Controller
             $usuarios->each(function($usuario) use($solicitud){
                 $usuario->notify(new SolicitudEnProceso($solicitud));
             });
-
         });
-
     }
 
     public function solicitudes()

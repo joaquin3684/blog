@@ -13,4 +13,5 @@ class Imputacion extends Model
     protected $fillable = [
         'codigo', 'nombre', 'id_subrubro'
     ];
+    protected $dates = ['deleted_at'];
 }

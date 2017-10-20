@@ -13,4 +13,6 @@ class Capitulo extends Model
     protected $fillable = [
         'codigo', 'nombre'
     ];
+
+    protected $dates = ['deleted_at'];
 }
