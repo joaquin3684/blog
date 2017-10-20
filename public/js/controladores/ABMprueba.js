@@ -14,6 +14,7 @@ $scope.borrarFormulario = function(){
 $scope.$Servicio = UserSrv;
 $scope.traerRelaciones = function(relaciones)
    {
+    var tablasin = $("#tipo_tabla").val();
       for(x in relaciones)
       {
 
@@ -23,13 +24,20 @@ $scope.traerRelaciones = function(relaciones)
             method: 'get',
          }).then(function successCallback(response)
          {
+          if(relaciones[x].tabla == 'organismos'){
+            $scope.organismosines = response.data;
+            $scope.orpi = 'juan';
+          }
 
           console.log(response);
+          if(tablasin != 'asociados'){
+
             $.each(response.data, function(val, text) {
                console.log(relaciones[x].select);
                $(relaciones[x].select).append($("<option />").val(text.id).text(text.nombre));
                $(relaciones[x].select+'_Editar').append($("<option />").val(text.id).text(text.nombre));
             });
+          }
          }, function errorCallback(data)
          {
             console.log(data);
@@ -39,6 +47,17 @@ $scope.traerRelaciones = function(relaciones)
 
 
    $scope.ExportarPDF = function(pantalla) {UserSrv.ExportPDF(pantalla);}
+
+   $scope.getCategorias = function (){
+        var idorganismo = document.getElementById('forro').value;
+        console.log(idorganismo);
+        for(var i = 0; i < $scope.organismosines.length; i++){
+          if($scope.organismosines[i].id == idorganismo){
+            $scope.categorias = $scope.organismosines[i].cuotas;
+          }
+        }
+        console.log($scope.categorias);
+    }
 
 
    $scope.enviarFormulario = function(tipoSolicitud, id = '')
@@ -87,7 +106,7 @@ $scope.traerRelaciones = function(relaciones)
                   }
 
                $scope.mensaje = response;
-              $('#formulario')[0].reset();
+                $('#formulario')[0].reset();
                if(tipoSolicitud != 'Mostrar'){
                  UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
                  $('#editar').modal('hide');

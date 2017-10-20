@@ -9,7 +9,9 @@
   <div class="container body" >
 
 
-    <div class="main_container" ng-init="traerRelaciones([{tabla:'organismos',select:'#forro'}])">
+    <div class="main_container" ng-init="traerRelaciones([
+    {tabla:'organismos',select:'#forro'}
+    ])">
 
       <input type="hidden" id="tipo_tabla" value="asociados">
       <!-- page content -->
@@ -164,9 +166,24 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Organismo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="forro" name="id_organismo" class="form-control col-md-7 col-xs-12" ></select>
+                        <select id="forro" ng-change="getCategorias()" ng-model="orpi" name="id_organismo" class="form-control col-md-7 col-xs-12" >
+                          <option value="{{x.id}}" ng-repeat="x in organismosines">
+                            {{x.nombre}}
+                            </option>
+                        </select>
                       </div>
 
+                    </div>
+                    <div class="item form-group"> 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Categoría <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12"> 
+                          <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="categoriacomplete" name="id_cuota" ng-required="true">
+                            <option value="{{x.id}}" ng-repeat="x in categorias">
+                            {{x.categoria}}
+                            </option>
+                          </select>
+                      </div>
                     </div>
                     <div class="ln_solid"></div>
                     <div class="form-group">
