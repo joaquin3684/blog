@@ -45,7 +45,7 @@ class ABM_asociados extends Controller
 
     public function show($id)
     {
-        return Socios::with('organismo.cuotas');
+        return Socios::with('organismo.cuotas')->find($id);
     }
 
     public function traerElementos()
