@@ -62,7 +62,7 @@
      <tr ng-repeat="asiento in asientos" ng-attr-id="asiento{{$index}}">
        <td style="border-top: 1px solid white;">
            <select class="form-control" id="sel1" ng-model="asiento.id_imputacion">
-             <option value="id" ng-repeat="id in idDisponibles">{{id.nombre}}</option>
+             <option value="{{id.id}}" ng-repeat="id in idDisponibles">{{id.nombre}}</option>
            </select>
        </td>
        <td style="border-top: 1px solid white;">
