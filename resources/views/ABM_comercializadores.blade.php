@@ -60,7 +60,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="apellido">Apellido<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="apellido" name="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el apellido del comercializador" ng-model="apellidoComerc">{{errores.cuota_social[0]}}
+                        <input type="text" id="apellido" name="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el apellido del comercializador" ng-model="apellidoComerc">{{errores.apellido[0]}}
                       </div>
                     </div>
 
@@ -75,49 +75,49 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="documento" >Documento<span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="documento" name="documento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Documento" ng-model="documentoComerc">{{errores.cuit[0]}}
+                      <input type="text" id="documento" name="documento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Documento" ng-model="documentoComerc">{{errores.dni[0]}}
                     </div>
                   </div>
                   <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="documento" >Email<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el email" ng-model="emailComerc">{{errores.cuit[0]}}
+                    <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el email" ng-model="emailComerc">{{errores.email[0]}}
                   </div>
                 </div>
                   <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Domicilio<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio" ng-model="domicilioComerc">{{errores.cuit[0]}}
+                    <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio" ng-model="domicilioComerc">{{errores.domicilio[0]}}
                   </div>
                 </div>
                 <div class="item form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Telefono<span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el telefono" ng-model="telefonoComerc">{{errores.cuit[0]}}
+                  <input type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el telefono" ng-model="telefonoComerc">{{errores.telefono[0]}}
                 </div>
               </div>
               <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Usuario<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el usuario" ng-model="usuarioComerc">{{errores.cuit[0]}}
+                <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el usuario" ng-model="usuarioComerc">{{errores.usuario[0]}}
               </div>
             </div>
             <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Contraseña<span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="contraseña" name="tcontraseña" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la contraseña" ng-model="contraseniaComerc">{{errores.cuit[0]}}
+              <input type="text" id="contraseña" name="tcontraseña" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la contraseña" ng-model="contraseniaComerc">{{errores.password[0]}}
             </div>
           </div>
           <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_colocacion" >Porc. colocacion<span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="porcentaje_colocacion" name="porcentaje_colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el porcentaje" ng-model="porcentaje_colocacionComerc">{{errores.cuit[0]}}
+            <input type="text" id="porcentaje_colocacion" name="porcentaje_colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el porcentaje" ng-model="porcentaje_colocacionComerc">{{errores.porcentaje_colocacion[0]}}
           </div>
         </div>
 

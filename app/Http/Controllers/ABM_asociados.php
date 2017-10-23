@@ -37,7 +37,7 @@ class ABM_asociados extends Controller
                 'importe' => $elem['valor'],
                 'nro_cuota' => 1,
             ]);
-            $socio->cuotaSocial()->save($cuota);
+            $socio->cuotasSociales()->save($cuota);
         });
         return ['created' => true];
     }

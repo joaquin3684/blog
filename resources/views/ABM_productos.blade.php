@@ -59,14 +59,14 @@
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Descripcion <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="descripcion" placeholder="Ingrese la descripcion" type="text">{{errores.nombre[0]}}
+                                                    <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="descripcion" placeholder="Ingrese la descripcion" type="text">{{errores.descripcion[0]}}
                                                 </div>
                                             </div>
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input type="number" step="0.01" id="retencion" ng-model="ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
+                                                    <input type="number" step="0.01" id="retencion" ng-model="ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.ganancia[0]}}
                                                 </div>
                                             </div>
 
@@ -76,7 +76,7 @@
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                   <select ng-model="id_proovedor" class="form-control col-md-7 col-xs-12" >
                                                       <option ng-repeat="proovedor in proovedores" value="{{proovedor.id}}">{{proovedor.razon_social}}</option>
-                                                  </select>
+                                                  </select>{{errores.id_proovedor[0]}}
 
                                                 </div>
                                             </div>
