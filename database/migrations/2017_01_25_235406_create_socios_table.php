@@ -29,8 +29,6 @@ class CreateSociosTable extends Migration
             $table->integer('telefono');
             $table->integer('id_organismo')->unsigned();
             $table->foreign('id_organismo')->references('id')->on('organismos');
-            $table->integer('id_cuota')->unsigned();
-            $table->foreign('id_cuota')->references('id')->on('categoria_cuota_sociales');
             $table->date('fecha_ingreso')->nullable();
             $table->integer('legajo');
             $table->softDeletes();

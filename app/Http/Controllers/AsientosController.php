@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Eloquent\Repos\Gateway\AsientosGateway;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AsientosController extends Controller
 {
@@ -31,6 +33,7 @@ class AsientosController extends Controller
     {
         DB::transaction(function() use ($request){
             foreach($request['asientos'] as $elem){
+                $elem['fecha_contable'] = Carbon::today()->toDateString();
                 $this->gateway->create($elem);
             }
         });
