@@ -49,7 +49,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-              
+
                 <div class="row">
     <section>
         <div class="wizard">
@@ -105,14 +105,14 @@
                 </ul>
             </div>
 
-            
+
                 <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" id="capitulor">
                         <h3>Alta de Capítulo</h3>
-                        
+
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('capitulo','Alta')" id="capituloform">
-                  
+
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="codigo">Código <span class="required">*</span>
@@ -148,15 +148,15 @@
                         </ul>
                 </div>
                 <div class="tab-pane" role="tabpanel" id="rubro">
-                        
+
 
 
 
                     <h3>Alta de Rubro</h3>
-                        
+
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('rubro','Alta')" id="rubroform">
-                  
+
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="id_capitulo">Capitulo <span class="required">*</span>
@@ -212,10 +212,10 @@
                 </div>
                 <div class="tab-pane" role="tabpanel" id="moneda">
                          <h3>Alta de Moneda</h3>
-                        
+
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('moneda','Alta')" id="monedaform">
-                  
+
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="id_rubro">Rubro <span class="required">*</span>
@@ -266,12 +266,12 @@
                         </ul>
                 </div>
                 <div class="tab-pane" role="tabpanel" id="departamento">
-                        
+
                         <h3>Alta de Departamento</h3>
-                        
+
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('departamento','Alta')" id="departamentoform">
-                  
+
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="id_moneda">Moneda <span class="required">*</span>
@@ -324,12 +324,12 @@
                 </div>
 
                 <div class="tab-pane" role="tabpanel" id="subrubro">
-                        
+
                       <h3>Alta de SubRubro</h3>
-                        
+
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('subRubro','Alta')" id="subRubroform">
-                  
+
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="id_departamento">Dpto <span class="required">*</span>
@@ -381,12 +381,12 @@
 
                 </div>
                 <div class="tab-pane" role="tabpanel" id="imputacion">
-                        
+
                         <h3>Alta de Imputación</h3>
-                        
+
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('imputacion','Alta')" id="imputacionform">
-                  
+
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="id_subrubro">Dpto <span class="required">*</span>
@@ -433,23 +433,23 @@
 
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-arrow-left"></i> Regresar a SubRubros</button></li>
-                            
+
                         </ul>
 
                     </div>
                     <div class="clearfix"></div>
                 </div>
-            
+
         </div>
     </section>
    </div>
 
                 </div>
                     <!-- End SmartWizard Content -->
-                  
-                
-          
-                  
+
+
+
+
 
                 </div>
               </div>
@@ -464,7 +464,103 @@
 
 
      <!-- aca va la tabla de editar -->
+     <div class="col-md-12 col-sm-12 col-xs-12">
+                   <div class="x_panel">
+                     <div class="x_title">
+                       <h2>Capitulos <small>Todos los capitulos disponibles</small></h2>
+                       <ul class="nav navbar-right panel_toolbox">
+                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                         </li>
+                         <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                           <ul class="dropdown-menu" role="menu">
+                             <li><a href="#">Settings 1</a>
+                             </li>
+                             <li><a href="#">Settings 2</a>
+                             </li>
+                           </ul>
+                         </li>
+                         <li><a href="#"><i class="fa fa-close"></i></a>
+                         </li>
+                       </ul>
+                       <div class="clearfix"></div>
+                     </div>
+                     <div class="x_content">
+                     <center>
+                    <button id="exportButton1" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
+                    </button>
+                    <button id="exportButton2" ng-click="$Servicio.Excel()" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
+                    <button id="exportButton3" ng-click="Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
+                    </center>
+                           <div id="pruebaExpandir">
+                               <div class="span12 row-fluid">
+                                   <!-- START TABLE -->
+                                   <div>
 
+                                     <div class="table-responsive">
+                                       @verbatim
+                                       <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
+                                           <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
+                                           <tr class="clickableRow" title="Datos">
+                                               <td title="'Capitulos'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                   {{abm.capitulos.nombre}}
+                                               </td>
+                                               <td title="'Rubros'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                   {{abm.rubros.nombre}}
+                                               </td>
+                                               <td title="'DNI'" filter="{ dni: 'text'}" sortable="'dni'">
+                                                   {{abm.dni}}
+                                               </td>
+                                               <td title="'Organismo'" filter="{ organismo: 'text'}" sortable="'organismo'">
+                                                   {{abm.organismo}}
+                                               </td>
+                                               <td title="'Legajo'" filter="{ legajo: 'text'}"sortable="'legajo'">
+                                                   {{abm.legajo}}
+                                               </td>
+                                               <td title="'Ingreso'" filter="{ fecha_ingreso: 'text'}" sortable="'fecha_ingreso'">
+                                                   {{abm.fecha_ingreso}}
+                                               </td>
+                                               <td title="'Nacimiento'" filter="{ fecha_nacimiento: 'text'}" sortable="'fecha_nacimiento'">
+                                                   {{abm.fecha_nacimiento}}
+                                               </td>
+                                               <td title="'Sexo'" filter="{ sexo: 'text'}" sortable="'sexo'">
+                                                   {{abm.sexo}}
+                                               </td>
+                                               <td title="'Cuit'" filter="{ cuit: 'text'}" sortable="'cuit'">
+                                                   {{abm.cuit}}
+                                               </td>
+                                               <td title="'Domicilio'" filter="{ domicilio: 'text'}" sortable="'domicilio'">
+                                                   {{abm.domicilio}}
+                                               </td>
+                                               <td title="'Localidad'" filter="{ localidad: 'text'}" sortable="'localidad'">
+                                                   {{abm.localidad}}
+                                               </td>
+                                               <td title="'CP'" filter="{ codigo_postal: 'text'}" sortable="'codigo_postal'">
+                                                   {{abm.codigo_postal}}
+                                               </td>
+                                               <td title="'Telefono'" filter="{ telefono: 'text'}" sortable="'telefono'">
+                                                   {{abm.telefono}}
+                                               </td>
+                                               <td id="botones">
+                                               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                               <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                               </td>
+                                           </tr>
+                                         </tbody>
+                                       </table>
+                                       @endverbatim
+                                     </div>
+
+
+                                   </div>
+                                   <!-- END TABLE -->
+                               </div>
+                           </div>
+
+                       </div>
+                   </div>
+
+                 </div>
      <!-- aca va la tabla de editar -->
       <!-- /page content -->
     </div>

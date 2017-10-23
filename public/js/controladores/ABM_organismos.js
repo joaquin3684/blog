@@ -41,7 +41,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       $scope.traerElementos();
       $scope.borrarFormulario();
       $scope.cuotas = [{
-        'categoria': '',
+        //'categoria': '',
         'valor': ''
       }]
     }, function errorCallback(response) {
@@ -94,8 +94,6 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       // data: data,
     }).then(function successCallback(response) {
       $scope.abmConsultado = response.data;
-      $scope.nombreedi = response.data.nombre;
-        $scope.variablepepe = "pepe";
       console.log($scope.abmConsultado);
       console.log($scope.nombreedi);
     }, function errorCallback(response) {
@@ -140,14 +138,14 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
 
 
   $scope.cuotas = [{
-    'categoria': '',
+    //'categoria': '',
     'valor': ''
   }]
   var cantComponentes = 1
     $scope.agregarHtml = function(destino) {
 
       destino.push({
-        'categoria': '',
+        //'categoria': '',
         'valor' : ''
       })
 
