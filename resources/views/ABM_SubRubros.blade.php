@@ -92,11 +92,11 @@
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <select id="id_departamento" class="form-control col-md-7 col-xs-12" name="id_departamento" ng-model="nose">
+                            <select required id="id_departamento" class="form-control col-md-7 col-xs-12" name="id_departamento" ng-model="nose">
                             <option value="{{x.id}}" ng-repeat="x in selectdepartamentos">
                             {{x.nombre}}
                             </option>
-                            </select>
+                            </select>{{errores.id_departamento[0]}}
                         </div>
                       </div>
 
@@ -106,7 +106,7 @@
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input required id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.codigo[0]}}
                         </div>
                       </div>
 
@@ -116,7 +116,7 @@
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                            <input required id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
                         </div>
                       </div>
                       <div class="row">

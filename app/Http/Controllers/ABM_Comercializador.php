@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidacionABMcomercializador;
 use App\Repositories\Eloquent\Repos\Gateway\ComercializadorGateway;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class ABM_Comercializador extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(ValidacionABMcomercializador $request)
     {
         $elem = $request->all();
         $usuario = $elem['usuario'];
@@ -40,7 +41,7 @@ class ABM_Comercializador extends Controller
         return $this->comercializador->find($id);
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidacionABMcomercializador $request, $id)
     {
         $this->comercializador->update($request->all(), $id);
     }

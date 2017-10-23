@@ -44,7 +44,8 @@ class ABM_asociados extends Controller
     }
 
     public function show($id)
-    {
+    {//TODO: estoy hay que cambiarlo de alguna manera porque en el abm asociados
+        //cuando muestro el elemnto deberia poder cambiar de organismo y tambien elejir otra cuota social.
         return Socios::with('organismo.cuotas')->find($id);
     }
 

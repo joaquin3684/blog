@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidacionABMProductos;
 use App\PorcentajeColocacion;
 use App\Productos;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class ABM_productos extends Controller
         return $this->producto->all();
     }
 
-    public function store(Request $request)
+    public function store(ValidacionABMProductos $request)
     {
         DB::transaction(function() use($request){
 
@@ -62,7 +63,7 @@ class ABM_productos extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(ValidacionABMProductos $request, $id)
     {
         DB::transaction(function() use($request, $id) {
             PorcentajeColocacion::where('id_producto', $id)->delete();

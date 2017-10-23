@@ -56,28 +56,28 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del Socio" type="text">{{errores.nombre[0]}}
+                        <input required id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del Socio" type="text">{{errores.nombre[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="apellido">Apellido<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="apellido" class="form-control col-md-7 col-xs-12" name="apellido" placeholder="Ingrese apellido del Socio" type="text">{{errores.apellido[0]}}
+                        <input id="apellido" class="form-control col-md-7 col-xs-12" name="apellido" placeholder="Ingrese apellido del Socio" type="text" required>{{errores.apellido[0]}}
                       </div>
                     </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_nacimiento">Fecha de nacimiento <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control col-md-7 col-xs-12" >{{errores.fecha_nacimiento[0]}}
+                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control col-md-7 col-xs-12" required>{{errores.fecha_nacimiento[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">DNI <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="dni" name="dni" ng-model="dni"  class="form-control col-md-7 col-xs-12" placeholder="Ingrese el DNI">{{errores.dni[0]}}
+                        <input type="number" id="dni" name="dni" ng-model="dni"  class="form-control col-md-7 col-xs-12" placeholder="Ingrese el DNI" required>{{errores.dni[0]}}
                       </div>
                       </div>
 
@@ -90,12 +90,12 @@
                         <input type="text" class="form-control" maxlength="2" ng-model="tipo" placeholder="Tipo" style="text-align: right">
                         <span class="input-group-addon">-{{dni}}-</span>
                         <input type="text" class="form-control" maxlength="1" ng-model="codigoVerif" placeholder="Codigo verif.">
-                        <input type="text" name="cuit" value="{{tipo}}{{dni}}{{codigoVerif}}" style="display: none">
+                        <input type="text" name="cuit" value="{{tipo}}{{dni}}{{codigoVerif}}" style="display: none">{{errores.cuit[0]}}
                       </div>
                       </div>
                     </div>
                       <!-- <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{{errores.cuit[0]}}
+                        <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">
                       </div>
                     </div> -->
 
@@ -103,28 +103,28 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{{errores.domicilio[0]}}
+                        <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio" required>{{errores.domicilio[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="localidad">Localidad <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="localidad" name="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Localidad">{{errores.localidad[0]}}
+                        <input type="text" id="localidad" name="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Localidad" required>{{errores.localidad[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="codigo_postal">Codigo Postal <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="codigo_postal" name="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Código Postal">{{errores.codigo_postal[0]}}
+                        <input type="number" id="codigo_postal" name="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Código Postal" required>{{errores.codigo_postal[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telefono">Telefono <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Teléfono">{{errores.telefono[0]}}
+                        <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Teléfono" required>{{errores.telefono[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
@@ -136,7 +136,7 @@
                               <input type="radio" name="sexo" value="Masculino">Masculino
                            </label>
                            <label class="radio-inline">
-                              <input type="radio" name="sexo" value="Femenino">Femenino
+                              <input type="radio" name="sexo" value="Femenino">Femenino {{errores.sexo[0]}}
                            </label>
 
                       </div>
@@ -145,14 +145,14 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="legajo">Legajo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="legajo" name="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Legajo">{{errores.legajo[0]}}
+                        <input type="number" id="legajo" name="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Legajo" required>{{errores.legajo[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_ingreso">Fecha de ingreso <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="fecha_ingreso" ng-value="fechadehoy" value="{{fechadehoy}}" name="fecha_ingreso" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la fecha de ingreso">{{errores.fecha_ingreso[0]}}
+                        <input type="date" id="fecha_ingreso" ng-value="fechadehoy" value="{{fechadehoy}}" name="fecha_ingreso" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la fecha de ingreso" required>{{errores.fecha_ingreso[0]}}
                       </div>
                       </div>
                       <div class="item form-group">
@@ -166,11 +166,11 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Organismo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="forro" ng-change="getCategorias()" ng-model="orpi" name="id_organismo" class="form-control col-md-7 col-xs-12" >
+                        <select required id="forro" ng-change="getCategorias()" ng-model="orpi" name="id_organismo" class="form-control col-md-7 col-xs-12" >
                           <option value="{{x.id}}" ng-repeat="x in organismosines">
                             {{x.nombre}}
                             </option>
-                        </select>
+                        </select>{{errores.id_organismo[0]}}
                       </div>
 
                     </div>
@@ -178,7 +178,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Categoría <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12"> 
-                          <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="categoriacomplete" name="id_cuota" ng-required="true">
+                          <select required class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="categoriacomplete" name="id_cuota" ng-required="true">
                             <option value="{{x.id}}" ng-repeat="x in categorias">
                             {{x.categoria}}
                             </option>

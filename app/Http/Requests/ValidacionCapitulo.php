@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidacionABMcomercializador extends FormRequest
+class ValidacionCapitulo extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,8 @@ class ValidacionABMcomercializador extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|unique:users,email,'.$this->get('id'),
-            'usuario' => 'required|unique:users,usuario,'.$this->get('id'),
-            'dni' => 'required|unique:comercializadores,dni,'.$this->get('id'),
-            'telefono' => 'required',
-            'porcentaje_colocacion' => 'required',
+            'codigo' => 'required|unique:capitulos,codigo,'.$this->get('id'),
+            'nombre' => 'required',
         ];
     }
 }

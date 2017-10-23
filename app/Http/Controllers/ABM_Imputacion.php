@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidacionImputacion;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class ABM_Imputacion extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(ValidacionImputacion $request)
     {
         return $this->gateway->create($request->all());
     }
@@ -50,9 +51,9 @@ class ABM_Imputacion extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidacionImputacion $request, $id)
     {
-        return $this->gateway->find($id);
+        return $this->gateway->update($request->all(), $id);
     }
 
     /**

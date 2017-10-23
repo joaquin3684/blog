@@ -20,7 +20,20 @@ class ValidacionABMsocios extends FormRequest
     {
         return [
             'dni' => 'required|unique:socios,nombre,'.$this->get('id'),
-            'cuit' => 'required|unique:socios,cuit,'.$this->get('id')
+            'cuit' => 'required|unique:socios,cuit,'.$this->get('id'),
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'fecha_nacimiento' => 'required',
+            'domicilio' => 'required',
+            'sexo' => 'required',
+            'localidad' => 'required',
+            'codigo_postal' => 'required',
+            'telefono' => 'required',
+            'id_organismo' => 'required',
+            'fecha_ingreso' => 'required',
+            'legajo' => 'required|unique:socios,legajo,'.$this->get('id'),
+
+
         ];
     }
 

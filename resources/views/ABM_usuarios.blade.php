@@ -51,28 +51,28 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario">Usuario <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="usuario" class="form-control col-md-7 col-xs-12" name="usuario" placeholder="Ingrese usuario" type="text">{{errores.usuario[0]}}
+                        <input id="usuario" class="form-control col-md-7 col-xs-12" name="usuario" placeholder="Ingrese usuario" type="text" required>{{errores.usuario[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="email" class="form-control col-md-7 col-xs-12" name="email" placeholder="Ingrese email del usuario" type="text">{{errores.email[0]}}
+                        <input id="email" class="form-control col-md-7 col-xs-12" name="email" placeholder="Ingrese email del usuario" type="text" required >{{errores.email[0]}}
                       </div>
                     </div>
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Contraseña <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="password" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la contraseña">{{errores.password[0]}}
+                        <input type="text" id="password" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la contraseña" required>{{errores.password[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="numeroDeRoles">Cantidad de roles <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="numeroDeRoles" name="numeroDeRoles" ng-model="numeroDeRoles" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cantidad de roles">{{errores.password[0]}}
+                        <input required type="text" id="numeroDeRoles" name="numeroDeRoles" ng-model="numeroDeRoles" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cantidad de roles">
                       </div><button type="button" ng-click="agregarPantalla()" class="btn btn-primary">Añadir Roles</button>
                     </div>
 

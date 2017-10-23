@@ -69,7 +69,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input required type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{{errores.descripcion[0]}}
+                      <input required type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{{errores.domicilio[0]}}
                     </div>
                   </div>
 
@@ -77,7 +77,7 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input required type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{{errores.descripcion[0]}}
+                    <input required type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{{errores.cuit[0]}}
                   </div>
                 </div>
 
@@ -85,7 +85,7 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telefono">Telefono<span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input required type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono">{{errores.descripcion[0]}}
+                  <input required type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono">{{errores.telefono[0]}}
                 </div>
               </div>
 
@@ -93,7 +93,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Email<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input required type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Email">{{errores.descripcion[0]}}
+                <input required type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Email">{{errores.email[0]}}
               </div>
             </div>
 
@@ -101,7 +101,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Usuario<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input required type="text" id="cuit" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Usuario">{{errores.descripcion[0]}}
+                <input required type="text" id="cuit" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Usuario">{{errores.usuario[0]}}
               </div>
             </div>
 
@@ -109,7 +109,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Contraseña<span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input required type="text" id="cuit" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Contraseña">{{errores.descripcion[0]}}
+              <input required type="text" id="cuit" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Contraseña">{{errores.password[0]}}
             </div>
           </div>
 <!--                     <div class="item form-group">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidacionCapitulo;
 use App\Repositories\Eloquent\Repos\Gateway\CapituloGateway;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class ABM_Capitulos extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(ValidacionCapitulo $request)
     {
         return $this->gateway->create($request->all());
     }
@@ -50,9 +51,9 @@ class ABM_Capitulos extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidacionCapitulo $request, $id)
     {
-        return $this->gateway->find($id);
+        return $this->gateway->update($request->all(), $id);
     }
 
     /**
