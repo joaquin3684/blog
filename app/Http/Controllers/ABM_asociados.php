@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cuotas;
+use App\Socios;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidacionABMsocios;
@@ -44,7 +45,7 @@ class ABM_asociados extends Controller
 
     public function show($id)
     {
-        return $this->socio->find($id);
+        return Socios::with('organismo.cuotas');
     }
 
     public function traerElementos()
