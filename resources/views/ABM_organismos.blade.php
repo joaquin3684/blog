@@ -71,11 +71,11 @@
 
                             <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social<span class="required">*</span>
                             </label>
-                            <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
+                            <!-- <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
                               <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuota.categoria" >{{errores.cuota_social[0]}}
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6" id="valor">
-                              <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Valor" ng-model="cuota.valor">{{errores.cuota_social[0]}}
+                            </div> -->
+                            <div class="col-md-6 col-sm-6 col-xs-12" id="valor">
+                              <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Ingrese el valor" ng-model="cuota.valor">{{errores.cuota_social[0]}}
                             </div>
                       </div>
                       </div>
@@ -170,10 +170,10 @@
                      <button id="exportButton1" ng-click="ExportarPDF('organismos')" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
                      </button>
                      <button id="exportButton2"  data-toggle="modal" data-target="#prompted" class="btn btn-success clearfix" ><span class="fa fa-file-excel-o"></span> EXCEL</button>
-                     
+
                      <button id="exportButton3" ng-click="$Servicio.Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
                      </center>
-                     
+
                      <div id="estatablaseexporta" style="display: none;">
                       @verbatim
                       <table id="tablaexported">
@@ -199,9 +199,9 @@
                                       @verbatim
 
                                       <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
-                                          
+
                                           <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
-                                          
+
                                           <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)"  ng-class="socio.id">
                                               <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
                                                   {{abm.nombre}}
@@ -279,19 +279,19 @@
                       <div class="item form-group clonado1" >
                         <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social<span class="required">*</span>
                         </label>
-                        <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
+                        <!-- <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
                           <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuota.categoria">{{errores.cuota_social[0]}}
-                        </div>
-                        <div class="col-md-3 col-sm-3 col-xs-6" id="valor">
-                          <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Valor" ng-model="cuota.valor">{{errores.cuota_social[0]}}
+                        </div> -->
+                        <div class="col-md-6 col-sm-6 col-xs-12" id="valor">
+                          <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Ingrese el valor" ng-model="cuota.valor">{{errores.cuota_social[0]}}
                         </div>
                       </div>
                     </div>
 
 
-                    <button id="sumahtml" type="button" class="btn btn-danger"  style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado1', abmConsultado.cuotas)">
+                    <!-- <button id="sumahtml" type="button" class="btn btn-danger"  style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado1', abmConsultado.cuotas)">
                       <span class="glyphicon glyphicon-minus" aria-hidden="true" ></span>
-                    </button>
+                    </button> -->
                   <button id="sumahtml" type="button" class="btn btn-primary"  style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml(abmConsultado.cuotas)">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
                   </button>

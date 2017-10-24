@@ -140,7 +140,26 @@ $scope.traerRelaciones = function(relaciones)
                   break;
                 }
 
-
+                $scope.datosabm = ['capitulos':$scope.selectcapitulos,
+                                    'rubros':$scope.selectrubros,
+                                    'monedas':$scope.selectmonedas,
+                                    'departamentos':$scope.selectdepartamentos,
+                                    'rubros':$scope.selectsubrubros];
+                $scope.paramsABMS = new NgTableParams({
+                  page: 1,
+                  count: 10
+                }, {
+                  total: $scope.datosabm.length,
+                  getData: function (params) {
+                    var filterObj = params.filter();
+                    filteredData = $filter('filter')($scope.datosabm, filterObj);
+                    var sortObj = params.orderBy();
+                    orderedData = $filter('orderBy')(filteredData, sortObj);
+                    $scope.datosabmfiltrados = orderedData;
+                    $scope.datatoexcel = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                  }
+                });
             }
 
         }, function errorCallback(data)
@@ -153,13 +172,16 @@ $scope.traerRelaciones = function(relaciones)
    {
 
       var metodito = 'get';
-      var abm = $("#tipo_tabla").val();
+      var abm = $("#tablon").val();
       var urlabm = abm + "/traerElementos";
       $scope.traigo('capitulo/traerElementos','get','cap');
       $scope.traigo('rubro/traerElementos','get','rub');
       $scope.traigo('moneda/traerElementos','get','mon');
       $scope.traigo('departamento/traerElementos','get','dep');
       $scope.traigo('subRubro/traerElementos','get','sub');
+
+
+
 
    }
 

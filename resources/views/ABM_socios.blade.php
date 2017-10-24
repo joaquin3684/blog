@@ -156,13 +156,6 @@
                       </div>
                       </div>
                       <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="grupo_familiar">Grupo Familiar <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="grupo_familiar" name="grupo_familiar" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Grupo Familiar">{{errores.grupo_familiar[0]}}
-                      </div>
-                      </div>
-                      <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Organismo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -172,14 +165,13 @@
                             </option>
                         </select>{{errores.id_organismo[0]}}
                       </div>
-
                     </div>
-                    <div class="item form-group"> 
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Categoría <span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12"> 
-                          <select required class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="categoriacomplete" name="id_cuota" ng-required="true">
-                            <option value="{{x.id}}" ng-repeat="x in categorias">
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="categoriacomplete" name="valor" ng-required="true">
+                            <option value="{{x.valor}}" ng-repeat="x in categorias">
                             {{x.categoria}}
                             </option>
                           </select>
@@ -417,6 +409,13 @@
                         <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{{errores.nombre[0]}}
                       </div>
                     </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Apellido <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="apellido" class="form-control col-md-7 col-xs-12" name="apellido" placeholder="Ingrese apellido del socio" type="text">{{errores.nombre[0]}}
+                      </div>
+                    </div>
 
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_nacimiento">Fecha de nacimiento <span class="required">*</span>
@@ -497,17 +496,14 @@
                       </div>
                       </div>
                       <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="grupo_familiar">Grupo Familiar <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="grupo_familiar" name="grupo_familiar" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.grupo_familiar[0]}}
-                      </div>
-                      </div>
-                      <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Organismo <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="forro_Editar" name="id_organismo" class="form-control col-md-7 col-xs-12" ></select>{{errores.dni[0]}}
+                        <select id="forro" ng-change="getCategorias()" ng-model="orpi" name="id_organismo" class="form-control col-md-7 col-xs-12" >
+                          <option value="{{x.id}}" ng-repeat="x in organismosines" ng-selected="organismo.id == x.id">
+                            {{x.nombre}}
+                            </option>
+                        </select>
                       </div>
 
                     </div>
