@@ -34,15 +34,19 @@ class PagoProovedoresController extends Controller
             ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
-            ->select('proovedores.razon_social AS proovedor', 'cuotas.nro_cuota', 'cuotas.importe', 'socios.nombre', 'socios.apellido', 'socios.legajo', 'cuotas.estado', 'proovedores.id AS id_proovedor', DB::raw('SUM(movimientos.entrada) AS totalCobrado'), DB::raw('SUM(movimientos.salida) AS totalPagado'), DB::raw('((SUM(movimientos.entrada) - SUM(movimientos.salida) ) * productos.ganancia / 100) AS diferencia'))
-            ->groupBy('productos.id', 'proovedores.id')
+            ->select('proovedores.razon_social AS proovedor', 'cuotas.nro_cuota', 'cuotas.importe', 'socios.nombre', 'socios.apellido', 'socios.legajo', 'cuotas.estado', 'proovedores.id AS id_proovedor', DB::raw('SUM(movimientos.entrada) AS totalCobrado'), DB::raw('SUM(movimientos.salida) AS totalPagado'), DB::raw('((SUM(movimientos.entrada) ) * productos.ganancia / 100) AS diferencia'))
+            ->groupBy('proovedores.id')
 
             ->havingRaw('totalCobrado <> totalPagado')->get();
 
-        $proovedores->map(function($proveedor){
-           //todo hay que terminar esto para que pueda armarme una coleccion unica aplanada por cada id_proveedor y sumarizar la ganancia y el total cobrado y la diferencia
-            //
+        $total = $proovedores->sum(function($p){
+
         });
+
+
+            //todo hay que terminar esto para que pueda armarme una coleccion unica aplanada por cada id_proveedor y sumarizar la ganancia y el total cobrado y la diferencia
+            //
+
 
         return $proovedores;
 
