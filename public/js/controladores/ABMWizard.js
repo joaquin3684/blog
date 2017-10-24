@@ -140,11 +140,11 @@ $scope.traerRelaciones = function(relaciones)
                   break;
                 }
 
-                $scope.datosabm = ['capitulos':$scope.selectcapitulos,
+                $scope.datosabm = [{'capitulos':$scope.selectcapitulos,
                                     'rubros':$scope.selectrubros,
                                     'monedas':$scope.selectmonedas,
                                     'departamentos':$scope.selectdepartamentos,
-                                    'rubros':$scope.selectsubrubros];
+                                    'rubros':$scope.selectsubrubros}];
                 $scope.paramsABMS = new NgTableParams({
                   page: 1,
                   count: 10
@@ -244,7 +244,9 @@ $scope.traerRelaciones = function(relaciones)
 
    }
 
-
+   $scope.consolear = function (algo){
+     console.log(algo);
+   }
    $scope.traerElementos();
 
    //EMPIEZA EL CODIGO DEL EXPANDIR

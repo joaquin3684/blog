@@ -112,7 +112,7 @@
 
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('capitulo','Alta')" id="capituloform">
-
+                    {{ csrf_field() }}
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="codigo">Código <span class="required">*</span>
@@ -156,28 +156,34 @@
 
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('rubro','Alta')" id="rubroform">
-
+                
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="id_capitulo">Capitulo <span class="required">*</span>
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <select id="id_rubro" class="form-control col-md-7 col-xs-12" name="id_rubro" ng-model="nose">
-                            <option value="{{x.id}}" ng-repeat="x in selectcapitulos">
+                            <select id="id_rubro" class="form-control col-md-7 col-xs-12" ng-model="nose">
+                            <option value="{{x}}" ng-repeat="x in selectcapitulos">
                             {{x.nombre}}
                             </option>
                             </select>
                         </div>
+                        <input type="hidden" value="{{nose.id}}" name="id_rubro">
                       </div>
 
                       <div class="row">
+                        {{consolear(nose.id)}}
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="codigo">Código <span class="required">*</span>
+                          <label class="" for="codigo">Código<span class="required">*</span>
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                          <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">{{nose.codigo}}.</span>
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input type="hidden" id="tipo_tabla" value="{{nose}}{{codigo}}" name="codigo">
+                          </div>
                         </div>
                       </div>
 
@@ -235,8 +241,15 @@
                           <label class="" for="codigo">Código <span class="required">*</span>
                           </label>
                         </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                        <!-- <div class="form-group col-md-4 col-sm-4 col-xs-12">
                             <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                        </div> -->
+                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                          <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">{{nose.codigo}}.</span>
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input type="hidden" id="tipo_tabla" value="{{nose}}{{codigo}}" name="codigo">
+                          </div>
                         </div>
                       </div>
 
@@ -292,8 +305,15 @@
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                          <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">{{nose.codigo}}.</span>
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input type="hidden" id="tipo_tabla" value="{{nose}}{{codigo}}" name="codigo">
+                          </div>
                         </div>
+                        <!-- <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                        </div> -->
                       </div>
 
                       <div class="row">
@@ -349,8 +369,15 @@
                           <label class="" for="codigo">Código <span class="required">*</span>
                           </label>
                         </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                        <!-- <div class="form-group col-md-4 col-sm-4 col-xs-12">
                             <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                        </div> -->
+                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                          <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">{{nose}}.</span>
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input type="hidden" id="tipo_tabla" value="{{nose}}{{codigo}}" name="codigo">
+                          </div>
                         </div>
                       </div>
 
@@ -406,8 +433,15 @@
                           <label class="" for="codigo">Código <span class="required">*</span>
                           </label>
                         </div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                        <!-- <div class="form-group col-md-4 col-sm-4 col-xs-12">
                             <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                        </div> -->
+                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                          <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">{{nose}}.</span>
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input type="hidden" id="tipo_tabla" value="{{nose}}{{codigo}}" name="codigo">
+                          </div>
                         </div>
                       </div>
 
@@ -502,45 +536,22 @@
                                        <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
                                            <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
                                            <tr class="clickableRow" title="Datos">
-                                               <td title="'Capitulos'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                                                   {{abm.capitulos.nombre}}
+                                               <td title="'Capitulo'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                   {{abm.capitulo.nombre}}
                                                </td>
-                                               <td title="'Rubros'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                                                   {{abm.rubros.nombre}}
+                                               <td title="'Rubro'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                   {{abm.rubro.nombre}}
                                                </td>
-                                               <td title="'DNI'" filter="{ dni: 'text'}" sortable="'dni'">
-                                                   {{abm.dni}}
+                                               <td title="'Moneda'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                   {{abm.moneda.nombre}}
                                                </td>
-                                               <td title="'Organismo'" filter="{ organismo: 'text'}" sortable="'organismo'">
-                                                   {{abm.organismo}}
+                                               <td title="'Departamento'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                   {{abm.departamento.nombre}}
                                                </td>
-                                               <td title="'Legajo'" filter="{ legajo: 'text'}"sortable="'legajo'">
-                                                   {{abm.legajo}}
+                                               <td title="'Sub Rubro'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                   {{abm.subRubro.nombre}}
                                                </td>
-                                               <td title="'Ingreso'" filter="{ fecha_ingreso: 'text'}" sortable="'fecha_ingreso'">
-                                                   {{abm.fecha_ingreso}}
-                                               </td>
-                                               <td title="'Nacimiento'" filter="{ fecha_nacimiento: 'text'}" sortable="'fecha_nacimiento'">
-                                                   {{abm.fecha_nacimiento}}
-                                               </td>
-                                               <td title="'Sexo'" filter="{ sexo: 'text'}" sortable="'sexo'">
-                                                   {{abm.sexo}}
-                                               </td>
-                                               <td title="'Cuit'" filter="{ cuit: 'text'}" sortable="'cuit'">
-                                                   {{abm.cuit}}
-                                               </td>
-                                               <td title="'Domicilio'" filter="{ domicilio: 'text'}" sortable="'domicilio'">
-                                                   {{abm.domicilio}}
-                                               </td>
-                                               <td title="'Localidad'" filter="{ localidad: 'text'}" sortable="'localidad'">
-                                                   {{abm.localidad}}
-                                               </td>
-                                               <td title="'CP'" filter="{ codigo_postal: 'text'}" sortable="'codigo_postal'">
-                                                   {{abm.codigo_postal}}
-                                               </td>
-                                               <td title="'Telefono'" filter="{ telefono: 'text'}" sortable="'telefono'">
-                                                   {{abm.telefono}}
-                                               </td>
+
                                                <td id="botones">
                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
                                                <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
