@@ -40,9 +40,12 @@ class ABM_organismos extends Controller
             $organismo = $this->organismo->create($request->all());
             $id_organismo = $organismo->id;
             $cuotasSociales = collect($request['cuota_social']);
-            $cuotasSociales->each(function ($cuota) use ($id_organismo) {
+            $i = 0;
+            $cuotasSociales->each(function ($cuota) use ($id_organismo, &$i) {
                 $cuota['id_organismo'] = $id_organismo;
+                $cuota['categoria'] = $i;
                 CategoriaCuotaSocial::create($cuota);
+                $i++;
             });
         });
 
@@ -57,10 +60,23 @@ class ABM_organismos extends Controller
     public function update(ValidacionABMorganismos $request, $id)
     {
         DB::transaction(function() use($request, $id) {
+            $cuotasSocialesNuevas = collect($request['cuota_social']);
+            $organismo = Organismos::with(['socios.cuotasSociales' => function($q){$q->where('estado', null);}, 'cuotas'])->find($id);
+            $organismo->cuotas->each(function($cuotaSocialActual) use ($organismo, $cuotasSocialesNuevas){
+                $organismo->socios->each(function($socio) use ($cuotaSocialActual, $cuotasSocialesNuevas){
+                    $socio->cuotasSociales->each(function($cuota) use ($cuotaSocialActual, $cuotasSocialesNuevas){
+                        if($cuota->importe == $cuotaSocialActual->valor){
+                            $cuotaNueva = $cuotasSocialesNuevas->first(function($c) use ($cuotaSocialActual){return $cuotaSocialActual->categoria == $c['categoria'];});
+                            $cuota->importe = $cuotaNueva['valor'];
+                            $cuota->save();
+                        } else {return false;}
+                    });
+                 });
+            });
+
             CategoriaCuotaSocial::where('id_organismo', $id)->delete();
             $this->organismo->update($request->all(), $id);
-            $cuotasSociales = collect($request['cuota_social']);
-            $cuotasSociales->each(function ($cuota) use ($id) {
+            $cuotasSocialesNuevas->each(function ($cuota) use ($id) {
                 $cuota['id_organismo'] = $id;
                 CategoriaCuotaSocial::create($cuota);
             });

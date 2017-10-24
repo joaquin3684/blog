@@ -24,7 +24,6 @@ use Debugbar;
 use App\Repositories\Eloquent\ConsultasCuotas;
 use App\Repositories\Eloquent\ConsultasMovimientos;
 use App\Repositories\Eloquent\Filtros;
-use App\Repositories\Eloquent\Tabla;
 use App\Repositories\Eloquent\Ventas as RepoVentas;
 use App\Repositories\Eloquent\Cobranza\CobrarPorVenta;
 use App\Repositories\Eloquent\Repos\VentasRepo;
@@ -37,12 +36,11 @@ class CobrarController extends Controller
     private $tabla;
     private $cobrar;
 
-    public function __construct(ConsultasCuotas $cuotas, Tabla $tabla, ConsultasMovimientos $movimientos, Filtros $filtros)
+    public function __construct(ConsultasCuotas $cuotas, ConsultasMovimientos $movimientos, Filtros $filtros)
     {
         $this->cuotas = $cuotas;
         $this->movimientos = $movimientos;
         $this->filtros = $filtros;
-        $this->tabla = $tabla;
 
     }
 

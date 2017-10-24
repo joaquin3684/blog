@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Eloquent\Filtros\VentasFilter;
 use App\Repositories\Eloquent\Mapper\VentasMapper;
 use App\Repositories\Eloquent\Repos\VentasRepo;
 use App\Repositories\Eloquent\Ventas;
@@ -23,6 +24,37 @@ class PagoProovedoresController extends Controller
 
     public function datos(Request $request)
     {
+
+
+        $proovedores = DB::table('ventas')
+            ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
+            ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
+            ->join('productos', 'productos.id', '=', 'ventas.id_producto')
+            ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
+            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+            ->where('cuotas.cuotable_type', 'App\Ventas')
+            ->where('movimientos.identificadores_type', 'App\Cuotas')
+            ->select('proovedores.razon_social AS proovedor', 'cuotas.nro_cuota', 'cuotas.importe', 'socios.nombre', 'socios.apellido', 'socios.legajo', 'cuotas.estado', 'proovedores.id AS id_proovedor', DB::raw('SUM(movimientos.entrada) AS totalCobrado'), DB::raw('SUM(movimientos.salida) AS totalPagado'), DB::raw('((SUM(movimientos.entrada) - SUM(movimientos.salida) ) * productos.ganancia / 100) AS diferencia'))
+            ->groupBy('productos.id', 'proovedores.id')
+
+            ->havingRaw('totalCobrado <> totalPagado')->get();
+
+        $proovedores->map(function($proveedor){
+           //todo hay que terminar esto para que pueda armarme una coleccion unica aplanada por cada id_proveedor y sumarizar la ganancia y el total cobrado y la diferencia
+            //
+        });
+
+        return $proovedores;
+
+        $organismos2 = VentasFilter::apply($request->all(), $movimientos);
+
+
+        $ventasPorOrganismo = $ventasPorOrganismo->each(function ($item, $key){
+            $diferencia = $item['totalACobrar'] - $item['totalCobrado'];
+            $item->put('diferencia', $diferencia);
+            return $item;
+        });
+
         $proovedores = Proovedores::with(['productos' => function($q) {
             $q->has('ventas');
             $q->has('ventas.movimientos');
@@ -59,6 +91,10 @@ class PagoProovedoresController extends Controller
 
         });
         return $proovedores->toJson();
+    }
+
+    public function detalleProveedor(Request $request){
+
     }
 
     public function traerDatosAutocomplete(Request $request)
