@@ -34,71 +34,69 @@ class PagoProovedoresController extends Controller
             ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
-            ->select('proovedores.razon_social AS proovedor', 'cuotas.nro_cuota', 'cuotas.importe', 'socios.nombre', 'socios.apellido', 'socios.legajo', 'cuotas.estado', 'proovedores.id AS id_proovedor', DB::raw('SUM(movimientos.entrada) AS totalCobrado'), DB::raw('SUM(movimientos.salida) AS totalPagado'), DB::raw('((SUM(movimientos.entrada) ) * productos.ganancia / 100) AS diferencia'))
-            ->groupBy('proovedores.id')
-
+            ->select('proovedores.razon_social AS proovedor', 'cuotas.nro_cuota', 'cuotas.importe', 'socios.nombre', 'socios.apellido', 'socios.legajo', 'cuotas.estado', 'proovedores.id AS id_proovedor', DB::raw('SUM(movimientos.entrada) AS totalCobrado'), DB::raw('SUM(movimientos.salida) AS totalPagado'), DB::raw('((SUM(movimientos.entrada) ) * productos.ganancia / 100) AS comision'))
+            ->groupBy('proovedores.id', 'productos.id')
             ->havingRaw('totalCobrado <> totalPagado')->get();
 
-        $total = $proovedores->sum(function($p){
-
+        $proov = $proovedores->unique('id_proovedor');
+        $pnuevo = $proov->each(function($p) use($proovedores){
+            $totalCobrado = 0;
+            $totalPagado = 0;
+            $comision = 0;
+            foreach($proovedores as $pro){
+                if($pro->id_proovedor == $p->id_proovedor)
+                {
+                    $totalCobrado += $pro->totalCobrado;
+                    $totalPagado += $pro->totalPagado;
+                    $comision += $pro->comision;
+                }
+            }
+            $p->totalCobrado = $totalCobrado;
+            $p->totalPagado = $totalPagado;
+            $p->comision = $comision;
         });
 
+        $pnuevo = $pnuevo->unique('id_proovedor');
+        return $pnuevo;
 
-            //todo hay que terminar esto para que pueda armarme una coleccion unica aplanada por cada id_proveedor y sumarizar la ganancia y el total cobrado y la diferencia
-            //
-
-
-        return $proovedores;
-
-        $organismos2 = VentasFilter::apply($request->all(), $movimientos);
-
-
-        $ventasPorOrganismo = $ventasPorOrganismo->each(function ($item, $key){
-            $diferencia = $item['totalACobrar'] - $item['totalCobrado'];
-            $item->put('diferencia', $diferencia);
-            return $item;
-        });
-
-        $proovedores = Proovedores::with(['productos' => function($q) {
-            $q->has('ventas');
-            $q->has('ventas.movimientos');
-            $q->with(['ventas' => function($q){
-                $q->has('movimientos');
-                $q->with(['cuotas' => function($q) {
-                    $q->whereHas('movimientos', function($q){
-                        $q->where('salida', null);
-                        $q->where('entrada', '>', 0);
-                    });
-                }]);
-                $q->with('socio');
-                $q->with(['movimientos' => function($q){
-                    $q->where('salida', null);
-                    $q->where('entrada', '>', 0);
-                }]);
-            }]);
-        }])->has('productos.ventas.movimientos')->get();
-
-
-        $proovedores->each(function($proovedor) {
-
-            $totalAPagar = $proovedor->productos->sum(function ($producto) {
-                $porcentaje = $producto->ganancia;
-                return $producto->ventas->sum(function ($venta) use ($porcentaje) {
-
-                    $total = $venta->movimientos->sum(function ($movimiento) {
-                        return $movimiento->entrada;
-                    });
-                    return $pagar = $total - $total * $porcentaje / 100;
-                });
-            });
-            $proovedor->total = $totalAPagar;
-
-        });
-        return $proovedores->toJson();
     }
 
-    public function detalleProveedor(Request $request){
+    public function detalleProveedor(Request $request)
+    {
 
+        $proovedores = DB::table('ventas')
+            ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
+            ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
+            ->join('productos', 'productos.id', '=', 'ventas.id_producto')
+            ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
+            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+            ->where('cuotas.cuotable_type', 'App\Ventas')
+            ->where('movimientos.identificadores_type', 'App\Cuotas')
+            ->where('proovedores.id', $request['id'])
+            ->select('cuotas.nro_cuota', 'cuotas.importe', 'ventas.id as servicio', 'socios.nombre', 'socios.apellido', 'socios.legajo', 'cuotas.estado', DB::raw('SUM(movimientos.entrada) AS totalCobrado'), DB::raw('SUM(movimientos.salida) AS totalPagado'), DB::raw('((SUM(movimientos.entrada) ) * productos.ganancia / 100) AS comision'))
+            ->groupBy('cuotas.id')
+            ->havingRaw('totalCobrado <> totalPagado')->get();
+
+        /*$proov = $proovedores->unique('id_proovedor');
+        $pnuevo = $proov->each(function($p) use($proovedores){
+            $totalCobrado = 0;
+            $totalPagado = 0;
+            $comision = 0;
+            foreach($proovedores as $pro){
+                if($pro->id_proovedor == $p->id_proovedor)
+                {
+                    $totalCobrado += $pro->totalCobrado;
+                    $totalPagado += $pro->totalPagado;
+                    $comision += $pro->comision;
+                }
+            }
+            $p->totalCobrado = $totalCobrado;
+            $p->totalPagado = $totalPagado;
+            $p->comision = $comision;
+        });
+
+        $pnuevo = $pnuevo->unique('id_proovedor');*/
+        return $proovedores;
     }
 
     public function traerDatosAutocomplete(Request $request)

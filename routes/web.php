@@ -148,6 +148,7 @@ Route::get('pago_proovedores', 'PagoProovedoresController@index');
 Route::post('pago_proovedores/datos', 'PagoProovedoresController@datos');
 Route::post('pago_proovedores/datosAutocomplete', 'PagoProovedoresController@traerDatosAutocomplete');
 Route::post('pago_proovedores/pagarCuotas', 'PagoProovedoresController@pagarCuotas');
+Route::post('pago_proovedores/detalleProveedor', 'PagoProovedoresController@detalleProveedor');
 
 //----------------- COBRAR VENTAS ---------------
 

@@ -49,7 +49,7 @@ class Movimiento
     public function pagarProovedor($ganancia)
     {
         $entrada = $this->entrada;
-        $this->salida = $entrada - ($entrada * $ganancia) / 100;
+        $this->salida = $entrada;
         $this->ganancia = $entrada * $ganancia / 100;
         $this->update($this, $this->id);
     }

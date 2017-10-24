@@ -18,7 +18,7 @@ class CreateCapitulosTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('nombre');
-            $table->integer('codigo');
+            $table->string('codigo');
             $table->softDeletes();
         });
     }
