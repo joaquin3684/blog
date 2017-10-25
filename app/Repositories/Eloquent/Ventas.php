@@ -120,6 +120,12 @@ class Ventas
         });
     }
 
+    public function sistemaFrances()
+    {
+        $col = collect();
+        //$formula = $this->importe * ( (1 + ))
+    }
+
     /**
      * @param mixed $descripcion
      */

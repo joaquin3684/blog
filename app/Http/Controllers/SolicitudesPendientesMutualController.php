@@ -10,13 +10,14 @@ use App\Repositories\Eloquent\Generadores\GeneradorVenta;
 use App\Repositories\Eloquent\GeneradorNumeroCredito;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
 use App\Repositories\Eloquent\Repos\Gateway\AgenteFinancieroGateway;
+use App\Repositories\Eloquent\Repos\Gateway\ProveedoresGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudesSinInversionistaGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use App\Repositories\Eloquent\Repos\ProveedoresRepo;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Repositories\Eloquent\Repos\VentasRepo;
 use Carbon\Carbon;
-use Cartalyst\Sentinel\Sentinel;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -54,7 +55,7 @@ class SolicitudesPendientesMutualController extends Controller
             $sol->save();
             if($sol->agente_financiero != null && $request->has('agente_financiero'))
             {
-                $agenteRepo = new AgenteFinancieroGateway();
+                $agenteRepo = new ProveedoresGateway();
                 $agente = $elem['agente_financiero'];
                 $ag = $agenteRepo->find($agente);
                 $usuario = Sentinel::findById($ag->usuario);

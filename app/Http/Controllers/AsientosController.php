@@ -34,6 +34,8 @@ class AsientosController extends Controller
         DB::transaction(function() use ($request){
             foreach($request['asientos'] as $elem){
                 $elem['fecha_contable'] = Carbon::today()->toDateString();
+                $ultimoAsiento = $this->gateway->last();
+                $elem['nro_asiento'] = $ultimoAsiento->nro_asiento + 1;
                 $this->gateway->create($elem);
             }
         });

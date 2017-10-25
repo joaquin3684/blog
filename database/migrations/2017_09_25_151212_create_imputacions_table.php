@@ -17,7 +17,7 @@ class CreateImputacionsTable extends Migration
         Schema::create('imputaciones', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->string('codigo');
+            $table->integer('codigo');
             $table->foreign('id_subrubro')->references('id')->on('sub_rubros');
             $table->integer('id_subrubro')->unsigned()->nullable();
             $table->softDeletes();

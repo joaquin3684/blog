@@ -11,7 +11,7 @@ class Asiento extends Model
     protected $table = 'asientos';
 
     protected $fillable = [
-        'id_imputacion', 'debe', 'haber', 'fecha_contable'
+        'id_imputacion', 'debe', 'haber', 'fecha_contable', 'nro_asiento'
     ];
 
     protected $dates = ['deleted_at'];

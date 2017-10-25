@@ -18,7 +18,7 @@ class CreateDepartamentosTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('nombre');
-            $table->string('codigo');
+            $table->integer('codigo');
             $table->foreign('id_moneda')->references('id')->on('monedas');
             $table->integer('id_moneda')->unsigned()->nullable();
             $table->softDeletes();

@@ -19,6 +19,7 @@ class CreateAsientosTable extends Migration
             $table->foreign('id_imputacion')->references('id')->on('imputaciones');
             $table->double('debe')->nullable();
             $table->double('haber')->nullable();
+            $table->bigInteger('nro_asiento');
             $table->date('fecha_contable');
             $table->timestamps();
         });
