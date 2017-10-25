@@ -166,14 +166,15 @@
                 </li>
                 <li><a><i class="fa fa-area-chart"></i> CONTABILIDAD <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                      <li><a href="capitulo">Capitulos</a>
+                      <li><a href="capitulo">Plan de cuentas</a>
+                      <li><a href="asientos">Asientos Contables Manuales</a>
                       </li>
-                      <li><a href="rubro">Rubros</a>
+                      <!-- <li><a href="rubro">Rubros</a>
                       </li>
                       <li><a href="moneda">Monedas</a></li>
                       <li><a href="departamento">Departamentos</a></li>
                       <li><a href="subRubro">SubRubros</a></li>
-                      <li><a href="imputacion">Imputaciones</a></li>
+                      <li><a href="imputacion">Imputaciones</a></li> -->
 
                   </ul>
                 </li>
@@ -310,13 +311,13 @@
         <h4 class="modal-title">Descargar como Excel</h4>
       </div>
       <div class="modal-body">
-      <form ng-submit="$Servicio.Excel2(nombreexcel)"> 
+      <form ng-submit="$Servicio.Excel2(nombreexcel)">
         <div class="input-group" style="width: 80%;">
-          
+
           <input type="password" class="form-control" id="pass" name="pass" placeholder="Nombre del archivo.." aria-describedby="basic-addon1" ng-model="nombreexcel">
           <span class="input-group-btn"><button class="btn btn-primary" type="submit" style="" ><span class="fa fa-file-excel-o"></span> DESCARGAR</button></span>
         </div>
-     
+
       </div>
     </div>
     </form>
