@@ -15,6 +15,7 @@
                 <div class="left-col" role="main">
                     <div class="">
                         <div class="clearfix">
+                          <div id="mensaje"></div>
                         </div>
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -174,90 +175,88 @@
                             <div class="clearfix">
                             </div>
                         </div>
-                        <div class="x_content">
-                            <div id="pruebaExpandir">
-                                <div class="span12 row-fluid">
-                                    <!-- START $scope.[model] updates -->
-                                    <!-- END $scope.[model] updates -->
-                                    <!-- START TABLE -->
-                                    <div>
-                                      @verbatim
-                                        <table ng-table="paramsProveedores" class="table table-hover table-bordered">
+                        @verbatim
+                        <div id="pruebaExpandir">
+                            <div class="span12 row-fluid">
+                                <!-- START $scope.[model] updates -->
+                                <!-- END $scope.[model] updates -->
+                                <!-- START TABLE -->
+                                <div>
+                                    <table ng-table="paramsProveedores" class="table table-hover table-bordered">
 
-                                            <tbody data-ng-repeat="proveedor in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                            <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,proveedor.id)" >
-                                                <td title="'Proveedor'" sortable="'proovedor'">
-                                                    {{proveedor.razon_social}}
-                                                </td>
-                                                <td title="'Total a Pagar'" sortable="'pagar'">
-                                                    {{proveedor.total}}
-                                                </td>
-                                            </tr>
-                                            <tr data-ng-switch-when="true">
-                                                <td colspan="5">
+                                        <tbody data-ng-repeat="proovedor in $data" data-ng-switch on="dayDataCollapse[$index]">
+                                        <tr class="clickableRow" title="" data-ng-click="pullProovedor(proovedor.id_proovedor);selectTableRow($index,proovedor.id_proovedor)" >
+                                            <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                {{proovedor.proovedor}}
+                                            </td>
+                                            <td title="'Apellido'" filter="{ apellido: 'text'}" sortable="'apellido'">
+                                                {{proovedor.apellido}}
+                                            </td>
+                                            <td title="'Monto a pagar'" filter="{ totalAPagar: 'text'}" sortable="'totalAPagar'">
+                                                {{proovedor.totalAPagar}}
+                                            </td>
+
+                                        </tr>
+                                        <tr data-ng-switch-when="true">
+                                            <td colspan="5">
+                                                <div>
                                                     <div>
-                                                        <div>
-                                                            <table class="table">
-                                                                <thead class="levelTwo" style="background-color: #73879C; color: white;">
-                                                                <tr>
-                                                                    <th>Fecha</th>
-                                                                    <th>Entrada</th>
-                                                                    <th>Salida</th>
-                                                                    <th>Ganancia</th>
-                                                                    <th>Gastos Administrativos</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <thead class="levelTwo" style="background-color: #73879C; color: white;">
-                                                                <tr>
-                                                                    <th>Fecha</th>
-                                                                    <th>Entrada</th>
-                                                                    <th>Salida</th>
-                                                                    <th>Ganancia</th>
-                                                                    <th>Gastos Administrativos</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr style="background-color: #A6A6A6; color: white;" data-ng-repeat="movimiento in cuota.movimientos">
+                                                        <table class="table">
+                                                            <thead class="levelTwo" style="background-color: #73879C; color: white;">
+                                                            <tr>
+                                                                <th>Socio</th>
+                                                                <th>Legajo</th>
+                                                                <th>Nro Cuota</th>
+                                                                <th>Fecha vto.</th>
+                                                                <th>Monto</th>
+                                                                <th>Estado</th>
+                                                                <th>Nro Servicio</th>
 
-                                                                    <td><center>{{movimiento.fecha}}</center></td>
-                                                                    <td><center>{{movimiento.entrada}}</center></td>
-                                                                    <td><center>{{movimiento.salida}}</center></td>
-                                                                    <td><center>{{movimiento.ganancia}}</center></td>
-                                                                    <td><center>{{movimiento.gastos_administrativos}}</center></td>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr style="background-color: #A6A6A6; color: white;" data-ng-repeat="movimiento in proovedorSeleccionado">
 
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                                                                <td><center>{{movimiento.nombre}}</center></td>
+                                                                <td><center>{{movimiento.legajo}}</center></td>
+                                                                <td><center>{{movimiento.nro_cuota}}</center></td>
+                                                                <td><center>{{movimiento.fecha_vencimiento}}</center></td>
+                                                                <td><center>{{movimiento.importe}}</center></td>
+                                                                <td><center>{{movimiento.estado}}</center></td>
+                                                                <td><center>{{movimiento.servicio}}</center></td>
+
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                            </tbody>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                            <td style="text-align: right;">
+                                                <b>Total</b>
 
-                                            <tfoot>
+                                            </td>
+                                            <td></td>
+                                            <td>
+                                                {{sumaMontoCobrado}}
+                                            </td>
 
-                                            <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
-                                                <td style="text-align: right;">
-                                                    <b>Total </b>
-                                                    {{sumarMontosACobrar()}}
-                                                </td>
 
-                                                <td>
-                                                    {{sumaMontoTotal}}
-                                                </td>
-                                            </tr>
-                                            </tfoot>
-
-                                        </table>
-                                        @endverbatim
-                                    </div>
-                                    <!-- END TABLE -->
+                                        </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
-
-                                <button type="button" ng-click="pagar()" class="btn btn-primary">Pagar</button>
+                                <!-- END TABLE -->
                             </div>
+                            <!-- Trigger the modal with a button -->
+                            <button type="button" class="btn btn-primary clearfix" ng-click="PagarProveedores()">Pagar</button>
+
 
                         </div>
+                        @endverbatim
 
                     </div>
                 </div>

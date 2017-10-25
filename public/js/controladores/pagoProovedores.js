@@ -1,5 +1,5 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){});
-app.controller('pago_proovedores', function($scope, $http, $compile, $sce, NgTableParams, $filter) {
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){});
+app.controller('pago_proovedores', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
 
   $scope.sumarMontosACobrar = function (){
    var sumaMontoTotal = 0;
@@ -9,6 +9,14 @@ app.controller('pago_proovedores', function($scope, $http, $compile, $sce, NgTab
 
     $scope.sumaMontoTotal = sumaMontoTotal;
   }
+
+  $scope.cambiarFecha = function(dato){
+     moment.locale('es');
+     fechaVencimiento= dato.fecha_vencimiento;
+     var fechaVencimiento= moment(fechaVencimiento, 'YYYY-MM-DD').format('L');
+     dato.fecha_vencimiento= fechaVencimiento;
+     return dato;
+   }
 
 $scope.ArrayPago = [];
     $scope.pullProveedores = function (){
@@ -26,7 +34,11 @@ $scope.ArrayPago = [];
             else
             {
                 console.log(response);
-                $scope.proveedores = response.data;
+                $scope.proveedores = response.data.map($scope.cambiarFecha);;
+                $scope.proveedores.forEach(function(entry) {
+                  var elem= {'id': entry.id_proovedor};
+                  $scope.ArrayPago.push(elem);
+                });
                 $scope.paramsProveedores = new NgTableParams({
                     page: 1,
                     count: 10
@@ -47,28 +59,43 @@ $scope.ArrayPago = [];
             console.log(data.data);
         });
 
-
-
     }
+
+    $scope.pullProovedor = function (id){
+      $http({
+          url: 'pago_proovedores/detalleProveedor',
+          method: 'post',
+          data: {'id': id}
+      }).then(function successCallback(response)
+      {
+          console.log(response.data.ventas);
+          if(typeof response.data === 'string')
+          {
+              return [];
+          }
+          else
+          {
+              console.log(response);
+              $scope.proovedorSeleccionado = response.data;
+          }
+
+      }, function errorCallback(data)
+      {
+          console.log(data.data);
+      });
+    };
 
     $scope.PagarProveedores = function (){
 
         $http({
             url: 'pago_proovedores/pagarCuotas',
             method: 'post',
-            data: {'proveedores': $scope.ArrayPago}
+            data: $scope.ArrayPago,
         }).then(function successCallback(response)
         {
-            console.log(response.data.ventas);
-            if(typeof response.data === 'string')
-            {
-                return [];
-            }
-            else
-            {
+          UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
                 $scope.pullProveedores();
                 $scope.ArrayPago = [];
-            }
 
         }, function errorCallback(data)
         {
