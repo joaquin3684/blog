@@ -108,6 +108,8 @@ $scope.traerRelaciones = function(relaciones)
       return dato;
     }
 
+
+  var inicio= true;
   $scope.traigo = function(urlabm,metodito,coso){
     var retorno;
     $http({
@@ -125,6 +127,10 @@ $scope.traerRelaciones = function(relaciones)
                 switch(coso){
                   case 'cap':
                     $scope.selectcapitulos = response.data;
+                    if (inicio){
+                      $scope.asignarPantallaActual('Capitulos');
+                      inicio= false;
+                    }
                   break;
                   case 'rub':
                     $scope.selectrubros = response.data;
@@ -138,34 +144,62 @@ $scope.traerRelaciones = function(relaciones)
                   case 'sub':
                     $scope.selectsubrubros = response.data;
                   break;
+                  case 'imp':
+                    $scope.selectimputaciones = response.data;
+                  break;
                 }
 
-                $scope.datosabm = [{'capitulos':$scope.selectcapitulos,
-                                    'rubros':$scope.selectrubros,
-                                    'monedas':$scope.selectmonedas,
-                                    'departamentos':$scope.selectdepartamentos,
-                                    'rubros':$scope.selectsubrubros}];
-                $scope.paramsABMS = new NgTableParams({
-                  page: 1,
-                  count: 10
-                }, {
-                  total: $scope.datosabm.length,
-                  getData: function (params) {
-                    var filterObj = params.filter();
-                    filteredData = $filter('filter')($scope.datosabm, filterObj);
-                    var sortObj = params.orderBy();
-                    orderedData = $filter('orderBy')(filteredData, sortObj);
-                    $scope.datosabmfiltrados = orderedData;
-                    $scope.datatoexcel = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                  }
-                });
             }
 
         }, function errorCallback(data)
         {
             console.log(data.data);
         })
+  }
+
+  $scope.generarTabla = function(datos){
+    $scope.paramsABMS = new NgTableParams({
+      page: 1,
+      count: 10
+    }, {
+      total: datos.length,
+      getData: function (params) {
+        var filterObj = params.filter();
+        filteredData = $filter('filter')(datos, filterObj);
+        var sortObj = params.orderBy();
+        orderedData = $filter('orderBy')(filteredData, sortObj);
+        $scope.datatoexcel = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+      }
+    });
+    //tablaDestino = tabla;
+  }
+
+
+  $scope.asignarPantallaActual = function (pantalla){
+    $scope.pantallaActual = pantalla;
+
+    switch(pantalla){
+      case 'Capitulos':
+        $scope.generarTabla($scope.selectcapitulos);
+      break;
+      case 'Rubros':
+        $scope.generarTabla($scope.selectrubros);
+      break;
+      case 'Monedas':
+        $scope.generarTabla($scope.selectmonedas);
+      break;
+      case 'Departamentos':
+        $scope.generarTabla($scope.selectdepartamentos);
+      break;
+      case 'SubRubros':
+        $scope.generarTabla($scope.selectsubrubros);
+      break;
+      case 'Imputaciones':
+        $scope.generarTabla($scope.selectimputaciones);
+      break;
+    }
+
   }
 
    $scope.traerElementos = function(relaciones)
@@ -179,9 +213,7 @@ $scope.traerRelaciones = function(relaciones)
       $scope.traigo('moneda/traerElementos','get','mon');
       $scope.traigo('departamento/traerElementos','get','dep');
       $scope.traigo('subRubro/traerElementos','get','sub');
-
-
-
+      $scope.traigo('imputacion/traerElementos','get','imp');
 
    }
 
@@ -248,6 +280,7 @@ $scope.traerRelaciones = function(relaciones)
      console.log(algo);
    }
    $scope.traerElementos();
+
 
    //EMPIEZA EL CODIGO DEL EXPANDIR
    $scope.tableRowExpanded = false;

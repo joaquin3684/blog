@@ -144,9 +144,13 @@
 
 
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-primary next-step">Continuar a Rubros <i class="fa fa-arrow-right"></i> </button></li>
+                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('Rubros')">Continuar a Rubros <i class="fa fa-arrow-right"></i> </button></li>
                         </ul>
+
+
+
                 </div>
+
                 <div class="tab-pane" role="tabpanel" id="rubro">
 
 
@@ -156,33 +160,32 @@
 
                   @verbatim
                   <form role="form" class="" ng-submit="enviarFormulario('rubro','Alta')" id="rubroform">
-                
+
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="id_capitulo">Capitulo <span class="required">*</span>
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <select id="id_rubro" class="form-control col-md-7 col-xs-12" ng-model="nose">
-                            <option value="{{x}}" ng-repeat="x in selectcapitulos">
+                            <select id="id_rubro" class="form-control col-md-7 col-xs-12" ng-model="capitulo">
+                            <option  ng-repeat="x in selectcapitulos" ng-value="{{x}}">
                             {{x.nombre}}
                             </option>
                             </select>
                         </div>
-                        <input type="hidden" value="{{nose.id}}" name="id_rubro">
+                        <input type="hidden" value="{{capitulo.id}}" name="id_capitulo">
                       </div>
 
                       <div class="row">
-                        {{consolear(nose.id)}}
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
                           <label class="" for="codigo">Código<span class="required">*</span>
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                           <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">{{nose.codigo}}.</span>
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
-                            <input type="hidden" id="tipo_tabla" value="{{nose}}{{codigo}}" name="codigo">
+                            <span class="input-group-addon" id="basic-addon1">{{capitulo.codigo}}</span>
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoRubro" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input type="hidden" id="tipo_tabla" value="{{capitulo.codigo}}{{codigoRubro}}" name="codigo">
                           </div>
                         </div>
                       </div>
@@ -208,8 +211,8 @@
 
 
                         <ul class="list-inline pull-right">
-                        <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-arrow-left"></i> Regresar a Capitulo</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Continuar a Moneda <i class="fa fa-arrow-right"></i> </button></li>
+                        <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('Capitulos')"><i class="fa fa-arrow-left"></i> Regresar a Capitulo</button></li>
+                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('Monedas')">Continuar a Moneda <i class="fa fa-arrow-right"></i> </button></li>
                         </ul>
 
 
@@ -220,6 +223,7 @@
                          <h3>Alta de Moneda</h3>
 
                   @verbatim
+
                   <form role="form" class="" ng-submit="enviarFormulario('moneda','Alta')" id="monedaform">
 
                       <div class="row">
@@ -228,12 +232,13 @@
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <select id="id_rubro" class="form-control col-md-7 col-xs-12" name="id_rubro" ng-model="nose">
-                            <option value="{{x.id}}" ng-repeat="x in selectrubros">
+                            <select id="id_rubro" class="form-control col-md-7 col-xs-12" ng-model="rubro">
+                            <option ng-value="{{x}}" ng-repeat="x in selectrubros">
                             {{x.nombre}}
                             </option>
                             </select>
                         </div>
+                        <input type="hidden" value="{{rubro.id}}" name="id_rubro">
                       </div>
 
                       <div class="row">
@@ -246,9 +251,9 @@
                         </div> -->
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                           <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">{{nose.codigo}}.</span>
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
-                            <input type="hidden" id="tipo_tabla" value="{{nose}}{{codigo}}" name="codigo">
+                            <span class="input-group-addon" id="basic-addon1">{{rubro.codigo}}</span>
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoMoneda" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input type="hidden" id="tipo_tabla" value="{{rubro.codigo}}{{codigoMoneda}}" name="codigo">
                           </div>
                         </div>
                       </div>
@@ -274,8 +279,8 @@
 
 
                         <ul class="list-inline pull-right">
-                        <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-arrow-left"></i> Regresar a Rubro</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Continuar a Departamento <i class="fa fa-arrow-right"></i> </button></li>
+                        <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('Rubros')"><i class="fa fa-arrow-left"></i> Regresar a Rubro</button></li>
+                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('Departamentos')">Continuar a Departamento <i class="fa fa-arrow-right"></i> </button></li>
                         </ul>
                 </div>
                 <div class="tab-pane" role="tabpanel" id="departamento">
@@ -283,6 +288,7 @@
                         <h3>Alta de Departamento</h3>
 
                   @verbatim
+
                   <form role="form" class="" ng-submit="enviarFormulario('departamento','Alta')" id="departamentoform">
 
                       <div class="row">
@@ -291,10 +297,11 @@
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <select id="id_moneda" class="form-control col-md-7 col-xs-12" name="id_moneda" ng-model="nose">
-                            <option value="{{x.id}}" ng-repeat="x in selectmonedas">
+                            <select id="id_moneda" class="form-control col-md-7 col-xs-12" ng-model="moneda">
+                            <option ng-value="{{x}}" ng-repeat="x in selectmonedas">
                             {{x.nombre}}
                             </option>
+                            <input type="hidden" value="{{moneda.id}}" name="id_moneda">
                             </select>
                         </div>
                       </div>
@@ -306,9 +313,9 @@
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                           <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">{{nose.codigo}}.</span>
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
-                            <input type="hidden" id="tipo_tabla" value="{{nose}}{{codigo}}" name="codigo">
+                            <span class="input-group-addon" id="basic-addon1">{{moneda.codigo}}</span>
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoDpto" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input type="hidden" id="tipo_tabla" value="{{moneda.codigo}}{{codigoDpto}}" name="codigo">
                           </div>
                         </div>
                         <!-- <div class="form-group col-md-4 col-sm-4 col-xs-12">
@@ -337,8 +344,8 @@
 
 
                         <ul class="list-inline pull-right">
-                        <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-arrow-left"></i> Regresar a Moneda</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Continuar a SubRubro <i class="fa fa-arrow-right"></i> </button></li>
+                        <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('Monedas')"><i class="fa fa-arrow-left"></i> Regresar a Moneda</button></li>
+                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('SubRubros')">Continuar a SubRubro <i class="fa fa-arrow-right"></i> </button></li>
                         </ul>
 
                 </div>
@@ -348,6 +355,7 @@
                       <h3>Alta de SubRubro</h3>
 
                   @verbatim
+
                   <form role="form" class="" ng-submit="enviarFormulario('subRubro','Alta')" id="subRubroform">
 
                       <div class="row">
@@ -356,11 +364,12 @@
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <select id="id_departamento" class="form-control col-md-7 col-xs-12" name="id_departamento" ng-model="nose">
-                            <option value="{{x.id}}" ng-repeat="x in selectdepartamentos">
+                            <select id="id_departamento" class="form-control col-md-7 col-xs-12" name="id_departamento" ng-model="departamento">
+                            <option ng-value="{{x}}" ng-repeat="x in selectdepartamentos">
                             {{x.nombre}}
                             </option>
                             </select>
+                            <input type="hidden" value="{{departamento.id}}" name="id_departamento">
                         </div>
                       </div>
 
@@ -374,9 +383,9 @@
                         </div> -->
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                           <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">{{nose}}.</span>
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
-                            <input type="hidden" id="tipo_tabla" value="{{nose}}{{codigo}}" name="codigo">
+                            <span class="input-group-addon" id="basic-addon1">{{departamento.codigo}}</span>
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoSubrubro" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input type="hidden" id="tipo_tabla" value="{{departamento.codigo}}{{codigoSubrubro}}" name="codigo">
                           </div>
                         </div>
                       </div>
@@ -402,8 +411,8 @@
 
 
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-arrow-left"></i> Regresar a Dpto</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Continuar a Imputaciones <i class="fa fa-arrow-right"></i> </button></li>
+                            <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('Departamentos')"><i class="fa fa-arrow-left"></i> Regresar a Dpto</button></li>
+                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('Imputaciones')">Continuar a Imputaciones <i class="fa fa-arrow-right"></i> </button></li>
                         </ul>
 
                 </div>
@@ -412,6 +421,7 @@
                         <h3>Alta de Imputación</h3>
 
                   @verbatim
+
                   <form role="form" class="" ng-submit="enviarFormulario('imputacion','Alta')" id="imputacionform">
 
                       <div class="row">
@@ -420,11 +430,12 @@
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <select id="id_subrubro" class="form-control col-md-7 col-xs-12" name="id_subrubro" ng-model="nose">
-                            <option value="{{x.id}}" ng-repeat="x in selectsubrubros">
+                            <select id="id_subrubro" class="form-control col-md-7 col-xs-12"  ng-model="subrubro">
+                            <option ng-value="{{x}}" ng-repeat="x in selectsubrubros">
                             {{x.nombre}}
                             </option>
                             </select>
+                            <input type="hidden" value="{{subrubro.id}}" name="id_subrubro">
                         </div>
                       </div>
 
@@ -438,9 +449,9 @@
                         </div> -->
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                           <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">{{nose}}.</span>
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigo" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
-                            <input type="hidden" id="tipo_tabla" value="{{nose}}{{codigo}}" name="codigo">
+                            <span class="input-group-addon" id="basic-addon1">{{subrubro.codigo}}</span>
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoImp" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input type="hidden" id="tipo_tabla" value="{{subrubro.codigo}}{{codigoImp}}" name="codigo">
                           </div>
                         </div>
                       </div>
@@ -466,7 +477,7 @@
 
 
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-arrow-left"></i> Regresar a SubRubros</button></li>
+                            <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('SubRubros')"><i class="fa fa-arrow-left"></i> Regresar a SubRubros</button></li>
 
                         </ul>
 
@@ -494,85 +505,101 @@
 
 
       </div>
+      <!-- aca va la tabla de editar -->
+      <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        @verbatim
+                        <h2>{{pantallaActual}}</h2>
+                        @endverbatim
+                        <ul class="nav navbar-right panel_toolbox">
+                          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                          </li>
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                              <li><a href="#">Settings 1</a>
+                              </li>
+                              <li><a href="#">Settings 2</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li><a href="#"><i class="fa fa-close"></i></a>
+                          </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                      <center>
+                     <button id="exportButton1" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
+                     </button>
+                     <button id="exportButton2" ng-click="$Servicio.Excel()" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
+                     <button id="exportButton3" ng-click="Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
+                     </center>
+                            <div id="pruebaExpandir">
+                                <div class="span12 row-fluid">
+                                    <!-- START TABLE -->
+                                    <!-- Mostrar Capitulos -->
+                                    <div >
+
+                                      <div class="table-responsive">
+                                        @verbatim
+                                        <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
+                                            <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
+                                            <tr class="clickableRow" title="Datos">
+                                                <td title="'Codigo'" filter="{ codigo: 'text'}" sortable="'codigo'">
+                                                    {{abm.codigo}}
+                                                </td>
+                                                <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                    {{abm.nombre}}
+                                                </td>
+
+                                                <td id="botones">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                                </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        @endverbatim
+                                      </div>
+                                      <!-- Mostrar Rubros -->
+                                      <!-- <div ng-show="pantallaActual == 'Rubros'">
+
+                                        <div class="table-responsive">
+                                          @verbatim
+                                          <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
+                                              <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
+                                              <tr class="clickableRow" title="Codigo">
+                                                  <td title="'Codigo'" filter="{ codigo: 'text'}" sortable="'codigo'">
+                                                      {{abm.codigo}}
+                                                  </td>
+                                                  <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                      {{abm.nombre}}
+                                                  </td>
+
+                                                  <td id="botones">
+                                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                  <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                                  </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                          @endverbatim
+                                        </div>
+                                    </div> -->
+                                    <!-- END TABLE -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                  </div>
+      <!-- aca va la tabla de editar -->
 
 
 
-     <!-- aca va la tabla de editar -->
-     <div class="col-md-12 col-sm-12 col-xs-12">
-                   <div class="x_panel">
-                     <div class="x_title">
-                       <h2>Capitulos <small>Todos los capitulos disponibles</small></h2>
-                       <ul class="nav navbar-right panel_toolbox">
-                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                         </li>
-                         <li class="dropdown">
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                           <ul class="dropdown-menu" role="menu">
-                             <li><a href="#">Settings 1</a>
-                             </li>
-                             <li><a href="#">Settings 2</a>
-                             </li>
-                           </ul>
-                         </li>
-                         <li><a href="#"><i class="fa fa-close"></i></a>
-                         </li>
-                       </ul>
-                       <div class="clearfix"></div>
-                     </div>
-                     <div class="x_content">
-                     <center>
-                    <button id="exportButton1" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
-                    </button>
-                    <button id="exportButton2" ng-click="$Servicio.Excel()" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
-                    <button id="exportButton3" ng-click="Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
-                    </center>
-                           <div id="pruebaExpandir">
-                               <div class="span12 row-fluid">
-                                   <!-- START TABLE -->
-                                   <div>
-
-                                     <div class="table-responsive">
-                                       @verbatim
-                                       <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
-                                           <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
-                                           <tr class="clickableRow" title="Datos">
-                                               <td title="'Capitulo'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                                                   {{abm.capitulo.nombre}}
-                                               </td>
-                                               <td title="'Rubro'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                                                   {{abm.rubro.nombre}}
-                                               </td>
-                                               <td title="'Moneda'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                                                   {{abm.moneda.nombre}}
-                                               </td>
-                                               <td title="'Departamento'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                                                   {{abm.departamento.nombre}}
-                                               </td>
-                                               <td title="'Sub Rubro'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                                                   {{abm.subRubro.nombre}}
-                                               </td>
-
-                                               <td id="botones">
-                                               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
-                                               <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
-                                               </td>
-                                           </tr>
-                                         </tbody>
-                                       </table>
-                                       @endverbatim
-                                     </div>
-
-
-                                   </div>
-                                   <!-- END TABLE -->
-                               </div>
-                           </div>
-
-                       </div>
-                   </div>
-
-                 </div>
-     <!-- aca va la tabla de editar -->
       <!-- /page content -->
     </div>
 
