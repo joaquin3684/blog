@@ -24,7 +24,7 @@ class ProductosMapper
 
     public function map(Productos $producto)
     {
-        $productoNuevo = new Producto($producto->id, $producto->nombre, $producto->ganancia, $producto->tipo);
+        $productoNuevo = new Producto($producto->id, $producto->nombre, $producto->ganancia, $producto->tipo, $producto->porcentaje_capital);
         if($producto->relationLoaded('proovedor'))
         {
             $mapper = new ProveedoresMapper();

@@ -103,10 +103,10 @@ class Ventas
 
     public function pagarProovedor()
     {
-
+        $porcenta_capital = $this->getPorcentajeCapital();
         $ganancia = $this->getPorcentajeGanancia();
-        $this->cuotas->each(function ($cuota) use ($ganancia) {
-           $cuota->pagarProovedor($ganancia);
+        $this->cuotas->each(function ($cuota) use ($ganancia, $porcenta_capital) {
+           $cuota->pagarProovedor($ganancia, $porcenta_capital);
         });
     }
 
@@ -171,6 +171,11 @@ class Ventas
     public function getPorcentajeGanancia()
     {
         return $this->producto->getGanancia();
+    }
+
+    public function getPorcentajeCapital()
+    {
+        return $this->producto->getPorcentajeCapital();
     }
 
     public function setEstados($estados)

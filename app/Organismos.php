@@ -10,7 +10,7 @@ class Organismos extends Model
     use SoftDeletes;
 	
     protected $fillable = [
-        'nombre', 'cuit'
+        'nombre', 'cuit', 'localidad', 'domicilio'
     ];
 
     protected $dates = ['deleted_at'];

@@ -46,11 +46,14 @@ class Movimiento
         return $this->fecha;
     }
 
-    public function pagarProovedor($ganancia)
+    public function pagarProovedor($ganancia, $porcentaje_capital, $aplicarPorcentajeCapital)
     {
         $entrada = $this->entrada;
         $this->salida = $entrada;
         $this->ganancia = $entrada * $ganancia / 100;
+        if($aplicarPorcentajeCapital){
+            $this->ganancia = ($entrada * $ganancia /100) + $entrada * $porcentaje_capital / 100;
+        }
         $this->update($this, $this->id);
     }
 

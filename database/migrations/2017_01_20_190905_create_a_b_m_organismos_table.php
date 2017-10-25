@@ -14,6 +14,8 @@ class CreateABMOrganismosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('cuit');
+            $table->string('localidad');
+            $table->string('domicilio');
             $table->softDeletes();
             $table->timestamps();
         });

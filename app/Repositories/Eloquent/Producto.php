@@ -13,16 +13,33 @@ class Producto
 {
     use Conversion;
     private $id;
+
+    /**
+     * @return mixed
+     */
+    public function getPorcentajeCapital()
+    {
+        return $this->porcentaje_capital;
+    }
+
+    /**
+     * @param mixed $porcentaje_capital
+     */
+    public function setPorcentajeCapital($porcentaje_capital)
+    {
+        $this->porcentaje_capital = $porcentaje_capital;
+    }
     private $nombre;
     private $ganancia;
     private $tipo;
     private $proveedor;
+    private $porcentaje_capital;
 
-    public function __construct($id, $nombre, $ganancia, $tipo)
+    public function __construct($id, $nombre, $ganancia, $tipo, $porcentaje_capital)
     {
         $this->id = $id;
         $this->nombre = $nombre;
-
+        $this->porcentaje_capital = $porcentaje_capital;
         $this->ganancia = $ganancia;
         $this->tipo = $tipo;
     }
