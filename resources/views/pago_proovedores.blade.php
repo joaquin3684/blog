@@ -241,7 +241,7 @@
                                             </td>
                                             <td></td>
                                             <td>
-                                                {{sumaMontoCobrado}}
+                                                {{sumaMonto}}
                                             </td>
 
 

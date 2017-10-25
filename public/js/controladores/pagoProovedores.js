@@ -35,9 +35,11 @@ $scope.ArrayPago = [];
             {
                 console.log(response);
                 $scope.proveedores = response.data;
+                $scope.sumaMonto = 0;
                 $scope.proveedores.forEach(function(entry) {
                   var elem= {'id': entry.id_proovedor};
                   $scope.ArrayPago.push(elem);
+                  $scope.sumaMonto += entry.totalAPagar;
                 });
                 $scope.paramsProveedores = new NgTableParams({
                     page: 1,
@@ -76,7 +78,7 @@ $scope.ArrayPago = [];
           else
           {
               console.log(response);
-          
+
               $scope.proovedorSeleccionado = response.data.map($scope.cambiarFecha);
           }
 
