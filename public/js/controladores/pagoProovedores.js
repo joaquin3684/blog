@@ -34,7 +34,7 @@ $scope.ArrayPago = [];
             else
             {
                 console.log(response);
-                $scope.proveedores = response.data.map($scope.cambiarFecha);;
+                $scope.proveedores = response.data;
                 $scope.proveedores.forEach(function(entry) {
                   var elem= {'id': entry.id_proovedor};
                   $scope.ArrayPago.push(elem);
@@ -76,7 +76,8 @@ $scope.ArrayPago = [];
           else
           {
               console.log(response);
-              $scope.proovedorSeleccionado = response.data;
+          
+              $scope.proovedorSeleccionado = response.data.map($scope.cambiarFecha);
           }
 
       }, function errorCallback(data)
