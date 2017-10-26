@@ -69,6 +69,13 @@
                                                     <input required type="number" step="0.01" id="retencion" ng-model="ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.ganancia[0]}}
                                                 </div>
                                             </div>
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_capital">Porcentaje Capital <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input required type="number" step="0.01" id="porcentaje_capital" ng-model="porcentaje_capital" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.ganancia[0]}}
+                                                </div>
+                                            </div>
 
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Proveedor <span class="required">*</span>
@@ -284,6 +291,14 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="number" id="retencion" ng-model="abmConsultado.ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_capital">Porcentaje capital <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" id="porcentaje_capital" ng-model="abmConsultado.porcentaje_capital" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_capital[0]}}
                                 </div>
                             </div>
 

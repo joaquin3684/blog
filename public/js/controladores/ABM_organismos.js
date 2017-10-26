@@ -29,6 +29,8 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
     var data = {
       'nombre': $scope.nombre,
       'cuit': $scope.cuit,
+      'domicilio': $scope.domicilio,
+      'localidad': $scope.localidad,
       'cuota_social': $scope.cuotas,
     };
 
@@ -106,6 +108,8 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
     var data = {
       'nombre': $scope.abmConsultado.nombre,
       'cuit': $scope.abmConsultado.cuit,
+      'domicilio': $scope.abmConsultado.domicilio,
+      'localidad': $scope.abmConsultado.localidad,
       'cuota_social': $scope.abmConsultado.cuotas,
       'id': $scope.abmConsultado.id,
     };

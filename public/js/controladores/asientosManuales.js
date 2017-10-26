@@ -17,8 +17,10 @@ app.controller('asientosManuales', function($scope, $http, $compile, $sce, NgTab
 
   $scope.submit = function() {
 
+    var fechaFormateada = moment($scope.fecha).format("MM-DD-YYYY");
     var data = {
       'asientos': $scope.asientos,
+      'fecha_valor': fechaFormateada
     };
 
     return $http({

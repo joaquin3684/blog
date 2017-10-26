@@ -65,6 +65,22 @@
                       </div>
                     </div>
 
+                    <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input required type="text" id="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el domicilio">{{errores.domicilio[0]}}
+                    </div>
+                  </div>
+
+                  <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="localidad">Localidad <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input required type="text" id="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la localidad">{{errores.localidad[0]}}
+                  </div>
+                </div>
+
 
                       <div id="aClonar" ng-repeat="cuota in cuotas">
                         <div class="item form-group clonado">
@@ -209,6 +225,12 @@
                                               <td title="'Cuit'" filter="{ cuit: 'text'}" sortable="'cuit'">
                                                   {{abm.cuit}}
                                               </td>
+                                              <td title="'Domicilio'" filter="{ domicilio: 'text'}" sortable="'domicilio'">
+                                                  {{abm.domicilio}}
+                                              </td>
+                                              <td title="'Localidad'" filter="{ localidad: 'text'}" sortable="'localidad'">
+                                                  {{abm.localidad}}
+                                              </td>
 
 
                                               <td id="botones">
@@ -263,7 +285,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" placeholder="Ingrese nombre del organismo" type="text" ng-model="nombreedi" >{{errores.nombre[0]}}
+                        <input class="form-control col-md-7 col-xs-12" placeholder="Ingrese nombre del organismo" type="text" ng-model="abmConsultado.nombre" >{{errores.nombre[0]}}
 
                       </div>
                     </div>
@@ -275,6 +297,23 @@
                         <input type="text" id="cuit" ng-model="abmConsultado.cuit" class="form-control col-md-7 col-xs-12">{{errores.cuit[0]}}
                       </div>
                     </div>
+
+                    <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="domicilio" ng-model="abmConsultado.domicilio" class="form-control col-md-7 col-xs-12">{{errores.domicilio[0]}}
+                    </div>
+                  </div>
+
+                    <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="localidad">Localidad <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="localidad" ng-model="abmConsultado.localidad" class="form-control col-md-7 col-xs-12">{{errores.localidad[0]}}
+                    </div>
+                  </div>
+
                     <div ng-repeat="cuota in abmConsultado.cuotas">
                       <div class="item form-group clonado1" >
                         <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social<span class="required">*</span>
