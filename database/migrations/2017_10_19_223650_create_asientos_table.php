@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -20,7 +21,10 @@ class CreateAsientosTable extends Migration
             $table->double('debe')->nullable();
             $table->double('haber')->nullable();
             $table->bigInteger('nro_asiento');
+            $table->integer('id_ejercicio')->unsigned();
+            $table->foreign('id_ejercicio')->references('id')->on('ejercicios');
             $table->date('fecha_contable');
+            $table->date('fecha_valor');
             $table->timestamps();
         });
     }

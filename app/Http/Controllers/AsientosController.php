@@ -10,19 +10,12 @@ use Illuminate\Support\Facades\DB;
 class AsientosController extends Controller
 {
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     private $gateway;
 
     public function __construct()
     {
         $this->gateway = new AsientosGateway();
     }
-
 
     public function index()
     {
@@ -32,27 +25,22 @@ class AsientosController extends Controller
     public function store(Request $request)
     {
         DB::transaction(function() use ($request){
+            $ejercicio = DB::table('ejercicios')->where('fecha_cierre', null)->first();
             foreach($request['asientos'] as $elem){
+                $elem['fecha_valor'] = $request['fecha_valor'];
                 $elem['fecha_contable'] = Carbon::today()->toDateString();
                 $ultimoAsiento = $this->gateway->last();
                 $elem['nro_asiento'] = $ultimoAsiento->nro_asiento + 1;
+                $elem['id_ejercicio'] = $ejercicio->id;
                 $this->gateway->create($elem);
             }
         });
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return $this->gateway->find($id);
     }
-
-
 
     public function all()
     {

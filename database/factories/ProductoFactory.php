@@ -11,6 +11,7 @@ $factory->define(App\Productos::class, function (Faker\Generator $faker) {
         'id_proovedor' => $faker->numberBetween(1,10),
         'nombre' => $faker->name,
         'ganancia' => $faker->numberBetween(0, 100),
+        'porcentaje_capital' => $faker->numberBetween(0, 100),
         'tipo' => 'Producto'
     ];
 });
@@ -21,6 +22,8 @@ $factory->state(App\Productos::class, 'Credito', function(Faker\Generator $faker
         'id_proovedor' => $faker->numberBetween(1,10),
         'nombre' => $faker->name,
         'ganancia' => $faker->numberBetween(0, 100),
+        'ganancia' => $faker->numberBetween(0, 100),
+        'porcentaje_capital' => $faker->numberBetween(0, 100),
         'tipo' => 'Credito'
     ];
 });
