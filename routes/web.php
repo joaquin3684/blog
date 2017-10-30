@@ -262,3 +262,7 @@ Route::get('notificacion/marcarTodasLeidas', 'NotificacionController@marcarTodas
 //-------------------- ASIENTOS ---------------------------------
 
 Route::resource('asientos', 'AsientosController');
+
+//-------------------- BANCOS ----------------------------------
+
+Route::resource('bancos', 'BancoController');
