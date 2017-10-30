@@ -14,6 +14,7 @@ class ImputacionGateway extends Gateway
 
     public static function obtenerCodigoNuevo($codigoBase)
     {
-        return DB::table('imputaciones')->where('codigo', 'like', '%'.$codigoBase.'%')->orderBy('codigo', 'desc')->first()->codigo;
+        $imputacion =  DB::table('imputaciones')->where('codigo', 'LIKE', '%'.$codigoBase.'%')->orderBy('codigo', 'desc')->first();
+        return $imputacion->codigo + 1;
     }
 }

@@ -32,13 +32,14 @@ class BancoController extends Controller
 
     public function store(ValidacionBanco $request)
     {
-        DB::transaction(function($request){
-            $this->gateway->create(['nombre' => $request['nombre']]);
+        DB::transaction(function() use ($request){
+       //     $this->gateway->create(['nombre' => $request['nombre']]);
+            $this->gateway->create($request->all());
             $codigo = ImputacionGateway::obtenerCodigoNuevo('1110102');
             Imputacion::create(['nombre' => 'Banco '.$request['nombre'], 'codigo' => $codigo]);
         });
     }
-    
+
 
     /**
      * Display the specified resource.

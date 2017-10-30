@@ -24,7 +24,7 @@ class ValidacionBanco extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required',
+            'nombre' => 'required|unique:bancos,nombre,'.$this->get('id'),
         ];
     }
 }

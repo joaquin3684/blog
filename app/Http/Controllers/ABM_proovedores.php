@@ -24,21 +24,20 @@ class ABM_proovedores extends Controller
     {
         $elem = collect($request->all());
         DB::transaction(function () use ($elem) {
-        $usuario = $elem['usuario'];
-        $pass = $elem['password'];
-        $email = $elem['email'];
 
-        $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
-        $elem['usuario'] = $user->id;
-        Proovedores::create($elem->toArray());
-        $codigo = ImputacionGateway::obtenerCodigoNuevo('1310100');
-        Imputacion::create(['nombre' => 'Deudores '.$elem['nombre'], 'codigo' => $codigo]);
-        $codigo = ImputacionGateway::obtenerCodigoNuevo('3110300');
-        Imputacion::create(['nombre' => 'Cta '.$elem['nombre'], 'codigo' => $codigo]);
-        $codigo = ImputacionGateway::obtenerCodigoNuevo('5110301');
-        Imputacion::create(['nombre' => 'Cta '.$elem['nombre'], 'codigo' => $codigo]);
+            $usuario = $elem['usuario'];
+            $pass = $elem['password'];
+            $email = $elem['email'];
 
-
+            $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
+            $elem['usuario'] = $user->id;
+            Proovedores::create($elem->toArray());
+            $codigo = ImputacionGateway::obtenerCodigoNuevo('1310100');
+            Imputacion::create(['nombre' => 'Deudores '.$elem['razon_social'], 'codigo' => $codigo]);
+            $codigo = ImputacionGateway::obtenerCodigoNuevo('3110300');
+            Imputacion::create(['nombre' => 'Cta '.$elem['razon_social'], 'codigo' => $codigo]);
+            $codigo = ImputacionGateway::obtenerCodigoNuevo('5110301');
+            Imputacion::create(['nombre' => 'Cta '.$elem['razon_social'], 'codigo' => $codigo]);
 
         });
     }
