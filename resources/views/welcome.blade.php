@@ -127,6 +127,7 @@
                       <li><a href="usuarios">Usuarios</a></li>
                       <li><a href="roles">Roles</a></li>
                       <li><a href="abm_comercializador">Comercializador</a></li>
+                      <li><a href="bancos">Bancos</a></li>
 
                   </ul>
                 </li>
