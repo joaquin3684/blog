@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ValidacionBanco;
 use App\Imputacion;
 use App\Repositories\Eloquent\Repos\Gateway\BancoGateway;
+use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,12 +33,12 @@ class BancoController extends Controller
     public function store(ValidacionBanco $request)
     {
         DB::transaction(function($request){
-            $this->gateway->create($request->all());
-            $codigo = DB::table('imputaciones')->where('codigo', 'like', '%'.'1110102'.'%')->orderBy('codigo', 'desc')->first();//TODO aca hay que ordenar siempre por el del banco
-            $codigoNuevo = $codigo->codigo +1;
-            Imputacion::create(['nombre' => $request['nombre'], 'codigo' => $codigoNuevo]);
+            $this->gateway->create(['nombre' => $request['nombre']]);
+            $codigo = ImputacionGateway::obtenerCodigoNuevo('1110102');
+            Imputacion::create(['nombre' => 'Banco '.$request['nombre'], 'codigo' => $codigo]);
         });
     }
+    
 
     /**
      * Display the specified resource.

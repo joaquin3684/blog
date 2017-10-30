@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Imputacion;
+use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidacionABMproovedores;
@@ -26,9 +28,17 @@ class ABM_proovedores extends Controller
         $pass = $elem['password'];
         $email = $elem['email'];
 
-            $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
-            $elem['usuario'] = $user->id;
-            Proovedores::create($elem->toArray());
+        $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
+        $elem['usuario'] = $user->id;
+        Proovedores::create($elem->toArray());
+        $codigo = ImputacionGateway::obtenerCodigoNuevo('1310100');
+        Imputacion::create(['nombre' => 'Deudores '.$elem['nombre'], 'codigo' => $codigo]);
+        $codigo = ImputacionGateway::obtenerCodigoNuevo('3110300');
+        Imputacion::create(['nombre' => 'Cta '.$elem['nombre'], 'codigo' => $codigo]);
+        $codigo = ImputacionGateway::obtenerCodigoNuevo('5110301');
+        Imputacion::create(['nombre' => 'Cta '.$elem['nombre'], 'codigo' => $codigo]);
+
+
 
         });
     }

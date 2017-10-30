@@ -3,6 +3,8 @@
 namespace App\Repositories\Eloquent\Repos\Gateway;
 
 
+use Illuminate\Support\Facades\DB;
+
 class ImputacionGateway extends Gateway
 {
     function model()
@@ -10,4 +12,8 @@ class ImputacionGateway extends Gateway
         return 'App\Imputacion';
     }
 
+    public static function obtenerCodigoNuevo($codigoBase)
+    {
+        return DB::table('imputaciones')->where('codigo', 'like', '%'.$codigoBase.'%')->orderBy('codigo', 'desc')->first()->codigo;
+    }
 }
