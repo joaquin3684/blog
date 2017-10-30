@@ -17,7 +17,7 @@ class CreateAsientosTable extends Migration
         Schema::create('asientos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_imputacion')->unsigned();
-            $table->foreign('id_imputacion')->references('id')->on('imputaciones');
+            $table->foreign('id_imputacion')->references('codigo')->on('imputaciones');
             $table->double('debe')->nullable();
             $table->double('haber')->nullable();
             $table->bigInteger('nro_asiento');

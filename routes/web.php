@@ -265,4 +265,9 @@ Route::resource('asientos', 'AsientosController');
 
 //-------------------- BANCOS ----------------------------------
 
+Route::get('bancos/traerElementos', 'BancoController@all');
 Route::resource('bancos', 'BancoController');
+
+//------------------- Cobro contable --------------------------
+
+Route::get('cobrar_contablemente', 'CobrarContablemente@index');

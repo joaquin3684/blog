@@ -17,4 +17,11 @@ class ImputacionGateway extends Gateway
         $imputacion =  DB::table('imputaciones')->where('codigo', 'LIKE', '%'.$codigoBase.'%')->orderBy('codigo', 'desc')->first();
         return $imputacion->codigo + 1;
     }
+
+    public static function traerBancos()
+    {
+        return DB::table('imputaciones')->where('codigo', 'LIKE', '%'.'1110102'.'%')->get();
+    }
+
+    public static function traerDeudores()
 }
