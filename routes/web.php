@@ -271,3 +271,6 @@ Route::resource('bancos', 'BancoController');
 //------------------- Cobro contable --------------------------
 
 Route::get('cobrar_contablemente', 'CobrarContablemente@index');
+Route::get('cobrar_contablemente/traerProveedores', 'CobrarContablemente@traerProveedores');
+Route::get('cobrar_contablemente/traerBancos', 'CobrarContablemente@traerBancos');
+Route::post('cobrar_contablemente/cobrar', 'CobrarContablemente@cobrar');

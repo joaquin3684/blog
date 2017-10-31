@@ -28,10 +28,21 @@ class CobrarContablemente extends Controller
     {
         DB::transaction(function() use ($request){
             $asientos = new AsientosGateway();
-            $asientos->create(['id_imputacion' => $request['codigo'], 'debe' => $request['valor']]);
-            if($request['tipo'] == 'servicios')
+            if($request['formaCobro'] == 'Banco')
             {
-                $asientos->create(['id_imputacion' => '131010001', 'haber' => $request['valor']]);
+                $asientos->create(['id_imputacion' => $request['codigo'], 'debe' => $request['valor']]);
+            }
+            else if($request['formaCobro'] == 'Caja')
+            {
+                $asientos->create(['id_imputacion' => '111010101', 'debe' => $request['valor']]);
+            }
+            if($request['tipo'] == 'Servicios')
+            {
+                $asientos->create(['id_imputacion' => $request['codigoDeudor'], 'haber' => $request['valor']]);
+            }
+            else if($request['tipo'] == 'Cuotas sociales')
+            {
+                $asientos->create(['id_imputacion' => $request['codigoDeudor'], 'haber' => $request['valor']]);
             }
         });
     }

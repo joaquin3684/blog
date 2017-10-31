@@ -24,4 +24,7 @@ class ImputacionGateway extends Gateway
     }
 
     public static function traerDeudores()
+    {
+        return DB::table('imputaciones')->where('codigo', 'LIKE', '%'.'1310100'.'%')->get();
+    }
 }
