@@ -94,11 +94,11 @@
 </table>
 
 <div class="item form-group">
-  <label class="control-label col-md-2 col-sm-2 col-xs-12" >Fecha valor<span class="required">*</span>
+  <label class="control-label " >Fecha valor<span class="required">*</span>
   </label>
-  <div class="col-md-4 col-sm-4 col-xs-12">
-    <input type="date" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la fecha" ng-model="fecha">
-  </div>
+
+    <input type="date" class="form-control " placeholder="Ingrese la fecha" ng-model="fecha">
+
 </div>
 
                     <div class="ln_solid"></div>
