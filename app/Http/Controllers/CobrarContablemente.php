@@ -30,7 +30,7 @@ class CobrarContablemente extends Controller
             $asientos = new AsientosGateway();
             if($request['formaCobro'] == 'Banco')
             {
-                $asientos->create(['id_imputacion' => $request['codigo'], 'debe' => $request['valor']]);
+                $asientos->create(['id_imputacion' => $request['idBanco'], 'debe' => $request['valor']]);
             }
             else if($request['formaCobro'] == 'Caja')
             {
@@ -38,12 +38,12 @@ class CobrarContablemente extends Controller
             }
             if($request['tipo'] == 'Servicios')
             {
-                $asientos->create(['id_imputacion' => $request['codigoDeudor'], 'haber' => $request['valor']]);
+                $asientos->create(['id_imputacion' => $request['idDeudor'], 'haber' => $request['valor']]);
             }
             else if($request['tipo'] == 'Cuotas sociales')
             {
                 $asientos->create(['id_imputacion' => $request['codigoDeudor'], 'haber' => $request['valor']]);
-            }
+            }//todo: aca falta la cuenta de imputacion para las cuotas sociales
         });
     }
 }
