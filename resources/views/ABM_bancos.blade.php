@@ -2,9 +2,8 @@
 
 @section('contenido')
 
+
 {!! Html::script('js/controladores/ABMprueba.js') !!}
-
-
 <div class="nav-md" ng-controller="ABM" >
 
   <div class="container body" >
@@ -189,6 +188,10 @@
 
   </div>
 </div>
+
+
+
+
 
 
 </div>

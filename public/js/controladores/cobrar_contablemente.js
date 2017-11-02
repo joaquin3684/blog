@@ -1,7 +1,7 @@
 
 var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider) {});
 
-app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
+app.controller('cobrar_contablemente', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
 

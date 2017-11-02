@@ -165,11 +165,12 @@
                       </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-area-chart"></i> CONTABILIDAD <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-area-chart"></i> Contabilidad <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                       <li><a href="capitulo">Plan de cuentas</a>
                       <li><a href="asientos">Asientos Contables Manuales</a>
                       </li>
+                      <li><a href="cobrar_contablemente">Cobrar contablemente</a></li>
                       <!-- <li><a href="rubro">Rubros</a>
                       </li>
                       <li><a href="moneda">Monedas</a></li>
@@ -183,13 +184,17 @@
                   </li>
                   <li><a href="comercializador"><i class="fa fa-pencil"></i>Generar Solicitud</a>
                   </li>
-                  <li><a href="correrVto"><i class="fa fa-calendar"></i>Correr Vto Servicio/Prestamo</a>
-                  </li>
+
                   <li><a href="solicitudesPendientesMutual"><i class="fa fa-clock-o"></i>Solicitudes Pendientes</a>
                   </li>
-
+                  <li><a href="correrVto"><i class="fa fa-calendar"></i>Correr Vto Servicio/Prestamo</a>
+                  </li>
+                  <li><a href="pago_proovedores"><i class="fa fa-money" ></i> Pago proveedores</a>
+                  <!-- <li><a type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-calendar-check-o" ></i> Fecha contable</a> -->
+                    <li><a><i class="fa fa-calendar-times-o" ></i> Cerrar fecha</a>
               </ul>
             </div>
+
 
 
           </div>
@@ -296,34 +301,108 @@
  {!! Html::script('js/app.js') !!}
 
 
+ <!-- Modal -->
+<div >
+  <div class="modal fade" id="myModal"  role="dialog"  data-backdrop="false">
+    <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Fecha contable</h4>
+        </div>
+        <div class="modal-body">
+
+          <form class="form-horizontal form-label-left">
+            <div class="item form-group">
+             <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha</label>
+             <div class="col-md-6 col-sm-6 col-xs-12">
+               <input class="form-control col-md-7 col-xs-12" ng-model="fechaContable" type="date">
+             </div>
+           </div>
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-6 col-md-offset-3">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-success" ng-click="guardarFechaContable(fechaContable)">Guardar</button>
+            </div>
+          </div>
+        </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <script type="text/javascript">
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider) {});
+
+app.controller('fechaContable', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
+
+  // manda las solicitud http necesarias para manejar los requerimientos de un abm
+
+
+
+  $scope.submit = function(fechaContable) {
+
+    var data = {
+      'fecha': fechaContable,
+    };
+
+    return $http({
+      url: 'fechaContable',
+      method: 'post',
+      data: data,
+
+    }).then(function successCallback(response) {
+      UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
+    }, function errorCallback(response) {
+      console.log("Error")
+    });
+
+  }
+
+});
+
+</script> -->
 
   <script>
     NProgress.done();
   </script>
   <!-- /datepicker -->
   <!-- /footer content -->
-  <div id="prompted" class="modal fade" role="dialog" ng-controller="Serviced">
-  <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Descargar como Excel</h4>
-      </div>
-      <div class="modal-body">
-      <form ng-submit="$Servicio.Excel2(nombreexcel)">
-        <div class="input-group" style="width: 80%;">
+  <div ng-controller="Serviced">
+    <div id="prompted" class="modal fade" role="dialog" >
+    <div class="modal-dialog">
 
-          <input type="password" class="form-control" id="pass" name="pass" placeholder="Nombre del archivo.." aria-describedby="basic-addon1" ng-model="nombreexcel">
-          <span class="input-group-btn"><button class="btn btn-primary" type="submit" style="" ><span class="fa fa-file-excel-o"></span> DESCARGAR</button></span>
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Descargar como Excel</h4>
         </div>
+        <div class="modal-body">
+        <form ng-submit="$Servicio.Excel2(nombreexcel)">
+          <div class="input-group" style="width: 80%;">
 
+            <input type="password" class="form-control" id="pass" name="pass" placeholder="Nombre del archivo.." aria-describedby="basic-addon1" ng-model="nombreexcel">
+            <span class="input-group-btn"><button class="btn btn-primary" type="submit" style="" ><span class="fa fa-file-excel-o"></span> DESCARGAR</button></span>
+          </div>
+
+        </div>
       </div>
+      </form>
     </div>
-    </form>
   </div>
-</div>
+
+
+  </div>
+
+
+
 </body>
 
 </html>

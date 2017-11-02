@@ -5,7 +5,7 @@
 {!! Html::script('js/controladores/cobrar_contablemente.js') !!}
 
 
-<div class="nav-md" ng-controller="ABM" >
+<div class="nav-md" ng-controller="cobrar_contablemente" >
 
   <div class="container body" >
 
@@ -19,7 +19,7 @@
         <div class="" >
 
           <div class="clearfix"></div>
-<div id="mensaje"></div>
+          <div id="mensaje"></div>
           <div class="row" >
             <div class="col-md-12 col-sm-12 col-xs-12" >
               <div class="x_panel"  >
@@ -94,7 +94,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="importe">Importe <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required class="form-control col-md-7 col-xs-12" ng-model="importe" placeholder="Ingrese el importe" type="text">{{errores.nombre[0]}}
+                        <input required class="form-control col-md-7 col-xs-12" ng-model="importe" placeholder="Ingrese el importe" type="number">{{errores.nombre[0]}}
                       </div>
                     </div>
 
