@@ -42,6 +42,16 @@ return [
     'modificacion_incorrecta' => [
         'title' => 'Los campos unicos erroneos.',
         'detail' => 'Los campos unicos ingresados ya existen porfavor ingrese valores unicos.'
-    ]
+    ],
+
+    'fecha_contable_cerrada' => [
+        'title' => 'Fecha contable cerrada.',
+        'detail' => 'La fecha contable ya esta en el dia actual.'
+    ],
+
+    'fecha_contable_ejercicio_cerrado' => [
+        'title' => 'Fecha elejida erronea.',
+        'detail' => 'La fecha elejida pertenece a un ejercicio cerrado.'
+    ],
 
 ];

@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Ejercicio;
+use App\Imputacion;
+use App\Repositories\Eloquent\ControlFechaContable;
+use App\Repositories\Eloquent\GeneradorDeAsientos;
 use App\Repositories\Eloquent\Repos\Gateway\AsientosGateway;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CobrarContablemente extends Controller
 {
+
+
+
     public function index()
     {
         return view('cobrar_contablemente');
@@ -26,23 +34,25 @@ class CobrarContablemente extends Controller
 
     public function cobrar(Request $request)
     {
+
         DB::transaction(function() use ($request){
-            $asientos = new AsientosGateway();
-            if($request['formaCobro'] == 'Banco')
+
+            if($request['formaCobro'] == 'banco')
             {
-                $asientos->create(['id_imputacion' => $request['idBanco'], 'debe' => $request['valor']]);
+                GeneradorDeAsientos::crear($request['idBanco'], $request['valor'], 0);
             }
-            else if($request['formaCobro'] == 'Caja')
+            else if($request['formaCobro'] == 'caja')
             {
-                $asientos->create(['id_imputacion' => '111010101', 'debe' => $request['valor']]);
+                $caja = Imputacion::where('nombre', 'Caja - Efectivo')->first();
+                GeneradorDeAsientos::crear($caja->id, $request['valor'], 0);
             }
-            if($request['tipo'] == 'Servicios')
+            if($request['tipo'] == 'servicios')
             {
-                $asientos->create(['id_imputacion' => $request['idDeudor'], 'haber' => $request['valor']]);
+                GeneradorDeAsientos::crear($request['idDeudor'], 0, $request['valor']);
             }
-            else if($request['tipo'] == 'Cuotas sociales')
+            else if($request['tipo'] == 'cuotas_sociales')
             {
-                $asientos->create(['id_imputacion' => $request['codigoDeudor'], 'haber' => $request['valor']]);
+                GeneradorDeAsientos::crear($request['idDeudor'], 0, $request['valor']);
             }//todo: aca falta la cuenta de imputacion para las cuotas sociales
         });
     }

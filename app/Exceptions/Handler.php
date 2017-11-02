@@ -96,6 +96,13 @@ class Handler extends ExceptionHandler
             ], config('errors.not_found'));
 
             $status = 405;
+        } else if($e instanceof LaFechaContablaYaEstaCerradaException){
+            $data = array_merge([
+                'id' => 'fecha_contable_cerrada',
+                'status' => '405'
+            ], config('errors.fecha_contable_cerrada'));
+
+            $status = 405;
         } else {
             $data = array_merge([
                 'id'     => 'error_sistema',

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cuotas;
+use App\Repositories\Eloquent\GeneradorDeAsientos;
+use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use App\Socios;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,6 +40,10 @@ class ABM_asociados extends Controller
                 'importe' => $elem['valor'],
                 'nro_cuota' => 1,
             ]);
+            $impu = ImputacionGateway::buscarPorCodigo('511010101');
+            GeneradorDeAsientos::crear($impu->id, 0, $elem['valor']);
+            GeneradorDeAsientos::crear($impu->id, $elem['valor'], 0);
+            //todo la imputacion al debe queda pendiente no saben que cuenta es todavia
             $socio->cuotasSociales()->save($cuota);
         });
         return ['created' => true];

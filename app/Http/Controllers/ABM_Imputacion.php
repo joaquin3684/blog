@@ -30,6 +30,7 @@ class ABM_Imputacion extends Controller
     public function store(ValidacionImputacion $request)
     {
         return $this->gateway->create($request->all());
+        //TODO: aca hay que crear las los saldos para esta cuenta
     }
 
     /**

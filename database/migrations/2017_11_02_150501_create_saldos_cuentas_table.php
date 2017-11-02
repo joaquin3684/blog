@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBancoReposTable extends Migration
+class CreateSaldosCuentasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,14 @@ class CreateBancoReposTable extends Migration
      */
     public function up()
     {
-        Schema::create('bancos', function (Blueprint $table) {
+        Schema::create('saldos_cuentas', function (Blueprint $table) {
             $table->increments('id');
+            $table->double('saldo');
+            $table->integer('year');
+            $table->integer('month');
+            $table->integer('id_imputacion')->unsigned();
+            $table->foreign('id_imputacion')->references('id')->on('imputaciones');
             $table->softDeletes();
-            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -31,7 +35,7 @@ class CreateBancoReposTable extends Migration
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
-        Schema::dropIfExists('bancos');
+        Schema::dropIfExists('saldos_cuentas');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
     }

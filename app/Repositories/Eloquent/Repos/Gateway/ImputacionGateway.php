@@ -27,4 +27,19 @@ class ImputacionGateway extends Gateway
     {
         return DB::table('imputaciones')->where('codigo', 'LIKE', '%'.'1310100'.'%')->get();
     }
+
+    public static function buscarPorNombre($nombre)
+    {
+        return DB::table('imputaciones')->where('nombre', $nombre)->first();
+    }
+
+    public static function buscarPorAproximadoNombre($aproximado)
+    {
+        return DB::table('imputaciones')->where('codigo', 'LIKE', '%'.$aproximado.'%')->get();
+    }
+
+    public static function buscarPorCodigo($codigo)
+    {
+        return DB::table('imputaciones')->where('nombre', $codigo)->first();
+    }
 }

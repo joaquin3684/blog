@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBancoReposTable extends Migration
+class CreateControlFechaContablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,12 @@ class CreateBancoReposTable extends Migration
      */
     public function up()
     {
-        Schema::create('bancos', function (Blueprint $table) {
+        Schema::create('control_fecha_contables', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('fecha_contable');
+            $table->integer('id_usuario')->unsigned();
+            $table->foreign('id_usuario')->references('id')->on('users');
             $table->softDeletes();
-            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -31,7 +33,7 @@ class CreateBancoReposTable extends Migration
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
-        Schema::dropIfExists('bancos');
+        Schema::dropIfExists('control_fecha_contables');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
     }

@@ -101,7 +101,7 @@
               <img src="images/img.jpg" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
-              <span>Bienvenido, {{Sentinel::check()->usuario}}</span>
+              <span>Bienvenido, {{Sentinel::check()->usuario}} {{\App\Repositories\Eloquent\ControlFechaContable::getFecha() }}</span>
               <h2></h2>
             </div>
           </div>

@@ -18,8 +18,8 @@ class CreateAsientosTable extends Migration
             $table->increments('id');
             $table->integer('id_imputacion')->unsigned();
             $table->foreign('id_imputacion')->references('id')->on('imputaciones');
-            $table->double('debe')->nullable();
-            $table->double('haber')->nullable();
+            $table->double('debe')->default(0);
+            $table->double('haber')->default(0);
             $table->bigInteger('nro_asiento');
             $table->integer('id_ejercicio')->unsigned();
             $table->foreign('id_ejercicio')->references('id')->on('ejercicios');

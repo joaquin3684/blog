@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Eloquent\CalcularSaldos;
+use App\Repositories\Eloquent\GeneradorDeAsientos;
 use App\Repositories\Eloquent\Repos\Gateway\AsientosGateway;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -25,14 +27,9 @@ class AsientosController extends Controller
     public function store(Request $request)
     {
         DB::transaction(function() use ($request){
-            $ejercicio = DB::table('ejercicios')->where('fecha_cierre', null)->first();
             foreach($request['asientos'] as $elem){
-                $elem['fecha_valor'] = $request['fecha_valor'];
-                $elem['fecha_contable'] = Carbon::today()->toDateString();
-                $ultimoAsiento = $this->gateway->last();
-                $elem['nro_asiento'] = $ultimoAsiento->nro_asiento + 1;
-                $elem['id_ejercicio'] = $ejercicio->id;
-                $this->gateway->create($elem);
+               GeneradorDeAsientos::crear($elem['id_imputacion'], $elem['debe'], $elem['haber'], $request['fecha_valor']);
+                CalcularSaldos::modificarSaldo($elem['id_imputacion'], $request['fecha_valor']);
             }
         });
     }

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imputacion;
+use App\Productos;
+use App\Proovedores;
+use App\Repositories\Eloquent\GeneradorDeAsientos;
 use App\Repositories\Eloquent\Generadores\GeneradorCuotas;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
 use App\Repositories\Eloquent\Repos\EstadoVentaRepo;
@@ -34,7 +38,6 @@ class AprobacionServiciosController extends Controller
             $user = Sentinel::getUser()->id;
             foreach ($request->all() as $servicio)
             {
-
                 $id = $servicio['id'];
                 $estado = $servicio['estado'];
                 $estadoRepo = new EstadoVentaRepo();
@@ -42,10 +45,16 @@ class AprobacionServiciosController extends Controller
                 $estadoRepo->create($data);
                 $ventasRepo = new VentasRepo();
                 $venta = $ventasRepo->find($id);
+                $producto = Productos::with('proovedor')->find($venta->getProducto()->getId());
+                $proveedor = $producto->proovedor;
+                $razonSocial = $proveedor->razon_social;
+                $deudores = Imputacion::where('nombre',  'Deudores '.$razonSocial)->first();
+                $cta = Imputacion::where('nombre',  'Cta '.$razonSocial)->first();
                 if($estado == 'APROBADO')
                 {
                     GeneradorCuotas::generarCuotasVenta($venta);
-
+                    GeneradorDeAsientos::crear($deudores->id, $venta->getImporte(), 0);
+                    GeneradorDeAsientos::crear($cta->id, 0, $venta->getImporte());
 
                 }
                 if($estado == 'RECHAZADO')

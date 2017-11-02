@@ -163,6 +163,14 @@ class Ventas
         $this->producto = $producto;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getProducto()
+    {
+        return $this->producto;
+    }
+
     public function getPrioridad()
     {
         return $this->producto->getPrioridad();
