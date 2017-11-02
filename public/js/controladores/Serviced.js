@@ -11,6 +11,27 @@ $scope.borrarFormulario = function(){
   $('#formulario')[0].reset();
 };
 
+$scope.guardarFechaContable = function (fechaContable){
+
+  var fechaFormateada = moment(fechaContable).format("YYYY-MM-DD");
+  var data = {
+    'fecha': fechaFormateada,
+  };
+
+  return $http({
+    url: 'fechaContable',
+    method: 'post',
+    data: data,
+
+  }).then(function successCallback(response) {
+    UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
+  }, function errorCallback(response) {
+    console.log("Error")
+  });
+
+}
+};
+
 $scope.$Servicio = UserSrv;
 $scope.traerRelaciones = function(relaciones)
    {
