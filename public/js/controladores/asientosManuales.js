@@ -14,6 +14,7 @@ app.controller('asientosManuales', function($scope, $http, $compile, $sce, NgTab
     }]
   };
 
+$scope.fecha = new Date();
 
   $scope.submit = function() {
 
