@@ -19,8 +19,19 @@ $scope.fecha = new Date();
   $scope.submit = function() {
 
     var fechaFormateada = moment($scope.fecha).format("YYYY-MM-DD");
+
+    var asientosData = [];
+
+    $scope.asientos.forEach(function(entry) {
+      asientosData.push({
+        'id_imputacion': entry.id_imputacion.id,
+        'codigo': entry.id_imputacion.codigo,
+        'debe': entry.debe,
+        'haber': entry.haber,
+      });
+    });
     var data = {
-      'asientos': $scope.asientos,
+      'asientos': asientosData,
       'fecha_valor': fechaFormateada
     };
 

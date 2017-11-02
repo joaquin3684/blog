@@ -52,6 +52,7 @@
 
 
 
+
   <!--[if lt IE 9]>
         <script src="../assets/js/ie8-responsive-file-warning.js"></script>
         <![endif]-->
@@ -110,9 +111,10 @@
           <br />
 
           <!-- sidebar menu -->
-          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+          <!-- <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" style="max-height: -webkit-fill-available; overflow-y: scroll;"> -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" >
 
-            <div class="menu_section">
+            <div class="menu_section" >
               <h3>General</h3>
               <ul class="nav side-menu">
 
@@ -367,6 +369,7 @@ app.controller('fechaContable', function($scope, $http, $compile, $sce, NgTableP
 });
 
 </script> -->
+
 
   <script>
     NProgress.done();

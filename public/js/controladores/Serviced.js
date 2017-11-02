@@ -29,7 +29,6 @@ $scope.guardarFechaContable = function (fechaContable){
     console.log("Error")
   });
 
-}
 };
 
 $scope.$Servicio = UserSrv;
