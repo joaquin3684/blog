@@ -17,7 +17,8 @@ app.controller('cobrar_contablemente', function($scope, $http, $compile, $sce, N
   $scope.submit = function() {
 
     var data = {
-      'idBanco': $scope.bancoSeleccionado,
+      'idBanco': $scope.bancoSeleccionado.id,
+      'codigoBanco': $scope.bancoSeleccionado.codigo,
       'formaCobro': $scope.formaCobro,
       'valor': $scope.importe,
       'codigoDeudor': $scope.deudorSeleccionado.codigo,

@@ -74,7 +74,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" ng-model="bancoSeleccionado">
-                          <option ng-value="banco.id" ng-repeat="banco in bancos">{{banco.nombre}}</option>
+                          <option ng-value="banco" ng-repeat="banco in bancos">{{banco.nombre}}</option>
                         </select>
                       </div>
                     </div>
