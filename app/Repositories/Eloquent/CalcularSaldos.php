@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\DB;
 
 class CalcularSaldos
 {
-    public static function modificarSaldo($id_imputacion, $fechaValor)
+    public static function modificarSaldo($id_imputacion, Carbon $fecha)
     {
-        $fecha = $fechaValor == null ? Carbon::today() : Carbon::createFromFormat('Y-m-d', $fechaValor);
         $saldo = DB::table('asientos')
             ->where('id_imputacion', $id_imputacion)
             ->groupBy('id_imputacion')

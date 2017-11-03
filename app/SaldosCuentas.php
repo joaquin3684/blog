@@ -10,7 +10,7 @@ class SaldosCuentas extends Model
     use SoftDeletes;
     protected $table = 'saldos_cuentas';
 
-    protected $fillable = ['saldo', 'id_imputacion', 'year', 'month'];
+    protected $fillable = ['saldo', 'id_imputacion', 'year', 'month', 'codigo'];
 
     protected $dates = ['deleted_at'];
 }

@@ -17,7 +17,8 @@ $factory->define(App\Asiento::class, function (Faker\Generator $faker) {
          'fecha_contable' => $fecha,
          'nro_asiento' => 1,
          'id_ejercicio' => 1,
-         'fecha_valor' => $fecha
+         'fecha_valor' => $fecha,
+         'codigo' => 1,
     ];
 });
 

@@ -29,8 +29,8 @@ Route::get('pruebas', function(){
 
      return view('prueba');
 });
-Route::get('imagenes', function(){
-
+Route::get('prueba', function(){
+    return \App\Repositories\Eloquent\Contabilidad\CalculadorSaldoInicial::calcular('2017-11-10', 131010001, 311030001);
 });
 
 Route::post('pruebas', function(Request $request){
@@ -279,3 +279,9 @@ Route::post('cobrar_contablemente/cobrar', 'CobrarContablemente@cobrar');
 
 Route::post('fechaContable', 'FechaContableController@setearFechaContable');
 Route::get('fechaContable/borrar', 'FechaContableController@cerrarFechaContable');
+
+
+//------------------- MAYOR CONTABLE ------------------------
+
+Route::get('mayorContable', 'MayorContableController@index');
+Route::post('mayorContable', 'MayorContableController@reporte');

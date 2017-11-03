@@ -39,20 +39,20 @@ class CobrarContablemente extends Controller
 
             if($request['formaCobro'] == 'banco')
             {
-                GeneradorDeAsientos::crear($request['idBanco'], $request['valor'], 0);
+                GeneradorDeAsientos::crear($request['idBanco'], $request['valor'], 0, $request['codigoBanco']);
             }
             else if($request['formaCobro'] == 'caja')
             {
                 $caja = Imputacion::where('nombre', 'Caja - Efectivo')->first();
-                GeneradorDeAsientos::crear($caja->id, $request['valor'], 0);
+                GeneradorDeAsientos::crear($caja->id, $request['valor'], 0, 111010101);
             }
             if($request['tipo'] == 'servicios')
             {
-                GeneradorDeAsientos::crear($request['idDeudor'], 0, $request['valor']);
+                GeneradorDeAsientos::crear($request['idDeudor'], 0, $request['valor'], $request['codigoDeudor']);
             }
             else if($request['tipo'] == 'cuotas_sociales')
             {
-                GeneradorDeAsientos::crear($request['idDeudor'], 0, $request['valor']);
+                GeneradorDeAsientos::crear($request['idDeudor'], 0, $request['valor'], $request['codigoDeudor']);
             }//todo: aca falta la cuenta de imputacion para las cuotas sociales
         });
     }

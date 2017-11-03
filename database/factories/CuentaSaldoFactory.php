@@ -16,5 +16,6 @@ $factory->define(App\SaldosCuentas::class, function (Faker\Generator $faker) {
         'saldo' => 0,
         'year' => $fechaHoy->year,
         'month' => $fechaHoy->month,
+        'codigo' => 1,
     ];
 });

@@ -28,8 +28,7 @@ class AsientosController extends Controller
     {
         DB::transaction(function() use ($request){
             foreach($request['asientos'] as $elem){
-               GeneradorDeAsientos::crear($elem['id_imputacion'], $elem['debe'], $elem['haber'], $request['fecha_valor']);
-                CalcularSaldos::modificarSaldo($elem['id_imputacion'], $request['fecha_valor']);
+               GeneradorDeAsientos::crear($elem['id_imputacion'], $elem['debe'], $elem['haber'], $elem['codigo'], $request['fecha_valor']);
             }
         });
     }

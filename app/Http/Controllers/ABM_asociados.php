@@ -41,8 +41,9 @@ class ABM_asociados extends Controller
                 'nro_cuota' => 1,
             ]);
             $impu = ImputacionGateway::buscarPorCodigo('511010101');
-            GeneradorDeAsientos::crear($impu->id, 0, $elem['valor']);
-            GeneradorDeAsientos::crear($impu->id, $elem['valor'], 0);
+            GeneradorDeAsientos::crear($impu->id, 0, $elem['valor'], $impu->codigo);
+            GeneradorDeAsientos::crear($impu->id, $elem['valor'], 0, $impu->codigo);
+
             //todo la imputacion al debe queda pendiente no saben que cuenta es todavia
             $socio->cuotasSociales()->save($cuota);
         });
