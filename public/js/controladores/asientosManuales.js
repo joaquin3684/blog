@@ -5,6 +5,8 @@ app.controller('asientosManuales', function($scope, $http, $compile, $sce, NgTab
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
 
+  $scope.fechaActual = moment().format("YYYY-MM-DD");
+
   $scope.borrarFormulario = function(){
     $('#formulario')[0].reset();
     $scope.asientos = [{
@@ -89,7 +91,6 @@ $scope.verificarIgualdad = function(){
     UserSrv.MostrarMensaje("Error","La suma de los haber debe ser igual a la de los deber","Error","mensaje");
   }
 };
-
 
   $scope.asientos = [{
     'id_imputacion': null,

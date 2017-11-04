@@ -97,7 +97,7 @@
   <label class="control-label " >Fecha valor<span class="required">*</span>
   </label>
 
-    <input type="date" class="form-control " placeholder="Ingrese la fecha" ng-model="fecha">
+    <input type="date" class="form-control " placeholder="Ingrese la fecha" ng-model="fecha" max="{{fechaActual}}">
 
 </div>
 
