@@ -173,6 +173,7 @@
                       <li><a href="asientos">Asientos Contables Manuales</a>
                       </li>
                       <li><a href="cobrar_contablemente">Cobrar contablemente</a></li>
+                      <li><a href="mayorContable">Mayor contable</a></li>
                       <!-- <li><a href="rubro">Rubros</a>
                       </li>
                       <li><a href="moneda">Monedas</a></li>
@@ -192,7 +193,7 @@
                   <li><a href="correrVto"><i class="fa fa-calendar"></i>Correr Vto Servicio/Prestamo</a>
                   </li>
                   <li><a href="pago_proovedores"><i class="fa fa-money" ></i> Pago proveedores</a>
-                  <!-- <li><a type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-calendar-check-o" ></i> Fecha contable</a> -->
+                  <li><a type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-calendar-check-o" ></i> Fecha contable</a>
                     <li><a><i class="fa fa-calendar-times-o" ></i> Cerrar fecha</a>
               </ul>
             </div>
@@ -303,72 +304,8 @@
  {!! Html::script('js/app.js') !!}
 
 
- <!-- Modal -->
-<div >
-  <div class="modal fade" id="myModal"  role="dialog"  data-backdrop="false">
-    <div class="modal-dialog" role="document">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Fecha contable</h4>
-        </div>
-        <div class="modal-body">
-
-          <form class="form-horizontal form-label-left">
-            <div class="item form-group">
-             <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha</label>
-             <div class="col-md-6 col-sm-6 col-xs-12">
-               <input class="form-control col-md-7 col-xs-12" ng-model="fechaContable" type="date">
-             </div>
-           </div>
-          <div class="ln_solid"></div>
-          <div class="form-group">
-            <div class="col-md-6 col-md-offset-3">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-success" ng-click="guardarFechaContable(fechaContable)">Guardar</button>
-            </div>
-          </div>
-        </form>
-
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- <script type="text/javascript">
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider) {});
-
-app.controller('fechaContable', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
-
-  // manda las solicitud http necesarias para manejar los requerimientos de un abm
 
 
-
-  $scope.submit = function(fechaContable) {
-
-    var data = {
-      'fecha': fechaContable,
-    };
-
-    return $http({
-      url: 'fechaContable',
-      method: 'post',
-      data: data,
-
-    }).then(function successCallback(response) {
-      UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
-    }, function errorCallback(response) {
-      console.log("Error")
-    });
-
-  }
-
-});
-
-</script> -->
 
 
   <script>
@@ -401,6 +338,40 @@ app.controller('fechaContable', function($scope, $http, $compile, $sce, NgTableP
     </div>
   </div>
 
+  <!-- Modal -->
+ <div >
+   <div class="modal fade" id="myModal"  role="dialog"  data-backdrop="false">
+     <div class="modal-dialog" role="document">
+       <!-- Modal content-->
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal">&times;</button>
+           <h4 class="modal-title">Fecha contable</h4>
+         </div>
+         <div class="modal-body">
+
+           <form class="form-horizontal form-label-left">
+             <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input class="form-control col-md-7 col-xs-12" ng-model="fechaContable" type="date">
+              </div>
+            </div>
+           <div class="ln_solid"></div>
+           <div class="form-group">
+             <div class="col-md-6 col-md-offset-3">
+               <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+               <button type="button" class="btn btn-success" ng-click="guardarFechaContable(fechaContable)">Guardar</button>
+             </div>
+           </div>
+         </form>
+
+         </div>
+
+       </div>
+     </div>
+   </div>
+ </div>
 
   </div>
 

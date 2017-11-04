@@ -10,7 +10,7 @@ $scope.fechadehoy = moment().format('YYYY-MM-DD');
 $scope.borrarFormulario = function(){
   $('#formulario')[0].reset();
 };
-
+$scope.fechaContable = new Date();
 $scope.guardarFechaContable = function (fechaContable){
 
   var fechaFormateada = moment(fechaContable).format("YYYY-MM-DD");

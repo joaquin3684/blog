@@ -1,4 +1,11 @@
 
+.sortorder::after {
+  content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+}
+.sortorder.reverse::after {
+  content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+}
+
 .danger{color: #d9534f}
 .info{color: #337ab7}
 .succes{color:#5cb85c}
