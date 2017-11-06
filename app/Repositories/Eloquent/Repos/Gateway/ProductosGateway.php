@@ -1,4 +1,6 @@
-<?php   namespace App\Repositories\Eloquent\Repos\Gateway;
+<?php
+
+namespace App\Repositories\Eloquent\Repos\Gateway;
 use App\Productos;
 
 /**

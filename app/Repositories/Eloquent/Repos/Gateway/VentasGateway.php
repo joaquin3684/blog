@@ -53,4 +53,9 @@ class VentasGateway extends Gateway
     {
         return Ventas::max('nro_credito');
     }
+
+    public function findWithProducto($id)
+    {
+        return Ventas::with('producto')->find($id);
+    }
 }

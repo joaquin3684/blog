@@ -44,7 +44,7 @@ class AprobacionServiciosController extends Controller
                 $data = array('id_venta' => $id, 'id_responsable_estado' => $user, 'estado' => $estado);
                 $estadoRepo->create($data);
                 $ventasRepo = new VentasRepo();
-                $venta = $ventasRepo->find($id);
+                $venta = $ventasRepo->findWithProducto($id);
                 $producto = Productos::with('proovedor')->find($venta->getProducto()->getId());
                 $proveedor = $producto->proovedor;
                 $razonSocial = $proveedor->razon_social;

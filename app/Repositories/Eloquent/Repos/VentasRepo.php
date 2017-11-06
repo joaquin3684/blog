@@ -59,5 +59,11 @@ class VentasRepo extends Repositorio
 
     }
 
+    public function findWithProducto($id)
+    {
+        $venta = $this->gateway->findWithProducto($id);
+        return $this->mapper->map($venta);
+    }
+
 
 }
