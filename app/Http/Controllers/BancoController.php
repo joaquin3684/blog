@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidacionBanco;
-use App\Imputacion;
+use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
 use App\Repositories\Eloquent\Repos\Gateway\BancoGateway;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
-use App\SaldosCuentas;
-use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,10 +36,7 @@ class BancoController extends Controller
         DB::transaction(function() use ($request){
             $this->gateway->create($request->all());
             $codigo = ImputacionGateway::obtenerCodigoNuevo('1110102');
-            $cuenta = Imputacion::create(['nombre' => 'Banco '.$request['nombre'], 'codigo' => $codigo]);
-            $fecha = Carbon::today();
-            SaldosCuentas::create(['codigo' => $cuenta->codigo, 'id_imputacion' => $cuenta->id, 'saldo' => 0, 'year' =>$fecha->year, 'month' => $fecha->month]);
-
+            GeneradorDeCuentas::generar('Banco '.$request['nombre'], $codigo);
         });
     }
 

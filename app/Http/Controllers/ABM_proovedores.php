@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imputacion;
+use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
@@ -33,11 +34,12 @@ class ABM_proovedores extends Controller
             $elem['usuario'] = $user->id;
             Proovedores::create($elem->toArray());
             $codigo = ImputacionGateway::obtenerCodigoNuevo('1310100');
-            Imputacion::create(['nombre' => 'Deudores '.$elem['razon_social'], 'codigo' => $codigo]);
+            GeneradorDeCuentas::generar('Deudores '.$elem['razon_social'], $codigo);
             $codigo = ImputacionGateway::obtenerCodigoNuevo('3110300');
-            Imputacion::create(['nombre' => 'Cta '.$elem['razon_social'], 'codigo' => $codigo]);
+            GeneradorDeCuentas::generar('Cta '.$elem['razon_social'], $codigo);
             $codigo = ImputacionGateway::obtenerCodigoNuevo('5110301');
-            Imputacion::create(['nombre' => 'Cta '.$elem['razon_social'], 'codigo' => $codigo]);
+            GeneradorDeCuentas::generar('Comisiones '.$elem['razon_social'], $codigo);
+
 
         });
     }

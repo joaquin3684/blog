@@ -46,11 +46,7 @@ class Login extends Controller
         DB::transaction(function() {
             $user = Sentinel::check();
             $fecha = ControlFechaContable::where('id_usuario', $user->id)->first();
-            if($fecha == null)
-            {
-                throw new LaFechaContablaYaEstaCerradaException('fecha_contable_cerrada');
-            }
-            else
+            if($fecha != null)
             {
                 ControlFechaContable::where('id_usuario', $user->id)->delete();
             }
