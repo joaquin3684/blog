@@ -47,4 +47,9 @@ class SociosGateway extends Gateway
         $hoy = $fecha->getFechaHoy();
         return Socios::with(['ventas.cuotas.movimientos', 'ventas.producto.proovedor.prioridad'])->find($id);
     }
+
+    public function all()
+    {
+        return Socios::with('organismo')->get();
+    }
 }

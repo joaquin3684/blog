@@ -40,21 +40,6 @@ $solicitud = 1;
         return 1;
 });
 
-
-//-------------- Creacion automatica de cosas para cuando se hace una migracion ----
-Route::get('creacionAutomatica', function(){
-    $user = Sentinel::registerAndActivate(array('usuario'=>'200', 'email'=>'1', 'password'=> '200'));
-    $role = Sentinel::getRoleRepository()->createModel()->create([
-        'name' => 'genio',
-        'slug' => 'genio',
-    ]);
-    $role->permissions = ['organismos.crear' => true, 'organismos.visualizar' => true, 'organismos.editar' => true, 'organismos.borrar'=> true, 'socios.editar' => true, 'socios.visualizar' => true, 'socios.crear' => true, 'socios.borrar' => true];
-    $role->save();
-    $role->users()->attach($user);
-    return $user;
-
-});
-
 //-------------- ORGANISMOS -----------
 
 Route::get('organismos/traerRelacionorganismos', 'ABM_organismos@traerRelacionorganismos');

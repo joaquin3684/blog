@@ -1,5 +1,6 @@
 <?php
 
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -71,6 +72,18 @@ class InicioSistema extends Seeder
 
             // Asiento de inicio
             $asiento = factory(\App\Asiento::class)->create(['id_ejercicio' => $ejercicio->id]);
+
+            $user = Sentinel::registerAndActivate(array('usuario'=>'200', 'email'=>'1', 'password'=> '200'));
+            $role = Sentinel::getRoleRepository()->createModel()->create([
+                'name' => 'genio',
+                'slug' => 'genio',
+            ]);
+            $role->permissions = ['organismos.crear' => true, 'organismos.visualizar' => true, 'organismos.editar' => true, 'organismos.borrar'=> true, 'socios.editar' => true, 'socios.visualizar' => true, 'socios.crear' => true, 'socios.borrar' => true];
+            $role->save();
+            $role->users()->attach($user);
+
+            $this->call(PrioridadesSeed::class);
+            //TODO:: los rubros y eso estan mal estory repitiendo la creacion de capitulos y rubros y etc
         });
     }
 }

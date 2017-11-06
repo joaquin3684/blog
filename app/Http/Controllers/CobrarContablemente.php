@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Ejercicio;
 use App\Imputacion;
-use App\Repositories\Eloquent\ControlFechaContable;
 use App\Repositories\Eloquent\GeneradorDeAsientos;
 use App\Repositories\Eloquent\Repos\Gateway\AsientosGateway;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;

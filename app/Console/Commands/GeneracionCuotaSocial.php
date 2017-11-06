@@ -34,6 +34,7 @@ class GeneracionCuotaSocial extends Command
         parent::__construct();
     }
 
+    //TODO:: hay que hacer cron para generar cada mes el saldo de cuenta
     /**
      * Execute the console command.
      *
@@ -41,25 +42,30 @@ class GeneracionCuotaSocial extends Command
      */
     public function handle()
     {
-       $hoy =  Carbon::today()->toDateString();
-       $socios = Socios::with(['cuotasSociales' => function ($q) use($hoy) {
-            $q->where('fecha_vencimiento', $hoy);
-       }], 'organismo')->whereHas('cuotasSociales', function($q) use ($hoy) {
-           $q->where('fecha_vencimiento', $hoy);
-       })->get();
-
-        $fechaInicioCuota = Carbon::today()->addDay()->toDateString();
-        $fechaVencimientoCuota = Carbon::today()->addMonth()->toDateString();
-        $socios->each(function($socio) use ($fechaInicioCuota, $fechaVencimientoCuota){
-            $cuota = Cuotas::create([
-                'fecha_inicio' => $fechaInicioCuota,
-                'fecha_vencimiento' => $fechaVencimientoCuota,
-                'importe' => $socio->organismo->cuota_social,
-                'nro_cuota' => 2,
-                ]);
-            $socio->cuotasSociales()->save($cuota);
-        });
-
         Log::info("holaaa");
+        $hoy =  Carbon::today()->toDateString();
+        $socios = Socios::with(['cuotasSociales' => function ($q) use($hoy) {
+             $q->where('fecha_vencimiento', $hoy);
+        }], 'organismo')->whereHas('cuotasSociales', function($q) use ($hoy) {
+            $q->where('fecha_vencimiento', $hoy);
+        })->get();
+         if($socios->isNotEmpty()) {
+
+
+             $fechaInicioCuota = Carbon::today()->addDay()->toDateString();
+             $fechaVencimientoCuota = Carbon::today()->addMonth()->toDateString();
+             $socios->each(function ($socio) use ($fechaInicioCuota, $fechaVencimientoCuota) {
+                 $cuota = Cuotas::create([
+                     'fecha_inicio' => $fechaInicioCuota,
+                     'fecha_vencimiento' => $fechaVencimientoCuota,
+                     'importe' => $socio->valor,
+                     'nro_cuota' => 2,
+                 ]);
+                 $socio->cuotasSociales()->save($cuota);
+                 Log::info("Se ha creado una cuota social para el socio ". $socio->id);
+//TODO:: aca falta generar el asiento en la imputacion de las cuotas sociales
+             });
+
+         }
     }
 }

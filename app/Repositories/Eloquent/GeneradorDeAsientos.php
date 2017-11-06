@@ -10,6 +10,7 @@ namespace App\Repositories\Eloquent;
 
 
 use App\Ejercicio;
+use App\Exceptions\EjercicioCerradoException;
 use App\Repositories\Eloquent\Repos\Gateway\AsientosGateway;
 use Carbon\Carbon;
 
@@ -22,11 +23,19 @@ class GeneradorDeAsientos
         $gate = new AsientosGateway();
         $ultimoAsiento = $gate->last();
         $nroAsiento = $ultimoAsiento->nro_asiento + 1;
-        $fechaVal = $fechaValor == null ? Carbon::today() : Carbon::createFromFormat('Y-m-d', $fechaValor);
         $fecha = new ControlFechaContable();
         $fechaContable = $fecha->fechaContable;
+        $fechaVal = $fechaValor == null ? $fechaContable : Carbon::createFromFormat('Y-m-d', $fechaValor);
         $asientos = new AsientosGateway();
-        $ejercicio = Ejercicio::where('fecha', '<', $fechaContable)->orderBy('id', 'desc')->first();
+        $ejercicio = Ejercicio::where('fecha', '<', $fechaVal->toDateString())
+                        ->where('fecha_cierre', null)
+                        ->orderBy('id', 'desc')
+                        ->first();
+
+        if($ejercicio == null)
+        {
+            throw new EjercicioCerradoException('ejercicio_cerrado');
+        }
         $asientos->create(['id_imputacion' => $cuenta, 'codigo' => $codigo, 'debe' => $debeNuevo, 'haber' => $haberNuevo, 'id_ejercicio' => $ejercicio->id, 'fecha_contable' => $fechaContable, 'fecha_valor' => $fechaVal->toDateString(), 'nro_asiento' => $nroAsiento]);
         CalcularSaldos::modificarSaldo($cuenta, $fechaVal);
     }

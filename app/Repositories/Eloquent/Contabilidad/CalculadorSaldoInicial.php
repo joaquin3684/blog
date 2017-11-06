@@ -18,15 +18,14 @@ class CalculadorSaldoInicial
     {
         $fecha = Carbon::createFromFormat('Y-m-d', $fechaInicio);
 
-        $saldo = DB::table('saldos_cuentas')
-            ->where('saldos_cuentas.codigo','>=', $cuentaDesde)
-            ->where('saldos_cuentas.codigo', '<=', $cuentaHasta)
+        $saldo = DB::table('imputaciones')
+            ->where('codigo','>=', $cuentaDesde)
+            ->where('codigo', '<=', $cuentaHasta)
             ->select(DB::raw('0 as saldo'), 'codigo');
 
         $saldoCuentas = DB::table('saldos_cuentas')
             ->where('year', '<=', $fecha->year)
             ->where('month', '<', $fecha->month)
-            //->where('codigo', $cuentaDesde)
             ->where('codigo','>=', $cuentaDesde)
             ->where('codigo', '<=', $cuentaHasta)
             ->unionAll($saldo)

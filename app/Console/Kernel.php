@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 
-        $schedule->command('cuota_social:crear')->daily();
+        $schedule->command('cuota_social:crear')->everyMinute()->withoutOverlapping();
     }
 
     /**

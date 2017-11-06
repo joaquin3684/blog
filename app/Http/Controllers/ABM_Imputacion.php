@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidacionImputacion;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
+use App\SaldosCuentas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ABM_Imputacion extends Controller
 {
@@ -29,8 +32,12 @@ class ABM_Imputacion extends Controller
 
     public function store(ValidacionImputacion $request)
     {
-        return $this->gateway->create($request->all());
-        //TODO: aca hay que crear las los saldos para esta cuenta
+        DB::transaction(function() use ($request){
+            $cuenta = $this->gateway->create($request->all());
+            $fecha = Carbon::today();
+            SaldosCuentas::create(['codigo' => $cuenta->codigo, 'id_imputacion' => $cuenta->id, 'saldo' => 0, 'year' =>$fecha->year, 'month' => $fecha->month]);
+        });
+
     }
 
     /**

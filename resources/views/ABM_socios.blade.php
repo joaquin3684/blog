@@ -299,7 +299,7 @@
                                                     {{abm.dni}}
                                                 </td>
                                                 <td title="'Organismo'" filter="{ organismo: 'text'}" sortable="'organismo'">
-                                                    {{abm.organismo}}
+                                                    {{abm.organismo.nombre}}
                                                 </td>
                                                 <td title="'Legajo'" filter="{ legajo: 'text'}"sortable="'legajo'">
                                                     {{abm.legajo}}

@@ -17,13 +17,13 @@ class CreateProductosTable extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('id_proovedor')->unsigned();
+            $table->integer('id_proovedor')->unsigned()->nullable();
             $table->foreign('id_proovedor')->references('id')->on('proovedores');
             $table->string('descripcion')->nullable();
-            $table->string('tipo');
-            $table->double('ganancia');
+            $table->string('tipo')->nullable();
+            $table->double('ganancia')->nullable();
             $table->double('porcentaje_capital')->nullable();
-            $table->string('nombre');
+            $table->string('nombre')->nullable();
             $table->softDeletes();
         });
         Schema::enableForeignKeyConstraints();

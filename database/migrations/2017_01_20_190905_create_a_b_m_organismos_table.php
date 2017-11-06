@@ -12,10 +12,10 @@ class CreateABMOrganismosTable extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('organismos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('cuit');
-            $table->string('localidad');
-            $table->string('domicilio');
+            $table->string('nombre')->nullable();
+            $table->string('cuit')->nullable();
+            $table->string('localidad')->nullable();
+            $table->string('domicilio')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

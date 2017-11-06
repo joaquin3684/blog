@@ -85,7 +85,7 @@ class SolicitudesPendientesMutualController extends Controller
 
         DB::transaction(function () use ($request){
 
-            //TODO: aca se tiene que ejecutar el proceso para que se refleje en la contabilidad
+            //  TODO: aca se tiene que ejecutar el proceso para que se refleje en la contabilidad
             $elem = $request->all();
             $sol = $this->solicitudesGateway->update($elem, $elem['id']);
             $proveedorRepo = new ProveedoresRepo();

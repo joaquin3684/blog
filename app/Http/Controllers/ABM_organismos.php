@@ -64,11 +64,13 @@ class ABM_organismos extends Controller
             $organismo = Organismos::with(['socios.cuotasSociales' => function($q){$q->where('estado', null);}, 'cuotas'])->find($id);
             $organismo->cuotas->each(function($cuotaSocialActual) use ($organismo, $cuotasSocialesNuevas){
                 $organismo->socios->each(function($socio) use ($cuotaSocialActual, $cuotasSocialesNuevas){
-                    $socio->cuotasSociales->each(function($cuota) use ($cuotaSocialActual, $cuotasSocialesNuevas){
+                    $socio->cuotasSociales->each(function($cuota) use ($cuotaSocialActual, $cuotasSocialesNuevas, $socio){
                         if($cuota->importe == $cuotaSocialActual->valor){
                             $cuotaNueva = $cuotasSocialesNuevas->first(function($c) use ($cuotaSocialActual){return $cuotaSocialActual->categoria == $c['categoria'];});
                             $cuota->importe = $cuotaNueva['valor'];
+                            $socio->valor = $cuotaNueva['valor'];
                             $cuota->save();
+                            $socio->save();
                         } else {return false;}
                     });
                  });

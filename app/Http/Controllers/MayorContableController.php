@@ -22,25 +22,26 @@ class MayorContableController extends Controller
 
         $saldosInicialesCuentas = CalculadorSaldoInicial::calcular($fechaDesde, $cuentaDesde, $cuentaHasta);
 
-
         $asientosCuentas = DB::table('asientos')
-            ->where('codigo', '>=', $cuentaDesde)
-            ->where('codigo', '<=', $cuentaHasta)
-            ->where('fecha_valor', '>=', $fechaDesde)
-            ->where('fecha_valor', '<=', $fechaHasta)
-            ->orderBy('codigo')
-            ->get();
+           ->where('codigo', '>=', $cuentaDesde)
+           ->where('codigo', '<=', $cuentaHasta)
+           ->where('fecha_valor', '>=', $fechaDesde)
+           ->where('fecha_valor', '<=', $fechaHasta)
+           ->orderBy('codigo')
+           ->get();
 
         return $saldosInicialesCuentas->map(function ($saldo) use ($asientosCuentas) {
-                    $saldo->asientos = $asientosCuentas->filter(function ($asiento) use ($saldo) {
-                        return $saldo->codigo == $asiento->codigo;
-                    })->map(function($a) use ($saldo) {
-                        $a->saldo = $saldo->saldo + $a->debe - $a->haber;
-                        return $a;
-                    });
-                    return $saldo;
+            $saldoAcumulativo = $saldo->saldo;
+           $saldo->asientos = $asientosCuentas->filter(function ($asiento) use ($saldo) {
+              return $saldo->codigo == $asiento->codigo;
+           })->map(function ($a) use ($saldo, &$saldoAcumulativo) {
+              $a->saldo = $saldoAcumulativo + $a->debe - $a->haber;
+              $saldoAcumulativo= $a->saldo;
+              return $a;
+           });
+           return $saldo;
         });
 
-
     }
+
 }

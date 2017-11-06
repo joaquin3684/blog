@@ -23,7 +23,7 @@ class SolicitudesSinInversionistaGateway extends Gateway
 
     public static function proveedores($id)
     {
-        return SolicitudesSinInversionista::where('solicitud', $id)->with('agentes_financieros')->get();
+         return SolicitudesSinInversionista::where('solicitud', $id)->with('agentes_financieros')->get();
     }
 
 }

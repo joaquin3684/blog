@@ -54,4 +54,9 @@ return [
         'detail' => 'La fecha elejida pertenece a un ejercicio cerrado.'
     ],
 
+    'ejercicio_cerrado' => [
+        'title' => 'Ejercicio cerrado.',
+        'detail' => 'No se puede imputar en esta fecha el ejercicio ya esta cerrado.'
+    ],
+
 ];

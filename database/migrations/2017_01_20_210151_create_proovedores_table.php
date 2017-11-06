@@ -18,15 +18,15 @@ class CreateProovedoresTable extends Migration
 
         Schema::create('proovedores', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('razon_social');
-            $table->integer('cuit');
-            $table->string('domicilio');
-            $table->integer('telefono');
-            $table->string('descripcion');
+            $table->string('razon_social')->nullable();
+            $table->integer('cuit')->nullable();
+            $table->string('domicilio')->nullable();
+            $table->integer('telefono')->nullable();
+            $table->string('descripcion')->nullable();
             $table->softDeletes();
-            $table->integer('id_prioridad')->unsigned();
+            $table->integer('id_prioridad')->unsigned()->nullable();
             $table->foreign('id_prioridad')->references('id')->on('prioridades');
-            $table->integer('usuario')->unsigned();
+            $table->integer('usuario')->unsigned()->nullable();
             $table->foreign('usuario')->references('id')->on('users');
             $table->timestamps();
         });

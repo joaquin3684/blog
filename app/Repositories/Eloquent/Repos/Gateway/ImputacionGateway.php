@@ -40,6 +40,6 @@ class ImputacionGateway extends Gateway
 
     public static function buscarPorCodigo($codigo)
     {
-        return DB::table('imputaciones')->where('nombre', $codigo)->first();
+        return DB::table('imputaciones')->where('codigo', $codigo)->first();
     }
 }

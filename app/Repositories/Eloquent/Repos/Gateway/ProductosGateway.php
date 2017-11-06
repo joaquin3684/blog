@@ -18,4 +18,9 @@ class ProductosGateway extends Gateway
     {
        return Productos::with('proovedor')->get();
     }
+
+    public function all()
+    {
+        return Productos::with('proovedor')->get();
+    }
 }

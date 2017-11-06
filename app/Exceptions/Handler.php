@@ -103,6 +103,20 @@ class Handler extends ExceptionHandler
             ], config('errors.fecha_contable_cerrada'));
 
             $status = 405;
+        }else if($e instanceof FechaContableElejidaEnEjercicioCerradoException){
+            $data = array_merge([
+                'id' => 'fecha_contable_ejercicio_cerrado',
+                'status' => '405'
+            ], config('errors.fecha_contable_ejercicio_cerrado'));
+
+            $status = 405;
+        } else if($e instanceof EjercicioCerradoException){
+            $data = array_merge([
+                'id' => 'ejercicio_cerrado',
+                'status' => '405'
+            ], config('errors.ejercicio_cerrado'));
+
+            $status = 405;
         } else {
             $data = array_merge([
                 'id'     => 'error_sistema',

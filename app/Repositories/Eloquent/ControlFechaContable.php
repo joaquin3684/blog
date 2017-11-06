@@ -20,7 +20,7 @@ class ControlFechaContable
     {
         $user = Sentinel::check();
         $fecha = FechaContable::where('id_usuario', $user->id)->first();
-        $this->fechaContable = $fecha == null ? Carbon::today()->toDateString() : $fecha;
+        $this->fechaContable = $fecha == null ? Carbon::today() : Carbon::createFromFormat('Y-m-d', $fecha);
 
     }
 
