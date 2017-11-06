@@ -3,6 +3,14 @@ var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutu
 });
 app.controller('pago_proovedores', function($scope, $http, $compile, $sce, NgTableParams, UserSrv, $filter) {
 
+  $scope.cambiarFecha = function(dato){
+     moment.locale('es');
+     fechaVencimiento= dato.fecha_vencimiento;
+     var fechaVencimiento= moment(fechaVencimiento, 'YYYY-MM-DD').format('L');
+     dato.fecha_vencimiento= fechaVencimiento;
+     return dato;
+   }
+
 $scope.ArrayAprobar = [];
     $scope.pullAprobar = function (){
 
@@ -18,7 +26,7 @@ $scope.ArrayAprobar = [];
             else
             {
                 console.log(response);
-                $scope.aprobaciones = response.data;
+                $scope.aprobaciones = response.data.map($scope.cambiarFecha);
                 $scope.paramsAprobaciones = new NgTableParams({
                     page: 1,
                     count: 10

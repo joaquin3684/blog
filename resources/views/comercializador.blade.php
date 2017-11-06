@@ -10,14 +10,14 @@
   <!-- CSS TABLAS -->
   <script>
   $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
+    $('[data-toggle="tooltip"]').tooltip();
 });
   </script>
 
 <div class="nav-md" ng-controller="comercializador" >
 
   <div class="container body" >
-  
+
     <div class="main_container" >
 
       <input type="hidden" id="tipo_tabla" value="organismos">
@@ -25,9 +25,9 @@
       <div class="left-col" role="main" >
 
         <div class="" >
-         
+
           <div class="clearfix"></div>
-          
+
           <div class="row" >
             <div class="col-md-12 col-sm-12 col-xs-12" >
             <div id="mensaje"></div>
@@ -55,13 +55,13 @@
 
                   <form class="form-horizontal form-label-left" ng-submit="AltaComercializador()" id="formulario" >
                    {{ csrf_field() }}
-                    
+
                     <span class="section">Generar Solicitud</span>
-                    
-                    <div class="item form-group"> 
+
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Organismo <span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12"> 
+                      <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="organismocomplete" ng-required="true">
                             <option value="{[{x.id}]}" ng-repeat="x in organismos">
                             {[{x.nombre}]}
@@ -69,7 +69,7 @@
                           </select>
                       </div>
                     </div>
-                    
+
 
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
@@ -90,7 +90,7 @@
                         <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" ng-model="nombre" type="text" ng-required="socio == null || socio == ''">{[{errores.nombre[0]}]}
                       </div>
                     </div>
-                    
+
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Apellido <span class="required">*</span>
                       </label>
@@ -119,12 +119,12 @@
                         <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" ng-model="fecha_nacimiento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit" ng-required="socio == null || socio == ''">{[{errores.cuota_social[0]}]}
                       </div>
                     </div>
-                        
+
                     <div flex layout="row" class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Sexo <span class="required">*</span>
                       </label>
                       <div  class="col-md-6 col-sm-6 col-xs-12">
-                        
+
                         <md-radio-group flex layout="row" ng-model="sexo" ng-required="socio == null || socio == ''">
 
                           <md-radio-button flex value="Masculino" class="md-primary">Masculino</md-radio-button>
@@ -209,7 +209,7 @@
     ngf-accept="'image/*'" type="file" ng-model="doc_endeudamiento" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
                       </div>
                     </div>
-        
+
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
@@ -228,8 +228,8 @@
 
 
       </div>
-      
-      
+
+
 
       <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
@@ -265,9 +265,9 @@
                                     <!-- START $scope.[model] updates -->
                                     <!-- END $scope.[model] updates -->
                                     <!-- START TABLE -->
-                                    <div id="exportTable">
+                                    <div id="exportTable" class="table-responsive">
                                         <table id="tablita" ng-table="paramssolicitudes" class="table table-hover table-bordered">
-                                        
+
                                             <tbody data-ng-repeat="solicitud in $data" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="Datos">
                                                 <td title="'Nombre'" sortable="'nombre'">
@@ -295,7 +295,7 @@
                                                     {[{solicitud.estado}]}
                                                 </td>
                                                 <td title="'Acciones Disponibles'" style="color: #21a9d6;">
-                                                    
+
                                                     <span data-toggle="modal" data-target="#Comprobantes" ng-click="getFotos(solicitud.id)" class="fa fa-file-picture-o fa-2x" titulo="Ver Comprobantes"></span>
 
                                                     <span ng-show="solicitud.estado == 'Esperando Respuesta Comercializador'" ng-click="IDPropuesta(solicitud.id,solicitud.total,solicitud.monto_por_cuota,solicitud.cuotas)" data-toggle="modal" data-target="#ContraPropuesta" class="fa fa-eye fa-2x" titulo="Analizar Propuesta"></span>
@@ -341,9 +341,9 @@
       </div>
       <div class="modal-body">
          <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
-                   
+
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Importe 
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Importe
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12" style="vertical-align: text-middle; color: blue;">
                         <input id="importe" ng-disabled="!modificandopropuesta" class="form-control col-md-7 col-xs-12" name="importe" placeholder="Ingrese el importe" type="number" ng-model="importe" step="0.01">{[{errores.importe[0]}]}
@@ -363,8 +363,8 @@
                         <input ng-disabled="!modificandopropuesta" id="nombre" class="form-control col-md-7 col-xs-12" name="MontoPorCuota" placeholder="Ingrese el nro de cuotas" ng-model="monto_por_cuota" type="number" step="0.01">{[{errores.nombre[0]}]}
                       </div>
                     </div>
-                    
-                   
+
+
                     <input type="hidden" name="id">
                     <div class="ln_solid"></div>
                     <div class="form-group">
@@ -380,7 +380,7 @@
                     </div>
                   </form>
       </div>
-      
+
     </div>
 
   </div>
@@ -394,17 +394,17 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-      
+
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Visualización de Comprobantes</h4>
       </div>
       <div class="modal-body">
          <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar" >
                     <div class="item form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comprob">Comprobante: 
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comprob">Comprobante:
                         </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        
+
                         <select ng-change="Comprobante()" class="form-control" placeholder="Comprobante a visualizar.." ng-model="comprobantevisualizar" >
                           <option ng-if="x.filename != null" ng-repeat="x in DatosModalActual" ng-value="x.encoded" >
                             {[{x.filename}]}
@@ -427,7 +427,7 @@
                     </div>
          </form>
       </div>
-      
+
     </div>
 
   </div>

@@ -37,7 +37,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
         //ESTOY ARMANDO UN SERVICE INTEGRAL -- NO TOCAR
         //$scope.paramssolicitudes = UserSrv.RequestTable('comercializador/solicitudes','get');
-        
+
 
 
     }
@@ -45,11 +45,11 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     $scope.submit = function() {
         console.log("el ng click funciona");
         $scope.upload($scope.file);
-      
+
     };
 
     $scope.funcion = function(){
-        
+
     }
 
     // upload on file select or drop
@@ -103,7 +103,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     }
 
     $scope.Comprobante = function (){
- 
+
         archivo = $scope.comprobantevisualizar;
         if(!isNaN(archivo) && archivo != null){
             document.getElementById('previsualizaciondiv').style.display = 'none';
@@ -111,12 +111,12 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             document.getElementById('endeud').innerHTML = archivo;
         } else {
             if(archivo != null){
-                document.getElementById('endeudamientodiv').style.display = 'none';    
+                document.getElementById('endeudamientodiv').style.display = 'none';
                 document.getElementById('previsualizaciondiv').style.display = 'block';
                 document.getElementById('previsualizacion').src = archivo;
             }
         }
-        
+
     }
 
     $scope.IDPropuesta = function(id,importe,monto,cantcuotas) {
@@ -132,7 +132,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             method: 'get'
         }).then(function successCallback(response)
         {
-          
+
             if(typeof response.data === 'string')
             {
                 return [];
@@ -160,7 +160,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             data: {'id':id,'estado':'Formulario Enviado'}
         }).then(function successCallback(response)
         {
-            
+
                 UserSrv.MostrarMensaje("OK","El formulario fue enviado correctamente.","OK","mensaje");
                 $scope.pullComercializadores();
 
@@ -170,7 +170,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
                 UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
 
         });
-    } 
+    }
 
     $scope.DatosModal = function (documento,recibo,cbu,domicilio,endeudamiento){
 
@@ -194,7 +194,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             data: {'id':$scope.idpropuestae,'estado':'Aceptada por Comercializador'}
         }).then(function successCallback(response)
         {
-            
+
                 UserSrv.MostrarMensaje("OK","La propuesta fue aceptada correctamente.","OK","mensaje");
                 $scope.pullComercializadores();
 
@@ -215,7 +215,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             data: {'id':$scope.idpropuestae,'total':$scope.importe,'cuotas':$scope.cuotas,'monto_por_cuota':$scope.monto_por_cuota,'estado':'Modificada por Comercializador'}
         }).then(function successCallback(response)
         {
-            
+
                 UserSrv.MostrarMensaje("OK","La contra propuesta fue enviada correctamente.","OK","mensaje");
                 $scope.pullComercializadores();
 
@@ -288,14 +288,14 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             data: $scope.Dato
         }).then(function successCallback(response)
         {
-            
-        
-                
+
+
+
                 UserSrv.MostrarMensaje("OK","La solicitud fue dada de alta correctamente.","OK","mensaje");
                 $scope.pullComercializadores();
-                
-                
-           
+
+
+
 
         }, function errorCallback(data)
         {
@@ -308,6 +308,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             data: $scope.Dato
         }).then(function (resp) {
             console.log('Success ' + 'uploaded. Response: ' + resp.data);
+            $scope.pullComercializadores();
         }, function (resp) {
             console.log('Error status: ' + resp.status);
         }, function (evt) {
@@ -321,7 +322,6 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     var self = this;
     $scope.pullComercializadores();
     $scope.getOrganismos();
-    
+
 
 });
-

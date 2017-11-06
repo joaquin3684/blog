@@ -85,7 +85,7 @@
                                                         </span>
                                                     </label>
                                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                                        <input class="form-control col-md-7 col-xs-12" name="capital" ng-model="importe" type="text">
+                                                        <input class="form-control col-md-7 col-xs-12" name="capital" ng-model="importe" type="number">
                                                         </input>
                                                     </div>
                                                 </div>
@@ -97,7 +97,7 @@
                                                         </span>
                                                     </label>
                                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                                        <input class="form-control col-md-7 col-xs-12" name="cuotas" ng-model="nro_cuotas" type="text">
+                                                        <input class="form-control col-md-7 col-xs-12" name="cuotas" ng-model="nro_cuotas" type="number">
                                                         </input>
                                                     </div>
                                                 </div>
@@ -137,7 +137,7 @@
                                                         </span>
                                                     </label>
                                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                                        <input class="form-control col-md-7 col-xs-12" name="monto_total" ng-model="monto_total" type="text">
+                                                        <input class="form-control col-md-7 col-xs-12" name="monto_total" ng-model="monto_total" type="number">
                                                         </input>
                                                     </div>
                                                 </div>

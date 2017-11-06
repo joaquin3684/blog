@@ -50,16 +50,17 @@ $scope.filtro = function (){
             var totalDebe = 0;
             var totalHaber = 0;
             var totalSaldo = 0;
-            entry.asientos.forEach(function(asiento) {
+            var arr = $.map(entry.asientos, function(el) { return el });
+        
+            arr.forEach(function(asiento) {
                 totalDebe += asiento.debe;
                 totalHaber += asiento.haber;
-                totalSaldo += asiento.saldo;
             });
-
+            totalSaldo = entry.saldo+ totalDebe - totalHaber;
             $scope.reporteMayorContable.push({
               'codigo': entry.codigo,
               'saldo': entry.saldo,
-              'asientos': entry.asientos,
+              'asientos': arr,
               'totalDebe': totalDebe,
               'totalHaber': totalHaber,
               'totalSaldo': totalSaldo

@@ -8,12 +8,13 @@ app.controller('asientosManuales', function($scope, $http, $compile, $sce, NgTab
   $scope.fechaActual = moment().format("YYYY-MM-DD");
 
   $scope.borrarFormulario = function(){
-    $('#formulario')[0].reset();
+    
     $scope.asientos = [{
       'id_imputacion': null,
       'debe': null,
       'haber': null,
     }]
+
   };
 
 $scope.fecha = new Date();
