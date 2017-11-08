@@ -32,15 +32,15 @@ class MayorContableController extends Controller
 
         return $saldosInicialesCuentas->map(function ($saldo) use ($asientosCuentas) {
             $saldoAcumulativo = $saldo->saldo;
-           $saldo->asientos = $asientosCuentas->filter(function ($asiento) use ($saldo) {
+            $saldo->asientos = $asientosCuentas->filter(function ($asiento) use ($saldo) {
               return $saldo->codigo == $asiento->codigo;
-           })->map(function ($a) use ($saldo, &$saldoAcumulativo) {
+            })->map(function ($a) use ($saldo, &$saldoAcumulativo) {
               $a->saldo = $saldoAcumulativo + $a->debe - $a->haber;
               $saldoAcumulativo= $a->saldo;
               return $a;
 
-           })->toArray();
-           return $saldo;
+            })->toArray();
+            return $saldo;
         });
 
     }

@@ -28,7 +28,7 @@ class ControlFechaContable
     {
         $user = Sentinel::check();
         $fecha = FechaContable::where('id_usuario', $user->id)->first();
-        return $fecha == null ? Carbon::today()->toDateString() : $fecha;
+        return $fecha == null ? Carbon::today()->toDateString() : $fecha->fecha_contable;
     }
 
 }

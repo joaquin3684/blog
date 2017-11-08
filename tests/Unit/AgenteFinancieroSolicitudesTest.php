@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Http\Controllers\ABM_asociados;
 use App\Repositories\Eloquent\Proveedor;
 use App\Repositories\Eloquent\Repos\SolicitudRepo;
 use App\Repositories\Eloquent\Solicitud;
@@ -29,6 +30,7 @@ class AgenteFinancieroSolicitudesTest extends TestCase
 
     public function testGenerarPropuesta()
     {
+
         $importe = 100;
         $cuotas = 5;
         $montoPorCuota = 120;

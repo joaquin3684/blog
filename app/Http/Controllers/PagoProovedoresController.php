@@ -75,7 +75,7 @@ class PagoProovedoresController extends Controller
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->where('proovedores.id', $request['id'])
-            ->select('cuotas.nro_cuota', 'cuotas.importe', 'ventas.id as servicio', 'socios.nombre', 'cuotas.fecha_vencimiento', 'socios.apellido', 'socios.legajo', 'cuotas.estado', DB::raw('SUM(movimientos.entrada) AS totalCobrado'), DB::raw('SUM(movimientos.salida) AS totalPagado'), DB::raw('((SUM(movimientos.entrada) - SUM(movimientos.salida) ) * productos.ganancia / 100) AS comision'))
+            ->select('cuotas.nro_cuota', 'cuotas.importe', 'ventas.id as servicio', 'socios.nombre', 'cuotas.fecha_vencimiento', 'socios.apellido', 'socios.legajo', 'cuotas.estado', DB::raw('SUM(movimientos.entrada) AS totalCobrado'), DB::raw('SUM(movimientos.salida) AS totalPagado'), DB::raw('(SUM(movimientos.salida) * productos.ganancia / 100) AS comision'))
             ->groupBy('cuotas.id')
             ->havingRaw('totalCobrado <> totalPagado')->get();
 
