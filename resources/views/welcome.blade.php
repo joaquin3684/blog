@@ -363,6 +363,7 @@
 
      }).then(function successCallback(response) {
        UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
+       window.location.reload();
      }, function errorCallback(response) {
        console.log("Error")
      });

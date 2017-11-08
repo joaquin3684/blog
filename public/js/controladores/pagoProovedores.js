@@ -34,7 +34,7 @@ $scope.ArrayPago = [];
             else
             {
                 console.log(response);
-                $scope.proveedores = response.data.;
+                $scope.proveedores = response.data;
                 $scope.sumaMonto = 0;
                 $scope.proveedores.forEach(function(entry) {
                   var elem= {'id': entry.id_proovedor};
