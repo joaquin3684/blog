@@ -242,6 +242,7 @@ $scope.traerRelaciones = function(relaciones)
 
 
    $scope.traerElementos();
+   console.log("Aca entra!")
 
    //EMPIEZA EL CODIGO DEL EXPANDIR
    $scope.tableRowExpanded = false;

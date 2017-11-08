@@ -18,6 +18,7 @@
 
   {!! Html::style('css/animate.min.css') !!}
 {!! Html::script('js/moment/moment.min.js') !!}
+
   <!-- Custom styling plus plugins -->
 
   {!! Html::style('css/custom.css') !!}
@@ -67,6 +68,42 @@
 </script>
 </head>
 
+<!-- Modal -->
+<div ng-controller="fechaContable">
+  @verbatim
+ <div class="modal fade" id="myModal"  role="dialog"  data-backdrop="false">
+   <div class="modal-dialog" role="document">
+     <!-- Modal content-->
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <h4 class="modal-title">Fecha contable </h4>
+       </div>
+       <div class="modal-body">
+
+         <form class="form-horizontal form-label-left">
+           <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input class="form-control col-md-7 col-xs-12" ng-model="fechaContable" type="date" max="{{fechaACtual}}">
+            </div>
+          </div>
+         <div class="ln_solid"></div>
+         <div class="form-group">
+           <div class="col-md-6 col-md-offset-3">
+             <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+             <button type="button" class="btn btn-success" ng-click="submit(fechaContable)">Guardar</button>
+           </div>
+         </div>
+       </form>
+
+       </div>
+
+     </div>
+   </div>
+ </div>
+ @endverbatim
+</div>
 
 <body class="nav-md">
 
@@ -304,12 +341,45 @@
  {!! Html::script('js/app.js') !!}
 
 
+ <script>
 
+
+ app.controller('fechaContable', function($scope, $http, UserSrv) {
+
+   $scope.fechaACtual = moment().format('YYYY-MM-DD');
+
+   $scope.submit = function(fechaContable) {
+
+     var fechaContable = moment(fechaContable).format('YYYY-MM-DD');
+
+     var data = {
+       'fecha': fechaContable,
+     };
+
+     return $http({
+       url: 'fechaContable',
+       method: 'post',
+       data: data,
+
+     }).then(function successCallback(response) {
+       UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
+     }, function errorCallback(response) {
+       console.log("Error")
+     });
+
+   }
+
+
+
+ });
+
+ </script>
 
 
 
   <script>
     NProgress.done();
+
   </script>
   <!-- /datepicker -->
   <!-- /footer content -->
@@ -337,41 +407,6 @@
       </form>
     </div>
   </div>
-
-  <!-- Modal -->
- <div >
-   <div class="modal fade" id="myModal"  role="dialog"  data-backdrop="false">
-     <div class="modal-dialog" role="document">
-       <!-- Modal content-->
-       <div class="modal-content">
-         <div class="modal-header">
-           <button type="button" class="close" data-dismiss="modal">&times;</button>
-           <h4 class="modal-title">Fecha contable</h4>
-         </div>
-         <div class="modal-body">
-
-           <form class="form-horizontal form-label-left">
-             <div class="item form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input class="form-control col-md-7 col-xs-12" ng-model="fechaContable" type="date">
-              </div>
-            </div>
-           <div class="ln_solid"></div>
-           <div class="form-group">
-             <div class="col-md-6 col-md-offset-3">
-               <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-               <button type="button" class="btn btn-success" ng-click="guardarFechaContable(fechaContable)">Guardar</button>
-             </div>
-           </div>
-         </form>
-
-         </div>
-
-       </div>
-     </div>
-   </div>
- </div>
 
   </div>
 
