@@ -58,9 +58,9 @@
                                     </div>
                                     <div class="x_content">
                                         <form class=" form-label-left" ng-submit="crearMovimiento()">
-                                            <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in query(searchText, 'filtroSocios')" md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado...">
+                                            <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre+' '+item.apellido" md-items="item in query(searchText, 'filtroSocios')" md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado...">
                                                 <span md-highlight-text="searchText">
-                                                    {[{item.nombre}]}
+                                                    {[{item.nombre}]} {[{item.apellido}]}
                                                 </span>
                                             </md-autocomplete>
                                             <hr/>
@@ -85,7 +85,7 @@
                                                         </span>
                                                     </label>
                                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                                        <input class="form-control col-md-7 col-xs-12" name="capital" ng-model="importe" type="number">
+                                                        <input class="form-control col-md-7 col-xs-12" name="capital" ng-model="importe" type="number" step="0.01">
                                                         </input>
                                                     </div>
                                                 </div>
@@ -112,7 +112,7 @@
                                                         </span>
                                                     </label>
                                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                                        <input class="form-control col-md-7 col-xs-12" id="vencimiento" name="vencimiento" ng-model="vencimiento" type="text" disabled="">
+                                                        <input class="form-control col-md-7 col-xs-12" id="vencimiento" name="vencimiento" ng-model="vencimiento" type="date" min="{[{fechaActual}]}">
                                                         </input>
                                                     </div>
                                                 </div>
