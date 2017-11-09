@@ -270,3 +270,9 @@ Route::get('fechaContable/borrar', 'FechaContableController@cerrarFechaContable'
 
 Route::get('mayorContable', 'MayorContableController@index');
 Route::post('mayorContable', 'MayorContableController@reporte');
+
+//----------------- PAGO CONTABLE -------------------------------
+
+Route::get('pagoContableProveedor', 'PagoProveedorContable@index');
+Route::get('pagoContableProveedor/proveedores', 'PagoProveedorContable@proveedoresImpagos');
+Route::post('pagoContableProveedor/pagar', 'PagoProveedorContable@pagar');

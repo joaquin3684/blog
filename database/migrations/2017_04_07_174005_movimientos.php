@@ -23,6 +23,8 @@ class Movimientos extends Migration
             $table->double('salida')->default(0);
             $table->date('fecha');
             $table->double('ganancia')->default(0);
+            $table->integer('contabilizado_salida')->default(0);
+            $table->integer('contabilizado_entrada')->default(0);
             $table->softDeletes();
         });
         Schema::enableForeignKeyConstraints();

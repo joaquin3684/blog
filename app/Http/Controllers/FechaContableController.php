@@ -17,14 +17,22 @@ class FechaContableController extends Controller
         DB::transaction(function() use ($request) {
             $ejercicios = Ejercicio::where('fecha_cierre', null)->where('fecha', '<', $request['fecha'])->get();
 
-            if($ejercicios == null)
+            if($ejercicios->isEmpty())
             {
                 throw new FechaContableElejidaEnEjercicioCerradoException('fecha_contable_ejercicio_cerrado');
             }
             else
             {
                 $user = Sentinel::check();
-                ControlFechaContable::create(['fecha_contable' => $request['fecha'], 'id_usuario' => $user->id]);
+                $fecha = ControlFechaContable::where('id_usuario', $user->id)->first();
+                if($fecha == null)
+                {
+                    ControlFechaContable::create(['fecha_contable' => $request['fecha'], 'id_usuario' => $user->id]);
+
+                } else {
+                    $fecha->fecha_contable = $request['fecha'];
+                    $fecha->save();
+                }
             }
         });
     }

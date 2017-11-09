@@ -23,7 +23,7 @@ class CreateVentasTable extends Migration
             $table->foreign('id_producto')->references('id')->on('productos');
             $table->string('descripcion')->nullable();
             $table->integer('nro_cuotas');
-            $table->integer('importe');
+            $table->double('importe');
             $table->date('fecha_vencimiento');
             $table->integer('nro_credito')->nullable();
             $table->softDeletes();
