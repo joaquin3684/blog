@@ -186,7 +186,8 @@
                                             <tbody data-ng-repeat="aprobacion in $data" data-ng-switch on="dayDataCollapse[$index]">
                                             <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,cuota.id_cuota)" >
                                                 <td title="'Socio'" sortable="'nombre'">
-                                                    {{--<input type="checkbox" ng-model="check" style="margin-right: 10px;" ng-change="Corroborar(aprobacion.id,check)">--}}{[{aprobacion.socio.nombre}]}
+                                                    {{--<input type="checkbox" ng-model="check" style="margin-right: 10px;" ng-change="Corroborar(aprobacion.id,check)">--}}
+                                                    {[{aprobacion.socio.nombre}]} {[{aprobacion.socio.apellido}]}
                                                 </td>
                                                 <td title="'Producto'" sortable="'nombre'">
                                                     {[{aprobacion.producto.nombre}]}

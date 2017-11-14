@@ -2,9 +2,10 @@ var app = angular.module('Mutual',  ['ngMaterial','Mutual.services']).config(fun
   $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
 app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
-  moment.locale('es');
+  //moment.locale('es');
 
-  $scope.vencimiento = moment().startOf('month').add(24, 'days').add(2, 'months').format('L');
+  $scope.vencimiento = new Date(moment().startOf('month').add(24, 'days').add(2, 'months').format('YYYY-MM-DD'));
+  $scope.fechaActual = moment().format('YYYY-MM-DD');
   $scope.mostrar = false;
   // machea a los socios en base al searchText
   $scope.query = function(searchText, ruta) {
@@ -53,8 +54,7 @@ app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
 
 
   $scope.crearMovimiento = function() {
-    var vencimiento = moment($scope.vencimiento, "DD/MM/YYYY");
-    console.log(vencimiento.format('YYYY-MM-DD'));
+    var vencimiento = moment($scope.vencimiento, "DD/MM/YYYY").format('YYYY-MM-DD');
 
     $http({
       url: 'ventas',
