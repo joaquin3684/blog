@@ -55,7 +55,7 @@ class PagoProveedorContable extends Controller
             $total = $totalAPagar + $comision;
             $deudor = ImputacionGateway::buscarPorNombre('Deudores '.$proveedor);
             GeneradorDeAsientos::crear($deudor->id, $totalAPagar, 0, $deudor->codigo);
-            $comision = ImputacionGateway::buscarPorNombre('Comision '.$proveedor);
+            $comision = ImputacionGateway::buscarPorNombre('Comisiones '.$proveedor);
             GeneradorDeAsientos::crear($comision->id, $comision, 0, $comision->codigo);
             if($request['formaCobro'] == 'banco')
             {
