@@ -29,8 +29,6 @@ class InicioSistema extends Seeder
             });
 
 
-
-
             // Cuenta De Cuotas Sociales
             $capitulo3 = factory(\App\Capitulo::class)->create(['nombre' => 'Resultado', 'codigo' => 5]);
             $rubro3 = factory(\App\Rubro::class)->create(['id_capitulo' => $capitulo3->id, 'nombre' => 'Recursos', 'codigo' => 51]);

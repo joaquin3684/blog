@@ -48,7 +48,7 @@ class PagoProveedorContable extends Controller
 
     public function pagar(Request $request)
     {
-        DB::transcation(function() use ($request){
+        DB::transaction(function() use ($request){
             $proveedor = $request['proveedor'];
             $totalAPagar = $request['totalAPagar'];
             $comision = $request['comision'];

@@ -19,7 +19,7 @@ class Dar_Servicio extends Controller
 
   	$socios = DB::table('socios')
   		->where('nombre', 'LIKE', '%'.$request['nombre'].'%')
-        ->where('apellido', 'LIKE', '%'.$request['nombre'].'%')->get();
+        ->orWhere('apellido', 'LIKE', '%'.$request['nombre'].'%')->get();
   	return $socios;
 
   }
