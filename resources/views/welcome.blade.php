@@ -105,6 +105,7 @@
  @endverbatim
 </div>
 
+
 <body class="nav-md">
 
   <div class="container body">
@@ -211,6 +212,7 @@
                       </li>
                       <li><a href="cobrar_contablemente">Cobrar contablemente</a></li>
                       <li><a href="mayorContable">Mayor contable</a></li>
+                      <li><a href="pagoContableProveedor">Pago contable Proveedor</a></li>
                       <!-- <li><a href="rubro">Rubros</a>
                       </li>
                       <li><a href="moneda">Monedas</a></li>
@@ -231,7 +233,7 @@
                   </li>
                   <li><a href="pago_proovedores"><i class="fa fa-money" ></i> Pago proveedores</a>
                   <li><a type="button" data-toggle="modal" data-target="#fechaContable"><i class="fa fa-calendar-check-o" ></i> Fecha contable</a>
-                    <li><a><i class="fa fa-calendar-times-o" ></i> Cerrar fecha</a>
+                  <li ng-controller="cerrarFecha"><a ng-click="cerrarFecha()"><i class="fa fa-calendar-times-o" ></i> Cerrar fecha</a>
               </ul>
             </div>
 
@@ -345,9 +347,7 @@
 
 
  app.controller('fechaContable', function($scope, $http, UserSrv) {
-
    $scope.fechaACtual = moment().format('YYYY-MM-DD');
-
    $scope.submit = function(fechaContable) {
 
      var fechaContable = moment(fechaContable).format('YYYY-MM-DD');
@@ -367,10 +367,22 @@
      }, function errorCallback(response) {
        console.log("Error")
      });
-
    }
+ });
 
+ app.controller('cerrarFecha', function($scope, $http, UserSrv) {
+   $scope.cerrarFecha = function() {
+     return $http({
+       url: 'fechaContable/borrar',
+       method: 'get',
 
+     }).then(function successCallback(response) {
+       UserSrv.MostrarMensaje("OK","Fecha cerrada","OK","mensaje");
+       window.location.reload();
+     }, function errorCallback(response) {
+       console.log("Error")
+     });
+   }
 
  });
 

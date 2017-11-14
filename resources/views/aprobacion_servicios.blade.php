@@ -16,9 +16,10 @@
                     <div class="">
                         <div class="clearfix">
                         </div>
-                        <div id="mensaje"></div>
+
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
+
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>
@@ -130,6 +131,7 @@
 
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div id="mensaje"></div>
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>

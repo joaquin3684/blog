@@ -66,6 +66,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       data: data,
 
     }).then(function successCallback(response) {
+      UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
       $scope.traerElementos();
       $scope.borrarFormulario();
       $scope.porcentajes = [{

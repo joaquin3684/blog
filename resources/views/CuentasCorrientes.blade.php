@@ -22,6 +22,7 @@
 
                 @verbatim
                 <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div id="mensaje"></div>
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>
@@ -343,10 +344,10 @@
                                     <!-- END TABLE -->
                                 </div>
                                 <!-- Trigger the modal with a button -->
-                                <button type="button" class="btn btn-primary clearfix" data-toggle="modal" data-target="#myModal" ng-hide="cuotas[0].estado == 'Renovado' || cuotas[0].estado == 'Cancelado'">Cancelar Servicio</button>
+                                <button type="button" class="btn btn-primary clearfix" data-toggle="modal" data-target="#modalCancelacion" ng-hide="cuotaSinEstado">Cancelar Servicio</button>
 
                                 <!-- Modal -->
-                                <div id="myModal" class="modal fade" role="dialog">
+                                <div id="modalCancelacion" class="modal fade" role="dialog">
                                   <div class="modal-dialog">
 
                                     <!-- Modal content-->
@@ -383,7 +384,7 @@
                                         </div>
                                       </div>
                                       <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary"  ng-click="cancelar(motivo, porcentaje)" style="position: absolute; left: 20px;">Realizar accion</button>
+                                        <button type="button" class="btn btn-primary"  ng-click="cancelar(motivo, $event)" style="position: absolute; left: 20px;">Realizar accion</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                       </div>
                                     </div>

@@ -58,6 +58,7 @@ $scope.ArrayAprobar = [];
         {
                 $scope.pullAprobar();
                 UserSrv.MostrarMensaje("OK","Se ha aprobado el servicio.","OK","mensaje");
+                
                 $scope.ArrayAprobar = [];
                 console.log('success');
 

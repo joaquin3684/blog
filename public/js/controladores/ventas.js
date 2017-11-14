@@ -239,6 +239,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                         return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
+                $scope.algunaCuotaSinEstado();
             }
 
         }, function errorCallback(data)
@@ -248,7 +249,17 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
     }
 
-    $scope.cancelar = function (motivo){
+    $scope.cuotaSinEstado = true;
+    $scope.algunaCuotaSinEstado = function(){
+    $scope.cuotaSinEstado = true;
+    $scope.cuotas.forEach(function(cuota){
+      if(cuota.estado == null){
+        $scope.cuotaSinEstado  =false;
+      }
+    });
+  };
+
+    $scope.cancelar = function (motivo, evento){
 
       $http({
           url: 'ventas/cancelarVenta',
@@ -256,9 +267,9 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
           data: {'id_venta': $scope.ventaActual, 'motivo': motivo}
       }).then(function successCallback(response)
       {
-        $scope.PullCuotas($scope.ventaActual, $scope.productoactual)
-        console.log("Exito al cancelar");
-        $('#myModal').modal('hide');
+        $scope.PullCuotas($scope.ventaActual, $scope.productoactual, evento);
+        UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
+        $('#modalCancelacion').modal('hide');
       }, function errorCallback(data)
         {
             console.log(data.data);
