@@ -10,7 +10,7 @@ class Movimientos extends Model
    	use SoftDeletes;
 
 	protected $fillable = [
-        'identificadores_id', 'identificadores_type', 'entrada', 'salida', 'fecha', 'nro_cuota', 'gastos_administrativos', 'ganancia'
+        'identificadores_id', 'identificadores_type', 'entrada', 'salida', 'fecha', 'nro_cuota', 'gastos_administrativos', 'ganancia', 'contabilizado_entrada', 'contabilizado_salida'
     ];
 
     protected $dates = ['deleted_at'];

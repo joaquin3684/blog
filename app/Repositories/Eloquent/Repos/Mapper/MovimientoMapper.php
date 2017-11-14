@@ -15,6 +15,6 @@ class MovimientoMapper
     
     public function map($movimiento)
     {
-        return new Movimiento($movimiento->id, $movimiento->entrada, $movimiento->salida, $movimiento->fecha, $movimiento->ganancia);
+        return new Movimiento($movimiento->id, $movimiento->entrada, $movimiento->salida, $movimiento->fecha, $movimiento->ganancia, $movimiento->contabilizado_salida, $movimiento->contabilizado_entrada);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
+use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,25 +18,20 @@ class InicioSistema extends Seeder
         DB::transaction(function(){
             $ejercicio = factory(\App\Ejercicio::class)->create();
 
-            // Cuenta de deudores
-            $capitulo = factory(\App\Capitulo::class)->create(['nombre' => 'Activo', 'codigo' => 1]);
-            $rubro = factory(\App\Rubro::class)->create(['id_capitulo' => $capitulo->id, 'nombre' => 'Creditos', 'codigo' => 13]);
-            $moneda = factory(\App\Moneda::class)->create(['id_rubro' => $rubro->id, 'nombre' => 'Creditos en pesos', 'codigo' => 131]);
-            $departamento = factory(\App\Departamento::class)->create(['id_moneda' => $moneda->id, 'nombre' => 'Creditos Dpto. General', 'codigo' => 13101]);
-            $subRubro = factory(\App\SubRubro::class)->create(['id_departamento' => $departamento->id, 'nombre' => 'Creditos', 'codigo' => 1310100]);
-            $imputacion = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubro->id, 'nombre' => 'Deudores XXX', 'codigo' => 131010001]);
-            $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion->id, 'codigo' => $imputacion->codigo]);
+            $proveedores = \App\Proovedores::all();
+            $proveedores->each(function($proveedor){
+                $codigo = ImputacionGateway::obtenerCodigoNuevo('1310100');
+                GeneradorDeCuentas::generar('Deudores '.$proveedor->razon_social, $codigo);
+                $codigo = ImputacionGateway::obtenerCodigoNuevo('3110300');
+                GeneradorDeCuentas::generar('Cta '.$proveedor->razon_social, $codigo);
+                $codigo = ImputacionGateway::obtenerCodigoNuevo('5110301');
+                GeneradorDeCuentas::generar('Comisiones '.$proveedor->razon_social, $codigo);
+            });
 
-            // Cuenta de proveedores
-            $capitulo2 = factory(\App\Capitulo::class)->create(['nombre' => 'Pasivo', 'codigo' => 3]);
-            $rubro2 = factory(\App\Rubro::class)->create(['id_capitulo' => $capitulo2->id, 'nombre' => 'Deudas', 'codigo' => 31]);
-            $moneda2 = factory(\App\Moneda::class)->create(['id_rubro' => $rubro2->id, 'nombre' => 'Deudas en pesos', 'codigo' => 311]);
-            $departamento2 = factory(\App\Departamento::class)->create(['id_moneda' => $moneda2->id, 'nombre' => 'Deudas Dpto servicio', 'codigo' => 31103]);
-            $subRubro2 = factory(\App\SubRubro::class)->create(['id_departamento' => $departamento2->id, 'nombre' => 'Creditos', 'codigo' => 3110300]);
-            $imputacion2 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubro2->id, 'nombre' => 'Cta', 'codigo' => 311030001]);
-            $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion2->id, 'codigo' => $imputacion2->codigo]);
 
-            // Cuenta De Cuotas SOciales
+
+
+            // Cuenta De Cuotas Sociales
             $capitulo3 = factory(\App\Capitulo::class)->create(['nombre' => 'Resultado', 'codigo' => 5]);
             $rubro3 = factory(\App\Rubro::class)->create(['id_capitulo' => $capitulo3->id, 'nombre' => 'Recursos', 'codigo' => 51]);
             $moneda3 = factory(\App\Moneda::class)->create(['id_rubro' => $rubro3->id, 'nombre' => 'Recursos en pesos', 'codigo' => 511]);
@@ -60,15 +57,6 @@ class InicioSistema extends Seeder
             $subRubro5 = factory(\App\SubRubro::class)->create(['id_departamento' => $departamento5->id, 'nombre' => 'Caja Dpto general', 'codigo' => 1110101]);
             $imputacion5 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubro5->id, 'nombre' => 'Caja - Efectivo', 'codigo' => 111010101]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion5->id, 'codigo' => $imputacion5->codigo]);
-
-            // Cuenta Comisiones
-            $capitulo6 = factory(\App\Capitulo::class)->create(['nombre' => 'Activo', 'codigo' => 5]);
-            $rubro6 = factory(\App\Rubro::class)->create(['id_capitulo' => $capitulo6->id, 'nombre' => 'Recursos', 'codigo' => 51]);
-            $moneda6 = factory(\App\Moneda::class)->create(['id_rubro' => $rubro6->id, 'nombre' => 'Recursos en pesos', 'codigo' => 511]);
-            $departamento6= factory(\App\Departamento::class)->create(['id_moneda' => $moneda6->id, 'nombre' => 'Dpto general', 'codigo' => 51103]);
-            $subRubro6 = factory(\App\SubRubro::class)->create(['id_departamento' => $departamento6->id, 'nombre' => 'Recursos especificos', 'codigo' => 5110301]);
-            $imputacion6 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubro6->id, 'nombre' => 'Comisiones XXX', 'codigo' => 511030101]);
-            $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion6->id, 'codigo' => $imputacion6->codigo]);
 
             // Asiento de inicio
             $asiento = factory(\App\Asiento::class)->create(['id_ejercicio' => $ejercicio->id]);

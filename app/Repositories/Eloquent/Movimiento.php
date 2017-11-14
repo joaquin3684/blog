@@ -19,16 +19,100 @@ class Movimiento
     private $salida;
     private $fecha;
     private $ganancia;
+    private $contabilizado_salida;
+    private $contabilizado_entrada;
 
 
-    public function __construct($id, $entrada, $salida, $fecha, $ganancia)
+    public function __construct($id, $entrada, $salida, $fecha, $ganancia, $contabilizado_salida, $contabilizado_entrada)
     {
         $this->id = $id;
         $this->entrada = $entrada;
         $this->salida = $salida;
         $this->fecha = $fecha;
         $this->ganancia = $ganancia;
+        $this->contabilizado_entrada = $contabilizado_entrada;
+        $this->contabilizado_salida = $contabilizado_salida;
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSalida()
+    {
+        return $this->salida;
+    }
+
+    /**
+     * @param mixed $salida
+     */
+    public function setSalida($salida)
+    {
+        $this->salida = $salida;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGanancia()
+    {
+        return $this->ganancia;
+    }
+
+    /**
+     * @param mixed $ganancia
+     */
+    public function setGanancia($ganancia)
+    {
+        $this->ganancia = $ganancia;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContabilizadoSalida()
+    {
+        return $this->contabilizado_salida;
+    }
+
+    /**
+     * @param mixed $contabilizado_salida
+     */
+    public function setContabilizadoSalida($contabilizado_salida)
+    {
+        $this->contabilizado_salida = $contabilizado_salida;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContabilizadoEntrada()
+    {
+        return $this->contabilizado_entrada;
+    }
+
+    /**
+     * @param mixed $contabilizado_entrada
+     */
+    public function setContabilizadoEntrada($contabilizado_entrada)
+    {
+        $this->contabilizado_entrada = $contabilizado_entrada;
     }
 
     public function getIdCuota()

@@ -28,7 +28,6 @@ class PagoProveedorContable extends Controller
                 ->where('movimientos.identificadores_type', 'App\Cuotas')
                 ->where('movimientos.contabilizado_salida', '0')
                 ->whereRaw('movimientos.entrada = movimientos.salida')
-                ->where('movimientos.contabilizado_entrada', '1')
                 ->groupBy('productos.id')
                 ->select('proovedores.id as id_proveedor', 'proovedores.razon_social', 'productos.id as producto', DB::raw('(SUM(movimientos.salida) * productos.ganancia / 100) as comision , (SUM(movimientos.salida) - (SUM(movimientos.salida) * productos.ganancia / 100)) as totalAPagar'))
                 ->get();

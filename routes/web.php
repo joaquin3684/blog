@@ -14,7 +14,9 @@
 
 use App\Exceptions\MasPlataCobradaQueElTotalException;
 use App\Repositories\Eloquent\Cobranza\CobrarPorSocio;
+use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
 use App\Repositories\Eloquent\FileManager;
+use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Ventas;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -25,6 +27,21 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 
 //---------------- PRUEBAS ------------------------------
+
+Route::get('generarCuentasYDemas', function(){
+
+   $proveedores = \App\Proovedores::all();
+   $proveedores->each(function($proveedor){
+       $codigo = ImputacionGateway::obtenerCodigoNuevo('1310100');
+       GeneradorDeCuentas::generar('Deudores '.$proveedor->razon_social, $codigo);
+       $codigo = ImputacionGateway::obtenerCodigoNuevo('3110300');
+       GeneradorDeCuentas::generar('Cta '.$proveedor->razon_social, $codigo);
+       $codigo = ImputacionGateway::obtenerCodigoNuevo('5110301');
+       GeneradorDeCuentas::generar('Comisiones '.$proveedor->razon_social, $codigo);
+   });
+});
+
+
 Route::get('pruebas', function(){
 
      return view('prueba');
