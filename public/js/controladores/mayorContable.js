@@ -1,5 +1,5 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){});
-app.controller('mayorContable', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter) {
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){});
+app.controller('mayorContable', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter, UserSrv) {
 
 $scope.ActualDate = moment().format('YYYY-MM-DD');
 
@@ -51,7 +51,7 @@ $scope.filtro = function (){
             var totalHaber = 0;
             var totalSaldo = 0;
             var arr = $.map(entry.asientos, function(el) { return el });
-        
+
             arr.forEach(function(asiento) {
                 totalDebe += asiento.debe;
                 totalHaber += asiento.haber;

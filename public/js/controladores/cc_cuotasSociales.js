@@ -1,5 +1,5 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable']).config(function($interpolateProvider){});
-app.controller('cc_cuotasSocialesCtrl', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter) {
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){});
+app.controller('cc_cuotasSocialesCtrl', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter, UserSrv) {
 
 $scope.ActualDate = moment().format('YYYY-MM-DD');
 

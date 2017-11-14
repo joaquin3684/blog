@@ -31,6 +31,7 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
     }).then(function successCallback(response) {
       $scope.traerElementos();
       $scope.borrarFormulario();
+      UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
     }, function errorCallback(response) {
       $scope.errores = response.data;
     });

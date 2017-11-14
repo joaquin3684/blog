@@ -66,6 +66,7 @@ app.controller('correr_vto_servicios', function($scope, $http, $compile, $sce, N
       data: data,
     }).then(function successCallback(response) {
       $scope.traerElementos();
+      UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
     }, function errorCallback(response) {
 
     });

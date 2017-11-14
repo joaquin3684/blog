@@ -49,6 +49,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
                $('#formulario')[0].reset();
                $scope.errores = '';
                console.log(response.data);
+               UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
             }, function errorCallback(data)
             {
                console.log(data);

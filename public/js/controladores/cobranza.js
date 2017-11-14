@@ -1,8 +1,8 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize']).config(function($interpolateProvider){
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'Mutual.services']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
-app.controller('cobranza', function($scope, $http, $compile, $sce) {
-   
+app.controller('cobranza', function($scope, $http, $compile, $sce, UserSrv) {
+
 // ESTAS FUNCIONES SON PARA DEFINIR LOS PARAMETROS DE BUSQUEDA EN LA FUNCION QUERY
    $scope.buscandoSocios = function(searchText)
    {
@@ -103,11 +103,11 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
             });
    }
 
-   // DATOS PARA FILTRAR LA DATATABLE 
+   // DATOS PARA FILTRAR LA DATATABLE
    $scope.data = [
       {'campo': 'movimientos.id_asociado', 'valor': $scope.valorSocio, 'operador': '='},
       {'campo': 'movimientos.id_producto', 'valor': $scope.valorProducto, 'operador': '='},
-      {'campo': 'proovedores.id', 'valor': $scope.valorProovedor, 'operador': '='}, 
+      {'campo': 'proovedores.id', 'valor': $scope.valorProovedor, 'operador': '='},
       {'campo': 'organismos.id', 'valor': $scope.valorOrganismo, 'operador': '='},
       {'campo': 'importeTotal', 'valor':$scope.minimo_importe, 'operador': '>='},
       {'campo': 'importeTotal', 'valor':$scope.maximo_importe, 'operador': '<='},
@@ -118,8 +118,8 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
       {'campo': 'cuotas.fecha_pago', 'valor':$scope.desde, 'operador': '>='},
       {'campo': 'cuotas.fecha_pago', 'valor':$scope.hasta, 'operador': '<='}
    ];
-   
-   // TABLA DE LA DATATABLE  
+
+   // TABLA DE LA DATATABLE
    var tabla =  $("#datatable-responsive").DataTable({
       processing: true,
       serverSide: true,
@@ -135,13 +135,13 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
          {
             d.filtros = $scope.data
          }
-      },  
-      columns: 
+      },
+      columns:
       [
          {data: 'organismo', name: 'organismo'},
          {data: 'importe', name: 'importe'},
       ],
-      columnDefs: 
+      columnDefs:
       [
          { "title": "Organismo", "targets": 0 },
          { "title": "Total a cobrar", "targets": 1 },
@@ -150,16 +150,16 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
       footerCallback: function ( row, data, start, end, display )
       {
          var api = this.api(), data;
- 
+
          // Remove the formatting to get integer data for summation
-         var intVal = function ( i ) 
+         var intVal = function ( i )
          {
             return typeof i === 'string' ?
             i.replace(/[\$,]/g, '')*1 :
             typeof i === 'number' ?
             i : 0;
          };
- 
+
          // Total over this page
          pageTotal = api
             .column( 1, { page: 'current'} )
@@ -167,25 +167,25 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
             .reduce( function (a, b) {
                return intVal(a) + intVal(b);
             }, 0 );
- 
+
          // Update footer
          $( api.column( 1 ).footer() ).html(
             '$'+pageTotal
          );
       },
       select: true,
-      fixedHeader: 
+      fixedHeader:
       {
          header:true,
          footer: true,
       },
-      language: 
+      language:
       {
          info: "Mostrando del _PAGE_ al _END_ de _TOTAL_ registros",
          zeroRecords: "No se encontraron resultados",
          infoFiltered: "(filtrado de _MAX_ registros)",
          lengthMenu: "Mostrar _MENU_ registros",
-         paginate: 
+         paginate:
          {
             next: "Siguiente",
             previous: "Anterior"
@@ -193,15 +193,15 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
          search: "Buscar:"
       },
       dom: 'Blrtip',
-      buttons: 
+      buttons:
       [
          {
             extend: 'pdf',
             text: 'Generar reporte',
-            exportOptions: 
+            exportOptions:
             {
                columns: ':visible',
-              
+
             }
          },
          'print',
@@ -212,7 +212,7 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
         [25, 50, 100, 200, "Todos"]
     ],
    });
-   
+
    $('#datatable-responsive tbody').on( 'click', 'tr', function () {
          var id = tabla.row(this).data().id_organismo;
          $('#datatable-responsive').dataTable().fnDestroy();
@@ -241,37 +241,37 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
             }
          },
          createdRow: function ( row, data, index ) {
-              
+
             if ( parseFloat(data.deuda) * 1 > 0 ) {
                 $('td', row).eq(6).addClass('highlight');
             }
-        },   
-         columnDefs: 
+        },
+         columnDefs:
          [
 
             { "title": "Socio", "targets": 0 },
             { "title": "Adeuda", "targets": 1 },
          ],
-         columns: 
+         columns:
          [
 
             {data: 'socio', name: 'socio'},
             {data: 'deuda', name: 'deuda'},
-            
+
          ],
          footerCallback: function ( row, data, start, end, display )
          {
             var api = this.api(), data;
-    
+
             // Remove the formatting to get integer data for summation
-            var intVal = function ( i ) 
+            var intVal = function ( i )
             {
                return typeof i === 'string' ?
                i.replace(/[\$,]/g, '')*1 :
                typeof i === 'number' ?
                i : 0;
             };
-    
+
             // Total over this page
               totalACobrars = api
                .column( 1, { page: 'current'} )
@@ -285,21 +285,21 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
                '$'+totalACobrars
             );
 
-          
+
          },
          select: true,
-         fixedHeader: 
+         fixedHeader:
          {
             header:true,
             footer: true,
          },
-         language: 
+         language:
          {
             info: "Mostrando del _PAGE_ al _END_ de _TOTAL_ registros",
             zeroRecords: "No se encontraron resultados",
             infoFiltered: "(filtrado de _MAX_ registros)",
             lengthMenu: "Mostrar _MENU_ registros",
-            paginate: 
+            paginate:
             {
                next: "Siguiente",
                previous: "Anterior"
@@ -307,12 +307,12 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
             search: "Buscar:"
          },
             dom: 'Blrtip',
-            buttons: 
+            buttons:
             [
                {
                   extend: 'pdf',
                   text: 'Generar reporte',
-                  exportOptions: 
+                  exportOptions:
                   {
                      columns: ':visible',
                      modifier:
@@ -331,13 +331,13 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
       });
 
    });
-   // FORMEATEA LA FECHA DE UN FORMATO DD/MM/AAAA  A UN FORMATO AAAA-MM-DD     
+   // FORMEATEA LA FECHA DE UN FORMATO DD/MM/AAAA  A UN FORMATO AAAA-MM-DD
    function formatearFecha(fecha)
    {
       var a = fecha.split('/');
       a.reverse();
       var j = a.join('-');
-      return j;         
+      return j;
    }
 
    // ESTA FUNCION ES PARA FILTRAR LA DATATABLE
@@ -355,7 +355,7 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
          {'campo': 'movimientos.id_asociado', 'valor': $scope.valorSocio, 'operador': '='},
          {'campo': 'movimientos.id_producto', 'valor': $scope.valorProducto, 'operador': '='},
          {'campo': 'proovedores.id', 'valor': $scope.valorProovedor, 'operador': '='},
-         {'campo': 'organismos.id', 'valor': $scope.valorOrganismo, 'operador': '='}, 
+         {'campo': 'organismos.id', 'valor': $scope.valorOrganismo, 'operador': '='},
          {'campo': 'importeTotal', 'valor':$scope.minimo_importe, 'operador': '>='},
          {'campo': 'importeTotal', 'valor':$scope.maximo_importe, 'operador': '<='},
          {'campo': 'cuotas.importe', 'valor':$scope.minimo_importe_cuota, 'operador': '>='},
@@ -366,8 +366,7 @@ app.controller('cobranza', function($scope, $http, $compile, $sce) {
          {'campo': 'cuotas.fecha_pago', 'valor':hasta, 'operador': '<='}
         ];
       tabla.draw();
-      
+
    }
 
 });
-
