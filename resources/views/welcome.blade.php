@@ -71,7 +71,7 @@
 <!-- Modal -->
 <div ng-controller="fechaContable">
   @verbatim
- <div class="modal fade" id="myModal"  role="dialog"  data-backdrop="false">
+ <div class="modal fade" id="fechaContable"  role="dialog"  data-backdrop="false">
    <div class="modal-dialog" role="document">
      <!-- Modal content-->
      <div class="modal-content">
@@ -230,7 +230,7 @@
                   <li><a href="correrVto"><i class="fa fa-calendar"></i>Correr Vto Servicio/Prestamo</a>
                   </li>
                   <li><a href="pago_proovedores"><i class="fa fa-money" ></i> Pago proveedores</a>
-                  <li><a type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-calendar-check-o" ></i> Fecha contable</a>
+                  <li><a type="button" data-toggle="modal" data-target="#fechaContable"><i class="fa fa-calendar-check-o" ></i> Fecha contable</a>
                     <li><a><i class="fa fa-calendar-times-o" ></i> Cerrar fecha</a>
               </ul>
             </div>
