@@ -50,7 +50,7 @@ class CobrarContablemente extends Controller
             }
             else if($request['tipo'] == 'cuotas_sociales')
             {
-                GeneradorDeAsientos::crear($request['idDeudor'], 0, $request['valor'], $request['codigoDeudor']);
+                GeneradorDeAsientos::crear(1, 0, $request['valor'], $request['codigoDeudor']);
             }//todo: aca falta la cuenta de imputacion para las cuotas sociales
         });
     }
