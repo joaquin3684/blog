@@ -24,7 +24,7 @@ class GeneradorDeAsientos
         $ultimoAsiento = $gate->last();
         $nroAsiento = $ultimoAsiento->nro_asiento + 1;
         $fecha = new ControlFechaContable();
-        $fechaContable = $fecha->fechaContable;
+        $fechaContable = $fecha->getFechaContable();
         $fechaVal = $fechaValor == null ? $fechaContable : Carbon::createFromFormat('Y-m-d', $fechaValor);
         $asientos = new AsientosGateway();
         $ejercicio = Ejercicio::where('fecha', '<', $fechaVal->toDateString())
@@ -36,7 +36,7 @@ class GeneradorDeAsientos
         {
             throw new EjercicioCerradoException('ejercicio_cerrado');
         }
-        $asientos->create(['id_imputacion' => $cuenta, 'codigo' => $codigo, 'debe' => $debeNuevo, 'haber' => $haberNuevo, 'id_ejercicio' => $ejercicio->id, 'fecha_contable' => $fechaContable, 'fecha_valor' => $fechaVal->toDateString(), 'nro_asiento' => $nroAsiento]);
+        $asientos->create(['id_imputacion' => $cuenta, 'codigo' => $codigo, 'debe' => $debeNuevo, 'haber' => $haberNuevo, 'id_ejercicio' => $ejercicio->id, 'fecha_contable' => $fechaContable->toDateString(), 'fecha_valor' => $fechaVal->toDateString(), 'nro_asiento' => $nroAsiento]);
         CalcularSaldos::modificarSaldo($cuenta, $fechaVal);
     }
 }

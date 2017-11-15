@@ -31,14 +31,24 @@ use Intervention\Image\ImageManagerStatic as Image;
 Route::get('generarCuentasYDemas', function(){
 
    $proveedores = \App\Proovedores::all();
-   $proveedores->each(function($proveedor){
-       $codigo = ImputacionGateway::obtenerCodigoNuevo('1310100');
-       GeneradorDeCuentas::generar('Deudores '.$proveedor->razon_social, $codigo);
-       $codigo = ImputacionGateway::obtenerCodigoNuevo('3110300');
-       GeneradorDeCuentas::generar('Cta '.$proveedor->razon_social, $codigo);
-       $codigo = ImputacionGateway::obtenerCodigoNuevo('5110301');
-       GeneradorDeCuentas::generar('Comisiones '.$proveedor->razon_social, $codigo);
-   });
+    if($proveedores->isNotEmpty()) {
+
+
+        $primerProveedor = $proveedores->splice(1, 1);
+        $primerProveedor = $primerProveedor->first();
+        GeneradorDeCuentas::generar('Deudores ' . $primerProveedor->razon_social, '131010001');
+        GeneradorDeCuentas::generar('Cta ' . $primerProveedor->razon_social, '311030001');
+        GeneradorDeCuentas::generar('Comisiones ' . $primerProveedor->razon_social, '511030101');
+        $proveedores->each(function ($proveedor) {
+            $codigo = ImputacionGateway::obtenerCodigoNuevo('1310100');
+            GeneradorDeCuentas::generar('Deudores ' . $proveedor->razon_social, $codigo);
+            $codigo = ImputacionGateway::obtenerCodigoNuevo('3110300');
+            GeneradorDeCuentas::generar('Cta ' . $proveedor->razon_social, $codigo);
+            $codigo = ImputacionGateway::obtenerCodigoNuevo('5110301');
+            GeneradorDeCuentas::generar('Comisiones ' . $proveedor->razon_social, $codigo);
+        });
+    }
+
 });
 
 
@@ -282,7 +292,6 @@ Route::post('cobrar_contablemente/cobrar', 'CobrarContablemente@cobrar');
 Route::post('fechaContable', 'FechaContableController@setearFechaContable');
 Route::get('fechaContable/borrar', 'FechaContableController@cerrarFechaContable');
 
-
 //------------------- MAYOR CONTABLE ------------------------
 
 Route::get('mayorContable', 'MayorContableController@index');
@@ -293,3 +302,9 @@ Route::post('mayorContable', 'MayorContableController@reporte');
 Route::get('pagoContableProveedor', 'PagoProveedorContable@index');
 Route::get('pagoContableProveedor/proveedores', 'PagoProveedorContable@proveedoresImpagos');
 Route::post('pagoContableProveedor/pagar', 'PagoProveedorContable@pagar');
+
+
+//----------------- BALANCE ---------------------------------------
+
+Route::get('balance', 'BalanceController@index');
+Route::post('balance', 'BalanceController@reporte');

@@ -4,6 +4,8 @@ namespace Tests\Unit;
 
 use App\Repositories\Eloquent\AgenteFinanciero;
 use App\Repositories\Eloquent\Comercializador;
+use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
+use App\Repositories\Eloquent\ControlFechaContable;
 use App\Repositories\Eloquent\Proveedor;
 use App\Repositories\Eloquent\Repos\Gateway\ComercializadorGateway;
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
@@ -14,6 +16,7 @@ use App\Repositories\Eloquent\Repos\SolicitudesSinInversionistaRepo;
 use App\Repositories\Eloquent\Solicitud;
 use App\SolicitudesSinInversionista;
 use App\Traits\Conversion;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -42,6 +45,15 @@ class ComercializadorTest extends TestCase
         $this->solicitudGateway = new SolicitudGateway();
         $this->solicitudMapper = new SolicitudMapper();
 
+
+    }
+
+    public function testPrueba()
+    {
+        $mock = \Mockery::mock('overload:App\Repositories\Eloquent\ControlFechaContable');
+        $fecha = Carbon::today();
+        $mock->shouldReceive('getFechaContable')->andReturn($fecha);
+        GeneradorDeCuentas::generar('Deudores dfds', '131010001');
 
     }
 

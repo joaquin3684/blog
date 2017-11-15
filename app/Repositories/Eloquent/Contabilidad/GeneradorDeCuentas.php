@@ -19,7 +19,7 @@ class GeneradorDeCuentas
     public static function generar($nombre, $codigo)
     {
         $fechaOperativa = new ControlFechaContable();
-        $fecha = $fechaOperativa->fechaContable;
+        $fecha = $fechaOperativa->getFechaContable();
         $codigoSubRubro = substr((string) $codigo, 0, -2);
         $subRubro = SubRubro::where('codigo', $codigoSubRubro)->first();
         $imputacion = Imputacion::create(['nombre' => $nombre, 'codigo' => $codigo, 'id_subrubro' => $subRubro->id]);

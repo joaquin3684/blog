@@ -43,7 +43,7 @@ class CalculadorSaldoInicial
             ->where('codigo', '<=', $cuentaHasta)
             ->unionAll($saldo)
             ->groupBy('id_imputacion')
-            ->select(DB::raw('(SUM(debe) - SUM(haber) ) as saldo'), 'codigo')
+            ->select(DB::raw('(SUM(debe) - SUM(haber)) as saldo'), 'codigo')
             ->get()->unique('codigo');
 
 
