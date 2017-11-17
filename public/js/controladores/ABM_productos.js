@@ -56,6 +56,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       'descripcion': $scope.descripcion,
       'ganancia': $scope.ganancia,
       'id_proovedor': $scope.id_proovedor,
+      'tasa': $scope.tasa,
       'tipo': $scope.tipo,
       'porcentajes': $scope.porcentajes,
     };
@@ -137,7 +138,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       'nombre': $scope.abmConsultado.nombre,
       'descripcion': $scope.abmConsultado.descripcion,
       'ganancia': $scope.abmConsultado.ganancia,
-      'porcentaje_capital': $scope.abmConsultado.porcentaje_capital,
+      'tasa': $scope.abmConsultado.tasa,
       'id_proovedor': $scope.abmConsultado.id_proovedor,
       'tipo': $scope.abmConsultado.tipo,
       'porcentajes': $scope.abmConsultado.porcentajes,

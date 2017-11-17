@@ -311,14 +311,13 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
       switch(formaCobro) {
         case 'porcentaje':
         if(porcentaje != undefined){
-          return $scope.sumaMontoACobrar*(1+(porcentaje/100));
+          return ($scope.sumaMontoACobrar- $scope.sumaMontoCobrado)*(1+(porcentaje/100));
         }
           break;
         case 'saldo':
-          return $scope.sumaMontoACobrar;
+          return ($scope.sumaMontoACobrar- $scope.sumaMontoCobrado);
           break;
-        default:
-          return $scope.sumaMontoACobrar;
+      
 }
     }
 
