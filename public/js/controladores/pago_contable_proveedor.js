@@ -16,14 +16,26 @@ app.controller('pago_contable_proveedor', function($scope, $http, $compile, $sce
 
   $scope.submit = function() {
 
-    var data = {
-      'proveedor': $scope.proveedorSeleccionado.razon_social,
-      'totalAPagar': $scope.proveedorSeleccionado.totalAPagar,
-      'comision': $scope.proveedorSeleccionado.comision,
-      'formaCobro': $scope.formaCobro,
-      'idBanco': $scope.bancoSeleccionado.id,
+if($scope.formaCobro == 'caja'){
+  var data = {
+    'proveedor': $scope.proveedorSeleccionado.razon_social,
+    'totalAPagar': $scope.proveedorSeleccionado.totalAPagar,
+    'comision': $scope.proveedorSeleccionado.comision,
+    'formaCobro': $scope.formaCobro,
+    'idBanco': null,
+    'codigoBanco': null
+  };
+}else{
+  var data = {
+    'proveedor': $scope.proveedorSeleccionado.razon_social,
+    'totalAPagar': $scope.proveedorSeleccionado.totalAPagar,
+    'comision': $scope.proveedorSeleccionado.comision,
+    'formaCobro': $scope.formaCobro,
+    'idBanco': $scsope.bancoSeleccionado.id,
+    'codigoBanco': $scope.bancoSeleccionado.codigo
+  };
+}
 
-    };
 
     return $http({
       url: 'pagoContableProveedor/pagar',

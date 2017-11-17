@@ -47,8 +47,18 @@
                   <form class="form-horizontal form-label-left" ng-submit="submit()" id="formulario" >
                    {{ csrf_field() }}
 
-
                    <div class="item form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Tipo<span class="required">*</span>
+                     </label>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                       <select class="form-control" ng-model="tipo">
+                         <option value="servicios">Servicios</option>
+                         <option value="cuotas_sociales">Cuotas sociales</option>
+                       </select>
+                     </div>
+                   </div>
+
+                   <div class="item form-group" ng-show="tipo == 'servicios'">
                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Deudor<span class="required">*</span>
                      </label>
                      <div class="col-md-6 col-sm-6 col-xs-12">
@@ -79,16 +89,7 @@
                       </div>
                     </div>
 
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Tipo<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="form-control" ng-model="tipo">
-                          <option value="servicios">Servicios</option>
-                          <option value="cuotas_sociales">Cuotas sociales</option>
-                        </select>
-                      </div>
-                    </div>
+
 
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="importe">Importe <span class="required">*</span>

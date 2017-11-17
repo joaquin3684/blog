@@ -45,7 +45,8 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       $scope.cuotas = [{
         //'categoria': '',
         'valor': ''
-      }]
+      }];
+      UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
     }, function errorCallback(response) {
       $scope.errores = response.data;
     });
@@ -120,6 +121,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
     }).then(function successCallback(response) {
       $scope.traerElementos();
       console.log("Exito al editar");
+      UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
       $('#editar').modal('toggle');
     }, function errorCallback(response) {
 

@@ -20,6 +20,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
            }).then(function successCallback(response)
            {
              $scope.proovedores = response.data;
+             console.log("Relaciones:")
             console.log(response);
               // $.each(response.data, function(val, text) {
               //    console.log(relaciones[x].select);
@@ -54,7 +55,6 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       'nombre': $scope.nombre,
       'descripcion': $scope.descripcion,
       'ganancia': $scope.ganancia,
-      'porcentaje_capital': $scope.porcentaje_capital,
       'id_proovedor': $scope.id_proovedor,
       'tipo': $scope.tipo,
       'porcentajes': $scope.porcentajes,
@@ -89,6 +89,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
         if (typeof response.data === 'string') {
           return [];
         } else {
+          console.log("Productos:");
             console.log(response.data);
             $scope.datosabm = response.data;
             $scope.paramsABMS = new NgTableParams({
@@ -123,6 +124,8 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       // data: data,
     }).then(function successCallback(response) {
       $scope.abmConsultado = response.data;
+      console.log("Producto");
+      console.log(response);
     }, function errorCallback(response) {
 
     });

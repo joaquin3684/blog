@@ -68,14 +68,14 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Cuit<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" name="cuit" required class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit" ng-model="cuitComerc">{{errores.cuit[0]}}
+                        <input type="number" id="cuit" name="cuit" required class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit" ng-model="cuitComerc">{{errores.cuit[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="documento" >Documento<span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="documento" name="documento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Documento" ng-model="documentoComerc">{{errores.dni[0]}}
+                      <input type="number" id="documento" name="documento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Documento" ng-model="documentoComerc">{{errores.dni[0]}}
                     </div>
                   </div>
                   <div class="item form-group">
@@ -96,7 +96,7 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Telefono<span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el telefono" ng-model="telefonoComerc">{{errores.telefono[0]}}
+                  <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el telefono" ng-model="telefonoComerc">{{errores.telefono[0]}}
                 </div>
               </div>
               <div class="item form-group">
@@ -117,7 +117,7 @@
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_colocacion" >Porc. colocacion<span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="porcentaje_colocacion" name="porcentaje_colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el porcentaje" ng-model="porcentaje_colocacionComerc">{{errores.porcentaje_colocacion[0]}}
+            <input type="number" step="0.01" id="porcentaje_colocacion" name="porcentaje_colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el porcentaje" ng-model="porcentaje_colocacionComerc">{{errores.porcentaje_colocacion[0]}}
           </div>
         </div>
 
@@ -171,10 +171,10 @@
                      <button id="exportButton1" ng-click="ExportarPDF('organismos')" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
                      </button>
                      <button id="exportButton2"  data-toggle="modal" data-target="#prompted" class="btn btn-success clearfix" ><span class="fa fa-file-excel-o"></span> EXCEL</button>
-                     
+
                      <button id="exportButton3" ng-click="$Servicio.Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
                      </center>
-                     
+
                      <div id="estatablaseexporta" style="display: none;">
                       @verbatim
                       <table id="tablaexported">
@@ -290,14 +290,14 @@
              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Cuit<span class="required">*</span>
              </label>
              <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit" ng-model="abmConsultado.cuit" required>{{errores.cuit[0]}}
+               <input type="number" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit" ng-model="abmConsultado.cuit" required>{{errores.cuit[0]}}
              </div>
            </div>
            <div class="item form-group">
            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="documento" >Documento<span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 col-xs-12">
-             <input type="text" id="documento" name="documento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Documento" ng-model="abmConsultado.dni" required>{{errores.dni[0]}}
+             <input type="number" id="documento" name="documento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Documento" ng-model="abmConsultado.dni" required>{{errores.dni[0]}}
            </div>
          </div>
          <div class="item form-group">
@@ -318,7 +318,7 @@
        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Telefono<span class="required">*</span>
        </label>
        <div class="col-md-6 col-sm-6 col-xs-12">
-         <input type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el telefono" ng-model="abmConsultado.telefono" required>{{errores.telefono[0]}}
+         <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el telefono" ng-model="abmConsultado.telefono" required>{{errores.telefono[0]}}
        </div>
      </div>
      <div class="item form-group">
@@ -332,7 +332,7 @@
    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_colocacion" >Porc. Colocacion<span class="required">*</span>
    </label>
    <div class="col-md-6 col-sm-6 col-xs-12">
-     <input type="text" id="porcentaje_colocacion" name="porcentaje_colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el porcentaje" ng-model="abmConsultado.porcentaje_colocacion" required>{{errores.porcentaje_colocacion[0]}}
+     <input type="number" step="0.01" id="porcentaje_colocacion" name="porcentaje_colocacion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el porcentaje" ng-model="abmConsultado.porcentaje_colocacion" required>{{errores.porcentaje_colocacion[0]}}
    </div>
  </div>
 
@@ -340,7 +340,7 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                      <button type="button" class="btn btn-primary" ngclick="borrarFormulario()">Cancelar</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                         <button id="send" type="submit" class="btn btn-success">Enviar</button>
 
                       </div>

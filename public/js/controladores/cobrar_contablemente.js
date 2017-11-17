@@ -16,13 +16,28 @@ app.controller('cobrar_contablemente', function($scope, $http, $compile, $sce, N
 
   $scope.submit = function() {
 
+    if($scope.formaCobro == 'caja'){
+      var idBanco = '';
+      var codigoBanco = '';
+    }else{
+      var idBanco = $scope.bancoSeleccionado.id;
+      var codigoBanco = $scope.bancoSeleccionado.codigo;
+    }
+    if($scope.tipo == 'cuotas_sociales'){
+      var idDeudor = '';
+      var codigoDeudor = '';
+    }else{
+      var idDeudor = $scope.deudorSeleccionado.id;
+      var codigoDeudor = $scope.deudorSeleccionado.codigo;
+    }
+
     var data = {
-      'idBanco': $scope.bancoSeleccionado.id,
-      'codigoBanco': $scope.bancoSeleccionado.codigo,
+      'idBanco': idBanco,
+      'codigoBanco': codigoBanco,
       'formaCobro': $scope.formaCobro,
       'valor': $scope.importe,
-      'codigoDeudor': $scope.deudorSeleccionado.codigo,
-      'idDeudor': $scope.deudorSeleccionado.id,
+      'codigoDeudor': codigoDeudor,
+      'idDeudor': idDeudor,
       'tipo': $scope.tipo
     };
 
