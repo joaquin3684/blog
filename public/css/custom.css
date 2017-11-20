@@ -22,9 +22,9 @@
 body.nav-sm .container.body .left_col {
   width: 70px;
   padding: 0;
-  position: fixed;
-  height: 100%;
-  z-index: 200;
+  position: absolute;
+  min-height: 100%;
+  z-index: 9999;
   background: #106cc8;
 }
 span:hover{
@@ -218,12 +218,11 @@ body.nav-sm span.fa, body.nav-sm .menu_section h3 {
 body.nav-md .container.body .col-md-3.left_col {
   width: 230px;
   padding: 0;
-
   display: flex;
   padding: 0;
-  position: fixed;
-  height: 100%;
-  z-index: 200;
+  position: absolute;
+  min-height: 100%;
+  z-index: 1;
   background: #106cc8;
 }
 body .container.body .right_col {

@@ -135,16 +135,16 @@
                       <div class="row">
                         <div class="form-group">
                           <div class="col-md-2 col-md-offset-6">
-                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta Capítulo</button>
+                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta</button>
                           </div>
                         </div>
                       </div>
                   </form>
                   @endverbatim
 
-
+                        <br>
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('Rubros')">Continuar a Rubros <i class="fa fa-arrow-right"></i> </button></li>
+                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('rubro')">Continuar a Rubros <i class="fa fa-arrow-right"></i> </button></li>
                         </ul>
 
 
@@ -202,17 +202,17 @@
                       <div class="row">
                         <div class="form-group">
                           <div class="col-md-2 col-md-offset-6">
-                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta Rubro</button>
+                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta</button>
                           </div>
                         </div>
                       </div>
                   </form>
                   @endverbatim
 
-
+                        <br>
                         <ul class="list-inline pull-right">
-                        <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('Capitulos')"><i class="fa fa-arrow-left"></i> Regresar a Capitulo</button></li>
-                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('Monedas')">Continuar a Moneda <i class="fa fa-arrow-right"></i> </button></li>
+                        <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('capitulo')"><i class="fa fa-arrow-left"></i> Regresar a Capitulo</button></li>
+                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('moneda')">Continuar a Moneda <i class="fa fa-arrow-right"></i> </button></li>
                         </ul>
 
 
@@ -270,17 +270,17 @@
                       <div class="row">
                         <div class="form-group">
                           <div class="col-md-2 col-md-offset-6">
-                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta Moneda</button>
+                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta </button>
                           </div>
                         </div>
                       </div>
                   </form>
                   @endverbatim
 
-
+                        <br>
                         <ul class="list-inline pull-right">
-                        <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('Rubros')"><i class="fa fa-arrow-left"></i> Regresar a Rubro</button></li>
-                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('Departamentos')">Continuar a Departamento <i class="fa fa-arrow-right"></i> </button></li>
+                        <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('rubro')"><i class="fa fa-arrow-left"></i> Regresar a Rubro</button></li>
+                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('departamento')">Continuar a Departamento <i class="fa fa-arrow-right"></i> </button></li>
                         </ul>
                 </div>
                 <div class="tab-pane" role="tabpanel" id="departamento">
@@ -335,17 +335,17 @@
                       <div class="row">
                         <div class="form-group">
                           <div class="col-md-2 col-md-offset-6">
-                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta DPTO</button>
+                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta</button>
                           </div>
                         </div>
                       </div>
                   </form>
                   @endverbatim
 
-
+                        <br>
                         <ul class="list-inline pull-right">
-                        <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('Monedas')"><i class="fa fa-arrow-left"></i> Regresar a Moneda</button></li>
-                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('SubRubros')">Continuar a SubRubro <i class="fa fa-arrow-right"></i> </button></li>
+                        <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('moneda')"><i class="fa fa-arrow-left"></i> Regresar a Moneda</button></li>
+                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('subRubro')">Continuar a SubRubro <i class="fa fa-arrow-right"></i> </button></li>
                         </ul>
 
                 </div>
@@ -402,17 +402,17 @@
                       <div class="row">
                         <div class="form-group">
                           <div class="col-md-2 col-md-offset-6">
-                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta SubRubro</button>
+                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta </button>
                           </div>
                         </div>
                       </div>
                   </form>
                   @endverbatim
 
-
+                        <br>
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('Departamentos')"><i class="fa fa-arrow-left"></i> Regresar a Dpto</button></li>
-                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('Imputaciones')">Continuar a Imputaciones <i class="fa fa-arrow-right"></i> </button></li>
+                            <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('departamento')"><i class="fa fa-arrow-left"></i> Regresar a Dpto</button></li>
+                            <li><button type="button" class="btn btn-primary next-step" ng-click="asignarPantallaActual('imputacion')">Continuar a Imputaciones <i class="fa fa-arrow-right"></i> </button></li>
                         </ul>
 
                 </div>
@@ -468,16 +468,16 @@
                       <div class="row">
                         <div class="form-group">
                           <div class="col-md-2 col-md-offset-6">
-                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta Imputacion</button>
+                            <button id="send" type="submit" style="width: 100%;" class="btn btn-success"><i class="fa fa-plus"></i> Alta</button>
                           </div>
                         </div>
                       </div>
                   </form>
                   @endverbatim
 
-
+                        <br>
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('SubRubros')"><i class="fa fa-arrow-left"></i> Regresar a SubRubros</button></li>
+                            <li><button type="button" class="btn btn-default prev-step" ng-click="asignarPantallaActual('subRubro')"><i class="fa fa-arrow-left"></i> Regresar a SubRubros</button></li>
 
                         </ul>
 
@@ -555,8 +555,8 @@
                                                 </td>
 
                                                 <td id="botones">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar_{{pantallaActual}}" ng-click="enviarFormulario( pantallaActual,'Mostrar',abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+
                                                 </td>
                                             </tr>
                                           </tbody>
@@ -613,7 +613,7 @@
   </div>
 
  <!-- Modal -->
-<div id="editar" class="modal fade" role="dialog">
+<div id="editar_capitulo" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -629,66 +629,24 @@
              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre" >Nombre <span class="required">*</span>
              </label>
              <div class="col-md-6 col-sm-6 col-xs-12">
-               <input  type="text" class="form-control col-md-7 col-xs-12" name="nombre" ng-model="abmConsultado.nombre">{{errores.nombre[0]}}
+               <input  type="text" class="form-control col-md-7 col-xs-12" name="nombre" ng-model="abmConsultado.nombre">
              </div>
            </div>
            <div class="item form-group">
-             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="apellido">Apellido<span class="required">*</span>
+             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="codigo">Codigo<span class="required">*</span>
              </label>
              <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" step="0.01" id="apellido" name="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el apellido del comercializador" ng-model="abmConsultado.apellido">{{errores.cuota_social[0]}}
+               <input type="text" name="codigo" class="form-control col-md-7 col-xs-12" ng-model="abmConsultado.codigo">
              </div>
            </div>
 
-             <div class="item form-group">
-             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Cuit<span class="required">*</span>
-             </label>
-             <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit" ng-model="abmConsultado.cuit">{{errores.cuit[0]}}
-             </div>
-           </div>
-           <div class="item form-group">
-           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="documento" >Documento<span class="required">*</span>
-           </label>
-           <div class="col-md-6 col-sm-6 col-xs-12">
-             <input type="text" id="documento" name="documento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Documento" ng-model="abmConsultado.dni">{{errores.cuit[0]}}
-           </div>
-         </div>
-         <div class="item form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="documento" >Email<span class="required">*</span>
-         </label>
-         <div class="col-md-6 col-sm-6 col-xs-12">
-           <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el email" ng-model="abmConsultado.email">{{errores.cuit[0]}}
-         </div>
-       </div>
-         <div class="item form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Domicilio<span class="required">*</span>
-         </label>
-         <div class="col-md-6 col-sm-6 col-xs-12">
-           <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio" ng-model="abmConsultado.domicilio">{{errores.cuit[0]}}
-         </div>
-       </div>
-       <div class="item form-group">
-       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Telefono<span class="required">*</span>
-       </label>
-       <div class="col-md-6 col-sm-6 col-xs-12">
-         <input type="text" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el telefono" ng-model="abmConsultado.telefono">{{errores.cuit[0]}}
-       </div>
-     </div>
-     <div class="item form-group">
-     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Usuario<span class="required">*</span>
-     </label>
-     <div class="col-md-6 col-sm-6 col-xs-12">
-       <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el usuario" ng-model="abmConsultado.usuario">{{errores.cuit[0]}}
-     </div>
-   </div>
 
                     <input type="hidden" name="id">
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
                       <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                        <button id="send" type="submit" class="btn btn-success">Enviar</button>
+                        <button id="send" type="submit" class="btn btn-success" ng-click="enviarFormulario('capitulo','Editar')">Enviar</button>
 
                       </div>
                     </div>

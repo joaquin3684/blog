@@ -79,16 +79,19 @@ $scope.traerRelaciones = function(relaciones)
             {
                if(tipoSolicitud == 'Mostrar')
                   {
-
                      console.log(response);
                      llenarFormulario('formularioEditar',response.data);
                   }
                $scope.mensaje = response;
                $('#'+formu)[0].reset();
-               if(tipoSolicitud != 'Mostrar'){UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje"); $('#editar').modal('hide');}
+               if(tipoSolicitud != 'Mostrar'){
+                 UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
+                 $('#editar').modal('hide');
+                 $('#editar_'+$scope.pantallaActual).modal('hide');
+               }
                $scope.errores = '';
                console.log(response.data);
-               $scope.traerElementos();
+               $scope.traerElementos($scope.pantallaActual);
             }, function errorCallback(data)
             {
                console.log(data);
@@ -128,7 +131,7 @@ $scope.traerRelaciones = function(relaciones)
                   case 'cap':
                     $scope.selectcapitulos = response.data;
                     if (inicio){
-                      $scope.asignarPantallaActual('Capitulos');
+                      $scope.asignarPantallaActual('capitulo');
                       inicio= false;
                     }
                   break;
@@ -148,7 +151,7 @@ $scope.traerRelaciones = function(relaciones)
                     $scope.selectimputaciones = response.data;
                   break;
                 }
-
+                $scope.asignarPantallaActual($scope.pantallaActual);
             }
 
         }, function errorCallback(data)
@@ -180,40 +183,51 @@ $scope.traerRelaciones = function(relaciones)
     $scope.pantallaActual = pantalla;
 
     switch(pantalla){
-      case 'Capitulos':
+      case 'capitulo':
         $scope.generarTabla($scope.selectcapitulos);
       break;
-      case 'Rubros':
+      case 'rubro':
         $scope.generarTabla($scope.selectrubros);
       break;
-      case 'Monedas':
+      case 'moneda':
         $scope.generarTabla($scope.selectmonedas);
       break;
-      case 'Departamentos':
+      case 'departamento':
         $scope.generarTabla($scope.selectdepartamentos);
       break;
-      case 'SubRubros':
+      case 'subRubrs':
         $scope.generarTabla($scope.selectsubrubros);
       break;
-      case 'Imputaciones':
+      case 'imputacion':
         $scope.generarTabla($scope.selectimputaciones);
       break;
     }
 
   }
 
-   $scope.traerElementos = function(relaciones)
+   $scope.traerElementos = function(pantalla)
    {
 
-      var metodito = 'get';
-      var abm = $("#tablon").val();
-      var urlabm = abm + "/traerElementos";
-      $scope.traigo('capitulo/traerElementos','get','cap');
-      $scope.traigo('rubro/traerElementos','get','rub');
-      $scope.traigo('moneda/traerElementos','get','mon');
-      $scope.traigo('departamento/traerElementos','get','dep');
-      $scope.traigo('subRubro/traerElementos','get','sub');
-      $scope.traigo('imputacion/traerElementos','get','imp');
+     switch(pantalla){
+       case 'capitulo':
+       $scope.traigo('capitulo/traerElementos','get','cap');
+       break;
+       case 'rubro':
+       $scope.traigo('rubro/traerElementos','get','rub');
+       break;
+       case 'moneda':
+       $scope.traigo('moneda/traerElementos','get','mon');
+       break;
+       case 'departamento':
+       $scope.traigo('departamento/traerElementos','get','dep');
+       break;
+       case 'subRubrs':
+       $scope.traigo('subRubro/traerElementos','get','sub');
+       break;
+       case 'imputacion':
+       $scope.traigo('imputacion/traerElementos','get','imp');
+       break;
+     }
 
    }
 
@@ -276,10 +290,7 @@ $scope.traerRelaciones = function(relaciones)
 
    }
 
-   $scope.consolear = function (algo){
-     console.log(algo);
-   }
-   $scope.traerElementos();
+   $scope.traerElementos('capitulo');
 
 
    //EMPIEZA EL CODIGO DEL EXPANDIR
