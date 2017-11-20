@@ -11,7 +11,12 @@ class SubRubro extends Model
     protected $table = 'sub_rubros';
 
     protected $fillable = [
-        'codigo', 'nombre', 'id_departamento'
+        'codigo', 'nombre', 'id_departamento', 'afecta_codigo_base'
     ];
     protected $dates = ['deleted_at'];
+
+    public function imputaciones()
+    {
+        return $this->hasMany('App\Imputacion', 'id_subrubro', 'id');
+    }
 }

@@ -11,7 +11,12 @@ class Departamento extends Model
     protected $table = 'departamentos';
 
     protected $fillable = [
-        'codigo', 'nombre', 'id_moneda'
+        'codigo', 'nombre', 'id_moneda', 'afecta_codigo_base'
     ];
     protected $dates = ['deleted_at'];
+
+    public function subRubros()
+    {
+        return $this->hasMany('App\SubRubro', 'id_departamento', 'id');
+    }
 }

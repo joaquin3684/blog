@@ -11,5 +11,7 @@ $factory->define(App\Moneda::class, function (Faker\Generator $faker) {
         'id_rubro' => 1,
         'codigo' => 1,
         'nombre' => 'prueba',
+        'afecta_codigo_base' => 1,
+
     ];
 });

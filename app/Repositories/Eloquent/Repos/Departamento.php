@@ -19,4 +19,10 @@ class Departamento extends Repositorio
         return 'App\Repositories\Eloquent\Repos\Departamento';
     }
 
+    public function traerRelaciones($id)
+    {
+        $capitulo = \App\Departamento::with('subRubros.imputaciones')->find($id);
+        return $this->mapper->map($capitulo);
+    }
+
 }

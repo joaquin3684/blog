@@ -53,6 +53,14 @@ class Producto
     }
 
     /**
+     * @return mixed
+     */
+    public function getProveedor()
+    {
+        return $this->proveedor;
+    }
+
+    /**
      * @param mixed $id
      */
     public function setId($id)

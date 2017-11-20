@@ -13,6 +13,8 @@ $factory->define(App\Departamento::class, function (Faker\Generator $faker) {
         'id_moneda' => 1,
         'codigo' => 1,
         'nombre' => 'prueba',
+        'afecta_codigo_base' => 1,
+
     ];
 });
 

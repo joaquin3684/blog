@@ -11,7 +11,7 @@ class Imputacion extends Model
     protected $table = 'imputaciones';
 
     protected $fillable = [
-        'codigo', 'nombre', 'id_subrubro'
+        'codigo', 'nombre', 'id_subrubro', 'afecta_codigo_base'
     ];
     protected $dates = ['deleted_at'];
 }

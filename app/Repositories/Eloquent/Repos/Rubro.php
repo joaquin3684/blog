@@ -19,4 +19,9 @@ class Rubro extends Repositorio
         return 'App\Repositories\Eloquent\Repos\Rubro';
     }
 
+    public function traerRelaciones($id)
+    {
+        $capitulo = \App\Rubro::with('monedas.departametos.subRubros.imputaciones')->find($id);
+        return $this->mapper->map($capitulo);
+    }
 }

@@ -19,4 +19,10 @@ class Moneda extends Repositorio
         return 'App\Repositories\Eloquent\Repos\Moneda';
     }
 
+    public function traerRelaciones($id)
+    {
+        $capitulo = \App\Monedaa::with('departametos.subRubros.imputaciones')->find($id);
+        return $this->mapper->map($capitulo);
+    }
+
 }

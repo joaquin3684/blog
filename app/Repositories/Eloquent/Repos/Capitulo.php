@@ -19,4 +19,10 @@ class Capitulo extends Repositorio
         return 'App\Repositories\Eloquent\Repos\Capitulo';
     }
 
+    public function traerRelaciones($id)
+    {
+        $capitulo = \App\Capitulo::with('rubros.monedas.departamentos.subRubros.imputaciones')->find($id);
+        return $this->mapper->map($capitulo);
+    }
+
 }

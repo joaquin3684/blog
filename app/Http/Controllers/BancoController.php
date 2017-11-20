@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ConfigImputaciones;
 use App\Http\Requests\ValidacionBanco;
 use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
 use App\Repositories\Eloquent\Repos\Gateway\BancoGateway;
@@ -35,42 +36,24 @@ class BancoController extends Controller
     {
         DB::transaction(function() use ($request){
             $this->gateway->create($request->all());
-            $codigo = ImputacionGateway::obtenerCodigoNuevo('1110102');
+            $codigoBase = ConfigImputaciones::find(4);
+            $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
             GeneradorDeCuentas::generar('Banco '.$request['nombre'], $codigo);
         });
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return $this->gateway->find($id);
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(ValidacionBanco $request, $id)
     {
         return $this->gateway->update($request->all(), $id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $this->gateway->destroy($id);

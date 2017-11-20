@@ -11,8 +11,13 @@ class Capitulo extends Model
     protected $table = 'capitulos';
 
     protected $fillable = [
-        'codigo', 'nombre'
+        'codigo', 'nombre', 'afecta_codigo_base'
     ];
 
     protected $dates = ['deleted_at'];
+
+    public function rubros()
+    {
+        return $this->hasMany('App\Rubro', 'id_capitulo', 'id');
+    }
 }

@@ -48,7 +48,9 @@ class ABM_Imputacion extends Controller
      */
     public function show($id)
     {
-        return $this->gateway->find($id);
+        $imputacion = $this->gateway->find($id);
+        $imputacion->codigo = substr($imputacion->codigo, 7);
+        return $imputacion;
     }
 
 
@@ -64,16 +66,6 @@ class ABM_Imputacion extends Controller
         return $this->gateway->update($request->all(), $id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $this->gateway->destroy($id);
-    }
 
     public function all()
     {

@@ -11,7 +11,12 @@ class Moneda extends Model
     protected $table = 'monedas';
 
     protected $fillable = [
-        'codigo', 'nombre', 'id_rubro'
+        'codigo', 'nombre', 'id_rubro', 'afecta_codigo_base'
     ];
     protected $dates = ['deleted_at'];
+
+    public function departamentos()
+    {
+        return $this->hasMany('App\Departamento', 'id_moneda', 'id');
+    }
 }

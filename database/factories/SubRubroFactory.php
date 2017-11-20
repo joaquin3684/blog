@@ -11,5 +11,7 @@ $factory->define(App\SubRubro::class, function (Faker\Generator $faker) {
         'id_departamento' => 1,
         'codigo' => 1,
         'nombre' => 'prueba',
+        'afecta_codigo_base' => 1,
+
     ];
 });

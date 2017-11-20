@@ -7,8 +7,11 @@ use App\Imputacion;
 class ImputacionMapper
 {
 
+
     public function map($objeto)
     {
-        //TODO poner lo que corresponde aca
+        return new \App\Repositories\Eloquent\Contabilidad\Imputacion($objeto->id, $objeto->codigo, $objeto->nombre, $objeto->afecta_codigo_base);
+
+
     }
 }

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\ConfigImputaciones;
 use App\Http\Requests\ValidacionSubRubro;
 use App\Repositories\Eloquent\Repos\Gateway\SubRubroGateway;
+use App\Repositories\Eloquent\Repos\SubRubro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ABM_SubRubro extends Controller
 {
@@ -14,10 +17,12 @@ class ABM_SubRubro extends Controller
      * @return \Illuminate\Http\Response
      */
     private $gateway;
+    private $repo;
 
     public function __construct()
     {
         $this->gateway = new SubRubroGateway();
+        $this->repo = new SubRubro();
     }
 
 
@@ -40,7 +45,9 @@ class ABM_SubRubro extends Controller
      */
     public function show($id)
     {
-        return $this->gateway->find($id);
+        $subrubro = $this->gateway->find($id);
+        $subrubro->codigo = substr($subrubro->codigo, 5);
+        return $subrubro;
     }
 
 
@@ -53,19 +60,28 @@ class ABM_SubRubro extends Controller
      */
     public function update(ValidacionSubRubro $request, $id)
     {
-        return $this->gateway->update($request->all(), $id);
+        DB::transaction(function() use ($request, $id){
+            $subRubro = $this->repo->traerRelaciones($id);
+            $codigoNuevo = $request['codigo'];
+            if($subRubro->getCodigo() == $codigoNuevo)
+            {
+                return $this->gateway->update($request->all(), $id);
+            }
+            else
+            {
+                if($subRubro->getAfectaCodigoBase() == 1)
+                {
+                    $config = ConfigImputaciones::where('codigo_base', 'LIKE', '%'.$subRubro->getCodigo().'%')->get();
+                    $config->each(function($conf) use ($codigoNuevo){
+                        $codigoViejo = substr($conf->codigo_base, 1);
+                        $conf->codigo_base = $codigoNuevo.$codigoViejo;
+                    });
+                }
+                $subRubro->modificarCodigo($request->all(), 0);
+            }
+        });
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $this->gateway->destroy($id);
-    }
 
     public function all()
     {

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\ConfigImputaciones;
 use App\Imputacion;
+use App\ProveedorImputacionDeudores;
 use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -32,13 +34,19 @@ class ABM_proovedores extends Controller
 
             $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
             $elem['usuario'] = $user->id;
-            Proovedores::create($elem->toArray());
-            $codigo = ImputacionGateway::obtenerCodigoNuevo('1310100');
-            GeneradorDeCuentas::generar('Deudores '.$elem['razon_social'], $codigo);
-            $codigo = ImputacionGateway::obtenerCodigoNuevo('3110300');
-            GeneradorDeCuentas::generar('Cta '.$elem['razon_social'], $codigo);
-            $codigo = ImputacionGateway::obtenerCodigoNuevo('5110301');
-            GeneradorDeCuentas::generar('Comisiones '.$elem['razon_social'], $codigo);
+            $proveedor = Proovedores::create($elem->toArray());
+            $codigoBase = ConfigImputaciones::find(1);
+            $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
+            $imputacion = GeneradorDeCuentas::generar('Deudores '.$elem['razon_social'], $codigo);
+            ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Deudores', 'codigo' => $imputacion->codigo]);
+            $codigoBase = ConfigImputaciones::find(2);
+            $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
+            $imputacion = GeneradorDeCuentas::generar('Cta '.$elem['razon_social'], $codigo);
+            ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Cta', 'codigo' => $imputacion->codigo]);
+            $codigoBase = ConfigImputaciones::find(3);
+            $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
+            $imputacion = GeneradorDeCuentas::generar('Comisiones '.$elem['razon_social'], $codigo);
+            ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Comisiones', 'codigo' => $imputacion->codigo]);
 
 
         });

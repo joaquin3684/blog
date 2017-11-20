@@ -20,6 +20,7 @@ class CreateImputacionsTable extends Migration
             $table->integer('codigo');
             $table->foreign('id_subrubro')->references('id')->on('sub_rubros');
             $table->integer('id_subrubro')->unsigned()->nullable();
+            $table->smallInteger('afecta_codigo_base')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

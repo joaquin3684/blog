@@ -19,4 +19,9 @@ class SubRubro extends Repositorio
         return 'App\Repositories\Eloquent\Repos\SubRubro';
     }
 
+    public function traerRelaciones($id)
+    {
+        $capitulo = Capitulo::with('imputaciones')->find($id);
+        return $this->mapper->map($capitulo);
+    }
 }

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepartamentosTable extends Migration
+class CreateProveedorImputacionDeudoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,15 +14,15 @@ class CreateDepartamentosTable extends Migration
      */
     public function up()
     {
-        Schema::create('departamentos', function (Blueprint $table) {
+        Schema::create('proveedor_imputaciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-            $table->string('nombre');
             $table->integer('codigo');
-            $table->smallInteger('afecta_codigo_base')->nullable();
-            $table->foreign('id_moneda')->references('id')->on('monedas');
-            $table->integer('id_moneda')->unsigned()->nullable();
-            $table->softDeletes();
+            $table->integer('id_proveedor')->unsigned();
+            $table->foreign('id_proveedor')->references('id')->on('proovedores');
+            $table->integer('id_imputacion')->unsigned();
+            $table->foreign('id_imputacion')->references('id')->on('imputaciones');
+            $table->string('tipo');
+            $table->timestamps();
         });
     }
 
@@ -34,7 +34,9 @@ class CreateDepartamentosTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('departamentos');
+
+        Schema::dropIfExists('proveedor_imputaciones');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+
     }
 }

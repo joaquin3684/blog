@@ -17,7 +17,6 @@ $scope.traerRelaciones = function(relaciones)
     var tablasin = $("#tipo_tabla").val();
       for(x in relaciones)
       {
-
          var url = relaciones[x].tabla + '/traerRelacion'+relaciones[x].tabla;
          $http({
             url: url,

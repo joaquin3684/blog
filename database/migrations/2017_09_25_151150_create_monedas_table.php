@@ -19,6 +19,7 @@ class CreateMonedasTable extends Migration
             $table->timestamps();
             $table->string('nombre');
             $table->integer('codigo');
+            $table->smallInteger('afecta_codigo_base')->nullable();
             $table->foreign('id_rubro')->references('id')->on('rubros');
             $table->integer('id_rubro')->unsigned()->nullable();
             $table->softDeletes();

@@ -11,7 +11,12 @@ class Rubro extends Model
     protected $table = 'rubros';
 
     protected $fillable = [
-        'codigo', 'nombre', 'id_capitulo'
+        'codigo', 'nombre', 'id_capitulo', 'afecta_codigo_base'
     ];
     protected $dates = ['deleted_at'];
+
+    public function monedas()
+    {
+        return $this->hasMany('App\Moneda', 'id_rubro', 'id');
+    }
 }

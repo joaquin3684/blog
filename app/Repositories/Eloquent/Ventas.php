@@ -171,6 +171,11 @@ class Ventas
         return $this->producto;
     }
 
+    public function getProveedor()
+    {
+        return $this->producto->getProveedor();
+    }
+
     public function getPrioridad()
     {
         return $this->producto->getPrioridad();

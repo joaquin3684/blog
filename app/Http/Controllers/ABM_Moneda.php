@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\ConfigImputaciones;
 use App\Http\Requests\ValidacionMoneda;
 use App\Repositories\Eloquent\Repos\Gateway\MonedaGateway;
+use App\Repositories\Eloquent\Repos\Moneda;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ABM_Moneda extends Controller
 {
@@ -14,10 +17,11 @@ class ABM_Moneda extends Controller
      * @return \Illuminate\Http\Response
      */
     private $gateway;
-
+    private $repo;
     public function __construct()
     {
         $this->gateway = new MonedaGateway();
+        $this->repo = new Moneda();
     }
 
 
@@ -40,7 +44,9 @@ class ABM_Moneda extends Controller
      */
     public function show($id)
     {
-        return $this->gateway->find($id);
+        $moneda = $this->gateway->find($id);
+        $moneda->codigo = substr($moneda->codigo, 2);
+        return $moneda;
     }
 
 
@@ -53,19 +59,29 @@ class ABM_Moneda extends Controller
      */
     public function update(ValidacionMoneda $request, $id)
     {
-        return $this->gateway->update($request->all(), $id);
+        DB::transaction(function() use ($request, $id){
+            $moneda = $this->repo->traerRelaciones($id);
+            $codigoNuevo = $request['codigo'];
+            if($moneda->getCodigo() == $codigoNuevo)
+            {
+                return $this->gateway->update($request->all(), $id);
+            }
+            else
+            {
+                if($moneda->getAfectaCodigoBase() == 1)
+                {
+                    $config = ConfigImputaciones::where('codigo_base', 'LIKE', '%'.$moneda->getCodigo().'%')->get();
+                    $config->each(function($conf) use ($codigoNuevo){
+                        $codigoViejo = substr($conf->codigo_base, 1);
+                        $conf->codigo_base = $codigoNuevo.$codigoViejo;
+                    });
+                }
+                $moneda->modificarCodigo($request->all(), 0);
+            }
+        });
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $this->gateway->destroy($id);
-    }
+
 
     public function all()
     {
