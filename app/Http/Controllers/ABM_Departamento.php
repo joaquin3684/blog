@@ -47,6 +47,7 @@ class ABM_Departamento extends Controller
     {
         $dpto = $this->gateway->find($id);
         $dpto->codigo = substr($dpto->codigo, 3);
+        $dpto->id_anterior = $dpto->id_moneda;
         return $dpto;
     }
 

@@ -46,6 +46,7 @@ class ABM_Moneda extends Controller
     {
         $moneda = $this->gateway->find($id);
         $moneda->codigo = substr($moneda->codigo, 2);
+        $moneda->id_anterior = $moneda->id_rubro;
         return $moneda;
     }
 

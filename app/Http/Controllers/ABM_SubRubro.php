@@ -47,6 +47,7 @@ class ABM_SubRubro extends Controller
     {
         $subrubro = $this->gateway->find($id);
         $subrubro->codigo = substr($subrubro->codigo, 5);
+        $subrubro->id_anterior = $subrubro->id_departamento;
         return $subrubro;
     }
 

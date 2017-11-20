@@ -50,6 +50,7 @@ class ABM_Imputacion extends Controller
     {
         $imputacion = $this->gateway->find($id);
         $imputacion->codigo = substr($imputacion->codigo, 7);
+        $imputacion->id_anterior = $imputacion->id_subrubro;
         return $imputacion;
     }
 
