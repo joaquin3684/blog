@@ -174,11 +174,14 @@
                                     <!-- START TABLE -->
                                     <div>
                                       @verbatim
-                                        <table ng-table="paramsReporte" class="table table-hover table-bordered">
+                                        <table ng-table="paramsReporte" class="table table-hover table-bordered" show-filter="false">
 
                                             <tbody data-ng-repeat="reporte in $data">
                                             <tr class="clickableRow" title="" >
-                                                <td title="'Nro asiento'" filter="{ codigo: 'text'}" sortable="'codigo'">
+                                              <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                  {{reporte.nombre}}
+                                              </td>
+                                                <td title="'Nro cuenta'" filter="{ codigo: 'text'}" sortable="'codigo'">
                                                     {{reporte.codigo}}
                                                 </td>
                                                 <td title="'Saldo inicial'" filter="{ saldo: 'text'}" sortable="'saldo'">
@@ -212,6 +215,11 @@
                                                                     <span ng-show="propertyName === 'nroAsiento'" class="sortorder" ng-class="{reverse: reverse}"></span>
                                                                     </th>
                                                                     <th>
+                                                                      <a href="#"  style="color: white">
+                                                                      Observaciones
+                                                                    </a>
+                                                                    </th>
+                                                                    <th>
                                                                       <a href="#" ng-click="sortBy('debe')" style="color: white">
                                                                       Debe
                                                                     </a>
@@ -237,6 +245,7 @@
                                                                     <td><center>{{cambiarFormato(asiento.fecha_contable)}}</center></td>
                                                                     <td><center>{{cambiarFormato(asiento.fecha_valor)}}</center></td>
                                                                     <td><center>{{asiento.nro_asiento}}</center></td>
+                                                                    <td><center>{{asiento.observaciones}}</center></td>
                                                                     <td><center>{{asiento.debe}}</center></td>
                                                                     <td><center>{{asiento.haber}}</center></td>
                                                                     <td><center>{{asiento.saldo}}</center></td>
@@ -248,6 +257,7 @@
                                                                         <b>Total</b>
 
                                                                     </td>
+                                                                    <td></td>
                                                                     <td></td>
                                                                     <td></td>
                                                                     <td >

@@ -40,7 +40,12 @@ $scope.traerRelaciones = function(relaciones)
 
    $scope.ExportarPDF = function(pantalla) {UserSrv.ExportPDF(pantalla);}
 
-
+   $scope.cantMaxima= function(){
+     if($scope.pantallaActual =='rubro' || $scope.pantallaActual=='capitulo' || $scope.pantallaActual=='moneda'){
+      return 1;
+     }
+     return 2;
+   }
    $scope.enviarFormulario = function(abm,tipoSolicitud, id = '')
    {
          var form = '';
@@ -81,6 +86,7 @@ $scope.traerRelaciones = function(relaciones)
                   {
                      console.log(response);
                      llenarFormulario('formularioEditar',response.data);
+                     $scope.id_anterior = response.data.id_anterior;
                   }
                $scope.mensaje = response;
                $('#'+formu)[0].reset();
@@ -112,12 +118,12 @@ $scope.traerRelaciones = function(relaciones)
     }
 
 
-  var inicio= true;
-  $scope.traigo = function(urlabm,metodito,coso){
-    var retorno;
+
+  $scope.generarTabla = function(url, tipoSelect){
+
     $http({
-            url: urlabm,
-            method: metodito
+            url: url,
+            method: 'get'
         }).then(function successCallback(response)
         {
             if(typeof response.data === 'string')
@@ -126,108 +132,81 @@ $scope.traerRelaciones = function(relaciones)
             }
             else
             {
-
-                switch(coso){
-                  case 'cap':
-                    $scope.selectcapitulos = response.data;
-                    if (inicio){
-                      $scope.asignarPantallaActual('capitulo');
-                      inicio= false;
-                    }
-                  break;
-                  case 'rub':
-                    $scope.selectrubros = response.data;
-                  break;
-                  case 'mon':
-                    $scope.selectmonedas = response.data;
-                  break;
-                  case 'dep':
-                    $scope.selectdepartamentos = response.data;
-                  break;
-                  case 'sub':
-                    $scope.selectsubrubros = response.data;
-                  break;
-                  case 'imp':
-                    $scope.selectimputaciones = response.data;
-                  break;
+              switch($scope.pantallaActual){
+                case 'capitulo':
+                  $scope.selectcapitulos = response.data
+                   break;
+                case 'rubro':
+                  $scope.selectrubros= response.data;
+                   break;
+                case 'moneda':
+                   $scope.selectmonedas = response.data;
+                   break;
+                case 'departamento':
+                   $scope.selectdepartamentos= response.data;
+                   break;
+                case 'subRubro':
+                   $scope.selectsubrubros= response.data;
+                   break;
+                case 'imputacion':
+                   $scope.selectimputaciones= response.data;
+                   break;
+              }
+              $scope.paramsABMS = new NgTableParams({
+                page: 1,
+                count: 10
+              }, {
+                total: response.data.length,
+                getData: function (params) {
+                  var filterObj = params.filter();
+                  filteredData = $filter('filter')(response.data, filterObj);
+                  var sortObj = params.orderBy();
+                  orderedData = $filter('orderBy')(filteredData, sortObj);
+                  $scope.datatoexcel = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                  return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 }
-                $scope.asignarPantallaActual($scope.pantallaActual);
+              });
             }
 
         }, function errorCallback(data)
         {
             console.log(data.data);
-        })
-  }
+        });
 
-  $scope.generarTabla = function(datos){
-    $scope.paramsABMS = new NgTableParams({
-      page: 1,
-      count: 10
-    }, {
-      total: datos.length,
-      getData: function (params) {
-        var filterObj = params.filter();
-        filteredData = $filter('filter')(datos, filterObj);
-        var sortObj = params.orderBy();
-        orderedData = $filter('orderBy')(filteredData, sortObj);
-        $scope.datatoexcel = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-      }
-    });
+
     //tablaDestino = tabla;
   }
 
 
   $scope.asignarPantallaActual = function (pantalla){
     $scope.pantallaActual = pantalla;
-
-    switch(pantalla){
-      case 'capitulo':
-        $scope.generarTabla($scope.selectcapitulos);
-      break;
-      case 'rubro':
-        $scope.generarTabla($scope.selectrubros);
-      break;
-      case 'moneda':
-        $scope.generarTabla($scope.selectmonedas);
-      break;
-      case 'departamento':
-        $scope.generarTabla($scope.selectdepartamentos);
-      break;
-      case 'subRubrs':
-        $scope.generarTabla($scope.selectsubrubros);
-      break;
-      case 'imputacion':
-        $scope.generarTabla($scope.selectimputaciones);
-      break;
-    }
-
+    $scope.traerElementos(pantalla);
   }
 
-   $scope.traerElementos = function(pantalla)
-   {
+   $scope.traerElementos = function(pantalla){
 
      switch(pantalla){
        case 'capitulo':
-       $scope.traigo('capitulo/traerElementos','get','cap');
-       break;
+          $scope.generarTabla('capitulo/traerElementos');
+          break;
        case 'rubro':
-       $scope.traigo('rubro/traerElementos','get','rub');
-       break;
+          $scope.generarTabla('rubro/traerElementos');
+          break;
        case 'moneda':
-       $scope.traigo('moneda/traerElementos','get','mon');
-       break;
+          $scope.generarTabla('moneda/traerElementos');
+          break;
        case 'departamento':
-       $scope.traigo('departamento/traerElementos','get','dep');
-       break;
-       case 'subRubrs':
-       $scope.traigo('subRubro/traerElementos','get','sub');
-       break;
+          $scope.generarTabla('departamento/traerElementos');
+          break;
+       case 'subRubro':
+          $scope.generarTabla('subRubro/traerElementos');
+          break;
        case 'imputacion':
-       $scope.traigo('imputacion/traerElementos','get','imp');
-       break;
+          $scope.generarTabla('imputacion/traerElementos');
+          break;
      }
+
+
 
    }
 
@@ -290,6 +269,7 @@ $scope.traerRelaciones = function(relaciones)
 
    }
 
+   $scope.pantallaActual = 'capitulo';
    $scope.traerElementos('capitulo');
 
 

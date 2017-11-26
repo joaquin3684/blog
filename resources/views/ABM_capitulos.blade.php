@@ -119,7 +119,7 @@
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="text" required>{{errores.codigo[0]}}
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="number" max="9" required>{{errores.codigo[0]}}
                         </div>
                       </div>
 
@@ -184,7 +184,7 @@
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                           <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1">{{capitulo.codigo}}</span>
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoRubro" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoRubro" placeholder="Ingrese el código" type="number" max="9">{{errores.nombre[0]}}
                             <input type="hidden" id="tipo_tabla" value="{{capitulo.codigo}}{{codigoRubro}}" name="codigo">
                           </div>
                         </div>
@@ -252,7 +252,7 @@
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                           <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1">{{rubro.codigo}}</span>
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoMoneda" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoMoneda" placeholder="Ingrese el código" type="number" max="9">{{errores.nombre[0]}}
                             <input type="hidden" id="tipo_tabla" value="{{rubro.codigo}}{{codigoMoneda}}" name="codigo">
                           </div>
                         </div>
@@ -314,7 +314,7 @@
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                           <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1">{{moneda.codigo}}</span>
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoDpto" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoDpto" placeholder="Ingrese el código" type="number" max="99">{{errores.nombre[0]}}
                             <input type="hidden" id="tipo_tabla" value="{{moneda.codigo}}{{codigoDpto}}" name="codigo">
                           </div>
                         </div>
@@ -384,7 +384,7 @@
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                           <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1">{{departamento.codigo}}</span>
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoSubrubro" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoSubrubro" placeholder="Ingrese el código" type="number" max="99">{{errores.nombre[0]}}
                             <input type="hidden" id="tipo_tabla" value="{{departamento.codigo}}{{codigoSubrubro}}" name="codigo">
                           </div>
                         </div>
@@ -426,7 +426,7 @@
 
                       <div class="row">
                         <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
-                          <label class="" for="id_subrubro">Dpto <span class="required">*</span>
+                          <label class="" for="id_subrubro">Subrubro <span class="required">*</span>
                           </label>
                         </div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
@@ -450,7 +450,7 @@
                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                           <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1">{{subrubro.codigo}}</span>
-                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoImp" placeholder="Ingrese el código" type="text">{{errores.nombre[0]}}
+                            <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoImp" placeholder="Ingrese el código" type="number" max="99">{{errores.nombre[0]}}
                             <input type="hidden" id="tipo_tabla" value="{{subrubro.codigo}}{{codigoImp}}" name="codigo">
                           </div>
                         </div>
@@ -555,7 +555,7 @@
                                                 </td>
 
                                                 <td id="botones">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar_{{pantallaActual}}" ng-click="enviarFormulario( pantallaActual,'Mostrar',abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario(pantallaActual,'Mostrar',abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
 
                                                 </td>
                                             </tr>
@@ -613,7 +613,7 @@
   </div>
 
  <!-- Modal -->
-<div id="editar_capitulo" class="modal fade" role="dialog">
+<div id="editar" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -625,28 +625,89 @@
       </div>
       <div class="modal-body">
          <form class="form-horizontal form-label-left" ng-submit="editarFormulario(abmConsultado.id)" id="formularioEditar" >
-           <div class="item form-group">
-             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre" >Nombre <span class="required">*</span>
-             </label>
-             <div class="col-md-6 col-sm-6 col-xs-12">
-               <input  type="text" class="form-control col-md-7 col-xs-12" name="nombre" ng-model="abmConsultado.nombre">
-             </div>
-           </div>
-           <div class="item form-group">
-             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="codigo">Codigo<span class="required">*</span>
-             </label>
-             <div class="col-md-6 col-sm-6 col-xs-12">
-               <input type="text" name="codigo" class="form-control col-md-7 col-xs-12" ng-model="abmConsultado.codigo">
-             </div>
-           </div>
 
+
+             <div class="item form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre" >Nombre <span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <input  type="text" class="form-control col-md-7 col-xs-12" name="nombre" ng-model="abmConsultado.nombre">
+               </div>
+             </div>
+             <div class="item form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="codigo">Codigo<span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <input name="codigo" class="form-control col-md-7 col-xs-12"  type="text" maxlength="{{cantMaxima()}}">
+               </div>
+             </div>
+             <div class="item form-group" ng-show="pantallaActual == 'rubro'">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_capitulo">Capitulo<span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <select id="id_subrubro" class="form-control col-md-7 col-xs-12"  ng-model="capitulo" >
+                 <option ng-value="{{x}}" ng-repeat="x in selectcapitulos" ng-selected="x.id == id_anterior">
+                 {{x.nombre}}
+                 </option>
+                 </select>
+                 <input type="hidden" value="{{capitulo.id}}" name="id_capitulo">
+               </div>
+             </div>
+             <div class="item form-group" ng-show="pantallaActual == 'moneda'">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_rubro">Rubro<span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <select class="form-control col-md-7 col-xs-12"  ng-model="rubro" >
+                 <option ng-value="{{x}}" ng-repeat="x in selectrubros" ng-selected="x.id == id_anterior">
+                 {{x.nombre}}
+                 </option>
+                 </select>
+                 <input type="hidden" value="{{rubro.id}}" name="id_rubro">
+               </div>
+             </div>
+             <div class="item form-group" ng-show="pantallaActual == 'departamento'">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_moneda">Moneda<span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <select class="form-control col-md-7 col-xs-12"  ng-model="moneda">
+                 <option ng-value="{{x}}" ng-repeat="x in selectmonedas" ng-selected="x.id == id_anterior">
+                 {{x.nombre}}
+                 </option>
+                 </select>
+                 <input type="hidden" value="{{moneda.id}}" name="id_moneda">
+               </div>
+             </div>
+             <div class="item form-group" ng-show="pantallaActual == 'subRubro'">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_moneda">Dpto<span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <select class="form-control col-md-7 col-xs-12"  ng-model="departamento">
+                 <option ng-value="{{x}}" ng-repeat="x in selectdepartamentos" ng-selected="x.id == id_anterior">
+                 {{x.nombre}}
+                 </option>
+                 </select>
+                 <input type="hidden" value="{{departamento.id}}" name="id_departamento">
+               </div>
+             </div>
+             <div class="item form-group" ng-show="pantallaActual == 'imputacion'">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_subrubro">Subrubro<span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <select class="form-control col-md-7 col-xs-12"  ng-model="subrubro">
+                 <option ng-value="{{x}}" ng-repeat="x in selectsubrubros" ng-selected="x.id == id_anterior">
+                 {{x.nombre}}
+                 </option>
+                 </select>
+                 <input type="hidden" value="{{subrubro.id}}" name="id_subrubro">
+               </div>
+             </div>
 
                     <input type="hidden" name="id">
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
                       <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                        <button id="send" type="submit" class="btn btn-success" ng-click="enviarFormulario('capitulo','Editar')">Enviar</button>
+                        <button id="send" type="submit" class="btn btn-success" ng-click="enviarFormulario(pantallaActual,'Editar')">Enviar</button>
 
                       </div>
                     </div>
