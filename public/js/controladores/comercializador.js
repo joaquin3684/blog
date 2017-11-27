@@ -22,9 +22,9 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
                     page: 1,
                     count: 10
                 }, {
-                    total: $scope.solicitudes.length,
                     getData: function (params) {
                         $scope.solicitudes = $filter('orderBy')($scope.solicitudes, params.orderBy());
+                        $scope.paramssolicitudes.total($scope.solicitudes.length);
                         return $scope.solicitudes.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });

@@ -20,9 +20,9 @@ app.controller('correr_vto_servicios', function($scope, $http, $compile, $sce, N
               page: 1,
               count: 10
             }, {
-              total: $scope.datosabm.length,
               getData: function(params) {
                 $scope.datosabm = $filter('orderBy')($scope.datosabm, params.orderBy());
+                $scope.paramsABMS.total($scope.datosabm.length);
                 return $scope.datosabm.slice((params.page() - 1) * params.count(), params.page() * params.count());
               }
             });

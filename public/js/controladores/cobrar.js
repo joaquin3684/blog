@@ -73,12 +73,12 @@ $http({
                        page: 1,
                        count: 10
                    }, {
-                       total: $scope.organismos.length,
                        getData: function (params) {
                          var filterObj = params.filter(),
                          filteredData = $filter('filter')($scope.organismos, filterObj);
                          var sortObj = params.orderBy();
                            orderedData = $filter('orderBy')(filteredData, sortObj);
+                           $scope.paramsOrganismos.total(orderedData.length);
                            $scope.organismosFiltrados = orderedData;
                            $scope.sumarMontosOrganismos();
                            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
@@ -205,12 +205,12 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                 page: 1,
                 count: 10
             }, {
-                total: $scope.socios.length,
                 getData: function (params) {
                     var filterObj = params.filter(),
                     filteredData = $filter('filter')($scope.socios, filterObj);
                     var sortObj = params.orderBy();
                     orderedData = $filter('orderBy')(filteredData, sortObj);
+                    $scope.paramsSocios.total(orderedData.length);
                     $scope.sociosFiltrados= orderedData;
 
                     return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
@@ -273,12 +273,12 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                     page: 1,
                     count: 10
                 }, {
-                    total: $scope.ventas.length,
                     getData: function (params) {
                       var filterObj = params.filter(),
                       filteredData = $filter('filter')($scope.ventas, filterObj);
                       var sortObj = params.orderBy();
                         orderedData = $filter('orderBy')(filteredData, sortObj);
+                        $scope.paramsVentas.total(orderedData.length);
                         $scope.ventasFiltradas = orderedData;
 
                         return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
