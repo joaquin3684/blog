@@ -23,7 +23,7 @@ class GeneradorDeCuentas
         $codigoSubRubro = substr((string) $codigo, 0, -2);
         $subRubro = SubRubro::where('codigo', $codigoSubRubro)->first();
         $imputacion = Imputacion::create(['nombre' => $nombre, 'codigo' => $codigo, 'id_subrubro' => $subRubro->id]);
-        SaldosCuentas::create(['saldo' => 0, 'year' => $fecha->year, 'month' => $fecha->month, 'codigo' => $imputacion->codigo, 'id_imputacion' => $imputacion->id]);
+        SaldosCuentas::create(['saldo' => 0, 'year' => $fecha->year, 'month' => $fecha->month, 'codigo' => $imputacion->codigo, 'id_imputacion' => $imputacion->id, 'nombre' => $imputacion->nombre]);
         return $imputacion;
     }
 }

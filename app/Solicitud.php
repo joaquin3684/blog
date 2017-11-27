@@ -10,8 +10,10 @@ class Solicitud extends Model
     use SoftDeletes;
     protected $table = 'solicitudes';
 
+    protected $dates = ['deleted_at'];
+
     protected $fillable = [
-        'id_socio', 'comercializador', 'doc_endeudamiento', 'agente_financiero', 'estado', 'total', 'monto_por_cuota', 'cuotas'];
+        'id_socio', 'id_producto', 'comercializador', 'doc_endeudamiento', 'agente_financiero', 'estado', 'total', 'monto_por_cuota', 'cuotas'];
 
     public function socio()
     {
@@ -26,7 +28,9 @@ class Solicitud extends Model
     public function comercializador()
     {
         return $this->belongsTo('App\Comercializador', 'comercializador', 'id');
-
     }
-    protected $dates = ['deleted_at'];
+    public function producto()
+    {
+        return $this->belongsTo('App\Producto', 'id_producto', 'id');
+    }
 }

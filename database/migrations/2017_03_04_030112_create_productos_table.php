@@ -22,7 +22,7 @@ class CreateProductosTable extends Migration
             $table->string('descripcion')->nullable();
             $table->string('tipo')->nullable();
             $table->double('ganancia')->nullable();
-            $table->double('porcentaje_capital')->nullable();
+            $table->double('tasa')->nullable();
             $table->string('nombre')->nullable();
             $table->softDeletes();
         });

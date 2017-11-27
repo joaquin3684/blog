@@ -52,21 +52,24 @@ class PagoProveedorContable extends Controller
             $proveedor = $request['proveedor'];
             $totalAPagar = $request['totalAPagar'];
             $comisionValor = $request['comision'];
+            $impuGate = new ImputacionGateway();
             $total = $totalAPagar + $comisionValor;
             $deudor = ImputacionGateway::buscarPorNombre('Deudores '.$proveedor);
-            GeneradorDeAsientos::crear($deudor->id, $totalAPagar, 0, $deudor->codigo);
+            GeneradorDeAsientos::crear($deudor, $totalAPagar, 0);
             $comision = ImputacionGateway::buscarPorNombre('Comisiones '.$proveedor);
-            GeneradorDeAsientos::crear($comision->id, $comisionValor, 0, $comision->codigo);
+            GeneradorDeAsientos::crear($comision, $comisionValor, 0);
             if($request['formaCobro'] == 'banco')
             {
-                GeneradorDeAsientos::crear($request['idBanco'], 0, $total, $request['codigoBanco']);
+                $banco = $impuGate->find($request['idBanco']);
+                GeneradorDeAsientos::crear($banco, 0, $total);
             }
             else if($request['formaCobro'] == 'caja')
             {
                 $caja = Imputacion::where('nombre', 'Caja - Efectivo')->first();
-                GeneradorDeAsientos::crear($caja->id, 0, $total, $caja->codigo);
+                GeneradorDeAsientos::crear($caja, 0, $total);
             }
         });
+        //TODO:: esto se deberia pagar desde banco o caja con las operacioens
     }
 
 }

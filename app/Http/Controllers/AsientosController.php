@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\Eloquent\CalcularSaldos;
 use App\Repositories\Eloquent\GeneradorDeAsientos;
 use App\Repositories\Eloquent\Repos\Gateway\AsientosGateway;
+use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,8 +28,10 @@ class AsientosController extends Controller
     public function store(Request $request)
     {
         DB::transaction(function() use ($request){
+            $impuGate = new ImputacionGateway();
             foreach($request['asientos'] as $elem){
-               GeneradorDeAsientos::crear($elem['id_imputacion'], $elem['debe'], $elem['haber'], $elem['codigo'], $request['fecha_valor']);
+                $cuenta = $impuGate->find($elem['id_imputacion']);
+               GeneradorDeAsientos::crear($cuenta, $elem['debe'], $elem['haber'], $request['fecha_valor']);
             }
         });
     }

@@ -20,6 +20,7 @@ class CreateAsientosTable extends Migration
             $table->foreign('id_imputacion')->references('id')->on('imputaciones');
             $table->double('debe')->default(0);
             $table->integer('codigo');
+            $table->string('nombre');
             $table->double('haber')->default(0);
             $table->bigInteger('nro_asiento');
             $table->integer('id_ejercicio')->unsigned();

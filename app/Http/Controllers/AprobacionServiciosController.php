@@ -53,8 +53,8 @@ class AprobacionServiciosController extends Controller
                 if($estado == 'APROBADO')
                 {
                     GeneradorCuotas::generarCuotasVenta($venta);
-                    GeneradorDeAsientos::crear($deudores->id, $venta->getImporte(), 0, $deudores->codigo);
-                    GeneradorDeAsientos::crear($cta->id, 0, $venta->getImporte(), $cta->codigo);
+                    GeneradorDeAsientos::crear($deudores, $venta->getImporte(), 0);
+                    GeneradorDeAsientos::crear($cta, 0, $venta->getImporte());
 
                 }
                 if($estado == 'RECHAZADO')

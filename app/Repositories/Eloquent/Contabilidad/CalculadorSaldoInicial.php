@@ -21,7 +21,7 @@ class CalculadorSaldoInicial
         $saldo = DB::table('imputaciones')
             ->where('codigo','>=', $cuentaDesde)
             ->where('codigo', '<=', $cuentaHasta)
-            ->select(DB::raw('0 as saldo'), 'codigo');
+            ->select(DB::raw('0 as saldo'), 'codigo', 'nombre');
 
         $saldoCuentas = DB::table('saldos_cuentas')
             ->where('year', '<=', $fecha->year)
@@ -30,7 +30,7 @@ class CalculadorSaldoInicial
             ->where('codigo', '<=', $cuentaHasta)
             ->unionAll($saldo)
             ->groupBy('id_imputacion')
-            ->select(DB::raw('SUM(saldo) as saldo'), 'codigo')
+            ->select(DB::raw('SUM(saldo) as saldo'), 'codigo', 'nombre')
             ->get()->unique('codigo');
 
         $fecha2 = Carbon::createFromFormat('Y-m-d', $fechaInicio);
@@ -43,7 +43,7 @@ class CalculadorSaldoInicial
             ->where('codigo', '<=', $cuentaHasta)
             ->unionAll($saldo)
             ->groupBy('id_imputacion')
-            ->select(DB::raw('(SUM(debe) - SUM(haber)) as saldo'), 'codigo')
+            ->select(DB::raw('(SUM(debe) - SUM(haber)) as saldo'), 'codigo', 'nombre')
             ->get()->unique('codigo');
 
 

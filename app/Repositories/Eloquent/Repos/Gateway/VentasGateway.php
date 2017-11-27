@@ -43,6 +43,10 @@ class VentasGateway extends Gateway
     {
         return Ventas::with('cuotas.movimientos')->find($id);
     }
+    public function findWithCuotasAndProveedor($id)
+    {
+        return Ventas::with('cuotas.movimientos', 'producto.proovedor')->find($id);
+    }
 
     public function ventasQueNoFueronCobradas()
     {

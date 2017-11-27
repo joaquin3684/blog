@@ -20,6 +20,7 @@ class CreateSaldosCuentasTable extends Migration
             $table->integer('year');
             $table->integer('month');
             $table->integer('codigo');
+            $table->string('nombre');
             $table->integer('id_imputacion')->unsigned();
             $table->foreign('id_imputacion')->references('id')->on('imputaciones');
             $table->softDeletes();

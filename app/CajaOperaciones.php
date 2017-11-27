@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CajaOperaciones extends Model
 {
     use SoftDeletes;
-    protected $table = 'operaciones';
+    protected $table = 'caja_operaciones';
     protected $fillable = [
         'id_operacion', 'fecha', 'entrada', 'salida'
     ];

@@ -38,9 +38,9 @@ class CajaController extends Controller
 
                 if($imputacion->pivot->debe)
                 {
-                    GeneradorDeAsientos::crear($imputacion->id, $valor, 0, $imputacion->codigo);
+                    GeneradorDeAsientos::crear($imputacion, $valor, 0);
                 } else {
-                    GeneradorDeAsientos::crear($imputacion->id, 0, $valor, $imputacion->codigo);
+                    GeneradorDeAsientos::crear($imputacion, 0, $valor);
                 }
             });
             if($operacion->entrada)

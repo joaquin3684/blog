@@ -20,8 +20,8 @@ class ABM_Operaciones extends Controller
     public function store(Request $request)
     {
         $op = Operacion::create($request->all());
-        $op->imputaciones()->attach($request['imputacion1'], $request->all());
-        $op->imputaciones()->attach($request['imputacion2'], $request->all());
+        $op->imputaciones()->attach($request['imputacion1'], ['debe' => $request['debe1'], 'haber' => $request['haber1']]);
+        $op->imputaciones()->attach($request['imputacion2'], ['debe' => $request['debe2'], 'haber' => $request['haber2']]);
 
     }
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as F;
+use Illuminate\Support\Facades\DB;
 
 class ProductosTablaSeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class ProductosTablaSeeder extends Seeder
 	        		'id_proovedor' => $faker->numberBetween(1,10),
 	        		'nombre' => $faker->name,
 	        		'ganancia' => $faker->numberBetween(0, 100),
-	        		'porcentaje_capital' => $faker->numberBetween(0, 100),
+	        		'tasa' => $faker->numberBetween(0, 100),
                     'tipo' => 'Producto'
 	        		]);
             }
@@ -28,7 +29,7 @@ class ProductosTablaSeeder extends Seeder
                 'id_proovedor' => $faker->numberBetween(1,10),
                 'nombre' => $faker->name,
                 'ganancia' => $faker->numberBetween(0, 100),
-                'porcentaje_capital' => $faker->numberBetween(0, 100),
+                'tasa' => $faker->numberBetween(0, 100),
                 'tipo' => 'Credito'
             ]);
         }

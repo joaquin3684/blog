@@ -19,7 +19,7 @@ class CreateCategoriaCuotaSocialsTable extends Migration
             $table->integer('id_organismo')->unsigned();
             $table->foreign('id_organismo')->references('id')->on('organismos');
             $table->integer('categoria');
-            $table->integer('valor');
+            $table->double('valor');
             $table->timestamps();
         });
     }

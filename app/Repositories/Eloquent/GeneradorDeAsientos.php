@@ -16,7 +16,7 @@ use Carbon\Carbon;
 
 class GeneradorDeAsientos
 {
-    public static function crear($cuenta, $debe, $haber, $codigo, $fechaValor = null)
+    public static function crear($cuenta, $debe, $haber, $fechaValor = null)
     {
         $debeNuevo = $debe == null ? 0 : $debe;
         $haberNuevo = $haber == null ? 0 : $haber;
@@ -36,7 +36,7 @@ class GeneradorDeAsientos
         {
             throw new EjercicioCerradoException('ejercicio_cerrado');
         }
-        $asientos->create(['id_imputacion' => $cuenta, 'codigo' => $codigo, 'debe' => $debeNuevo, 'haber' => $haberNuevo, 'id_ejercicio' => $ejercicio->id, 'fecha_contable' => $fechaContable->toDateString(), 'fecha_valor' => $fechaVal->toDateString(), 'nro_asiento' => $nroAsiento]);
+        $asientos->create(['id_imputacion' => $cuenta->id, 'nombre' => $cuenta->nombre, 'codigo' => $cuenta->codigo, 'debe' => $debeNuevo, 'haber' => $haberNuevo, 'id_ejercicio' => $ejercicio->id, 'fecha_contable' => $fechaContable->toDateString(), 'fecha_valor' => $fechaVal->toDateString(), 'nro_asiento' => $nroAsiento]);
         CalcularSaldos::modificarSaldo($cuenta, $fechaVal);
     }
 }

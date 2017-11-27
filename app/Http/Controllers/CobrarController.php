@@ -249,7 +249,7 @@ class CobrarController extends Controller
             foreach($request->all() as $venta)
             {
                 $ventasRepo = new VentasRepo();
-                $ventaCuotasVencidas = $ventasRepo->findWithCuotas($venta['id']);
+                $ventaCuotasVencidas = $ventasRepo->findWithCuotasAndProveedor($venta['id']);
 
                 $cobrar = new CobrarPorVenta();
                 try{

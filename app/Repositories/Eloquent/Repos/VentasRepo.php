@@ -52,6 +52,11 @@ class VentasRepo extends Repositorio
         return $this->mapper->map($venta);
     }
 
+    public function findWithCuotasAndProveedor($id)
+    {
+        $venta = $this->gateway->findWithCuotasAndProveedor($id);
+        return $this->mapper->map($venta);
+    }
 
     public function findLastCredito()
     {

@@ -28,14 +28,23 @@ class BalanceController extends Controller
             ->orderBy('codigo')
             ->get();
 
-        return $saldosInicialesCuentas->map(function ($saldo) use ($imputaciones) {
-            $imputacion = $imputaciones->first(function ($imputacion) use ($saldo) {
-                return $saldo->codigo == $imputacion->codigo;
+
+            return $saldosInicialesCuentas->map(function ($saldo) use ($imputaciones) {
+                $imputacion = $imputaciones->first(function ($imputacion) use ($saldo) {
+                    return $saldo->codigo == $imputacion->codigo;
+                });
+                $saldo->saldoAnterior = $saldo->saldo;
+                if($imputacion == null)
+                {
+                    $saldo->totalDebe = 0;
+                    $saldo->totalHaber = 0;
+                } else {
+                    $saldo->totalDebe = $imputacion->totalDebe;
+                    $saldo->totalHaber = $imputacion->totalHaber;
+                    $saldo->saldo = $imputacion->saldo + $saldo->saldo;
+                }
+                return $saldo;
             });
-            $saldo->saldo = $imputacion->saldo + $saldo->saldo;
-            $saldo->saldoAnterior = $imputacion->saldo;
-            $saldo->nombre = $imputacion->nombre;
-            return $saldo;
-        });
+
     }
 }

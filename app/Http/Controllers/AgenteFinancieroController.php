@@ -138,9 +138,6 @@ class AgenteFinancieroController extends Controller
         });
     }
 
-
-
-
     public function fotos(Request $request)
     {
         $id = $request['id'];

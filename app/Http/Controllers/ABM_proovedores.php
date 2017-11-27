@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ConfigImputaciones;
 use App\Imputacion;
+use App\Productos;
 use App\ProveedorImputacionDeudores;
 use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
@@ -91,5 +92,10 @@ class ABM_proovedores extends Controller
             $p->put('nombre', $proveedor->razon_social);
             return $p;
         });
+    }
+
+    public function productos(Request $request)
+    {
+        return Productos::where('id_proovedor', $request['id'])->get();
     }
 }

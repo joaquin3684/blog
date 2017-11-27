@@ -107,8 +107,8 @@ class CobrarPorSocio
 
         $cobroPorProveedor->each(function ($proveedor) {
             $cuenta = ProveedorImputacionDeudores::where('id_proveedor', $proveedor['proveedor'])->where('tipo', 'Deudores')->first();
-            GeneradorDeAsientos::crear($cuenta->id, 0, $proveedor['total'], $cuenta->codigo);
-            GeneradorDeAsientos::crear(1, $proveedor['total'], 0, 111010102);
+            GeneradorDeAsientos::crear($cuenta, 0, $proveedor['total']);
+            GeneradorDeAsientos::crear($cuenta, $proveedor['total'], 0);
             //TODO:: preguntar donde va a estar la cuenta puente
         });
     }

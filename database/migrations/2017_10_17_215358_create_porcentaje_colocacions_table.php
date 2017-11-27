@@ -18,9 +18,9 @@ class CreatePorcentajeColocacionsTable extends Migration
             $table->increments('id');
             $table->integer('id_producto')->unsigned();
             $table->foreign('id_producto')->references('id')->on('productos');
-            $table->integer('desde');
-            $table->integer('hasta');
-            $table->integer('porcentaje');
+            $table->double('desde');
+            $table->double('hasta');
+            $table->double('porcentaje');
             $table->timestamps();
         });
     }
