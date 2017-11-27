@@ -55,4 +55,29 @@ class CalculadorSaldoInicial
         });
 
     }
+
+    public function calcularEnCaja($fechaInicio)
+    {
+        $fecha = Carbon::createFromFormat('Y-m-d', $fechaInicio);
+
+        $saldoCuentas = DB::table('saldos_operaciones_caja')
+            ->where('year', '<=', $fecha->year)
+            ->where('month', '<', $fecha->month)
+            ->groupBy('id_imputacion')
+            ->select(DB::raw('SUM(saldo) as saldo'), 'codigo')
+            ->get()->unique('codigo');
+
+        $fecha2 = Carbon::createFromFormat('Y-m-d', $fechaInicio);
+        $fecha2->day = 0;
+
+        $saldoCuentasDiasRestantes = DB::table('asientos')
+            ->where('fecha_valor', '<=', $fecha->toDateString())
+            ->where('fecha_valor', '>=', $fecha2->toDateString())
+            ->where('codigo','>=', $cuentaDesde)
+            ->where('codigo', '<=', $cuentaHasta)
+            ->unionAll($saldo)
+            ->groupBy('id_imputacion')
+            ->select(DB::raw('(SUM(debe) - SUM(haber)) as saldo'), 'codigo')
+            ->get()->unique('codigo');
+    }
 }

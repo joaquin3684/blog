@@ -75,6 +75,7 @@ class ABM_Moneda extends Controller
                     $config->each(function($conf) use ($codigoNuevo){
                         $codigoViejo = substr($conf->codigo_base, 1);
                         $conf->codigo_base = $codigoNuevo.$codigoViejo;
+                        $conf->save();
                     });
                 }
                 $moneda->modificarCodigo($request->all(), 0);

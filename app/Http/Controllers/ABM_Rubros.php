@@ -75,6 +75,7 @@ class ABM_Rubros extends Controller
                     $config->each(function($conf) use ($codigoNuevo){
                         $codigoViejo = substr($conf->codigo_base, 1);
                         $conf->codigo_base = $codigoNuevo.$codigoViejo;
+                        $conf->save();
                     });
                 }
                 $rubro->modificarCodigo($request->all(), 0);

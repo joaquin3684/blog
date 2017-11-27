@@ -16,9 +16,11 @@ use App\Exceptions\MasPlataCobradaQueElTotalException;
 use App\Repositories\Eloquent\Cobranza\CobrarPorSocio;
 use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
 use App\Repositories\Eloquent\FileManager;
+use App\Repositories\Eloquent\GeneradorDeAsientos;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Ventas;
+use App\Operacion;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -57,8 +59,16 @@ Route::get('pruebas', function(){
      return view('prueba');
 });
 Route::get('prueba', function(){
-    return \App\Repositories\Eloquent\Contabilidad\CalculadorSaldoInicial::calcular('2017-11-10', 131010001, 311030001);
-});
+    $operacion = Operacion::with('imputaciones')->find(1);
+    $operacion->imputaciones->each(function($imputacion){
+
+        if($imputacion->pivot->debe)
+        {
+            GeneradorDeAsientos::crear($imputacion->id, 200, 0, $imputacion->codigo);
+        } else {
+            GeneradorDeAsientos::crear($imputacion->id, 0, 200, $imputacion->codigo);
+        }
+    });});
 
 Route::post('pruebas', function(Request $request){
     $user = Sentinel::authenticate($request->all());
@@ -308,3 +318,13 @@ Route::post('pagoContableProveedor/pagar', 'PagoProveedorContable@pagar');
 
 Route::get('balance', 'BalanceController@index');
 Route::post('balance', 'BalanceController@reporte');
+
+//----------------- CAJA -----------------------------------------
+
+Route::post('caja/elemntosFiltrados', 'CajaController@all');
+Route::resource('caja', 'CajaController');
+
+//------------------ OPERACIONES --------------------------------
+
+Route::get('operaciones/traerElementos', 'ABM_Operaciones@all');
+Route::resource('operaciones', 'ABM_Operaciones');
