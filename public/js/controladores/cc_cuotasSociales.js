@@ -31,13 +31,13 @@ $http({
                        page: 1,
                        count: 10
                    }, {
-                       total: $scope.organismos.length,
                        getData: function (params) {
                          var filterObj = params.filter();
                          filteredData = $filter('filter')($scope.organismos, filterObj);
                          var sortObj = params.orderBy();
                            orderedData = $filter('orderBy')(filteredData, sortObj);
                            $scope.organismosFiltrados = orderedData;
+                           $scope.paramsOrganismos.total(orderedData.length);
                            $scope.sumarMontosACobrar($scope.organismosFiltrados)
                            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                        }
@@ -77,13 +77,13 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                 page: 1,
                 count: 10
             }, {
-                total: $scope.socios.length,
                 getData: function (params) {
                     var filterObj = params.filter(),
                     filteredData = $filter('filter')($scope.socios, filterObj);
                     var sortObj = params.orderBy();
                     orderedData = $filter('orderBy')(filteredData, sortObj);
                     $scope.sociosFiltrados= orderedData;
+                    $scope.paramsSocios.total(orderedData.length);
                     $scope.sumarMontosACobrar($scope.sociosFiltrados);
                     return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 }
@@ -152,13 +152,13 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                     page: 1,
                     count: 10
                 }, {
-                    total: $scope.cuotas.length,
                     getData: function (params) {
                       var filterObj = params.filter(),
                       filteredData = $filter('filter')($scope.cuotas, filterObj);
                       var sortObj = params.orderBy();
                         orderedData = $filter('orderBy')(filteredData, sortObj);
                         $scope.cuotasFiltradas = orderedData;
+                        $scope.paramsCuotas.total(orderedData.length);
                         $scope.sumarCuotas();
                         return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }

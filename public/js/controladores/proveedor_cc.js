@@ -31,13 +31,13 @@ $http({
                        page: 1,
                        count: 10
                    }, {
-                       total: $scope.organismos.length,
                        getData: function (params) {
                          var filterObj = params.filter();
                          filteredData = $filter('filter')($scope.organismos, filterObj);
                          var sortObj = params.orderBy();
                            orderedData = $filter('orderBy')(filteredData, sortObj);
                            $scope.organismosFiltrados = orderedData;
+                           $scope.paramsOrganismos.total(orderedData.length);
                            $scope.sumarMontosACobrar($scope.organismosFiltrados)
                            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                        }

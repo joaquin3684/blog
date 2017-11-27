@@ -22,9 +22,9 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
                     page: 1,
                     count: 10
                 }, {
-                    total: $scope.solicitudes.length,
                     getData: function (params) {
                         $scope.solicitudes = $filter('orderBy')($scope.solicitudes, params.orderBy());
+                        $scope.paramssolicitudes.total($scope.solicitudes.length);
                         return $scope.solicitudes.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });
@@ -58,9 +58,9 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
                     page: 1,
                     count: 10
                 }, {
-                    total: $scope.solicitudes2.length,
                     getData: function (params) {
                         $scope.solicitudes2 = $filter('orderBy')($scope.solicitudes2, params.orderBy());
+                        $scope.paramssolicitudes2.total($scope.solicitudes2.length);
                         return $scope.solicitudes2.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });

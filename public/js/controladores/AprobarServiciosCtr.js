@@ -31,9 +31,9 @@ $scope.ArrayAprobar = [];
                     page: 1,
                     count: 10
                 }, {
-                    total: $scope.aprobaciones.length,
                     getData: function (params) {
                         $scope.aprobaciones = $filter('orderBy')($scope.aprobaciones, params.orderBy());
+                        $scope.paramsAprobaciones.total($scope.aprobaciones.length);
                         return $scope.aprobaciones.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });

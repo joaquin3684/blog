@@ -72,12 +72,12 @@ $scope.filtro = function (){
                page: 1,
                count: 10
            }, {
-               total: $scope.reporteMayorContable.lenght,
                getData: function (params) {
                  var filterObj = params.filter();
                  filteredData = $filter('filter')($scope.reporteMayorContable, filterObj);
                  var sortObj = params.orderBy();
                    orderedData = $filter('orderBy')(filteredData, sortObj);
+                 $scope.paramsReporte.total(orderedData.length);
                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                }
            });

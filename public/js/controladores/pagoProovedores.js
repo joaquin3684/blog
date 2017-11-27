@@ -45,12 +45,12 @@ $scope.ArrayPago = [];
                     page: 1,
                     count: 10
                 }, {
-                    total: $scope.proveedores.length,
                     getData: function (params) {
                       var filterObj = params.filter(),
                       filteredData = $filter('filter')($scope.proveedores, filterObj);
                       var sortObj = params.orderBy();
                         orderedData = $filter('orderBy')(filteredData, sortObj);
+                        $scope.paramsProveedores.total(orderedData.length);
                         return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     }
                 });

@@ -68,13 +68,13 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
               page: 1,
               count: 10
             }, {
-              total: $scope.datosabm.length,
               getData: function(params) {
                 var filterObj = params.filter();
                 filteredData = $filter('filter')($scope.datosabm, filterObj);
                 var sortObj = params.orderBy();
                 orderedData = $filter('orderBy')(filteredData, sortObj);
                 $scope.datosabmfiltrados = orderedData;
+                c
                 $scope.datatoexcel = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
               }
