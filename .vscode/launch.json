@@ -17,7 +17,7 @@
             "request": "launch",
             "url": "http://lucas.app:8000/login",
             "sourceMaps": true,
-            "webRoot": "wwwroot"
+            "webRoot": "${workspaceFolder}"
         },
         {
             "name": "Attach",

@@ -187,7 +187,7 @@
                                               <tr>
                                                 <th>Cuota</th>
                                                 <th>Importe</th>
-                                                <th>Fecha</th>
+                                                <th>Vencimiento</th>
                                               </tr>
 
                                             </thead>
