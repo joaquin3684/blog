@@ -329,3 +329,8 @@ Route::resource('caja', 'CajaController');
 
 Route::get('operaciones/traerElementos', 'ABM_Operaciones@all');
 Route::resource('operaciones', 'ABM_Operaciones');
+
+
+//------------------- Caja Operaciones --------------------------
+
+Route::resource('cajaOperaciones', 'CajaOperacionesController');
