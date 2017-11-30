@@ -53,19 +53,20 @@
                     <span class="section">Datos de socio</span>
 
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre" >Nombre <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del Socio" type="text">{{errores.nombre[0]}}
+                        <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese nombre del Socio" type="text">{{errores.nombre[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="apellido">Apellido<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="apellido" class="form-control col-md-7 col-xs-12" name="apellido" placeholder="Ingrese apellido del Socio" type="text" required>{{errores.apellido[0]}}
+                        <input id="apellido" class="form-control col-md-7 col-xs-12" ng-model="apellido" placeholder="Ingrese apellido del Socio" type="text" required>{{errores.apellido[0]}}
                       </div>
                     </div>
+                    <input style="display: none" name="nombre"  value="{{apellido}},{{nombre}} " type="text" >
                       <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_nacimiento">Fecha de nacimiento <span class="required">*</span>
                       </label>
@@ -290,10 +291,10 @@
                                             <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
                                             <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)"  ng-class="socio.id">
                                                 <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                                                    {{abm.nombre}}
+                                                    {{abm.nombre.split(',').shift()}}
                                                 </td>
                                                 <td title="'Apellido'" filter="{ apellido: 'text'}" sortable="'apellido'">
-                                                    {{abm.apellido}}
+                                                    {{abm.nombre.split(',').pop()}}
                                                 </td>
                                                 <td title="'DNI'" filter="{ dni: 'text'}" sortable="'dni'">
                                                     {{abm.dni}}

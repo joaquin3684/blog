@@ -287,13 +287,7 @@
                                     <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="abmConsultado.descripcion" placeholder="Ingrese la descripcion" type="text">{{errores.nombre[0]}}
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" step="0.01" id="retencion" ng-model="abmConsultado.ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
-                                </div>
-                            </div>
+                          
 
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tasa">Tasa <span class="required">*</span>

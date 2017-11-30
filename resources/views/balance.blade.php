@@ -160,13 +160,13 @@
                                                   {{balance.nombre}}
                                               </td>
                                               <td title="'Saldo anterior'" filter="{ saldo_anterior: 'text'}" sortable="'saldo_anterior'">
-                                                  {{balance.saldo_anterior}}
+                                                  {{balance.saldoAnterior}}
                                               </td>
                                               <td title="'Total mov. debe'" filter="{ total_debe: 'text'}" sortable="'total_debe'">
-                                                  {{balance.total_debe}}
+                                                  {{balance.totalDebe}}
                                               </td>
                                               <td title="'Total mov. haber'" filter="{ total_haber: 'text'}" sortable="'total_haber'">
-                                                  {{balance.total_haber}}
+                                                  {{balance.totalHaber}}
                                               </td>
                                               <td title="'Saldo'" filter="{ saldo: 'text'}" sortable="'saldo'">
                                                   {{balance.saldo}}

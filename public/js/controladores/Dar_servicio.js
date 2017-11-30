@@ -91,7 +91,7 @@ app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
   $scope.mostrarPlanDePago = function() {
     $scope.mostrar = true;
     var planDePago = [];
-    var importe = $scope.importe / $scope.nro_cuotas;
+    var importe = ($scope.importe / $scope.nro_cuotas).toFixed(2);
     moment.locale('es')
     var vto = moment($scope.vencimiento, "DD/MM/YYYY");
     console.log(vto);

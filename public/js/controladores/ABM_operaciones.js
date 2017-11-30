@@ -134,10 +134,12 @@ app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTabl
   }
 
   $scope.editarFormulario = function (id) {
-
+    $scope.abmConsultado.debe2 = $scope.abmConsultado.haber1;
+    $scope.abmConsultado.haber2 = $scope.abmConsultado.debe1;
     return $http({
       url: 'operaciones/'+ id,
       method: 'put',
+      
       data: $scope.abmConsultado,
     }).then(function successCallback(response) {
       $scope.traerElementos();
