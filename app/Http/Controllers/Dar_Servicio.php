@@ -27,7 +27,7 @@ class Dar_Servicio extends Controller
   public function proovedoresQueCumplenConFiltro(Request $request)
   {
   	$proovedores = DB::table('proovedores')
-  		->where('razon_social', 'LIKE', '%'.$request['razon_social'].'%')->get();
+  		->where('razon_social', 'LIKE', '%'.$request['nombre'].'%')->get();
   	return $proovedores;
   }
 }

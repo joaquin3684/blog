@@ -110,6 +110,8 @@ class CobrarPorSocio
             GeneradorDeAsientos::crear($cuenta, 0, $proveedor['total']);
             GeneradorDeAsientos::crear($cuenta, $proveedor['total'], 0);
             //TODO:: preguntar donde va a estar la cuenta puente
+            //TODO:: esto no va a funcionar porque el proveedorImputacionesDeudores no tiene nombre para poner en el asiento hay que ponerle un nombre a la tabla y ver en la creacion y modificacion que no se cague nada
+
         });
     }
 

@@ -45,11 +45,13 @@ class ABM_Operaciones extends Controller
      */
     public function update(Request $request, $id)
     {
-        $op = Operacion::find($id);
-        $op->fill($request->all())->save();
-        $op->pivot->debe = $request['debe'];
-        $op->pivot->haber = $request['haber'];
-        $op->pivot->save();
+        $op = Operacion::with('imputaciones')->find($id);
+        $op->fill($request->all());
+        $op->imputaciones()->detach();
+        $op->imputaciones()->attach($request['imputacion1'], ['debe' => $request['debe1'], 'haber' => $request['haber1']]);
+        $op->imputaciones()->attach($request['imputacion2'], ['debe' => $request['debe2'], 'haber' => $request['haber2']]);
+
+        $op->save();
     }
 
     public function all()
