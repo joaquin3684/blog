@@ -17,13 +17,18 @@
             "request": "launch",
             "url": "http://lucas.app:8000/login",
             "sourceMaps": true,
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}/public/js/controladores"
         },
         {
             "name": "Attach",
             "type": "chrome",
             "request": "attach",
-            "port": 9222
+            "port": 9222,
+            "url": "http://lucas.app:8000/",
+            "webRoot": "${workspaceFolder}",
+            "sourceMapPathOverrides": {
+                "/vagrant/*": "${workspaceRoot}/*"
+            }
         }
     ]
 }

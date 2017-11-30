@@ -53,7 +53,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre" >Nombre <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre de la operacion" type="text" ng-model="nombre">{{errores.nombre[0]}}
+                        <input required id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre de la operacion" type="text" ng-model="nombre">{{errores.nombre[0]}}
                       </div>
                     </div>
                     <div class="item form-group">
@@ -61,12 +61,12 @@
                         </label>
                        <div class="col-md-2 col-sm-2 col-xs-6">
                             <div class="radio">
-                            <label><input type="radio" ng-model="entrada" ng-click="modificar('salida')" ng-value="1">Ingreso</label>
+                            <label><input  type="radio" ng-model="entrada" ng-click="modificar('salida')" ng-value="1" ng-required="salida == 0 && entrada ==0">Ingreso</label>
                             </div>
                       </div>
                       <div class="col-md-2 col-sm-2 col-xs-6">
                             <div class="radio">
-                            <label><input type="radio" ng-model="salida" ng-click="modificar('entrada')" ng-value="1">Egreso</label>
+                            <label><input  type="radio" ng-model="salida" ng-click="modificar('entrada')" ng-value="1">Egreso</label>
                             </div>
                       </div>
                     </div>
@@ -75,18 +75,19 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Asiento<span class="required">*</span>
                       </label>
                       <div class="col-md-4 col-sm-4 col-xs-12">
-                        <select class="form-control" ng-model="cuenta1Seleccionada" >
-                            <option ng-value="cuenta1.id" ng-repeat="cuenta1 in cuentas">{{cuenta1.nombre}}</option>
+                        <select class="form-control" ng-model="cuenta1Seleccionada">
+                            <option  ng-value="cuenta1.id" ng-repeat="cuenta1 in cuentas">{{cuenta1.nombre}}</option>
                         </select>
+                       
                       </div>
                       <div class="col-md-1 col-sm-1 col-xs-6">
                             <div class="radio">
-                            <label><input type="radio" ng-model="cuenta1Debe" ng-click="modificar('cuenta1Haber')" ng-value="1">Debe</label>
+                            <label><input  type="radio" ng-model="cuenta1Debe" ng-click="modificar('cuenta1Haber')" ng-value="1" ng-required="cuenta1Debe == 0 && cuenta1Haber ==0">Debe</label>
                             </div>
                       </div>
                       <div class="col-md-1 col-sm-1 col-xs-6">
                             <div class="radio">
-                            <label><input type="radio" ng-model="cuenta1Haber" ng-click="modificar('cuenta1Debe')" ng-value="1">Haber</label>
+                            <label><input  type="radio" ng-model="cuenta1Haber" ng-click="modificar('cuenta1Debe')" ng-value="1">Haber</label>
                             </div>
                       </div>
                     </div>
@@ -95,18 +96,18 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" >Asiento<span class="required">*</span>
                       </label>
                       <div class="col-md-4 col-sm-4 col-xs-12">
-                        <select class="form-control" ng-model="cuenta2Seleccionada">
+                        <select class="form-control" name="cuenta2selec" ng-model="cuenta2Seleccionada">
                             <option ng-value="cuenta2.id" ng-repeat="cuenta2 in cuentas">{{cuenta2.nombre}}</option>
                         </select>
                       </div>
                       <div class="col-md-1 col-sm-1 col-xs-6">
                             <div class="radio">
-                            <label><input type="radio" ng-checked="cuenta1Haber == 1" disabled>Debe</label>
+                            <label><input  type="radio" ng-checked="cuenta1Haber == 1" disabled>Debe</label>
                             </div>
                       </div>
                       <div class="col-md-1 col-sm-1 col-xs-6">
                             <div class="radio">
-                            <label><input type="radio"  ng-checked="cuenta1Debe == 1" disabled>Haber</label>
+                            <label><input  type="radio"  ng-checked="cuenta1Debe == 1" disabled>Haber</label>
                             </div>
                       </div>
                     </div>  

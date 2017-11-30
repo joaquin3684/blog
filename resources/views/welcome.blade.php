@@ -223,6 +223,15 @@
                   </ul>
                 </li>
 
+                <li><a><i class="fa fa-shopping-bag"></i> Caja <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                      <li><a href="operaciones">Operaciones</a>
+                     
+                
+
+                  </ul>
+                </li>
+
                   </li>
                   <li><a href="comercializador"><i class="fa fa-pencil"></i>Generar Solicitud</a>
                   </li>

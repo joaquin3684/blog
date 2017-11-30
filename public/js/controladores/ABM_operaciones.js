@@ -18,6 +18,9 @@ app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTabl
   $scope.cuenta1Haber = 0;
   $scope.entrada = 0;
   $scope.salida = 0;
+  $scope.cuenta1Seleccionada = '';
+  $scope.cuenta2Seleccionada = '';
+
   $scope.submit = function() {
     var data = {
       'nombre': $scope.nombre,
