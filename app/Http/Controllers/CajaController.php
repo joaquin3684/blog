@@ -59,6 +59,6 @@ class CajaController extends Controller
         return CajaOperaciones::with('operacion')
             ->where('fecha', '>=', $request['fecha_desde'])
             ->where('fecha', '>=', $request['fecha_hasta'])
-            ->get()->groupBy('fecha');
+            ->get();
     }
 }
