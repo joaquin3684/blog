@@ -15,14 +15,14 @@ use Illuminate\Support\Facades\DB;
 
 class CalcularSaldos
 {
-    public static function modificarSaldo($id_imputacion, Carbon $fecha)
+    public static function modificarSaldo($cuenta, Carbon $fecha)
     {
         $saldo = DB::table('asientos')
-            ->where('id_imputacion', $id_imputacion)
+            ->where('id_imputacion', $cuenta->id)
             ->groupBy('id_imputacion')
             ->select(DB::raw('(SUM(debe) - SUM(haber)) as saldo'))->first();
 
-        $cuenta = SaldosCuentas::where('id_imputacion', $id_imputacion)
+        $cuenta = SaldosCuentas::where('id_imputacion', $cuenta->id)
             ->where('year', $fecha->year)
             ->where('month', $fecha->month)
             ->first();

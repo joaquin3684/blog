@@ -15,6 +15,7 @@ class OperacionImputacion extends Migration
     public function up()
     {
         Schema::create('operacion_imputacion', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('id_imputacion')->unsigned();
             $table->foreign('id_imputacion')->references('id')->on('imputaciones');
             $table->integer('id_operacion')->unsigned();
