@@ -322,7 +322,7 @@ Route::post('balance', 'BalanceController@reporte');
 
 //----------------- CAJA -----------------------------------------
 
-Route::post('caja/elemntosFiltrados', 'CajaController@all');
+Route::post('caja/elementosFiltrados', 'CajaController@all');
 Route::resource('caja', 'CajaController');
 
 //------------------ OPERACIONES --------------------------------

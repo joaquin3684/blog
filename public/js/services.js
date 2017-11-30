@@ -181,52 +181,6 @@ angular.module('Mutual.services', ['ngTable'])
 }])
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .controller('Serviced', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, clonarHtmlService) {
 
 
