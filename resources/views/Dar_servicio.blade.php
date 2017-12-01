@@ -60,7 +60,7 @@
                                         <form class=" form-label-left" ng-submit="crearMovimiento()">
                                             <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre+' '+item.apellido" md-items="item in query(searchText, 'filtroSocios')" md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..." required>
                                                 <span md-highlight-text="searchText">
-                                                    {[{item.nombre}]} {[{item.apellido}]}
+                                                    {[{item.nombre}]} {[{item.apellido}]} ({[{item.legajo}]})
                                                 </span>
                                             </md-autocomplete>
                                             <hr/>

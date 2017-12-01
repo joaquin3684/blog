@@ -1,7 +1,7 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable','Mutual.services']).config(function($interpolateProvider){
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable','Mutual.services','ServicioABM']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
-app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv) {
+app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv, ServicioABM) {
 
     $scope.pullSolicitudes = function (){
 
@@ -35,8 +35,15 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
             console.log(data.data);
         });
 
-
-
+    }
+    $scope.pullProductos = function () {
+        var url= 'proveedores/productos';
+        var data = {
+            'id': Number($scope.agente)
+        }
+        ServicioABM.pullFilteredByData(url, data).then(function (returnedData) {
+            $scope.productos = returnedData;
+        });
     }
 
         $scope.pullSolicitudes2 = function (){
@@ -152,6 +159,7 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
             else
             {
                 $scope.agentesasignar = response.data;
+                
                 console.log(response);
             }
 

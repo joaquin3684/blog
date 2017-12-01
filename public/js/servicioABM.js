@@ -44,6 +44,25 @@ angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
         return promise;
         };
 
+        this.pullFilteredByData = function (url, data) {
+
+            var promise = $http({
+                url: url,
+                method: "post",
+                data: data,
+            }).then(function successCallback(response) {
+                if (typeof response.data === 'string') {
+                    return [];
+                } else {
+                    console.log(response.data);
+                    return response.data;
+                }
+            }, function errorCallback(response) {
+                console.log('Error al traer elementos!');
+            });
+
+            return promise;
+        };
 
   this.createTable = function(data){
       var paramsABMS = new NgTableParams({

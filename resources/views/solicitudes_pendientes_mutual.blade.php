@@ -269,13 +269,24 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Agente Financiero
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select ng-keyup="$event.keyCode == 13 && AsignarAF()" class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="agente">
+                          <select ng-keyup="$event.keyCode == 13 && AsignarAF()" class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="agente" ng-click="pullProductos()">>
                             <option value="{[{x.agentes_financieros.id}]}" ng-repeat="x in agentesasignar">
                             {[{x.agentes_financieros.razon_social}]}
                             </option>
                           </select>
                       </div>
                     </div>
+                     <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Producto
+                      </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="producto" 
+                            <option value="{[{producto.agentes_financieros.id}]}" ng-repeat="producto in productos" >
+                            {[{x.agentes_financieros.razon_social}]}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
