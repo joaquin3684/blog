@@ -56,9 +56,19 @@ class CajaController extends Controller
 
     public function all(Request $request)
     {
-        return CajaOperaciones::with('operacion')
+        $operaciones = CajaOperaciones::with('operacion')
             ->where('fecha', '>=', $request['fecha_desde'])
-            ->where('fecha', '>=', $request['fecha_hasta'])
-            ->get();
+            ->where('fecha', '<=', $request['fecha_hasta'])
+            ->get()->groupBy('fecha');
+
+        $op = collect();
+        $operaciones->each(function($operacion, $key) use (&$op){
+            $opAux = collect();
+            $opAux->put('fecha', $key);
+            $opAux->put('cajaOperacion',$operacion);
+            $op->push($opAux);
+        });
+        return $op;
+
     }
 }
