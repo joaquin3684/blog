@@ -280,10 +280,8 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Producto
                       </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="producto" 
-                            <option value="{[{producto.agentes_financieros.id}]}" ng-repeat="producto in productos" >
-                            {[{x.agentes_financieros.razon_social}]}
-                            </option>
+                          <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="productoSeleccionado">
+                            <option ng-value="producto.id" ng-repeat="producto in productos">{[{producto.nombre}]}</option>
                           </select>
                         </div>
                       </div>

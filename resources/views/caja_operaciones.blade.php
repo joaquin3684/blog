@@ -73,10 +73,10 @@
                                           <div class="item form-group" >
                                               <label class="control-label col-md-3 col-sm-3 col-xs-8" for="categoria">Fecha</label>
                                               <div class="col-md-4 col-sm-4 col-xs-8" >
-                                                <input type="text"  ng-model="fecha_desde" class="form-control col-md-2 col-xs-12" onfocus="(this.type='date')" placeholder="Desde">
+                                                <input type="text"  ng-model="fecha_desde" class="form-control col-md-2 col-xs-12" onfocus="(this.type='date')" placeholder="Desde" required>
                                               </div>
                                               <div class="col-md-4 col-sm-4 col-xs-8" >
-                                                <input type="text" ng-model="fecha_hasta"  class="form-control col-md-2 col-xs-12" onfocus="(this.type='date')" placeholder="Hasta">
+                                                <input type="text" ng-model="fecha_hasta"  class="form-control col-md-2 col-xs-12" onfocus="(this.type='date')" placeholder="Hasta" required>
                                               </div>
                                           </div>
 
@@ -150,30 +150,76 @@
                                     <!-- START TABLE -->
                                     <div>
                                       @verbatim
-                                      <table ng-table="params" class="table table-hover table-bordered">
-                                          <tbody data-ng-repeat="operacion in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                          <tr class="clickableRow" title="Datos">
-                                              <td title="'Codigo'" filter="{ codigo: 'text'}" sortable="'codigo'">
-                                                  {{operacion.codigo}}
-                                              </td>
-                                              <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                                                  {{operacion.nombre}}
-                                              </td>
-                                              <td title="'Saldo anterior'" filter="{ saldo_anterior: 'text'}" sortable="'saldo_anterior'">
-                                                  {{operacion.saldoAnterior}}
-                                              </td>
-                                              <td title="'Total mov. debe'" filter="{ total_debe: 'text'}" sortable="'total_debe'">
-                                                  {{operacion.totalDebe}}
-                                              </td>
-                                              <td title="'Total mov. haber'" filter="{ total_haber: 'text'}" sortable="'total_haber'">
-                                                  {{operacion.totalHaber}}
-                                              </td>
-                                              <td title="'Saldo'" filter="{ saldo: 'text'}" sortable="'saldo'">
-                                                  {{operacion.saldo}}
-                                              </td>
+                                      <table ng-table="paramsCaja" class="table table-hover table-bordered" show-filter="false">
 
-                                          </tr>
-                                      </table>
+                                            <tbody data-ng-repeat="caja in $data">
+                                            <tr class="clickableRow" title="" >
+                                              <td title="'Fecha'" filter="{ fecha: 'text'}" sortable="'fecha'">
+                                                 <center> {{cambiarFormato(caja.fecha)}}</center>
+                                              </td>
+                                            
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div>
+                                                            <table class="table table-striped">
+                                                                <thead style="background-color: #337ab7; color: white;" >
+                                                                <tr >
+                                                                    <th class="col-md-2">
+                                                                      <a href="#" ng-click="sortBy('nombre')" style="color: white">
+                                                                      Nombre
+                                                                    </a>
+                                                                    <span ng-show="propertyName === 'nombre'" class="sortorder" ng-class="{reverse: reverse}"></span>
+                                                                    </th>
+                                                                    <th class="col-md-2">
+                                                                      <a href="#" ng-click="sortBy('entrada')" style="color: white">
+                                                                      Entrada
+                                                                    </a>
+                                                                    <span ng-show="propertyName === 'entrada'" class="sortorder" ng-class="{reverse: reverse}"></span>
+                                                                    </th>
+                                                                    <th class="col-md-2">
+                                                                      <a href="#" ng-click="sortBy('salida')" style="color: white">
+                                                                      Salida
+                                                                    </a>
+                                                                    <span ng-show="propertyName === 'salida'" class="sortorder" ng-class="{reverse: reverse}"></span>
+                                                                    </th>
+                                                                    
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr ng-repeat="cajaOperacion in caja.cajaOperacion | orderBy:propertyName:reverse">
+                                                                    <td><center>{{cajaOperacion.operacion.nombre}}</center></td>
+                                                                    <td><center>{{cajaOperacion.entrada}}</center></td>
+                                                                    <td><center>{{cajaOperacion.salida}}</center></td>
+                                                                    
+                                                                </tr>
+                                                                </tbody>
+                                                               `  <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                                                        {{calcularTotales(caja.cajaOperacion)}}
+                                                                    <td style="text-align: right;">
+                                                                     <b>Total</b>
+                                                                    </td>
+                                                                    <td >
+                                                                        <center>{{totales[$index].entrada}}</center>
+                                                                    </td>
+                                                                    <td>
+                                                                        <center>{{totales[$index].salida}}</center>
+                                                                    </td>
+                                                                    
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                            <tfoot>
+
+
+                                            </tr>
+                                            </tfoot>
+                                        </table>
                                         @endverbatim
                                     </div>
                                     <!-- END TABLE -->

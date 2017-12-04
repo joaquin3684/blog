@@ -60,6 +60,7 @@ $scope.filtro = function (){
             $scope.reporteMayorContable.push({
               'codigo': entry.codigo,
               'saldo': entry.saldo,
+              'nombre': entry.nombre,
               'asientos': arr,
               'totalDebe': totalDebe,
               'totalHaber': totalHaber,

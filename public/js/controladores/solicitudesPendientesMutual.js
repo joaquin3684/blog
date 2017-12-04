@@ -36,6 +36,7 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
         });
 
     }
+   
     $scope.pullProductos = function () {
         var url= 'proveedores/productos';
         var data = {
@@ -91,7 +92,11 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
         $http({
                 url: 'solicitudesPendientesMutual/actualizar',
                 method: 'post',
-                data: {'id':$scope.idpropuestae,'agente_financiero':$scope.agente}
+                data: {
+                    'id':$scope.idpropuestae,
+                    'agente_financiero':$scope.agente,
+                    'id_producto': $scope.productoSeleccionado
+                }
             }).then(function successCallback(response)
             {
 

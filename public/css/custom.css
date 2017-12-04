@@ -11,21 +11,27 @@
 .succes{color:#5cb85c}
 
 .alert-fixed {
-    position:fixed;
+    position:absolu;
     top: 0px;
     left: 0px;
     width: 100%;
     z-index:9999;
     border-radius:0px
 }
-
+.left_col{
+  background: #106cc8;
+}
 body.nav-sm .container.body .left_col {
   width: 70px;
   padding: 0;
-  position: absolute;
+  position: relative;
   min-height: 100%;
   z-index: 9999;
   background: #106cc8;
+}
+.nav-sm .container.body .col-md-3.left_col.menu_fixed {
+  position: fixed;
+  height: 100%;
 }
 span:hover{
   color: green;
@@ -225,6 +231,14 @@ body.nav-md .container.body .col-md-3.left_col {
   z-index: 1;
   background: #106cc8;
 }
+.nav-md .container.body .col-md-3.left_col.menu_fixed {
+  height: 100%;
+  position: fixed;
+}
+.nav-sm .container.body .col-md-3.left_col .mCSB_container,
+.nav-sm .container.body .col-md-3.left_col .mCustomScrollBox {
+  overflow: visible;
+}
 body .container.body .right_col {
   background: #f1f2f3;
 }
@@ -269,6 +283,14 @@ body.nav-md .container.body .right_col {
   .x_title h2 small {
     display: none
   }
+}
+
+.left_col .mCSB_scrollTools {
+  width: 6px;
+}
+
+.left_col .mCSB_dragger {
+  max-height: 400px !important;
 }
 
 /**  ------------------------------------------  **/

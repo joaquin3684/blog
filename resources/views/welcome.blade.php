@@ -18,7 +18,7 @@
 
   {!! Html::style('css/animate.min.css') !!}
 {!! Html::script('js/moment/moment.min.js') !!}
-
+{!! Html::style('js/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css') !!}
   <!-- Custom styling plus plugins -->
 
   {!! Html::style('css/custom.css') !!}
@@ -151,11 +151,11 @@
 
           <!-- sidebar menu -->
           <!-- <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" style="max-height: -webkit-fill-available; overflow-y: scroll;"> -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" >
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
             <div class="menu_section" >
               <h3>General</h3>
-              <ul class="nav side-menu">
+              <ul class="nav side-menu" >
 
                 <li><a><i class="fa fa-edit"></i> ABM <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
@@ -214,6 +214,7 @@
                       <li><a href="cobrar_contablemente">Cobrar contablemente</a></li>
                       <li><a href="mayorContable">Mayor contable</a></li>
                       <li><a href="pagoContableProveedor">Pago contable Proveedor</a></li>
+                      <li><a href="balance">Balance</a></li>
                       <!-- <li><a href="rubro">Rubros</a>
                       </li>
                       <li><a href="moneda">Monedas</a></li>
@@ -228,6 +229,8 @@
                   <ul class="nav child_menu" style="display: none">
                       <li><a href="operaciones">Operaciones</a>
                       <li><a href="caja">Caja</a>
+                      <li><a href="operaciones">ABM operaciones</a>
+                      <li><a href="cajaOperaciones">Reporte caja</a>
                   </ul>
                 </li>
 
@@ -346,11 +349,26 @@
   {!! Html::script('js/progressbar/bootstrap-progressbar.min.js') !!}
 {!! Html::script('js/wizard/jquery.smartWizard.js') !!}
 
-  <!-- chart js -->
- {!! Html::script('js/custom.js') !!}
- {!! Html::script('js/app.js') !!}
+<!-- chart js -->
+{!! Html::script('js/custom.js') !!}
+{!! Html::script('js/app.js') !!}
 
-
+<!-- scroller -->
+ {!! Html::script('js/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') !!}
+<script>
+  $(document).ready(function() {
+    
+        $('.menu_fixed').mCustomScrollbar({
+            autoHideScrollbar: true,
+            theme: 'minimal',
+            
+            mouseWheel:{ 
+              
+              scrollAmount: 800, }
+        });
+    
+  });
+	</script>
  <script>
 
 
