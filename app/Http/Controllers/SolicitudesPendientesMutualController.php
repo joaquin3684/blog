@@ -46,7 +46,7 @@ class SolicitudesPendientesMutualController extends Controller
             }
             if ($request->has('agente_financiero')) {
                 $agente = $elem['agente_financiero'];
-                $producto = $elem['producto'];
+                $producto = $elem['id_producto'];
                 $col->put('agente_financiero', $agente);
                 $col->put('id_producto', $producto);
 
