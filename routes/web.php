@@ -94,7 +94,7 @@ Route::resource('asociados', 'ABM_asociados');
 Route::get('proovedores/datos', 'ABM_proovedores@datos');
 Route::get('proovedores/traerElementos', 'ABM_proovedores@traerElementos');
 Route::get('proovedores/traerRelacionproovedores', 'ABM_proovedores@traerRelacion');
-Route::post('proveedores/productos', 'ABM_proveedores@productos');
+Route::post('proveedores/productos', 'ABM_proovedores@productos');
 Route::resource('proovedores', 'ABM_proovedores');
 
 //---------------- PRODUCTOS ----------------
