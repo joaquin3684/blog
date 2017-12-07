@@ -227,7 +227,7 @@
 
                 <li><a><i class="fa fa-shopping-bag"></i> Caja <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                      <li><a href="operaciones">Operaciones</a>
+                     
                       <li><a href="caja">Caja</a>
                       <li><a href="operaciones">ABM operaciones</a>
                       <li><a href="cajaOperaciones">Reporte caja</a>

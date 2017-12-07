@@ -31,7 +31,7 @@ if($scope.formaCobro == 'caja'){
     'totalAPagar': $scope.proveedorSeleccionado.totalAPagar,
     'comision': $scope.proveedorSeleccionado.comision,
     'formaCobro': $scope.formaCobro,
-    'idBanco': $scsope.bancoSeleccionado.id,
+    'idBanco': $scope.bancoSeleccionado.id,
     'codigoBanco': $scope.bancoSeleccionado.codigo
   };
 }
