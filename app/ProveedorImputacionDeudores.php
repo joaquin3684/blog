@@ -12,4 +12,8 @@ class ProveedorImputacionDeudores extends Model
         'id_proveedor', 'id_imputacion', 'tipo', 'codigo'
     ];
 
+    public function imputacion(){
+        return $this->belongsTo('App\Imputacion', 'id_imputacion', 'id');
+    }
+
 }

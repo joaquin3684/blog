@@ -15,9 +15,9 @@ app.controller('pago_contable_proveedor', function($scope, $http, $compile, $sce
 
 
   $scope.submit = function() {
-
+    var data;
 if($scope.formaCobro == 'caja'){
-  var data = {
+   data = {
     'proveedor': $scope.proveedorSeleccionado.razon_social,
     'totalAPagar': $scope.proveedorSeleccionado.totalAPagar,
     'comision': $scope.proveedorSeleccionado.comision,
@@ -26,7 +26,7 @@ if($scope.formaCobro == 'caja'){
     'codigoBanco': null
   };
 }else{
-  var data = {
+   data = {
     'proveedor': $scope.proveedorSeleccionado.razon_social,
     'totalAPagar': $scope.proveedorSeleccionado.totalAPagar,
     'comision': $scope.proveedorSeleccionado.comision,

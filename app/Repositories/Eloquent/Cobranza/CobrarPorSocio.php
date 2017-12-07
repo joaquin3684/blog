@@ -106,9 +106,9 @@ class CobrarPorSocio
         }
 
         $cobroPorProveedor->each(function ($proveedor) {
-            $cuenta = ProveedorImputacionDeudores::where('id_proveedor', $proveedor['proveedor'])->where('tipo', 'Deudores')->first();
-            GeneradorDeAsientos::crear($cuenta, 0, $proveedor['total']);
-            GeneradorDeAsientos::crear($cuenta, $proveedor['total'], 0);
+            $cuenta = ProveedorImputacionDeudores::with('imputacion')->where('id_proveedor', $proveedor['proveedor'])->where('tipo', 'Deudores')->first();
+            GeneradorDeAsientos::crear($cuenta->imputacion, 0, $proveedor['total']);
+            GeneradorDeAsientos::crear($cuenta->imputacion, $proveedor['total'], 0);
             //TODO:: preguntar donde va a estar la cuenta puente
             //TODO:: esto no va a funcionar porque el proveedorImputacionesDeudores no tiene nombre para poner en el asiento hay que ponerle un nombre a la tabla y ver en la creacion y modificacion que no se cague nada
 
