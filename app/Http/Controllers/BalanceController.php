@@ -26,6 +26,8 @@ class BalanceController extends Controller
             ->groupBy('id_imputacion')
             ->select(DB::raw('SUM(asientos.debe) as totalDebe, SUM(asientos.haber) as totalHaber, (SUM(asientos.debe) - SUM(asientos.haber)) as saldo'), 'asientos.codigo', 'imputaciones.nombre')
             ->orderBy('codigo')
+            ->havingRaw('SUM(asientos.debe) > 0 OR SUM(asientos.haber) > 0 OR (SUM(asientos.debe) - SUM(asientos.haber)) > 0')
+
             ->get();
 
 
@@ -44,6 +46,8 @@ class BalanceController extends Controller
                     $saldo->saldo = $imputacion->saldo + $saldo->saldo;
                 }
                 return $saldo;
+            })->filter(function($saldo){
+                return $saldo->totalDebe > 0 || $saldo->totalHaber > 0 || $saldo->saldo > 0;
             });
 
     }
