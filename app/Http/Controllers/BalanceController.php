@@ -26,6 +26,8 @@ class BalanceController extends Controller
             ->groupBy('id_imputacion')
             ->select(DB::raw('SUM(asientos.debe) as totalDebe, SUM(asientos.haber) as totalHaber, (SUM(asientos.debe) - SUM(asientos.haber)) as saldo'), 'asientos.codigo', 'imputaciones.nombre')
             ->orderBy('codigo')
+            ->havingRaw('SUM(asientos.debe) > 0')
+
             ->get();
 
 
