@@ -60,14 +60,14 @@ class ABM_proovedores extends Controller
 
     public function show($id)
     {
-        $registro = Proovedores::find($id);
+        $registro = Proovedores::with('usuario')->find($id);
         return $registro;
        
     }
 
     public function update(ValidacionABMproovedores $request, $id)
     {
-        $registro = Proovedores::find($id);
+        $registro = Proovedores::with('usuario')->find($id);
         $registro->fill($request->all())->save();
         return ['updated' => true];
     }
