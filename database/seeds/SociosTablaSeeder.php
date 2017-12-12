@@ -25,7 +25,7 @@ class SociosTablaSeeder extends Seeder
 	        		'codigo_postal' => $faker->randomNumber(4),
 	        		'telefono' => $faker->randomNumber(8),
 	        		'legajo' => $faker->randomNumber(3),
-	        		'nombre' => $faker->name,
+	        		'nombre' => $faker->firstName().','.$faker->lastName,
 	        		]);
         } 
          DB::statement('SET FOREIGN_KEY_CHECKS=1;');   

@@ -62,12 +62,19 @@ class ABM_asociados extends Controller
 
     public function traerElementos()
     {
-        return $this->socio->all();
+        return $this->socio->all()->map(function($socio){
+            $nombre = explode(",", $socio->nombre);
+            $socio->nombre = $nombre[0];
+            $socio->apellido = $nombre[1];
+            return $socio;
+        });
     }
 
     public function update(ValidacionABMsocios $request, $id)
     {
-        $this->socio->update($request->all(), $id);
+        $elem = $request->all();
+        $elem['nombre'] = $elem['apellido'].','.$elem['nombre'];
+        $this->socio->update($elem, $id);
     }
 
     public function destroy($id)
