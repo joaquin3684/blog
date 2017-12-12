@@ -83,7 +83,7 @@
 
                                           </div>
                                         </div>
-                                        <input type="submit" ng-click="filtro()" class="btn btn-success" value="Filtrar">
+                                        <input type="submit"class="btn btn-success" value="Filtrar">
                                         </form>
                                         @endverbatim
                                     </div>

@@ -51,7 +51,7 @@ app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
     $scope.proovedor = '';
     $scope.producto = '';
     $scope.importe = '';
-    $scope.montoPorCobrar = '';
+    $scope.montoPorCuota = '';
     $scope.nro_cuotas = '';
     $scope.observacion = '';
 

@@ -211,7 +211,7 @@
                       <li><a href="capitulo">Plan de cuentas</a>
                       <li><a href="asientos">Asientos Contables Manuales</a>
                       </li>
-                      <li><a href="cobrar_contablemente">Cobrar contablemente</a></li>
+                      <!--<li><a href="cobrar_contablemente">Cobrar contablemente</a></li> -->
                       <li><a href="mayorContable">Mayor contable</a></li>
                       <li><a href="pagoContableProveedor">Pago contable Proveedor</a></li>
                       <li><a href="balance">Balance</a></li>
