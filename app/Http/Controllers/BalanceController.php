@@ -30,8 +30,8 @@ class BalanceController extends Controller
 
             ->get();
 
-
-            return $saldosInicialesCuentas->map(function ($saldo) use ($imputaciones) {
+            $col = collect();
+            $saldosInicialesCuentas->map(function ($saldo) use ($imputaciones) {
                 $imputacion = $imputaciones->first(function ($imputacion) use ($saldo) {
                     return $saldo->codigo == $imputacion->codigo;
                 });
@@ -46,9 +46,13 @@ class BalanceController extends Controller
                     $saldo->saldo = $imputacion->saldo + $saldo->saldo;
                 }
                 return $saldo;
-            })->filter(function($saldo){
-                return $saldo->totalDebe > 0 || $saldo->totalHaber > 0 || $saldo->saldo > 0;
+            })->filter(function($saldo) use (&$col){
+                if($saldo->totalDebe > 0 || $saldo->totalHaber > 0 || $saldo->saldo > 0)
+                {
+                    $col->push($saldo);
+                }
             });
+            return $col;
 
     }
 }
