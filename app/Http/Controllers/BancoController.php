@@ -32,7 +32,7 @@ class BancoController extends Controller
     }
 
 
-    public function store(ValidacionBanco $request)
+    public function store(Request $request)
     {
         DB::transaction(function() use ($request){
             $this->gateway->create($request->all());
@@ -48,7 +48,7 @@ class BancoController extends Controller
     }
 
 
-    public function update(ValidacionBanco $request, $id)
+    public function update(Request $request, $id)
     {
         return $this->gateway->update($request->all(), $id);
     }
