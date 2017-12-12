@@ -47,7 +47,29 @@
                    {{ csrf_field() }}
 
                     <span class="section"></span>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control" ng-model="tipo" required>
+                        <option value="caja">Caja</option>
+                        <option value="banco">Banco</option>
+                        </select>
+                      </div>
+                    </div>
 
+                    <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Operacion <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <md-autocomplete  md-input-name="idoperacion" md-item-text="item.nombre" md-items="item in query(searchText, url)" md-search-text="searchText" md-selected-item="operacion" placeholder="Buscar operacion..." required>
+                          <span md-highlight-text="searchText">
+                            {{item.nombre}}
+                          </span>
+                        </md-autocomplete>    
+                      </div>
+                    </div>
+                    
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razonSocial">Operacion <span class="required">*</span>
                       </label>
@@ -62,10 +84,64 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" >Valor <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input  class="form-control" type="number" steop="0.01" required ng-model="valor" placeholder="Ingrese un valor">
+                        <input  class="form-control" type="number" step="0.01" required ng-model="valor" placeholder="Ingrese un valor">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" >Observacion</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input  class="form-control" type="text" ng-model="observacion" placeholder="Ingrese una observacion">
                       </div>
                     </div>
                   
+                  <div ng-show="tipo == 'banco'">
+                  <div class="item form-group" >
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" >Banco <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control" ng-model="bancoSeleccionado" required>
+                        <option ng-value="banco.id" ng-repeat="banco in bancos">{{banco.nombre}}</option>
+                        </select>
+                      </div>
+                    </div>
+                     <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo transaccion<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control" ng-model="tipoTransaccion" required>
+                        <option value="cheque">Cheque</option>
+                        <option value="transferencia">Transferencia</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div ng-show="tipoTransaccion == 'cheque'">
+                  <div class="item form-group" >
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" >Chequera <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control" ng-model="chequeraSeleccionada" required>
+                        <option ng-value="chequera.id" ng-repeat="chequera in chequeras">{{chequera.nombre}}</option>
+                        </select>
+                      </div>
+                    </div>
+                     <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Nro cheque<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input  class="form-control" type="number" step="1" required ng-model="nro_cheque" placeholder="Ingrese un nro de cheque">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input  class="form-control" type="date" step="1" required ng-model="fecha">
+                      </div>
+                    </div>
+                  </div>
+
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">

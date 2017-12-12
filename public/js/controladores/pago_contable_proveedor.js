@@ -13,7 +13,6 @@ app.controller('pago_contable_proveedor', function($scope, $http, $compile, $sce
 
   };
 
-
   $scope.submit = function() {
     var data;
 if($scope.formaCobro == 'caja'){

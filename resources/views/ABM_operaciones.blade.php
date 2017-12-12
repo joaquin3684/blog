@@ -75,9 +75,14 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Asiento<span class="required">*</span>
                       </label>
                       <div class="col-md-4 col-sm-4 col-xs-12">
-                        <select class="form-control" ng-model="cuenta1Seleccionada">
+                      <md-autocomplete  md-input-name="idcuenta" md-item-text="item.nombre" md-items="item in query(searchText, url)" md-search-text="searchText" md-selected-item="cuenta1Seleccionada" placeholder="Buscar cuenta..." required>
+                          <span md-highlight-text="searchText">
+                            {{item.nombre}}
+                          </span>
+                        </md-autocomplete>  
+                       <!-- <select class="form-control" ng-model="cuenta1Seleccionada">
                             <option  ng-value="cuenta1.id" ng-repeat="cuenta1 in cuentas">{{cuenta1.nombre}}</option>
-                        </select>
+                        </select> -->
                        
                       </div>
                       <div class="col-md-1 col-sm-1 col-xs-6">
@@ -96,9 +101,14 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" >Asiento<span class="required">*</span>
                       </label>
                       <div class="col-md-4 col-sm-4 col-xs-12">
-                        <select class="form-control" name="cuenta2selec" ng-model="cuenta2Seleccionada">
+                      <md-autocomplete  md-input-name="idcuenta" md-item-text="item.nombre" md-items="item in query(searchText, url)" md-search-text="searchText2" md-selected-item="cuenta2Seleccionada" placeholder="Buscar cuenta..." required>
+                          <span md-highlight-text="searchText">
+                            {{item.nombre}}
+                          </span>
+                        </md-autocomplete> 
+                       <!-- <select class="form-control" name="cuenta2selec" ng-model="cuenta2Seleccionada">
                             <option ng-value="cuenta2.id" ng-repeat="cuenta2 in cuentas">{{cuenta2.nombre}}</option>
-                        </select>
+                        </select> -->
                       </div>
                       <div class="col-md-1 col-sm-1 col-xs-6">
                             <div class="radio">

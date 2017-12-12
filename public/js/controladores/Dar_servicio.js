@@ -7,6 +7,10 @@ app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
   $scope.vencimiento = new Date(moment().startOf('month').add(24, 'days').add(2, 'months').format('YYYY-MM-DD'));
   $scope.fechaActual = moment().format('YYYY-MM-DD');
   $scope.mostrar = false;
+  
+  $scope.getImporte = function(){
+    $scope.importe = $scope.montoPorCuota * $scope.nro_cuotas;
+  }
   // machea a los socios en base al searchText
   $scope.query = function(searchText, ruta) {
     return $http({
@@ -47,6 +51,7 @@ app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
     $scope.proovedor = '';
     $scope.producto = '';
     $scope.importe = '';
+    $scope.montoPorCobrar = '';
     $scope.nro_cuotas = '';
     $scope.observacion = '';
 

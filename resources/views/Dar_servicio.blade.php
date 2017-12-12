@@ -76,33 +76,7 @@
                                                 </span>
                                             </md-autocomplete>
                                             <hr/>
-                                            <div class="row form-group">
-                                                <div class=" ">
-                                                    <label class="control-label col-md-1 col-sm-3 col-xs-12" for="capital">
-                                                        Capital
-                                                        <span class="required">
-                                                            *
-                                                        </span>
-                                                    </label>
-                                                    <div class="col-md-4 col-sm-6 col-xs-12">
-                                                        <input class="form-control col-md-7 col-xs-12" name="capital" ng-model="importe" type="number" step="0.01" required>
-                                                        </input>
-                                                    </div>
-                                                </div>
-                                                <div class=" ">
-                                                    <label class="control-label col-md-offset-1 col-md-1 col-sm-3 col-xs-12" for="cuotas" >
-                                                        Cuotas
-                                                        <span class="required">
-                                                            *
-                                                        </span>
-                                                    </label>
-                                                    <div class="col-md-4 col-sm-6 col-xs-12">
-                                                        <input class="form-control col-md-7 col-xs-12" name="cuotas" ng-model="nro_cuotas" type="number" required>
-                                                        </input>
-                                                    </div>
-                                                </div>
 
-                                            </div>
                                             <div class="row form-group">
                                                 <div class="item ">
                                                     <label class="control-label col-md-1 col-sm-3 col-xs-12" for="vencimiento">
@@ -125,6 +99,49 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row form-group">
+                                                <div class=" ">
+                                                    <label class="control-label col-md-1 col-sm-3 col-xs-12" for="capital">
+                                                        Monto por cuota
+                                                        <span class="required">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                                        <input class="form-control col-md-7 col-xs-12" name="capital" ng-model="montoPorCuota" type="number" step="0.01" required>
+                                                        </input>
+                                                    </div>
+                                                </div>
+                                                <div class=" ">
+                                                    <label class="control-label col-md-offset-1 col-md-1 col-sm-3 col-xs-12" for="cuotas" >
+                                                        Cuotas
+                                                        <span class="required">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                                        <input class="form-control col-md-7 col-xs-12" name="cuotas" ng-model="nro_cuotas" type="number" required>
+                                                        </input>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="row form-group ">
+                                            
+                                                    <label class="control-label  col-md-1 col-sm-3 col-xs-12" >
+                                                        Capital total
+                                                        <span class="required">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                                  {[{getImporte()}]}
+                                                        <input class="form-control col-md-7 col-xs-12"  ng-model="importe" type="number" disabled>
+                                                      
+                                                        </input>
+                                                    </div>
+                                                </div>
+                                            
                                             <div class="row form-group" ng-if="tipo_servicio == 'credito'">
                                                 <div class="item">
                                                     <label class="control-label col-md-1 col-sm-3 col-xs-12" for="plata recibida">

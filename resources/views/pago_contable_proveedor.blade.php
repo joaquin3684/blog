@@ -78,8 +78,8 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" ng-model="formaCobro">
-                          <option value="caja">Caja</option>
-                          <option value="banco">Banco</option>
+                          <option value="caja" ng-disabled="proveedorSeleccionado.totalAPagar > 1000">Caja</option>
+                          <option value="banco" >Banco</option>
                         </select>
                       </div>
                     </div>
