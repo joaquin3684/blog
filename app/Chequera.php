@@ -5,13 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Banco extends Model
+class Chequera extends Model
 {
     use SoftDeletes;
-    protected $table = 'bancos';
+    protected $table = 'chequeras';
 
     protected $fillable = [
-        'nombre', 'sucursal', 'direccion', 'nro_cuenta'
+        'nro_chequera', 'nro_inicio', 'nro_fin', 'estado', 'id_banco'
     ];
 
     protected $dates = ['deleted_at'];

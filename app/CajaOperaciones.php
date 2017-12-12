@@ -10,7 +10,7 @@ class CajaOperaciones extends Model
     use SoftDeletes;
     protected $table = 'caja_operaciones';
     protected $fillable = [
-        'id_operacion', 'fecha', 'entrada', 'salida'
+        'fecha', 'entrada', 'salida', 'operacion_id', 'operacion_type', 'transferencia', 'id_chequera', 'nro_cheque', 'vto_cheque'
     ];
 
     protected $dates = ['deleted_at'];

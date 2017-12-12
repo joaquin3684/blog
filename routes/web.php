@@ -334,3 +334,8 @@ Route::resource('operaciones', 'ABM_Operaciones');
 //------------------- Caja Operaciones --------------------------
 
 Route::resource('cajaOperaciones', 'CajaOperacionesController');
+
+//------------------ CHEQUERA --------------------------------
+
+Route::post('chequera/traerElementos', 'ChequeraController@all');
+Route::resource('chequera', 'ChequeraController');
