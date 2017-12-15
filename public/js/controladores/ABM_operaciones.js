@@ -2,7 +2,15 @@ var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutu
 app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
-
+  $scope.query = function (searchText, url, scopeObj) {
+    var data = {
+      'nombre': serchText
+    }
+    ServicioABM.pullFilteredByData(url, data).then(function (returnedData) {
+      $scope[scopeObj] = returnedData;
+    });
+  }
+  
   $scope.borrarFormulario = function(){
     $('#formulario')[0].reset();
     $scope.cuenta1Debe = 0;

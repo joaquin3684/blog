@@ -332,9 +332,18 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado
                     <span class="required">*</span>
                   </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input required class="form-control col-md-7 col-xs-12" ng-model="estado" type="text">
-                  </div>
+                
+                    <div class="col-md-2 col-sm-2 col-xs-6">
+                            <div class="radio">
+                            <label><input  type="radio" ng-model="estado" value="activo">Activo</label>
+                            </div>
+                      </div>
+                      <div class="col-md-2 col-sm-2 col-xs-6">
+                            <div class="radio">
+                            <label><input  type="radio"  ng-model="estado" value="inactivo">Inactivo</label>
+                            </div>
+                      </div>
+            
                 </div>
 
 

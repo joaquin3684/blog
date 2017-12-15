@@ -62,21 +62,11 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Operacion <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <md-autocomplete  md-input-name="idoperacion" md-item-text="item.nombre" md-items="item in query(searchText, url)" md-search-text="searchText" md-selected-item="operacion" placeholder="Buscar operacion..." required>
+                        <md-autocomplete  md-input-name="idoperacion" md-item-text="item.nombre" md-items="item in query(searchText, 'imputacion/autocomplete')" md-search-text="searchText" md-selected-item="operacion" placeholder="Buscar operacion..." required>
                           <span md-highlight-text="searchText">
                             {{item.nombre}}
                           </span>
                         </md-autocomplete>    
-                      </div>
-                    </div>
-                    
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razonSocial">Operacion <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="form-control" ng-model="operacionSeleccionada" required>
-                        <option ng-value="operacion.id" ng-repeat="operacion in operaciones">{{operacion.nombre}}</option>
-                        </select>
                       </div>
                     </div>
 
