@@ -24,6 +24,7 @@ class CreateSociosTable extends Migration
             $table->integer('dni')->nullable();
             $table->string('domicilio')->nullable();
             $table->string('sexo')->nullable();
+            $table->string('apellido')->nullable();
             $table->string('localidad')->nullable();
             $table->integer('codigo_postal')->nullable();
             $table->integer('telefono')->nullable();

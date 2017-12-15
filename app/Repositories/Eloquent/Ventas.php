@@ -67,7 +67,12 @@ class Ventas
         });
     }
 
-
+    public function contabilizarPago()
+    {
+        $this->cuotas->each(function($cuota){
+            $cuota->contabilizarPago();
+        });
+    }
     /**
      * @return mixed
      */

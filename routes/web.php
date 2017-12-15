@@ -23,6 +23,8 @@ use App\Ventas;
 use App\Operacion;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -59,16 +61,27 @@ Route::get('pruebas', function(){
      return view('prueba');
 });
 Route::get('prueba', function(){
-    $operacion = Operacion::with('imputaciones')->find(1);
-    $operacion->imputaciones->each(function($imputacion){
+    DB::transaction(function(){
 
-        if($imputacion->pivot->debe)
-        {
-            GeneradorDeAsientos::crear($imputacion->id, 200, 0, $imputacion->codigo);
+
+    $ventas = \App\Ventas::all();
+    $ventas->each(functioN($venta){
+        \App\EstadoVenta::create(['id_venta' => $venta->id, 'id_responsable_estado' => 1, 'estado' => 'APROBADO']);
+    });
+    $cuotas = \App\Cuotas::where('estado', 'Cobro Total')->get();
+    $cuotas->each(function($cuota){
+        $venta = Ventas::with('producto')->find($cuota->cuotable_id);
+        if($venta == null){
+            Log::info("cuota es ". $cuota->id);
         } else {
-            GeneradorDeAsientos::crear($imputacion->id, 0, 200, $imputacion->codigo);
+
+
+            $ganancia = $cuota->importe * $venta->producto->ganancia / 100;
+            \App\Movimientos::create(['identificadores_id' => $cuota->id, 'identificadores_type' => 'App\Cuotas', 'entrada' => $cuota->importe, 'salida' => $cuota->importe, 'fecha' => \Carbon\Carbon::today()->toDateString(), 'contabilizado_salida' => 1, 'ganancia' => $ganancia]);
         }
-    });});
+        });
+    });
+});
 
 Route::post('pruebas', function(Request $request){
     $user = Sentinel::authenticate($request->all());

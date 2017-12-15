@@ -51,21 +51,10 @@ class PagoProveedorContable extends Controller
     {
         DB::transaction(function() use ($request){
 
-            $productos = DB::table('proovedores')
-                ->join('productos', 'productos.id_proovedor', '=', 'proovedores.id')
-                ->join('ventas', 'ventas.id_producto', '=', 'productos.id')
-                ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
-                ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
-                ->where('cuotas.cuotable_type', 'App\Ventas')
-                ->where('movimientos.identificadores_type', 'App\Cuotas')
-                ->where('movimientos.contabilizado_salida', '0')
-                ->where('proovedores.id', $request['id_proveedor'])
-                ->whereRaw('movimientos.entrada = movimientos.salida')
-                ->select('proovedores.id as id_proveedor', 'proovedores.razon_social', 'productos.id as producto')
-                ->get();
-
             $proveedorRepo = new ProveedoresRepo();
-            $proveedor = $proveedorRepo->getProveedorConCuotasSinContabilizar($request['id_proveedor']);
+            $proveedorObjeto = $proveedorRepo->getProveedorConCuotasSinContabilizar($request['id_proveedor']);
+
+            $proveedorObjeto->contabilizarPago();
 
             $proveedor = $request['proveedor'];
             $totalAPagar = $request['totalAPagar'];

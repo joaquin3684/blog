@@ -115,6 +115,12 @@ class Movimiento
         $this->contabilizado_entrada = $contabilizado_entrada;
     }
 
+    public function contabilizarPago()
+    {
+        $this->contabilizado_salida = 1;
+        $this->update($this, $this->id);
+    }
+
     public function getIdCuota()
     {
         return $this->id_cuota;

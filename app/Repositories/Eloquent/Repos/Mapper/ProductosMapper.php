@@ -31,6 +31,14 @@ class ProductosMapper
             $proveedor = $mapper->map($producto->proovedor);
             $productoNuevo->setProveedor($proveedor);
         }
+        if($producto->relationLoaded('ventas'))
+        {
+            $mapper = new VentasMapper();
+            $ventas = $producto->ventas->map(function($venta) use ($mapper){
+                return $mapper->map($venta);
+            });
+            $productoNuevo->setVentas($ventas);
+        }
         return $productoNuevo;
     }
 }

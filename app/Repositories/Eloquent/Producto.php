@@ -34,6 +34,7 @@ class Producto
     private $tipo;
     private $proveedor;
     private $porcentaje_capital;
+    private $ventas;
 
     public function __construct($id, $nombre, $ganancia, $tipo, $porcentaje_capital)
     {
@@ -51,6 +52,23 @@ class Producto
     {
         return $this->id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getVentas()
+    {
+        return $this->ventas;
+    }
+
+    /**
+     * @param mixed $ventas
+     */
+    public function setVentas($ventas)
+    {
+        $this->ventas = $ventas;
+    }
+
 
     /**
      * @return mixed
@@ -116,6 +134,13 @@ class Producto
     public function getGastosAdministrativos()
     {
         return $this->gastos_administrativos;
+    }
+
+    public function contabilizarPago()
+    {
+        $this->ventas->each(function($venta){
+            $venta->contabilizarPago();
+        });
     }
 
     /**

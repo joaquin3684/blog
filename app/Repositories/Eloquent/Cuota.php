@@ -72,6 +72,13 @@ class Cuota
         $this->movimientos->push($mov);
     }
 
+    public function contabilizarPago()
+    {
+        $this->movimientos->each(function($movimiento){
+            $movimiento->contabilizarPago();
+        });
+    }
+
     public function estaVencida()
     {
         $fechaInicio = Carbon::createFromFormat('Y-m-d', $this->fecha_inicio)->toDateString();

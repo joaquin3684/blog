@@ -48,7 +48,9 @@ class Proveedor
 
     public function contabilizarPago()
     {
-
+        $this->productos->each(function($producto){
+            $producto->contabilizarPago();
+        });
     }
 
     public function generarPropuesta($importe, $montoPorCuota, $cuotas, $idSolicitud)
