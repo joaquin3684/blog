@@ -1,4 +1,5 @@
 <?php namespace App\Repositories\Eloquent\Repos;
+use App\Proovedores;
 use App\Repositories\Eloquent\Repos\Gateway\ProveedoresGateway;
 use App\Repositories\Eloquent\Repos\Mapper\ProveedoresMapper;
 
@@ -28,5 +29,14 @@ class ProveedoresRepo extends Repositorio
     {
         $proveedor = $this->gateway->findProductos($id_proveedor);
         return $this->mapper->map($proveedor);
+    }
+
+    public function getProveedorConCuotasSinContabilizar($id)
+    {
+         $proveedor = Proovedores::with(['productos.ventas.cuotas.movimientos' => function($q){
+            $q->where('movimientos.contabilizado_salida', '0')
+            ->whereRaw('movimientos.entrada = movimientos.salida');
+        }])->find($id);
+         return $this->mapper->map($proveedor);
     }
 }
