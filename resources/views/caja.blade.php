@@ -62,7 +62,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Operacion <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <md-autocomplete  md-input-name="idoperacion" md-item-text="item.nombre" md-items="item in query(searchText, 'imputacion/autocomplete')" md-search-text="searchText" md-selected-item="operacion" placeholder="Buscar operacion..." required>
+                        <md-autocomplete  md-input-name="idoperacion" md-item-text="item.nombre" md-items="item in query(searchText, 'operaciones/autocomplete')" md-search-text="searchText" md-selected-item="operacionSeleccionada" placeholder="Buscar operacion..." required>
                           <span md-highlight-text="searchText">
                             {{item.nombre}}
                           </span>
@@ -106,7 +106,7 @@
                     </div>
                   </div>
 
-                  <div ng-show="tipoTransaccion == 'cheque'">
+                  <div ng-show="tipoTransaccion == 'cheque' && tipo =='banco'">
                   <div class="item form-group" >
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" >Chequera <span class="required">*</span>
                       </label>
@@ -136,7 +136,7 @@
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
                         <button  type="button" ng-click="borrarFormulario()" class="btn btn-primary">Cancel</button>
-                        <button id="send" type="submit" name="enviar" class="btn btn-success">Generar</button>
+                        <button id="send" type="submit" ng-click="create()" class="btn btn-success">Generar</button>
                       </div>
                     </div>
                   </form>

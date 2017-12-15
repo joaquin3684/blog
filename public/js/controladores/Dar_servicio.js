@@ -9,7 +9,7 @@ app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
   $scope.mostrar = false;
   
   $scope.getImporte = function(){
-    $scope.importe = $scope.montoPorCuota * $scope.nro_cuotas;
+    $scope.importe = Number(($scope.montoPorCuota * $scope.nro_cuotas).toFixed(2));
   }
   // machea a los socios en base al searchText
   $scope.query = function(searchText, ruta) {
@@ -96,7 +96,8 @@ app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
   $scope.mostrarPlanDePago = function() {
     $scope.mostrar = true;
     var planDePago = [];
-    var importe = ($scope.importe / $scope.nro_cuotas).toFixed(2);
+    var importe = $scope.importe / $scope.nro_cuotas;
+    importe = importe.toFixed(2);
     moment.locale('es')
     var vto = moment($scope.vencimiento, "DD/MM/YYYY");
     console.log(vto);

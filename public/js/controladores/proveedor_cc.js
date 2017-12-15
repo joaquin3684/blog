@@ -229,8 +229,8 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
          sumaDiferencia += elem.diferencia;
        });
        $scope.sumaDiferencia = sumaDiferencia;
-       $scope.sumaMontoCobrado = sumaMontoCobrado;
-       $scope.sumaMontoACobrar = sumaMontoACobrar;
+        $scope.sumaMontoCobrado = sumaMontoCobrado.toFixed(2);
+        $scope.sumaMontoACobrar = sumaMontoACobrar.toFixed(2);
     }
 
     $scope.mostrarPorPantalla = function(cuota){
@@ -244,8 +244,8 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
          sumaMontoACobrar += elem.importe;
          sumaMontoCobrado += elem.cobrado;
        });
-       $scope.sumaMontoCobrado = sumaMontoCobrado;
-       $scope.sumaMontoACobrar = sumaMontoACobrar;
+        $scope.sumaMontoCobrado = sumaMontoCobrado.toFixed(2);
+        $scope.sumaMontoACobrar = sumaMontoACobrar.toFixed(2);
     }
 
     //PARAMETROS INICIALES

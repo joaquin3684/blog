@@ -75,7 +75,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit" >Asiento<span class="required">*</span>
                       </label>
                       <div class="col-md-4 col-sm-4 col-xs-12">
-                      <md-autocomplete  md-input-name="idcuenta" md-item-text="item.nombre" md-items="item in query(searchText, 'imputacion/autocomplete', 'item')" md-search-text="searchText" md-selected-item="cuenta1Seleccionada" placeholder="Buscar cuenta..." required>
+                      <md-autocomplete  md-input-name="idcuenta" md-item-text="item.nombre" md-items="item in query(searchText, 'imputacion/autocomplete')" md-search-text="searchText" md-selected-item="cuenta1Seleccionada" placeholder="Buscar cuenta..." required>
                           <span md-highlight-text="searchText">
                             {{item.nombre}}
                           </span>
@@ -101,9 +101,9 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" >Asiento<span class="required">*</span>
                       </label>
                       <div class="col-md-4 col-sm-4 col-xs-12">
-                      <md-autocomplete  md-input-name="idcuenta" md-item-text="item.nombre" md-items="item in query(searchText, 'imputacion/autocomplete', 'item')" md-search-text="searchText2" md-selected-item="cuenta2Seleccionada" placeholder="Buscar cuenta..." required>
-                          <span md-highlight-text="searchText">
-                            {{item.nombre}}
+                      <md-autocomplete  md-input-name="idcuenta2" md-item-text="item2.nombre" md-items="item2 in query(searchText2, 'imputacion/autocomplete')" md-search-text="searchText2" md-selected-item="cuenta2Seleccionada" placeholder="Buscar cuenta..." required>
+                          <span md-highlight-text="searchText2">
+                            {{item2.nombre}}
                           </span>
                         </md-autocomplete> 
                        <!-- <select class="form-control" name="cuenta2selec" ng-model="cuenta2Seleccionada">
