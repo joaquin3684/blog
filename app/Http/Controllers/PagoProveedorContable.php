@@ -64,8 +64,8 @@ class PagoProveedorContable extends Controller
                 ->select('proovedores.id as id_proveedor', 'proovedores.razon_social', 'productos.id as producto')
                 ->get();
 
-
-            $proveedor = ProveedoresRepo::getProveedorConCuotasSinContabilizar($request['id_proveedor']);
+            $proveedorRepo = new ProveedoresRepo();
+            $proveedor = $proveedorRepo->getProveedorConCuotasSinContabilizar($request['id_proveedor']);
 
             $proveedor = $request['proveedor'];
             $totalAPagar = $request['totalAPagar'];

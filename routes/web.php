@@ -259,7 +259,7 @@ Route::resource('departamento', 'ABM_Departamento');
 //-------------------- IMPUTACION ----------------------------------
 
 Route::get('imputacion/traerElementos', 'ABM_Imputacion@all');
-Route::post('imputacion/autocomplete', 'ABM_imputacion@autocomplete');
+Route::post('imputacion/autocomplete', 'ABM_Imputacion@autocomplete');
 Route::resource('imputacion', 'ABM_Imputacion');
 
 //-------------------- MONEDA ----------------------------------
