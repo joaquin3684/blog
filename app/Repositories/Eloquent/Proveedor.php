@@ -45,6 +45,12 @@ class Proveedor
         $this->id = $id;
     }
 
+
+    public function contabilizarPago()
+    {
+
+    }
+
     public function generarPropuesta($importe, $montoPorCuota, $cuotas, $idSolicitud)
     {
         $solicitud = $this->getSolicitudes()->first(function($solicitud) use ($idSolicitud){

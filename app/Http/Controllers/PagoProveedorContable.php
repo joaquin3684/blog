@@ -6,6 +6,7 @@ use App\Imputacion;
 use App\Proovedores;
 use App\Repositories\Eloquent\GeneradorDeAsientos;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
+use App\Repositories\Eloquent\Repos\ProveedoresRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -49,6 +50,23 @@ class PagoProveedorContable extends Controller
     public function pagar(Request $request)
     {
         DB::transaction(function() use ($request){
+
+            $productos = DB::table('proovedores')
+                ->join('productos', 'productos.id_proovedor', '=', 'proovedores.id')
+                ->join('ventas', 'ventas.id_producto', '=', 'productos.id')
+                ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
+                ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+                ->where('cuotas.cuotable_type', 'App\Ventas')
+                ->where('movimientos.identificadores_type', 'App\Cuotas')
+                ->where('movimientos.contabilizado_salida', '0')
+                ->where('proovedores.id', $request['id_proveedor'])
+                ->whereRaw('movimientos.entrada = movimientos.salida')
+                ->select('proovedores.id as id_proveedor', 'proovedores.razon_social', 'productos.id as producto')
+                ->get();
+
+
+            $proveedor = ProveedoresRepo::getProveedorConCuotasSinContabilizar($request['id_proveedor']);
+
             $proveedor = $request['proveedor'];
             $totalAPagar = $request['totalAPagar'];
             $comisionValor = $request['comision'];
@@ -69,7 +87,6 @@ class PagoProveedorContable extends Controller
                 GeneradorDeAsientos::crear($caja, 0, $total);
             }
         });
-        //TODO:: esto se deberia pagar desde banco o caja con las operacioens
     }
 
 }
