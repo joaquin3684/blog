@@ -259,6 +259,7 @@ Route::resource('departamento', 'ABM_Departamento');
 //-------------------- IMPUTACION ----------------------------------
 
 Route::get('imputacion/traerElementos', 'ABM_Imputacion@all');
+Route::post('imputacion/autocomplete', 'ABM_imputacion@autocomplete');
 Route::resource('imputacion', 'ABM_Imputacion');
 
 //-------------------- MONEDA ----------------------------------
@@ -328,6 +329,7 @@ Route::resource('caja', 'CajaController');
 //------------------ OPERACIONES --------------------------------
 
 Route::get('operaciones/traerElementos', 'ABM_Operaciones@all');
+Route::post('operaciones/autocomplete', 'ABM_Operaciones@autocomplete');
 Route::resource('operaciones', 'ABM_Operaciones');
 
 
@@ -339,3 +341,4 @@ Route::resource('cajaOperaciones', 'CajaOperacionesController');
 
 Route::post('chequera/traerElementos', 'ChequeraController@all');
 Route::resource('chequera', 'ChequeraController');
+

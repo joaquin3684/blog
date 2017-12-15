@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Operacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ABM_Operaciones extends Controller
 {
@@ -59,4 +60,9 @@ class ABM_Operaciones extends Controller
         return Operacion::all();
     }
 
+    public function autocomplete(Request $request)
+    {
+        return DB::table('operaciones')
+            ->where('nombre', 'LIKE', '%'.$request['nombre'].'%')->get();
+    }
 }

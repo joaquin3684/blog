@@ -72,4 +72,10 @@ class ABM_Imputacion extends Controller
     {
         return $this->gateway->all();
     }
+
+    public function autocomplete(Request $request)
+    {
+        return DB::table('imputaciones')
+            ->where('nombre', 'LIKE', '%'.$request['nombre'].'%')->get();
+    }
 }
