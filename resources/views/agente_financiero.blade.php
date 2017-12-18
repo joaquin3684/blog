@@ -103,7 +103,7 @@
 
                                                       <span ng-show="solicitud.estado == 'Agente Financiero Asignado' || solicitud.estado == 'Modificada por Comercializador'" ng-click="RechazarSolicitud(solicitud.id)" class="fa fa-close fa-2x" titulo="Rechazar Solicitud"></span>
 
-                                                      <span ng-click="IDModal(solicitud.id)" ng-show="solicitud.estado == 'Agente Financiero Asignado'" data-toggle="modal" data-target="#Propuesta" class="fa fa-send fa-2x" titulo="Enviar Propuesta"></span>
+                                                      <span ng-click="IDModal(solicitud)" ng-show="solicitud.estado == 'Agente Financiero Asignado'" data-toggle="modal" data-target="#Propuesta" class="fa fa-send fa-2x" titulo="Enviar Propuesta"></span>
 
                                                       <span ng-click="ReservarCapital(solicitud.id)" ng-show="solicitud.estado == 'Aceptada por Comercializador'" class="fa fa-dollar fa-2x" titulo="Reservar Capital"></span>
                                                       
@@ -220,21 +220,21 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Importe <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input ng-keyup="$event.keyCode == 13 && EnviarPropuesta()" id="nombre" class="form-control col-md-7 col-xs-12" name="Importe" placeholder="Ingrese el importe" type="number" ng-model="importe" step="0.01">{[{errores.nombre[0]}]}
+                        <input ng-change="calcularMontoPorCuota()" ng-keyup="$event.keyCode == 13 && EnviarPropuesta()" id="nombre" class="form-control col-md-7 col-xs-12" name="Importe" placeholder="Ingrese el importe" type="number" ng-model="importe" step="0.01">{[{errores.nombre[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Cuotas">Cuotas <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input ng-keyup="$event.keyCode == 13 && EnviarPropuesta()" id="nombre" class="form-control col-md-7 col-xs-12" name="Cuotas" placeholder="Ingrese el nro de cuotas" type="number" ng-model="cuotas" step="0.01">{[{errores.nombre[0]}]}
+                        <input ng-change="calcularMontoPorCuota()" ng-keyup="$event.keyCode == 13 && EnviarPropuesta()" id="nombre" class="form-control col-md-7 col-xs-12" name="Cuotas" placeholder="Ingrese el nro de cuotas" type="number" ng-model="cuotas" step="0.01">{[{errores.nombre[0]}]}
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="MontoPorCuota">Monto por Cuota <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input ng-keyup="$event.keyCode == 13 && EnviarPropuesta()" id="nombre" class="form-control col-md-7 col-xs-12" name="MontoPorCuota" placeholder="Ingrese el nro de cuotas" ng-model="monto_por_cuota" type="number" step="0.01">{[{errores.nombre[0]}]}
+                        <input disabled  ng-keyup="$event.keyCode == 13 && EnviarPropuesta()" id="nombre" class="form-control col-md-7 col-xs-12" name="MontoPorCuota" placeholder="Ingrese el nro de cuotas" ng-model="monto_por_cuota" type="text" >{[{errores.nombre[0]}]}
                       </div>
                     </div>
                     
