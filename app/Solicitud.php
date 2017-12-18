@@ -31,6 +31,6 @@ class Solicitud extends Model
     }
     public function producto()
     {
-        return $this->belongsTo('App\Producto', 'id_producto', 'id');
+        return $this->belongsTo('App\Productos', 'id_producto', 'id');
     }
 }
