@@ -25,10 +25,22 @@ app.controller('cajaOperaciones', function ($scope, $http, $compile, $sce, $wind
     
     $scope.filtro = function () {
 
-        data = {
-            'fecha_desde': $scope.fecha_desde,
-            'fecha_hasta': $scope.fecha_hasta,
-        };
+        if($scope.tipoFiltro == 'caja'){
+            data = {
+                'banco': 0,
+                'caja': 1,
+                'fecha_desde': $scope.fecha_desde,
+                'fecha_hasta': $scope.fecha_hasta,
+            };
+
+        }else{
+            data = {
+                'banco': 1,
+                'caja': 0,
+                'fecha_desde': $scope.fecha_desde,
+                'fecha_hasta': $scope.fecha_hasta,
+            };
+        }
         
         var url = 'caja/elementosFiltrados';
         var fechas = [];
