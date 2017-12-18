@@ -89,16 +89,16 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" >Banco <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="form-control" ng-model="bancoSeleccionado" required>
-                        <option ng-value="banco.id" ng-repeat="banco in bancos">{{banco.nombre}}</option>
+                        <select class="form-control" ng-model="bancoSeleccionado" required >
+                        <option ng-value="banco.id" ng-repeat="banco in bancos" >{{banco.nombre}}</option>
                         </select>
                       </div>
                     </div>
                      <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo transaccion<span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo operacion<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="form-control" ng-model="tipoTransaccion" required>
+                        <select class="form-control" ng-model="tipoTransaccion" required ng-disabled="bancoSeleccionado == undefined" ng-click="traerChequeras()">
                         <option value="cheque">Cheque</option>
                         <option value="transferencia">Transferencia</option>
                         </select>
@@ -107,12 +107,13 @@
                   </div>
 
                   <div ng-show="tipoTransaccion == 'cheque' && tipo =='banco'">
+                  
                   <div class="item form-group" >
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" >Chequera <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" ng-model="chequeraSeleccionada" required>
-                        <option ng-value="chequera.id" ng-repeat="chequera in chequeras">{{chequera.nombre}}</option>
+                        <option ng-value="chequera.id" ng-repeat="chequera in chequeras">{{chequera.nro_chequera}}</option>
                         </select>
                       </div>
                     </div>

@@ -14,6 +14,11 @@ app.controller('caja', function ($scope, $http, $compile, $sce, NgTableParams, $
     $scope.borrarFormulario = function () {
         $('#formulario')[0].reset();
         $scope.operacionSeleccionada = '';
+        $scope.bancoSeleccionado = '';
+        $scope.chequeraSeleccionada = '';
+        $scope.tipoTransaccion = '';
+        $scope.tipoOperacion ='';
+        $scope.tipo = ''
     };
     $scope.create = function (object) {
 
@@ -27,14 +32,25 @@ app.controller('caja', function ($scope, $http, $compile, $sce, NgTableParams, $
             $scope[scopeObj] = returnedData;
         });
     }
+    $scope.traerChequeras = function () {
+        if($scope.tipoTransaccion == 'cheque'){
+
+            var data = {
+                'id_banco': $scope.bancoSeleccionado
+            }
+            ServicioABM.pullFilteredByData('chequera/traerElementos', data).then(function (returnedData) {
+                $scope.chequeras = returnedData
+                $scope.paramsChequera = ServicioABM.createTable(returnedData)
+            })
+        }
+    }
     pull('operaciones/traerElementos','operaciones');
     pull('bancos/traerElementos', 'bancos');
-    pull('chequera/traerElementos', 'chequeras');
 
     var getData = function(){
         var caja = {
              'data' : {
-                'tipo_operacion': $scope.tipo,
+                'tipoOperacion': $scope.tipo,
                 'id_operacion': $scope.operacionSeleccionada.id,
                 'valor': $scope.valor,
                 'observacion': $scope.observacion
@@ -42,7 +58,7 @@ app.controller('caja', function ($scope, $http, $compile, $sce, NgTableParams, $
         }
         var banco = {
             'data': {
-                'tipo_operacion': $scope.tipo,
+                'tipoOperacion': $scope.tipo,
                 'id_operacion': $scope.operacionSeleccionada.id,
                 'valor': $scope.valor,
                 'observacion': $scope.observacion,
@@ -52,7 +68,7 @@ app.controller('caja', function ($scope, $http, $compile, $sce, NgTableParams, $
         }
         var bancoConCheque = {
             'data': {
-                'tipo_operacion': $scope.tipo,
+                'tipoOperacion': $scope.tipo,
                 'id_operacion': $scope.operacionSeleccionada.id,
                 'valor': $scope.valor,
                 'observacion': $scope.observacion,
