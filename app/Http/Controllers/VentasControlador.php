@@ -34,7 +34,7 @@ class VentasControlador extends Controller
             ->groupBy('ventas.id')
             ->where('socios.id', '=', $request['id'])
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->select('socios.nombre AS socio', 'ventas.id AS id_venta', 'ventas.fecha_vencimiento AS fecha', 'proovedores.razon_social AS proovedor', 'productos.nombre AS producto', 'ventas.nro_cuotas', DB::raw('SUM(cuotas.importe) AS totalACobrar'));
+            ->select('socios.nombre AS socio', 'ventas.id AS id_venta', 'ventas.fecha_vencimiento AS fecha', 'proovedores.razon_social AS proovedor', 'productos.nombre AS producto', 'ventas.nro_cuotas', DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'));
 
         $ventas1 = VentasFilter::apply($request->all(), $ventas);
 
@@ -48,7 +48,7 @@ class VentasControlador extends Controller
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->where('socios.id', '=', $request['id'])
-            ->select('ventas.id AS id_venta', DB::raw('SUM(movimientos.entrada) AS totalCobrado'));
+            ->select('ventas.id AS id_venta', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'));
 
         $ventas2 = VentasFilter::apply($request->all(), $movimientos);
 
@@ -121,7 +121,7 @@ class VentasControlador extends Controller
             ->groupBy('socios.id')
             ->where('organismos.id', '=', $request['id'])
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->select('socios.nombre AS socio', 'socios.id AS id_socio',  DB::raw('SUM(cuotas.importe) AS totalACobrar'));
+            ->select('socios.nombre AS socio', 'socios.id AS id_socio',  DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'));
 
         $socios = VentasFilter::apply($request->all(), $ventas);
 
@@ -138,7 +138,7 @@ class VentasControlador extends Controller
 
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->where('organismos.id', '=', $request['id'])
-            ->select('socios.id AS id_socio', DB::raw('SUM(movimientos.entrada) AS totalCobrado'));
+            ->select('socios.id AS id_socio', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'));
 
         $socios2 = VentasFilter::apply($request->all(), $movimientos);
 
@@ -166,7 +166,7 @@ class VentasControlador extends Controller
             ->join('productos', 'productos.id', '=', 'ventas.id_producto')
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
+            ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('ROUND(SUM(cuotas.importe), 2) AS totalACobrar'))
             ->groupBy('organismos.id');
 
         $organismos = VentasFilter::apply($request->all(), $ventas);
@@ -182,7 +182,7 @@ class VentasControlador extends Controller
 
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->groupBy('organismos.id')
-            ->select('organismos.id AS id_organismo', DB::raw('SUM(movimientos.entrada) AS totalCobrado'));
+            ->select('organismos.id AS id_organismo', DB::raw('ROUND(SUM(movimientos.entrada), 2) AS totalCobrado'));
 
         $organismos2 = VentasFilter::apply($request->all(), $movimientos);
 

@@ -87,7 +87,7 @@ class CajaController extends Controller
     {
 
         // data { banco: 1 si lo elijio sino nada, caja: igual que banco, fecha_desde: 2017-03-02, fecha_hasta: 2017-02-05}
-        if(!isEmpty($request['banco']) && isEmpty($request['caja']))
+        if(!empty($request['banco']) && empty($request['caja']))
         {
             $operaciones = CajaOperaciones::with('operacion')
                 ->where('fecha', '>=', $request['fecha_desde'])
@@ -95,7 +95,7 @@ class CajaController extends Controller
                 ->where('operacion_type', 'banco')
                 ->get()->groupBy('fecha');
         }
-        else if(!isEmpty($request['caja']) && isEmpty($request['banco']))
+        else if(!empty($request['caja']) && empty($request['banco']))
         {
             $operaciones = CajaOperaciones::with('operacion')
                 ->where('fecha', '>=', $request['fecha_desde'])
