@@ -62,9 +62,9 @@ $scope.filtro = function (){
               'saldo': entry.saldo,
               'nombre': entry.nombre,
               'asientos': arr,
-              'totalDebe': totalDebe,
-              'totalHaber': totalHaber,
-              'totalSaldo': totalSaldo
+              'totalDebe': totalDebe.toFixed(2),
+              'totalHaber': totalHaber.toFixed(2),
+              'totalSaldo': totalSaldo.toFixed(2)
             });
 
           });

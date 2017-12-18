@@ -1,16 +1,14 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider) {});
-app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ServicioABM']).config(function($interpolateProvider) {});
+app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ServicioABM) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
   $scope.query = function (searchText, url, scopeObj) {
     var data = {
-      'nombre': serchText
+      'nombre': searchText
     }
-    ServicioABM.pullFilteredByData(url, data).then(function (returnedData) {
-      $scope[scopeObj] = returnedData;
-    });
+    return ServicioABM.pullFilteredByData(url, data)
   }
-  
+
   $scope.borrarFormulario = function(){
     $('#formulario')[0].reset();
     $scope.cuenta1Debe = 0;
@@ -32,8 +30,8 @@ app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTabl
   $scope.submit = function() {
     var data = {
       'nombre': $scope.nombre,
-      'imputacion1': $scope.cuenta1Seleccionada,
-      'imputacion2': $scope.cuenta2Seleccionada,
+      'imputacion1': $scope.cuenta1Seleccionada.id,
+      'imputacion2': $scope.cuenta2Seleccionada.id,
       'debe1': $scope.cuenta1Debe,
       'haber1': $scope.cuenta1Haber,
       'debe2': $scope.cuenta1Haber,

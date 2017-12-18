@@ -36,8 +36,8 @@ $scope.sumarMontosACobrar = function (elemsFiltrados, elems){
 
   });
 
-  $scope.sumaMontoTotal = sumaMontoTotal;
-  $scope.sumaMontoACobrar = sumaMontoACobrar;
+    $scope.sumaMontoTotal = sumaMontoTotal.toFixed(2);
+    $scope.sumaMontoACobrar = sumaMontoACobrar.toFixed(2);
 }
 
 
@@ -104,9 +104,9 @@ $scope.sumarMontosOrganismos = function(){
      sumaDiferencia += elem.diferencia;
 
    });
-   $scope.sumaTotalACobrar = sumaTotalACobrar;
-   $scope.sumaTotalCobrado = sumaTotalCobrado;
-   $scope.sumaDiferencia = sumaDiferencia;
+    $scope.sumaTotalACobrar = sumaTotalACobrar.toFixed(2);
+    $scope.sumaTotalCobrado = sumaTotalCobrado.toFixed(2);
+    $scope.sumaDiferencia = sumaDiferencia.toFixed(2);
 }
 
 

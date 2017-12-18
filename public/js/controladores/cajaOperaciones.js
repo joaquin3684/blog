@@ -12,8 +12,8 @@ app.controller('cajaOperaciones', function ($scope, $http, $compile, $sce, $wind
             totalSalida += element.salida;  
         });
         $scope.totales.push({
-            'entrada': totalEntrada,
-            'salida': totalSalida
+            'entrada': totalEntrada.toFixed(2),
+            'salida': totalSalida.toFixed(2)
         })
     }
 

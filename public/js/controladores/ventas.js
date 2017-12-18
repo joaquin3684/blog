@@ -13,9 +13,9 @@ $scope.sumarMontosACobrar = function (elemsFiltrados){
     sumaDiferencia += elem.diferencia;
   });
 
-  $scope.sumaTotalCobrado = sumaMontoCobrado;
-  $scope.sumaTotalACobrar = sumaMontoACobrar;
-  $scope.sumaDiferencia = sumaDiferencia;
+    $scope.sumaTotalCobrado = sumaMontoCobrado.toFixed(2);
+    $scope.sumaTotalACobrar = sumaMontoACobrar.toFixed(2);
+    $scope.sumaDiferencia = sumaDiferencia.toFixed(2);
 }
 
 $scope.sumarCuotas = function (){
@@ -25,8 +25,8 @@ $scope.sumarCuotas = function (){
      sumaMontoACobrar += elem.importe;
      sumaMontoCobrado += elem.cobrado;
    });
-   $scope.sumaMontoCobrado = sumaMontoCobrado;
-   $scope.sumaMontoACobrar = sumaMontoACobrar;
+    $scope.sumaMontoCobrado = sumaMontoCobrado.toFixed(2);
+    $scope.sumaMontoACobrar = sumaMontoACobrar.toFixed(2);
 }
 
 $scope.cambiarFechaCuotas = function(cuota){

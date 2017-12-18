@@ -7,7 +7,7 @@ app.controller('pago_proovedores', function($scope, $http, $compile, $sce, NgTab
       sumaMontoTotal += elem.total;
     });
 
-    $scope.sumaMontoTotal = sumaMontoTotal;
+      $scope.sumaMontoTotal = sumaMontoTotal.toFixed(2);
   }
 
   $scope.cambiarFecha = function(dato){
@@ -36,11 +36,13 @@ $scope.ArrayPago = [];
                 console.log(response);
                 $scope.proveedores = response.data;
                 $scope.sumaMonto = 0;
+                var totalEspecifico = 0;
                 $scope.proveedores.forEach(function(entry) {
                   var elem= {'id': entry.id_proovedor};
                   $scope.ArrayPago.push(elem);
-                  $scope.sumaMonto += entry.totalAPagar;
+                     totalEspecifico += entry.totalAPagar;
                 });
+                $scope.sumaMonto= totalEspecifico.toFixed(2)
                 $scope.paramsProveedores = new NgTableParams({
                     page: 1,
                     count: 10
