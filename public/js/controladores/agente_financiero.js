@@ -4,10 +4,13 @@ var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable','Mutua
 app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv) {
 
     $scope.calcularMontoPorCuota = function (){
-        if($scope.importe != undefined && $scope.cuotas != undefined){
+        if($scope.importe != null && $scope.cuotas != null){
 
             var tasa = $scope.solicitudSeleccionada.producto.tasa;
-            $scope.monto_por_cuota = (($scope.importe * Math.pow((1 + tasa), $scope.cuotas) * tasa) / (Math.pow((1 + tasa), $scope.cuotas)-1)).toFixed(2)
+            $scope.monto_por_cuota = Number((($scope.importe * Math.pow((1 + tasa), $scope.cuotas) * tasa) / (Math.pow((1 + tasa), $scope.cuotas)-1)).toFixed(2))
+        }
+        else{
+            $scope.monto_por_cuota = null;
         }
     }
 

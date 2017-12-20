@@ -225,8 +225,9 @@
                                                 <td title="'Retencion'" filter="{ ganancia: 'text'}" sortable="'ganancia'">
                                                     {{abm.ganancia}}
                                                 </td>
-                                                <td title="'Proveedor'" filter="{ id_proovedor: 'text'}" sortable="'id_proovedor'">
-                                                    {{abm.proovedor.razon_social}}
+                                                <td title="'Proveedor'" filter="{ razon_social: 'text'}" sortable="'razon_social'">
+                                                
+                                                    {{abm.razon_social}}
                                                 </td>
                                                 <td>
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerElemento(abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>

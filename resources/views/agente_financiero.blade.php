@@ -234,7 +234,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="MontoPorCuota">Monto por Cuota <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input disabled  ng-keyup="$event.keyCode == 13 && EnviarPropuesta()" id="nombre" class="form-control col-md-7 col-xs-12" name="MontoPorCuota" placeholder="Ingrese el nro de cuotas" ng-model="monto_por_cuota" type="text" >{[{errores.nombre[0]}]}
+                        <input disabled  ng-keyup="$event.keyCode == 13 && EnviarPropuesta()" id="nombre" class="form-control col-md-7 col-xs-12" name="MontoPorCuota" placeholder="Ingrese el nro de cuotas" ng-model="monto_por_cuota" type="number" >{[{errores.nombre[0]}]}
                       </div>
                     </div>
                     
