@@ -60,6 +60,17 @@ Route::get('pruebas', function(){
 
      return view('prueba');
 });
+Route::get('nombreSocios', function(){
+    DB::transaction(function(){
+
+
+   $socios = \App\Socios::all();
+   $socios->each(function($socio){
+       $socio->nombre = $socio->apellido.', '.$socio->nombre;
+       $socio->save();
+   });
+    });
+});
 Route::get('prueba', function(){
     DB::transaction(function(){
 
@@ -68,17 +79,21 @@ Route::get('prueba', function(){
     $ventas->each(functioN($venta){
         \App\EstadoVenta::create(['id_venta' => $venta->id, 'id_responsable_estado' => 1, 'estado' => 'APROBADO']);
     });
-    $cuotas = \App\Cuotas::where('estado', 'Cobro Total')->get();
+    $cuotas = \App\Cuotas::all();
     $cuotas->each(function($cuota){
         $venta = Ventas::with('producto')->find($cuota->cuotable_id);
-        if($venta == null){
-            Log::info("cuota es ". $cuota->id);
+        if($cuota->nro_cuota == 1){
+            $fechaInicio = \Carbon\Carbon::createFromFormat('Y-m-d', $cuota->fecha_vencimiento)->subMonths(2)->toDateString();
+            $cuota->fecha_inicio = $fechaInicio;
         } else {
-
-
+            $fechaInicio = \Carbon\Carbon::createFromFormat('Y-m-d', $cuota->fecha_vencimiento)->subMonth()->toDateString();
+            $cuota->fecha_inicio = $fechaInicio;
+        }
+        if($cuota->estado == 'Cobro Total'){
             $ganancia = $cuota->importe * $venta->producto->ganancia / 100;
             \App\Movimientos::create(['identificadores_id' => $cuota->id, 'identificadores_type' => 'App\Cuotas', 'entrada' => $cuota->importe, 'salida' => $cuota->importe, 'fecha' => \Carbon\Carbon::today()->toDateString(), 'contabilizado_salida' => 1, 'ganancia' => $ganancia]);
         }
+        $cuota->save();
         });
     });
 });

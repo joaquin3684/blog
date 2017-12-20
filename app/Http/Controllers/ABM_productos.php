@@ -32,7 +32,10 @@ class ABM_productos extends Controller
 
     public function traerElementos()
     {
-        return $this->producto->all();
+        return $this->producto->all()->map(function($producto) {
+            $producto->razon_social = $producto->proovedor->razon_social;
+            return $producto;
+        });
     }
 
     public function store(ValidacionABMProductos $request)
