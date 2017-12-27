@@ -12,7 +12,9 @@
 */
 
 
+use App\ConfigImputaciones;
 use App\Exceptions\MasPlataCobradaQueElTotalException;
+use App\ProveedorImputacionDeudores;
 use App\Repositories\Eloquent\Cobranza\CobrarPorSocio;
 use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
 use App\Repositories\Eloquent\FileManager;
@@ -30,6 +32,10 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 
 
+Route::get('/', functioN(){
+   return view('landing');
+});
+
 //---------------- PRUEBAS ------------------------------
 
 Route::get('generarCuentasYDemas', function(){
@@ -40,16 +46,35 @@ Route::get('generarCuentasYDemas', function(){
 
         $primerProveedor = $proveedores->splice(1, 1);
         $primerProveedor = $primerProveedor->first();
-        GeneradorDeCuentas::generar('Deudores ' . $primerProveedor->razon_social, '131010001');
-        GeneradorDeCuentas::generar('Cta ' . $primerProveedor->razon_social, '311030001');
-        GeneradorDeCuentas::generar('Comisiones ' . $primerProveedor->razon_social, '511030101');
+        $codigoBase = ConfigImputaciones::find(1);
+        $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
+        $imputacion = GeneradorDeCuentas::generar('Deudores '.$primerProveedor->razon_social, $codigo);
+        ProveedorImputacionDeudores::create(['id_proveedor' => $primerProveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Deudores', 'codigo' => $imputacion->codigo]);
+        $codigoBase = ConfigImputaciones::find(2);
+        $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
+        $imputacion = GeneradorDeCuentas::generar('Cta '.$primerProveedor->razon_social, $codigo);
+        ProveedorImputacionDeudores::create(['id_proveedor' => $primerProveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Cta', 'codigo' => $imputacion->codigo]);
+        $codigoBase = ConfigImputaciones::find(3);
+        $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
+        $imputacion = GeneradorDeCuentas::generar('Comisiones '.$primerProveedor->razon_social, $codigo);
+        ProveedorImputacionDeudores::create(['id_proveedor' => $primerProveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Comisiones', 'codigo' => $imputacion->codigo]);
+
+
         $proveedores->each(function ($proveedor) {
-            $codigo = ImputacionGateway::obtenerCodigoNuevo('1310100');
-            GeneradorDeCuentas::generar('Deudores ' . $proveedor->razon_social, $codigo);
-            $codigo = ImputacionGateway::obtenerCodigoNuevo('3110300');
-            GeneradorDeCuentas::generar('Cta ' . $proveedor->razon_social, $codigo);
-            $codigo = ImputacionGateway::obtenerCodigoNuevo('5110301');
-            GeneradorDeCuentas::generar('Comisiones ' . $proveedor->razon_social, $codigo);
+            $codigoBase = ConfigImputaciones::find(1);
+            $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
+            $imputacion = GeneradorDeCuentas::generar('Deudores '.$proveedor->razon_social, $codigo);
+            ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Deudores', 'codigo' => $imputacion->codigo]);
+            $codigoBase = ConfigImputaciones::find(2);
+            $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
+            $imputacion = GeneradorDeCuentas::generar('Cta '.$proveedor->razon_social, $codigo);
+            ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Cta', 'codigo' => $imputacion->codigo]);
+            $codigoBase = ConfigImputaciones::find(3);
+            $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
+            $imputacion = GeneradorDeCuentas::generar('Comisiones '.$proveedor->razon_social, $codigo);
+            ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Comisiones', 'codigo' => $imputacion->codigo]);
+
+
         });
     }
 
@@ -71,6 +96,8 @@ Route::get('nombreSocios', function(){
    });
     });
 });
+
+
 Route::get('prueba', function(){
     DB::transaction(function(){
 
@@ -370,3 +397,8 @@ Route::resource('cajaOperaciones', 'CajaOperacionesController');
 Route::post('chequera/traerElementos', 'ChequeraController@all');
 Route::resource('chequera', 'ChequeraController');
 
+//---------------- NOVEDADES ---------------------------------
+
+Route::post('novedades/organismos', 'NovedadesController@mostrarPorOrganismo');
+Route::post('novedades/socios', 'NovedadesController@mostrarPorSocio');
+Route::resource('novedades', 'NovedadesController');

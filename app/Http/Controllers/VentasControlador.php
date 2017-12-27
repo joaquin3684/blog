@@ -57,7 +57,7 @@ class VentasControlador extends Controller
 
         $ventasPorVenta = $ventasPorVenta->each(function ($item, $key){
             $diferencia = $item['totalACobrar'] - $item['totalCobrado'];
-            $item->put('diferencia', $diferencia);
+            $item->put('diferencia', round($diferencia,2));
             return $item;
         });
 
@@ -147,7 +147,7 @@ class VentasControlador extends Controller
 
         $ventasPorSocio = $ventasPorSocio->each(function ($item, $key){
             $diferencia = $item['totalACobrar'] - $item['totalCobrado'];
-            $item->put('diferencia', $diferencia);
+            $item->put('diferencia', round($diferencia,2));
             return $item;
         });
 
@@ -190,7 +190,7 @@ class VentasControlador extends Controller
 
         $ventasPorOrganismo = $ventasPorOrganismo->each(function ($item, $key){
             $diferencia = $item['totalACobrar'] - $item['totalCobrado'];
-            $item->put('diferencia', $diferencia);
+            $item->put('diferencia', round($diferencia,2));
             return $item;
         });
 

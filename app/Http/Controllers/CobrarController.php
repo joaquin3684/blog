@@ -57,7 +57,7 @@ class CobrarController extends Controller
             ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->groupBy('organismos.id')
-            ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
+            ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'))
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where(function($query) use ($hoy){
                 /*$query->where('cuotas.fecha_vencimiento', '<=', $hoy)
@@ -76,13 +76,13 @@ class CobrarController extends Controller
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->groupBy('organismos.id')
-            ->select('organismos.id AS id_organismo', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))
+            ->select('organismos.id AS id_organismo', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'))
             ->get();
 
         $cobrado = $this->unirColecciones($cuotas, $movimientos, ['id_organismo'], ['totalCobrado' => 0]);
 
         $cobrado = $cobrado->each(function ($item, $key){
-            $diferencia = $item['totalACobrar'] - $item['totalCobrado'];
+            $diferencia = round($item['totalACobrar'] - $item['totalCobrado'],2);
             $item->put('diferencia', $diferencia);
             return $item;
         });
@@ -103,7 +103,7 @@ class CobrarController extends Controller
             ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->groupBy('socios.id')
-            ->select('socios.nombre AS socio', 'socios.id AS id_socio', 'socios.legajo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
+            ->select('socios.nombre AS socio', 'socios.id AS id_socio', 'socios.legajo', DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'))
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where(function($query) use ($hoy){
                 $query->where('cuotas.fecha_vencimiento', '<=', $hoy)
@@ -124,13 +124,13 @@ class CobrarController extends Controller
             ->where('organismos.id', '=', $id)
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
-            ->select('socios.id AS id_socio', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))
+            ->select('socios.id AS id_socio', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'))
             ->get();
         $cobrado = $this->unirColecciones($cuotas, $movimientos, ['id_socio'], ['totalCobrado' => 0]);
 
         $cobrado = $cobrado->each(function ($item, $key){
             $diferencia = $item['totalACobrar'] - $item['totalCobrado'];
-            $item->put('diferencia', $diferencia);
+            $item->put('diferencia', round($diferencia,2));
             return $item;
         });
 
@@ -159,7 +159,7 @@ class CobrarController extends Controller
             })
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('socios.id', '=', $request['id'])
-            ->select('socios.nombre AS socio', 'ventas.id AS id_venta', 'proovedores.razon_social AS proovedor', 'productos.nombre AS producto', DB::raw('SUM(cuotas.importe) AS totalACobrar'))->get();
+            ->select('socios.nombre AS socio', 'ventas.id AS id_venta', 'proovedores.razon_social AS proovedor', 'productos.nombre AS producto', DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'))->get();
 
         $movimientos = DB::table('ventas')
             ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
@@ -170,12 +170,12 @@ class CobrarController extends Controller
             ->where('socios.id', '=', $request['id'])
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
-            ->select('ventas.id AS id_venta', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))->get();
+            ->select('ventas.id AS id_venta', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'))->get();
 
         $cobrado = $this->unirColecciones($ventas, $movimientos, ["id_venta"], ['totalCobrado' => 0]);
 
         $cobrado = $cobrado->each(function ($item, $key){
-            $diferencia = $item['totalACobrar'] - $item['totalCobrado'];
+            $diferencia = round($item['totalACobrar'] - $item['totalCobrado'], 2);
             $item->put('diferencia', $diferencia);
             return $item;
         });
