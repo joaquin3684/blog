@@ -123,7 +123,7 @@ class NovedadesController extends Controller
             $item->put('diferencia', round($diferencia,2));
             if($diferencia > 0)
             {
-                $nombre = explode(',', $item->socio);
+                $nombre = explode(',', $item['socio']);
                 $item->nombre = $nombre[0];
                 $item->apellido = $nombre[1];
                 $col->push($item);
