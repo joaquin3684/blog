@@ -124,8 +124,8 @@ class NovedadesController extends Controller
             if($diferencia > 0)
             {
                 $nombre = explode(',', $item['socio']);
-                $item->nombre = $nombre[0];
-                $item->apellido = $nombre[1];
+                $item->put('nombre', $nombre[0]);
+                $item->put('apellido', $nombre[1]);
                 $col->push($item);
 
             }
