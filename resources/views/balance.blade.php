@@ -196,12 +196,12 @@
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                <tr ng-repeat="socio in organismo.socios | orderBy:propertyName:reverse">
+                                                                <tr ng-repeat="socio in socios | orderBy:propertyName:reverse">
 
                                                                     <td><center>{{socio.legajo}}</center></td>
                                                                     <td><center>{{socio.apellido}}</center></td>
                                                                     <td><center>{{socio.nombre}}</center></td>
-                                                                    <td><center>{{socio.importe}}</center></td>
+                                                                    <td><center>{{socio.diferencia}}</center></td>
                                                                     
 
                                                                 </tr>

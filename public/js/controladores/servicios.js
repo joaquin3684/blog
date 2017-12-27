@@ -20,7 +20,7 @@ app.controller('servicios', function ($scope, $http, $compile, $sce, NgTablePara
         data = {
             'fecha_desde': $scope.fecha_desde,
             'fecha_hasta': $scope.fecha_hasta,
-            'id_organismo': id_organismo
+            'id': id_organismo
         }
         ServicioABM.pullFilteredByData('novedades/socios', data).then(function (returnedData) {
             $scope.socios = returnedData;
