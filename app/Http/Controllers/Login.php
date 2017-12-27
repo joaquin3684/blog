@@ -26,7 +26,7 @@ class Login extends Controller
 
             Sentinel::authenticate($request->all());
             $user = Sentinel::check();
-            if ($user) {
+            if ($user){
                 $fecha = ControlFechaContable::where('id_usuario', $user->id)->first();
                 if ($fecha == null) {
 
@@ -34,7 +34,7 @@ class Login extends Controller
                     ControlFechaContable::where('id_usuario', $user->id)->delete();
                 }
                 $registros = [];
-                return view('landing');
+                return redirect('/');
             } else {
                 throw new UsuarioOPasswordErroneosException('login_incorrecto');
             }

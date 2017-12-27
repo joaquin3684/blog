@@ -93,7 +93,7 @@ class NovedadesController extends Controller
             ->where('cuotas.fecha_inicio', '>=', $request['fecha_desde'])
             ->where('cuotas.fecha_vencimiento', '<=', $request['fecha_hasta'])
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->select('socios.nombre AS socio', 'socios.id AS id_socio',  DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'));
+            ->select('socios.nombre AS socio', 'socios.legajo', 'socios.id AS id_socio',  DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'));
 
         $socios = VentasFilter::apply($request->all(), $ventas);
 
@@ -123,7 +123,11 @@ class NovedadesController extends Controller
             $item->put('diferencia', round($diferencia,2));
             if($diferencia > 0)
             {
+                $nombre = explode(',', $item->socio);
+                $item->nombre = $nombre[0];
+                $item->apellido = $nombre[1];
                 $col->push($item);
+
             }
             return $item;
         });

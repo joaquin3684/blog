@@ -13,6 +13,7 @@
 
 
 use App\ConfigImputaciones;
+use App\Cuotas;
 use App\Exceptions\MasPlataCobradaQueElTotalException;
 use App\ProveedorImputacionDeudores;
 use App\Repositories\Eloquent\Cobranza\CobrarPorSocio;
@@ -23,6 +24,7 @@ use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Ventas;
 use App\Operacion;
+use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +33,28 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
 
+
+Route::get('generarCuotasSociales', function(){
+
+    DB::transaction(function () {
+        $fechaInicioCuota = Carbon::today()->toDateString();
+        $fechaVencimientoCuota = Carbon::today()->addMonths(2);
+        $socios = \App\Socios::all();
+        $socios->each(function ($socio) use($fechaInicioCuota, $fechaVencimientoCuota){
+            $cuota = Cuotas::create([
+                'fecha_inicio' => $fechaInicioCuota,
+                'fecha_vencimiento' => $fechaVencimientoCuota,
+                'importe' => $socio->valor,
+                'nro_cuota' => 1,
+            ]);
+         /*   $impu = ImputacionGateway::buscarPorCodigo('511010101');
+            GeneradorDeAsientos::crear($impu, 0, $socio->valor);
+            GeneradorDeAsientos::crear($impu, $socio->valor, 0);*/
+            $socio->cuotasSociales()->save($cuota);
+        });
+
+    });
+});
 
 Route::get('/', functioN(){
    return view('landing');
