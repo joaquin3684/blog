@@ -1,5 +1,5 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){});
-app.controller('cobrar', function($scope, $http, $compile, $sce, $window, NgTableParams, $filter, UserSrv) {
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services','ManejoExcell']).config(function($interpolateProvider){});
+app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTableParams, $filter, UserSrv, ManejoExcell) {
 
 $scope.ActualDate = moment().format('YYYY-MM-DD');
 
@@ -22,6 +22,17 @@ $scope.actualizarSocios = function(){
   }
 }
 
+$scope.verificarOrganismo = function(organismo){
+   
+    console.log($scope.archivoExcell)
+    if($scope.archivoExcell[0].id_organismo == organismo.id){
+        asignarMontosACobrar($scope.archivoExcell)
+    }
+}
+
+$scope.asignarMontosACobrar= function(socios){
+
+}
 
 $scope.sumarMontosACobrar = function (elemsFiltrados, elems){
  var sumaMontoACobrar = 0;

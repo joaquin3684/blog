@@ -1,8 +1,4 @@
-@extends('welcome')
-
-@section('contenido')
-
-{!! Html::script('js/controladores/cobrar.js') !!}
+@extends('welcome') @section('contenido') {!! Html::script('js/controladores/cobrar.js') !!}
 
 <div class="nav-md" ng-controller="cobrar">
     <div class="container body">
@@ -10,77 +6,92 @@
 
             <input id="tipo_tabla" name="tipo_tabla" type="hidden" value="proovedores">
             <input type="hidden" id="token" value="{{ csrf_token() }}">
-                <!-- page content -->
+            <!-- page content -->
 
-                <div id="mensaje"></div>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>
-                                Cobranzas disponibles
-                                <small>
-                                  Cobrar por socio o por servicio
-                                </small>
-                            </h2>
+            <div id="mensaje"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>
+                            Cobranzas disponibles
+                            <small>
+                                Cobrar por socio o por servicio
+                            </small>
+                        </h2>
 
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li>
-                                    <a class="collapse-link">
-                                        <i class="fa fa-chevron-up">
-                                        </i>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                        <i class="fa fa-wrench">
-                                        </i>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <a href="#">
-                                                Settings 1
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Settings 2
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-close">
-                                        </i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="clearfix">
-                            </div>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up">
+                                    </i>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                                    <i class="fa fa-wrench">
+                                    </i>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="#">
+                                            Settings 1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Settings 2
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-close">
+                                    </i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix">
                         </div>
-                        <div class="x_content" id="impr">
-                     <center>
-                     <button id="exportButton1" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
-                     </button>
-                     <button id="exportButton2" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> EXCEL</button>
-                     </center>
- <div class="row">
-   @verbatim
-    <ol class="breadcrumb breadcrumb-arrow">
-        <li><a href="" id="bread-organismos" ng-click="setVista('Organismos'); actualizarOrganismos()"><i class="fa fa-home"></i> ORGANISMOS</a></li>
-        <li><a href="" id="bread-socios" ng-if="vistaactual !== 'Organismos'" ng-click="setVista('Socios'); actualizarSocios()">SOCIOS (<b>{{organismoactual}}</b>)</a></li>
-        <li><a href="" id="bread-servicios" ng-if="vistaactual !== 'Organismos' && vistaactual !== 'Socios'" ng-click="setVista('Ventas')">SERVICIOS (<b>{{socioactual}}</b>)</a></li>
-    </ol>
-    @endverbatim
-</div>
+                    </div>
+                    <div class="x_content" id="impr">
+                        <center>
+                            <button id="exportButton1" class="btn btn-danger clearfix">
+                                <span class="fa fa-file-pdf-o"></span> PDF
+                            </button>
+                            <button id="exportButton2" class="btn btn-success clearfix">
+                                <span class="fa fa-file-excel-o"></span> EXCEL</button>
+                                <label class="btn btn-primary" ng-show="vistaactual=='Socios'">
+                            <i class="fa fa-download " aria-hidden="true"></i> IMPORTAR <input type="file" import-sheet-js="" multiple="false" style="display:none;"/>
+                        </label>
+                        </center>
+                        <div class="row">
+                            @verbatim
+                                                        
+                            <ol class="breadcrumb breadcrumb-arrow">
+                                <li>
+                                    <a href="" id="bread-organismos" ng-click="setVista('Organismos'); actualizarOrganismos()">
+                                        <i class="fa fa-home"></i> ORGANISMOS</a>
+                                </li>
+                                <li>
+                                    <a href="" id="bread-socios" ng-if="vistaactual !== 'Organismos'" ng-click="setVista('Socios'); actualizarSocios()">SOCIOS (
+                                        <b>{{organismoactual}}</b>)</a>
+                                </li>
+                                <li>
+                                    <a href="" id="bread-servicios" ng-if="vistaactual !== 'Organismos' && vistaactual !== 'Socios'" ng-click="setVista('Ventas')">SERVICIOS (
+                                        <b>{{socioactual}}</b>)</a>
+                                </li>
+                            </ol>
+                            @endverbatim
+                        </div>
                         <div id="divTablaOrganismos" ng-if="vistaactual=='Organismos'">
-                          @verbatim
-                        		<table id="tablaOrganismos" ng-table="paramsOrganismos" class="table table-hover table-bordered">
+                            @verbatim
+                            <table id="tablaOrganismos" ng-table="paramsOrganismos" class="table table-hover table-bordered">
 
                                 <tr ng-repeat="organismo in $data" ng-click="PullSocios(organismo.id_organismo,organismo.organismo)">
 
-                                    <td title="'Organismo'" filter="{organismo: 'text'}" sortable="'organismo'" >
-							                          {{organismo.organismo}}
+                                    <td title="'Organismo'" filter="{organismo: 'text'}" sortable="'organismo'">
+                                        {{organismo.organismo}}
                                     </td>
 
                                     <td title="'Total a Cobrar'" filter="{totalACobrar: 'text'}" sortable="'totalACobrar'">
@@ -89,61 +100,62 @@
                                     <td title="'Total Cobrado'" filter="{totalCobrado: 'text'}" sortable="'totalCobrado'">
                                         {{organismo.totalCobrado}}
                                     </td>
-                                    <td title="'Diferencia'" filter="{diferencia: 'text'}" sortable="'diferencia'" >
-							                          {{organismo.diferencia}}
+                                    <td title="'Diferencia'" filter="{diferencia: 'text'}" sortable="'diferencia'">
+                                        {{organismo.diferencia}}
                                     </td>
 
                                     </td>
 
-							   	</tr>
+                                </tr>
 
-                  <tfoot>
-                  <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
-                      <td style="text-align: right;">
-                          <b>Total</b>
-                      </td>
-                      <td>
-                          {{sumaTotalACobrar}}
-                      </td>
-                      <td>
-                          {{sumaTotalCobrado}}
-                      </td>
-                      <td>
-                          {{sumaDiferencia}}
-                      </td>
-                  </tr>
-                  </tfoot>
-								</table>
-                @endverbatim
-                        </div>
-                        <div id="divTablaSocios" ng-if="vistaactual=='Socios'" >
-                            @verbatim
-                                <table id="tablaSocios" ng-table="paramsSocios" class="table table-hover table-bordered" >
-
-                                    <tr ng-repeat="socio in $data" >
-
-                                        <td title="'Socio'" filter="{ socio: 'text'}" sortable="'socio'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
-                                            {{socio.socio}}
+                                <tfoot>
+                                    <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                        <td style="text-align: right;">
+                                            <b>Total</b>
                                         </td>
-
-                                        <td title="'Legajo'" filter="{ legajo: 'text'}" sortable="'legajo'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
-                                            {{socio.legajo}}
+                                        <td>
+                                            {{sumaTotalACobrar}}
                                         </td>
-                                        <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
-                                            {{socio.totalACobrar}}
+                                        <td>
+                                            {{sumaTotalCobrado}}
                                         </td>
-                                        <td title="'Monto a cobrar'" filter="{ montoACobrar: 'text'}" sortable="'montoACobrar'">
-                                          <div class="input-group" style="margin-bottom: 0px;">
-                                            <input type="number" class="form-control" ng-model="socio.montoACobrar" style="height: 25px">
-                                              <span class="input-group-addon"  style="padding-bottom: 3px;padding-top: 5px;">
-                                                <input type="checkbox" ng-model="socio.checked">
-                                              </span>
-                                          </div>
+                                        <td>
+                                            {{sumaDiferencia}}
                                         </td>
-
                                     </tr>
+                                </tfoot>
+                            </table>
+                            @endverbatim
+                        </div>
+                        <div id="divTablaSocios" ng-if="vistaactual=='Socios'">
+                            @verbatim
+                            <table id="tablaSocios" ng-table="paramsSocios" class="table table-hover table-bordered">
 
-                                    <tfoot>
+                                <tr ng-repeat="socio in $data">
+
+                                    <td title="'Socio'" filter="{ socio: 'text'}" sortable="'socio'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
+                                        {{socio.socio}}
+                                    </td>
+
+                                    <td title="'Legajo'" filter="{ legajo: 'text'}" sortable="'legajo'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
+                                        {{socio.legajo}}
+                                    </td>
+                                    <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'" ng-click="PullVentas(socio.id_socio,socio.socio)"
+                                        style="vertical-align: middle">
+                                        {{socio.totalACobrar}}
+                                    </td>
+                                    <td title="'Monto a cobrar'" filter="{ montoACobrar: 'text'}" sortable="'montoACobrar'">
+                                        <div class="input-group" style="margin-bottom: 0px;">
+                                            <input type="number" class="form-control" ng-model="socio.montoACobrar" style="height: 25px">
+                                            <span class="input-group-addon" style="padding-bottom: 3px;padding-top: 5px;">
+                                                <input type="checkbox" ng-model="socio.checked">
+                                            </span>
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+                                <tfoot>
 
                                     <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
                                         <td style="text-align: right;">
@@ -157,74 +169,84 @@
                                         </td>
                                         <td>
 
-                                          {{sumaMontoACobrar}}
+                                            {{sumaMontoACobrar}}
 
                                         </td>
                                     </tr>
-                                    </tfoot>
+                                </tfoot>
 
-                                </table>
+                            </table>
 
 
-                                <input type="checkbox" ng-model="check" ng-init="check =true" ng-click="cambiarChecks(check, socios)">Seleccionar todos</input>
-                                <br />
-                                <br />
-                                <button type="button" class="btn btn-primary" ng-click="cobrarSocios()">Cobrar</button>
-                                @endverbatim
+                            <input type="checkbox" ng-model="check" ng-init="check =true" ng-click="cambiarChecks(check, socios)">Seleccionar todos</input>
+                            <br />
+                            <br />
+                            
+                            </div>
+                            <button type="button" class="btn btn-primary" ng-click="cobrarSocios()">Cobrar</button>
+
+
+                            
+                            <button ng-click="verificarOrganismo(organismoActual)"></button>
+
+                            @endverbatim
 
 
                         </div>
                         @verbatim
-                        <div id="divTablaVentas" ng-if="vistaactual=='Ventas'" >
+                        
+                        
+
+                        <div id="divTablaVentas" ng-if="vistaactual=='Ventas'">
 
                             <table id="tablaVentas" ng-table="paramsVentas" class="table table-hover table-bordered">
-                                <tr ng-repeat="venta in $data" >
+                                <tr ng-repeat="venta in $data">
                                     <td title="'Nombre servicio'" filter="{ producto: 'text'}" sortable="'producto'" style="vertical-align: middle">
                                         {{venta.producto}}
                                     </td>
                                     <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'" style="vertical-align: middle">
                                         {{venta.totalACobrar}}
                                     </td>
-                                    <td title="'Monto a cobrar'" filter="{ montoACobrar: 'text'}" sortable="'montoACobrar'" >
-                                      <div class="input-group" style="margin-bottom: 0px;">
-                                        <input type="number" class="form-control" ng-model="venta.montoACobrar" style="height: 25px">
-                                          <span class="input-group-addon" style="padding-bottom: 3px;padding-top: 5px;">
-                                            <input type="checkbox" ng-model="venta.checked">
-                                          </span>
-                                      </div>
+                                    <td title="'Monto a cobrar'" filter="{ montoACobrar: 'text'}" sortable="'montoACobrar'">
+                                        <div class="input-group" style="margin-bottom: 0px;">
+                                            <input type="number" class="form-control" ng-model="venta.montoACobrar" style="height: 25px">
+                                            <span class="input-group-addon" style="padding-bottom: 3px;padding-top: 5px;">
+                                                <input type="checkbox" ng-model="venta.checked">
+                                            </span>
+                                        </div>
                                     </td>
                                 </tr>
 
                                 <tfoot>
-                                <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
-                                    <td style="text-align: right;">
-                                        <b>Total</b>
-                                        {{sumarMontosACobrar(ventasFiltradas, ventas)}}
-                                    </td>
+                                    <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                        <td style="text-align: right;">
+                                            <b>Total</b>
+                                            {{sumarMontosACobrar(ventasFiltradas, ventas)}}
+                                        </td>
 
-                                    <td>
-                                        {{sumaMontoTotal}}
-                                    </td>
-                                    <td>
-                                       {{sumaMontoACobrar}}
-                                    </td>
-                                </tr>
+                                        <td>
+                                            {{sumaMontoTotal}}
+                                        </td>
+                                        <td>
+                                            {{sumaMontoACobrar}}
+                                        </td>
+                                    </tr>
                                 </tfoot>
 
                             </table>
 
-                            <input type="checkbox"  ng-model="check" ng-init="check = true" ng-click="cambiarChecks(check, ventas)">Seleccionar todos</input>
+                            <input type="checkbox" ng-model="check" ng-init="check = true" ng-click="cambiarChecks(check, ventas)">Seleccionar todos</input>
                             <br />
                             <br />
 
                             <button type="button" class="btn btn-primary" ng-click="cobrarVentas()">Cobrar</button>
                         </div>
                         @endverbatim
-                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- /page content -->
+            <!-- /page content -->
             </input>
         </div>
     </div>

@@ -46,10 +46,11 @@
 {!! Html::script('js/angular-sanitize/angular-sanitize.min.js') !!}
 {!! Html::script('js/services.js') !!}
 {!! Html::script('js/servicioABM.js') !!}
+{!! Html::script('js/ManejoExcell.js') !!}
 {!! Html::script('js/vue-resource/dist/vue-resource.min.js') !!}
 {!! Html::script('js/alasql.min.js') !!}
-{!! Html::script('js/xlsx.core.min.js') !!}
-
+{!! Html::script('js/xlsx.full.min.js') !!}
+{!! Html::script('js/FileSaver.min.js') !!}
 
 
 
