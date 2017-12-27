@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Eloquent\Filtros\VentasFilter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
