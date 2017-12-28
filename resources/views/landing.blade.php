@@ -1,13 +1,13 @@
-@extends('welcome') @section('contenido') 
+@extends('welcome') @section('contenido')
+{!! Html::script('js/controladores/ABMprueba.js') !!}
 
 <div class="nav-md">
 
   <div class="container body">
 
 
-    <div class="main_container" >
-
-      <input type="hidden" id="tipo_tabla" name="tipo_tabla" value="productos" ng-init="traerRelaciones([{tabla:'proovedores',select:'#proovedor'}])">
+    <div class="main_container">
+      <input type="hidden" id="token" value="{{ csrf_token() }}">
       <!-- page content -->
       <div class="left-col" role="main">
 
@@ -32,16 +32,16 @@
                               <i class="fa fa-briefcase" aria-hidden="true"></i>
                               <strong>Mutual</strong>system
                             </h1>
-  
+
                             <div class="description">
                               <p>
                                 Sistema integral de informacion
                               </p>
                             </div>
                           </div>
-                        </div>
-                        </center>
-                     
+                      </div>
+                      </center>
+
                     </div>
                   </div>
 
@@ -62,7 +62,14 @@
 
   </div>
 
-
+  <div class="custom-notifications dsp_none" id="custom_notifications">
+    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+    </ul>
+    <div class="clearfix">
+    </div>
+    <div class="tabbed_notifications" id="notif-group">
+    </div>
+  </div>
 
 
 </div>
