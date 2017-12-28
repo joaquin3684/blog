@@ -132,7 +132,7 @@
         <div class="left_col scroll-view" >
 
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Mutual</span></a>
+            <a href="landing" class="site_title"><i class="fa fa-paw"></i> <span>Mutual</span></a>
           </div>
           <div class="clearfix"></div>
 
@@ -194,6 +194,8 @@
                     <li><a href="dar_servicio">Alta Gestion Servicio/Prestamo</a>
                     </li>
                     <li><a href="aprobacion">Aprobacion Servicio/Prestamo</a>
+                    </li>
+                    <li><a href="novedades">Novedades</a>
                     </li>
                   </ul>
                 </li>

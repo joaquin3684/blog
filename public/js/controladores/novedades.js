@@ -1,5 +1,5 @@
 var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ManejoExcell', 'ServicioABM']).config(function ($interpolateProvider) {});
-app.controller('servicios', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ManejoExcell, ServicioABM) {
+app.controller('novedades', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ManejoExcell, ServicioABM) {
 
 
     $scope.filtro = function () {
@@ -27,8 +27,6 @@ app.controller('servicios', function ($scope, $http, $compile, $sce, NgTablePara
         })
     }
 
-   
-    $scope.paramsTable = ServicioABM.createTable($scope.servicios)
 
     $scope.propertyName = 'legajo';
     $scope.reverse = true;
@@ -38,13 +36,21 @@ app.controller('servicios', function ($scope, $http, $compile, $sce, NgTablePara
     };
 
     $scope.escribirArchivo = function (organismo) {
+        $scope.traerSocios(organismo.id_organismo)
         var socios = []
-        organismo.socios.forEach(element => {
-            element.id_organismo = organismo.id
-            socios.push(element)   
+        $scope.socios.forEach(element => {
+            var socio= {
+                'id_socio': element.id_socio,
+                'legajo': element.legajo,
+                'apellido': element.apellido,
+                'nombre': element.nombre,
+                'importe': element.diferencia,
+                'id_organismo': organismo.id_organismo
+            }
+            socios.push(socio)   
         });
         var nombreHoja = 'Hoja'
-        var nombreArchivo = organismo.nombre + ' ' + '(' + $scope.fecha_desde_fija + '/' + $scope.fecha_hasta_fija + ')'
+        var nombreArchivo = organismo.organismo + ' ' + '(' + $scope.fecha_desde_fija + '/' + $scope.fecha_hasta_fija + ')'
 
         ManejoExcell.exportarExcell(socios, nombreHoja, nombreArchivo)
     }

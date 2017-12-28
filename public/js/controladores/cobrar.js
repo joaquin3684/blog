@@ -22,16 +22,28 @@ $scope.actualizarSocios = function(){
   }
 }
 
-$scope.verificarOrganismo = function(organismo){
-   
-    console.log($scope.archivoExcell)
-    if($scope.archivoExcell[0].id_organismo == organismo.id){
-        asignarMontosACobrar($scope.archivoExcell)
-    }
+$scope.modificarDatos= function(){
+    $scope.asignarMontosACobrar()
 }
 
-$scope.asignarMontosACobrar= function(socios){
-
+buscarMonto = function(id_socio){
+    var monto = 0
+    for(index in $scope.archivoExcell){ 
+        if ($scope.archivoExcell[index].id_socio == id_socio) {
+         monto = Number($scope.archivoExcell[index].importe);
+         break
+        }
+    };
+    return monto
+}
+$scope.asignarMontosACobrar= function(){
+    if ($scope.archivoExcell[0].id_organismo == $scope.organismoActual.id) {
+        $scope.socios.forEach(socio => {
+            socio.montoACobrar = buscarMonto(socio.id_socio)
+        });
+    }else{
+        UserSrv.MostrarMensaje("Error", "Debe importarse una planilla del organismo: "+$scope.organismoactual+".", 'Error', 'mensaje', undefined);
+    }
 }
 
 $scope.sumarMontosACobrar = function (elemsFiltrados, elems){

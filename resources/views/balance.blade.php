@@ -2,11 +2,11 @@
 
 @section('contenido')
 
-{!! Html::script('js/controladores/servicios.js') !!}
+{!! Html::script('js/controladores/balance.js') !!}
 
 
 
-<div class="nav-md" ng-controller="servicios">
+<div class="nav-md" ng-controller="balance">
     <div class="container body">
         <div class="main_container">
             <input id="tipo_tabla" name="tipo_tabla" type="hidden" value="proovedores">
@@ -99,7 +99,8 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>
-                                Servicios
+                                Balances
+                                
                             </h2>
 
                             <ul class="nav navbar-right panel_toolbox">
@@ -149,77 +150,30 @@
                                     <!-- START TABLE -->
                                     <div>
                                       @verbatim
-                                      <table ng-table="paramsTable" class="table table-hover table-bordered" show-filter="false">
-
-                                            <tbody data-ng-repeat="organismo in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                            <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,organismo.id_organismo)">
-                                              <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                                                  {{organismo.organismo}}
+                                      <table ng-table="paramsBalances" class="table table-hover table-bordered">
+                                          <tbody data-ng-repeat="balance in $data" data-ng-switch on="dayDataCollapse[$index]">
+                                          <tr class="clickableRow" title="Datos">
+                                              <td title="'Codigo'" filter="{ codigo: 'text'}" sortable="'codigo'">
+                                                  {{balance.codigo}}
                                               </td>
-                                                <td title="'Descargar'" >
-                                                    <center><i class="fa fa-download fa-lg" aria-hidden="true" ng-click="escribirArchivo(organismo)"></i></center>
-                                                </td>
-                                            </tr>
-                                            <tr data-ng-switch-when="true">
-                                                <td colspan="5">
-                                                    <div>
-                                                        <div>
-                                                            <table class="table table-striped">
-                                                                <thead style="background-color: #337ab7; color: white;" >
-                                                                <tr >
-                                                                    <th>
-                                                                      <a href="#" ng-click="sortBy('legajo')" style="color: white">
-                                                                      Legajo
-                                                                    </a>
-                                                                    <span ng-show="propertyName === 'legajo'" class="sortorder" ng-class="{reverse: reverse}"></span>
-                                                                    </th>
-                                                                    <th>
-                                                                      <a href="#" ng-click="sortBy('apellido')" style="color: white">
-                                                                      Apellido
-                                                                    </a>
-                                                                    <span ng-show="propertyName === 'apellido'" class="sortorder" ng-class="{reverse: reverse}"></span>
-                                                                    </th>
-                                                                    <th>
-                                                                      <a href="#" ng-click="sortBy('nombre')" style="color: white">
-                                                                      Nombre
-                                                                    </a>
-                                                                    <span ng-show="propertyName === 'nombre'" class="sortorder" ng-class="{reverse: reverse}"></span>
-                                                                    </th>
-                                                                    
-                                                                    <th>
-                                                                      <a href="#" ng-click="sortBy('importe')" style="color: white">
-                                                                      Importe
-                                                                    </a>
-                                                                    <span ng-show="propertyName === 'importe'" class="sortorder" ng-class="{reverse: reverse}"></span>
-                                                                    </th>
-                                                                    
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr ng-repeat="socio in socios | orderBy:propertyName:reverse">
+                                              <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                  {{balance.nombre}}
+                                              </td>
+                                              <td title="'Saldo anterior'" filter="{ saldo_anterior: 'text'}" sortable="'saldo_anterior'">
+                                                  {{balance.saldoAnterior}}
+                                              </td>
+                                              <td title="'Total mov. debe'" filter="{ total_debe: 'text'}" sortable="'total_debe'">
+                                                  {{balance.totalDebe}}
+                                              </td>
+                                              <td title="'Total mov. haber'" filter="{ total_haber: 'text'}" sortable="'total_haber'">
+                                                  {{balance.totalHaber}}
+                                              </td>
+                                              <td title="'Saldo'" filter="{ saldo: 'text'}" sortable="'saldo'">
+                                                  {{balance.saldo}}
+                                              </td>
 
-                                                                    <td><center>{{socio.legajo}}</center></td>
-                                                                    <td><center>{{socio.apellido}}</center></td>
-                                                                    <td><center>{{socio.nombre}}</center></td>
-                                                                    <td><center>{{socio.diferencia}}</center></td>
-                                                                    
-
-                                                                </tr>
-                                                                </tbody>
-                                                                
-                                                                    
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                            <tfoot>
-
-
-                                            </tr>
-                                            </tfoot>
-                                        </table>
+                                          </tr>
+                                      </table>
                                         @endverbatim
                                     </div>
                                     <!-- END TABLE -->

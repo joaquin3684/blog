@@ -70,6 +70,7 @@ angular.module('ManejoExcell', []).service('ManejoExcell', function () {
                     /* update scope */
                     $scope.$apply(function () {
                         $scope.archivoExcell = data;
+                        $scope.modificarDatos();
                     });
                     /* DO SOMETHING WITH workbook HERE */
                 };
