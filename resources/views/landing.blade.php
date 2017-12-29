@@ -15,26 +15,26 @@
 
           <div class="clearfix"></div>
           <div id="mensaje"></div>
-          <div class="row">
+          <div class="row" >
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <!--<div class="x_panel" style="background-image: url('../images/imgLogin/1.jpg')"> -->
-              <div class="x_panel">
+              <div class="x_panel" style="background-image: url('../images/imgLogin/1.svg')"> 
+              <!--<div class="x_panel">-->
                 <!-- Top content -->
                 <div class="top-content">
 
                   <div class="inner-bg">
                     <div class="container">
-                      <div class="row">
+                      <div class="row" style="height: -webkit-fill-available;">
                         <center>
 
-                          <div class="col-sm-8 col-sm-offset-2 text">
-                            <h1>
-                              <i class="fa fa-briefcase" aria-hidden="true"></i>
+                          <div class="col-md-12 col-sm-8 text" style="color:white; margin-top:10%">
+                          <h1><i class="fa fa-briefcase fa-lg" aria-hidden="true"></i></h1 >
+                            <h1 style="font-size: 46px">
                               <strong>Mutual</strong>system
                             </h1>
 
                             <div class="description">
-                              <p>
+                              <p style="font-size: 19px">
                                 Sistema integral de informacion
                               </p>
                             </div>
