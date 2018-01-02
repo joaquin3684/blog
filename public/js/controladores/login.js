@@ -14,7 +14,7 @@ app.controller('loguear', function($scope, $http, $compile, $location, $window) 
             }).then(function successCallback(response)
             {
                if(response == 'si'){
-                  $window.location.href = 'asociados';
+                  $window.location.href = '/';
                }
                
             }, function errorCallback(data)

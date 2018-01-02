@@ -56,7 +56,7 @@ Route::get('generarCuotasSociales', function(){
     });
 });
 
-Route::get('/', functioN(){
+Route::get('/', function(){
    return view('landing');
 });
 
@@ -141,7 +141,7 @@ Route::get('prueba', function(){
             $cuota->fecha_inicio = $fechaInicio;
         }
         if($cuota->estado == 'Cobro Total'){
-            $ganancia = $cuota->importe * $venta->producto->ganancia / 100;
+            $ganancia = round($cuota->importe * $venta->producto->ganancia / 100, 2);
             \App\Movimientos::create(['identificadores_id' => $cuota->id, 'identificadores_type' => 'App\Cuotas', 'entrada' => $cuota->importe, 'salida' => $cuota->importe, 'fecha' => \Carbon\Carbon::today()->toDateString(), 'contabilizado_salida' => 1, 'ganancia' => $ganancia]);
         }
         $cuota->save();

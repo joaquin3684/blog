@@ -141,9 +141,9 @@ class Movimiento
         $entrada = $this->entrada;
         $this->salida = $entrada;
         if($aplicarPorcentajeCapital){
-            $this->ganancia = ($entrada * $ganancia /100) + $entrada * $porcentaje_capital / 100;
+            $this->ganancia = round(($entrada * $ganancia /100) + $entrada * $porcentaje_capital / 100, 2);
         } else {
-            $this->ganancia = ($entrada * $ganancia /100);
+            $this->ganancia = round($entrada * $ganancia /100, 2);
         }
         $this->update($this, $this->id);
     }
