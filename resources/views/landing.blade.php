@@ -27,7 +27,7 @@
                       <div class="row" style="height: -webkit-fill-available;">
                         <center>
 
-                          <div class="col-md-12 col-sm-8 text" style="color:white; margin-top:10%">
+                          <div class="col-md-12 col-sm-8 text animated flipInX" style="color:white; margin-top:10%">
                           <h1><i class="fa fa-briefcase fa-lg" aria-hidden="true"></i></h1 >
                             <h1 style="font-size: 46px">
                               <strong>Mutual</strong>system

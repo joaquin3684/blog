@@ -4,7 +4,14 @@
     // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
+        {
+            "phpunit.execPath": "app/tests/Unit",
+            "phpunit.args": [
+                "--configuration",
+                "./phpunit.xml.dist"
+            ],
+            "phpunit.preferRunClassTestOverQuickPickWindow": false // Default false
+        },
         {
             "name": "Launch localhost with sourcemaps",
             "type": "chrome",
