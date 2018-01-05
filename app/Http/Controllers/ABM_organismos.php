@@ -63,6 +63,7 @@ class ABM_organismos extends Controller
             $cuotasSocialesNuevas = collect($request['cuota_social']);
             $organismo = Organismos::with(['socios.cuotasSociales' => function($q){$q->where('estado', null);}, 'cuotas'])->find($id);
             $organismo->cuotas->each(function($cuotaSocialActual) use ($organismo, $cuotasSocialesNuevas){
+
                 $organismo->socios->each(function($socio) use ($cuotaSocialActual, $cuotasSocialesNuevas){
                     $socio->cuotasSociales->each(function($cuota) use ($cuotaSocialActual, $cuotasSocialesNuevas, $socio){
                         if($cuota->importe == $cuotaSocialActual->valor){
