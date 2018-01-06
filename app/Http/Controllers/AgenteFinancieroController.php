@@ -102,7 +102,6 @@ class AgenteFinancieroController extends Controller
     public function reservarCapital(Request $request)
     {
         DB::transaction(function () use ($request) {
-            //TODO: aca se tiene que ejecutar el proceso para que se refleje en la contabilidad
             $elem = $request->all();
             $solicitud = $elem['id'];
             $usuario = Sentinel::check();

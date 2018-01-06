@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Comercializador;
 use App\Http\Requests\ValidacionABMcomercializador;
 use App\Repositories\Eloquent\Repos\Gateway\ComercializadorGateway;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ABM_Comercializador extends Controller
 {
@@ -23,6 +25,10 @@ class ABM_Comercializador extends Controller
 
     public function store(ValidacionABMcomercializador $request)
     {
+        DB::transaction(function() use ($request){
+
+
+
         $elem = $request->all();
         $usuario = $elem['usuario'];
         $pass = $elem['password'];
@@ -30,20 +36,30 @@ class ABM_Comercializador extends Controller
         $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
         $elem['usuario'] = $user->id;
         $this->comercializador->create($elem);
+
         //TODO: aca hay que ponerle el rol de comercializador
 
-        return ['created' => true];
+        });
+
     }
 
 
     public function show($id)
     {
-        return $this->comercializador->find($id);
+        return Comercializador::with('usuario')->find($id);
     }
 
     public function update(ValidacionABMcomercializador $request, $id)
     {
-        $this->comercializador->update($request->all(), $id);
+        DB::transaction(function() use ($request, $id){
+
+            $comer = $this->comercializador->find($id);
+            $user = Sentinel::findById($comer->usuario);
+            $user->update($request->all());
+            $request['usuario'] = $user->id;
+            $this->comercializador->update($request->all(), $id);
+
+        });
     }
 
     /**

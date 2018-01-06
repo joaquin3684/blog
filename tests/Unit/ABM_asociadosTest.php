@@ -9,6 +9,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class ABM_asociadosTest extends TestCase
 {
 
+    use DatabaseTransactions;
+
     public function data()
     {
         return [

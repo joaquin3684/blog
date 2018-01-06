@@ -18,4 +18,9 @@ class Comercializador extends Model
     {
         return $this->hasMany('App\Solicitud', 'comercializador', 'id');
     }
+
+    public function usuario()
+    {
+        return $this->belongsTo('Cartalyst\Sentinel\Users\EloquentUser', 'id_usuario', 'id');
+    }
 }

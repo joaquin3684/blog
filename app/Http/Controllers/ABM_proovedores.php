@@ -32,7 +32,7 @@ class ABM_proovedores extends Controller
             $usuario = $elem['usuario'];
             $pass = $elem['password'];
             $email = $elem['email'];
-
+            //TODO:: aca falta ponerle el rol al proveedor
             $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
             $elem['usuario'] = $user->id;
             $proveedor = Proovedores::create($elem->toArray());
