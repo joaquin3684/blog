@@ -71,7 +71,7 @@ $scope.traerRelaciones = function(relaciones)
         id: $('input[name=id]').val(),
         http: function(){
             ServicioABM.push(this.data, this.url, this.id).then(function(){
-                this.actualizarDatos(data, id, editar)
+                this.actualizarDatos(this.data, this.id, editar)
                 $('#editar').modal('hide');
             })
         },
@@ -80,16 +80,16 @@ $scope.traerRelaciones = function(relaciones)
         }
     }
     $scope.Alta = {
-        data: $("#formulario").serializeArray(),
-        url: $("#tipo_tabla").val(),
         http: function () {
-            ServicioABM.create(this.data, this.url).then(function(){
-                this.actualizarDatos(data, undefined, alta)
+            var data =$("#formulario").serializeArray()
+            var url = $("#tipo_tabla").val()
+            ServicioABM.create($.param(data), url).then(function(){
+                this.actualizarDatos(data)
                 $('#formulario')[0].reset();
             })
         },
-        actualizarDatos: function () {
-            $scope.datosabm.push(this.data)
+        actualizarDatos: function (data) {
+            $scope.datosabm.push(data)
         }
     }
     $scope.Borrar = {
@@ -98,7 +98,7 @@ $scope.traerRelaciones = function(relaciones)
         http: function (id) {
             this.id = id
             ServicioABM.delete(this.url, id).then(function(){
-                this.actualizarDatos(undefined, id, borrar)
+                this.actualizarDatos(undefined, this.id, borrar)
             })
         },
         actualizarDatos: function () {
@@ -118,6 +118,8 @@ $scope.traerRelaciones = function(relaciones)
          var form = '';
          var abm = $("#tipo_tabla").val();
          console.log('el id es: ' + id);
+       var data = $("#formulario").serializeArray()
+
          $scope[tipoSolicitud].http(id)
          //   $('#formulario')[0].reset();
          /*switch(tipoSolicitud)

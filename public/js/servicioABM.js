@@ -13,6 +13,7 @@ angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
                 url: url,
                 method: 'post',
                 data: data,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).then(function successCallback(response) {
                 UserSrv.MostrarMensaje("OK", "Elemento dado de alta correctamente.", undefined, 'mensaje', undefined);
             }, function errorCallback(response) {
