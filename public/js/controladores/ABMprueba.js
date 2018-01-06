@@ -1,6 +1,6 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'ServicioABM', 'Mutual.services']).config(function($interpolateProvider){
 });
-app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, clonarHtmlService) {
+app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $filter, ServicioABM, UserSrv, clonarHtmlService) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
 
@@ -58,13 +58,69 @@ $scope.traerRelaciones = function(relaciones)
         console.log($scope.categorias);
     }
 
+    let buscarIndexPorId = function (id){
+        var igualId = function (dato) {
+            return dato.id == id
+        }
+        $scope.datosabm.findIndex(igualId)
+    }
 
+    $scope.Editar = {
+        data: $("#formularioEditar").serializeArray(),
+        url: $("#tipo_tabla").val(),
+        id: $('input[name=id]').val(),
+        http: function(){
+            ServicioABM.push(this.data, this.url, this.id).then(function(){
+                this.actualizarDatos(data, id, editar)
+                $('#editar').modal('hide');
+            })
+        },
+        actualizarDatos: function(){
+            $scope.datosabm[buscarIndexPorId(this.id)] = this.data
+        }
+    }
+    $scope.Alta = {
+        data: $("#formulario").serializeArray(),
+        url: $("#tipo_tabla").val(),
+        http: function () {
+            ServicioABM.create(this.data, this.url).then(function(){
+                this.actualizarDatos(data, undefined, alta)
+                $('#formulario')[0].reset();
+            })
+        },
+        actualizarDatos: function () {
+            $scope.datosabm.push(this.data)
+        }
+    }
+    $scope.Borrar = {
+        url: $("#tipo_tabla").val(),
+        id: '',
+        http: function (id) {
+            this.id = id
+            ServicioABM.delete(this.url, id).then(function(){
+                this.actualizarDatos(undefined, id, borrar)
+            })
+        },
+        actualizarDatos: function () {
+            $scope.datosabm.splice(buscarIndexPorId(this.id), 1)
+        }
+    }
+    $scope.Mostrar = {
+        url: $("#tipo_tabla").val(),
+        http: function (id) {
+            ServicioABM.pull(this.url, id).then(function(response){
+                llenarFormulario('formularioEditar', response.data);
+            })
+        }
+    }
    $scope.enviarFormulario = function(tipoSolicitud, id = '')
    {
          var form = '';
          var abm = $("#tipo_tabla").val();
          console.log('el id es: ' + id);
-         switch(tipoSolicitud)
+         $scope[tipoSolicitud].http(id)
+         //   $('#formulario')[0].reset();
+         /*switch(tipoSolicitud)
          {
             case 'Editar':
                var metodo = 'put';
@@ -119,7 +175,7 @@ $scope.traerRelaciones = function(relaciones)
             {
                console.log(data);
                $scope.errores = data.data;
-            });
+            });*/
 
    }
 
