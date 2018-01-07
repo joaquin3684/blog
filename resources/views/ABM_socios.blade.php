@@ -91,8 +91,9 @@
                         <input type="text" class="form-control" maxlength="2" ng-model="tipo" placeholder="Tipo" style="text-align: right">
                         <span class="input-group-addon">-{{dni}}-</span>
                         <input type="text" class="form-control" maxlength="1" ng-model="codigoVerif" placeholder="Codigo verif.">
-                        <input type="text" name="cuit" value="{{tipo}}{{dni}}{{codigoVerif}}" style="display: none">{{errores.cuit[0]}}
+                        <input type="text" name="cuit" value="{{tipo}}{{dni}}{{codigoVerif}}" style="display: none">
                       </div>
+                      {{errores.cuit[0]}}
                       </div>
                     </div>
                       <!-- <div class="col-md-6 col-sm-6 col-xs-12">

@@ -1,11 +1,11 @@
 angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
 
-    .service('ServicioABM', function ($http, NgTableParams, $filter, UserSrv) {
+    .service('ServicioABM', function ($http, NgTableParams, $filter, UserSrv, $rootScope) {
 
         //$("#editar").modal('toggle')
 
         this.borrarFormulario = function () {
-            $('#formulario')[0].reset();
+            //$('#formulario')[0].reset();
         };
 
         this.create = function (data, url) {
@@ -21,7 +21,10 @@ angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
             });
         };
 
-
+        this.createMS = function (data, url, scopeVariable){
+            this.create(data,url)
+            $rootScope[scopeVariable].push(data)
+        }
 
         this.pull = function (url, id) {
 
@@ -83,6 +86,17 @@ angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
             return paramsABMS;
         }
 
+        this.updateTable = function (data, paramsTable){
+            $rootScope[paramsTable].total(data.length);
+            $rootScope[paramsTable].reload()
+        }
+
+        this.buscarIndexPorId = function (id, data, formatoId) {
+            var igualId = function (dato) {
+                return dato[formatoId] == id
+            }
+            data.findIndex(igualId)
+        }
 
         this.push = function (data, url, id) {
             return $http({
@@ -95,11 +109,15 @@ angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
             }, function errorCallback(response) {
                 console.log('Error al editar un elemento!');
             });
+        }
 
+        this.pushMS = function(data, url, id, scopeVariable, formatoId){ /* formatoId es el nombre del campo id del objeto data, por ejemplo 'id_socio' o 'id_organismo'*/
+            this.push(data, url, id)
+            var index = this.buscarIndexPorId(id, $rootScope[scopeVariable], formatoId)
+            $rootScope[scopeVariable][index] = data
         }
 
         this.delete = function (url, id) {
-
             return $http({
                 url: url + '/' + id,
                 method: 'delete',
@@ -108,5 +126,11 @@ angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
             }, function errorCallback(response) {
                 console.log('Error al borrar un elemento!');
             });
+        }
+
+        this.deleteMS = function (url, id, scopeVariable, formatoId){
+            this.delete(url,id)
+            var index = this.buscarIndexPorId(id, $rootScope[scopeVariable], formatoId)
+            $rootScope[scopeVariable].splice(index,1)
         }
     });
