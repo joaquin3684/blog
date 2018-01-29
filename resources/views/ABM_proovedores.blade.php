@@ -72,6 +72,23 @@
                       <input required type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{{errores.domicilio[0]}}
                     </div>
                   </div>
+                  <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="piso">Piso
+                      </label>
+                      <div class="col-md-1 col-sm-1 col-xs-12">
+                        <input type="number" id="piso" name="piso" class="form-control"  required>{{errores.piso[0]}}
+                      </div>
+                      <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dpto">Dpto
+                      </label>
+                      <div class="col-md-1 col-sm-1 col-xs-12">
+                        <input type="text" id="dpto" name="dpto" class="form-control"  required>{{errores.departamento[0]}}
+                      </div>
+                      <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nucleo">Nucleo
+                      </label>
+                      <div class="col-md-2 col-sm-2 col-xs-12">
+                        <input type="number" id="nucleo" name="nucleo" class="form-control" required>{{errores.nucleo[0]}}
+                      </div>
+                    </div>
 
                   <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>

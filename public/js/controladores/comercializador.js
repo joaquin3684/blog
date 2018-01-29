@@ -111,12 +111,27 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             document.getElementById('endeud').innerHTML = archivo;
         } else {
             if(archivo != null){
-                document.getElementById('endeudamientodiv').style.display = 'none';
-                document.getElementById('previsualizaciondiv').style.display = 'block';
-                document.getElementById('previsualizacion').src = archivo;
+                var img = new Image();
+                img.onload = function () {
+                    
+                    document.getElementById('endeudamientodiv').style.display = 'none';
+                    document.getElementById('previsualizaciondiv').style.display = 'block';
+                    document.getElementById('previsualizacion').src = archivo;
+                    $scope.heightImg = img.height;
+                    $scope.widthImg = img.width;
+                    $scope.$apply();
+                }
+                img.src = archivo;
             }
         }
 
+    }
+    $scope.expandirImg = function(){
+        // Get the image and insert it inside the modal
+        var img = document.getElementById('previsualizacion');
+        var modalImg = document.getElementById("imgExpandida");
+       
+        modalImg.src = img.src;
     }
 
     $scope.IDPropuesta = function(id,importe,monto,cantcuotas) {

@@ -3,6 +3,14 @@ var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable','Mutua
 });
 app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv, ServicioABM) {
 
+    $scope.expandirImg = function () {
+        // Get the image and insert it inside the modal
+        var img = document.getElementById('previsualizacion');
+        var modalImg = document.getElementById("imgExpandida");
+
+        modalImg.src = img.src;
+    }
+    
     $scope.pullSolicitudes = function (){
 
         $http({

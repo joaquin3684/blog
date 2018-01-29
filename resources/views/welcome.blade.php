@@ -22,6 +22,7 @@
   <!-- Custom styling plus plugins -->
 
   {!! Html::style('css/custom.css') !!}
+  {!! Html::style('css/expandirImagen.css') !!}
   {!! Html::style('css/icheck/flat/green.css') !!}
   {!! Html::style('css/barrow.css') !!}
   {!! Html::style('css/floatexamples.css') !!}
