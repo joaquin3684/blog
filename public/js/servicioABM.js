@@ -133,4 +133,15 @@ angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
             var index = this.buscarIndexPorId(id, $rootScope[scopeVariable], formatoId)
             $rootScope[scopeVariable].splice(index,1)
         }
+
+        this.saveInLocalStorage = function(data, name){
+            sessionStorage.setItem(name, JSON.stringify(data));
+        }
+        this.loadFromLocalStorage = function(name){
+            // Retrieve the object from storage
+            var retrievedData = sessionStorage.getItem(name);
+            var retrievedObject = JSON.parse(retrievedData);
+            var t=6
+            return retrievedObject
+        }
     });

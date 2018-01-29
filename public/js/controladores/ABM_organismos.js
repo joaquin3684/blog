@@ -1,7 +1,7 @@
 
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider) {});
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable','ServicioABM', 'Mutual.services']).config(function($interpolateProvider) {});
 
-app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv,clonarHtmlService) {
+app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams,ServicioABM , $filter, UserSrv,clonarHtmlService) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
 
@@ -23,6 +23,10 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
 
     newWin.document.close();
   };
+
+  $scope.recoverData =function (){
+    
+  }
 
   $scope.submit = function() {
 
@@ -54,7 +58,23 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
   }
 
   $scope.traerElementos = function() {
-
+    if (sessionStorage.getItem('organismos') != null){
+      $scope.datosabm = ServicioABM.loadFromLocalStorage('organismos')
+      $scope.paramsABMS = new NgTableParams({
+        page: 1,
+        count: 10
+      }, {
+          getData: function (params) {
+            var filterObj = params.filter();
+            filteredData = $filter('filter')($scope.datosabm, filterObj);
+            var sortObj = params.orderBy();
+            orderedData = $filter('orderBy')(filteredData, sortObj);
+            $scope.datosabmfiltrados = orderedData;
+            $scope.datatoexcel = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+          }
+        });
+    }else{
     return $http({
       url: "organismos/traerElementos",
       method: "get",
@@ -64,6 +84,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
         } else {
             console.log(response.data);
             $scope.datosabm = response.data;
+            ServicioABM.saveInLocalStorage(response.data, 'organismos')
             $scope.paramsABMS = new NgTableParams({
               page: 1,
               count: 10
@@ -84,6 +105,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       }, function errorCallback(response) {
 
       });
+    }
   }
 
   $scope.traerElementos();

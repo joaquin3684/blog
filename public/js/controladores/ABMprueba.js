@@ -201,7 +201,23 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         var metodito = 'get';
         var abm = $("#tipo_tabla").val();
         var urlabm = abm + "/traerElementos";
-
+        if (sessionStorage.getItem('socios') != null) {
+            $scope.datosabm = ServicioABM.loadFromLocalStorage('socios')
+            $scope.paramsABMS = new NgTableParams({
+                page: 1,
+                count: 10
+            }, {
+                    getData: function (params) {
+                        var filterObj = params.filter();
+                        filteredData = $filter('filter')($scope.datosabm, filterObj);
+                        var sortObj = params.orderBy();
+                        orderedData = $filter('orderBy')(filteredData, sortObj);
+                        $scope.datosabmfiltrados = orderedData;
+                        $scope.datatoexcel = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    }
+                });
+        } else {
         $http({
             url: urlabm,
             method: metodito
@@ -212,6 +228,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
                 console.log(response);
                 if (abm == 'asociados') {
                     $scope.datosabm = response.data.map($scope.cambiarFecha);
+                    ServicioABM.saveInLocalStorage($scope.datosabm, 'socios')
                 } else {
                     $scope.datosabm = response.data;
                 }
@@ -235,6 +252,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         }, function errorCallback(data) {
             console.log(data.data);
         });
+    }
     }
 
     $scope.agregarPantalla = function () {
