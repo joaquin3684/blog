@@ -287,13 +287,7 @@
 
   </div>
 
-   <!-- The Modal -->
-  <div id="modalExpandirImg" class="modalExpandir fade">
-    <!-- The Close Button -->
-    <span class="close" data-dismiss="modal">&times;</span>
-    <!-- Modal Content (The Image) -->
-    <img class="modal-contentExpandirImg" id="imgExpandida">
-  </div>
+  
 
   <div id="AgenteFinanciero" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -368,6 +362,21 @@
     </div>
   </div>
 
+   <!-- The Modal -->
+  <div id="modalExpandirImg" class="modalExpandir fade">
+    <!-- The Close Button -->
+    <span class="close" data-dismiss="modal">&times;</span>
+    <!-- Modal Content (The Image) -->
+    <img class="modal-contentExpandirImg" id="imgExpandida">
+    <br>
+    <a ng-href="{[{imageSrc}]}" download>
+      <center style="color: white">
+        <h4>Descargar
+          <i class="fa fa-download" aria-hidden="true"></i>
+        </h4>
+      </center>
+    </a>
+  </div>
 </div>
 
 

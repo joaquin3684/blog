@@ -485,7 +485,8 @@
 
               </br>
               <center>
-                <img src="images/preload.png" id="previsualizacion" class="imgAExpandir" data-toggle="modal" data-target="#modalExpandirImg" ng-click="expandirImg()">
+                <img src="images/preload.png" id="previsualizacion" class="imgAExpandir" data-toggle="modal" data-target="#modalExpandirImg"
+                  ng-click="expandirImg()">
               </center>
             </div>
           </form>
@@ -505,6 +506,14 @@
     <span class="close" data-dismiss="modal">&times;</span>
     <!-- Modal Content (The Image) -->
     <img class="modal-contentExpandirImg" id="imgExpandida">
+    <br>
+    <a ng-href="{[{imageSrc}]}" download>
+      <center style="color: white">
+        <h4>Descargar
+          <i class="fa fa-download" aria-hidden="true"></i>
+        </h4>
+      </center>
+    </a>
   </div>
 
 </div>

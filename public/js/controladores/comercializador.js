@@ -1,5 +1,6 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable','Mutual.services', 'ngFileUpload']).config(function($interpolateProvider){
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ngFileUpload']).config(function ($interpolateProvider, $compileProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 });
 app.controller('comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv, Upload) {
 
@@ -132,6 +133,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         var modalImg = document.getElementById("imgExpandida");
        
         modalImg.src = img.src;
+        $scope.imageSrc = img.src;
     }
 
     $scope.IDPropuesta = function(id,importe,monto,cantcuotas) {

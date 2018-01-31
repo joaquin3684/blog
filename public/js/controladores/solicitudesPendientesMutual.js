@@ -1,7 +1,9 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable','Mutual.services','ServicioABM']).config(function($interpolateProvider){
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ServicioABM']).config(function ($interpolateProvider, $compileProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 });
-app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv, ServicioABM) {
+
+app.controller('solicitudesPendientesMutual', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ServicioABM) {
 
     $scope.expandirImg = function () {
         // Get the image and insert it inside the modal
@@ -9,8 +11,9 @@ app.controller('solicitudesPendientesMutual', function($scope, $http, $compile, 
         var modalImg = document.getElementById("imgExpandida");
 
         modalImg.src = img.src;
+        $scope.imageSrc = img.src;
     }
-    
+
     $scope.pullSolicitudes = function (){
 
         $http({
