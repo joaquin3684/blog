@@ -16,6 +16,8 @@
                     <div class="clearfix"></div>
                     <div id="mensaje"></div>
                     <div class="row">
+                        @if(Sentinel::check()->hasAccess('productos.crear'))
+
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
@@ -57,9 +59,8 @@
                                         {{ csrf_field() }}
 
                                         <span class="section">Datos del Producto</span>
-                                      
-                                        
-                                        <button ng-click="escribirArchivo()"></button>
+
+
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre
                                                 <span class="required">*</span>
@@ -160,6 +161,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
 
@@ -167,7 +169,7 @@
 
             </div>
 
-
+            @if(Sentinel::check()->hasAccess('productos.visualizar'))
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
@@ -265,12 +267,17 @@
                                                     {{abm.razon_social}}
                                                 </td>
                                                 <td>
+                                                @endverbatim
+                                                 @if(Sentinel::check()->hasAccess('productos.editar'))
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerElemento(abm.id)">
                                                         <span class="glyphicon glyphicon-pencil"></span>
                                                     </button>
+                                                    @endif @if(Sentinel::check()->hasAccess('productos.borrar'))
                                                     <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)">
                                                         <span class="glyphicon glyphicon-remove"></span>
                                                     </button>
+                                                    @endif
+                                                    @verbatim
                                                 </td>
                                             </tr>
                                     </table>
@@ -283,6 +290,7 @@
                     </div>
                 </div>
             </div>
+            @endif
 
             <!-- /page content -->
         </div>

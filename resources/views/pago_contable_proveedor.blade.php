@@ -98,12 +98,14 @@
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
                         <button  type="button" ng-click="borrarFormulario()" class="btn btn-primary">Cancel</button>
+                        @endverbatim
+                        @if(Sentinel::check()->hasAccess('pagoContableProveedores.crear'))
                         <button id="send" type="submit" name="enviar" class="btn btn-success">Pagar</button>
+                        @endif
                       </div>
                     </div>
                   </form>
-                  @endverbatim
-
+              
                 </div>
               </div>
             </div>

@@ -158,67 +158,121 @@
             <div class="menu_section" >
               <h3>General</h3>
               <ul class="nav side-menu" >
-
+       
+              @if(Sentinel::check()->hasAnyAccess(['socios.*', 'organismos.*', 'proveedores.*', 'organismos.*', 'proovedores.*', 'productos.*', 'usuarios.*', 'roles.*', 'comercializadores.*', 'bancos.*']))
                 <li><a><i class="fa fa-edit"></i> ABM <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
+                      @if(Sentinel::check()->hasAccess('socios.*')) 
                       <li><a href="asociados">Socios</a>
                       </li>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('organismos.*'))
                       <li><a href="organismos">Organismos</a>
                       </li>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('proovedores.*'))
                       <li><a href="proovedores">Proovedores</a></li>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('productos.*'))
                       <li><a href="productos">Productos</a></li>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('usuarios.*'))
                       <li><a href="usuarios">Usuarios</a></li>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('roles.*'))
                       <li><a href="roles">Roles</a></li>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('comercializadores.*'))
                       <li><a href="abm_comercializador">Comercializador</a></li>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('bancos.*'))
                       <li><a href="bancos">Bancos</a></li>
+                      @endif
 
                   </ul>
                 </li>
+              @endif
+               @if(Sentinel::check()->hasAnyAccess(['ventas.*', 'ccCuotasSociales.*']))
                   <li><a><i class="fa fa-bank"></i> Cuentas Corrientes <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
+                  @if(Sentinel::check()->hasAccess('ventas.*'))
                     <li><a href="ventas">CC Servicios/Prestamos</a>
                     </li>
+                    @endif
+                    @if(Sentinel::check()->hasAccess('ccCuotasSociales.*'))
                     <li><a href="cc_cuotasSociales">CC Cuotas Sociales</a>
                     </li>
+                    @endif
                   </ul>
                 </li>
+                @endif
+                @if(Sentinel::check()->hasAnyAccess(['cobrar.*', 'cobroCuotasSociales.*']))
                   <li><a><i class="fa fa-dollar"></i> Cobros <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
+                  @if(Sentinel::check()->hasAccess('cobrar.*'))
                     <li><a href="cobrar">Cobrar Servicios/Prestamos</a>
                     </li>
+                  @endif
+                  @if(Sentinel::check()->hasAccess('cobroCuotasSociales.*'))
                     <li><a href="cobroCuotasSociales">Cobrar Cuotas Sociales</a>
                     </li>
+                  @endif
                   </ul>
                 </li>
+                @endif
+                @if(Sentinel::check()->hasAnyAccess(['darServicios.*', 'aprobacionServicios.*', 'novedades.*']))
                 <li><a><i class="fa fa-gears"></i> Gestion de cobranza <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
+                  @if(Sentinel::check()->hasAccess('darServicios.*'))
                     <li><a href="dar_servicio">Alta Gestion Servicio/Prestamo</a>
                     </li>
+                  @endif
+                  @if(Sentinel::check()->hasAccess('aprobacionServicios.*'))
                     <li><a href="aprobacion">Aprobacion Servicio/Prestamo</a>
                     </li>
+                  @endif
+                  @if(Sentinel::check()->hasAccess('novedades.*'))
                     <li><a href="novedades">Novedades</a>
                     </li>
+                    @endif
                   </ul>
                 </li>
+                @endif
+                @if(Sentinel::check()->hasAnyAccess(['agentesFinancieros.*', 'CCProveedor.*']))
                  <li><a><i class="fa fa-briefcase"></i> Agente Financiero <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
+                  @if(Sentinel::check()->hasAccess('agentesFinancieros.*'))
                     <li><a href="agente_financiero">Solicitudes</a>
                     </li>
-
-
+                  @endif
+                  @if(Sentinel::check()->hasAccess('CCProveedor.*'))
                       <li><a href="proveedorCC">Cuenta Corriente</a>
                       </li>
+                      @endif
                   </ul>
                 </li>
+                @endif
+                @if(Sentinel::check()->hasAnyAccess(['capitulos.*', 'asientosManuales.*', 'mayorContable.*', 'pagoContableProveedores.*', 'balances.*']))
                 <li><a><i class="fa fa-area-chart"></i> Contabilidad <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
+                  @if(Sentinel::check()->hasAccess('capitulos.*'))
                       <li><a href="capitulo">Plan de cuentas</a>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('asientosManuales.*'))
                       <li><a href="asientos">Asientos Contables Manuales</a>
                       </li>
+                      @endif
+
                       <!--<li><a href="cobrar_contablemente">Cobrar contablemente</a></li> -->
+                      @if(Sentinel::check()->hasAccess('mayorContable.*'))
                       <li><a href="mayorContable">Mayor contable</a></li>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('pagoContableProveedores.*'))
                       <li><a href="pagoContableProveedor">Pago contable Proveedor</a></li>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('balances.*'))
                       <li><a href="balance">Balance</a></li>
+                      @endif
                       <!-- <li><a href="rubro">Rubros</a>
                       </li>
                       <li><a href="moneda">Monedas</a></li>
@@ -228,27 +282,45 @@
 
                   </ul>
                 </li>
-
+                @endif
+                @if(Sentinel::check()->hasAnyAccess(['cajas.*', 'operaciones.*', 'cajaOperaciones.*']))
                 <li><a><i class="fa fa-shopping-bag"></i> Caja <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                     
+                     @if(Sentinel::check()->hasAccess('cajas.*'))
                       <li><a href="caja">Caja</a>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('operaciones.*'))
                       <li><a href="operaciones">ABM operaciones</a>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('cajaOperaciones.*'))
                       <li><a href="cajaOperaciones">Reporte caja</a>
+                      @endif
                   </ul>
                 </li>
+                @endif
 
                   </li>
+                  @if(Sentinel::check()->hasAccess('comercializador.*'))
                   <li><a href="comercializador"><i class="fa fa-pencil"></i>Generar Solicitud</a>
+                  @endif
                   </li>
-
+                  @if(Sentinel::check()->hasAccess('solicitudesPendientes.*'))
                   <li><a href="solicitudesPendientesMutual"><i class="fa fa-clock-o"></i>Solicitudes Pendientes</a>
                   </li>
+                  @endif
+                  @if(Sentinel::check()->hasAccess('correrVtoServicios.*'))
                   <li><a href="correrVto"><i class="fa fa-calendar"></i>Correr Vto Servicio/Prestamo</a>
                   </li>
+                  @endif
+                  @if(Sentinel::check()->hasAccess('pagoProveedores.*'))
                   <li><a href="pago_proovedores"><i class="fa fa-money" ></i> Pago proveedores</a>
+                  @endif
+                  @if(Sentinel::check()->hasAccess('fechaContable.*'))
                   <li><a type="button" data-toggle="modal" data-target="#fechaContable"><i class="fa fa-calendar-check-o" ></i> Fecha contable</a>
+                  @endif
+                  @if(Sentinel::check()->hasAccess('cerrarFecha.*'))
                   <li ng-controller="cerrarFecha"><a ng-click="cerrarFecha()"><i class="fa fa-calendar-times-o" ></i> Cerrar fecha</a>
+                  @endif
               </ul>
             </div>
 

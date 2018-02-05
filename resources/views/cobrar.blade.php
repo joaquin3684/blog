@@ -9,6 +9,7 @@
             <!-- page content -->
 
             <div id="mensaje"></div>
+            @if(Sentinel::check()->hasAccess('cobrar.visualizar'))
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
@@ -62,10 +63,10 @@
                             <button id="exportButton2" class="btn btn-success clearfix">
                                 <span class="fa fa-file-excel-o"></span> EXCEL</button>
                             <label class="btn btn-primary" ng-show="vistaactual=='Socios'">
-                                <i class="fa fa-download " aria-hidden="true" ></i> IMPORTAR
+                                <i class="fa fa-download " aria-hidden="true"></i> IMPORTAR
                                 <input type="file" import-sheet-js="" multiple="false" style="display:none;" />
                             </label>
-                          
+
                         </center>
                         <div class="row">
                             @verbatim
@@ -182,10 +183,11 @@
 
                             <input type="checkbox" ng-model="check" ng-init="check =true" ng-click="cambiarChecks(check, socios)">Seleccionar todos</input>
                             <br />
-                            <br />
-
+                            <br /> 
+                            @endverbatim @if(Sentinel::check()->hasAccess('cobrar.crear'))
+                            <button type="button" class="btn btn-primary" ng-click="cobrarSocios()">Cobrar</button>
+                            @endif @verbatim
                         </div>
-                        <button type="button" class="btn btn-primary" ng-click="cobrarSocios()">Cobrar</button>
 
 
                         @endverbatim
@@ -237,12 +239,15 @@
                         <input type="checkbox" ng-model="check" ng-init="check = true" ng-click="cambiarChecks(check, ventas)">Seleccionar todos</input>
                         <br />
                         <br />
-
+                        @endverbatim
+                        @if(Sentinel::check()->hasAccess('cobrar.crear'))
                         <button type="button" class="btn btn-primary" ng-click="cobrarVentas()">Cobrar</button>
+                        @endif
                     </div>
-                    @endverbatim
+                    
                 </div>
             </div>
+            @endif
         </div>
 
         <!-- /page content -->

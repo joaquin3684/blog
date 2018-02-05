@@ -22,7 +22,7 @@
       </div>
 
 
-
+      @if(Sentinel::check()->hasAccess('solicitudesPendientes.visualizar'))
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div id="mensaje"></div>
         <div class="x_panel">
@@ -104,13 +104,13 @@
 
                           <span ng-click="getFotos(solicitud.id)" data-toggle="modal" data-target="#Comprobantes" class="fa fa-file-picture-o fa-2x"
                             titulo="Ver Comprobantes"></span>
-
+                          @if(Sentinel::check()->hasAccess('solicitudesPendientes.crear'))
                           <span ng-click="IDModal(solicitud.id)" data-toggle="modal" data-target="#AgenteFinanciero" ng-show="solicitud.agente_financiero == null"
                             class="fa fa-check fa-2x" titulo="Asignar Agente Financiero"></span>
 
                           <span ng-click="IDModal(solicitud.id)" data-toggle="modal" data-target="#Endeudamiento" ng-show="solicitud.doc_endeudamiento == null"
                             class="fa fa-file-text fa-2x" titulo="Numero Endeudamiento"></span>
-
+                          @endif
 
 
                         </td>
@@ -203,10 +203,10 @@
                           {[{solicitud.estado}]}
                         </td>
                         <td title="'Acciones Disponibles'" style="color: #21a9d6;">
-
+                          @if(Sentinel::check()->hasAccess('solicitudesPendientes.crear'))
                           <span ng-click="AprobarSolicitud(solicitud.id)" ng-show="solicitud.estado == 'Capital Otorgado'" class="fa fa-user fa-2x"
                             titulo="Aprobar Solicitud"></span>
-
+                          @endif
                           <span ng-click="getFotos(solicitud.id)" data-toggle="modal" data-target="#Comprobantes" class="fa fa-file-picture-o fa-2x"
                             titulo="Ver Comprobantes"></span>
 
@@ -221,7 +221,7 @@
           </div>
         </div>
       </div>
-
+      @endif
       <!-- /page content -->
     </div>
 
@@ -275,7 +275,8 @@
               <center>Previsualización</center>
               </br>
               <center>
-                <img src="images/preload.png" id="previsualizacion" class="imgAExpandir" data-toggle="modal" data-target="#modalExpandirImg" ng-click="expandirImg()">
+                <img src="images/preload.png" id="previsualizacion" class="imgAExpandir" data-toggle="modal" data-target="#modalExpandirImg"
+                  ng-click="expandirImg()">
               </center>
             </div>
           </form>
@@ -287,7 +288,7 @@
 
   </div>
 
-  
+
 
   <div id="AgenteFinanciero" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -362,7 +363,7 @@
     </div>
   </div>
 
-   <!-- The Modal -->
+  <!-- The Modal -->
   <div id="modalExpandirImg" class="modalExpandir fade">
     <!-- The Close Button -->
     <span class="close" data-dismiss="modal">&times;</span>

@@ -14,6 +14,7 @@
 
           <div class="clearfix"></div>
           <div id="mensaje"></div>
+          @if(Sentinel::check()->hasAccess('bancos.crear'))
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -103,13 +104,13 @@
             </div>
           </div>
         </div>
-
+        @endif
 
 
       </div>
 
 
-
+      @if(Sentinel::check()->hasAccess('bancos.visualizar'))
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
@@ -174,12 +175,18 @@
                           {{abm.nro_cuenta}}
                         </td>
                         <td>
+                          @endverbatim @if(Sentinel::check()->hasAccess('bancos.editar')) @verbatim
+
                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerBanco(abm.id)">
                             <span class="glyphicon glyphicon-pencil"></span>
                           </button>
+                          @endverbatim @endif @if(Sentinel::check()->hasAccess('bancos.borrar')) @verbatim
+
                           <button type="button" class="btn btn-danger" ng-click="delete(abm.id)">
                             <span class="glyphicon glyphicon-remove"></span>
                           </button>
+                          @endverbatim @endif @verbatim
+
                           <button type="button" class="btn btn-info" data-toggle="modal" data-target="#chequera" ng-click="asignarBanco(abm.id)">
                             <span class="glyphicon glyphicon-plus"></span>
                           </button>
@@ -195,7 +202,7 @@
           </div>
         </div>
       </div>
-
+      @endif
       <!-- /page content -->
     </div>
 
@@ -264,6 +271,7 @@
               <div class="col-md-6 col-md-offset-3">
 
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+
                 <button type="submit" class="btn btn-success">Enviar</button>
               </div>
             </div>
@@ -332,18 +340,20 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado
                     <span class="required">*</span>
                   </label>
-                
-                    <div class="col-md-2 col-sm-2 col-xs-6">
-                            <div class="radio">
-                            <label><input  type="radio" ng-model="estado" value="activo">Activo</label>
-                            </div>
-                      </div>
-                      <div class="col-md-2 col-sm-2 col-xs-6">
-                            <div class="radio">
-                            <label><input  type="radio"  ng-model="estado" value="inactivo">Inactivo</label>
-                            </div>
-                      </div>
-            
+
+                  <div class="col-md-2 col-sm-2 col-xs-6">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" ng-model="estado" value="activo">Activo</label>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-sm-2 col-xs-6">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" ng-model="estado" value="inactivo">Inactivo</label>
+                    </div>
+                  </div>
+
                 </div>
 
 

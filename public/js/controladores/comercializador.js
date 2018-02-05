@@ -4,6 +4,9 @@ var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutu
 });
 app.controller('comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv, Upload) {
 
+        $scope.mostrar =  function(algo){
+            console.log(algo)
+        }
     $scope.pullComercializadores = function (){
 
         $http({

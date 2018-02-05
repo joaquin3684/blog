@@ -1,64 +1,75 @@
-@extends('welcome')
-
-@section('contenido')
+@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABM_organismos.js') !!}
 
 
-{!! Html::script('js/controladores/ABM_organismos.js') !!}
+<div class="nav-md" ng-controller="ABM">
 
+  <div class="container body">
 
-<div class="nav-md" ng-controller="ABM" >
-
-  <div class="container body" >
-
-    <div class="main_container" >
+    <div class="main_container">
 
       <input type="hidden" id="tipo_tabla" value="organismos">
       <!-- page content -->
-      <div class="left-col" role="main" >
+      <div class="left-col" role="main">
 
-          <div class="" >
+        <div class="">
 
           <div class="clearfix"></div>
           <div id="mensaje"></div>
-          <div class="row" >
-            <div class="col-md-12 col-sm-12 col-xs-12" >
-              <div class="x_panel"  >
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              @if(Sentinel::check()->hasAccess('organismos.crear'))
+              <div class="x_panel">
                 <div class="x_title">
-                  <h2>Formulario de organismos <small>Dar de alta un organismo</small></h2>
+                  <h2>Formulario de organismos
+                    <small>Dar de alta un organismo</small>
+                  </h2>
                   <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <li>
+                      <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                      </a>
                     </li>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-wrench"></i>
+                      </a>
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
+                        <li>
+                          <a href="#">Settings 1</a>
                         </li>
-                        <li><a href="#">Settings 2</a>
+                        <li>
+                          <a href="#">Settings 2</a>
                         </li>
                       </ul>
                     </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    <li>
+                      <a class="close-link">
+                        <i class="fa fa-close"></i>
+                      </a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                   @verbatim
-                  <form class="form-horizontal form-label-left" ng-submit="submit()" id="formulario" >
-                   {{ csrf_field() }}
+                  <form class="form-horizontal form-label-left" ng-submit="submit()" id="formulario">
+                    {{ csrf_field() }}
 
                     <span class="section">Datos del organismo</span>
 
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre
+                        <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese nombre del organismo" type="text">{{errores.nombre[0]}}
+                        <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese nombre del organismo"
+                          type="text">{{errores.nombre[0]}}
                       </div>
                     </div>
 
-                      <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit
+                        <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input required type="number" id="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit">{{errores.cuit[0]}}
@@ -66,42 +77,45 @@
                     </div>
 
                     <div class="item form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input required type="text" id="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el domicilio">{{errores.domicilio[0]}}
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input required type="text" id="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el domicilio">{{errores.domicilio[0]}}
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="localidad">Localidad <span class="required">*</span>
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input required type="text" id="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la localidad">{{errores.localidad[0]}}
-                  </div>
-                </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="localidad">Localidad
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input required type="text" id="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la localidad">{{errores.localidad[0]}}
+                      </div>
+                    </div>
 
 
-                      <div id="aClonar" ng-repeat="cuota in cuotas">
-                        <div class="item form-group clonado">
+                    <div id="aClonar" ng-repeat="cuota in cuotas">
+                      <div class="item form-group clonado">
 
-                            <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social<span class="required">*</span>
-                            </label>
-                            <!-- <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social
+                          <span class="required">*</span>
+                        </label>
+                        <!-- <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
                               <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuota.categoria" >{{errores.cuota_social[0]}}
                             </div> -->
-                            <div class="col-md-6 col-sm-6 col-xs-12" id="valor">
-                              <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Ingrese el valor" ng-model="cuota.valor">{{errores.cuota_social[0]}}
-                            </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12" id="valor">
+                          <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Ingrese el valor" ng-model="cuota.valor">{{errores.cuota_social[0]}}
+                        </div>
                       </div>
-                      </div>
+                    </div>
 
 
-                      <button id="sumahtml" type="button" class="btn btn-danger"  style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado', cuotas)">
-                        <span class="glyphicon glyphicon-minus" aria-hidden="true" ></span>
-                      </button>
-                    <button id="sumahtml" type="button" class="btn btn-primary"  style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml(cuotas)">
-                      <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
+                    <button id="sumahtml" type="button" class="btn btn-danger" style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado', cuotas)">
+                      <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </button>
+                    <button id="sumahtml" type="button" class="btn btn-primary" style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml(cuotas)">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </button>
 
 
@@ -119,6 +133,7 @@
 
                 </div>
               </div>
+              @endif
             </div>
           </div>
         </div>
@@ -130,27 +145,40 @@
 
 
       <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Organismos <small>Todos los organismos disponibles</small></h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-<!--                       <div class="x_content">
+        @if(Sentinel::check()->hasAccess('organismos.visualizar'))
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Organismos
+              <small>Todos los organismos disponibles</small>
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li>
+                <a class="collapse-link">
+                  <i class="fa fa-chevron-up"></i>
+                </a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                  <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="#">Settings 1</a>
+                  </li>
+                  <li>
+                    <a href="#">Settings 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-close"></i>
+                </a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <!--                       <div class="x_content">
 
                         <table id="datatable-responsive" cellspacing="0" class="table table-striped table-bordered dt-responsive nowrap order-colum compact" cellspacing="0" width="100%">
                           <thead>
@@ -180,77 +208,90 @@
                         </table>
 
                       </div> -->
-                      <div class="x_content">
-                     <center>
+          <div class="x_content">
+            <center>
 
-                     <button id="exportButton1" ng-click="ExportarPDF('organismos')" class="btn btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> PDF
-                     </button>
-                     <button id="exportButton2"  data-toggle="modal" data-target="#prompted" class="btn btn-success clearfix" ><span class="fa fa-file-excel-o"></span> EXCEL</button>
+              <button id="exportButton1" ng-click="ExportarPDF('organismos')" class="btn btn-danger clearfix">
+                <span class="fa fa-file-pdf-o"></span> PDF
+              </button>
+              <button id="exportButton2" data-toggle="modal" data-target="#prompted" class="btn btn-success clearfix">
+                <span class="fa fa-file-excel-o"></span> EXCEL</button>
 
-                     <button id="exportButton3" ng-click="$Servicio.Impresion()" class="btn btn-primary clearfix"><span class="fa fa-print"></span> IMPRIMIR</button>
-                     </center>
+              <button id="exportButton3" ng-click="$Servicio.Impresion()" class="btn btn-primary clearfix">
+                <span class="fa fa-print"></span> IMPRIMIR</button>
+            </center>
 
-                     <div id="estatablaseexporta" style="display: none;">
-                      @verbatim
-                      <table id="tablaexported">
-                          <thead>
+            <div id="estatablaseexporta" style="display: none;">
+              @verbatim
+              <table id="tablaexported">
+                <thead>
 
-                            <td>NOMBRE</td><td>CUIT</td>
+                  <td>NOMBRE</td>
+                  <td>CUIT</td>
 
-                          </thead>
-                          <tbody>
-                            <tr ng-repeat="abm in datatoexcel">
-                              <td>{{abm.nombre}}</td><td>{{abm.cuit}}</td>
-                            </tr>
-                          </tbody>
-                      </table>
-                      @endverbatim
-                     </div>
-                            <div id="pruebaExpandir">
-                                <div class="span12 row-fluid">
-                                    <!-- START $scope.[model] updates -->
-                                    <!-- END $scope.[model] updates -->
-                                    <!-- START TABLE -->
-                                    <div class="table-responsive">
-                                      @verbatim
+                </thead>
+                <tbody>
+                  <tr ng-repeat="abm in datatoexcel">
+                    <td>{{abm.nombre}}</td>
+                    <td>{{abm.cuit}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              @endverbatim
+            </div>
+            <div id="pruebaExpandir">
+              <div class="span12 row-fluid">
+                <!-- START $scope.[model] updates -->
+                <!-- END $scope.[model] updates -->
+                <!-- START TABLE -->
+                <div class="table-responsive">
+                  @verbatim
 
-                                      <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
+                  <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
 
-                                          <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
+                    <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
 
-                                          <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)"  ng-class="socio.id">
-                                              <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                                                  {{abm.nombre}}
-                                              </td>
-                                              <td title="'Cuit'" filter="{ cuit: 'text'}" sortable="'cuit'">
-                                                  {{abm.cuit}}
-                                              </td>
-                                              <td title="'Domicilio'" filter="{ domicilio: 'text'}" sortable="'domicilio'">
-                                                  {{abm.domicilio}}
-                                              </td>
-                                              <td title="'Localidad'" filter="{ localidad: 'text'}" sortable="'localidad'">
-                                                  {{abm.localidad}}
-                                              </td>
+                      <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)" ng-class="socio.id">
+                        <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                          {{abm.nombre}}
+                        </td>
+                        <td title="'Cuit'" filter="{ cuit: 'text'}" sortable="'cuit'">
+                          {{abm.cuit}}
+                        </td>
+                        <td title="'Domicilio'" filter="{ domicilio: 'text'}" sortable="'domicilio'">
+                          {{abm.domicilio}}
+                        </td>
+                        <td title="'Localidad'" filter="{ localidad: 'text'}" sortable="'localidad'">
+                          {{abm.localidad}}
+                        </td>
 
 
-                                              <td id="botones">
-                                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerElemento(abm.id)"><span class="glyphicon glyphicon-pencil"></span></button>
-                                              <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)"><span class="glyphicon glyphicon-remove"></span></button>
-                                              </td>
+                        <td id="botones">
+                          @endverbatim @if(Sentinel::check()->hasAccess('organismos.editar')) @verbatim
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerElemento(abm.id)">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                          </button>
+                          @endverbatim @endif @if(Sentinel::check()->hasAccess('organismos.borrar')) @verbatim
+                          <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                          </button>
+                          @endverbatim @endif @verbatim
+                        </td>
 
-                                          </tr>
+                      </tr>
 
-                                        </tbody>
-                                      </table>
-                                        @endverbatim
-                                    </div>
-                                    <!-- END TABLE -->
-                                </div>
-                            </div>
+                    </tbody>
+                  </table>
+                  @endverbatim
+                </div>
+                <!-- END TABLE -->
+              </div>
+            </div>
 
-                        </div>
-                    </div>
-                  </div>
+          </div>
+        </div>
+        @endif
+      </div>
 
 
       <!-- /page content -->
@@ -266,92 +307,97 @@
   </div>
 
 
- <!-- Modal -->
-<div id="editar" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-@verbatim
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Editar</h4>
-      </div>
-      <div class="modal-body">
+  <!-- Modal -->
+  <div id="editar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      @verbatim
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Editar</h4>
+        </div>
+        <div class="modal-body">
 
 
-         <form class="form-horizontal form-label-left" ng-submit="editarFormulario(abmConsultado.id)" id="formularioEditar" >
+          <form class="form-horizontal form-label-left" ng-submit="editarFormulario(abmConsultado.id)" id="formularioEditar">
 
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" placeholder="Ingrese nombre del organismo" type="text" ng-model="abmConsultado.nombre" >{{errores.nombre[0]}}
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input class="form-control col-md-7 col-xs-12" placeholder="Ingrese nombre del organismo" type="text" ng-model="abmConsultado.nombre">{{errores.nombre[0]}}
 
-                      </div>
-                    </div>
+              </div>
+            </div>
 
-                      <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cuit" ng-model="abmConsultado.cuit" class="form-control col-md-7 col-xs-12">{{errores.cuit[0]}}
-                      </div>
-                    </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="cuit" ng-model="abmConsultado.cuit" class="form-control col-md-7 col-xs-12">{{errores.cuit[0]}}
+              </div>
+            </div>
 
-                    <div class="item form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="domicilio" ng-model="abmConsultado.domicilio" class="form-control col-md-7 col-xs-12">{{errores.domicilio[0]}}
-                    </div>
-                  </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="domicilio" ng-model="abmConsultado.domicilio" class="form-control col-md-7 col-xs-12">{{errores.domicilio[0]}}
+              </div>
+            </div>
 
-                    <div class="item form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="localidad">Localidad <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="localidad" ng-model="abmConsultado.localidad" class="form-control col-md-7 col-xs-12">{{errores.localidad[0]}}
-                    </div>
-                  </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="localidad">Localidad
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="localidad" ng-model="abmConsultado.localidad" class="form-control col-md-7 col-xs-12">{{errores.localidad[0]}}
+              </div>
+            </div>
 
-                    <div ng-repeat="cuota in abmConsultado.cuotas">
-                      <div class="item form-group clonado1" >
-                        <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social<span class="required">*</span>
-                        </label>
-                        <!-- <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
+            <div ng-repeat="cuota in abmConsultado.cuotas">
+              <div class="item form-group clonado1">
+                <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social
+                  <span class="required">*</span>
+                </label>
+                <!-- <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
                           <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuota.categoria">{{errores.cuota_social[0]}}
                         </div> -->
-                        <div class="col-md-6 col-sm-6 col-xs-12" id="valor">
-                          <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Ingrese el valor" ng-model="cuota.valor">{{errores.cuota_social[0]}}
-                        </div>
-                      </div>
-                    </div>
+                <div class="col-md-6 col-sm-6 col-xs-12" id="valor">
+                  <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Ingrese el valor" ng-model="cuota.valor">{{errores.cuota_social[0]}}
+                </div>
+              </div>
+            </div>
 
 
-                    <!-- <button id="sumahtml" type="button" class="btn btn-danger"  style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado1', abmConsultado.cuotas)">
+            <!-- <button id="sumahtml" type="button" class="btn btn-danger"  style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado1', abmConsultado.cuotas)">
                       <span class="glyphicon glyphicon-minus" aria-hidden="true" ></span>
                     </button> -->
-                  <button id="sumahtml" type="button" class="btn btn-primary"  style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml(abmConsultado.cuotas)">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>
-                  </button>
+            <button id="sumahtml" type="button" class="btn btn-primary" style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml(abmConsultado.cuotas)">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
 
-                    <input type="hidden" name="id">
-                    <div class="ln_solid"></div>
-                    <div class="form-group">
-                      <div class="col-md-6 col-md-offset-3">
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                        <button id="send" type="submit" class="btn btn-success">Enviar</button>
+            <input type="hidden" name="id">
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-3">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                <button id="send" type="submit" class="btn btn-success">Enviar</button>
 
-                      </div>
-                    </div>
-                  </form>
+              </div>
+            </div>
+          </form>
+
+        </div>
 
       </div>
-
+      @endverbatim
     </div>
-@endverbatim
   </div>
-</div>
 
 
 </div>
