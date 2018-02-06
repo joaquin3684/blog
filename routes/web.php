@@ -194,6 +194,7 @@ Route::resource('prioridades', 'ABM_prioridades');
 
 Route::get('roles/traerRelacionroles', 'ABM_roles@traerRelacionpantallas');
 Route::get('roles/traerRoles', 'ABM_roles@traerRoles');
+Route::get('roles/all', 'ABM_roles@all');
 Route::resource('roles', 'ABM_roles');
 
 

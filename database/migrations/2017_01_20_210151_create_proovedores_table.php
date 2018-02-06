@@ -23,11 +23,14 @@ class CreateProovedoresTable extends Migration
             $table->string('domicilio')->nullable();
             $table->integer('telefono')->nullable();
             $table->string('descripcion')->nullable();
-            $table->softDeletes();
+            $table->string('departamento')->nullable();
             $table->integer('id_prioridad')->unsigned()->nullable();
             $table->foreign('id_prioridad')->references('id')->on('prioridades');
             $table->integer('usuario')->unsigned()->nullable();
             $table->foreign('usuario')->references('id')->on('users');
+            $table->integer('piso')->nullable();
+            $table->integer('nucleo')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();

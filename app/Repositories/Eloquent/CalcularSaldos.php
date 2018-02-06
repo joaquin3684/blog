@@ -22,11 +22,18 @@ class CalcularSaldos
             ->groupBy('id_imputacion')
             ->select(DB::raw('(SUM(debe) - SUM(haber)) as saldo'))->first();
 
-        $cuenta = SaldosCuentas::where('id_imputacion', $cuenta->id)
+        $saldo = SaldosCuentas::where('id_imputacion', $cuenta->id)
             ->where('year', $fecha->year)
             ->where('month', $fecha->month)
             ->first();
-        $cuenta->fill(['saldo' => $saldo->saldo])->save();
+
+        if($saldo == null)
+        {
+            $fecha = Carbon::today();
+            SaldosCuentas::create(['codigo' => $cuenta->codigo, 'id_imputacion' => $cuenta->id, 'saldo' => 0, 'year' =>$fecha->year, 'month' => $fecha->month]);
+        } else  {
+            $saldo->fill(['saldo' => $saldo->saldo])->save();
+        }
 
     }
 }

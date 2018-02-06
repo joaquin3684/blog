@@ -26,12 +26,15 @@ class CreateSociosTable extends Migration
             $table->string('sexo')->nullable();
             $table->string('apellido')->nullable();
             $table->string('localidad')->nullable();
+            $table->string('departamento')->nullable();
             $table->integer('codigo_postal')->nullable();
             $table->integer('telefono')->nullable();
             $table->integer('id_organismo')->unsigned()->nullable();
             $table->foreign('id_organismo')->references('id')->on('organismos');
             $table->date('fecha_ingreso')->nullable();
             $table->integer('legajo')->nullable();
+            $table->integer('piso')->nullable();
+            $table->integer('nucleo')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

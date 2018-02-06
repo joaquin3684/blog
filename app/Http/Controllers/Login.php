@@ -34,7 +34,7 @@ class Login extends Controller
                     ControlFechaContable::where('id_usuario', $user->id)->delete();
                 }
                 $registros = [];
-                return redirect('/');
+                return redirect('#/');
             } else {
                 throw new UsuarioOPasswordErroneosException('login_incorrecto');
             }
