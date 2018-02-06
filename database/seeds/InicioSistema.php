@@ -114,8 +114,23 @@ class InicioSistema extends Seeder
                 'name' => 'genio',
                 'slug' => 'genio',
             ]);
-            $role->permissions = ['organismos.crear' => true, 'organismos.visualizar' => true, 'organismos.editar' => true, 'organismos.borrar'=> true, 'socios.editar' => true, 'socios.visualizar' => true, 'socios.crear' => true, 'socios.borrar' => true];
+            $role2 = Sentinel::getRoleRepository()->createModel()->create([
+                'name' => 'ignorante',
+                'slug' => 'ignorante',
+            ]);
+            $pantallas = DB::table('pantallas')->pluck('nombre');
+            $permisos = collect([]);
+            foreach ($pantallas as $pantalla) {
+                $permisos->put($pantalla . '.crear', true);
+                $permisos->put($pantalla . '.visualizar', true);
+                $permisos->put($pantalla . '.borrar', true);
+                $permisos->put($pantalla . '.editar', true);
+                
+            }
+            $role->permissions = $permisos->toArray();
+            $role2->permissions = [];
             $role->save();
+            $role2->save();
             $role->users()->attach($user);
 
             $this->call(PrioridadesSeed::class);

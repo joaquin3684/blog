@@ -17,11 +17,12 @@
         <div class="">
 
           <div class="clearfix"></div>
-          @if(Sentinel::check()->hasAccess('socios.crear'))
+          
           <div class="row">
 
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div id="mensaje"></div>
+              @if(Sentinel::check()->hasAccess('socios.crear'))
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Formulario de socios
@@ -130,12 +131,12 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="piso">Piso
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="number" id="piso" name="piso" class="form-control"  required>{{errores.piso[0]}}
+                        <input type="number" id="piso" name="piso" class="form-control" required>{{errores.piso[0]}}
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dpto">Dpto
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="text" id="dpto" name="dpto" class="form-control"  required>{{errores.departamento[0]}}
+                        <input type="text" id="dpto" name="dpto" class="form-control" required>{{errores.departamento[0]}}
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nucleo">Nucleo
                       </label>
@@ -238,14 +239,16 @@
 
                 </div>
               </div>
+            @endif
             </div>
           </div>
         </div>
 
-        @endif @if(Sentinel::check()->hasAccess('socios.visualizar'))
+         
 
       </div>
       <div class="col-md-12 col-sm-12 col-xs-12">
+      @if(Sentinel::check()->hasAccess('socios.visualizar'))
         <div class="x_panel">
           <div class="x_title">
             <h2>Socios
@@ -391,12 +394,22 @@
                             {{abm.telefono}}
                           </td>
                           <td id="botones">
+                          @endverbatim
+                          @if(Sentinel::check()->hasAccess('socios.editar'))
+                          @verbatim
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)">
                               <span class="glyphicon glyphicon-pencil"></span>
                             </button>
+                          @endverbatim
+                          @endif
+                          @if(Sentinel::check()->hasAccess('socios.borrar'))
+                          @verbatim
                             <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)">
                               <span class="glyphicon glyphicon-remove"></span>
                             </button>
+                          @endverbatim
+                          @endif
+                          @verbatim
                           </td>
                         </tr>
                         <!--
@@ -438,9 +451,9 @@
 
           </div>
         </div>
+      @endif
 
       </div>
-      @endif
       <!-- /page content -->
     </div>
 

@@ -24,6 +24,7 @@
           <div class="clearfix"></div>
 
           <div class="row">
+            @if(Sentinel::check()->hasAccess('comercializador.crear'))
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div id="mensaje"></div>
               <div class="x_panel">
@@ -199,13 +200,38 @@
                         </div>
                       </div>
                     </div>
+
+
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Copia del Documento
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file" id="cuit" name="cuit" ng-model="doc_documento"
-                          class="form-control col-md-7 col-xs-12" placeholder="" required>{[{errores.cuit[0]}]}
+                        <div class=" input-group">
+                          <span class="input-group-btn">
+                            <label class="btn btn-primary" type="button" for="input_doc_documento">Seleccionar Archivo</label>
+                          </span>
+                          <input class="form-control col-md-7 col-xs-12" ng-value="doc_documento.name">
+                          <input id="input_doc_documento" ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file" id="cuit"
+                            name="cuit" ng-model="doc_documento" class="form-control col-md-7 col-xs-12" placeholder="" required
+                            style="display: none">{[{errores.cuit[0]}]}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Copia del Recibo
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class=" input-group">
+                          <span class="input-group-btn">
+                            <label class="btn btn-primary" type="button" for="input_doc_recibo">Seleccionar Archivo</label>
+                          </span>
+                          <input class="form-control col-md-7 col-xs-12" ng-value="doc_recibo.name">
+                          <input id="input_doc_recibo" ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file" id="cuit"
+                            name="cuit" ng-model="doc_recibo" class="form-control col-md-7 col-xs-12" placeholder="" required
+                            style="display: none">{[{errores.cuit[0]}]}
+                        </div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -256,6 +282,7 @@
                 </div>
               </div>
             </div>
+            @endif
           </div>
         </div>
 
@@ -264,7 +291,7 @@
       </div>
 
 
-
+  @if(Sentinel::check()->hasAccess('comercializador.visualizar'))
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
@@ -344,10 +371,10 @@
                           {[{solicitud.estado}]}
                         </td>
                         <td title="'Acciones Disponibles'" style="color: #21a9d6;">
-
+                          
                           <span data-toggle="modal" data-target="#Comprobantes" ng-click="getFotos(solicitud.id)" class="fa fa-file-picture-o fa-2x"
                             titulo="Ver Comprobantes"></span>
-
+                          @if(Sentinel::check()->hasAccess('comercializador.crear'))
                           <span ng-show="solicitud.estado == 'Esperando Respuesta Comercializador'" ng-click="IDPropuesta(solicitud.id,solicitud.total,solicitud.monto_por_cuota,solicitud.cuotas)"
                             data-toggle="modal" data-target="#ContraPropuesta" class="fa fa-eye fa-2x" titulo="Analizar Propuesta"></span>
 
@@ -355,6 +382,7 @@
 
                           <span ng-show="solicitud.estado == 'Capital Reservado'" class="fa fa-send fa-2x" ng-click="EnviarFormulario(solicitud.id)"
                             titulo="Enviar Formulario"></span>
+                            @endif
                         </td>
                       </tr>
                   </table>
@@ -366,7 +394,7 @@
           </div>
         </div>
       </div>
-
+      @endif
 
       <!-- /page content -->
     </div>

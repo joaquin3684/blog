@@ -26,7 +26,8 @@
 
 
 
-            @verbatim
+            @if(Sentinel::check()->hasAccess('ventas.visualizar'))
+            @verbatim 
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div id="mensaje"></div>
                 <div class="x_panel">
@@ -93,8 +94,7 @@
                                         <b>{{organismoactual}}</b>)</a>
                                 </li>
                                 <li>
-                                    <a href="" id="bread-servicios" ng-if="vistaactual !== 'Organismos' && vistaactual !== 'Socios'"
-                                        ng-click="setVista('Ventas')">SERVICIOS (
+                                    <a href="" id="bread-servicios" ng-if="vistaactual !== 'Organismos' && vistaactual !== 'Socios'" ng-click="setVista('Ventas')">SERVICIOS (
                                         <b>{{socioactual}}</b>)</a>
                                 </li>
                                 <li>
@@ -374,8 +374,9 @@
                                 <!-- END TABLE -->
                             </div>
                             <!-- Trigger the modal with a button -->
+                            @endverbatim @if(Sentinel::check()->hasAccess('ventas.crear'))
                             <button type="button" class="btn btn-primary clearfix" data-toggle="modal" data-target="#modalCancelacion" ng-hide="cuotaSinEstado">Cancelar Servicio</button>
-
+                            @endif @verbatim
                             <!-- Modal -->
                             <div id="modalCancelacion" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
@@ -415,7 +416,9 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
+
                                             <button type="button" class="btn btn-primary" ng-click="cancelar(motivo, $event)" style="position: absolute; left: 20px;">Realizar accion</button>
+
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </div>
@@ -427,6 +430,7 @@
                 </div>
             </div>
             @endverbatim
+            @endif 
             <!-- /page content -->
             </input>
         </div>

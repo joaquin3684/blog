@@ -146,11 +146,13 @@
                                 <!-- END TABLE -->
                             </div>
                             <!-- Trigger the modal with a button -->
+                            @endverbatim
+                            @if(Sentinel::check()->hasAccess('pagoProveedores.crear'))
                             <button type="button" class="btn btn-primary clearfix" ng-click="PagarProveedores()">Pagar</button>
-
+                            @endif
 
                         </div>
-                        @endverbatim
+                        
 
                     </div>
                 </div>

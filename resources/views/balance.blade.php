@@ -1,8 +1,4 @@
-@extends('welcome')
-
-@section('contenido')
-
-{!! Html::script('js/controladores/balance.js') !!}
+@extends('welcome') @section('contenido') {!! Html::script('js/controladores/balance.js') !!}
 
 
 
@@ -11,191 +7,192 @@
         <div class="main_container">
             <input id="tipo_tabla" name="tipo_tabla" type="hidden" value="proovedores">
             <input type="hidden" id="token" value="{{ csrf_token() }}">
-                <!-- page content -->
-                <div class="left-col" role="main">
-                    <div class="">
-                        <div class="clearfix">
-                        </div>
+            <!-- page content -->
+            <div class="left-col" role="main">
+                <div class="">
+                    <div class="clearfix">
+                    </div>
+                    @if(Sentinel::check()->hasAccess('balances.visualizar'))
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>
+                                    Filtro
 
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>
-                                        Filtro
-
-                                    </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li>
-                                            <a class="collapse-link">
-                                                <i class="fa fa-chevron-up">
-                                                </i>
-                                            </a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                                <i class="fa fa-wrench">
-                                                </i>
-                                            </a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li>
-                                                    <a href="#">
-                                                        Settings 1
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Settings 2
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a class="close-link">
-                                                <i class="fa fa-close">
-                                                </i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix">
-                                    </div>
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up">
+                                            </i>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                                            <i class="fa fa-wrench">
+                                            </i>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a href="#">
+                                                    Settings 1
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    Settings 2
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="close-link">
+                                            <i class="fa fa-close">
+                                            </i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix">
                                 </div>
-                                <!-- ARRANCAN LOS FILTROS -->
-                                <div class="x_content" >
-                                    <div class="container">
+                            </div>
+                            <!-- ARRANCAN LOS FILTROS -->
+                            <div class="x_content">
+                                <div class="container">
 
-                                      @verbatim
+                                    @verbatim
 
-                                      <form class="form-horizontal form-label-left" ng-submit="filtro()">
+                                    <form class="form-horizontal form-label-left" ng-submit="filtro()">
 
 
                                         <div class="row">
 
-                                          <div class="item form-group" >
-                                              <label class="control-label col-md-3 col-sm-3 col-xs-8" for="categoria">Fecha</label>
-                                              <div class="col-md-4 col-sm-4 col-xs-8" >
-                                                <input type="text"  ng-model="fecha_desde" class="form-control col-md-2 col-xs-12" onfocus="(this.type='date')" placeholder="Desde">
-                                              </div>
-                                              <div class="col-md-4 col-sm-4 col-xs-8" >
-                                                <input type="text" ng-model="fecha_hasta"  class="form-control col-md-2 col-xs-12" onfocus="(this.type='date')" placeholder="Hasta">
-                                              </div>
-                                          </div>
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-8" for="categoria">Fecha</label>
+                                                <div class="col-md-4 col-sm-4 col-xs-8">
+                                                    <input type="text" ng-model="fecha_desde" class="form-control col-md-2 col-xs-12" onfocus="(this.type='date')" placeholder="Desde">
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xs-8">
+                                                    <input type="text" ng-model="fecha_hasta" class="form-control col-md-2 col-xs-12" onfocus="(this.type='date')" placeholder="Hasta">
+                                                </div>
+                                            </div>
 
 
-                                          </div>
                                         </div>
-                                        <input type="submit"class="btn btn-success" value="Filtrar">
-                                        </form>
-                                        @endverbatim
-                                    </div>
                                 </div>
+                                <input type="submit" class="btn btn-success" value="Filtrar">
+                                </form>
+                                @endverbatim
                             </div>
                         </div>
                     </div>
+                    
                 </div>
+            </div>
+        </div>
 
 
 
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>
-                                Balances
-                                
-                            </h2>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>
+                        Balances
 
-                            <ul class="nav navbar-right panel_toolbox">
+                    </h2>
+
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up">
+                                </i>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                                <i class="fa fa-wrench">
+                                </i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a class="collapse-link">
-                                        <i class="fa fa-chevron-up">
-                                        </i>
+                                    <a href="#">
+                                        Settings 1
                                     </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                        <i class="fa fa-wrench">
-                                        </i>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <a href="#">
-                                                Settings 1
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Settings 2
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <i class="fa fa-close">
-                                        </i>
+                                        Settings 2
                                     </a>
                                 </li>
                             </ul>
-                            <div class="clearfix">
-                            </div>
-                        </div>
-                        <div class="x_content" id="impr">
-
-
-
-
-                            <div id="pruebaExpandir" >
-                                <div class="span12 row-fluid">
-                                    <!-- START $scope.[model] updates -->
-                                    <!-- END $scope.[model] updates -->
-                                    <!-- START TABLE -->
-                                    <div>
-                                      @verbatim
-                                      <table ng-table="paramsBalances" class="table table-hover table-bordered">
-                                          <tbody data-ng-repeat="balance in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                          <tr class="clickableRow" title="Datos">
-                                              <td title="'Codigo'" filter="{ codigo: 'text'}" sortable="'codigo'">
-                                                  {{balance.codigo}}
-                                              </td>
-                                              <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                                                  {{balance.nombre}}
-                                              </td>
-                                              <td title="'Saldo anterior'" filter="{ saldo_anterior: 'text'}" sortable="'saldo_anterior'">
-                                                  {{balance.saldoAnterior}}
-                                              </td>
-                                              <td title="'Total mov. debe'" filter="{ total_debe: 'text'}" sortable="'total_debe'">
-                                                  {{balance.totalDebe}}
-                                              </td>
-                                              <td title="'Total mov. haber'" filter="{ total_haber: 'text'}" sortable="'total_haber'">
-                                                  {{balance.totalHaber}}
-                                              </td>
-                                              <td title="'Saldo'" filter="{ saldo: 'text'}" sortable="'saldo'">
-                                                  {{balance.saldo}}
-                                              </td>
-
-                                          </tr>
-                                      </table>
-                                        @endverbatim
-                                    </div>
-                                    <!-- END TABLE -->
-                                </div>
-
-                            </div>
-                        </div>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-close">
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix">
                     </div>
                 </div>
+                <div class="x_content" id="impr">
 
-                <!-- /page content -->
-            </input>
+
+
+
+                    <div id="pruebaExpandir">
+                        <div class="span12 row-fluid">
+                            <!-- START $scope.[model] updates -->
+                            <!-- END $scope.[model] updates -->
+                            <!-- START TABLE -->
+                            <div>
+                                @verbatim
+                                <table ng-table="paramsBalances" class="table table-hover table-bordered">
+                                    <tbody data-ng-repeat="balance in $data" data-ng-switch on="dayDataCollapse[$index]">
+                                        <tr class="clickableRow" title="Datos">
+                                            <td title="'Codigo'" filter="{ codigo: 'text'}" sortable="'codigo'">
+                                                {{balance.codigo}}
+                                            </td>
+                                            <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                {{balance.nombre}}
+                                            </td>
+                                            <td title="'Saldo anterior'" filter="{ saldo_anterior: 'text'}" sortable="'saldo_anterior'">
+                                                {{balance.saldoAnterior}}
+                                            </td>
+                                            <td title="'Total mov. debe'" filter="{ total_debe: 'text'}" sortable="'total_debe'">
+                                                {{balance.totalDebe}}
+                                            </td>
+                                            <td title="'Total mov. haber'" filter="{ total_haber: 'text'}" sortable="'total_haber'">
+                                                {{balance.totalHaber}}
+                                            </td>
+                                            <td title="'Saldo'" filter="{ saldo: 'text'}" sortable="'saldo'">
+                                                {{balance.saldo}}
+                                            </td>
+
+                                        </tr>
+                                </table>
+                                @endverbatim
+                            </div>
+                            <!-- END TABLE -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
+        @endif
+        <!-- /page content -->
+        </input>
     </div>
-    <div class="custom-notifications dsp_none" id="custom_notifications">
-        <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
-        </ul>
-        <div class="clearfix">
-        </div>
-        <div class="tabbed_notifications" id="notif-group">
-        </div>
+</div>
+<div class="custom-notifications dsp_none" id="custom_notifications">
+    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+    </ul>
+    <div class="clearfix">
     </div>
+    <div class="tabbed_notifications" id="notif-group">
+    </div>
+</div>
 
 
 </div>
