@@ -10,6 +10,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title> Mutual </title>
+  {!! Html::script('js/angular.min.js') !!}
   <!-- Bootstrap core CSS -->
 {!! Html::style('js/angular-material/angular-material.min.css') !!}
   {!! Html::style('css/bootstrap.min.css') !!}
@@ -34,7 +35,7 @@
    {!! Html::script('js/jquery-ui-1.12.1/jquery-ui.min.js') !!}
    {!! Html::style('js/jquery-ui-1.12.1/jquery-ui.min.css') !!}
 
-    {!! Html::script('js/angular.min.js') !!}
+    
     {!! Html::script('js/nprogress.js') !!}
   {!! Html::script('js/misFunciones.js') !!}
   {!! Html::script('js/angular-animate/angular-animate.min.js') !!}
@@ -109,7 +110,7 @@
 </div>
 
 
-<body class="nav-md">
+<body class="nav-md" >
 
   <div class="container body">
 

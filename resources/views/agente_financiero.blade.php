@@ -30,7 +30,7 @@
       </div>
 
 
-      @if(Sentinel::check()->hasAccess('agentesfinancieros.visualizar'))
+      @if(Sentinel::check()->hasAccess('agentesFinancieros.visualizar'))
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div id="mensaje"></div>
         <div class="x_panel">
@@ -110,7 +110,7 @@
                           <span data-toggle="modal" data-target="#Comprobantes" ng-click="getFotos(solicitud.id)" class="fa fa-file-picture-o fa-2x"
                             titulo="Ver Comprobantes"></span>
                        
-                        @if(Sentinel::check()->hasAccess('agenteFinanciero.crear'))
+                        @if(Sentinel::check()->hasAccess('agentesFinancieros.crear'))
                           <span ng-show="solicitud.estado == 'Agente Financiero Asignado' || solicitud.estado == 'Modificada por Comercializador'"
                             ng-click="RechazarSolicitud(solicitud.id)" class="fa fa-close fa-2x" titulo="Rechazar Solicitud"></span>
 

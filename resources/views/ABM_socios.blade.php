@@ -1,5 +1,7 @@
-@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABMprueba.js') !!} {!! Html::script('js/bootstrap-menu/BootstrapMenu.min.js')
-!!}
+@extends('welcome') @section('contenido') 
+{!! Html::script('js/angular.min.js')!!}
+{!! Html::script('js/controladores/ABMprueba.js') !!} 
+{!! Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
 
 <div class="nav-md" ng-controller="ABM">
 
@@ -57,8 +59,8 @@
                 </div>
                 <div class="x_content">
                   @verbatim
-                  <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario">
-                    {{ csrf_field() }}
+                  <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario" >
+                    <div ng-cloak>{{ csrf_field() }}</div>
 
                     <span class="section">Datos de socio</span>
 
@@ -68,7 +70,8 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese nombre del Socio"
-                          type="text">{{errores.nombre[0]}}
+                          type="text" >
+                          <div ng-cloak>{{errores.nombre[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -77,7 +80,8 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input id="apellido" class="form-control col-md-7 col-xs-12" ng-model="apellido" placeholder="Ingrese apellido del Socio"
-                          type="text" required>{{errores.apellido[0]}}
+                          type="text" required>
+                          <div ng-cloak>{{errores.apellido[0]}}</div>
                       </div>
                     </div>
                     <input style="display: none" name="nombre" value="{{apellido}},{{nombre}}" type="text">
@@ -86,7 +90,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control col-md-7 col-xs-12" required>{{errores.fecha_nacimiento[0]}}
+                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control col-md-7 col-xs-12" required><div ng-cloak>{{errores.fecha_nacimiento[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -95,10 +99,11 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="number" id="dni" name="dni" ng-model="dni" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el DNI"
-                          required>{{errores.dni[0]}}
+                          required>
+                          <div ng-cloak>{{errores.dni[0]}}</div>
                       </div>
                     </div>
-
+                  
 
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit
@@ -107,9 +112,9 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="input-group">
                           <input type="text" class="form-control" maxlength="2" ng-model="tipo" placeholder="Tipo" style="text-align: right">
-                          <span class="input-group-addon">-{{dni}}-</span>
+                          <span class="input-group-addon"><div ng-cloak>-{{dni}}-</div></span>
                           <input type="text" class="form-control" maxlength="1" ng-model="codigoVerif" placeholder="Codigo verif.">
-                          <input type="text" name="cuit" value="{{tipo}}{{dni}}{{codigoVerif}}" style="display: none">{{errores.cuit[0]}}
+                          <input type="text" name="cuit" value="{{tipo}}{{dni}}{{codigoVerif}}" style="display: none"><div ng-cloak>{{errores.cuit[0]}}</div>
                         </div>
                       </div>
                     </div>
@@ -124,24 +129,26 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio"
-                          required>{{errores.domicilio[0]}}
+                          required>
+                          <div ng-cloak>{{errores.domicilio[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="piso">Piso
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="number" id="piso" name="piso" class="form-control" required>{{errores.piso[0]}}
+                        <input type="number" id="piso" name="piso" class="form-control" required ng->
+                        <div ng-cloak>{{errores.piso[0]}}</div>
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dpto">Dpto
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="text" id="dpto" name="dpto" class="form-control" required>{{errores.departamento[0]}}
+                        <input type="text" id="dpto" name="dpto" class="form-control" required><div ng-cloak>{{errores.departamento[0]}}</div>
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nucleo">Nucleo
                       </label>
                       <div class="col-md-2 col-sm-2 col-xs-12">
-                        <input type="number" id="nucleo" name="nucleo" class="form-control" required>{{errores.nucleo[0]}}
+                        <input type="number" id="nucleo" name="nucleo" class="form-control" required><div ng-cloak>{{errores.nucleo[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -150,7 +157,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="localidad" name="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Localidad"
-                          required>{{errores.localidad[0]}}
+                          required><div ng-cloak>{{errores.localidad[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -159,7 +166,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="number" id="codigo_postal" name="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Código Postal"
-                          required>{{errores.codigo_postal[0]}}
+                          required><div ng-cloak>{{errores.codigo_postal[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -168,7 +175,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Teléfono"
-                          required>{{errores.telefono[0]}}
+                          required><div ng-cloak>{{errores.telefono[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -181,7 +188,7 @@
                           <input type="radio" name="sexo" value="Masculino">Masculino
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="sexo" value="Femenino">Femenino {{errores.sexo[0]}}
+                          <input type="radio" name="sexo" value="Femenino">Femenino <div ng-cloak>{{errores.sexo[0]}}</div>
                         </label>
 
                       </div>
@@ -191,7 +198,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="legajo" name="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Legajo" required>{{errores.legajo[0]}}
+                        <input type="number" id="legajo" name="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Legajo" required><div ng-cloak>{{errores.legajo[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -200,7 +207,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="date" id="fecha_ingreso" ng-value="fechadehoy" value="{{fechadehoy}}" name="fecha_ingreso" class="form-control col-md-7 col-xs-12"
-                          placeholder="Ingrese la fecha de ingreso" required>{{errores.fecha_ingreso[0]}}
+                          placeholder="Ingrese la fecha de ingreso" required><div ng-cloak>{{errores.fecha_ingreso[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -212,7 +219,7 @@
                           <option value="{{x.id}}" ng-repeat="x in organismosines">
                             {{x.nombre}}
                           </option>
-                        </select>{{errores.id_organismo[0]}}
+                        </select><div ng-cloak>{{errores.id_organismo[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -222,7 +229,7 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="categoriacomplete" name="valor" ng-required="true">
                           <option value="{{x.valor}}" ng-repeat="x in categorias">
-                            {{x.categoria}}
+                            <div ng-cloak>{{x.categoria}}</div>
                           </option>
                         </select>
                       </div>
@@ -247,7 +254,7 @@
          
 
       </div>
-      <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-12 col-sm-12 col-xs-12" ng-cloak>
       @if(Sentinel::check()->hasAccess('socios.visualizar'))
         <div class="x_panel">
           <div class="x_title">
