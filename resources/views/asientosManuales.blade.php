@@ -51,11 +51,11 @@
                 <div class="x_content">
                   @verbatim
                   <form class="form-horizontal form-label-left" id="formulario" ng-submit="verificarIgualdad()">
-                    {{ csrf_field() }}
+                    <div ng-cloak>{{ csrf_field() }}</div>
 
-                    <table class="table">
+                    <table class="table" ng-cloak>
                       <thead>
-                        <tr>
+                        <tr >
 
                           <th style="text-align: center">Id. imputacion</th>
                           <th style="text-align: center">Debe</th>
@@ -65,7 +65,7 @@
                       </thead>
                       <tbody>
 
-                        <tr ng-repeat="asiento in asientos" ng-attr-id="asiento{{$index}}">
+                        <tr ng-repeat="asiento in asientos" ng-attr-id="asiento{{$index}}" ng-cloak>
                           <td style="border-top: 1px solid white;">
                             <select class="form-control" id="sel1" ng-model="asiento.id_imputacion">
                               <option ng-value="{{id}}" ng-repeat="id in idDisponibles">{{id.nombre}}</option>
@@ -89,7 +89,7 @@
 
                       </tbody>
                       <tfoot>
-                        <tr style="font-size: initial">
+                        <tr style="font-size: initial" ng-cloak>
                           <th>Totales:</th>
                           {{sumarTotales()}}
                           <th>{{sumaDebe}}</th>

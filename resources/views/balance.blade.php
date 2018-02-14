@@ -149,7 +149,7 @@
                                 @verbatim
                                 <table ng-table="paramsBalances" class="table table-hover table-bordered">
                                     <tbody data-ng-repeat="balance in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                        <tr class="clickableRow" title="Datos">
+                                        <tr class="clickableRow" title="Datos" ng-cloak>
                                             <td title="'Codigo'" filter="{ codigo: 'text'}" sortable="'codigo'">
                                                 {{balance.codigo}}
                                             </td>

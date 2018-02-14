@@ -79,7 +79,7 @@
                                     <table ng-table="paramsProveedores" class="table table-hover table-bordered">
 
                                         <tbody data-ng-repeat="proovedor in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                        <tr class="clickableRow" title="" data-ng-click="pullProovedor(proovedor.id_proovedor);selectTableRow($index,proovedor.id_proovedor)" >
+                                        <tr class="clickableRow" title="" data-ng-click="pullProovedor(proovedor.id_proovedor);selectTableRow($index,proovedor.id_proovedor)" ng-cloak>
                                             <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
                                                 {{proovedor.proovedor}}
                                             </td>
@@ -91,11 +91,11 @@
                                             </td>
 
                                         </tr>
-                                        <tr data-ng-switch-when="true">
+                                        <tr data-ng-switch-when="true" ng-cloak>
                                             <td colspan="5">
                                                 <div>
                                                     <div>
-                                                        <table class="table">
+                                                        <table class="table" ng-cloak>
                                                             <thead class="levelTwo" style="background-color: #73879C; color: white;">
                                                             <tr>
                                                                 <th>Socio</th>
@@ -128,7 +128,7 @@
                                         </tr>
                                         </tbody>
                                         <tfoot>
-                                        <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                        <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;" ng-cloak>
                                             <td style="text-align: right;">
                                                 <b>Total</b>
 

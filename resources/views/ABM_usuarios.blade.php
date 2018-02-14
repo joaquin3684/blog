@@ -52,7 +52,7 @@
                 <div class="x_content">
                   @verbatim
                   <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario">
-                    {{ csrf_field() }}
+                    <div ng-cloak>{{ csrf_field() }}</div>
 
                     <span class="section">Datos de usuario</span>
 
@@ -61,7 +61,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="usuario" class="form-control col-md-7 col-xs-12" name="usuario" placeholder="Ingrese usuario" type="text" required>{{errores.usuario[0]}}
+                        <input id="usuario" class="form-control col-md-7 col-xs-12" name="usuario" placeholder="Ingrese usuario" type="text" required><div ng-cloak>{{errores.usuario[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -70,7 +70,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input id="email" class="form-control col-md-7 col-xs-12" name="email" placeholder="Ingrese email del usuario" type="text"
-                          required>{{errores.email[0]}}
+                          required><div ng-cloak>{{errores.email[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -79,7 +79,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="password" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la contraseña"
-                          required>{{errores.password[0]}}
+                          required><div ng-cloak>{{errores.password[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -160,7 +160,7 @@
               @verbatim
               <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
                 <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-                  <tr class="clickableRow" title="Datos">
+                  <tr class="clickableRow" title="Datos" ng-cloak>
                     <td title="'Usuario'" filter="{ usuario: 'text'}" sortable="'usuario'">
                       {{abm.usuario}}
                     </td>
@@ -231,7 +231,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="usuario" class="form-control col-md-7 col-xs-12" name="usuario" placeholder="Ingrese usuario del organismo" type="text">{{errores.usuario[0]}}
+                <input id="usuario" class="form-control col-md-7 col-xs-12" name="usuario" placeholder="Ingrese usuario del organismo" type="text"><div ng-cloak>{{errores.usuario[0]}}</div>
               </div>
             </div>
             <div class="item form-group">
@@ -239,7 +239,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="email" class="form-control col-md-7 col-xs-12" name="email" placeholder="Ingrese email del organismo" type="text">{{errores.email[0]}}
+                <input id="email" class="form-control col-md-7 col-xs-12" name="email" placeholder="Ingrese email del organismo" type="text"><div ng-cloak>{{errores.email[0]}}</div>
               </div>
             </div>
             <div class="item form-group">
@@ -247,7 +247,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="password" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el password">{{errores.password[0]}}
+                <input type="text" id="password" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el password"><div ng-cloak>{{errores.password[0]}}</div>
               </div>
             </div>
 

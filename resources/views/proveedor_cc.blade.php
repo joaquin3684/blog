@@ -377,7 +377,7 @@
                             @verbatim
                             <table id="tablaOrganismos" ng-table="paramsOrganismos" class="table table-hover table-bordered">
 
-                                <tr ng-repeat="organismo in $data" ng-click="PullSocios(organismo.id_organismo,organismo.organismo)">
+                                <tr ng-repeat="organismo in $data" ng-click="PullSocios(organismo.id_organismo,organismo.organismo)" ng-cloak>
 
                                     <td title="'Organismo'" filter="{organismo: 'text'}" sortable="'organismo'">
                                         {{organismo.organismo}}

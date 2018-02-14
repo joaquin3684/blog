@@ -83,7 +83,7 @@
                   <table id="tablita" ng-table="paramssolicitudes" class="table table-hover table-bordered">
 
                     <tbody data-ng-repeat="solicitud in $data" data-ng-switch on="dayDataCollapse[$index]">
-                      <tr class="clickableRow" title="Datos">
+                      <tr class="clickableRow" title="Datos" ng-cloak>
                         <td title="'Nombre'" sortable="'nombre'">
                           {[{solicitud.socio.nombre}]}
                         </td>
@@ -322,7 +322,8 @@
               <center>Previsualización</center>
               </br>
               <center>
-                <img src="images/preload.png" height="300px" width="300px" id="previsualizacion">
+                <img src="images/preload.png" id="previsualizacion" class="imgAExpandir" data-toggle="modal" data-target="#modalExpandirImg"
+                  ng-click="expandirImg()">
               </center>
             </div>
           </form>
@@ -334,7 +335,22 @@
 
 
   </div>
-
+  
+  <!-- The Modal -->
+  <div id="modalExpandirImg" class="modalExpandir fade">
+    <!-- The Close Button -->
+    <span class="close" data-dismiss="modal">&times;</span>
+    <!-- Modal Content (The Image) -->
+    <img class="modal-contentExpandirImg" id="imgExpandida">
+    <br>
+    <a ng-href="{[{imageSrc}]}" download>
+      <center style="color: white">
+        <h4>Descargar
+          <i class="fa fa-download" aria-hidden="true"></i>
+        </h4>
+      </center>
+    </a>
+  </div>
 
 </div>
 

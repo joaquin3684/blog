@@ -67,7 +67,7 @@
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese nombre del producto"
-                                                    type="text">{{errores.nombre[0]}}
+                                                    type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -76,7 +76,7 @@
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="descripcion" placeholder="Ingrese la descripcion"
-                                                    type="text">{{errores.descripcion[0]}}
+                                                    type="text"><div ng-cloak>{{errores.descripcion[0]}}</div>
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -84,7 +84,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input required type="number" step="0.01" id="retencion" ng-model="ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %">{{errores.porcentaje_retencion[0]}}
+                                                <input required type="number" step="0.01" id="retencion" ng-model="ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %"><div ng-cloak>{{errores.porcentaje_retencion[0]}}</div>
                                             </div>
                                         </div>
 
@@ -94,8 +94,8 @@
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <select ng-model="id_proovedor" class="form-control col-md-7 col-xs-12" required>
-                                                    <option ng-repeat="proovedor in proovedores" value="{{proovedor.id}}">{{proovedor.razon_social}}</option>
-                                                </select>{{errores.id_proovedor[0]}}
+                                                    <option ng-repeat="proovedor in proovedores" value="{{proovedor.id}}"><div ng-cloak>{{proovedor.razon_social}}</div></option>
+                                                </select><div ng-cloak>{{errores.id_proovedor[0]}}</div>
 
                                             </div>
                                         </div>
@@ -105,7 +105,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input required type="number" step="0.01" ng-model="tasa" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la tasa">{{errores.tasa[0]}}
+                                                <input required type="number" step="0.01" ng-model="tasa" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la tasa"><div ng-cloak>{{errores.tasa[0]}}</div>
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -127,13 +127,13 @@
                                                 </label>
                                                 <div class="col-md-2 col-sm-2 col-xs-8" id="desde">
                                                     <input type="number" step="0.01" ng-model="porcentaje.desde" class="form-control col-md-2 col-xs-12" ng-disabled="{{!$first}}"
-                                                        placeholder="Desde">{{errores.cuota_social[0]}} {{asignarDesde($index, $first, porcentajes)}}
+                                                        placeholder="Desde"><div ng-cloak>{{errores.cuota_social[0]}}</div> <div ng-cloak>{{asignarDesde($index, $first, porcentajes)}}</div>
                                                 </div>
                                                 <div class="col-md-2 col-sm-2 col-xs-8" id="hasta">
-                                                    <input type="number" step="0.01" ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta">{{errores.cuota_social[0]}}
+                                                    <input type="number" step="0.01" ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta"><div ng-cloak>{{errores.cuota_social[0]}}</div>
                                                 </div>
                                                 <div class="col-md-2 col-sm-2 col-xs-8" id="porc">
-                                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">{{errores.cuota_social[0]}}
+                                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje"><div ng-cloak>{{errores.cuota_social[0]}}</div>
                                                 </div>
 
                                             </div>
@@ -252,7 +252,7 @@
                                     @verbatim
                                     <table ng-table="paramsABMS" class="table table-hover table-bordered">
                                         <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                            <tr class="clickableRow" title="Datos">
+                                            <tr class="clickableRow" title="Datos" ng-cloak>
                                                 <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
                                                     {{abm.nombre}}
                                                 </td>
@@ -327,7 +327,7 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input id="nombre" class="form-control col-md-7 col-xs-12" ng-model="abmConsultado.nombre" placeholder="Ingrese nombre del producto"
-                                    type="text">{{errores.nombre[0]}}
+                                    type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
                             </div>
                         </div>
                         <div class="item form-group">
@@ -336,7 +336,7 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="abmConsultado.descripcion" placeholder="Ingrese la descripcion"
-                                    type="text">{{errores.nombre[0]}}
+                                    type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
                             </div>
                         </div>
 
@@ -346,7 +346,7 @@
                                 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" step="0.01" ng-model="abmConsultado.tasa" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la tasa">{{errores.tasa[0]}}
+                                <input type="number" step="0.01" ng-model="abmConsultado.tasa" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la tasa"><div ng-cloak>{{errores.tasa[0]}}</div>
                             </div>
                         </div>
 
@@ -367,14 +367,14 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-2 col-sm-2 col-xs-8" id="desde">
-                                    <input type="number" ng-model="porcentaje.desde" class="form-control col-md-2 col-xs-12" ng-disabled="{{!$first}}" placeholder="Desde">{{errores.cuota_social[0]}}
+                                    <input type="number" ng-model="porcentaje.desde" class="form-control col-md-2 col-xs-12" ng-disabled="{{!$first}}" placeholder="Desde"><div ng-cloak>{{errores.cuota_social[0]}}</div>
                                 </div>
                                 {{asignarDesde($index, $first, abmConsultado.porcentajes)}}
                                 <div class="col-md-2 col-sm-2 col-xs-8" id="hasta">
-                                    <input type="number" step="0.01" ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta">{{errores.cuota_social[0]}}
+                                    <input type="number" step="0.01" ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta"><div ng-cloak>{{errores.cuota_social[0]}}</div>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-xs-8" id="porc">
-                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">{{errores.cuota_social[0]}}
+                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje"><div ng-cloak>{{errores.cuota_social[0]}}</div>
                                 </div>
 
                             </div>

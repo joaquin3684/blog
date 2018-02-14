@@ -54,7 +54,7 @@
                 <div class="x_content">
                   @verbatim
                   <form class="form-horizontal form-label-left" id="formulario" ng-submit="submitComerc()">
-                    {{ csrf_field() }}
+                    <div ng-cloak>{{ csrf_field() }}</div>
 
                     <span class="section">Datos del comercializador</span>
 
@@ -64,7 +64,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del comercializador"
-                          type="text" ng-model="nombreComerc">{{errores.nombre[0]}}
+                          type="text" ng-model="nombreComerc"><div ng-cloak>{{errores.nombre[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -73,7 +73,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="apellido" name="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el apellido del comercializador"
-                          ng-model="apellidoComerc">{{errores.apellido[0]}}
+                          ng-model="apellidoComerc"><div ng-cloak>{{errores.apellido[0]}}</div>
                       </div>
                     </div>
 
@@ -83,7 +83,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="number" id="cuit" name="cuit" required class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit"
-                          ng-model="cuitComerc">{{errores.cuit[0]}}
+                          ng-model="cuitComerc"><div ng-cloak>{{errores.cuit[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -92,7 +92,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="number" id="documento" name="documento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Documento"
-                          ng-model="documentoComerc">{{errores.dni[0]}}
+                          ng-model="documentoComerc"><div ng-cloak>{{errores.dni[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -100,7 +100,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el email" ng-model="emailComerc">{{errores.email[0]}}
+                        <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el email" ng-model="emailComerc"><div ng-cloak>{{errores.email[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -109,7 +109,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio"
-                          ng-model="domicilioComerc">{{errores.domicilio[0]}}
+                          ng-model="domicilioComerc"><div ng-cloak>{{errores.domicilio[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -118,7 +118,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el telefono"
-                          ng-model="telefonoComerc">{{errores.telefono[0]}}
+                          ng-model="telefonoComerc"><div ng-cloak>{{errores.telefono[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -126,7 +126,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el usuario" ng-model="usuarioComerc">{{errores.usuario[0]}}
+                        <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el usuario" ng-model="usuarioComerc"><div ng-cloak>{{errores.usuario[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -135,7 +135,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="contraseña" name="tcontraseña" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la contraseña"
-                          ng-model="contraseniaComerc">{{errores.password[0]}}
+                          ng-model="contraseniaComerc"><div ng-cloak>{{errores.password[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -144,7 +144,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="number" step="0.01" id="porcentaje_colocacion" name="porcentaje_colocacion" class="form-control col-md-7 col-xs-12"
-                          placeholder="Ingrese el porcentaje" ng-model="porcentaje_colocacionComerc">{{errores.porcentaje_colocacion[0]}}
+                          placeholder="Ingrese el porcentaje" ng-model="porcentaje_colocacionComerc"><div ng-cloak>{{errores.porcentaje_colocacion[0]}}</div>
                       </div>
                     </div>
 
@@ -246,7 +246,7 @@
                   <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
 
                     <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-                      <tr class="clickableRow" title="Datos">
+                      <tr class="clickableRow" title="Datos" ng-cloak>
                         <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
                           {{abm.nombre}}
                         </td>
@@ -330,7 +330,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" class="form-control col-md-7 col-xs-12" name="nombre" ng-model="abmConsultado.nombre" required>{{errores.nombre[0]}}
+                <input type="text" class="form-control col-md-7 col-xs-12" name="nombre" ng-model="abmConsultado.nombre" required><div ng-cloak>{{errores.nombre[0]}}</div>
               </div>
             </div>
             <div class="item form-group">
@@ -339,7 +339,7 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" step="0.01" id="apellido" name="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el apellido del comercializador"
-                  ng-model="abmConsultado.apellido" required>{{errores.apellido[0]}}
+                  ng-model="abmConsultado.apellido" required><div ng-cloak>{{errores.apellido[0]}}</div>
               </div>
             </div>
 
@@ -349,7 +349,7 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="number" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit" ng-model="abmConsultado.cuit"
-                  required>{{errores.cuit[0]}}
+                  required><div ng-cloak>{{errores.cuit[0]}}</div>
               </div>
             </div>
             <div class="item form-group">
@@ -358,7 +358,7 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="number" id="documento" name="documento" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Documento"
-                  ng-model="abmConsultado.dni" required>{{errores.dni[0]}}
+                  ng-model="abmConsultado.dni" required><div ng-cloak>{{errores.dni[0]}}</div>
               </div>
             </div>
             <div class="item form-group">
@@ -367,7 +367,7 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el email" ng-model="abmConsultado.email"
-                  required>{{errores.email[0]}}
+                  required><div ng-cloak>{{errores.email[0]}}</div>
               </div>
             </div>
             <div class="item form-group">
@@ -376,7 +376,7 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio"
-                  ng-model="abmConsultado.domicilio" required>{{errores.domicilio[0]}}
+                  ng-model="abmConsultado.domicilio" required><div ng-cloak>{{errores.domicilio[0]}}</div>
               </div>
             </div>
             <div class="item form-group">
@@ -385,7 +385,7 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el telefono"
-                  ng-model="abmConsultado.telefono" required>{{errores.telefono[0]}}
+                  ng-model="abmConsultado.telefono" required><div ng-cloak>{{errores.telefono[0]}}</div>
               </div>
             </div>
             <div class="item form-group">
@@ -394,7 +394,7 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el usuario" ng-model="abmConsultado.usuario"
-                  required>{{errores.usuario[0]}}
+                  required><div ng-cloak>{{errores.usuario[0]}}</div>
               </div>
             </div>
             <div class="item form-group">
@@ -403,7 +403,7 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="number" step="0.01" id="porcentaje_colocacion" name="porcentaje_colocacion" class="form-control col-md-7 col-xs-12"
-                  placeholder="Ingrese el porcentaje" ng-model="abmConsultado.porcentaje_colocacion" required>{{errores.porcentaje_colocacion[0]}}
+                  placeholder="Ingrese el porcentaje" ng-model="abmConsultado.porcentaje_colocacion" required><div ng-cloak>{{errores.porcentaje_colocacion[0]}}</div>
               </div>
             </div>
 

@@ -78,7 +78,7 @@
 
                     <tbody data-ng-repeat="solicitud in $data | filter: { estado: filtroestado }" data-ng-switch on="dayDataCollapse[$index]">
 
-                      <tr class="clickableRow" title="Datos">
+                      <tr class="clickableRow" title="Datos" ng-cloak>
                         <td title="'Nombre'" sortable="'nombre'">
                           {[{solicitud.socio.nombre}]}
                         </td>
@@ -180,7 +180,7 @@
                   <table id="tablita" ng-table="paramssolicitudes2" class="table table-hover table-bordered">
 
                     <tbody data-ng-repeat="solicitud in $data" data-ng-switch on="dayDataCollapse[$index]">
-                      <tr class="clickableRow" title="Datos">
+                      <tr class="clickableRow" title="Datos" ng-cloak>
                         <td title="'Nombre'" sortable="'nombre'">
                           {[{solicitud.socio.nombre}]}
                         </td>

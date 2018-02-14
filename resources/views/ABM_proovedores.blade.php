@@ -64,7 +64,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input required id="razonSocial" class="form-control col-md-7 col-xs-12" name="razon_social" placeholder="Ingrese la Razon social"
-                          type="text">{{errores.nombre[0]}}
+                          type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
                       </div>
                     </div>
 
@@ -72,7 +72,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descripcion">Descripcion
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Descripcion">{{errores.descripcion[0]}}
+                        <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Descripcion"><div ng-cloak>{{errores.descripcion[0]}}</div>
                       </div>
                     </div>
 
@@ -81,24 +81,24 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio">{{errores.domicilio[0]}}
+                        <input required type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio"><div ng-cloak>{{errores.domicilio[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="piso">Piso
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="number" id="piso" name="piso" class="form-control" required>{{errores.piso[0]}}
+                        <input type="number" id="piso" name="piso" class="form-control" required><div ng-cloak>{{errores.piso[0]}}</div>
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dpto">Dpto
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="text" id="dpto" name="dpto" class="form-control" required>{{errores.departamento[0]}}
+                        <input type="text" id="dpto" name="dpto" class="form-control" required><div ng-cloak>{{errores.departamento[0]}}</div>
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nucleo">Nucleo
                       </label>
                       <div class="col-md-2 col-sm-2 col-xs-12">
-                        <input type="number" id="nucleo" name="nucleo" class="form-control" required>{{errores.nucleo[0]}}
+                        <input type="number" id="nucleo" name="nucleo" class="form-control" required><div ng-cloak>{{errores.nucleo[0]}}</div>
                       </div>
                     </div>
 
@@ -107,7 +107,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="number" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit">{{errores.cuit[0]}}
+                        <input required type="number" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit"><div ng-cloak>{{errores.cuit[0]}}</div>
                       </div>
                     </div>
 
@@ -116,7 +116,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono">{{errores.telefono[0]}}
+                        <input required type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono"><div ng-cloak>{{errores.telefono[0]}}</div>
                       </div>
                     </div>
 
@@ -125,7 +125,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Email">{{errores.email[0]}}
+                        <input required type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Email"><div ng-cloak>{{errores.email[0]}}</div>
                       </div>
                     </div>
 
@@ -134,7 +134,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="cuit" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Usuario">{{errores.usuario[0]}}
+                        <input required type="text" id="cuit" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Usuario"><div ng-cloak>{{errores.usuario[0]}}</div>
                       </div>
                     </div>
 
@@ -143,21 +143,21 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="cuit" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Contraseña">{{errores.password[0]}}
+                        <input required type="text" id="cuit" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Contraseña"><div ng-cloak>{{errores.password[0]}}</div>
                       </div>
                     </div>
                     <!--                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="porcentaje_retencion" name="porcentaje_retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese % Ganancia">{{errores.porcentaje_retencion[0]}}
+                        <input type="number" id="porcentaje_retencion" name="porcentaje_retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese % Ganancia"><div ng-cloak>{{errores.porcentaje_retencion[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_gastos_administrativos">Porcentaje de Gastos administrtivos <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="porcentaje_gastos_administrativos" name="porcentaje_gastos_administrativos" class="form-control col-md-7 col-xs-12" placeholder="Ingrese % G.A.">{{errores.porcentaje_gastos_administrativos[0]}}
+                        <input type="number" id="porcentaje_gastos_administrativos" name="porcentaje_gastos_administrativos" class="form-control col-md-7 col-xs-12" placeholder="Ingrese % G.A."><div ng-cloak>{{errores.porcentaje_gastos_administrativos[0]}}</div>
                       </div>
                     </div> -->
                     <div class="item form-group">
@@ -243,8 +243,8 @@
                   @verbatim
                   <table ng-table="paramsABMS" class="table table-hover table-bordered">
                     <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-                      <tr class="clickableRow" title="Datos">
-                        <td title="'Razon social'" filter="{ razon_social: 'text'}" sortable="'razonSocial'">
+                      <tr class="clickableRow" title="Datos" ng-cloak>
+                        <td title="'Razon social'" filter="{ razon_social: 'text'}" sortable="'razonSocial'" >
                           {{abm.razon_social}}
                         </td>
                         <td title="'Descripcion'" filter="{ descripcion: 'text'}" sortable="'descripcion'">
@@ -332,7 +332,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="razon_social" class="form-control col-md-7 col-xs-12" name="razon_social" type="text">{{errores.nombre[0]}}
+                <input id="razon_social" class="form-control col-md-7 col-xs-12" name="razon_social" type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
               </div>
             </div>
 
@@ -341,7 +341,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12">{{errores.descripcion[0]}}
+                <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.descripcion[0]}}</div>
               </div>
             </div>
 
@@ -350,7 +350,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12">{{errores.descripcion[0]}}
+                <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.descripcion[0]}}</div>
               </div>
             </div>
 
@@ -359,7 +359,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12">{{errores.descripcion[0]}}
+                <input type="number" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.descripcion[0]}}</div>
               </div>
             </div>
 
@@ -368,7 +368,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12">{{errores.descripcion[0]}}
+                <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.descripcion[0]}}</div>
               </div>
             </div>
 
@@ -377,7 +377,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12">{{errores.descripcion[0]}}
+                <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.descripcion[0]}}</div>
               </div>
             </div>
 
@@ -386,21 +386,21 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12">{{errores.descripcion[0]}}
+                <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.descripcion[0]}}</div>
               </div>
             </div>
             <!--                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_retencion">Porcentaje de Ganancia <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="porcentaje_retencion" name="porcentaje_retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.porcentaje_retencion[0]}}
+                        <input type="number" id="porcentaje_retencion" name="porcentaje_retencion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social"><div ng-cloak>{{errores.porcentaje_retencion[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="porcentaje_gastos_administrativos">Porcentaje de Gastos administrtivos <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="porcentaje_gastos_administrativos" name="porcentaje_gastos_administrativos" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.porcentaje_gastos_administrativos[0]}}
+                        <input type="number" id="porcentaje_gastos_administrativos" name="porcentaje_gastos_administrativos" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social"><div ng-cloak>{{errores.porcentaje_gastos_administrativos[0]}}</div>
                       </div>
                     </div> -->
             <div class="item form-group">

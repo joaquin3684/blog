@@ -50,7 +50,7 @@
                 <div class="x_content">
                   @verbatim
                   <form class="form-horizontal form-label-left" ng-submit="create()" id="formulario1">
-                    {{ csrf_field() }}
+                    <div ng-cloak>{{ csrf_field() }}</div>
 
                     <span class="section">Datos del banco</span>
 
@@ -59,7 +59,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                        <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese el nombre" type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -161,7 +161,7 @@
                   @verbatim
                   <table ng-table="paramsABMS" class="table table-hover table-bordered">
                     <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-                      <tr class="clickableRow" title="Datos">
+                      <tr class="clickableRow" title="Datos" ng-cloak>
                         <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
                           {{abm.nombre}}
                         </td>
@@ -228,7 +228,7 @@
         <div class="modal-body">
           @verbatim
           <form class="form-horizontal form-label-left" ng-submit="editarBanco(bancoSeleccionado.id)" id="formulario2">
-            {{ csrf_field() }}
+            <div ng-cloak>{{ csrf_field() }}</div>
 
 
             <div class="item form-group">
@@ -372,7 +372,7 @@
 
                 <table ng-table="paramsChequera" class="table table-hover table-bordered">
                   <tbody data-ng-repeat="chequera in $data" data-ng-switch on="dayDataCollapse[$index]">
-                    <tr class="clickableRow" title="Datos">
+                    <tr class="clickableRow" title="Datos" ng-cloak>
                       <td title="'Nro chequera'" filter="{ nro_chequera: 'text'}" sortable="'nro_chequera'">
                         {{chequera.nro_chequera}}
                       </td>

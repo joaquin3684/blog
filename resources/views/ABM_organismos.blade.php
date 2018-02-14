@@ -63,7 +63,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese nombre del organismo"
-                          type="text">{{errores.nombre[0]}}
+                          type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
                       </div>
                     </div>
 
@@ -72,7 +72,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="number" id="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit">{{errores.cuit[0]}}
+                        <input required type="number" id="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit"><div ng-cloak>{{errores.cuit[0]}}</div>
                       </div>
                     </div>
 
@@ -81,7 +81,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el domicilio">{{errores.domicilio[0]}}
+                        <input required type="text" id="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el domicilio"><div ng-cloak>{{errores.domicilio[0]}}</div>
                       </div>
                     </div>
 
@@ -90,7 +90,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la localidad">{{errores.localidad[0]}}
+                        <input required type="text" id="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la localidad"><div ng-cloak>{{errores.localidad[0]}}</div>
                       </div>
                     </div>
 
@@ -102,10 +102,10 @@
                           <span class="required">*</span>
                         </label>
                         <!-- <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
-                              <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuota.categoria" >{{errores.cuota_social[0]}}
+                              <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuota.categoria" ><div ng-cloak>{{errores.cuota_social[0]}}</div>
                             </div> -->
                         <div class="col-md-6 col-sm-6 col-xs-12" id="valor">
-                          <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Ingrese el valor" ng-model="cuota.valor">{{errores.cuota_social[0]}}
+                          <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Ingrese el valor" ng-model="cuota.valor"><div ng-cloak>{{errores.cuota_social[0]}}</div>
                         </div>
                       </div>
                     </div>
@@ -247,11 +247,11 @@
                 <div class="table-responsive">
                   @verbatim
 
-                  <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
+                  <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered" >
 
                     <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
 
-                      <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)" ng-class="socio.id">
+                      <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)" ng-class="socio.id" ng-cloak>
                         <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
                           {{abm.nombre}}
                         </td>
@@ -327,7 +327,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input class="form-control col-md-7 col-xs-12" placeholder="Ingrese nombre del organismo" type="text" ng-model="abmConsultado.nombre">{{errores.nombre[0]}}
+                <input class="form-control col-md-7 col-xs-12" placeholder="Ingrese nombre del organismo" type="text" ng-model="abmConsultado.nombre"><div ng-cloak>{{errores.nombre[0]}}</div>
 
               </div>
             </div>
@@ -337,7 +337,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="cuit" ng-model="abmConsultado.cuit" class="form-control col-md-7 col-xs-12">{{errores.cuit[0]}}
+                <input type="text" id="cuit" ng-model="abmConsultado.cuit" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.cuit[0]}}</div>
               </div>
             </div>
 
@@ -346,7 +346,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="domicilio" ng-model="abmConsultado.domicilio" class="form-control col-md-7 col-xs-12">{{errores.domicilio[0]}}
+                <input type="text" id="domicilio" ng-model="abmConsultado.domicilio" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.domicilio[0]}}</div>
               </div>
             </div>
 
@@ -355,7 +355,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="localidad" ng-model="abmConsultado.localidad" class="form-control col-md-7 col-xs-12">{{errores.localidad[0]}}
+                <input type="text" id="localidad" ng-model="abmConsultado.localidad" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.localidad[0]}}</div>
               </div>
             </div>
 
@@ -365,10 +365,10 @@
                   <span class="required">*</span>
                 </label>
                 <!-- <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
-                          <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuota.categoria">{{errores.cuota_social[0]}}
+                          <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuota.categoria"><div ng-cloak>{{errores.cuota_social[0]}}</div>
                         </div> -->
                 <div class="col-md-6 col-sm-6 col-xs-12" id="valor">
-                  <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Ingrese el valor" ng-model="cuota.valor">{{errores.cuota_social[0]}}
+                  <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Ingrese el valor" ng-model="cuota.valor"><div ng-cloak>{{errores.cuota_social[0]}}</div>
                 </div>
               </div>
             </div>

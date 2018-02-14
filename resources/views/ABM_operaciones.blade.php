@@ -52,7 +52,7 @@
                 <div class="x_content">
                   @verbatim
                   <form class="form-horizontal form-label-left" id="formulario" ng-submit="submit()">
-                    {{ csrf_field() }}
+                    <div ng-cloak>{{ csrf_field() }}</div>
 
                     <span class="section">Datos de la operacion</span>
 
@@ -62,7 +62,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input required id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre de la operacion"
-                          type="text" ng-model="nombre">{{errores.nombre[0]}}
+                          type="text" ng-model="nombre"><div ng-cloak>{{errores.nombre[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -217,7 +217,7 @@
 
             <div id="estatablaseexporta" style="display: none;">
               @verbatim
-              <table id="tablaexported">
+              <table id="tablaexported" ng-cloak>
                 <thead>
 
                   <td>NOMBRE</td>
@@ -243,7 +243,7 @@
                   <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
 
                     <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-                      <tr class="clickableRow" title="Datos">
+                      <tr class="clickableRow" title="Datos" ng-cloak>
                         <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
                           {{abm.nombre}}
                         </td>
@@ -308,7 +308,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" class="form-control col-md-7 col-xs-12" ng-model="abmConsultado.nombre" required>{{errores.nombre[0]}}
+                <input type="text" class="form-control col-md-7 col-xs-12" ng-model="abmConsultado.nombre" required><div ng-cloak>{{errores.nombre[0]}}</div>
               </div>
             </div>
             <div class="item form-group">

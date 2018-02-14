@@ -59,7 +59,7 @@
                   <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
 
                     <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-                      <tr class="clickableRow" title="Datos">
+                      <tr class="clickableRow" title="Datos" ng-cloak>
                         <td title="'Asociado'" sortable="'nombre'">
                           {{abm.socio.nombre}}
                         </td>

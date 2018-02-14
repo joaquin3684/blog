@@ -62,7 +62,7 @@
                 <div class="x_content">
 
                   <form class="form-horizontal form-label-left" ng-submit="AltaComercializador()" id="formulario">
-                    {{ csrf_field() }}
+                    <div ng-cloak>{{ csrf_field() }}</div>
 
                     <span class="section">Generar Solicitud</span>
 
@@ -99,7 +99,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" ng-model="nombre"
-                            type="text" ng-required="socio == null || socio == ''">{[{errores.nombre[0]}]}
+                            type="text" ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.nombre[0]}]}</div>
                         </div>
                       </div>
 
@@ -109,7 +109,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="cuit" name="apellido" ng-model="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Apellido"
-                            ng-required="socio == null || socio == ''">{[{errores.cuit[0]}]}
+                            ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.cuit[0]}]}</div>
                         </div>
                       </div>
                       <div class="item form-group">
@@ -118,7 +118,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="number" id="dni" name="dni" ng-model="dni" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el DNI"
-                            ng-required="socio == null || socio == ''">{[{errores.dni[0]}]}
+                            ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.dni[0]}]}</div>
                         </div>
                       </div>
                       <div class="item form-group">
@@ -127,7 +127,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="number" id="cuota_social" name="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit"
-                            ng-required="socio == null || socio == ''">{[{errores.cuota_social[0]}]}
+                            ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.cuota_social[0]}]}</div>
                         </div>
                       </div>
                       <div class="item form-group">
@@ -136,7 +136,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" ng-model="fecha_nacimiento" class="form-control col-md-7 col-xs-12"
-                            placeholder="Ingrese el Cuit" ng-required="socio == null || socio == ''">{[{errores.cuota_social[0]}]}
+                            placeholder="Ingrese el Cuit" ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.cuota_social[0]}]}</div>
                         </div>
                       </div>
 
@@ -160,7 +160,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="number" id="legajo" name="legajo" ng-model="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Legajo"
-                            ng-required="socio == null || socio == ''">{[{errores.legajo[0]}]}
+                            ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.legajo[0]}]}</div>
                         </div>
                       </div>
                       <div class="item form-group">
@@ -169,7 +169,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="cuit" name="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio"
-                            ng-required="socio == null || socio == ''">{[{errores.cuit[0]}]}
+                            ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.cuit[0]}]}</div>
                         </div>
                       </div>
                       <div class="item form-group">
@@ -178,7 +178,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="localidad" name="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Localidad"
-                            ng-required="socio == null || socio == ''">{[{errores.localidad[0]}]}
+                            ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.localidad[0]}]}</div>
                         </div>
                       </div>
                       <div class="item form-group">
@@ -187,7 +187,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="cuit" name="telefono" ng-model="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono"
-                            ng-required="socio == null || socio == ''">{[{errores.cuit[0]}]}
+                            ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.telefono[0]}]}</div>
                         </div>
                       </div>
                       <div class="item form-group">
@@ -196,14 +196,14 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="cuit" name="codigo_postal" ng-model="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Codigo Postal"
-                            ng-required="socio == null || socio == ''">{[{errores.cuit[0]}]}
+                            ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.codigo_postal[0]}]}</div>
                         </div>
                       </div>
                     </div>
 
 
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Copia del Documento
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Copia del Documento
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -212,14 +212,14 @@
                             <label class="btn btn-primary" type="button" for="input_doc_documento">Seleccionar Archivo</label>
                           </span>
                           <input class="form-control col-md-7 col-xs-12" ng-value="doc_documento.name">
-                          <input id="input_doc_documento" ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file" id="cuit"
-                            name="cuit" ng-model="doc_documento" class="form-control col-md-7 col-xs-12" placeholder="" required
-                            style="display: none">{[{errores.cuit[0]}]}
+                          <input id="input_doc_documento" ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file"
+                            ng-model="doc_documento" class="form-control col-md-7 col-xs-12" placeholder="" required
+                            style="display: none"><div ng-cloak>{[{errores.doc_documento[0]}]}</div>
                         </div>
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Copia del Recibo
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Copia del Recibo
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -228,48 +228,61 @@
                             <label class="btn btn-primary" type="button" for="input_doc_recibo">Seleccionar Archivo</label>
                           </span>
                           <input class="form-control col-md-7 col-xs-12" ng-value="doc_recibo.name">
-                          <input id="input_doc_recibo" ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file" id="cuit"
-                            name="cuit" ng-model="doc_recibo" class="form-control col-md-7 col-xs-12" placeholder="" required
-                            style="display: none">{[{errores.cuit[0]}]}
+                          <input id="input_doc_recibo" ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file"
+                            ng-model="doc_recibo" class="form-control col-md-7 col-xs-12" placeholder="" required
+                            style="display: none"><div ng-cloak>{[{errores.doc_recibo[0]}]}</div>
                         </div>
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Copia del Recibo
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Copia del Domicilio
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file" id="cuit" name="cuit" ng-model="doc_recibo"
-                          class="form-control col-md-7 col-xs-12" placeholder="" required>{[{errores.cuit[0]}]}
+                        <div class=" input-group">
+                          <span class="input-group-btn">
+                            <label class="btn btn-primary" type="button" for="input_doc_domicilio">Seleccionar Archivo</label>
+                          </span>
+                          <input class="form-control col-md-7 col-xs-12" ng-value="doc_domicilio.name">
+                          <input id="input_doc_domicilio" ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file" 
+                            ng-model="doc_domicilio" class="form-control col-md-7 col-xs-12" placeholder="" required
+                            style="display: none"><div ng-cloak>{[{errores.doc_domicilio[0]}]}</div>
+                        </div>
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Copia del Domicilio
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Copia del CBU
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ng-model="doc_domicilio" type="file" id="cuit"
-                          name="cuit" class="form-control col-md-7 col-xs-12" placeholder="" required>{[{errores.cuit[0]}]}
+                        <div class=" input-group">
+                          <span class="input-group-btn">
+                            <label class="btn btn-primary" type="button" for="input_doc_cbu">Seleccionar Archivo</label>
+                          </span>
+                          <input class="form-control col-md-7 col-xs-12" ng-value="doc_cbu.name">
+                          <input id="input_doc_cbu" ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file" 
+                            ng-model="doc_cbu" class="form-control col-md-7 col-xs-12" placeholder="" required
+                            style="display: none"><div ng-cloak>{[{errores.doc_cbu[0]}]}</div>
+                        </div>
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" ng-model="doc_cbu" for="cuit">Copia del CBU
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Certificado de Endeudamiento
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file" ng-model="doc_cbu" id="cuit" name="cuit"
-                          class="form-control col-md-7 col-xs-12" placeholder="" required>{[{errores.cuit[0]}]}
+                        <div class=" input-group">
+                          <span class="input-group-btn">
+                            <label class="btn btn-primary" type="button" for="input_doc_endeudamiento">Seleccionar Archivo</label>
+                          </span>
+                          <input class="form-control col-md-7 col-xs-12" ng-value="doc_endeudamiento.name">
+                          <input id="input_doc_endeudamiento" ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file" 
+                            ng-model="doc_endeudamiento" class="form-control col-md-7 col-xs-12" placeholder="" required
+                            style="display: none"><div ng-cloak>{[{errores.doc_endeudamiento[0]}]}</div>
+                        </div>
                       </div>
                     </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" ng-model="doc_endeudamiento" for="cuit">Certificado de Endeudamiento
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file" ng-model="doc_endeudamiento" id="cuit"
-                          name="cuit" class="form-control col-md-7 col-xs-12" placeholder="">{[{errores.cuit[0]}]}
-                      </div>
-                    </div>
-
+                
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">

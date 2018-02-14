@@ -4,9 +4,7 @@ var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutu
 });
 app.controller('comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv, Upload) {
 
-        $scope.mostrar =  function(algo){
-            console.log(algo)
-        }
+   
     $scope.pullComercializadores = function (){
 
         $http({
@@ -52,10 +50,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
     };
 
-    $scope.funcion = function(){
-
-    }
-
+   
     // upload on file select or drop
     $scope.upload = function (file) {
         Upload.upload({

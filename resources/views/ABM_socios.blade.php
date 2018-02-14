@@ -216,7 +216,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select required id="forro" ng-change="getCategorias()" ng-model="orpi" name="id_organismo" class="form-control col-md-7 col-xs-12">
-                          <option value="{{x.id}}" ng-repeat="x in organismosines">
+                          <option value="{{x.id}}" ng-repeat="x in organismosines" >
                             {{x.nombre}}
                           </option>
                         </select><div ng-cloak>{{errores.id_organismo[0]}}</div>
@@ -228,7 +228,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="categoriacomplete" name="valor" ng-required="true">
-                          <option value="{{x.valor}}" ng-repeat="x in categorias">
+                          <option value="{{x.valor}}" ng-repeat="x in categorias" >
                             <div ng-cloak>{{x.categoria}}</div>
                           </option>
                         </select>
@@ -254,7 +254,7 @@
          
 
       </div>
-      <div class="col-md-12 col-sm-12 col-xs-12" ng-cloak>
+      <div class="col-md-12 col-sm-12 col-xs-12">
       @if(Sentinel::check()->hasAccess('socios.visualizar'))
         <div class="x_panel">
           <div class="x_title">
@@ -358,9 +358,9 @@
 
                   <div class="table-responsive">
                     @verbatim
-                    <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
+                    <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered" >
                       <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-                        <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)" ng-class="socio.id">
+                        <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)" ng-class="socio.id" ng-cloak>
                           <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
                             {{abm.nombre.split(',').pop()}}
                           </td>
@@ -390,6 +390,15 @@
                           </td>
                           <td title="'Domicilio'" filter="{ domicilio: 'text'}" sortable="'domicilio'">
                             {{abm.domicilio}}
+                          </td>
+                           <td title="'Piso'" filter="{ piso: 'text'}" sortable="'piso'">
+                            {{abm.piso}}
+                          </td>
+                           <td title="'Dpto'" filter="{ dpto: 'text'}" sortable="'dpto'">
+                            {{abm.dpto}}
+                          </td>
+                           <td title="'Nucleo'" filter="{ nucleo: 'text'}" sortable="'nucleo'">
+                            {{abm.nucleo}}
                           </td>
                           <td title="'Localidad'" filter="{ localidad: 'text'}" sortable="'localidad'">
                             {{abm.localidad}}
@@ -526,7 +535,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="dni" name="dni" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.dni[0]}}
+                <input type="number" id="dni" name="dni" class="form-control col-md-7 col-xs-12" >{{errores.dni[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -550,7 +559,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.domicilio[0]}}
+                <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" >{{errores.domicilio[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -558,7 +567,31 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="localidad" name="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.localidad[0]}}
+                <input type="text" id="localidad" name="localidad" class="form-control col-md-7 col-xs-12" >{{errores.localidad[0]}}
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="piso">Piso
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="piso" name="piso" class="form-control col-md-7 col-xs-12" >{{errores.piso[0]}}
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dpto">Departamento
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="dpto" name="dpto" class="form-control col-md-7 col-xs-12" >{{errores.dpto[0]}}
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nucleo">Nucleo
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="nucleo" name="nucleo" class="form-control col-md-7 col-xs-12" >{{errores.nucleo[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -566,7 +599,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="codigo_postal" name="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.codigo_postal[0]}}
+                <input type="number" id="codigo_postal" name="codigo_postal" class="form-control col-md-7 col-xs-12" >{{errores.codigo_postal[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -574,7 +607,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.telefono[0]}}
+                <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" >{{errores.telefono[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -582,7 +615,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="legajo" name="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.legajo[0]}}
+                <input type="number" id="legajo" name="legajo" class="form-control col-md-7 col-xs-12" >{{errores.legajo[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -590,7 +623,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="date" id="fecha_ingreso" name="fecha_ingreso" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la cuota social">{{errores.fecha_ingreso[0]}}
+                <input type="date" id="fecha_ingreso" name="fecha_ingreso" class="form-control col-md-7 col-xs-12" >{{errores.fecha_ingreso[0]}}
               </div>
             </div>
             <div class="item form-group">

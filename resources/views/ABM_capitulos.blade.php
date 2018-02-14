@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                   <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="number" max="9"
-                                    required>{{errores.codigo[0]}}
+                                    required><div ng-cloak>{{errores.codigo[0]}}</div>
                                 </div>
                               </div>
 
@@ -139,7 +139,7 @@
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text" required>{{errores.nombre[0]}}
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text" required><div ng-cloak>{{errores.nombre[0]}}</div>
                                 </div>
                               </div>
                               <div class="row">
@@ -584,7 +584,7 @@
       <div class="x_panel">
         <div class="x_title">
           @verbatim
-          <h2>{{pantallaActual}}</h2>
+          <h2><div ng-cloak>{{pantallaActual.toUpperCase()}}</div></h2>
           @endverbatim
           <ul class="nav navbar-right panel_toolbox">
             <li>
@@ -633,7 +633,7 @@
                   @verbatim
                   <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
                     <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-                      <tr class="clickableRow" title="Datos">
+                      <tr class="clickableRow" title="Datos" ng-cloak>
                         <td title="'Codigo'" filter="{ codigo: 'text'}" sortable="'codigo'">
                           {{abm.codigo}}
                         </td>

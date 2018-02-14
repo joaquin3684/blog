@@ -51,7 +51,7 @@
                   <h2>Generar operacion</h2>
                   @verbatim
                   <form class="form-horizontal form-label-left" ng-submit="create()" id="formulario">
-                    {{ csrf_field() }}
+                    <div ng-cloak>{{ csrf_field() }}</div>
 
                     <span class="section"></span>
                     <div class="item form-group">

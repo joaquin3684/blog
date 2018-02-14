@@ -1,12 +1,12 @@
- @extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABMprueba.js') !!}
+ @extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABMroles.js') !!}
 
-<div class="nav-md" ng-controller="ABM">
+<div class="nav-md" ng-controller="ABM_roles">
 
   <div class="container body">
 
     <div class="main_container">
 
-      <input type="hidden" id="tipo_tabla" name="tipo_tabla" value="roles">
+
       <!-- page content -->
       <div class="left-col" role="main">
 
@@ -51,8 +51,8 @@
                 </div>
                 <div class="x_content">
                   @verbatim
-                  <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario">
-                    {{ csrf_field() }}
+                  <form class="form-horizontal form-label-left" ng-submit="create()" id="formulario">
+                    <div ng-cloak>{{ csrf_field() }}</div>
 
                     <span class="section">Datos de roles</span>
 
@@ -62,7 +62,8 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input id="nombre" class="form-control col-md-7 col-xs-12" name="name" ng-model="name" placeholder="Ingrese nombre del Rol"
-                          type="text">{{errores.name[0]}}
+                          type="text">
+                        <div ng-cloak>{{errores.name[0]}}</div>
                       </div>
                     </div>
                     <input type="hidden" name="slug" value="{{name}}">
@@ -116,7 +117,7 @@
   </div>
 
   <!-- Tabla -->
- @if(Sentinel::check()->hasAccess('roles.visualizar'))
+  @if(Sentinel::check()->hasAccess('roles.visualizar'))
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
@@ -154,31 +155,20 @@
       <!-- START $scope.[model] updates -->
       <!-- END $scope.[model] updates -->
       <!-- START TABLE -->
-      <div>
-        <div class="table-responsive">
+      <div class="row">
+        <div class=" col-md-2" ></div>
+        <div class="table-responsive col-md-8 col-sm-8 col-xs-12" >
           @verbatim
-          <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
-            <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-              <tr class="clickableRow" title="Datos">
-                <td title="'Nombre'" sortable="'nombre'">
+          <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered" >
+            <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
+              <tr class="clickableRow" title="Datos" ng-cloak ng-click="seleccionarRol()" data-toggle="modal" data-target="#editar">
+                <td title="Seleccione una fila para ver los permisos" data-title="'Nombre'" sortable="'nombre'" >
                   {{abm.nombre}}
                 </td>
-                <td title="'Cant. Pantallas'" sortable="'cant_pantallas'">
-                  {{abm.cant_pantallas}}
+                <td title="Seleccione una fila para ver los permisos" data-title="'Cant. Pantallas'" sortable="'cant_pantallas'" >
+                  {{abm.pantallas.length}}
                 </td>
-                <td id="botones">
-                @endverbatim
-                @if(Sentinel::check()->hasAccess('roles.editar'))
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                  </button>
-                  @endif @if(Sentinel::check()->hasAccess('roles.borrar'))
-                  <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)">
-                    <span class="glyphicon glyphicon-remove"></span>
-                  </button>
-                  @endif
-                  @verbatim
-                </td>
+                
               </tr>
             </tbody>
           </table>
@@ -190,70 +180,66 @@
     </div>
   </div>
   @endif
-</div>
-</div>
 
-</div>
+  <!-- Modal -->
+  <div id="editar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-<!-- Modal -->
-<div id="editar" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Permisos</h4>
+        </div>
+        <div class="modal-body">
+          @verbatim
+          <form class="form-horizontal form-label-left">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Editar</h4>
-      </div>
-      <div class="modal-body">
-        @verbatim
-        <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar">
-          {{ csrf_field() }}
+            <div class="table-responsive">
 
-          <span class="section">Pantallas</span>
-          <div class="table-responsive">
-            @verbatim
-            <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
-              <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-                <tr class="clickableRow" title="Datos">
-                  <td title="'Nombre'" sortable="'nombre'">
-                    {{abm.nombre}}
-                  </td>
-                  <td title="'Cant. Pantallas'" sortable="'cant_pantallas'">
-                    {{abm.cant_pantallas}}
-                  </td>
-                  <td id="botones">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', abm.id)">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)">
-                      <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            @endverbatim
-          </div>
+              <table class="table table-bordered" style="text-align: center; ">
+                <thead >
+                  <tr style="">
+                    <th>Pantalla</th>
+                    <th>Crear</th>
+                    <th>Visualizar</th>
+                    <th>Editar</th>
+                    <th>Borrar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="pantalla in rolSeleccionado.pantallas">
+                    <td>{{pantalla.nombre}}</td>
+                    <td><i class="fa fa-check" ng-show="pantalla.crear"></i></td>
+                    <td><i class="fa fa-check" ng-show="pantalla.visualizar"></i></td>
+                    <td><i class="fa fa-check" ng-show="pantalla.editar"></i></td>
+                    <td><i class="fa fa-check" ng-show="pantalla.borrar"></i></td>
+                  </tr>
+                </tbody>
+              </table>
 
-
-
-          <input type="hidden" name="id">
-          <div class="ln_solid"></div>
-          <div class="form-group">
-            <div class="col-md-6 col-md-offset-3">
-              <button id="send" type="submit" class="btn btn-success">Submit</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
             </div>
-          </div>
-        </form>
-        @endverbatim
+
+
+
+
+            <div class="ln_solid"></div>
+
+          </form>
+          @endverbatim
+        </div>
+
       </div>
 
     </div>
-
   </div>
 </div>
+</div>
+</div>
+
+
+
+
 
 </div>
 

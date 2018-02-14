@@ -45,7 +45,7 @@
                 <div class="x_content">
                   @verbatim
                   <form class="form-horizontal form-label-left" ng-submit="submit()" id="formulario" >
-                   {{ csrf_field() }}
+                   <div ng-cloak>{{ csrf_field() }}</div>
 
 
                    <div class="item form-group">
@@ -70,7 +70,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="importe">Total a pagar <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required class="form-control col-md-7 col-xs-12" ng-model="proveedorSeleccionado.totalAPagar" type="number" disabled="">{{errores.nombre[0]}}
+                        <input required class="form-control col-md-7 col-xs-12" ng-model="proveedorSeleccionado.totalAPagar" type="number" disabled="">
                       </div>
                     </div>
                     <div class="item form-group">

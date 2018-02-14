@@ -1,5 +1,6 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable','Mutual.services']).config(function($interpolateProvider){
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function ($interpolateProvider, $compileProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 });
 app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv) {
 
@@ -79,6 +80,14 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
                     UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
 
             });
+    }
+    $scope.expandirImg = function () {
+        // Get the image and insert it inside the modal
+        var img = document.getElementById('previsualizacion');
+        var modalImg = document.getElementById("imgExpandida");
+
+        modalImg.src = img.src;
+        $scope.imageSrc = img.src;
     }
 
     $scope.OtorgarCapital = function(id) {
