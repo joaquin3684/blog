@@ -1,4 +1,7 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function ($interpolateProvider) {});
+
+var app = angular.module('Mutual').config(function ($interpolateProvider) {});
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja');
+
 app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, clonarHtmlService) {
 
     // manda las solicitud http necesarias para manejar los requerimientos de un abm
@@ -38,8 +41,8 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
             });
         }
     }
-
-
+    
+    
     $scope.ExportarPDF = function (pantalla) {
         UserSrv.ExportPDF(pantalla);
     }
@@ -111,10 +114,15 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
             console.log(response.data);
             $scope.traerElementos();
         }, function errorCallback(data) {
+            UserSrv.MostrarMensaje("Error", 'Se ha detectado un error al realizar la accion (' + data.statusText + '). Si el error persiste debera comunicarse con el servicio tecnico.', 'Error', "mensaje");
             console.log(data);
             $scope.errores = data.data;
         });
 
+    }
+   
+    $scope.delete = function (idBaja) {
+        $scope.enviarFormulario('Borrar', idBaja)
     }
 
     $scope.cambiarFecha = function (dato) {
@@ -223,8 +231,10 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
 
 
-
     $scope.traerElementos();
+    $(document).ready(function () {
+        $("[data-toggle=popover]").popover();
+    });
 
     //EMPIEZA EL CODIGO DEL EXPANDIR
     $scope.tableRowExpanded = false;

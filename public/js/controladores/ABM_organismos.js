@@ -1,5 +1,5 @@
 
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider) {});
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja']).config(function($interpolateProvider) {});
 
 app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv,clonarHtmlService) {
 
@@ -128,6 +128,9 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
 
   }
 
+  $scope.delete = function(id){
+    $scope.borrarElemento(id)
+  }
   $scope.borrarElemento = function (id) {
 
     return $http({
@@ -135,6 +138,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
       method: 'delete',
     }).then(function successCallback(response) {
       $scope.traerElementos();
+      UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
       console.log("Exito al eliminar");
     }, function errorCallback(response) {
 

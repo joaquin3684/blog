@@ -59,7 +59,7 @@
                                         <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre+' '+item.apellido" md-items="item in query(searchText, 'filtroSocios')"
                                             md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..."
                                             required>
-                                            <span md-highlight-text="searchText">
+                                            <span md-highlight-text="searchText" ng-cloak>
                                                 {[{item.nombre}]} {[{item.apellido}]} ({[{item.legajo}]})
                                             </span>
                                         </md-autocomplete>
@@ -67,7 +67,7 @@
                                         <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.razon_social" md-items="item in query(searchText2, 'filtroProovedores')"
                                             md-search-text="searchText2" md-selected-item="proovedor" md-selected-item-change="habilitar()"
                                             placeholder="Buscar proovedor..." required>
-                                            <span md-highlight-text="searchText">
+                                            <span md-highlight-text="searchText" ng-cloak>
                                                 {[{item.razon_social}]}
                                             </span>
                                         </md-autocomplete>
@@ -75,7 +75,7 @@
                                         <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in traerProductos(searchText3)"
                                             md-search-text="searchText3" md-selected-item="producto" ng-disabled="habilitacion"
                                             placeholder="Buscar producto..." required>
-                                            <span md-highlight-text="searchText">
+                                            <span md-highlight-text="searchText" ng-cloak>
                                                 {[{item.nombre}]}
                                             </span>
                                         </md-autocomplete>
@@ -100,7 +100,7 @@
                                                     Observacion
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" id="observacion" name="observacion" ng-model="observacion" type="text">
+                                                    <input class="form-control col-md-7 col-xs-12" id="observacion" name="observacion" ng-model="observacion" type="text" placeholder="Los hermanos sean unidos porque ésa es la ley primera.">
                                                 </div>
                                             </div>
                                         </div>
@@ -113,7 +113,7 @@
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" name="capital" ng-model="montoPorCuota" type="number" step="0.01" required>
+                                                    <input class="form-control col-md-7 col-xs-12" name="capital" placeholder="123" ng-model="montoPorCuota" type="number" step="0.01" required>
                                                     </input>
                                                 </div>
                                             </div>
@@ -125,7 +125,7 @@
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" name="cuotas" ng-model="nro_cuotas" type="number" required>
+                                                    <input class="form-control col-md-7 col-xs-12" name="cuotas" placeholder="12" ng-model="nro_cuotas" type="number" required>
                                                     </input>
                                                 </div>
                                             </div>
@@ -139,15 +139,15 @@
                                                     *
                                                 </span>
                                             </label>
-                                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                                {[{getImporte()}]}
+                                            <div class="col-md-4 col-sm-6 col-xs-12" >
+                                                <div ng-cloak>{[{getImporte()}]}</div>
                                                 <input class="form-control col-md-7 col-xs-12" ng-model="importe" type="number" disabled>
 
                                                 </input>
                                             </div>
                                         </div>
 
-                                        <div class="row form-group" ng-if="tipo_servicio == 'credito'">
+                                        <div class="row form-group" ng-if="tipo_servicio == 'credito'" ng-cloak>
                                             <div class="item">
                                                 <label class="control-label col-md-1 col-sm-3 col-xs-12" for="plata recibida">
                                                     Monto Total Otorgado
@@ -173,7 +173,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row form-group" ng-if="tipo_servicio == 'producto'">
+                                        <div class="row form-group" ng-if="tipo_servicio == 'producto'" ng-cloak>
                                             <div class="item">
                                                 <label class="control-label col-md-1 col-sm-3 col-xs-12" for="observaciones">
                                                     Observaciones
@@ -201,7 +201,7 @@
                                         </div>
                                     </form>
                                     <div class="row" ng-show="mostrar">
-                                        <table class="table striped">
+                                        <table class="table striped" ng-cloak>
                                             <thead>
                                                 <tr>
                                                     <th>Cuota</th>

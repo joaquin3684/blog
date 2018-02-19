@@ -127,7 +127,7 @@
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="number" max="9"
+                                  <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="1" type="number" max="9"
                                     required><div ng-cloak>{{errores.codigo[0]}}</div>
                                 </div>
                               </div>
@@ -139,7 +139,7 @@
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text" required><div ng-cloak>{{errores.nombre[0]}}</div>
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Activo" type="text" required><div ng-cloak>{{errores.nombre[0]}}</div>
                                 </div>
                               </div>
                               <div class="row">
@@ -201,7 +201,7 @@
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                   <div class="input-group">
                                     <span class="input-group-addon" id="basic-addon1">{{capitulo.codigo}}</span>
-                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoRubro" placeholder="Ingrese el código" type="number"
+                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoRubro" placeholder="1" type="number"
                                       max="9">{{errores.nombre[0]}}
                                     <input type="hidden" id="tipo_tabla" value="{{capitulo.codigo}}{{codigoRubro}}" name="codigo">
                                   </div>
@@ -215,7 +215,7 @@
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Deudas" type="text">{{errores.nombre[0]}}
                                 </div>
                               </div>
                               <div class="row">
@@ -281,7 +281,7 @@
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                   <div class="input-group">
                                     <span class="input-group-addon" id="basic-addon1">{{rubro.codigo}}</span>
-                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoMoneda" placeholder="Ingrese el código" type="number"
+                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoMoneda" placeholder="1" type="number"
                                       max="9">{{errores.nombre[0]}}
                                     <input type="hidden" id="tipo_tabla" value="{{rubro.codigo}}{{codigoMoneda}}" name="codigo">
                                   </div>
@@ -295,7 +295,7 @@
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Deuda en pesos" type="text">{{errores.nombre[0]}}
                                 </div>
                               </div>
                               <div class="row">
@@ -355,7 +355,7 @@
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                   <div class="input-group">
                                     <span class="input-group-addon" id="basic-addon1">{{moneda.codigo}}</span>
-                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoDpto" placeholder="Ingrese el código" type="number"
+                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoDpto" placeholder="11" type="number"
                                       max="99">{{errores.nombre[0]}}
                                     <input type="hidden" id="tipo_tabla" value="{{moneda.codigo}}{{codigoDpto}}" name="codigo">
                                   </div>
@@ -372,7 +372,7 @@
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Deuda Dpto Servicios" type="text">{{errores.nombre[0]}}
                                 </div>
                               </div>
                               <div class="row">
@@ -437,7 +437,7 @@
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                   <div class="input-group">
                                     <span class="input-group-addon" id="basic-addon1">{{departamento.codigo}}</span>
-                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoSubrubro" placeholder="Ingrese el código" type="number"
+                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoSubrubro" placeholder="11" type="number"
                                       max="99">{{errores.nombre[0]}}
                                     <input type="hidden" id="tipo_tabla" value="{{departamento.codigo}}{{codigoSubrubro}}" name="codigo">
                                   </div>
@@ -451,7 +451,7 @@
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Creditos" type="text">{{errores.nombre[0]}}
                                 </div>
                               </div>
                               <div class="row">
@@ -515,7 +515,7 @@
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                   <div class="input-group">
                                     <span class="input-group-addon" id="basic-addon1">{{subrubro.codigo}}</span>
-                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoImp" placeholder="Ingrese el código" type="number"
+                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoImp" placeholder="11" type="number"
                                       max="99">{{errores.nombre[0]}}
                                     <input type="hidden" id="tipo_tabla" value="{{subrubro.codigo}}{{codigoImp}}" name="codigo">
                                   </div>
@@ -529,7 +529,7 @@
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Cuotas Sociales" type="text">{{errores.nombre[0]}}
                                 </div>
                               </div>
                               <div class="row">

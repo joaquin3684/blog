@@ -1,4 +1,4 @@
-@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABM_operaciones.js') !!}
+@extends('welcome') @section('contenido') {!! Html::script('js/controladores/verificarBaja.js')!!}{!! Html::script('js/controladores/ABM_operaciones.js') !!}
 
 
 <div class="nav-md" ng-controller="ABM_operaciones">
@@ -91,7 +91,7 @@
                         <md-autocomplete md-input-name="idcuenta" md-item-text="item.nombre" md-items="item in query(searchText, 'imputacion/autocomplete')"
                           md-search-text="searchText" md-selected-item="cuenta1Seleccionada" placeholder="Buscar cuenta..."
                           required>
-                          <span md-highlight-text="searchText">
+                          <span md-highlight-text="searchText" ng-cloak>
                             {{item.nombre}}
                           </span>
                         </md-autocomplete>
@@ -122,7 +122,7 @@
                         <md-autocomplete md-input-name="idcuenta2" md-item-text="item2.nombre" md-items="item2 in query(searchText2, 'imputacion/autocomplete')"
                           md-search-text="searchText2" md-selected-item="cuenta2Seleccionada" placeholder="Buscar cuenta..."
                           required>
-                          <span md-highlight-text="searchText2">
+                          <span md-highlight-text="searchText2" ng-cloak>
                             {{item2.nombre}}
                           </span>
                         </md-autocomplete>
@@ -259,9 +259,7 @@
                             <span class="glyphicon glyphicon-pencil"></span>
                           </button>
                           @endif @if(Sentinel::check()->hasAccess('operaciones.borrar'))
-                          <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)">
-                            <span class="glyphicon glyphicon-remove"></span>
-                          </button>
+                          <verificar-baja></verificar-baja>
                           @endif
                           @verbatim
                         </td>

@@ -1,4 +1,4 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider) {});
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja']).config(function($interpolateProvider) {});
 app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
@@ -108,6 +108,7 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
       data: data,
     }).then(function successCallback(response) {
       $scope.traerElementos();
+      UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
       console.log("Exito al editar");
       $('#editar').modal('toggle');
     }, function errorCallback(response) {
@@ -116,6 +117,9 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
 
   }
 
+  $scope.delete= function(id){
+    $scope.borrarElemento(id)
+  }
   $scope.borrarElemento = function (id) {
 
     return $http({
@@ -123,6 +127,7 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
       method: 'delete',
     }).then(function successCallback(response) {
       $scope.traerElementos();
+      UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
       console.log("Exito al eliminar");
     }, function errorCallback(response) {
 

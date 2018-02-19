@@ -61,7 +61,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="name" ng-model="name" placeholder="Ingrese nombre del Rol"
+                        <input id="nombre" class="form-control col-md-7 col-xs-12" name="name" ng-model="name" placeholder="Administrador"
                           type="text">
                         <div ng-cloak>{{errores.name[0]}}</div>
                       </div>
@@ -74,13 +74,37 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input id="numeroDePantallas" class="form-control col-md-7 col-xs-12" name="numeroDePantallas" ng-model="numeroDePantallas"
-                          placeholder="Ingrese cantidad de pantallas" type="text">
+                          placeholder="12" type="text" ng-change="agregarPantalla()">
                       </div>
-                      <button type="button" ng-click="agregarPantalla()" class="btn btn-primary">Añadir pantalla</button>
-                    </div>
 
-                    <div id="agregarCodigo">
                     </div>
+                    <div ng-repeat="permiso in permisos" ng-cloak>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Pantalla
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select id="pantallas' + i + '" name="pantalla{{$index}}" class="form-control col-md-7 col-xs-12">
+                        <option ng-repeat="pantalla in pantallas" ng-value="pantalla.nombre">{{pantalla.nombre}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div style=" margin-bottom:20px;">
+                      <label class="checkbox-inline col-sm-offset-3 col-xs-offset-1">
+                        <input type="checkbox" value="crear" ng-checked="seleccionarTodos$index" name="valor{{$index}}[]"> Crear
+                      </label>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" value="editar" ng-checked="seleccionarTodos$index" name="valor{{$index}}[]">Editar</label>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" value="borrar" ng-checked="seleccionarTodos$index" name="valor{{$index}}[]">Borrar</label>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" ng-checked="seleccionarTodos$index" name="valor{{$index}}[]" value="visualizar">Visualizar</label>
+                      <label class="checkbox-inline col-sm-offset-4 col-xs-offset-2">
+                        <input type="checkbox" ng-model="seleccionarTodos$index">Seleccionar todos</label>
+                    </div> 
+                    </div>
+                    <!--<div id="agregarCodigo">
+                    </div>-->
 
 
                     <div class="ln_solid"></div>
@@ -156,19 +180,19 @@
       <!-- END $scope.[model] updates -->
       <!-- START TABLE -->
       <div class="row">
-        <div class=" col-md-2" ></div>
-        <div class="table-responsive col-md-8 col-sm-8 col-xs-12" >
+        <div class=" col-md-2"></div>
+        <div class="table-responsive col-md-8 col-sm-8 col-xs-12">
           @verbatim
-          <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered" >
-            <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]" >
+          <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
+            <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
               <tr class="clickableRow" title="Datos" ng-cloak ng-click="seleccionarRol()" data-toggle="modal" data-target="#editar">
-                <td title="Seleccione una fila para ver los permisos" data-title="'Nombre'" sortable="'nombre'" >
+                <td title="Seleccione una fila para ver los permisos" data-title="'Nombre'" sortable="'nombre'" filter="{ nombre: 'text'}">
                   {{abm.nombre}}
                 </td>
-                <td title="Seleccione una fila para ver los permisos" data-title="'Cant. Pantallas'" sortable="'cant_pantallas'" >
-                  {{abm.pantallas.length}}
+                <td title="Seleccione una fila para ver los permisos" data-title="'Cant. Pantallas'" sortable="'cant_pantallas'" filter="{ cantPantallas: 'text'}">
+                  {{abm.cantPantallas}}
                 </td>
-                
+
               </tr>
             </tbody>
           </table>
@@ -198,7 +222,7 @@
             <div class="table-responsive">
 
               <table class="table table-bordered" style="text-align: center; ">
-                <thead >
+                <thead>
                   <tr style="">
                     <th>Pantalla</th>
                     <th>Crear</th>
@@ -210,10 +234,18 @@
                 <tbody>
                   <tr ng-repeat="pantalla in rolSeleccionado.pantallas">
                     <td>{{pantalla.nombre}}</td>
-                    <td><i class="fa fa-check" ng-show="pantalla.crear"></i></td>
-                    <td><i class="fa fa-check" ng-show="pantalla.visualizar"></i></td>
-                    <td><i class="fa fa-check" ng-show="pantalla.editar"></i></td>
-                    <td><i class="fa fa-check" ng-show="pantalla.borrar"></i></td>
+                    <td>
+                      <i class="fa fa-check" ng-show="pantalla.crear"></i>
+                    </td>
+                    <td>
+                      <i class="fa fa-check" ng-show="pantalla.visualizar"></i>
+                    </td>
+                    <td>
+                      <i class="fa fa-check" ng-show="pantalla.editar"></i>
+                    </td>
+                    <td>
+                      <i class="fa fa-check" ng-show="pantalla.borrar"></i>
+                    </td>
                   </tr>
                 </tbody>
               </table>

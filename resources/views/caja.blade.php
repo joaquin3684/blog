@@ -74,7 +74,7 @@
                         <md-autocomplete md-input-name="idoperacion" md-item-text="item.nombre" md-items="item in query(searchText, 'operaciones/autocomplete')"
                           md-search-text="searchText" md-selected-item="operacionSeleccionada" placeholder="Buscar operacion..."
                           required>
-                          <span md-highlight-text="searchText">
+                          <span md-highlight-text="searchText" ng-cloak>
                             {{item.nombre}}
                           </span>
                         </md-autocomplete>
@@ -86,17 +86,17 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control" type="number" step="0.01" required ng-model="valor" placeholder="Ingrese un valor">
+                        <input class="form-control" type="number" step="0.01" required ng-model="valor" placeholder="123">
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Observacion</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control" type="text" ng-model="observacion" placeholder="Ingrese una observacion">
+                        <input class="form-control" type="text" ng-model="observacion" placeholder="Los hermanos sean unidos pues ésa es la ley primera.">
                       </div>
                     </div>
 
-                    <div ng-show="tipo == 'banco'">
+                    <div ng-show="tipo == 'banco'" ng-cloak>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Banco
                           <span class="required">*</span>
@@ -120,7 +120,7 @@
                       </div>
                     </div>
 
-                    <div ng-show="tipoTransaccion == 'cheque' && tipo =='banco'">
+                    <div ng-show="tipoTransaccion == 'cheque' && tipo =='banco'" ng-cloak>
 
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Chequera

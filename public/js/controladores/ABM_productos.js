@@ -1,4 +1,4 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ManejoExcell']).config(function ($interpolateProvider) {});
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ManejoExcell', 'verificarBaja']).config(function ($interpolateProvider) {});
 app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ManejoExcell) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
@@ -147,6 +147,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       data: data,
     }).then(function successCallback(response) {
       $scope.traerElementos();
+      UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
       console.log("Exito al editar");
       $('#editar').modal('toggle');
     }, function errorCallback(response) {
@@ -155,12 +156,16 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
   }
 
+  $scope.delete = function (id){
+    $scope.borrarElemento(id)
+  }
   $scope.borrarElemento = function (id) {
 
     return $http({
       url: 'productos/' + id,
       method: 'delete',
     }).then(function successCallback(response) {
+      UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
       $scope.traerElementos();
       $scope.borrarFormulario();
       console.log("Exito al eliminar");

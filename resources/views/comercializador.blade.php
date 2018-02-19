@@ -72,8 +72,8 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="organismocomplete" ng-required="true">
-                          <option value="{[{x.id}]}" ng-repeat="x in organismos">
-                            {[{x.nombre}]}
+                          <option value="{[{x.id}]}" ng-repeat="x in organismos" ng-bind="x.nombre">
+                           
                           </option>
                         </select>
                       </div>
@@ -86,7 +86,7 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in query(searchText, 'filtroSocios')"
                           md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..." ng-required="true">
-                          <span md-highlight-text="searchText">
+                          <span md-highlight-text="searchText" ng-cloak>
                             {[{item.nombre}]}
                           </span>
                         </md-autocomplete>
@@ -98,7 +98,7 @@
                           <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" ng-model="nombre"
+                          <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Juan" ng-model="nombre"
                             type="text" ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.nombre[0]}]}</div>
                         </div>
                       </div>
@@ -108,7 +108,7 @@
                           <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="cuit" name="apellido" ng-model="apellido" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Apellido"
+                          <input type="text" id="cuit" name="apellido" ng-model="apellido" class="form-control col-md-7 col-xs-12" placeholder="Perez"
                             ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.cuit[0]}]}</div>
                         </div>
                       </div>
@@ -117,7 +117,7 @@
                           <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="number" id="dni" name="dni" ng-model="dni" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el DNI"
+                          <input type="number" id="dni" name="dni" ng-model="dni" class="form-control col-md-7 col-xs-12" placeholder="12345678"
                             ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.dni[0]}]}</div>
                         </div>
                       </div>
@@ -126,7 +126,7 @@
                           <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="number" id="cuota_social" name="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit"
+                          <input type="number" id="cuota_social" name="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="00123456780"
                             ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.cuota_social[0]}]}</div>
                         </div>
                       </div>
@@ -159,7 +159,7 @@
                           <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="number" id="legajo" name="legajo" ng-model="legajo" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Legajo"
+                          <input type="number" id="legajo" name="legajo" ng-model="legajo" class="form-control col-md-7 col-xs-12" placeholder="123"
                             ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.legajo[0]}]}</div>
                         </div>
                       </div>
@@ -168,7 +168,7 @@
                           <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="cuit" name="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio"
+                          <input type="text" id="cuit" name="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Av. 9 de Julio 1234"
                             ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.cuit[0]}]}</div>
                         </div>
                       </div>
@@ -177,7 +177,7 @@
                           <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="localidad" name="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Localidad"
+                          <input type="text" id="localidad" name="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="CABA"
                             ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.localidad[0]}]}</div>
                         </div>
                       </div>
@@ -186,7 +186,7 @@
                           <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="cuit" name="telefono" ng-model="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono"
+                          <input type="text" id="cuit" name="telefono" ng-model="telefono" class="form-control col-md-7 col-xs-12" placeholder="1123456789"
                             ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.telefono[0]}]}</div>
                         </div>
                       </div>
@@ -195,7 +195,7 @@
                           <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="cuit" name="codigo_postal" ng-model="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Codigo Postal"
+                          <input type="text" id="cuit" name="codigo_postal" ng-model="codigo_postal" class="form-control col-md-7 col-xs-12" placeholder="1234"
                             ng-required="socio == null || socio == ''"><div ng-cloak>{[{errores.codigo_postal[0]}]}</div>
                         </div>
                       </div>

@@ -1,4 +1,4 @@
-@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABM_productos.js') !!}
+@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABM_productos.js') !!}{!! Html::script('js/controladores/verificarBaja.js')!!}
 
 <div class="nav-md" ng-controller="ABM">
 
@@ -56,7 +56,7 @@
                                     @verbatim
 
                                     <form class="form-horizontal form-label-left" ng-submit="submit()" id="formulario">
-                                        {{ csrf_field() }}
+                                        <div ng-cloak>{{ csrf_field() }}</div>
 
                                         <span class="section">Datos del Producto</span>
 
@@ -66,8 +66,8 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese nombre del producto"
-                                                    type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
+                                                <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Credito" type="text">
+                                                <div ng-cloak>{{errores.nombre[0]}}</div>
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -75,8 +75,9 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="descripcion" placeholder="Ingrese la descripcion"
-                                                    type="text"><div ng-cloak>{{errores.descripcion[0]}}</div>
+                                                <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="descripcion" placeholder="Los hermanos sean unidos porque ésa es la ley primera."
+                                                    type="text">
+                                                <div ng-cloak>{{errores.descripcion[0]}}</div>
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -84,7 +85,8 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input required type="number" step="0.01" id="retencion" ng-model="ganancia" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el %"><div ng-cloak>{{errores.porcentaje_retencion[0]}}</div>
+                                                <input required type="number" step="0.01" id="retencion" ng-model="ganancia" class="form-control col-md-7 col-xs-12" placeholder="1">
+                                                <div ng-cloak>{{errores.porcentaje_retencion[0]}}</div>
                                             </div>
                                         </div>
 
@@ -94,8 +96,11 @@
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <select ng-model="id_proovedor" class="form-control col-md-7 col-xs-12" required>
-                                                    <option ng-repeat="proovedor in proovedores" value="{{proovedor.id}}"><div ng-cloak>{{proovedor.razon_social}}</div></option>
-                                                </select><div ng-cloak>{{errores.id_proovedor[0]}}</div>
+                                                    <option ng-repeat="proovedor in proovedores" value="{{proovedor.id}}" ng-bind="proovedor.razon_social">
+                                                        
+                                                    </option>
+                                                </select>
+                                                <div ng-cloak>{{errores.id_proovedor[0]}}</div>
 
                                             </div>
                                         </div>
@@ -105,7 +110,8 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input required type="number" step="0.01" ng-model="tasa" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la tasa"><div ng-cloak>{{errores.tasa[0]}}</div>
+                                                <input required type="number" step="0.01" ng-model="tasa" class="form-control col-md-7 col-xs-12" placeholder="1">
+                                                <div ng-cloak>{{errores.tasa[0]}}</div>
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -113,8 +119,8 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select ng-model="tipo" class="form-control col-md-7 col-xs-12">
-                                                    <option value="Credito">Credito</option>
+                                                <select ng-model="tipo" class="form-control col-md-7 col-xs-12" required>
+                                                    <option value="Credito" >Credito</option>
                                                     <option value="Producto">Producto</option>
                                                 </select>
                                             </div>
@@ -127,13 +133,17 @@
                                                 </label>
                                                 <div class="col-md-2 col-sm-2 col-xs-8" id="desde">
                                                     <input type="number" step="0.01" ng-model="porcentaje.desde" class="form-control col-md-2 col-xs-12" ng-disabled="{{!$first}}"
-                                                        placeholder="Desde"><div ng-cloak>{{errores.cuota_social[0]}}</div> <div ng-cloak>{{asignarDesde($index, $first, porcentajes)}}</div>
+                                                        placeholder="1">
+                                                    <div ng-cloak>{{errores.cuota_social[0]}}</div>
+                                                    <div ng-cloak>{{asignarDesde($index, $first, porcentajes)}}</div>
                                                 </div>
                                                 <div class="col-md-2 col-sm-2 col-xs-8" id="hasta">
-                                                    <input type="number" step="0.01" ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                                                    <input type="number" step="0.01" ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="2">
+                                                    <div ng-cloak>{{errores.cuota_social[0]}}</div>
                                                 </div>
                                                 <div class="col-md-2 col-sm-2 col-xs-8" id="porc">
-                                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="1">
+                                                    <div ng-cloak>{{errores.cuota_social[0]}}</div>
                                                 </div>
 
                                             </div>
@@ -267,17 +277,13 @@
                                                     {{abm.razon_social}}
                                                 </td>
                                                 <td>
-                                                @endverbatim
-                                                 @if(Sentinel::check()->hasAccess('productos.editar'))
+                                                    @endverbatim @if(Sentinel::check()->hasAccess('productos.editar'))
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerElemento(abm.id)">
                                                         <span class="glyphicon glyphicon-pencil"></span>
                                                     </button>
                                                     @endif @if(Sentinel::check()->hasAccess('productos.borrar'))
-                                                    <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)">
-                                                        <span class="glyphicon glyphicon-remove"></span>
-                                                    </button>
-                                                    @endif
-                                                    @verbatim
+                                                    <verificar-baja></verificar-baja>
+                                                    @endif @verbatim
                                                 </td>
                                             </tr>
                                     </table>
@@ -327,7 +333,8 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input id="nombre" class="form-control col-md-7 col-xs-12" ng-model="abmConsultado.nombre" placeholder="Ingrese nombre del producto"
-                                    type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
+                                    type="text">
+                                <div ng-cloak>{{errores.nombre[0]}}</div>
                             </div>
                         </div>
                         <div class="item form-group">
@@ -336,7 +343,8 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="abmConsultado.descripcion" placeholder="Ingrese la descripcion"
-                                    type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
+                                    type="text">
+                                <div ng-cloak>{{errores.nombre[0]}}</div>
                             </div>
                         </div>
 
@@ -346,7 +354,8 @@
                                 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" step="0.01" ng-model="abmConsultado.tasa" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la tasa"><div ng-cloak>{{errores.tasa[0]}}</div>
+                                <input type="number" step="0.01" ng-model="abmConsultado.tasa" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la tasa">
+                                <div ng-cloak>{{errores.tasa[0]}}</div>
                             </div>
                         </div>
 
@@ -367,14 +376,17 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-2 col-sm-2 col-xs-8" id="desde">
-                                    <input type="number" ng-model="porcentaje.desde" class="form-control col-md-2 col-xs-12" ng-disabled="{{!$first}}" placeholder="Desde"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                                    <input type="number" ng-model="porcentaje.desde" class="form-control col-md-2 col-xs-12" ng-disabled="{{!$first}}" placeholder="Desde">
+                                    <div ng-cloak>{{errores.cuota_social[0]}}</div>
                                 </div>
                                 {{asignarDesde($index, $first, abmConsultado.porcentajes)}}
                                 <div class="col-md-2 col-sm-2 col-xs-8" id="hasta">
-                                    <input type="number" step="0.01" ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                                    <input type="number" step="0.01" ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta">
+                                    <div ng-cloak>{{errores.cuota_social[0]}}</div>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-xs-8" id="porc">
-                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">
+                                    <div ng-cloak>{{errores.cuota_social[0]}}</div>
                                 </div>
 
                             </div>

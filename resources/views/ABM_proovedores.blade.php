@@ -1,4 +1,4 @@
-@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABMprueba.js') !!}
+@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABMprueba.js') !!}{!! Html::script('js/controladores/verificarBaja.js')!!}
 
 
 <div class="nav-md" ng-controller="ABM">
@@ -54,7 +54,7 @@
                 <div class="x_content">
                   @verbatim
                   <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario">
-                    {{ csrf_field() }}
+                    
 
                     <span class="section">Datos de proovedor</span>
 
@@ -63,7 +63,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required id="razonSocial" class="form-control col-md-7 col-xs-12" name="razon_social" placeholder="Ingrese la Razon social"
+                        <input required id="razonSocial" class="form-control col-md-7 col-xs-12" name="razon_social" placeholder="FINANCOMP"
                           type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
                       </div>
                     </div>
@@ -72,7 +72,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descripcion">Descripcion
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Descripcion"><div ng-cloak>{{errores.descripcion[0]}}</div>
+                        <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12" placeholder="Los hermanos sean unidos porque ésa es la ley primera."><div ng-cloak>{{errores.descripcion[0]}}</div>
                       </div>
                     </div>
 
@@ -81,24 +81,24 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Domicilio"><div ng-cloak>{{errores.domicilio[0]}}</div>
+                        <input required type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Av. 9 de Julio 1234"><div ng-cloak>{{errores.domicilio[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="piso">Piso
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="number" id="piso" name="piso" class="form-control" required><div ng-cloak>{{errores.piso[0]}}</div>
+                        <input type="number" id="piso" name="piso" class="form-control" placeholder="1" required><div ng-cloak>{{errores.piso[0]}}</div>
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dpto">Dpto
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="text" id="dpto" name="dpto" class="form-control" required><div ng-cloak>{{errores.departamento[0]}}</div>
+                        <input type="text" id="dpto" name="dpto" class="form-control" placeholder="12" required><div ng-cloak>{{errores.departamento[0]}}</div>
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nucleo">Nucleo
                       </label>
                       <div class="col-md-2 col-sm-2 col-xs-12">
-                        <input type="number" id="nucleo" name="nucleo" class="form-control" required><div ng-cloak>{{errores.nucleo[0]}}</div>
+                        <input type="number" id="nucleo" name="nucleo" class="form-control" placeholder="12" required><div ng-cloak>{{errores.nucleo[0]}}</div>
                       </div>
                     </div>
 
@@ -107,7 +107,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="number" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Cuit"><div ng-cloak>{{errores.cuit[0]}}</div>
+                        <input required type="number" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="00123456780"><div ng-cloak>{{errores.cuit[0]}}</div>
                       </div>
                     </div>
 
@@ -116,7 +116,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Telefono"><div ng-cloak>{{errores.telefono[0]}}</div>
+                        <input required type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" placeholder="1123456789"><div ng-cloak>{{errores.telefono[0]}}</div>
                       </div>
                     </div>
 
@@ -125,7 +125,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Email"><div ng-cloak>{{errores.email[0]}}</div>
+                        <input required type="text" id="email" name="email" class="form-control col-md-7 col-xs-12" placeholder="email@hotmail.com"><div ng-cloak>{{errores.email[0]}}</div>
                       </div>
                     </div>
 
@@ -134,7 +134,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="cuit" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el Usuario"><div ng-cloak>{{errores.usuario[0]}}</div>
+                        <input required type="text" id="cuit" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Usuario123"><div ng-cloak>{{errores.usuario[0]}}</div>
                       </div>
                     </div>
 
@@ -143,7 +143,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="cuit" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la Contraseña"><div ng-cloak>{{errores.password[0]}}</div>
+                        <input required type="text" id="cuit" name="password" class="form-control col-md-7 col-xs-12" placeholder="Contr123"><div ng-cloak>{{errores.password[0]}}</div>
                       </div>
                     </div>
                     <!--                     <div class="item form-group">
@@ -281,9 +281,8 @@
                             <span class="glyphicon glyphicon-pencil"></span>
                           </button>
                            @endif @if(Sentinel::check()->hasAccess('proovedores.borrar'))
-                          <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)">
-                            <span class="glyphicon glyphicon-remove"></span>
-                          </button>
+                           
+                          <verificar-baja></verificar-baja>
                           @endif
                           @verbatim
                         </td>

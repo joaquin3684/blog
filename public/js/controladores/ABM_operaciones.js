@@ -1,4 +1,4 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ServicioABM']).config(function($interpolateProvider) {});
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ServicioABM', 'verificarBaja']).config(function($interpolateProvider) {});
 app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ServicioABM) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
@@ -157,6 +157,9 @@ app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTabl
 
   }
 
+  $scope.delete = function (id){
+    $scope.borrarElemento(id)
+  }
   $scope.borrarElemento = function (id) {
 
     return $http({

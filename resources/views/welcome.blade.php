@@ -11,6 +11,12 @@
 
   <title> Mutual </title>
   {!! Html::script('js/angular.min.js') !!}
+ 
+    {!! Html::script('js/jquery.min.js') !!}
+
+   {!! Html::script('js/jquery-ui-1.12.1/jquery-ui.min.js') !!}
+   {!! Html::style('js/jquery-ui-1.12.1/jquery-ui.min.css') !!}
+     {!! Html::script('js/controladores/Mutual.js')!!} 
   <!-- Bootstrap core CSS -->
 {!! Html::style('js/angular-material/angular-material.min.css') !!}
   {!! Html::style('css/bootstrap.min.css') !!}
@@ -30,10 +36,7 @@
   {!! Html::style('css/ng-table.min.css') !!}
   {!! Html::style('css/bootstrap-notifications-master/dist/stylesheets/bootstrap-notifications.min.css') !!}
 
-  {!! Html::script('js/jquery.min.js') !!}
 
-   {!! Html::script('js/jquery-ui-1.12.1/jquery-ui.min.js') !!}
-   {!! Html::style('js/jquery-ui-1.12.1/jquery-ui.min.css') !!}
 
     
     {!! Html::script('js/nprogress.js') !!}
@@ -115,7 +118,7 @@
   <div class="container body">
 
 
-    <div class="main_container">
+    <div class="main_container" >
 <center>
 
 <div id="ContenedorMensaje" style="margin-left: 25%; margin-top: 20px; width: 50%; height: 150px; z-index: 1000000; position: fixed;" hidden>
@@ -134,7 +137,7 @@
         <div class="left_col scroll-view" >
 
           <div class="navbar nav_title" style="border: 0;">
-            <a href="landing" class="site_title"><i class="fa fa-paw"></i> <span>Mutual</span></a>
+            <a href="" class="site_title"><i class="fa fa-briefcase"></i> <span>Mutual</span></a>
           </div>
           <div class="clearfix"></div>
 
