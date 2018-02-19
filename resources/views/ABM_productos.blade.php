@@ -75,7 +75,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="descripcion" placeholder="Los hermanos sean unidos porque ésa es la ley primera."
+                                                <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="descripcion" placeholder="Nada nos hace envejecer con mas rapidez que el pensar incesantemente que nos hacemos viejos."
                                                     type="text">
                                                 <div ng-cloak>{{errores.descripcion[0]}}</div>
                                             </div>
