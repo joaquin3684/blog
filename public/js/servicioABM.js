@@ -15,7 +15,8 @@ angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
                 data: data,
             }).then(function successCallback(response) {
                 UserSrv.MostrarMensaje("OK", "Elemento dado de alta correctamente.", undefined, 'mensaje', undefined);
-            }, function errorCallback(response) {
+            }, function errorCallback(data) {
+                UserSrv.MostrarError(data)
                 console.log('Error al realizar el alta!');
             });
         };
@@ -38,7 +39,8 @@ angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
                     console.log(response.data);
                     return response.data;
                 }
-            }, function errorCallback(response) {
+            }, function errorCallback(data) {
+                UserSrv.MostrarError(data)
                 console.log('Error al traer elementos!');
             });
 
@@ -58,7 +60,8 @@ angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
                     console.log(response.data);
                     return response.data;
                 }
-            }, function errorCallback(response) {
+            }, function errorCallback(data) {
+                UserSrv.MostrarError(data)
                 console.log('Error al traer elementos!');
             });
 
@@ -91,7 +94,8 @@ angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
             }).then(function successCallback(response) {
                 UserSrv.MostrarMensaje("OK", "Elemento editado correctamente.", undefined, 'mensaje', undefined);
 
-            }, function errorCallback(response) {
+            }, function errorCallback(data) {
+                UserSrv.MostrarError(data)
                 console.log('Error al editar un elemento!');
             });
 
@@ -104,7 +108,8 @@ angular.module('ServicioABM', ['ngTable', 'Mutual.services'])
                 method: 'delete',
             }).then(function successCallback(response) {
                 UserSrv.MostrarMensaje("OK", "Elemento eliminado correctamente.", undefined, 'mensaje', undefined);
-            }, function errorCallback(response) {
+            }, function errorCallback(data) {
+                UserSrv.MostrarError(data)
                 console.log('Error al borrar un elemento!');
             });
         }

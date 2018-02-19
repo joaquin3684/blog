@@ -100,6 +100,7 @@ $scope.traerRelaciones = function(relaciones)
                $scope.traerElementos($scope.pantallaActual);
             }, function errorCallback(data)
             {
+                UserSrv.MostrarError(data)
                console.log(data);
                $scope.errores = data.data;
             });
@@ -170,6 +171,7 @@ $scope.traerRelaciones = function(relaciones)
 
         }, function errorCallback(data)
         {
+            UserSrv.MostrarError(data)
             console.log(data.data);
         });
 
@@ -247,6 +249,7 @@ $scope.traerRelaciones = function(relaciones)
             });
          }, function errorCallback(data)
          {
+             UserSrv.MostrarError(data)
             console.log(data);
          });
    }

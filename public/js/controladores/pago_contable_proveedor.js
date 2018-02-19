@@ -48,6 +48,7 @@ if($scope.formaCobro == 'caja'){
       $scope.traerElementos();
       UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
     }, function errorCallback(response) {
+      UserSrv.MostrarError(response)
       $scope.errores = response.data;
     });
 
@@ -67,7 +68,7 @@ if($scope.formaCobro == 'caja'){
 
 
       }, function errorCallback(response) {
-
+        UserSrv.MostrarError(response)
       });
   }
 
@@ -85,7 +86,7 @@ if($scope.formaCobro == 'caja'){
 
 
       }, function errorCallback(response) {
-
+        UserSrv.MostrarError(response)
       });
   }
 

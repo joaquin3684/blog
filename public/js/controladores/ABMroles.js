@@ -31,6 +31,7 @@ app.controller('ABM_roles', function ($scope, $http, $compile, $sce, NgTablePara
       UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
       pull('roles/traerRoles', 'roles', 'paramsABMS');
     }, function errorCallback(data) {
+      UserSrv.MostrarError(data)
       console.log(data);
       $scope.errores = data.data;
     });

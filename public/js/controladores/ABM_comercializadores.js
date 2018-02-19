@@ -33,7 +33,8 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
       $scope.borrarFormulario();
       UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
     }, function errorCallback(response) {
-      $scope.errores = response.data;
+      UserSrv.MostrarError(response)   
+            $scope.errores = response.data;
     });
 
   }
@@ -69,8 +70,8 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
 
 
       }, function errorCallback(response) {
-
-      });
+        UserSrv.MostrarError(response)   
+            });
   }
 
   $scope.traerElementos();
@@ -84,8 +85,8 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
     }).then(function successCallback(response) {
       $scope.abmConsultado = response.data;
     }, function errorCallback(response) {
-
-    });
+      UserSrv.MostrarError(response)
+        });
   }
 
   $scope.editarFormulario = function (id) {
@@ -112,8 +113,8 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
       console.log("Exito al editar");
       $('#editar').modal('toggle');
     }, function errorCallback(response) {
-
-    });
+      UserSrv.MostrarError(response)
+        });
 
   }
 
@@ -130,8 +131,8 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
       UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
       console.log("Exito al eliminar");
     }, function errorCallback(response) {
-
-    });
+      UserSrv.MostrarError(response)
+        });
   }
 
 

@@ -34,6 +34,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
         }, function errorCallback(data)
         {
+            UserSrv.MostrarError(data)
             console.log(data.data);
         });
 
@@ -78,6 +79,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
                     return response.data;
                     console.log(data);
                 }, function errorCallback(data){
+                    UserSrv.MostrarError(data)
                     console.log(data);
                 });
     }
@@ -97,7 +99,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
                     $scope.DatosModalActual = response.data;
                     console.log(response.data);
                 }, function errorCallback(data){
-                    UserSrv.MensajeError(data.data);
+                    UserSrv.MostrarError(data)
                 });
     }
 
@@ -160,6 +162,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
         }, function errorCallback(data)
         {
+            UserSrv.MostrarError(data)
             console.log(data.data);
         });
     }
@@ -182,7 +185,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         }, function errorCallback(data)
         {
 
-                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
+            UserSrv.MostrarError(data)
 
         });
     }
@@ -215,8 +218,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
         }, function errorCallback(data)
         {
-
-                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
+            UserSrv.MostrarError(data)
 
         });
 
@@ -237,7 +239,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         }, function errorCallback(data)
         {
 
-                UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
+            UserSrv.MostrarError(data)
 
         });
 

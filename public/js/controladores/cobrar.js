@@ -111,6 +111,7 @@ $http({
 
             }, function errorCallback(data)
             {
+                UserSrv.MostrarError(data)
                console.log(data.data);
             });
 }
@@ -157,6 +158,7 @@ $scope.cobrarSocios = function(){
         $scope.PullSocios($scope.organismoActual.id, $scope.organismoActual.nombre);
         $scope.sociosModificados = true;
       },function errorCallback(data){
+          UserSrv.MostrarError(data)
         console.log(data.data);
       });
 
@@ -184,6 +186,7 @@ $scope.cobrarVentas = function(){
         $scope.PullVentas($scope.socioActual.id,$scope.socioActual.nombre );
         $scope.ventasModificadas = true;
       },function errorCallback(data){
+          UserSrv.MostrarError(data)
         console.log(data.data);
       });
 }
@@ -311,6 +314,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
         }, function errorCallback(data)
         {
+            UserSrv.MostrarError(data)
             console.log(data.data);
         });
 

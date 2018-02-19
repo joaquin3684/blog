@@ -20,7 +20,7 @@ $scope.traerImputaciones = function() {
 
 
     }, function errorCallback(response) {
-
+      UserSrv.MostrarError(response)
     });
 }
 
@@ -86,7 +86,7 @@ $scope.filtro = function (){
 
 
     }, function errorCallback(response) {
-
+      UserSrv.MostrarError(response)
     });
 }
 

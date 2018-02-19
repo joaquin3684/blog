@@ -57,8 +57,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
                 $scope.traerElementos();
             }, function errorCallback(data)
             {
-                UserSrv.MostrarMensaje("Error", 'Se ha detectado un error al realizar la accion ('+ data.statusText+'). Si el error persiste debera comunicarse con el servicio tecnico.', 'Error', "mensaje");
-               console.log(data);
+                UserSrv.MostrarError(data)                 
                $scope.errores = data.data;
             });
 

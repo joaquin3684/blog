@@ -41,6 +41,7 @@ $scope.ArrayAprobar = [];
 
         }, function errorCallback(data)
         {
+            UserSrv.MostrarError(data)
             console.log(data.data);
         });
 
@@ -64,7 +65,8 @@ $scope.ArrayAprobar = [];
 
         }, function errorCallback(data)
         {
-            UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
+            UserSrv.MostrarError(data)
+       
         });
 
 

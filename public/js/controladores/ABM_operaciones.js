@@ -1,5 +1,5 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ServicioABM', 'verificarBaja']).config(function($interpolateProvider) {});
-app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ServicioABM) {
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ServicioABM', 'verificarBaja']).config(function ($interpolateProvider) {});
+app.controller('ABM_operaciones', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ServicioABM) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
   $scope.query = function (searchText, url, scopeObj) {
@@ -9,12 +9,12 @@ app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTabl
     return ServicioABM.pullFilteredByData(url, data)
   }
 
-  $scope.borrarFormulario = function(){
+  $scope.borrarFormulario = function () {
     $('#formulario')[0].reset();
     $scope.cuenta1Debe = 0;
-    $scope.cuenta1Haber =0
+    $scope.cuenta1Haber = 0
   };
-  $scope.modificar = function (elem){
+  $scope.modificar = function (elem) {
     $scope[elem] = 0;
   }
   $scope.modificar2 = function (elem, elem2) {
@@ -27,7 +27,7 @@ app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTabl
   $scope.cuenta1Seleccionada = '';
   $scope.cuenta2Seleccionada = '';
 
-  $scope.submit = function() {
+  $scope.submit = function () {
     var data = {
       'nombre': $scope.nombre,
       'imputacion1': $scope.cuenta1Seleccionada.id,
@@ -48,80 +48,81 @@ app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTabl
     }).then(function successCallback(response) {
       $scope.traerElementos();
       $scope.borrarFormulario();
-      UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
+      UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
     }, function errorCallback(response) {
+      UserSrv.MostrarError(response)
       $scope.errores = response.data;
     });
 
   }
 
-  traerImputaciones = function (){
+  traerImputaciones = function () {
     return $http({
       url: "imputacion/traerElementos",
       method: "get",
     }).then(function successCallback(response) {
-      
-        console.log(response.data);
-        $scope.cuentas = response.data;
-    }, function errorCallback(response) {
 
+      console.log(response.data);
+      $scope.cuentas = response.data;
+    }, function errorCallback(response) {
+      UserSrv.MostrarError(response)
     });
   }
-  $scope.traerElementos = function() {
+  $scope.traerElementos = function () {
 
     return $http({
       url: "operaciones/traerElementos",
       method: "get",
     }).then(function successCallback(response) {
-        if (typeof response.data === 'string') {
-          return [];
-        } else {
-            console.log(response.data);
-            $scope.datosabm = [];
-            response.data.forEach(operacion => {
-              if(operacion.entrada == 1){
-                var tipo = 'Ingreso'
-              }else{
-                var tipo = 'Egreso'
-              }
-              $scope.datosabm.push({
-                'nombre': operacion.nombre,
-                'id': operacion.id,
-                'tipo': tipo
-              })
-            });
-            $scope.paramsABMS = new NgTableParams({
-              page: 1,
-              count: 10
-            }, {
-              getData: function(params) {
-                var filterObj = params.filter();
-                filteredData = $filter('filter')($scope.datosabm, filterObj);
-                var sortObj = params.orderBy();
-                orderedData = $filter('orderBy')(filteredData, sortObj);
-                $scope.paramsABMS.total(orderedData.length);
-                return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-              },
-                
-            });
-         
+      if (typeof response.data === 'string') {
+        return [];
+      } else {
+        console.log(response.data);
+        $scope.datosabm = [];
+        response.data.forEach(operacion => {
+          if (operacion.entrada == 1) {
+            var tipo = 'Ingreso'
+          } else {
+            var tipo = 'Egreso'
           }
+          $scope.datosabm.push({
+            'nombre': operacion.nombre,
+            'id': operacion.id,
+            'tipo': tipo
+          })
+        });
+        $scope.paramsABMS = new NgTableParams({
+          page: 1,
+          count: 10
+        }, {
+          getData: function (params) {
+            var filterObj = params.filter();
+            filteredData = $filter('filter')($scope.datosabm, filterObj);
+            var sortObj = params.orderBy();
+            orderedData = $filter('orderBy')(filteredData, sortObj);
+            $scope.paramsABMS.total(orderedData.length);
+            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+          },
+
+        });
+
+      }
 
 
-      }, function errorCallback(response) {
-
-      });
+    }, function errorCallback(response) {
+      UserSrv.MostrarError(response)
+    });
   }
 
   $scope.traerElementos();
   traerImputaciones();
-  $scope.traerElemento = function(id) {
+  $scope.traerElemento = function (id) {
     return $http({
-      url: 'operaciones/'+ id,
+      url: 'operaciones/' + id,
       method: 'get',
       // data: data,
     }).then(function successCallback(response) {
-      
+
       $scope.abmConsultado = {
         'id': response.data.id,
         'nombre': response.data.nombre,
@@ -135,7 +136,7 @@ app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTabl
         'salida': response.data.salida
       };
     }, function errorCallback(response) {
-
+      UserSrv.MostrarError(response)
     });
   }
 
@@ -143,33 +144,33 @@ app.controller('ABM_operaciones', function($scope, $http, $compile, $sce, NgTabl
     $scope.abmConsultado.debe2 = $scope.abmConsultado.haber1;
     $scope.abmConsultado.haber2 = $scope.abmConsultado.debe1;
     return $http({
-      url: 'operaciones/'+ id,
+      url: 'operaciones/' + id,
       method: 'put',
-      
+
       data: $scope.abmConsultado,
     }).then(function successCallback(response) {
       $scope.traerElementos();
       console.log("Exito al editar");
       $('#editar').modal('toggle');
     }, function errorCallback(response) {
-
+      UserSrv.MostrarError(response)
     });
 
   }
 
-  $scope.delete = function (id){
+  $scope.delete = function (id) {
     $scope.borrarElemento(id)
   }
   $scope.borrarElemento = function (id) {
 
     return $http({
-      url: 'operaciones/'+ id,
+      url: 'operaciones/' + id,
       method: 'delete',
     }).then(function successCallback(response) {
       $scope.traerElementos();
       console.log("Exito al eliminar");
     }, function errorCallback(response) {
-
+      UserSrv.MostrarError(response)
     });
   }
 

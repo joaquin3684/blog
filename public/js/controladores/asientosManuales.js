@@ -49,6 +49,7 @@ $scope.fecha = new Date();
       UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
       $scope.traerElementos();
     }, function errorCallback(response) {
+      UserSrv.MostrarError(response)
       $scope.errores = response.data;
     });
 
@@ -69,7 +70,7 @@ $scope.fecha = new Date();
 
 
       }, function errorCallback(response) {
-
+        UserSrv.MostrarError(response)
       });
   }
 
