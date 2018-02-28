@@ -117,7 +117,8 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
         });
 
   }
-
+  
+  $scope.guardarDatosBaja = function () { $scope.elemABorrar = this.abm }
   $scope.delete= function(id){
     $scope.borrarElemento(id)
   }

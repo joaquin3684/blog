@@ -182,7 +182,7 @@
                           </button>
                           @endverbatim @endif @if(Sentinel::check()->hasAccess('bancos.borrar')) @verbatim
 
-                          <verificar-baja></verificar-baja>
+                          <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
                           @endverbatim @endif @verbatim
 
                           <button type="button" class="btn btn-info" data-toggle="modal" data-target="#chequera" ng-click="asignarBanco(abm.id)">

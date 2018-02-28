@@ -5,6 +5,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
     $('#formulario')[0].reset();
   }
 
+    $scope.guardarDatosBaja = function () { $scope.elemABorrar = this.abm }
   $scope.delete= function(id){
       $scope.enviarFormulario('Borrar', id)
   }

@@ -75,6 +75,7 @@ app.controller('ABM_bancos', function ($scope, $http, $compile, $sce, NgTablePar
             $scope[scopeObj] = returnedData;
         });
     }
+    $scope.guardarDatosBaja = function () { $scope.elemABorrar = this.abm }
     $scope.delete = function (id) {
         ServicioABM.delete('bancos', id).then(function () {
             pull('bancos/traerElementos', 'bancos', 'paramsABMS');

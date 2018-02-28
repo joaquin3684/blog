@@ -120,10 +120,9 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         });
 
     }
-   
-    $scope.delete = function (idBaja) {
-        $scope.enviarFormulario('Borrar', idBaja)
-    }
+
+   $scope.guardarDatosBaja =  function(){$scope.elemABorrar = this.abm}
+    $scope.delete = function (id) {$scope.enviarFormulario('Borrar', id)}
 
     $scope.cambiarFecha = function (dato) {
         moment.locale('es');

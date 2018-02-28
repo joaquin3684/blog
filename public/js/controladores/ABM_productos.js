@@ -158,6 +158,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
   }
 
+  $scope.guardarDatosBaja = function () { $scope.elemABorrar = this.abm }
   $scope.delete = function (id){
     $scope.borrarElemento(id)
   }

@@ -1,4 +1,5 @@
-@extends('welcome') @section('contenido'){!! Html::script('js/controladores/verificarBaja.js')!!} {!! Html::script('js/controladores/ABM_comercializadores.js') !!}
+@extends('welcome') @section('contenido'){!! Html::script('js/controladores/verificarBaja.js')!!}
+ {!! Html::script('js/controladores/ABM_comercializadores.js') !!}
 
 
 <div class="nav-md" ng-controller="ABM_comercializador">
@@ -282,7 +283,7 @@
                             <span class="glyphicon glyphicon-pencil"></span>
                           </button>
                           @endif @if(Sentinel::check()->hasAccess('comercializadores.borrar'))
-                          <verificar-baja></verificar-baja>
+                          <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
                           @endif
                           @verbatim
                         </td>

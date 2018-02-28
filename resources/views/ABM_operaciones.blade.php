@@ -259,7 +259,7 @@
                             <span class="glyphicon glyphicon-pencil"></span>
                           </button>
                           @endif @if(Sentinel::check()->hasAccess('operaciones.borrar'))
-                          <verificar-baja></verificar-baja>
+                          <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
                           @endif
                           @verbatim
                         </td>

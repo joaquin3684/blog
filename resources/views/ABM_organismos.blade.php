@@ -272,7 +272,7 @@
                             <span class="glyphicon glyphicon-pencil"></span>
                           </button>
                           @endverbatim @endif @if(Sentinel::check()->hasAccess('organismos.borrar')) @verbatim
-                          <verificar-baja></verificar-baja>
+                          <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
                           
                           @endverbatim @endif @verbatim
                         </td>
