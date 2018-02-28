@@ -26,6 +26,7 @@ $scope.guardarFechaContable = function (fechaContable){
   }).then(function successCallback(response) {
     UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
   }, function errorCallback(response) {
+      UserSrv.MostrarError(response)
     console.log("Error")
   });
 
@@ -52,6 +53,7 @@ $scope.traerRelaciones = function(relaciones)
             });
          }, function errorCallback(data)
          {
+             UserSrv.MostrarError(data)
             console.log(data);
          });
       }
@@ -119,6 +121,7 @@ $scope.traerRelaciones = function(relaciones)
                $scope.traerElementos();
             }, function errorCallback(data)
             {
+                UserSrv.MostrarError(data)
                console.log(data);
                $scope.errores = data.data;
             });
@@ -178,6 +181,7 @@ $scope.traerRelaciones = function(relaciones)
 
         }, function errorCallback(data)
         {
+            UserSrv.MostrarError(data)
             console.log(data.data);
         });
    }
@@ -219,6 +223,7 @@ $scope.traerRelaciones = function(relaciones)
             });
          }, function errorCallback(data)
          {
+             UserSrv.MostrarError(data)
             console.log(data);
          });
    }

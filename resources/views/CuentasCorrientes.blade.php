@@ -28,9 +28,9 @@
 
             @if(Sentinel::check()->hasAccess('ventas.visualizar'))
             @verbatim 
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12" >
                 <div id="mensaje"></div>
-                <div class="x_panel">
+                <div class="x_panel" ng-cloak>
                     <div class="x_title">
                         <h2>
                             Cuenta corriente servicios/prestamos
@@ -84,7 +84,7 @@
                         </center>
                         <div class="row">
 
-                            <ol class="breadcrumb breadcrumb-arrow">
+                            <ol class="breadcrumb breadcrumb-arrow" ng-cloak>
                                 <li>
                                     <a href="" id="bread-organismos" ng-click="setVista('Organismos')">
                                         <i class="fa fa-home"></i> ORGANISMOS</a>
@@ -129,7 +129,7 @@
 
                                 </tr>
                                 <tfoot>
-                                    <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                    <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;" ng-cloak>
                                         <td style="text-align: right;">
                                             <b>Total</b>
                                         </td>
@@ -151,7 +151,7 @@
                         <div id="divTablaSocios" ng-if="vistaactual=='Socios'">
                             <table id="tablaSocios" ng-table="paramsSocios" class="table table-hover table-bordered">
 
-                                <tr ng-repeat="socio in $data" ng-click="PullVentas(socio.id_socio,socio.socio)">
+                                <tr ng-repeat="socio in $data" ng-click="PullVentas(socio.id_socio,socio.socio)" ng-cloak>
                                     <td title="'Socio'" filter="{socio: 'text'}" sortable="'socio'">
                                         {{socio.socio}}
                                     </td>
@@ -168,7 +168,7 @@
                                 </tr>
 
                                 <tfoot>
-                                    <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                    <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;" ng-cloak>
                                         <td style="text-align: right;">
                                             <b>Total</b>
                                         </td>
@@ -188,7 +188,7 @@
                         </div>
                         <div id="divTablaVentas" ng-if="vistaactual=='Ventas'">
                             <table id="tablaVentas" ng-table="paramsVentas" class="table table-hover table-bordered">
-                                <tr ng-repeat="venta in $data" ng-click="PullCuotas(venta.id_venta,venta.producto, $event)">
+                                <tr ng-repeat="venta in $data" ng-click="PullCuotas(venta.id_venta,venta.producto, $event)" ng-cloak>
                                     <td title="'Producto'" filter="{producto: 'text'}" sortable="'producto'">
                                         {{venta.producto}}
                                     </td>
@@ -216,7 +216,7 @@
                                 </tr>
 
                                 <tfoot>
-                                    <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                    <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;" ng-cloak>
                                         <td style="text-align: right;">
                                             <b>Total</b>
                                         </td>
@@ -254,7 +254,7 @@
                                     <div class="modal-body" style="padding-bottom: 50px;">
                                         <table class="table table-hover table-bordered" ng-table="paramsMovimientos">
 
-                                            <tr ng-repeat="movimiento in $data">
+                                            <tr ng-repeat="movimiento in $data" ng-cloak>
                                                 <td title="'Cuota'" filter="{nro_cuota: 'text'}" sortable="'nro_cuota'">
                                                     {{movimiento.nro_cuota}}
                                                 </td>
@@ -291,7 +291,7 @@
                                     <table ng-table="paramsCuotas" class="table table-hover table-bordered">
 
                                         <tbody data-ng-repeat="cuota in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                            <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,cuota.id_cuota)" ng-class="cuota.estado">
+                                            <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,cuota.id_cuota)" ng-class="cuota.estado" ng-cloak>
                                                 <td title="'NroCuota'" filter="{ nro_cuota: 'text'}" sortable="'nro_cuota'">
                                                     {{cuota.nro_cuota}}
                                                 </td>
@@ -318,7 +318,7 @@
                                                         <div>
                                                             <table class="table">
                                                                 <thead class="levelTwo" style="background-color: #73879C; color: white;">
-                                                                    <tr>
+                                                                    <tr ng-cloak>
                                                                         <th>Fecha</th>
                                                                         <th>Entrada</th>
                                                                         <th>Salida</th>
@@ -327,7 +327,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr style="background-color: #A6A6A6; color: white;" data-ng-repeat="movimiento in cuota.movimientos">
+                                                                    <tr style="background-color: #A6A6A6; color: white;" data-ng-repeat="movimiento in cuota.movimientos" ng-cloak>
 
                                                                         <td>
                                                                             <center>{{movimiento.fecha}}</center>
@@ -352,7 +352,7 @@
                                             </tr>
                                         </tbody>
                                         <tfoot>
-                                            <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;">
+                                            <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;" ng-cloak>
                                                 <td style="text-align: right;">
                                                     <b>Total</b>
 

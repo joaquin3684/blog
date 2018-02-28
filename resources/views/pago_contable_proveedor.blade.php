@@ -53,7 +53,7 @@
                      </label>
                      <div class="col-md-6 col-sm-6 col-xs-12">
                        <select class="form-control" ng-model="proveedorSeleccionado">
-                         <option ng-value="proveedor" ng-repeat="proveedor in proveedores">{{proveedor.razon_social}}</option>
+                         <option ng-value="proveedor" ng-repeat="proveedor in proveedores" ng-bind="proveedor.razon_social"></option>
                        </select>
                      </div>
                    </div>
@@ -77,9 +77,9 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Forma de pago <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="form-control" ng-model="formaCobro">
+                        <select class="form-control" ng-model="formaCobro" ng-cloak>
                           <option value="caja" ng-disabled="proveedorSeleccionado.totalAPagar > 1000">Caja</option>
-                          <option value="banco" >Banco</option>
+                          <option value="banco">Banco</option>
                         </select>
                       </div>
                     </div>
@@ -89,7 +89,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" ng-model="bancoSeleccionado">
-                          <option ng-value="banco" ng-repeat="banco in bancos">{{banco.nombre}}</option>
+                          <option ng-value="banco" ng-repeat="banco in bancos" ng-bind="banco.nombre"></option>
                         </select>
                       </div>
                     </div>

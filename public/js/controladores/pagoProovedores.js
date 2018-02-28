@@ -60,6 +60,7 @@ $scope.ArrayPago = [];
 
         }, function errorCallback(data)
         {
+            UserSrv.MostrarError(data)
             console.log(data.data);
         });
 
@@ -86,6 +87,7 @@ $scope.ArrayPago = [];
 
       }, function errorCallback(data)
       {
+          UserSrv.MostrarError(data)
           console.log(data.data);
       });
     };
@@ -104,6 +106,7 @@ $scope.ArrayPago = [];
 
         }, function errorCallback(data)
         {
+            UserSrv.MostrarError(data)
             console.log(data.data);
         });
 

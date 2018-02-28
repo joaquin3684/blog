@@ -1,4 +1,4 @@
-@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABMusuarios.js') !!}
+@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABMusuarios.js') !!}{!! Html::script('js/controladores/verificarBaja.js')!!}
 
 <div class="nav-md" ng-controller="ABM">
 
@@ -13,7 +13,7 @@
         <div class="">
 
           <div class="clearfix"></div>
-
+<div id="mensaje"></div>
           <div class="row">
             @if(Sentinel::check()->hasAccess('usuarios.crear'))
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -61,7 +61,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="usuario" class="form-control col-md-7 col-xs-12" name="usuario" placeholder="Ingrese usuario" type="text" required><div ng-cloak>{{errores.usuario[0]}}</div>
+                        <input id="usuario" class="form-control col-md-7 col-xs-12" name="usuario" placeholder="Usuario1" type="text" required><div ng-cloak>{{errores.usuario[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -69,7 +69,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="email" class="form-control col-md-7 col-xs-12" name="email" placeholder="Ingrese email del usuario" type="text"
+                        <input id="email" class="form-control col-md-7 col-xs-12" name="email" placeholder="email@hotmail.com" type="text"
                           required><div ng-cloak>{{errores.email[0]}}</div>
                       </div>
                     </div>
@@ -78,7 +78,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="password" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la contraseña"
+                        <input type="text" id="password" name="password" class="form-control col-md-7 col-xs-12" placeholder="Contr123"
                           required><div ng-cloak>{{errores.password[0]}}</div>
                       </div>
                     </div>
@@ -88,7 +88,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input required type="number" id="numeroDeRoles" name="numeroDeRoles" ng-model="numeroDeRoles" class="form-control col-md-7 col-xs-12"
-                          placeholder="Ingrese la cantidad de roles">
+                          placeholder="1">
                       </div>
                       <button type="button" ng-click="agregarPantalla()" class="btn btn-primary">Añadir Roles</button>
                     </div>
@@ -180,9 +180,7 @@
                         <span class="glyphicon glyphicon-pencil"></span>
                       </button>
                       @endif @if(Sentinel::check()->hasAccess('usuarios.borrar'))
-                      <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', abm.id)">
-                        <span class="glyphicon glyphicon-remove"></span>
-                      </button>
+                      <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
                       @endif
                       @verbatim
                     </td>

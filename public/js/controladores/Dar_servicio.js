@@ -24,6 +24,7 @@ app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
       return response.data;
 
     }, function errorCallback(data) {
+      UserSrv.MostrarError(data)
       console.log(data);
     });
   }
@@ -42,6 +43,7 @@ app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
       return response.data;
 
     }, function errorCallback(data) {
+      UserSrv.MostrarError(data)
       console.log(data);
     });
   }
@@ -79,6 +81,7 @@ app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
       return response.data;
 
     }, function errorCallback(data) {
+      UserSrv.MostrarError(data)
       console.log(data);
     });
   }

@@ -1,8 +1,13 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){});
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja']).config(function($interpolateProvider){});
 app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
 
   $scope.borrarFormulario = function(){
     $('#formulario')[0].reset();
+  }
+
+    $scope.guardarDatosBaja = function () { $scope.elemABorrar = this.abm }
+  $scope.delete= function(id){
+      $scope.enviarFormulario('Borrar', id)
   }
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
    $scope.enviarFormulario = function(tipoSolicitud, id = '')
@@ -48,11 +53,12 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
                $scope.mensaje = response;
                $('#formulario')[0].reset();
                $scope.errores = '';
-               console.log(response.data);
+             
                UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
+                $scope.traerElementos();
             }, function errorCallback(data)
             {
-               console.log(data);
+                UserSrv.MostrarError(data)                 
                $scope.errores = data.data;
             });
 

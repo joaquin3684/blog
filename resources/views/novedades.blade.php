@@ -150,8 +150,8 @@
                                 @verbatim
                                 <table ng-table="paramsTable" class="table table-hover table-bordered" show-filter="false">
 
-                                    <tbody data-ng-repeat="organismo in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                        <tr class="clickableRow" title="">
+                                    <tbody data-ng-repeat="organismo in $data" data-ng-switch on="dayDataCollapse[$index]" ng-cloak>
+                                        <tr class="clickableRow" title="" ng-cloak>
                                             <td title="'Nombre'" filter="{ organismo: 'text'}" sortable="'organismo'" data-ng-click="selectTableRow($index,organismo.id_organismo)">
                                                 {{organismo.organismo}}
                                             </td>
@@ -165,7 +165,7 @@
                                             <td colspan="5">
                                                 <div>
                                                     <div>
-                                                        <table class="table table-striped">
+                                                        <table class="table table-striped" >
                                                             <thead style="background-color: #337ab7; color: white;">
                                                                 <tr>
                                                                     <th>

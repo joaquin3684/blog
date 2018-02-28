@@ -25,9 +25,10 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>ABM Capitulos
+                  <h2>Plan de Cuentas
                     <small>Dar de alta un capitulo</small>
                   </h2>
+
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link">
@@ -56,7 +57,9 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-
+                  @verbatim
+                  <span class="section" ng-cloak>Datos de {{pantallaActual}}</span>
+                  @endverbatim
                   <div class="row">
                     <section>
                       <div class="wizard">
@@ -115,41 +118,42 @@
 
                         <div class="tab-content">
                           <div class="tab-pane active" role="tabpanel" id="capitulor">
-                            <h3>Alta de Capítulo</h3>
+
 
                             @verbatim
-                            <form role="form" class="" ng-submit="enviarFormulario('capitulo','Alta')" id="capituloform">
-                              {{ csrf_field() }}
+                            <form role="form" class="" style="text-align: right" ng-submit="enviarFormulario('capitulo','Alta')" id="capituloform">
+                              <div ng-cloak>{{ csrf_field() }}</div>
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="codigo">Código
                                     <span class="required">*</span>
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="Ingrese el código" type="number" max="9"
-                                    required><div ng-cloak>{{errores.codigo[0]}}</div>
+                                  <input id="codigo" class="form-control col-md-7 col-xs-12" name="codigo" placeholder="1" type="number" max="9" required>
+                                  <div ng-cloak>{{errores.codigo[0]}}</div>
                                 </div>
                               </div>
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="nombre">Nombre
                                     <span class="required">*</span>
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text" required><div ng-cloak>{{errores.nombre[0]}}</div>
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Activo" type="text" required>
+                                  <div ng-cloak>{{errores.nombre[0]}}</div>
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="form-group">
-                                  <div class="col-md-2 col-md-offset-6">
-                                    <button id="send" type="submit" style="width: 100%;" class="btn btn-success">
-                                      <i class="fa fa-plus"></i> Alta</button>
-                                  </div>
+                              <div class="ln_solid"></div>
+                              <div class="form-group">
+                                <div class="col-md-4 col-md-offset-4">
+                                  <button type="button" ng-click="borrarFormulario()" class="btn btn-primary">Cancelar</button>
+                                  <button id="send" type="submit" class="btn btn-success">Alta</button>
                                 </div>
                               </div>
+                              
                             </form>
                             @endverbatim
 
@@ -168,16 +172,11 @@
 
                           <div class="tab-pane" role="tabpanel" id="rubro">
 
-
-
-
-                            <h3>Alta de Rubro</h3>
-
                             @verbatim
-                            <form role="form" class="" ng-submit="enviarFormulario('rubro','Alta')" id="rubroform">
+                            <form role="form" class="" style="text-align: right" ng-submit="enviarFormulario('rubro','Alta')" id="rubroform">
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="id_capitulo">Capitulo
                                     <span class="required">*</span>
                                   </label>
@@ -193,7 +192,7 @@
                               </div>
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="codigo">Código
                                     <span class="required">*</span>
                                   </label>
@@ -201,21 +200,20 @@
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                   <div class="input-group">
                                     <span class="input-group-addon" id="basic-addon1">{{capitulo.codigo}}</span>
-                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoRubro" placeholder="Ingrese el código" type="number"
-                                      max="9">{{errores.nombre[0]}}
+                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoRubro" placeholder="1" type="number" max="9">{{errores.nombre[0]}}
                                     <input type="hidden" id="tipo_tabla" value="{{capitulo.codigo}}{{codigoRubro}}" name="codigo">
                                   </div>
                                 </div>
                               </div>
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="nombre">Nombre
                                     <span class="required">*</span>
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Deudas" type="text">{{errores.nombre[0]}}
                                 </div>
                               </div>
                               <div class="row">
@@ -247,14 +245,13 @@
 
                           </div>
                           <div class="tab-pane" role="tabpanel" id="moneda">
-                            <h3>Alta de Moneda</h3>
 
                             @verbatim
 
-                            <form role="form" class="" ng-submit="enviarFormulario('moneda','Alta')" id="monedaform">
+                            <form role="form" class="" style="text-align: right" ng-submit="enviarFormulario('moneda','Alta')" id="monedaform">
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="id_rubro">Rubro
                                     <span class="required">*</span>
                                   </label>
@@ -270,7 +267,7 @@
                               </div>
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="codigo">Código
                                     <span class="required">*</span>
                                   </label>
@@ -281,21 +278,20 @@
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                   <div class="input-group">
                                     <span class="input-group-addon" id="basic-addon1">{{rubro.codigo}}</span>
-                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoMoneda" placeholder="Ingrese el código" type="number"
-                                      max="9">{{errores.nombre[0]}}
+                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoMoneda" placeholder="1" type="number" max="9">{{errores.nombre[0]}}
                                     <input type="hidden" id="tipo_tabla" value="{{rubro.codigo}}{{codigoMoneda}}" name="codigo">
                                   </div>
                                 </div>
                               </div>
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="nombre">Nombre
                                     <span class="required">*</span>
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Deuda en pesos" type="text">{{errores.nombre[0]}}
                                 </div>
                               </div>
                               <div class="row">
@@ -324,14 +320,13 @@
                           </div>
                           <div class="tab-pane" role="tabpanel" id="departamento">
 
-                            <h3>Alta de Departamento</h3>
 
                             @verbatim
 
-                            <form role="form" class="" ng-submit="enviarFormulario('departamento','Alta')" id="departamentoform">
+                            <form role="form" class="" style="text-align: right" ng-submit="enviarFormulario('departamento','Alta')" id="departamentoform">
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="id_moneda">Moneda
                                     <span class="required">*</span>
                                   </label>
@@ -347,7 +342,7 @@
                               </div>
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="codigo">Código
                                     <span class="required">*</span>
                                   </label>
@@ -355,8 +350,7 @@
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                   <div class="input-group">
                                     <span class="input-group-addon" id="basic-addon1">{{moneda.codigo}}</span>
-                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoDpto" placeholder="Ingrese el código" type="number"
-                                      max="99">{{errores.nombre[0]}}
+                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoDpto" placeholder="11" type="number" max="99">{{errores.nombre[0]}}
                                     <input type="hidden" id="tipo_tabla" value="{{moneda.codigo}}{{codigoDpto}}" name="codigo">
                                   </div>
                                 </div>
@@ -366,13 +360,13 @@
                               </div>
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="nombre">Nombre
                                     <span class="required">*</span>
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Deuda Dpto Servicios" type="text">{{errores.nombre[0]}}
                                 </div>
                               </div>
                               <div class="row">
@@ -403,14 +397,14 @@
 
                           <div class="tab-pane" role="tabpanel" id="subrubro">
 
-                            <h3>Alta de SubRubro</h3>
+
 
                             @verbatim
 
-                            <form role="form" class="" ng-submit="enviarFormulario('subRubro','Alta')" id="subRubroform">
+                            <form role="form" class="" style="text-align: right" ng-submit="enviarFormulario('subRubro','Alta')" id="subRubroform">
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="id_departamento">Dpto
                                     <span class="required">*</span>
                                   </label>
@@ -426,7 +420,7 @@
                               </div>
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="codigo">Código
                                     <span class="required">*</span>
                                   </label>
@@ -437,21 +431,20 @@
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                   <div class="input-group">
                                     <span class="input-group-addon" id="basic-addon1">{{departamento.codigo}}</span>
-                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoSubrubro" placeholder="Ingrese el código" type="number"
-                                      max="99">{{errores.nombre[0]}}
+                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoSubrubro" placeholder="11" type="number" max="99">{{errores.nombre[0]}}
                                     <input type="hidden" id="tipo_tabla" value="{{departamento.codigo}}{{codigoSubrubro}}" name="codigo">
                                   </div>
                                 </div>
                               </div>
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="nombre">Nombre
                                     <span class="required">*</span>
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Creditos" type="text">{{errores.nombre[0]}}
                                 </div>
                               </div>
                               <div class="row">
@@ -481,14 +474,14 @@
                           </div>
                           <div class="tab-pane" role="tabpanel" id="imputacion">
 
-                            <h3>Alta de Imputación</h3>
 
                             @verbatim
 
-                            <form role="form" class="" ng-submit="enviarFormulario('imputacion','Alta')" id="imputacionform">
+                            <form role="form" class="" style="text-align: right" style="text-align: right" ng-submit="enviarFormulario('imputacion','Alta')"
+                              id="imputacionform">
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="id_subrubro">Subrubro
                                     <span class="required">*</span>
                                   </label>
@@ -504,7 +497,7 @@
                               </div>
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="codigo">Código
                                     <span class="required">*</span>
                                   </label>
@@ -515,21 +508,20 @@
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                   <div class="input-group">
                                     <span class="input-group-addon" id="basic-addon1">{{subrubro.codigo}}</span>
-                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoImp" placeholder="Ingrese el código" type="number"
-                                      max="99">{{errores.nombre[0]}}
+                                    <input id="codigo" class="form-control col-md-7 col-xs-12" ng-model="codigoImp" placeholder="11" type="number" max="99">{{errores.nombre[0]}}
                                     <input type="hidden" id="tipo_tabla" value="{{subrubro.codigo}}{{codigoImp}}" name="codigo">
                                   </div>
                                 </div>
                               </div>
 
                               <div class="row">
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12 col-md-offset-3">
+                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
                                   <label class="" for="nombre">Nombre
                                     <span class="required">*</span>
                                   </label>
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese el nombre" type="text">{{errores.nombre[0]}}
+                                  <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Cuotas Sociales" type="text">{{errores.nombre[0]}}
                                 </div>
                               </div>
                               <div class="row">
@@ -584,7 +576,9 @@
       <div class="x_panel">
         <div class="x_title">
           @verbatim
-          <h2><div ng-cloak>{{pantallaActual.toUpperCase()}}</div></h2>
+          <h2>
+            <div ng-cloak>{{pantallaActual.toUpperCase()}}</div>
+          </h2>
           @endverbatim
           <ul class="nav navbar-right panel_toolbox">
             <li>
@@ -646,7 +640,7 @@
                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario(pantallaActual,'Mostrar',abm.id)">
                             <span class="glyphicon glyphicon-pencil"></span>
                           </button>
-                         @endif @verbatim
+                          @endif @verbatim
 
 
                         </td>

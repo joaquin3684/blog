@@ -1,4 +1,4 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider) {});
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja']).config(function($interpolateProvider) {});
 app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
@@ -33,7 +33,8 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
       $scope.borrarFormulario();
       UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
     }, function errorCallback(response) {
-      $scope.errores = response.data;
+      UserSrv.MostrarError(response)   
+            $scope.errores = response.data;
     });
 
   }
@@ -69,8 +70,8 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
 
 
       }, function errorCallback(response) {
-
-      });
+        UserSrv.MostrarError(response)   
+            });
   }
 
   $scope.traerElementos();
@@ -84,8 +85,8 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
     }).then(function successCallback(response) {
       $scope.abmConsultado = response.data;
     }, function errorCallback(response) {
-
-    });
+      UserSrv.MostrarError(response)
+        });
   }
 
   $scope.editarFormulario = function (id) {
@@ -108,14 +109,19 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
       data: data,
     }).then(function successCallback(response) {
       $scope.traerElementos();
+      UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
       console.log("Exito al editar");
       $('#editar').modal('toggle');
     }, function errorCallback(response) {
-
-    });
+      UserSrv.MostrarError(response)
+        });
 
   }
-
+  
+  $scope.guardarDatosBaja = function () { $scope.elemABorrar = this.abm }
+  $scope.delete= function(id){
+    $scope.borrarElemento(id)
+  }
   $scope.borrarElemento = function (id) {
 
     return $http({
@@ -123,10 +129,11 @@ app.controller('ABM_comercializador', function($scope, $http, $compile, $sce, Ng
       method: 'delete',
     }).then(function successCallback(response) {
       $scope.traerElementos();
+      UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
       console.log("Exito al eliminar");
     }, function errorCallback(response) {
-
-    });
+      UserSrv.MostrarError(response)
+        });
   }
 
 

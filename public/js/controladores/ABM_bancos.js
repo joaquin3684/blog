@@ -1,4 +1,5 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'ServicioABM', 'Mutual.services']).config(function ($interpolateProvider) {});
+var app = angular.module('Mutual').config(function ($interpolateProvider) {});
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'ServicioABM', 'Mutual.services', 'verificarBaja');
 app.controller('ABM_bancos', function ($scope, $http, $compile, $sce, NgTableParams, $filter, ServicioABM, UserSrv) {
 
     $scope.borrarFormulario = function () {
@@ -74,6 +75,7 @@ app.controller('ABM_bancos', function ($scope, $http, $compile, $sce, NgTablePar
             $scope[scopeObj] = returnedData;
         });
     }
+    $scope.guardarDatosBaja = function () { $scope.elemABorrar = this.abm }
     $scope.delete = function (id) {
         ServicioABM.delete('bancos', id).then(function () {
             pull('bancos/traerElementos', 'bancos', 'paramsABMS');

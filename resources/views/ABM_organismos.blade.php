@@ -1,4 +1,4 @@
-@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABM_organismos.js') !!}
+@extends('welcome') @section('contenido') {!! Html::script('js/controladores/verificarBaja.js')!!}{!! Html::script('js/controladores/ABM_organismos.js') !!}
 
 
 <div class="nav-md" ng-controller="ABM">
@@ -53,7 +53,7 @@
                 <div class="x_content">
                   @verbatim
                   <form class="form-horizontal form-label-left" ng-submit="submit()" id="formulario">
-                    {{ csrf_field() }}
+                   <div ng-cloak>{{ csrf_field() }}</div> 
 
                     <span class="section">Datos del organismo</span>
 
@@ -62,7 +62,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese nombre del organismo"
+                        <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="AFIP"
                           type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
                       </div>
                     </div>
@@ -72,7 +72,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="number" id="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit"><div ng-cloak>{{errores.cuit[0]}}</div>
+                        <input required type="number" id="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="00123456780"><div ng-cloak>{{errores.cuit[0]}}</div>
                       </div>
                     </div>
 
@@ -81,7 +81,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el domicilio"><div ng-cloak>{{errores.domicilio[0]}}</div>
+                        <input required type="text" id="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Av. 9 de julio 1234"><div ng-cloak>{{errores.domicilio[0]}}</div>
                       </div>
                     </div>
 
@@ -90,7 +90,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la localidad"><div ng-cloak>{{errores.localidad[0]}}</div>
+                        <input required type="text" id="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="CABA"><div ng-cloak>{{errores.localidad[0]}}</div>
                       </div>
                     </div>
 
@@ -105,7 +105,7 @@
                               <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuota.categoria" ><div ng-cloak>{{errores.cuota_social[0]}}</div>
                             </div> -->
                         <div class="col-md-6 col-sm-6 col-xs-12" id="valor">
-                          <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Ingrese el valor" ng-model="cuota.valor"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                          <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="1234" ng-model="cuota.valor"><div ng-cloak>{{errores.cuota_social[0]}}</div>
                         </div>
                       </div>
                     </div>
@@ -272,9 +272,8 @@
                             <span class="glyphicon glyphicon-pencil"></span>
                           </button>
                           @endverbatim @endif @if(Sentinel::check()->hasAccess('organismos.borrar')) @verbatim
-                          <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)">
-                            <span class="glyphicon glyphicon-remove"></span>
-                          </button>
+                          <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
+                          
                           @endverbatim @endif @verbatim
                         </td>
 

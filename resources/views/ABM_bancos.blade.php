@@ -1,4 +1,4 @@
-@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABM_bancos.js') !!}
+@extends('welcome') @section('contenido') {!! Html::script('js/controladores/verificarBaja.js')!!}{!! Html::script('js/controladores/ABM_bancos.js') !!}
 <div class="nav-md" ng-controller="ABM_bancos">
 
   <div class="container body">
@@ -59,7 +59,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Ingrese el nombre" type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
+                        <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="Galicia" type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -67,7 +67,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required id="sucursal" class="form-control col-md-7 col-xs-12" ng-model="sucursal" placeholder="Ingrese la sucursal"
+                        <input required id="sucursal" class="form-control col-md-7 col-xs-12" ng-model="sucursal" placeholder="Almagro"
                           type="text">
                       </div>
                     </div>
@@ -76,7 +76,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required id="direccion" class="form-control col-md-7 col-xs-12" ng-model="direccion" placeholder="Ingrese la direccion"
+                        <input required id="direccion" class="form-control col-md-7 col-xs-12" ng-model="direccion" placeholder="Av. 9 de Julio 123"
                           type="text">
                       </div>
                     </div>
@@ -85,7 +85,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required id="nro_cuenta" class="form-control col-md-7 col-xs-12" ng-model="nro_cuenta" placeholder="Ingrese el numero de cuenta"
+                        <input required id="nro_cuenta" class="form-control col-md-7 col-xs-12" ng-model="nro_cuenta" placeholder="1234"
                           type="number">
                       </div>
                     </div>
@@ -182,9 +182,7 @@
                           </button>
                           @endverbatim @endif @if(Sentinel::check()->hasAccess('bancos.borrar')) @verbatim
 
-                          <button type="button" class="btn btn-danger" ng-click="delete(abm.id)">
-                            <span class="glyphicon glyphicon-remove"></span>
-                          </button>
+                          <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
                           @endverbatim @endif @verbatim
 
                           <button type="button" class="btn btn-info" data-toggle="modal" data-target="#chequera" ng-click="asignarBanco(abm.id)">

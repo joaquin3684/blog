@@ -72,10 +72,10 @@
                             </select>
                           </td>
                           <td style="border-top: 1px solid white;">
-                            <input type="number" name="" value="" class="form-control" ng-model="asiento.debe" placeholder="Ingrese el valor" ng-disabled="asiento.haber != null">
+                            <input type="number" name="" value="" class="form-control" ng-model="asiento.debe" placeholder="123" ng-disabled="asiento.haber != null">
                           </td>
                           <td style="border-top: 1px solid white;">
-                            <input type="number" name="" value="" class="form-control" ng-model="asiento.haber" placeholder="Ingrese el haber" ng-disabled="asiento.debe != null">
+                            <input type="number" name="" value="" class="form-control" ng-model="asiento.haber" placeholder="123" ng-disabled="asiento.debe != null">
                           </td>
                           <td style="border-top: 1px solid white;">
                             <button id="sumahtml" type="button" class="btn btn-danger" ng-click="eliminarHtml('#asiento'+$index, asientos,$index)">

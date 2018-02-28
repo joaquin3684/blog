@@ -79,11 +79,11 @@
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-8" for="categoria">Codigo desde</label>
                                                 <div class="col-md-4 col-sm-4 col-xs-8">
-                                                    <input type="text" ng-model="codigo_desde" class="form-control col-md-2 col-xs-12" placeholder="Codigo desde">
+                                                    <input type="text" ng-model="codigo_desde" class="form-control col-md-2 col-xs-12" placeholder="123456789">
                                                 </div>
                                                 <div class="col-md-4 col-sm-4 col-xs-8">
                                                     <select class="form-control" ng-model="codigo_desde">
-                                                        <option ng-value="imputacion.codigo" ng-repeat="imputacion in imputaciones">{{imputacion.nombre}}</option>
+                                                        <option ng-value="imputacion.codigo" ng-repeat="imputacion in imputaciones" ng-bind="imputacion.nombre"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -91,11 +91,11 @@
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-8" for="categoria">Codigo hasta</label>
                                                 <div class="col-md-4 col-sm-4 col-xs-8">
-                                                    <input type="text" ng-model="codigo_hasta" class="form-control col-md-2 col-xs-12" placeholder="Codigo hasta">
+                                                    <input type="text" ng-model="codigo_hasta" class="form-control col-md-2 col-xs-12" placeholder="987654321">
                                                 </div>
                                                 <div class="col-md-4 col-sm-4 col-xs-8">
                                                     <select class="form-control" ng-model="codigo_hasta">
-                                                        <option ng-value="imputacion.codigo" ng-repeat="imputacion in imputaciones">{{imputacion.nombre}}</option>
+                                                        <option ng-value="imputacion.codigo" ng-repeat="imputacion in imputaciones" ng-bind="imputacion.nombre"></option>
                                                     </select>
                                                 </div>
 

@@ -44,6 +44,7 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
 
         }, function errorCallback(data)
         {
+            UserSrv.MostrarError(data)
             console.log(data.data);
         });
 
@@ -104,7 +105,7 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
 
         }, function errorCallback(data)
         {
-
+      
                 UserSrv.MostrarMensaje("Error","Ocurrió algún error inesperado. Intente nuevamente.","Error","mensaje");
 
         });

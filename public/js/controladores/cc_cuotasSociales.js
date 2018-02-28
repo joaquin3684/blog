@@ -46,6 +46,7 @@ $http({
 
             }, function errorCallback(data)
             {
+                UserSrv.MostrarError(data)
                console.log(data.data);
             });
 
@@ -92,6 +93,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
     }, function errorCallback(data)
     {
+        UserSrv.MostrarError(data)
         console.log(data.data);
     });
 
@@ -167,6 +169,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
         }, function errorCallback(data)
         {
+            UserSrv.MostrarError(data)
             console.log(data.data);
         });
 

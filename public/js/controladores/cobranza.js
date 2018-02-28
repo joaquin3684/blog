@@ -99,6 +99,7 @@ app.controller('cobranza', function($scope, $http, $compile, $sce, UserSrv) {
 
             }, function errorCallback(data)
             {
+              UserSrv.MostrarError(data)
                console.log(data.data);
             });
    }

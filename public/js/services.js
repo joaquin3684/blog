@@ -2,7 +2,7 @@ angular.module('Mutual.services', ['ngTable'])
 
 //La clase alert-fixed permite que el mensaje aparezca siempre en la parte superior de la pantalla
 
-.service('UserSrv', function($http,$mdDialog, NgTableParams,$filter){
+    .service('UserSrv', function ($http, $mdDialog, NgTableParams, $filter, $rootScope){
 
     var that = this;
     this.Impresion = function() {
@@ -26,15 +26,15 @@ angular.module('Mutual.services', ['ngTable'])
 
                 }, 2000);
         } else {
-            $('#'+sector).html('<div class="alert alert-danger alert-fixed" role="alert"><strong>¡'+titulo+'!</strong> '+mensaje+'</div>');
-            setTimeout(function(){ $('#'+sector).html(''); }, 4000);
+            $('#' + sector).html('<div class="alert alert-danger alert-dismissible alert-fixed" role="alert"><strong>¡' + titulo + '!</strong> ' + mensaje + '<a href="#"  style="color: white; opacity: 1" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>');
+            
         }
     }
+        
 
-    this.MensajeError = function(data){
-        var div = '#mensajito';
-        $('#ContenedorMensaje').html('<div id="mensajito" class="alert alert-danger" role="alert"><button type="button" onclick="$(ContenedorMensaje).hide(500); "class="close">&times;</button><strong style="font-size: 20pt;">'+data.title+'</strong></br> <font style="font-size: 15pt;">'+data.detail+'</font></div>');
-        $('#ContenedorMensaje').show(500);
+    this.MostrarError = function(response){
+        $('#mensaje').html('<div class="alert alert-danger alert-dismissible alert-fixed" role="alert"><strong>¡Error!</strong> Se ha detectado un error al realizar la accion (' + response.statusText + '). Si el error persiste debera comunicarse con el servicio tecnico<a href="#"  style="color: white; opacity: 1" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>');
+        
     }
 
     this.Excel = function(vista) {
@@ -129,7 +129,7 @@ angular.module('Mutual.services', ['ngTable'])
 })
 
 
-
+/*
 .factory('myHttpInterceptor', function($q, $rootScope) {
   return {
     // optional method
@@ -172,16 +172,16 @@ angular.module('Mutual.services', ['ngTable'])
     }
   };
 })
+*/
 
 
 
-
-.config(['$httpProvider', function($httpProvider) {
+/*.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('myHttpInterceptor');
-}])
+}])*/
 
 
-.controller('Serviced', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, clonarHtmlService) {
+.controller('Serviced', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
 
 
 $scope.$Servicio = UserSrv;

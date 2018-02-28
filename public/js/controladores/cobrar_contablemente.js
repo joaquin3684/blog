@@ -51,6 +51,7 @@ app.controller('cobrar_contablemente', function($scope, $http, $compile, $sce, N
       $scope.traerElementos();
       UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
     }, function errorCallback(response) {
+      UserSrv.MostrarError(response)
       $scope.errores = response.data;
     });
 
@@ -70,7 +71,7 @@ app.controller('cobrar_contablemente', function($scope, $http, $compile, $sce, N
 
 
       }, function errorCallback(response) {
-
+        UserSrv.MostrarError(response)
       });
   }
 
@@ -88,7 +89,7 @@ app.controller('cobrar_contablemente', function($scope, $http, $compile, $sce, N
 
 
       }, function errorCallback(response) {
-
+        UserSrv.MostrarError(response)
       });
   }
 

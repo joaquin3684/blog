@@ -1,4 +1,7 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function ($interpolateProvider) {});
+
+var app = angular.module('Mutual').config(function ($interpolateProvider) {});
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja');
+
 app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, clonarHtmlService) {
 
     // manda las solicitud http necesarias para manejar los requerimientos de un abm
@@ -38,8 +41,8 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
             });
         }
     }
-
-
+    
+    
     $scope.ExportarPDF = function (pantalla) {
         UserSrv.ExportPDF(pantalla);
     }
@@ -111,11 +114,15 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
             console.log(response.data);
             $scope.traerElementos();
         }, function errorCallback(data) {
-            console.log(data);
+            UserSrv.MostrarError(data)
+                        console.log(data);
             $scope.errores = data.data;
         });
 
     }
+
+   $scope.guardarDatosBaja =  function(){$scope.elemABorrar = this.abm}
+    $scope.delete = function (id) {$scope.enviarFormulario('Borrar', id)}
 
     $scope.cambiarFecha = function (dato) {
         moment.locale('es');
@@ -164,6 +171,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
             }
 
         }, function errorCallback(data) {
+            UserSrv.MostrarError(data)
             console.log(data.data);
         });
     }
@@ -202,6 +210,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
             });
         }, function errorCallback(data) {
+            UserSrv.MostrarError(data)
             console.log(data);
         });
     }
@@ -223,8 +232,10 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
 
 
-
     $scope.traerElementos();
+    $(document).ready(function () {
+        $("[data-toggle=popover]").popover();
+    });
 
     //EMPIEZA EL CODIGO DEL EXPANDIR
     $scope.tableRowExpanded = false;
