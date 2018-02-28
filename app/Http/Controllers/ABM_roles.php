@@ -41,9 +41,9 @@ class ABM_roles extends Controller
         $permisos = array();
        
        
-        for($i = 0; $request['numeroDePantallas'] > $i; $i++)
+        for($i = 0;  $i < $request['numeroDePantallas']; $i++)
         {
-            for($j = 0; count($request['valor'.$i]) > $j; $j++)
+            for($j = 0; $j < count($request['valor'.$i]); $j++)
             {
                 $index = $request['pantalla'.$i].'.'.$request['valor'.$i][$j];
                 $permisos[$index] = true;
@@ -75,44 +75,6 @@ class ABM_roles extends Controller
     public function all()
     {
         $roles = Sentinel::getRoleRepository()->get();
-        $nuevosRoles = collect();
-        $roles->each(function($rol) use ($nuevosRoles){
-
-            $permisos = $rol->permissions;
-            $pantallas = collect();
-
-            $pant = collect();
-            foreach ($permisos as $key => $permiso)
-            {
-                $pantalla = explode(".", $key)[0];
-
-                if(!$pantallas->contains('nombre', $pantalla)) {
-                    $pant->put('nombre', $pantalla);
-                    $pantallas->push($pant->toArray());
-                    $pant->pull('nombre');
-                }
-            }
-
-
-            $pantallas->each(function($key, $pantalla) use ($permisos, $pantallas){
-                $permisosMapeados = collect();
-                foreach ($permisos as $key => $permiso)
-                {
-                    $pantallaPermiso = explode(".", $key)[0];
-                    $tipoPermiso = explode(".", $key)[1];
-                    $permisosPantalla = collect();
-
-                    if ($pantallaPermiso == $pantalla) {
-                        $permisosPantalla->put('nombre', $tipoPermiso);
-                        $permisosPantalla->put('bool', $permiso);
-                        $permisosMapeados->push($permisosPantalla);
-                    }
-                }
-                $pantallas->put('permisos',$permisosMapeados);
-            });
-
-        $nuevosRoles->push($rol);
-        });
         return $roles;
     }
 

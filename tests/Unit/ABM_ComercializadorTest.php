@@ -24,7 +24,7 @@ class ABM_ComercializadorTest extends TestCase
             'nombre' => $f->firstName(),
             'dni' => $f->randomNumber(8),
             'cuit' => $f->randomNumber(8),
-            'telefono' => $f->phoneNumber,
+            'telefono' => $f->randomNumber(8),
             'usuario' => 'prueba',
             'apellido' => $f->lastName,
             'domicilio' =>  $f->address,

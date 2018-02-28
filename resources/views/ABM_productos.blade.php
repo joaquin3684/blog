@@ -203,37 +203,7 @@
                         </ul>
                         <div class="clearfix"></div>
                     </div>
-                    <!--                         <div class="x_content">
 
-                            <table id="datatable-responsive" cellspacing="0" class="table table-striped table-bordered dt-responsive nowrap order-colum compact" cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Descripcion</th>
-                                    <th>% de Ganancia</th>
-                                    <th>Proovedor</th>
-                                    <th></th>
-
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach ($registros as $registro)
-                                    <tr>
-                                        <td>{{ $registro->nombre }}</td>
-                                        <td>{{ $registro->descripcion }}</td>
-                                        <td>{{ $registro->retencion }}</td>
-                                        <td>{{ $registro->proovedor->razon_social }}</td>
-                                        <td>@if(Sentinel::check()->hasAccess('organismos.editar'))<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('Mostrar', {{$registro->id}})"><span class="glyphicon glyphicon-pencil"></span></button>@endif
-                                            @if(Sentinel::check()->hasAccess('organismos.borrar'))  <button type="button" class="btn btn-danger" ng-click="enviarFormulario('Borrar', {{$registro->id}})"><span class="glyphicon glyphicon-remove"></span></button>@endif
-                                        </td>
-
-
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-
-                        </div> -->
 
                     <div class="x_content" id="impr">
                         <center>

@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class CobrarPorVentaTest extends TestCase
 {
 
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     public function testComprobarQueSeCobraLaCantidadEspecificada()
     {

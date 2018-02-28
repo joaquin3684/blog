@@ -42,7 +42,6 @@ class ABM_productos extends Controller
     {
         DB::transaction(function() use($request){
 
-
             $producto = $this->producto->create($request->all());
             $id_producto = $producto->id;
             $porcentajes = collect($request['porcentajes']);
@@ -51,7 +50,6 @@ class ABM_productos extends Controller
                 PorcentajeColocacion::create($porcentaje);
             });
         });
-
     }
 
     /**

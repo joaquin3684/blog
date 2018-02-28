@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CorrerVtoTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
     public function setUp()
     {
         parent::setUp();

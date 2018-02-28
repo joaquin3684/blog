@@ -19,7 +19,7 @@ class AgenteFinancieroSolicitudesTest extends TestCase
      * @return void
      */
 
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     private $solicitudRepo;
     public function setUp()

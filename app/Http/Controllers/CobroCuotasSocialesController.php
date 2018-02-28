@@ -51,11 +51,15 @@ class CobroCuotasSocialesController extends Controller
             return $item;
         });
 
-        $cobrado = $cobrado->filter(function ($item) {
-            return $item['diferencia'] > 0;
+        $a = collect();
+        $cobrado->each(function ($item) use($a) {
+            if($item['diferencia'] > 0)
+            {
+                $a->push($item);
+            }
         });
 
-        return $cobrado;
+        return $a;
     }
 
     public function mostrarPorSocio(Request $request)
@@ -96,11 +100,15 @@ class CobroCuotasSocialesController extends Controller
             return $item;
         });
 
-        $cobrado = $cobrado->filter(function ($item) {
-            return $item['diferencia'] > 0;
+        $a = collect();
+        $cobrado->each(function ($item) use($a) {
+            if($item['diferencia'] > 0)
+            {
+                $a->push($item);
+            }
         });
 
-        return $cobrado;
+        return $a;
     }
 
     public function cobrar(Request $request)

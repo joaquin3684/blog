@@ -87,11 +87,15 @@ class CobrarController extends Controller
             return $item;
         });
 
-        $cobrado = $cobrado->filter(function ($item) {
-            return $item['diferencia'] > 0;
+        $a = collect();
+        $cobrado = $cobrado->each(function ($item) use($a) {
+            if($item['diferencia'] > 0)
+            {
+                $a->push($item);
+            }
         });
 
-        return $cobrado;
+        return $a;
     }
 
     public function mostrarPorSocio(Request $request)
@@ -133,13 +137,18 @@ class CobrarController extends Controller
             $item->put('diferencia', round($diferencia,2));
             return $item;
         });
-
-        $cobrado = $cobrado->filter(function ($item) {
-           return $item['diferencia'] > 0;
+        $a = collect();
+        $cobrado->each(function ($item) use($a) {
+           if($item['diferencia'] > 0)
+           {
+               $a->push($item);
+           }
         });
 
-        return $cobrado;
+        return $a;
+
     }
+
     public function mostrarPorVenta(Request $request)
     {
         $hoy = Carbon::today()->toDateString();
@@ -180,11 +189,15 @@ class CobrarController extends Controller
             return $item;
         });
 
-        $cobrado = $cobrado->filter(function ($item) {
-            return $item['diferencia'] > 0;
+        $a = collect();
+        $cobrado->each(function ($item) use($a) {
+            if($item['diferencia'] > 0)
+            {
+                $a->push($item);
+            }
         });
 
-        return $cobrado;
+        return $a;
 
 
     }

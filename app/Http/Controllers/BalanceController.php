@@ -46,7 +46,7 @@ class BalanceController extends Controller
                     $saldo->saldo = $imputacion->saldo + $saldo->saldo;
                 }
                 return $saldo;
-            })->filter(function($saldo) use (&$col){
+            })->each(function($saldo) use (&$col){
                 if($saldo->totalDebe > 0 || $saldo->totalHaber > 0 || $saldo->saldo > 0)
                 {
                     $col->push($saldo);

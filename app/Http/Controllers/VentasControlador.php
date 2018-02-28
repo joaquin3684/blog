@@ -121,7 +121,7 @@ class VentasControlador extends Controller
             ->groupBy('socios.id')
             ->where('organismos.id', '=', $request['id'])
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->select('socios.nombre AS socio', 'socios.id AS id_socio', 'socio.legajo',  DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'));
+            ->select('socios.nombre AS socio', 'socios.id AS id_socio', 'socios.legajo',  DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'));
 
         $socios = VentasFilter::apply($request->all(), $ventas);
 
@@ -151,7 +151,7 @@ class VentasControlador extends Controller
             return $item;
         });
 
-        return $ventasPorSocio->toJson();
+        return $ventasPorSocio;
 
     }
 

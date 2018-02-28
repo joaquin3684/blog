@@ -288,56 +288,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
-          <!--                       <div class="x_content">
 
-                        <table id="datatable-responsive" cellspacing="0" class="table table-striped table-bordered dt-responsive nowrap order-colum compact" cellspacing="0" width="100%">
-                          <thead>
-                            <tr>
-                              <th>Nombre</th>
-                              <th>Fecha Nacimiento</th>
-                              <th>Cuit</th>
-                              <th>Dni</th>
-                              <th>Domicilio</th>
-                              <th>Localidad</th>
-                              <th>Codigo Postal</th>
-                              <th>Telefono</th>
-                              <th>Legajo</th>
-                              <th>Fecha Ingreso</th>
-                              <th>Grupo Familiar</th>
-                              <th>Organismo</th>
-                              <th></th>
-                            </tr>
-                          </thead>
-
-                          <tbody>
-                            @foreach ($registros as $registro)
-                              <tr>
-                                <td>{{ $registro->nombre }}</td>
-                                <td>{{ $registro->fecha_nacimiento }}</td>
-                                <td>{{ $registro->cuit }}</td>
-                                <td>{{ $registro->dni }}</td>
-                                <td>{{ $registro->domicilio }}</td>
-                                <td>{{ $registro->localidad }}</td>
-                                <td>{{ $registro->codigo_postal }}</td>
-                                <td>{{ $registro->telefono }}</td>
-                                <td>{{ $registro->legajo }}</td>
-                                <td>{{ $registro->fecha_ingreso }}</td>
-                                <td>{{ $registro->grupo_familiar }}</td>
-                                <td>{{ $registro->organismo->nombre }}</td>
-
-
-                                <td>@if(Sentinel::check()->hasAccess('socios.editar'))<button type="button" data-toggle="modal" data-target="#editar" onclick="enviarFormulario('Mostrar', {{$registro->id}})" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil"></span></button>@endif
-                               @if(Sentinel::check()->hasAccess('socios.borrar')) <button type="button" class="btn btn-danger" onclick="enviarFormulario('Borrar', {{$registro->id}})"><span class="glyphicon glyphicon-remove"></span></button>
-                               @endif
-                                </td>
-
-
-                              </tr>
-                            @endforeach
-                          </tbody>
-                        </table>
-
-                      </div> -->
 
           <div class="x_content">
             <center>

@@ -24,7 +24,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ComercializadorTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
     use Conversion;
     /**
      * A basic test example.

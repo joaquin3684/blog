@@ -21,7 +21,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SolicitudesEsperandoMutualTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     private $solicitudGateway;
     private $solCreada;
