@@ -90,10 +90,10 @@
                       <div class="col-md-1 col-sm-1 col-xs-12">
                         <input type="number" id="piso" name="piso" class="form-control" placeholder="1" required><div ng-cloak>{{errores.piso[0]}}</div>
                       </div>
-                      <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dpto">Dpto
+                      <label class="control-label col-md-1 col-sm-1 col-xs-12" for="departamento">Dpto
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="text" id="dpto" name="dpto" class="form-control" placeholder="12" required><div ng-cloak>{{errores.departamento[0]}}</div>
+                        <input type="text" id="departamento" name="departamento" class="form-control" placeholder="12" required><div ng-cloak>{{errores.departamento[0]}}</div>
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nucleo">Nucleo
                       </label>
@@ -352,6 +352,28 @@
                 <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.descripcion[0]}}</div>
               </div>
             </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="piso">Piso
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="piso" name="piso" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.piso[0]}}</div>
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="departamento">Departamento
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="departamento" name="departamento" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.departamento[0]}}</div>
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nucleo">Nucleo
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="nucleo" name="departamnucleoento" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.nucleo[0]}}</div>
+              </div>
+            </div>
+
 
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit

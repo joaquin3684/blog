@@ -100,11 +100,26 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="dni" name="dni" ng-model="dni" class="form-control col-md-7 col-xs-12" placeholder="12345678" required>
+                        <input type="number" id="dni" name="dni" ng-model="dni" class="form-control col-md-7 col-xs-12" placeholder="12345678" ng-change="validarCuit()" required>
                         <div ng-cloak>{{errores.dni[0]}}</div>
                       </div>
                     </div>
+                      <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sexo">Sexo
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
 
+                        <label class="radio-inline">
+                          <input type="radio" name="sexo" value="Masculino" ng-model="sexoMasculino" ng-click="validarCuit('masculino')">Masculino
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="sexo" value="Femenino"   ng-model="sexoFemenino" ng-click="validarCuit('femenino')">Femenino
+                          <div ng-cloak>{{errores.sexo[0]}}</div>
+                        </label>
+                   
+                      </div>
+                    </div>
 
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Cuit
@@ -143,10 +158,10 @@
                         <input type="number" id="piso" name="piso" class="form-control" required placeholder="1">
                         <div ng-cloak>{{errores.piso[0]}}</div>
                       </div>
-                      <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dpto">Dpto
+                      <label class="control-label col-md-1 col-sm-1 col-xs-12" for="departamento">Dpto
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="text" id="dpto" name="dpto" class="form-control" placeholder="12" required>
+                        <input type="text" id="departamento" name="departamento" class="form-control" placeholder="12" required>
                         <div ng-cloak>{{errores.departamento[0]}}</div>
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nucleo">Nucleo
@@ -183,22 +198,7 @@
                         <div ng-cloak>{{errores.telefono[0]}}</div>
                       </div>
                     </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sexo">Sexo
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-
-                        <label class="radio-inline">
-                          <input type="radio" name="sexo" value="Masculino">Masculino
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="sexo" value="Femenino">Femenino
-                          <div ng-cloak>{{errores.sexo[0]}}</div>
-                        </label>
-
-                      </div>
-                    </div>
+                  
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="legajo">Legajo
                         <span class="required">*</span>
@@ -355,8 +355,8 @@
                           <td title="'Piso'" filter="{ piso: 'text'}" sortable="'piso'">
                             {{abm.piso}}
                           </td>
-                          <td title="'Dpto'" filter="{ dpto: 'text'}" sortable="'dpto'">
-                            {{abm.dpto}}
+                          <td title="'Dpto'" filter="{ departamento: 'text'}" sortable="'departamento'">
+                            {{abm.departamento}}
                           </td>
                           <td title="'Nucleo'" filter="{ nucleo: 'text'}" sortable="'nucleo'">
                             {{abm.nucleo}}
@@ -524,23 +524,23 @@
             </div>
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="piso">Piso
-                <span class="required">*</span>
+                
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" id="piso" name="piso" class="form-control col-md-7 col-xs-12">{{errores.piso[0]}}
               </div>
             </div>
             <div class="item form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dpto">Departamento
-                <span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="departamento">Departamento
+                
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="dpto" name="dpto" class="form-control col-md-7 col-xs-12">{{errores.dpto[0]}}
+                <input type="text" id="departamento" name="departamento" class="form-control col-md-7 col-xs-12">{{errores.departamento[0]}}
               </div>
             </div>
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nucleo">Nucleo
-                <span class="required">*</span>
+                
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" id="nucleo" name="nucleo" class="form-control col-md-7 col-xs-12">{{errores.nucleo[0]}}

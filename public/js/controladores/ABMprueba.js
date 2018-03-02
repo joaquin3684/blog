@@ -12,7 +12,34 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
     $scope.borrarFormulario = function () {
         $('#formulario')[0].reset();
     };
+    $scope.validarCuit = function(sexo) {
 
+        if (sexo != undefined) $scope.sexo = sexo
+        if (($scope.sexoMasculino == undefined && $scope.sexoFemenino == undefined) | $scope.dni == undefined) {
+            return false;
+        }
+        
+
+        $scope.tipo = ($scope.sexo == 'masculino') ? 20 : 27;
+
+        var acumulado = 0;
+        var digitos = $scope.tipo +''+ $scope.dni;
+
+        for (var i = 0; i < digitos.length; i++) {
+            acumulado += digitos[9 - i] * (2 + (i % 6));
+        }
+
+        var verif = 11 - (acumulado % 11);
+        if (verif == 11) {
+            verif = 0;
+        }else if(verif ==10){
+            verif = undefined
+            $scope.tipo = undefined
+            
+        }
+
+        $scope.codigoVerif = verif;
+    }
     $scope.$Servicio = UserSrv;
     $scope.traerRelaciones = function (relaciones) {
         var tablasin = $("#tipo_tabla").val();
