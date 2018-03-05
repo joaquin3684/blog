@@ -188,7 +188,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="MontoPorCuota">Monto por Cuota
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input ng-disabled="!modificandopropuesta" id="nombre" class="form-control col-md-7 col-xs-12" name="MontoPorCuota" placeholder="Ingrese el nro de cuotas"
+                <input ng-disabled="!modificandopropuesta" id="nombre" class="form-control col-md-7 col-xs-12" name="MontoPorCuota" 
                   ng-model="monto_por_cuota" type="number" step="0.01">{[{errores.nombre[0]}]}
               </div>
             </div>
@@ -259,7 +259,7 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input disabled ng-keyup="$event.keyCode == 13 && EnviarPropuesta()" id="nombre" class="form-control col-md-7 col-xs-12"
-                  name="MontoPorCuota" placeholder="Ingrese el nro de cuotas" ng-model="monto_por_cuota" type="number">{[{errores.nombre[0]}]}
+                  name="MontoPorCuota"  ng-model="monto_por_cuota" type="number">{[{errores.nombre[0]}]}
               </div>
             </div>
 
