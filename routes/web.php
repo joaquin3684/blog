@@ -427,3 +427,7 @@ Route::resource('chequera', 'ChequeraController');
 Route::post('novedades/organismos', 'NovedadesController@mostrarPorOrganismo');
 Route::post('novedades/socios', 'NovedadesController@mostrarPorSocio');
 Route::resource('novedades', 'NovedadesController');
+
+//----------------- SOLICITUDES PENDIENTES DE COBRO ---------------------
+
+Route::get('solicitudPendienteDeCobro', 'SolicitudesPendientesDeCobro@index');

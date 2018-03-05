@@ -27,9 +27,9 @@ class CreateSolicitudsTable extends Migration
             $table->foreign('id_producto')->references('id')->on('productos');
             $table->string('estado');
             $table->string('doc_endeudamiento')->nullable();
-            $table->integer('total')->nullable();
+            $table->double('total')->nullable();
             $table->integer('cuotas')->nullable();
-            $table->integer('monto_por_cuota')->nullable();
+            $table->double('monto_por_cuota')->nullable();
             $table->integer('id_socio')->unsigned();
             $table->foreign('id_socio')->references('id')->on('socios');
             $table->softDeletes();
