@@ -430,4 +430,8 @@ Route::resource('novedades', 'NovedadesController');
 
 //----------------- SOLICITUDES PENDIENTES DE COBRO ---------------------
 
-Route::get('solicitudPendienteDeCobro', 'SolicitudesPendientesDeCobro@index');
+Route::get('solicitudesPendientesDeCobro', 'SolicitudesPendientesDeCobro@index');
+
+//----------------- CUENTA CORRIENTE COMERCIALIZADOR ---------------------
+
+Route::get('cuentaCorrienteComercializador', 'CuentaCorrienteComercializador@index');
