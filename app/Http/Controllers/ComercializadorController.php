@@ -121,6 +121,15 @@ class ComercializadorController extends Controller
 
     }
 
+    public function rechazarPropuesta(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            $sol = $this->solicitudGateway->update($request->all(), $request['id']);
+
+        });
+    }
+
+
     public function enviarFormulario(Request $request)
     {
         DB::transaction(function () use ($request) {

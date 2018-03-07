@@ -288,6 +288,8 @@ Route::post('comercializador/modificarPropuesta', 'ComercializadorController@mod
 Route::post('comercializador/enviarFormulario', 'ComercializadorController@enviarFormulario');
 Route::post('comercializador/buscarSocios', 'ComercializadorController@sociosQueCumplenConFiltro');
 Route::post('comercializador/fotos', 'ComercializadorController@fotos');
+Route::post('comercializador/rechazarPropuesta', 'ComercializadorController@rechazarPropuesta');
+
 
 //------------------ SOLICITUDES PENDIENTES DE LA MUTUAL --------------
 
