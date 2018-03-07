@@ -291,6 +291,8 @@ Route::post('comercializador/fotos', 'ComercializadorController@fotos');
 Route::post('comercializador/rechazarPropuesta', 'ComercializadorController@rechazarPropuesta');
 
 
+
+
 //------------------ SOLICITUDES PENDIENTES DE LA MUTUAL --------------
 
 Route::get('solicitudesPendientesMutual', 'SolicitudesPendientesMutualController@index');
@@ -432,4 +434,12 @@ Route::resource('novedades', 'NovedadesController');
 
 //----------------- SOLICITUDES PENDIENTES DE COBRO ---------------------
 
-Route::get('solicitudPendienteDeCobro', 'SolicitudesPendientesDeCobro@index');
+Route::get('solicitudesPendientesDeCobro', 'SolicitudesPendientesDeCobro@index');
+
+//----------------- PAGO SOLICITUDES PENDIENTES DE COBRO ---------------------
+
+Route::get('pagoSolicitudesPendientesDeCobro', 'PagoSolicitudesPendientesDeCobro@index');
+
+//----------------- CUENTA CORRIENTE COMERCIALIZADOR ---------------------
+
+Route::get('cuentaCorrienteComercializador', 'CuentaCorrienteComercializador@index');

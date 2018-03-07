@@ -1,4 +1,5 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'ServicioABM', 'Mutual.services']).config(function ($interpolateProvider) {});
+var app = angular.module('Mutual').config(function ($interpolateProvider) {});
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja', 'ServicioABM');
 app.controller('ABM_roles', function ($scope, $http, $compile, $sce, NgTableParams, $filter, $timeout, ServicioABM, UserSrv) {
 
   $scope.borrarFormulario = function () {

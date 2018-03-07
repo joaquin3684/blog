@@ -1,4 +1,5 @@
 var app = angular.module('Login', ['Login.services']).config(function($interpolateProvider){});
+
 app.controller('loguear', function($scope, $http, $compile, $location, $window) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm

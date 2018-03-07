@@ -152,6 +152,9 @@
                             <table id="tablaSocios" ng-table="paramsSocios" class="table table-hover table-bordered">
 
                                 <tr ng-repeat="socio in $data" ng-click="PullVentas(socio.id_socio,socio.socio)" ng-cloak>
+                                <td title="'Legajo'" filter="{legajo: 'text'}" sortable="'legajo'">
+                                        {{socio.legajo}}
+                                    </td>
                                     <td title="'Socio'" filter="{socio: 'text'}" sortable="'socio'">
                                         {{socio.socio}}
                                     </td>
@@ -172,6 +175,7 @@
                                         <td style="text-align: right;">
                                             <b>Total</b>
                                         </td>
+                                        <td></td>
                                         <td>
                                             {{sumaTotalACobrar}}
                                         </td>
@@ -189,6 +193,9 @@
                         <div id="divTablaVentas" ng-if="vistaactual=='Ventas'">
                             <table id="tablaVentas" ng-table="paramsVentas" class="table table-hover table-bordered">
                                 <tr ng-repeat="venta in $data" ng-click="PullCuotas(venta.id_venta,venta.producto, $event)" ng-cloak>
+                                        <td title="'Id'" filter="{id_venta: 'text'}" sortable="'id_venta'">
+                                        {{venta.id_venta}}
+                                    </td>
                                     <td title="'Producto'" filter="{producto: 'text'}" sortable="'producto'">
                                         {{venta.producto}}
                                     </td>
@@ -221,6 +228,7 @@
                                             <b>Total</b>
                                         </td>
                                         <td>
+                                        <td></td>
                                         </td>
                                         <td>
                                         </td>

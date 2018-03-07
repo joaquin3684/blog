@@ -44,7 +44,10 @@ class PantallasSeed extends Seeder
                  'CCProveedor',
                  'solicitudesPendientes',
                  'fechaContable',
-                 'cerrarFecha'
+                 'cerrarFecha',
+                 'solicitudesPendientesDeCobro',
+                 'cuentaCorrienteComercializador',
+                 'pagoSolicitudesPendientesDeCobro'
             ];
             for ($i=0; $i < count($pantallas); $i++)
             {

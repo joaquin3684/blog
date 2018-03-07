@@ -57,6 +57,8 @@
 {!! Html::script('js/xlsx.full.min.js') !!}
 {!! Html::script('js/FileSaver.min.js') !!}
 
+{!! Html::script('js/controladores/ejercicioController.js')!!}
+{!! Html::script('js/controladores/ejercicio.js')!!}
 
 
 
@@ -317,14 +319,20 @@
                   </li>
                   @endif
                   @if(Sentinel::check()->hasAccess('pagoProveedores.*'))
-                  <li><a href="pago_proovedores"><i class="fa fa-money" ></i> Pago proveedores</a>
+                  <li><a href="pago_proovedores"><i class="fa fa-money" ></i> Pago proveedores</a></li>
                   @endif
                   @if(Sentinel::check()->hasAccess('fechaContable.*'))
-                  <li><a type="button" data-toggle="modal" data-target="#fechaContable"><i class="fa fa-calendar-check-o" ></i> Fecha contable</a>
+                  <li><a type="button" data-toggle="modal" data-target="#fechaContable"><i class="fa fa-calendar-check-o" ></i> Fecha contable</a></li>
                   @endif
                   @if(Sentinel::check()->hasAccess('cerrarFecha.*'))
-                  <li ng-controller="cerrarFecha"><a ng-click="cerrarFecha()"><i class="fa fa-calendar-times-o" ></i> Cerrar fecha</a>
+                  <li ng-controller="cerrarFecha"><a ng-click="cerrarFecha()"><i class="fa fa-calendar-times-o" ></i> Cerrar fecha</a></li>
                   @endif
+                  <li><a type="button" data-toggle="modal" data-target="#ejercicio"><i class="fa fa-calendar-o" ></i> Abrir/Cerrar ejercicio</a></li> 
+                  <div ng-controller="ejercicio">  
+                  
+                    <ejercicio></ejercicio>
+                  </div>
+                  
               </ul>
             </div>
 

@@ -130,6 +130,9 @@
                             <table id="tablaSocios" ng-table="paramsSocios" class="table table-hover table-bordered">
 
                                 <tr ng-repeat="socio in $data" ng-click="PullCuotas(socio.id_socio,socio.socio)">
+                                <td title="'Legajo'" filter="{ legajo: 'text'}" sortable="'legajo'">
+                                        {{socio.legajo}}
+                                    </td>
                                     <td title="'Socio'" filter="{ socio: 'text'}" sortable="'socio'">
                                         {{socio.socio}}
                                     </td>
@@ -151,6 +154,7 @@
                                             <b>Total</b>
 
                                         </td>
+                                        <td></td>
                                         <td>
                                             {{sumaMontoACobrar}}
                                         </td>

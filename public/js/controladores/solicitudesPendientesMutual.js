@@ -1,7 +1,8 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ServicioABM']).config(function ($interpolateProvider, $compileProvider){
+var app = angular.module('Mutual').config(function ($interpolateProvider, $compileProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 });
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ServicioABM');
 
 app.controller('solicitudesPendientesMutual', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ServicioABM) {
 
