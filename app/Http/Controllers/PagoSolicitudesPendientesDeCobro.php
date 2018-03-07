@@ -26,7 +26,7 @@ class PagoSolicitudesPendientesDeCobro extends Controller
     {
         foreach($request['comercializadores'] as $comer) {
 
-            $comer = $this->repo->findByUser($comer['id']);
+            $comer = $this->repo->find($comer['id']);
             $solicitudes = $this->repo->solicitudesPendientesDeCobro($comer->getId());
 
             $productos = array();
