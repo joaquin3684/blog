@@ -53,7 +53,7 @@ class SolicitudesPendientesDeCobro extends Controller
 
         $solicitudes->each(function($solicitud) use ($productos, $comer){
            $index = $this->getIndex($solicitud->id_producto, $productos);
-           $montoComer = ($solicitud->total * $productos['porcentajeElejido'] /100) * $comer->porcentaje_colocacion /100;
+           $montoComer = ($solicitud->total * $productos[$index]['porcentajeElejido'] /100) * $comer->porcentaje_colocacion /100;
            $solicitud['montoACobrar'] = $montoComer;
         });
 
