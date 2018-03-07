@@ -435,6 +435,7 @@ Route::resource('novedades', 'NovedadesController');
 //----------------- SOLICITUDES PENDIENTES DE COBRO ---------------------
 
 Route::get('solicitudesPendientesDeCobro', 'SolicitudesPendientesDeCobro@index');
+Route::get('solicitudesPendientesDeCobro/{id}', 'SolicitudesPendientesDeCobro@solicitudes');
 
 //----------------- PAGO SOLICITUDES PENDIENTES DE COBRO ---------------------
 
