@@ -1,6 +1,7 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services']).config(function($interpolateProvider){
+var app = angular.module('Mutual').config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services');
 app.controller('pago_proovedores', function($scope, $http, $compile, $sce, NgTableParams, UserSrv, $filter) {
 
   $scope.cambiarFecha = function(dato){

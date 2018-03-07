@@ -135,14 +135,14 @@
                             <table id="tablaSocios" ng-table="paramsSocios" class="table table-hover table-bordered">
 
                                 <tr ng-repeat="socio in $data">
-
+                                    
+                                    <td title="'Legajo'" filter="{ legajo: 'text'}" sortable="'legajo'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
+                                        {{socio.legajo}}
+                                    </td>
                                     <td title="'Socio'" filter="{ socio: 'text'}" sortable="'socio'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
                                         {{socio.socio}}
                                     </td>
 
-                                    <td title="'Legajo'" filter="{ legajo: 'text'}" sortable="'legajo'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
-                                        {{socio.legajo}}
-                                    </td>
                                     <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'" ng-click="PullVentas(socio.id_socio,socio.socio)"
                                         style="vertical-align: middle">
                                         {{socio.totalACobrar}}

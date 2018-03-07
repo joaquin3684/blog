@@ -1,7 +1,8 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ngFileUpload']).config(function ($interpolateProvider, $compileProvider){
+var app = angular.module('Mutual').config(function ($interpolateProvider, $compileProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 });
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ngFileUpload');
 app.controller('comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv, Upload) {
 
    
@@ -221,6 +222,22 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             UserSrv.MostrarError(data)
 
         });
+
+    }
+    $scope.RechazarPropuesta = function () {
+
+        $http({
+            url: 'comercializador/rechazarPropuesta',
+            method: 'post',
+            data: { 'id': $scope.idpropuestae, 'estado': 'Rechazada por Inversionista' }
+        }).then(function successCallback(response) {
+            UserSrv.MostrarMensaje("OK", "La propuesta fue rechazada correctamente.", "OK", "mensaje");
+            $scope.pullComercializadores();
+        }, function errorCallback(data) {
+                UserSrv.MostrarError(data);
+            });
+
+        $('#AnalizarPropuesta').modal('hide');
 
     }
 

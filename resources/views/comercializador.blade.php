@@ -466,11 +466,9 @@
             <div class="form-group">
               <div class="col-md-12">
                 <center>
-                  <button data-dismiss="modal" type="button" ng-show="!modificandopropuesta" ng-click="AceptarPropuesta()" class="btn btn-primary">ACEPTAR PROPUESTA</button>
-                  <button id="send" ng-show="!modificandopropuesta" ng-click="ModificarPropuesta(true)" class="btn btn-warning">MODIFICAR</button>
-
-                  <button data-dismiss="modal" id="send" ng-show="modificandopropuesta" ng-click="PropuestaModificada()" class="btn btn-success">ENVIAR CONTRAPROPUESTA</button>
-                  <button id="send" ng-show="modificandopropuesta" ng-click="ModificarPropuesta(false)" class="btn btn-danger">CANCELAR</button>
+                  <button data-dismiss="modal" type="button"  ng-click="AceptarPropuesta()" class="btn btn-primary">Aceptar </button>
+                  <button data-dismiss="modal" type="button"  ng-click="RechazarPropuesta()" class="btn btn-danger">Rechazar </button>
+    
                 </center>
               </div>
             </div>

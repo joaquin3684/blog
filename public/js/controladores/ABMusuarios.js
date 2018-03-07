@@ -1,4 +1,5 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja']).config(function($interpolateProvider){});
+var app = angular.module('Mutual').config(function($interpolateProvider){});
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja');
 app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
 
   $scope.borrarFormulario = function(){
@@ -54,7 +55,7 @@ app.controller('ABM', function($scope, $http, $compile, $sce, NgTableParams, $fi
                $('#formulario')[0].reset();
                $scope.errores = '';
              
-               UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
+                if (tipoSolicitud != 'Mostrar') { UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");}
                 $scope.traerElementos();
             }, function errorCallback(data)
             {

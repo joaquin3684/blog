@@ -1,4 +1,5 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ManejoExcell', 'ServicioABM']).config(function ($interpolateProvider) {});
+var app = angular.module('Mutual').config(function ($interpolateProvider) {});
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ManejoExcell', 'ServicioABM');
 app.controller('novedades', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ManejoExcell, ServicioABM) {
 
 

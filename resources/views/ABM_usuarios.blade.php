@@ -167,12 +167,7 @@
                     <td title="'Email'" filter="{ email: 'text'}" sortable="'email'">
                       {{abm.email}}
                     </td>
-                    <td title="'Contraseña'" filter="{ password: 'text'}" sortable="'password'">
-                      {{abm.password}}
-                    </td>
-                    <td title="Cant. roles" filter="{ cantRoles: 'text'}" sortable="'cantRoles'">
-                      {{abm.cantRoles}}
-                    </td>
+                    
                     <td id="botones">
                     @endverbatim
                     @if(Sentinel::check()->hasAccess('usuarios.editar'))
@@ -240,14 +235,7 @@
                 <input id="email" class="form-control col-md-7 col-xs-12" name="email" placeholder="Ingrese email del organismo" type="text"><div ng-cloak>{{errores.email[0]}}</div>
               </div>
             </div>
-            <div class="item form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Contraseña
-                <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="password" name="password" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el password"><div ng-cloak>{{errores.password[0]}}</div>
-              </div>
-            </div>
+            
 
 
             <input type="hidden" name="id">
