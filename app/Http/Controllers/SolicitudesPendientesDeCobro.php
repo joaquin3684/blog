@@ -24,7 +24,7 @@ class SolicitudesPendientesDeCobro extends Controller
 
         $usuario = Sentinel::check();
         $comer = $this->repo->findByUser($usuario->id);
-        $solicitudes = $this->repo->findSolicitudesPendientesDeCobro($comer->getId());
+        $solicitudes = $this->repo->solicitudesPendientesDeCobro($comer->getId());
 
         $productos = array();
 

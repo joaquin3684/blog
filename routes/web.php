@@ -440,6 +440,7 @@ Route::get('solicitudesPendientesDeCobro/solicitudes', 'SolicitudesPendientesDeC
 //----------------- PAGO SOLICITUDES PENDIENTES DE COBRO ---------------------
 
 Route::get('pagoSolicitudesPendientesDeCobro', 'PagoSolicitudesPendientesDeCobro@index');
+Route::post('pagoSolicitudesPendientesDeCobro/pagar', 'PagoSolicitudesPendientesDeCobro@pagar');
 
 //----------------- CUENTA CORRIENTE COMERCIALIZADOR ---------------------
 
