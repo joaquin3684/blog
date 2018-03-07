@@ -76,13 +76,13 @@
 
                                             <tr class="clickableRow" title="Datos" ng-cloak>
                                                 <td title="'Nombre'" sortable="'nombre'">
-                                                    {{solicitud.nombre}}
+                                                    {{solicitud.socio.nombre.split(',').pop()}}
                                                 </td>
                                                 <td title="'Apellido'" sortable="'apellido'">
-                                                    {{solicitud.apellido}}
+                                                    {{solicitud.socio.nombre.split(',').shift()}}
                                                 </td>
                                                 <td title="'Legajo'" sortable="'legajo'">
-                                                    {{solicitud.legajo}}
+                                                    {{solicitud.socio.legajo}}
                                                 </td>
                                                 <td title="'Monto a cobrar'" sortable="'montoACobrar'">
                                                     {{solicitud.montoACobrar}}
@@ -90,7 +90,22 @@
 
                                                 </td>
                                             </tr>
+                                            <tfoot>
+                                                <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;" ng-cloak>
+                                                    <td style="text-align: right;">
+                                                        <b>Total</b>
+                                                    </td><td>
+                                                    <td></td>
+                                              
+                                    
+                                                    <td>
+                                                        {{sumaTotalACobrar}}
+                                                    </td>
+                                                    
+                                                </tr>
+                                            </tfoot>
                                     </table>
+                                    
                                     @endverbatim
                                 </div>
                                 <!-- END TABLE -->

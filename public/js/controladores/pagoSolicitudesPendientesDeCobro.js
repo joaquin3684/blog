@@ -11,6 +11,7 @@ app.controller('pagoSolicitudesPendientesDeCobro', function ($scope, $http, $com
     var pull = function (url, scopeObj, params) {
         ServicioABM.pull(url).then(function (returnedData) {
             $scope[scopeObj] = returnedData;
+            $scope.sumaTotalACobrar = $scope.solicitudes.map(el => el.montoACobrar).reduce((acum, monto) => acum + monto)
             $scope[params] = ServicioABM.createTable(returnedData)
         });
     }
@@ -20,23 +21,14 @@ app.controller('pagoSolicitudesPendientesDeCobro', function ($scope, $http, $com
         });
     }
 
-    $scope.solicitudes = [{
-        nombre: 'Lucas',
-        apellido: 'Blanco',
-        legajo: '1567433',
-        montoACobrar: 2150
-    }, {
-            nombre: 'Lucas',
-            apellido: 'Blanco',
-            legajo: '1567433',
-            montoACobrar: 2150
-        }];
-    $scope.sumaTotalACobrar = $scope.solicitudes.map(el => el.montoACobrar).reduce((acum,monto) => acum + monto)
-    $scope.paramsSolicitud = ServicioABM.createTable($scope.solicitudes)
-
     $scope.pagar = function(){
-
+        var elementosAPagar = $scope.solicitudes.map(solicitud => ({'id' : solicitud.id}))
+        var data = {'comercializadores': elementosAPagar};
+        var url = 'pagoSolicitudesPendientesDeCobro/pagar';
+        ServicioABM.create(data, url).then(function () {
+            pull('solicitudesPendientesDeCobro/solicitudes', 'solicitudes', 'paramsSolicitud');
+        });
     }
 
-    //pull('agente_financiero/solicitudes', 'solicitudes', 'paramsSolicitud');
+    pull('solicitudesPendientesDeCobro/solicitudes', 'solicitudes', 'paramsSolicitud');
 });
