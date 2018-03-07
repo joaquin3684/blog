@@ -31,6 +31,7 @@ class CreateSolicitudsTable extends Migration
             $table->integer('cuotas')->nullable();
             $table->double('monto_por_cuota')->nullable();
             $table->integer('id_socio')->unsigned();
+            $table->double('monto_pagado')->nullable();
             $table->foreign('id_socio')->references('id')->on('socios');
             $table->softDeletes();
             $table->timestamps();

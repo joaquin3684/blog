@@ -13,7 +13,7 @@ class Solicitud extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'id_socio', 'id_producto', 'comercializador', 'doc_endeudamiento', 'agente_financiero', 'estado', 'total', 'monto_por_cuota', 'cuotas'];
+        'id_socio', 'id_producto', 'comercializador', 'doc_endeudamiento', 'agente_financiero', 'estado', 'total', 'monto_por_cuota', 'cuotas', 'monto_pagado'];
 
     public function socio()
     {
