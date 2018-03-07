@@ -52,6 +52,12 @@ class ComercializadorRepo extends Repositorio
         }])->find($id);
     }
 
+    public function comercializadoresConSolicitudesAprobadas()
+    {
+        return Comercializador::whereHas('solicitudes', function($query){
+            $query->where('estado', 'Solicitud Aprobada');
+        })->get();
+    }
 
 
 }

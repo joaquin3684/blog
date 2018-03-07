@@ -11,6 +11,7 @@ namespace App\Repositories\Eloquent\Repos;
 
 use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use App\Repositories\Eloquent\Repos\Mapper\SolicitudMapper;
+use App\Solicitud;
 
 class SolicitudRepo extends Repositorio
 {
@@ -32,4 +33,5 @@ class SolicitudRepo extends Repositorio
             return $this->mapper->map($solicitud);
         });
     }
+
 }
