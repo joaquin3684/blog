@@ -28,7 +28,6 @@ class SolicitudesPendientesDeCobro extends Controller
 
         $productos = array();
 
-
         $solicitudes->groupBy('id_producto');
         $solicitudes->each(function($solicitud) use ($productos){
             $index = $this->getIndex($solicitud->id_producto, $productos);

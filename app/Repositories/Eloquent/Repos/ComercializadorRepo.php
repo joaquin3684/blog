@@ -9,9 +9,10 @@
 namespace App\Repositories\Eloquent\Repos;
 
 
+use App\Comercializador;
 use App\Repositories\Eloquent\Repos\Gateway\ComercializadorGateway;
 use App\Repositories\Eloquent\Repos\Mapper\ComercializadorMapper;
-use App\Repositories\Eloquent\Solicitud;
+use App\Solicitud;
 
 class ComercializadorRepo extends Repositorio
 {
@@ -30,5 +31,27 @@ class ComercializadorRepo extends Repositorio
     {
         return Solicitud::with('socio', 'producto.porcentajes')->where('comercializador', $id)->where('estado', 'Solicitud Aprobada')->get();
     }
+
+    public function comercializadoresConSolicitudesTerminadas()
+    {
+        return Comercializador::whereHas('solicitudes', function($query){
+            $query->where('estado', 'Pagada')
+                ->orWhere('estado', 'Rechazada por comercializador')
+                ->orWhere('estado', 'Solicitud Aprobada')
+                ->orWhere('estado', 'Rechazada por Inversionista');
+        })->get();
+    }
+
+    public function solicitudesTerminadasComer($id)
+    {
+        return Comercializador::with(['solicitudes' => function($query) {
+            $query->where('estado', 'Pagada')
+                ->orWhere('estado', 'Rechazada por comercializador')
+                ->orWhere('estado', 'Solicitud Aprobada')
+                ->orWhere('estado', 'Rechazada por Inversionista');
+        }])->find($id);
+    }
+
+
 
 }
