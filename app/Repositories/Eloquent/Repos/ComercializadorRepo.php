@@ -28,7 +28,7 @@ class ComercializadorRepo extends Repositorio
 
     public function solicitudesPendientesDeCobro($id)
     {
-        return Solicitud::where('comercializador', $id)->where('estado', 'Solicitud Aprobada')->get();
+        return Solicitud::with('socio', 'producto.porcentajes')->where('comercializador', $id)->where('estado', 'Solicitud Aprobada')->get();
     }
 
 }
