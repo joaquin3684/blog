@@ -20,13 +20,6 @@ app.controller('solicitudesPendientesDeCobro', function ($scope, $http, $compile
         });
     }
 
-    $scope.solicitudes = [{
-        nombre: 'Lucas',
-        apellido: 'Blanco',
-        legajo:'1567433',
-        montoACobrar: 2150
-    }];
-    $scope.paramsSolicitud = ServicioABM.createTable($scope.solicitudes)
    
-    //pull('agente_financiero/solicitudes', 'solicitudes', 'paramsSolicitud');
+    pull('solicitudesPendientesDeCobro/solicitudes', 'solicitudes', 'paramsSolicitud');
 });

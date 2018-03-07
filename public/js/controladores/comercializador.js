@@ -20,7 +20,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             else
             {
                 console.log(response);
-                $scope.solicitudes = response.data;
+                $scope.solicitudes = response.data.filter(solicitud => solicitud.estado !='Rechazada por comercializador');
                 $scope.paramssolicitudes = new NgTableParams({
                     page: 1,
                     count: 10
@@ -210,7 +210,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         $http({
             url: 'comercializador/aceptarPropuesta',
             method: 'post',
-            data: {'id':$scope.idpropuestae,'estado':'Aceptada por Comercializador'}
+            data: {'id':$scope.idpropuestae,'estado':'Aceptada por comercializador'}
         }).then(function successCallback(response)
         {
 
@@ -229,7 +229,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         $http({
             url: 'comercializador/rechazarPropuesta',
             method: 'post',
-            data: { 'id': $scope.idpropuestae, 'estado': 'Rechazada por Inversionista' }
+            data: { 'id': $scope.idpropuestae, 'estado': 'Rechazada por comercializador' }
         }).then(function successCallback(response) {
             UserSrv.MostrarMensaje("OK", "La propuesta fue rechazada correctamente.", "OK", "mensaje");
             $scope.pullComercializadores();
@@ -343,6 +343,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         }).then(function (resp) {
             console.log('Success ' + 'uploaded. Response: ' + resp.data);
             $scope.pullComercializadores();
+            UserSrv.MostrarMensaje("OK", "La solicitud fue dada de alta correctamente.", "OK", "mensaje");
         }, function (resp) {
             console.log('Error status: ' + resp.status);
         }, function (evt) {
