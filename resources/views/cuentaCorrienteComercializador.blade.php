@@ -87,7 +87,9 @@
                                     <td title="'Nombre'" filter="{nombre: 'text'}" sortable="'nombre'">
                                         {{comercializador.nombre}}
                                     </td>
-
+                                    <td title="'Cuit'" filter="{cuit: 'text'}" sortable="'cuit'">
+                                        {{comercializador.cuit}}
+                                    </td>
                                 </tr>
 
                             </table>

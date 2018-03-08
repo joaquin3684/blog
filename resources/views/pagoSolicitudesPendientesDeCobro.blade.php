@@ -25,7 +25,7 @@
                 <div id="mensaje"></div>
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Solicitudes Pendientes de Cobro</h2>
+                        <h2>Pago Solicitudes Pendientes de Cobro</h2>
 
                         <ul class="nav navbar-right panel_toolbox">
                             <li>
@@ -71,44 +71,78 @@
 
                                 <div id="exportTable">
                                     @verbatim
-                                    <table ng-table="paramsSolicitud" class="table table-hover table-bordered">
-                                        <tbody data-ng-repeat="solicitud in $data" data-ng-switch on="dayDataCollapse[$index]">
+                                    <table ng-table="paramsComercializadores" class="table table-hover table-bordered">
 
-                                            <tr class="clickableRow" title="Datos" ng-cloak>
-                                                <td title="'Nombre'" sortable="'nombre'">
-                                                    {{solicitud.socio.nombre.split(',').pop()}}
+                                        <tbody data-ng-repeat="comercializador in $data" data-ng-switch on="dayDataCollapse[$index]">
+                                            <tr class="clickableRow" title="" data-ng-click="PullSolicitudes(comercializador.id);selectTableRow($index,proovedor.id_proovedor)"
+                                                ng-cloak>
+                                                <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                                    {{comercializador.nombre}}
                                                 </td>
-                                                <td title="'Apellido'" sortable="'apellido'">
-                                                    {{solicitud.socio.nombre.split(',').shift()}}
-                                                </td>
-                                                <td title="'Legajo'" sortable="'legajo'">
-                                                    {{solicitud.socio.legajo}}
-                                                </td>
-                                                <td title="'Monto a cobrar'" sortable="'montoACobrar'">
-                                                    {{solicitud.montoACobrar}}
+                                                <td title="'Cuit'" filter="{ cuit: 'text'}" sortable="'cuit'">
+                                                    {{comercializador.cuit}}
                                                 </td>
 
+                                            </tr>
+                                            <tr data-ng-switch-when="true" ng-cloak>
+                                                <td colspan="5">
+                                                    <div>
+                                                        <div>
+                                                            <table class="table" ng-cloak>
+                                                                <thead class="levelTwo" style="color: white; background-color: #337ab7">
+                                                                    <tr>
+                                                                        <th>Socio</th>
+                                                                        <th>Legajo</th>
+                                                                        <th>Producto</th>
+                                                                        <th>Monto a cobrar</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr data-ng-repeat="solicitud in solicitudes">
+
+                                                                        <td>
+                                                                            <center>{{solicitud.socio.nombre}}</center>
+                                                                        </td>
+                                                                        <td>
+                                                                            <center>{{solicitud.socio.legajo}}</center>
+                                                                        </td>
+                                                                        <td>
+                                                                            <center>{{solicitud.producto.nombre}}</center>
+                                                                        </td>
+                                                                        <td>
+                                                                            <center>{{solicitud.montoACobrar}}</center>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                                <tfoot>
+                                            <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;" ng-cloak>
+                                                <td style="text-align: center;">
+                                                    <b>Total</b>
+
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <center>{{sumaTotalACobrarPorComercializador}}</center>
+                                                </td>
+
+
+                                            </tr>
+                                        </tfoot>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
-                                            <tfoot>
-                                                <tr style="background-color: #e6e9ed; color: #106cc8; font-size: 15px;" ng-cloak>
-                                                    <td style="text-align: right;">
-                                                        <b>Total</b>
-                                                    </td><td>
-                                                    <td></td>
-                                              
-                                    
-                                                    <td>
-                                                        {{sumaTotalACobrar}}
-                                                    </td>
-                                                    
-                                                </tr>
-                                            </tfoot>
                                             
+                                        </tbody>
+                                        
                                     </table>
-                                    
+
+
                                     @endverbatim
-                                    
+
                                 </div>
                                 <!-- END TABLE -->
                                 <button class="btn btn-primary" ng-click="pagar()">Pagar</button>

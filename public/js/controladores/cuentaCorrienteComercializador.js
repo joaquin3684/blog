@@ -23,28 +23,16 @@ app.controller('cuentaCorrienteComercializador', function ($scope, $http, $compi
     $scope.setVista = function (pantalla){
         $scope.vistaactual = pantalla
     }
-    $scope.comercializadores = [{
-        nombre: 'Lucas',
-        id: 1,
-        algomas: 'tuvieja'
-    }];
-    $scope.socios = [{
-        nombre: 'Lucas',
-        apellido: 'Blanco',
-        legajo: '156489',
-        credito: 2000,
-        montoCobrado:1500
-    }];
+   
 
     $scope.PullSocios= function(idComercializador, nombreComercializador){
         //pull('comercializadores/trearElementos', 'socios', 'paramsSocios');
-        $scope.paramsSocios = ServicioABM.createTable($scope.socios)
+        pull('cuentaCorrienteComercializador/ventasComer/'+idComercializador, 'socios', 'paramsSocios');
         $scope.comercializadoractual= nombreComercializador
         $scope.setVista('Socios')
     }
     $scope.PullComercializador = function (idComercializador) {
-        //pull('comercializadores/trearElementos', 'comercializadores', 'paramsComercializador');
-        $scope.paramsComercializador = ServicioABM.createTable($scope.comercializadores)
+        pull('cuentaCorrienteComercializador/comercializadores', 'comercializadores', 'paramsComercializador');
         $scope.setVista('Comercializador')
     }
     $scope.PullComercializador()
