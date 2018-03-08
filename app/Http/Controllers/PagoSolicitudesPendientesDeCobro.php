@@ -53,7 +53,7 @@ class PagoSolicitudesPendientesDeCobro extends Controller
             $solicitudes->each(function ($solicitud) use ($productos, $comer) {
                 $index = $this->getIndex($solicitud->id_producto, $productos);
                 $montoComer = ($solicitud->total * $productos[$index]['porcentajeElejido'] / 100) * $comer->getPorcentajeColocacion() / 100;
-                $this->solRepo->update(['monto_pagado' => $montoComer], $solicitud->id);
+                $this->solRepo->update(['monto_pagado' => $montoComer, 'estado' => 'Pagada'], $solicitud->id);
 
             });
         }

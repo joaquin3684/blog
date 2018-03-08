@@ -40,9 +40,10 @@ class Comercializador
      * @param $email
      * @param $porcentaje_colocacion
      */
-    public function __construct($id, $nombre, $dni, $cuit, $telefono, $usuario, $apellido, $domicilio, $email, $porcentaje_colocacion)
+    public function __construct($id, $nombre, $dni, $cuit, $telefono, $usuario, $apellido, $domicilio, $email, $porcentaje_colocacion, $solicitudes = null)
     {
         $this->id = $id;
+        $this->solicitudes = $solicitudes == null ? collect() : $solicitudes;
         $this->nombre = $nombre;
         $this->dni = $dni;
         $this->cuit = $cuit;
