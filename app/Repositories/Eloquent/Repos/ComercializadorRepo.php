@@ -44,7 +44,7 @@ class ComercializadorRepo extends Repositorio
 
     public function solicitudesTerminadasComer($id)
     {
-        return Comercializador::with(['solicitudes' => function($query) {
+        return Comercializador::with(['solicitudes.socio' => function($query) {
             $query->where('estado', 'Pagada')
                 ->orWhere('estado', 'Rechazada por comercializador')
                 ->orWhere('estado', 'Solicitud Aprobada')
