@@ -100,20 +100,16 @@
 
                                 <tr ng-repeat="socio in $data" ng-cloak>
                                     <td title="'Socio'" filter="{nombre: 'text'}" sortable="'nombre'">
-                                        {{socio.nombre}}
-                                    </td>
-
-                                    <td title="'Apellido'" filter="{apellido: 'text'}" sortable="'apellido'">
-                                        {{socio.apellido}}
+                                        {{socio.socio.nombre}}
                                     </td>
                                     <td title="'Legajo'" filter="{legajo: 'text'}" sortable="'legajo'">
-                                        {{socio.legajo}}
+                                        {{socio.socio.legajo}}
                                     </td>
                                     <td title="'Credito'" filter="{credito: 'text'}" sortable="'credito'">
                                         {{socio.credito}}
                                     </td>
                                     <td title="'Monto cobrado'" filter="{montoCobrado: 'text'}" sortable="'montoCobrado'">
-                                        {{socio.montoCobrado}}
+                                        {{socio.total}}
                                     </td>
                                 </tr>
                             </table>

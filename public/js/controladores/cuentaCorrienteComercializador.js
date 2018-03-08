@@ -1,6 +1,6 @@
 var app = angular.module('Mutual').config(function ($interpolateProvider) { });
-app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'ServicioABM', 'Mutual.services');
-app.controller('cuentaCorrienteComercializador', function ($scope, $http, $compile, $sce, NgTableParams, $filter, ServicioABM) {
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'ServicioABM', 'Mutual.services', 'angular-loading-bar');
+app.controller('cuentaCorrienteComercializador', function ($scope, $http, $compile, $sce, NgTableParams, ServicioABM) {
 
     $scope.borrarFormulario = function () {
         $('#formulario2')[0].reset();
@@ -26,8 +26,8 @@ app.controller('cuentaCorrienteComercializador', function ($scope, $http, $compi
    
 
     $scope.PullSocios= function(idComercializador, nombreComercializador){
-        //pull('comercializadores/trearElementos', 'socios', 'paramsSocios');
         pull('cuentaCorrienteComercializador/ventasComer/'+idComercializador, 'socios', 'paramsSocios');
+       
         $scope.comercializadoractual= nombreComercializador
         $scope.setVista('Socios')
     }

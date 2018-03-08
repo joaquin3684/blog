@@ -1,5 +1,5 @@
 var app = angular.module('Mutual').config(function ($interpolateProvider) { });
-app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'ServicioABM', 'Mutual.services');
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'ServicioABM', 'Mutual.services', 'angular-loading-bar');
 app.controller('solicitudesPendientesDeCobro', function ($scope, $http, $compile, $sce, NgTableParams, $filter, ServicioABM) {
 
     $scope.borrarFormulario = function () {

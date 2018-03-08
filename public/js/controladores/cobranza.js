@@ -1,7 +1,7 @@
 var app = angular.module('Mutual').config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
-app.requires.push('ngMaterial', 'ngSanitize','Mutual.services');
+app.requires.push('ngMaterial', 'ngSanitize', 'Mutual.services', 'angular-loading-bar');
 app.controller('cobranza', function($scope, $http, $compile, $sce, UserSrv) {
 
 // ESTAS FUNCIONES SON PARA DEFINIR LOS PARAMETROS DE BUSQUEDA EN LA FUNCION QUERY
