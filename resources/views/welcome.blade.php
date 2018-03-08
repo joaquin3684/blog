@@ -130,7 +130,7 @@
       ACA VA EL MENSAJE
 </div>
 <!--<div id="LoadingGlobal" style="background-color: rgba(255, 255, 255, 0.9); position: fixed; width: 100%; height: 100%;" hidden>-->
-  <div id="LoadingGlobal" style="background-color: rgba(255, 255, 255, 0.7); width: 100%; height: 100%; z-index: 10000000000; position: fixed;" hidden>
+  <div id="LoadingGlobal" style="background-color: rgba(1, 1, 1, 0.7); width: 100%; height: 100%; z-index: 10000000000; position: fixed;" hidden>
   <div style="margin-top: 20%; color: black;">
        <span style="font-size: 30pt; color: black;">CARGANDO</span></br></br>
           <i style="font-size: 40pt;" class="fa fa-spinner fa-pulse fa-fw"></i>
