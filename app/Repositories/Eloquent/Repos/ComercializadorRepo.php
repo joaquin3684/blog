@@ -44,12 +44,13 @@ class ComercializadorRepo extends Repositorio
 
     public function solicitudesTerminadasComer($id)
     {
-        return Comercializador::with(['solicitudes.socio' => function($query) {
+        return Solicitud::with('socio' )
+        ->where('comercializador', $id)->where('estado', 'Pagada')->orWhere(function($query){
             $query->where('estado', 'Pagada')
                 ->orWhere('estado', 'Rechazada por comercializador')
                 ->orWhere('estado', 'Solicitud Aprobada')
                 ->orWhere('estado', 'Rechazada por Inversionista');
-        }])->find($id);
+            })->get();
     }
 
     public function comercializadoresConSolicitudesAprobadas()
