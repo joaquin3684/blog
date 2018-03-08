@@ -101,4 +101,18 @@ class PagoSolicitudesPendientesDeCobro extends Controller
 
         return $solicitudes;
     }
+
+    public function getIndex($id, $array)
+    {
+
+        foreach($array as $key => $value)
+        {
+            if ($value['id'] == $id)
+            {
+                return $key;
+            }
+        }
+        return -1;
+    }
+
 }

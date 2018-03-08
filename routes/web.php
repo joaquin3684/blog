@@ -442,7 +442,6 @@ Route::get('solicitudesPendientesDeCobro/solicitudes', 'SolicitudesPendientesDeC
 Route::get('pagoSolicitudesPendientesDeCobro', 'PagoSolicitudesPendientesDeCobro@index');
 Route::get('pagoSolicitudesPendientesDeCobro/comercializadores', 'PagoSolicitudesPendientesDeCobro@comercializadores');
 Route::get('pagoSolicitudesPendientesDeCobro/solicitudesComer/{id}', 'PagoSolicitudesPendientesDeCobro@solicitudesTerminadasComer');
-
 Route::post('pagoSolicitudesPendientesDeCobro/pagar', 'PagoSolicitudesPendientesDeCobro@pagar');
 
 //----------------- CUENTA CORRIENTE COMERCIALIZADOR ---------------------
