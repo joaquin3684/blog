@@ -201,7 +201,7 @@
                   </ul>
                 </li>
               @endif
-               @if(Sentinel::check()->hasAnyAccess(['ventas.*', 'ccCuotasSociales.*']))
+               @if(Sentinel::check()->hasAnyAccess(['ventas.*', 'ccCuotasSociales.*, cuentaCorrienteComercializador']))
                   <li><a><i class="fa fa-bank"></i> Cuentas Corrientes <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                   @if(Sentinel::check()->hasAccess('ventas.*'))
@@ -210,6 +210,10 @@
                     @endif
                     @if(Sentinel::check()->hasAccess('ccCuotasSociales.*'))
                     <li><a href="cc_cuotasSociales">CC Cuotas Sociales</a>
+                    </li>
+                    @endif
+                     @if(Sentinel::check()->hasAccess('cuentaCorrienteComercializador.*'))
+                    <li><a href="cuentaCorrienteComercializador">CC Comercializador</a>
                     </li>
                     @endif
                   </ul>
@@ -307,12 +311,32 @@
                   </ul>
                 </li>
                 @endif
+                @if(Sentinel::check()->hasAnyAccess(['comercializador.*', 'solicitudesPendientesDeCobro.*']))
+                <li><a><i class="fa fa-user"></i> Comercializador <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                     @if(Sentinel::check()->hasAccess('comercializador.*'))
+                      <li><a href="comercializador"></i>Generar Solicitud</a>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('solicitudesPendientesDeCobro.*'))
+                      <li><a href="solicitudesPendientesDeCobro"></i>Solicitudes Aprobadas</a>
+                      @endif
+                  </ul>
+                </li>
+                @endif
 
-                  </li>
-                  @if(Sentinel::check()->hasAccess('comercializador.*'))
-                  <li><a href="comercializador"><i class="fa fa-pencil"></i>Generar Solicitud</a>
-                  @endif
-                  </li>
+                  @if(Sentinel::check()->hasAnyAccess(['pagoProveedores.*', 'pagoSolicitudesPendientesDeCobro.*']))
+                <li><a><i class="fa fa-money" ></i> Pagos <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                     @if(Sentinel::check()->hasAccess('pagoProveedores.*'))
+                      <li><a href="pago_proovedores"></i>Proveedores</a>
+                      @endif
+                      @if(Sentinel::check()->hasAccess('pagoSolicitudesPendientesDeCobro.*'))
+                      <li><a href="pagoSolicitudesPendientesDeCobro"></i>Comercializadores</a>
+                      @endif
+                  </ul>
+                </li>
+                @endif
+                 
                   @if(Sentinel::check()->hasAccess('solicitudesPendientes.*'))
                   <li><a href="solicitudesPendientesMutual"><i class="fa fa-clock-o"></i>Solicitudes Pendientes</a>
                   </li>
@@ -321,9 +345,7 @@
                   <li><a href="correrVto"><i class="fa fa-calendar"></i>Correr Vto Servicio/Prestamo</a>
                   </li>
                   @endif
-                  @if(Sentinel::check()->hasAccess('pagoProveedores.*'))
-                  <li><a href="pago_proovedores"><i class="fa fa-money" ></i> Pago proveedores</a></li>
-                  @endif
+                  
                   @if(Sentinel::check()->hasAccess('fechaContable.*'))
                   <li><a type="button" data-toggle="modal" data-target="#fechaContable"><i class="fa fa-calendar-check-o" ></i> Fecha contable</a></li>
                   @endif
