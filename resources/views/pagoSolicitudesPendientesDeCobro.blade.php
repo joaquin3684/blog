@@ -145,7 +145,7 @@
 
                                 </div>
                                 <!-- END TABLE -->
-                                <button class="btn btn-primary" ng-click="pagar()">Pagar</button>
+                                <button class="btn btn-primary" ng-if="solicitudes !=undefined" ng-click="pagar()">Pagar</button>
                             </div>
                         </div>
 

@@ -2,7 +2,7 @@ var app = angular.module('Mutual').config(function ($interpolateProvider, $compi
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 });
-app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services');
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'angular-loading-bar');
 app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv) {
 
     $scope.calcularMontoPorCuota = function (){

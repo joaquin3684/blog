@@ -102,18 +102,15 @@
                                     <td title="'Socio'" filter="{nombre: 'text'}" sortable="'nombre'">
                                         {{socio.socio.nombre}}
                                     </td>
-
-                                    <td title="'Apellido'" filter="{apellido: 'text'}" sortable="'apellido'">
-                                        {{socio.apellido}}
-                                    </td>
                                     <td title="'Legajo'" filter="{legajo: 'text'}" sortable="'legajo'">
-                                        {{socio.legajo}}
+                                        {{socio.socio.legajo}}
                                     </td>
-                                    <td title="'Credito'" filter="{credito: 'text'}" sortable="'credito'">
-                                        {{socio.credito}}
+                                    <td title="'Estado'" filter="{estado: 'text'}" sortable="'estado'">
+                                        {{socio.estado}}
                                     </td>
+
                                     <td title="'Monto cobrado'" filter="{montoCobrado: 'text'}" sortable="'montoCobrado'">
-                                        {{socio.montoCobrado}}
+                                        {{socio.monto_pagado}}
                                     </td>
                                 </tr>
                             </table>

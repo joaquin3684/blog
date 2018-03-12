@@ -1,5 +1,5 @@
 var app = angular.module('Mutual').config(function($interpolateProvider) {});
-app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services');
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'angular-loading-bar');
 app.controller('correr_vto_servicios', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
 
 

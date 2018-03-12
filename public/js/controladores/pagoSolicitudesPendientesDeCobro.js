@@ -1,5 +1,5 @@
 var app = angular.module('Mutual').config(function ($interpolateProvider) { });
-app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'ServicioABM', 'Mutual.services');
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'ServicioABM', 'Mutual.services', 'angular-loading-bar');
 app.controller('pagoSolicitudesPendientesDeCobro', function ($scope, $http, $compile, $sce, NgTableParams, $filter, ServicioABM) {
 
     $scope.borrarFormulario = function () {
@@ -21,7 +21,7 @@ app.controller('pagoSolicitudesPendientesDeCobro', function ($scope, $http, $com
     }
 
     $scope.pagar = function(){
-        var elementosAPagar = $scope.solicitudes.map(solicitud => ({'id' : solicitud.id}))
+        var elementosAPagar = $scope.comercializadores.map(comercializador => ({'id' : comercializador.id}))
         var data = {'comercializadores': elementosAPagar};
         var url = 'pagoSolicitudesPendientesDeCobro/pagar';
         ServicioABM.create(data, url).then(function () {

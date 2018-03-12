@@ -263,7 +263,7 @@
 
 
       </div>
-      <div class="col-md-12 col-sm-12 col-xs-12">
+      
         @if(Sentinel::check()->hasAccess('socios.visualizar'))
         <div class="x_panel">
           <div class="x_title">
@@ -421,7 +421,7 @@
         </div>
         @endif
 
-      </div>
+      
       <!-- /page content -->
     </div>
 

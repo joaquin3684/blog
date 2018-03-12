@@ -1,6 +1,6 @@
 
 var app = angular.module('Mutual').config(function($interpolateProvider) {});
-app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services');
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'angular-loading-bar');
 
 app.controller('cobrar_contablemente', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
 

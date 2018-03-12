@@ -1,5 +1,5 @@
 var app = angular.module('Mutual').config(function ($interpolateProvider) {});
-app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja');
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja', 'angular-loading-bar');
 
 app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, clonarHtmlService) {
 

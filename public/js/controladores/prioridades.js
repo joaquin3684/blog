@@ -1,4 +1,4 @@
-var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ui.sortable', 'Mutual.services']).config(function($interpolateProvider){
+var app = angular.module('Mutual', ['ngMaterial', 'ngSanitize', 'ui.sortable', 'Mutual.services', 'angular-loading-bar']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
 app.controller('prioridades', function($scope, $http, $compile, $sce, UserSrv) {

@@ -1,5 +1,5 @@
 var app = angular.module('Mutual').config(function ($interpolateProvider) { });
-app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ServicioABM');
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ServicioABM', 'angular-loading-bar');
 app.controller('cajaOperaciones', function ($scope, $http, $compile, $sce, $window, NgTableParams, $filter, ServicioABM, UserSrv) {
 
     $scope.ActualDate = moment().format('YYYY-MM-DD');

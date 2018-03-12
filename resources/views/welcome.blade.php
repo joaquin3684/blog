@@ -35,7 +35,9 @@
   {!! Html::style('css/floatexamples.css') !!}
   {!! Html::style('css/ng-table.min.css') !!}
   {!! Html::style('css/bootstrap-notifications-master/dist/stylesheets/bootstrap-notifications.min.css') !!}
-
+  {!! Html::style('css/bootstrap-notifications-master/dist/stylesheets/bootstrap-notifications.min.css') !!}
+  {!! Html::style('css/loadingBar/loading-bar.css') !!}
+  
 
 
     
@@ -49,6 +51,7 @@
 {!! Html::script('js/angular-material/angular-material.min.js') !!}
 
 {!! Html::script('js/angular-sanitize/angular-sanitize.min.js') !!}
+{!! Html::script('js/loadingBar/loading-bar.min.js') !!}
 {!! Html::script('js/services.js') !!}
 {!! Html::script('js/servicioABM.js') !!}
 {!! Html::script('js/ManejoExcell.js') !!}
@@ -127,7 +130,7 @@
       ACA VA EL MENSAJE
 </div>
 <!--<div id="LoadingGlobal" style="background-color: rgba(255, 255, 255, 0.9); position: fixed; width: 100%; height: 100%;" hidden>-->
-  <div id="LoadingGlobal" style="background-color: rgba(255, 255, 255, 0.7); width: 100%; height: 100%; z-index: 10000000000; position: fixed;" hidden>
+  <div id="LoadingGlobal" style="background-color: rgba(1, 1, 1, 0.7); width: 100%; height: 100%; z-index: 10000000000; position: fixed;" hidden>
   <div style="margin-top: 20%; color: black;">
        <span style="font-size: 30pt; color: black;">CARGANDO</span></br></br>
           <i style="font-size: 40pt;" class="fa fa-spinner fa-pulse fa-fw"></i>
@@ -139,7 +142,7 @@
         <div class="left_col scroll-view" >
 
           <div class="navbar nav_title" style="border: 0;">
-            <a href="" class="site_title"><i class="fa fa-briefcase"></i> <span>Mutual</span></a>
+            <a href="" class="site_title"><i class="fa fa-briefcase"></i> Mutual</a>
           </div>
           <div class="clearfix"></div>
 
@@ -342,7 +345,7 @@
           <!-- /sidebar menu -->
 
           <!-- /menu footer buttons -->
-          <div class="sidebar-footer " style="background-color: #0f5ead;">
+          <!-- <div class="sidebar-footer " style="background-color: #0f5ead;">
             <a data-toggle="tooltip" data-placement="top" title="Settings"  style="background-color: #106cc8; color:#e4e5e7;">
               <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             </a>
@@ -355,7 +358,7 @@
             <a data-toggle="tooltip" href="logout" data-placement="top" title="Salir" style="background-color: #106cc8; color:#e4e5e7;">
               <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
-          </div>
+          </div>-->
           <!-- /menu footer buttons -->
         </div>
       </div>

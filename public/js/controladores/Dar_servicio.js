@@ -1,7 +1,7 @@
 var app = angular.module('Mutual').config(function($interpolateProvider) {
   $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
-app.requires.push('ngMaterial', 'Mutual.services');
+app.requires.push('ngMaterial', 'Mutual.services', 'angular-loading-bar');
 app.controller('Dar_servicio', function($scope, $http, $compile, $q, UserSrv) {
   //moment.locale('es');
 
