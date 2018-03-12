@@ -149,7 +149,7 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
         $http({
             url: 'agente_financiero/aceptarPropuesta',
             method: 'post',
-            data: {'id':$scope.idpropuestae,'estado':'Aceptada por Comercializador'}
+            data: {'id':$scope.idpropuestae,'estado':'Aceptada por comercializador'}
         }).then(function successCallback(response)
         {
             

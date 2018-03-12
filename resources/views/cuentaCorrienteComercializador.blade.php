@@ -100,7 +100,7 @@
 
                                 <tr ng-repeat="socio in $data" ng-cloak>
                                     <td title="'Socio'" filter="{nombre: 'text'}" sortable="'nombre'">
-                                        {{socio.nombre}}
+                                        {{socio.socio.nombre}}
                                     </td>
 
                                     <td title="'Apellido'" filter="{apellido: 'text'}" sortable="'apellido'">

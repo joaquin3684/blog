@@ -117,7 +117,7 @@
                           <span ng-click="IDModal(solicitud)" ng-show="solicitud.estado == 'Agente Financiero Asignado'" data-toggle="modal" data-target="#Propuesta"
                             class="fa fa-send fa-2x" titulo="Enviar Propuesta"></span>
 
-                          <span ng-click="ReservarCapital(solicitud.id)" ng-show="solicitud.estado == 'Aceptada por Comercializador'" class="fa fa-dollar fa-2x"
+                          <span ng-click="ReservarCapital(solicitud.id)" ng-show="solicitud.estado == 'Aceptada por comercializador'" class="fa fa-dollar fa-2x"
                             titulo="Reservar Capital"></span>
 
                           <span ng-click="OtorgarCapital(solicitud.id)" ng-show="solicitud.estado == 'Formulario Enviado'" class="fa fa-money fa-2x"
