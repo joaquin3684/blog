@@ -1,5 +1,5 @@
 var app = angular.module('Mutual').config(function ($interpolateProvider) { });
-app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'angular-loading-bar');
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'angular-loading-bar', 'ServicioABM');
 app.controller('caja', function ($scope, $http, $compile, $sce, NgTableParams, $filter, ServicioABM, UserSrv) {
 
     $scope.fecha = new Date();
