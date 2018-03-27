@@ -71,7 +71,8 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="organismocomplete" ng-required="true">
+                        <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="organismocomplete" required>
+                        <option value="">Elige un organismo</option>
                           <option value="{[{x.id}]}" ng-repeat="x in organismos" ng-bind="x.nombre">
                            
                           </option>
@@ -85,7 +86,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in query(searchText, 'filtroSocios')"
-                          md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..." ng-required="true">
+                          md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..." >
                           <span md-highlight-text="searchText" ng-cloak>
                             {[{item.nombre}]}
                           </span>
@@ -146,7 +147,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
 
-                          <md-radio-group flex layout="row" ng-model="sexo" ng-required="socio == null || socio == ''">
+                          <md-radio-group flex layout="row" ng-model="sexo" ng-required="socio == undefined || socio == null">
 
                             <md-radio-button flex value="Masculino" class="md-primary">Masculino</md-radio-button>
                             <md-radio-button flex value="Femenino">Femenino</md-radio-button>
@@ -361,9 +362,6 @@
                       <tr class="clickableRow" title="Datos">
                         <td title="'Nombre'" sortable="'nombre'">
                           {[{solicitud.socio.nombre}]}
-                        </td>
-                        <td title="'Apellido'" sortable="'apellido'">
-                          {[{solicitud.socio.apellido}]}
                         </td>
                         <td title="'Cuit'" sortable="'cuit'">
                           {[{solicitud.socio.cuit}]}
