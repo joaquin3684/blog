@@ -92,7 +92,7 @@ class Proveedor
         $solicitud = $this->getSolicitudes()->first(function($solicitud) use ($idSolicitud){
             return $solicitud->getId() == $idSolicitud;
         });
-        $solicitud->setEstado('Aceptada por Comercializador');
+        $solicitud->setEstado('Aceptada por comercializador');
         $solicitud->guardar();
         return $solicitud;
     }

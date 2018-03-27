@@ -94,7 +94,7 @@ class SolicitudesPendientesMutualController extends Controller
             $sol->socio()->restore();
             if($sol->socio->cuotasSociales->count() == 0)
             {
-                GeneradorCuotas::generarCuotaSocial($sol->socio->organismo->cuota_social, $sol->socio->id);
+                GeneradorCuotas::generarCuotaSocial($sol->socio->organismo->cuotas->first()->valor, $sol->socio->id);
             }
 
             $socioPosta = $sol->socio;

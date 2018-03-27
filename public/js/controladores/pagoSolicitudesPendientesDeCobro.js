@@ -21,7 +21,7 @@ app.controller('pagoSolicitudesPendientesDeCobro', function ($scope, $http, $com
     }
 
     $scope.pagar = function(){
-        var elementosAPagar = $scope.solicitudes.map(solicitud => ({'id' : solicitud.id}))
+        var elementosAPagar = $scope.comercializadores.map(comercializador => ({'id' : comercializador.id}))
         var data = {'comercializadores': elementosAPagar};
         var url = 'pagoSolicitudesPendientesDeCobro/pagar';
         ServicioABM.create(data, url).then(function () {
