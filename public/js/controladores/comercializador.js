@@ -344,6 +344,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             console.log('Success ' + 'uploaded. Response: ' + resp.data);
             $scope.pullComercializadores();
             UserSrv.MostrarMensaje("OK", "La solicitud fue dada de alta correctamente.", "OK", "mensaje");
+            limpiarCampos()
         }, function (resp) {
             console.log('Error status: ' + resp.status);
         }, function (evt) {
@@ -352,6 +353,27 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         });
 
 
+    }
+
+    var limpiarCampos = function(){
+        $scope.nombre = null
+        $scope.apellido = null
+        $scope.cuit= null
+        $scope.domicilio= null
+        $scope.fecha_nacimiento = null
+        $scope.sexo= null
+        $scope.codigo_postal= null
+        $scope.telefono= null
+        $scope.doc_documento= null
+        $scope.doc_cbu= null
+        $scope.doc_endeudamiento= null
+        $scope.doc_recibo= null
+        $scope.doc_domicilio= null
+        $scope.organismocomplete= null
+        $scope.dni= null
+        $scope.localidad= null
+        $scope.legajo= null
+        $scope.socio = null
     }
 
     var self = this;

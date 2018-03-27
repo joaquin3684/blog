@@ -71,7 +71,8 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="organismocomplete" ng-required="true">
+                        <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="organismocomplete" required>
+                        <option value="">Elige un organismo</option>
                           <option value="{[{x.id}]}" ng-repeat="x in organismos" ng-bind="x.nombre">
                            
                           </option>
@@ -146,7 +147,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
 
-                          <md-radio-group flex layout="row" ng-model="sexo" ng-required="socio == null || socio == ''">
+                          <md-radio-group flex layout="row" ng-model="sexo" ng-required="socio == undefined || socio == null">
 
                             <md-radio-button flex value="Masculino" class="md-primary">Masculino</md-radio-button>
                             <md-radio-button flex value="Femenino">Femenino</md-radio-button>
