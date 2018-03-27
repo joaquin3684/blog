@@ -85,7 +85,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in query(searchText, 'filtroSocios')"
-                          md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..." ng-required="true">
+                          md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..." >
                           <span md-highlight-text="searchText" ng-cloak>
                             {[{item.nombre}]}
                           </span>
@@ -361,9 +361,6 @@
                       <tr class="clickableRow" title="Datos">
                         <td title="'Nombre'" sortable="'nombre'">
                           {[{solicitud.socio.nombre}]}
-                        </td>
-                        <td title="'Apellido'" sortable="'apellido'">
-                          {[{solicitud.socio.apellido}]}
                         </td>
                         <td title="'Cuit'" sortable="'cuit'">
                           {[{solicitud.socio.cuit}]}

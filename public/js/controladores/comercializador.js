@@ -296,7 +296,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         };
     } else {
         $scope.Dato = {
-        'nombre':$scope.nombre,//$scope.nombre,
+        'nombre':$scope.nombre + ',' + $scope.apellido,//$scope.nombre,
         'apellido':$scope.apellido,
         'cuit':$scope.cuit,
         'domicilio':$scope.domicilio,
