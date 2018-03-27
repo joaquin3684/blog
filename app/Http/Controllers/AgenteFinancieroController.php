@@ -96,7 +96,14 @@ class AgenteFinancieroController extends Controller
     {
         $usuario = Sentinel::check();
         $agente =  $this->agenteGateway->findSolicitudesByAgenteFinanciero($usuario->id);
-        return $agente->solicitudes;
+        return $agente->solicitudes->map(function($solicitud){
+            $socio = $solicitud->socio;
+            $nombre = explode(",", $socio->nombre);
+            $socio->nombre = $nombre[0];
+            $socio->apellido = $nombre[1];
+            $solicitud->socio = $socio;
+            return $solicitud;
+        });
     }
 
     public function reservarCapital(Request $request)

@@ -69,7 +69,14 @@ class SolicitudesPendientesMutualController extends Controller
 
     public function solicitudes()
     {
-        return $this->solicitudesGateway->solicitudesSinAsignar();
+        return $this->solicitudesGateway->solicitudesSinAsignar()->map(function($solicitud){
+            $socio = $solicitud->socio;
+            $nombre = explode(",", $socio->nombre);
+            $socio->nombre = $nombre[0];
+            $socio->apellido = $nombre[1];
+            $solicitud->socio = $socio;
+            return $solicitud;
+    });
     }
 
     public function proveedores(Request $request)
@@ -79,7 +86,14 @@ class SolicitudesPendientesMutualController extends Controller
 
     public function solicitudesAVerificar()
     {
-        return $this->solicitudesGateway->solicitudesConCapitalOtorgado();
+        return $this->solicitudesGateway->solicitudesConCapitalOtorgado()->map(function($solicitud){
+            $socio = $solicitud->socio;
+            $nombre = explode(",", $socio->nombre);
+            $socio->nombre = $nombre[0];
+            $socio->apellido = $nombre[1];
+            $solicitud->socio = $socio;
+            return $solicitud;
+        });;
     }
 
     public function aprobarSolicitud(Request $request)
