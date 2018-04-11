@@ -89,7 +89,7 @@
                       </label>
                       <div class="col-md-4 col-sm-4 col-xs-12">
                         <md-autocomplete md-input-name="idcuenta" md-item-text="item.nombre" md-items="item in query(searchText, 'imputacion/autocomplete')"
-                          md-search-text="searchText" md-selected-item="cuenta1Seleccionada" placeholder="Buscar cuenta..."
+                          md-search-text="searchText" md-selected-item="cuenta1Seleccionada"  md-min-length="0" placeholder="Buscar cuenta..."
                           required>
                           <span md-highlight-text="searchText" ng-cloak>
                             {{item.nombre}}
@@ -119,7 +119,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-4 col-sm-4 col-xs-12">
-                        <md-autocomplete md-input-name="idcuenta2" md-item-text="item2.nombre" md-items="item2 in query(searchText2, 'imputacion/autocomplete')"
+                        <md-autocomplete md-input-name="idcuenta2" md-item-text="item2.nombre" md-min-length="0" md-items="item2 in query(searchText2, 'imputacion/autocomplete')"
                           md-search-text="searchText2" md-selected-item="cuenta2Seleccionada" placeholder="Buscar cuenta..."
                           required>
                           <span md-highlight-text="searchText2" ng-cloak>

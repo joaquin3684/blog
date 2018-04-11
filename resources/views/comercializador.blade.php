@@ -86,7 +86,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in query(searchText, 'filtroSocios')"
-                          md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..." >
+                          md-search-text="searchText" md-selected-item="socio" md-min-length="0" placeholder="Buscar afiliado..." >
                           <span md-highlight-text="searchText" ng-cloak>
                             {[{item.nombre}]}
                           </span>

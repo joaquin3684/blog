@@ -112,6 +112,9 @@
                                     <td title="'Monto cobrado'" filter="{montoCobrado: 'text'}" sortable="'montoCobrado'">
                                         {{socio.monto_pagado}}
                                     </td>
+                                    <td title="'Fecha estado'" filter="{updated_at: 'text'}" sortable="'updated_at'">
+                                        {{socio.updated_at}}
+                                    </td>
                                 </tr>
                             </table>
                         </div>

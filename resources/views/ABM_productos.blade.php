@@ -75,7 +75,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="descripcion" placeholder="Nada nos hace envejecer con mas rapidez que el pensar incesantemente que nos hacemos viejos."
+                                                <input id="descripcion" class="form-control col-md-7 col-xs-12" ng-model="descripcion" placeholder="Ingrese una descripcion"
                                                     type="text">
                                                 <div ng-cloak>{{errores.descripcion[0]}}</div>
                                             </div>
@@ -133,16 +133,16 @@
                                                 </label>
                                                 <div class="col-md-2 col-sm-2 col-xs-8" id="desde">
                                                     <input type="number" step="0.01" ng-model="porcentaje.desde" class="form-control col-md-2 col-xs-12" ng-disabled="{{!$first}}"
-                                                        placeholder="1">
+                                                        placeholder="Desde">
                                                     <div ng-cloak>{{errores.cuota_social[0]}}</div>
                                                     <div ng-cloak>{{asignarDesde($index, $first, porcentajes)}}</div>
                                                 </div>
                                                 <div class="col-md-2 col-sm-2 col-xs-8" id="hasta">
-                                                    <input type="number" step="0.01" ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="2">
+                                                    <input type="number" step="0.01" ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta">
                                                     <div ng-cloak>{{errores.cuota_social[0]}}</div>
                                                 </div>
                                                 <div class="col-md-2 col-sm-2 col-xs-8" id="porc">
-                                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="1">
+                                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">
                                                     <div ng-cloak>{{errores.cuota_social[0]}}</div>
                                                 </div>
 

@@ -9,8 +9,9 @@ app.controller('solicitudesPendientesDeCobro', function ($scope, $http, $compile
 
 
     var pull = function (url, scopeObj, params) {
+        moment.locale('es')
         ServicioABM.pull(url).then(function (returnedData) {
-            $scope[scopeObj] = returnedData;
+            $scope[scopeObj] = returnedData.map(solicitud => solicitud.updated_at = moment(solicitud.updated_at).format('L'));
             $scope.sumaTotalACobrar = $scope.solicitudes.map(el => el.montoACobrar).reduce((acum, monto) => acum + monto)
             $scope[params] = ServicioABM.createTable(returnedData)
         });
