@@ -11,7 +11,22 @@ angular.module('Mutual.services', ['ngTable'])
     var newWin=window.open('','sexportTable');
 
     newWin.document.open();
-    var code = '<html><link rel="stylesheet" href="js/angular-material/angular-material.min.css"><link rel="stylesheet" href="css/bootstrap.min.css"<link rel="stylesheet" href="fonts/css/font-awesome.min.css"><link rel="stylesheet" href="ss/animate.min.css"><link rel="stylesheet" href="css/custom.css"><link rel="stylesheet" href="css/icheck/flat/green.css"><link rel="stylesheet" href="css/barrow.css"><link rel="stylesheet" href="css/floatexamples.css"><link rel="stylesheet" href="css/ng-table.min.css"><link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.min.css"><body onload="window.print(); window.close()"><script>$(document).ready(function() {window.print(); window.close();}</script><table class="table table-hover table-bordered">'+tabla+'</table></body></html>';
+    var code = '<html>'+
+    '<link rel="stylesheet" href="js/angular-material/angular-material.min.css">'+
+    '<link rel="stylesheet" href="css/bootstrap.min.css"'+
+    '<link rel="stylesheet" href="fonts/css/font-awesome.min.css">'+
+    '<link rel="stylesheet" href="ss/animate.min.css">'+
+    '<link rel="stylesheet" href="css/custom.css">'+
+    '<link rel="stylesheet" href="css/icheck/flat/green.css">'+
+    '<link rel="stylesheet" href="css/barrow.css">'+
+    '<link rel="stylesheet" href="css/floatexamples.css">'+
+    '<link rel="stylesheet" href="css/ng-table.min.css">'+
+    '<link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.min.css">'+
+    '<body onload="window.print(); window.close()" style="padding: 40px">'+
+    '<script>$(document).ready(function() {window.print(); window.close();}</script>'+
+    '<table class="table table-hover table-bordered">'+tabla+'</table>'+
+    '</body>'+
+    '</html>'
     newWin.document.write(code);
 
     newWin.document.close();

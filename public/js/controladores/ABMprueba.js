@@ -159,6 +159,8 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         var fechaIngreso = moment(fechaIngreso, 'YYYY-MM-DD').format('L');
         dato.fecha_nacimiento = fechaNacimiento;
         dato.fecha_ingreso = fechaIngreso;
+        dato.apellido = dato.nombre.split(',').shift()
+        dato.nombre = dato.nombre.split(',').pop()
         return dato;
     }
 
@@ -177,6 +179,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
                 console.log(response);
                 if (abm == 'asociados') {
                     $scope.datosabm = response.data.map($scope.cambiarFecha);
+
                 } else {
                     $scope.datosabm = response.data;
                 }

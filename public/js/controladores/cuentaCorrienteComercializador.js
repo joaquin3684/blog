@@ -26,8 +26,12 @@ app.controller('cuentaCorrienteComercializador', function ($scope, $http, $compi
    
 
     $scope.PullSocios= function(idComercializador, nombreComercializador){
-        pull('cuentaCorrienteComercializador/ventasComer/'+idComercializador, 'socios', 'paramsSocios');
-       
+       // pull('cuentaCorrienteComercializador/ventasComer/'+idComercializador, 'socios', 'paramsSocios');
+       moment.locale('es')
+        ServicioABM.pull('cuentaCorrienteComercializador/ventasComer/' + idComercializador).then(function (returnedData) {
+            $scope.socios = returnedData.map(socio => socio.updated_at = moment(socio.updated_at).format('L'))
+            $scope.paramsSocios = ServicioABM.createTable(returnedData)
+        });
         $scope.comercializadoractual= nombreComercializador
         $scope.setVista('Socios')
     }

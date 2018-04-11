@@ -72,7 +72,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descripcion">Descripcion
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12" placeholder="Al final, lo que importa no son los años de vida, sino la vida de los años"><div ng-cloak>{{errores.descripcion[0]}}</div>
+                        <input type="text" id="descripcion" name="descripcion" class="form-control col-md-7 col-xs-12" placeholder="Ingrese una descripcion"><div ng-cloak>{{errores.descripcion[0]}}</div>
                       </div>
                     </div>
 

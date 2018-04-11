@@ -323,10 +323,10 @@
                       <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
                         <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)" ng-class="socio.id" ng-cloak>
                           <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                            {{abm.nombre.split(',').pop()}}
+                            {{abm.nombre}}
                           </td>
                           <td title="'Apellido'" filter="{ apellido: 'text'}" sortable="'apellido'">
-                            {{abm.nombre.split(',').shift()}}
+                            {{abm.apellido}}
                           </td>
                           <td title="'DNI'" filter="{ dni: 'text'}" sortable="'dni'">
                             {{abm.dni}}

@@ -56,8 +56,8 @@
                                 </div>
                                 <div class="x_content">
                                     <form class=" form-label-left" ng-submit="crearMovimiento()">
-                                        <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre+' '+item.apellido" md-items="item in query(searchText, 'filtroSocios')"
-                                            md-search-text="searchText" md-selected-item="socio" placeholder="Buscar afiliado..."
+                                        <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre+' (' + item.legajo + ')'" md-items="item in query(searchText, 'filtroSocios')"
+                                            md-search-text="searchText" md-selected-item="socio" md-min-length="0" placeholder="Buscar afiliado..."
                                             required>
                                             <span md-highlight-text="searchText" ng-cloak>
                                                 {[{item.nombre}]} {[{item.apellido}]} ({[{item.legajo}]})
@@ -66,7 +66,7 @@
                                         <hr/>
                                         <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.razon_social" md-items="item in query(searchText2, 'filtroProovedores')"
                                             md-search-text="searchText2" md-selected-item="proovedor" md-selected-item-change="habilitar()"
-                                            placeholder="Buscar proovedor..." required>
+                                            placeholder="Buscar proovedor..." md-min-length="0" required>
                                             <span md-highlight-text="searchText" ng-cloak>
                                                 {[{item.razon_social}]}
                                             </span>
@@ -74,11 +74,13 @@
                                         <hr/>
                                         <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in traerProductos(searchText3)"
                                             md-search-text="searchText3" md-selected-item="producto" ng-disabled="habilitacion"
-                                            placeholder="Buscar producto..." required>
+                                            placeholder="Buscar producto..." required md-min-length="0">
                                             <span md-highlight-text="searchText" ng-cloak>
                                                 {[{item.nombre}]}
                                             </span>
+                                            
                                         </md-autocomplete>
+                                        
                                         <hr/>
 
                                         <div class="row form-group">
@@ -100,7 +102,7 @@
                                                     Observacion
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" id="observacion" name="observacion" ng-model="observacion" type="text" placeholder="Los hermanos sean unidos porque ésa es la ley primera.">
+                                                    <input class="form-control col-md-7 col-xs-12" id="observacion" name="observacion" ng-model="observacion" type="text" placeholder="Ingrese una observacion">
                                                 </div>
                                             </div>
                                         </div>

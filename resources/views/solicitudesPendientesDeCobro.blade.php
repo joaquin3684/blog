@@ -84,10 +84,12 @@
                                                 <td title="'Legajo'" sortable="'legajo'">
                                                     {{solicitud.socio.legajo}}
                                                 </td>
+                                                <td title="'Fecha aprobacion'" sortable="'updated_at'">
+                                                    {{solicitud.updated_at}}
+                                                </td>
                                                 <td title="'Monto a cobrar'" sortable="'montoACobrar'">
                                                     {{solicitud.montoACobrar}}
                                                 </td>
-
                                                 </td>
                                             </tr>
                                             <tfoot>
@@ -96,7 +98,7 @@
                                                         <b>Total</b>
                                                     </td><td>
                                                     <td></td>
-                                              
+                                              <td></td>
                                     
                                                     <td>
                                                         {{sumaTotalACobrar}}

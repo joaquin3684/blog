@@ -72,7 +72,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <md-autocomplete md-input-name="idoperacion" md-item-text="item.nombre" md-items="item in query(searchText, 'operaciones/autocomplete')"
-                          md-search-text="searchText" md-selected-item="operacionSeleccionada" placeholder="Buscar operacion..."
+                          md-search-text="searchText" md-selected-item="operacionSeleccionada" md-min-length="0" placeholder="Buscar operacion..."
                           required>
                           <span md-highlight-text="searchText" ng-cloak>
                             {{item.nombre}}
@@ -92,7 +92,7 @@
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Observacion</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control" type="text" ng-model="observacion" placeholder="Los hermanos sean unidos pues ésa es la ley primera.">
+                        <input class="form-control" type="text" ng-model="observacion" placeholder="Ingrese una observacion">
                       </div>
                     </div>
 
