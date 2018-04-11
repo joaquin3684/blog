@@ -13,6 +13,30 @@ class Producto
 {
     use Conversion;
     private $id;
+    private $nombre;
+    private $ganancia;
+    private $tipo;
+    private $proveedor;
+    private $tasa;
+    private $ventas;
+
+    public function __construct($id, $nombre, $ganancia, $tipo, $tasa)
+    {
+        $this->id = $id;
+        $this->nombre = $nombre;
+        $this->ganancia = $ganancia;
+        $this->tipo = $tipo;
+        $this->tasa = $tasa;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
 
     /**
      * @return mixed
@@ -29,30 +53,6 @@ class Producto
     {
         $this->porcentaje_capital = $porcentaje_capital;
     }
-    private $nombre;
-    private $ganancia;
-    private $tipo;
-    private $proveedor;
-    private $porcentaje_capital;
-    private $ventas;
-
-    public function __construct($id, $nombre, $ganancia, $tipo, $porcentaje_capital)
-    {
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->porcentaje_capital = $porcentaje_capital;
-        $this->ganancia = $ganancia;
-        $this->tipo = $tipo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
      * @return mixed
      */

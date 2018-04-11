@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\Eloquent\Repos\ComercializadorRepo;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SolicitudesPendientesDeCobro extends Controller
 {
@@ -24,6 +25,7 @@ class SolicitudesPendientesDeCobro extends Controller
 
         $usuario = Sentinel::check();
         $comer = $this->repo->findByUser($usuario->id);
+
         $solicitudes = $this->repo->solicitudesPendientesDeCobro($comer->getId());
 
         $productos = array();

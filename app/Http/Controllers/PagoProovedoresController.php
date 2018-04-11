@@ -24,7 +24,6 @@ class PagoProovedoresController extends Controller
     public function datos(Request $request)
     {
 
-
         $proovedores = DB::table('ventas')
             ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
             ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
