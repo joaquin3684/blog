@@ -16,74 +16,45 @@ class CC_CuotasSocialesController extends Controller
 
     public function mostrarPorOrganismos(Request $request)
     {
-        $ventas = DB::table('socios')
-            ->join('cuotas', 'cuotas.cuotable_id', '=', 'socios.id')
-            ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
-            ->where('cuotas.cuotable_type', 'App\Socios')
-            ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
-            ->groupBy('organismos.id')->get();
 
-      //  $organismos = CC_CuotasSocialesFilter::apply($request, $ventas);
+        $var = "'App\\".'\\'."Socios'";
 
-        $movimientos = DB::table('socios')
-            ->join('cuotas', 'cuotas.cuotable_id', '=', 'socios.id')
-            ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
-            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
-            ->where('movimientos.identificadores_type', 'App\Cuotas')
-            ->groupBy('organismos.id')
-            ->select('organismos.id AS id_organismo', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))->get();
+        return DB::select(DB::raw("SELECT organismos.nombre AS organismo, organismos.id AS id_organismo, ROUND(SUM(cuotas.importe),2) AS totalACobrar, IFNULL(ROUND(SUM(movimientos.entrada),2),0) AS totalCobrado, ROUND(IFNULL((ROUND(SUM(cuotas.importe),2) - ROUND(SUM(movimientos.entrada),2)), 0), 2) AS diferencia 
+                            FROM (socios
+                            INNER JOIN cuotas ON cuotas.cuotable_id = socios.id)
+                            LEFT JOIN movimientos ON movimientos.identificadores_id = cuotas.id
+                            INNER JOIN organismos ON organismos.id = socios.id_organismo
+                            WHERE cuotas.cuotable_type = $var
+                            GROUP BY organismos.id, organismos.nombre"));
 
-        //$organismos2 = CC_CuotasSocialesFilter::apply($request, $movimientos);
-
-        $ventasPorOrganismo = $this->unirColecciones($ventas, $movimientos, ["id_organismo"], ['totalCobrado' => 0]);
-
-        $ventasPorOrganismo = $ventasPorOrganismo->each(function ($item, $key){
-            $diferencia = $item['totalACobrar'] - $item['totalCobrado'];
-            $item->put('diferencia', $diferencia);
-            return $item;
-        });
-
-        return $ventasPorOrganismo->toJson();
     }
 
     public function mostrarPorSocios(Request $request)
     {
-        $ventas = DB::table('socios')
-            ->join('cuotas', 'cuotas.cuotable_id', '=', 'socios.id')
-            ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
-            ->groupBy('socios.id')
-            ->where('organismos.id', '=', $request['id'])
-            ->where('cuotas.cuotable_type', 'App\Socios')
-            ->select('socios.nombre AS socio', 'socios.id AS id_socio',  DB::raw('SUM(cuotas.importe) AS totalACobrar'))->get();
+        $var = "'App\\".'\\'."Socios'";
 
-        //$socios = CC_CuotasSocialesFilter::apply($request, $ventas);
+        return DB::select(DB::raw("SELECT socios.nombre AS socio, socios.id AS id_socio, ROUND(SUM(cuotas.importe),2) AS totalACobrar, IFNULL(ROUND(SUM(movimientos.entrada),2),0) AS totalCobrado, ROUND(IFNULL((ROUND(SUM(cuotas.importe),2) - ROUND(SUM(movimientos.entrada),2)), 0), 2) AS diferencia 
+                            FROM (socios
+                            INNER JOIN cuotas ON cuotas.cuotable_id = socios.id)
+                            LEFT JOIN movimientos ON movimientos.identificadores_id = cuotas.id
+                            INNER JOIN organismos ON organismos.id = socios.id_organismo
+                            WHERE organismos.id = ".$request['id']." AND cuotas.cuotable_type = $var
+                            GROUP BY socios.id, socios.nombre"));
 
-
-        $movimientos = DB::table('socios')
-            ->join('cuotas', 'cuotas.cuotable_id', '=', 'socios.id')
-            ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
-            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
-            ->groupBy('socios.id')
-            ->where('movimientos.identificadores_type', 'App\Cuotas')
-            ->where('organismos.id', '=', $request['id'])
-            ->select('socios.id AS id_socio', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))->get();
-
-        //$socios2 = CC_CuotasSocialesFilter::apply($request, $movimientos);
-
-
-        $ventasPorSocio = $this->unirColecciones($ventas, $movimientos, ["id_socio"], ['totalCobrado' => 0]);
-
-        $ventasPorSocio = $ventasPorSocio->each(function ($item, $key){
-            $diferencia = $item['totalACobrar'] - $item['totalCobrado'];
-            $item->put('diferencia', $diferencia);
-            return $item;
-        });
-
-        return $ventasPorSocio->toJson();
     }
 
     public function mostrarPorCuotas(Request $request)
     {
+        $var = "'App\\".'\\'."Socios'";
+
+        return DB::select(DB::raw("SELECT cuotas.* , IFNULL(ROUND(SUM(movimientos.entrada),2),0) AS cobrado 
+                            FROM (socios
+                            INNER JOIN cuotas ON cuotas.cuotable_id = socios.id)
+                            LEFT JOIN movimientos ON movimientos.identificadores_id = cuotas.id
+                            INNER JOIN organismos ON organismos.id = socios.id_organismo
+                            WHERE socios.id = ".$request['id']." AND cuotas.cuotable_type = $var"));
+
+
         $a =  Socios::with('cuotasSociales.movimientos')->find($request['id']);
         $a->cuotasSociales->each(function ($cuota){
             $s = $cuota->movimientos->sum(function($movimiento) {

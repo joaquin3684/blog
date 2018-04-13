@@ -3,6 +3,7 @@
 use App\Prioridades;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class InicioSistemaSoloAbms extends Seeder
 {

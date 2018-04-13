@@ -14,7 +14,7 @@ $scope.ActualDate = moment().format('YYYY-MM-DD');
 $scope.pullOrganismos = function (){
 
 $http({
-         url: 'cobroCuotasSociales/porOrganismo',
+         url: 'cc_cuotasSociales/mostrarOrganismos',
          method: 'post'
          }).then(function successCallback(response)
             {
@@ -59,7 +59,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
 
     $http({
-        url: 'cobroCuotasSociales/porSocio',
+        url: 'cc_cuotasSociales/mostrarSocios',
         method: 'post',
         data: {'id': idorganismo}
     }).then(function successCallback(response)
@@ -145,7 +145,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
             else
             {
 
-              $scope.cuotas =response.data.cuotas_sociales.map($scope.cambiarFechaCuotas);
+              $scope.cuotas =response.data.map($scope.cambiarFechaCuotas);
                 console.log(response.data);
                 //var datacuotas = response.data;
                 $scope.vistaactual = 'Cuotas';

@@ -24,7 +24,7 @@ class Login extends Controller
 	{
         DB::transaction(function() use($request){
 
-            Sentinel::authenticate($request->all());
+         $p=   Sentinel::authenticate($request->all());
             $user = Sentinel::check();
             if ($user){
                 $fecha = ControlFechaContable::where('id_usuario', $user->id)->first();

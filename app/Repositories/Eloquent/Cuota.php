@@ -116,16 +116,10 @@ class Cuota
         });
     }
 
-    public function pagarProovedor($ganancia, $porcentaje_capital)
+    public function pagarProovedor($ganancia)
     {
-        $aplicarPorcentajeCapital = true;
-        if($this->getNroCuota() == 1){
-            $aplicarPorcentajeCapital = true;
-        } else {
-            $aplicarPorcentajeCapital = false;
-        }
-        $this->movimientos->each(function ($movimiento) use ($ganancia, $porcentaje_capital, $aplicarPorcentajeCapital){
-            $movimiento->pagarProovedor($ganancia, $porcentaje_capital, $aplicarPorcentajeCapital);
+        $this->movimientos->each(function ($movimiento) use ($ganancia){
+            $movimiento->pagarProovedor($ganancia);
         });
     }
 
