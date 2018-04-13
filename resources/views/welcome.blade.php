@@ -550,7 +550,7 @@
         <form ng-submit="$Servicio.Excel2(nombreexcel)">
           <div class="input-group" style="width: 80%;">
 
-            <input type="password" class="form-control" id="pass" name="pass" placeholder="Nombre del archivo.." aria-describedby="basic-addon1" ng-model="nombreexcel">
+            <input type="text" class="form-control" id="pass" name="pass" placeholder="Nombre del archivo.." aria-describedby="basic-addon1" ng-model="nombreexcel">
             <span class="input-group-btn"><button class="btn btn-primary" type="submit" style="" ><span class="fa fa-file-excel-o"></span> DESCARGAR</button></span>
           </div>
 

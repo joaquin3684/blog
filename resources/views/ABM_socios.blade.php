@@ -302,12 +302,10 @@
           <div class="x_content">
             <center>
 
-              <button id="exportButton1" class="btn btn-danger clearfix">
-                <span class="fa fa-file-pdf-o"></span> PDF
-              </button>
-              <button id="exportButton2" ng-click="$Servicio.Excel()" class="btn btn-success clearfix">
+              <button id="exportButton2" data-toggle="modal" data-target="#prompted" class="btn btn-success clearfix">
                 <span class="fa fa-file-excel-o"></span> EXCEL</button>
-              <button id="exportButton3" ng-click="Impresion()" class="btn btn-primary clearfix">
+
+              <button id="exportButton3" ng-click="$Servicio.Impresion()" class="btn btn-primary clearfix">
                 <span class="fa fa-print"></span> IMPRIMIR</button>
             </center>
             <div id="pruebaExpandir">
@@ -317,7 +315,7 @@
                 <!-- START TABLE -->
                 <div>
                  
-                  <div class="table-responsive">
+                  <div class="table-responsive" id="estatablaseexporta">
                     @verbatim
                     <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
                       <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">

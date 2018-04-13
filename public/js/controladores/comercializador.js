@@ -278,6 +278,9 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         'apellido':$scope.apellido,
         'cuit':$scope.cuit,
         'domicilio':$scope.domicilio,
+        'piso': $scope.piso,
+        'departamento': $scope.departamento,
+        'nucleo': $scope.nucleo,
         'fecha_nacimiento':moment($scope.fecha_nacimiento).format('YYYY-MM-DD'),
         'sexo':$scope.sexo,
         'codigo_postal':$scope.codigo_postal,
@@ -300,6 +303,9 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         'apellido':$scope.apellido,
         'cuit':$scope.cuit,
         'domicilio':$scope.domicilio,
+        'piso': $scope.piso,
+            'departamento': $scope.departamento,
+            'nucleo': $scope.nucleo,
         'fecha_nacimiento':moment($scope.fecha_nacimiento).format('YYYY-MM-DD'),
         'sexo':$scope.sexo,
         'codigo_postal':$scope.codigo_postal,
@@ -360,6 +366,9 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         $scope.apellido = null
         $scope.cuit= null
         $scope.domicilio= null
+        $scope.piso = null
+        $scope.departamento = null
+        $scope.nucleo = null
         $scope.fecha_nacimiento = null
         $scope.sexo= null
         $scope.codigo_postal= null

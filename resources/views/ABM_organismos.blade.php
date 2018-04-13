@@ -211,9 +211,6 @@
           <div class="x_content">
             <center>
 
-              <button id="exportButton1" ng-click="ExportarPDF('organismos')" class="btn btn-danger clearfix">
-                <span class="fa fa-file-pdf-o"></span> PDF
-              </button>
               <button id="exportButton2" data-toggle="modal" data-target="#prompted" class="btn btn-success clearfix">
                 <span class="fa fa-file-excel-o"></span> EXCEL</button>
 
@@ -244,7 +241,7 @@
                 <!-- START $scope.[model] updates -->
                 <!-- END $scope.[model] updates -->
                 <!-- START TABLE -->
-                <div class="table-responsive">
+                <div class="table-responsive" id="estatablaseexporta" >
                   @verbatim
 
                   <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered" >

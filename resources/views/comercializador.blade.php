@@ -174,6 +174,26 @@
                         </div>
                       </div>
                       <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="piso">Piso
+                      </label>
+                      <div class="col-md-1 col-sm-1 col-xs-12">
+                        <input type="number" id="piso" name="piso" class="form-control" required placeholder="1">
+                        <div ng-cloak>{[{errores.piso[0]}]}</div>
+                      </div>
+                      <label class="control-label col-md-1 col-sm-1 col-xs-12" for="departamento">Dpto
+                      </label>
+                      <div class="col-md-1 col-sm-1 col-xs-12">
+                        <input type="text" id="departamento" name="departamento" class="form-control" placeholder="12" required>
+                        <div ng-cloak>{[{errores.departamento[0]}]}</div>
+                      </div>
+                      <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nucleo">Nucleo
+                      </label>
+                      <div class="col-md-2 col-sm-2 col-xs-12">
+                        <input type="number" id="nucleo" name="nucleo" class="form-control" placeholder="12" required>
+                        <div ng-cloak>{[{errores.nucleo[0]}]}</div>
+                      </div>
+                    </div>
+                      <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuota_social">Localidad
                           <span class="required">*</span>
                         </label>
