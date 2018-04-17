@@ -86,12 +86,7 @@ class ComercializadorController extends Controller
             {
                 FileManager::uploadImage($doc_endeudamiento, $ruta, 'doc_endeudamiento.png');
             }
-            $usuarios = Sentinel::getUserRepository()->whereHas('roles', function($q){
-                $q->where('name', 'gestorSolicitudes');
-            })->get();
-            $usuarios->each(function($usuario) use($solicitud){
-                $usuario->notify(new SolicitudEnProceso($solicitud));
-            });
+
         });
     }
 
@@ -119,11 +114,7 @@ class ComercializadorController extends Controller
     {
         DB::transaction(function () use ($request) {
             $elem = $request->all();
-            $sol = $this->solicitudGateway->update($elem, $elem['id']);
-            $agenteGate = new ProveedoresGateway();
-            $agente = $agenteGate->find($sol->agente_financiero);
-            $user = Sentinel::findById($agente->usuario);
-            $user->notify(new SolicitudContraPropuestada($sol));
+            $this->solicitudGateway->update($elem, $elem['id']);
         });
 
     }
@@ -131,7 +122,7 @@ class ComercializadorController extends Controller
     public function rechazarPropuesta(Request $request)
     {
         DB::transaction(function () use ($request) {
-            $sol = $this->solicitudGateway->update($request->all(), $request['id']);
+            $this->solicitudGateway->update($request->all(), $request['id']);
 
         });
     }
@@ -141,11 +132,7 @@ class ComercializadorController extends Controller
     {
         DB::transaction(function () use ($request) {
             $elem = $request->all();
-            $sol = $this->solicitudGateway->update($elem, $elem['id']);
-            $agenteGate = new ProveedoresGateway();
-            $agente = $agenteGate->find($sol->agente_financiero);
-            $user = Sentinel::findById($agente->usuario);
-            $user->notify(new SolicitudFormularioEnviado($sol));
+            $this->solicitudGateway->update($elem, $elem['id']);
         });
     }
 
@@ -155,11 +142,7 @@ class ComercializadorController extends Controller
     {
         DB::transaction(function () use ($request) {
             $elem = $request->all();
-            $sol = $this->solicitudGateway->update($elem, $elem['id']);
-            $agenteGate = new ProveedoresGateway();
-            $agente = $agenteGate->find($sol->agente_financiero);
-            $user = Sentinel::findById($agente->usuario);
-            $user->notify(new SolicitudAceptada($sol));
+            $this->solicitudGateway->update($elem, $elem['id']);
         });
     }
 
