@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as F;
+use Illuminate\Support\Facades\DB;
 
 class OrganismosTablaSeeder extends Seeder
 {
@@ -15,11 +16,12 @@ class OrganismosTablaSeeder extends Seeder
         $faker = F::create('App\Organismos');
         for ($i=0; $i < 3; $i++)
         {
-        	DB::table('organismos')->insert([
-        	'nombre' => $faker->name,
-	        'cuit' => $faker->randomNumber(8),
-        	]);
-	        }
+            $org = factory(App\Organismos::class)->create();
+            $cat1 = factory(App\CategoriaCuotaSocial::class)->create(['id_organismo' => $org->id, 'categoria' => 1, 'valor' =>  100]);
+            $cat1 = factory(App\CategoriaCuotaSocial::class)->create(['id_organismo' => $org->id, 'categoria' => 2, 'valor' =>  200]);
+            $cat1 = factory(App\CategoriaCuotaSocial::class)->create(['id_organismo' => $org->id, 'categoria' => 3, 'valor' =>  300]);
+        }
+
 	     
     }
 }

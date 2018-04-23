@@ -48,15 +48,10 @@ class AgenteFinancieroController extends Controller
             $montoPorCuota = $request['monto_por_cuota'];
             $cuotas = $request['cuotas'];
             $solicitud = $request['id'];
-            $solicitudRepo = new SolicitudGateway();
-            $sol = $solicitudRepo->solicitudWithComer($solicitud);
             $usuario = Sentinel::check();
             $agenteRepo = new ProveedoresRepo();
             $proveedor = $agenteRepo->findByUser($usuario->id);
             $proveedor->generarPropuesta($importe, $montoPorCuota, $cuotas, $solicitud);
-            $comer = $sol->comercializador()->get()->first();
-            $userANotif = Sentinel::findById($comer->usuario);
-            $userANotif->notify(new SolicitudPropuesta($sol));
         });
     }
 
@@ -68,11 +63,6 @@ class AgenteFinancieroController extends Controller
             $agenteRepo = new ProveedoresRepo();
             $proveedor = $agenteRepo->findByUser($usuario->id);
             $proveedor->rechazarPropuesta($solicitud);
-            $solGate = new SolicitudGateway();
-            $sol = $solGate->solicitudWithComer($solicitud);
-            $comer = $sol->comercializador()->get()->first();
-            $userANotif = Sentinel::findById($comer->usuario);
-            $userANotif->notify(new SolicitudRechazada($sol));
         });
     }
 
@@ -84,11 +74,6 @@ class AgenteFinancieroController extends Controller
             $agenteRepo = new ProveedoresRepo();
             $proveedor = $agenteRepo->findByUser($usuario->id);
             $proveedor->aceptarPropuesta($solicitud);
-            $solGate = new SolicitudGateway();
-            $sol = $solGate->solicitudWithComer($solicitud);
-            $comer = $sol->comercializador()->get()->first();
-            $userANotif = Sentinel::findById($comer->usuario);
-            $userANotif->notify(new SolicitudAceptada($sol));
         });
     }
 
@@ -115,11 +100,6 @@ class AgenteFinancieroController extends Controller
             $agenteRepo = new ProveedoresRepo();
             $proveedor = $agenteRepo->findByUser($usuario->id);
             $proveedor->reservarCapital($solicitud);
-            $solGate = new SolicitudGateway();
-            $sol = $solGate->solicitudWithComer($solicitud);
-            $comer = $sol->comercializador()->get()->first();
-            $userANotif = Sentinel::findById($comer->usuario);
-            $userANotif->notify(new SolicitudCapitalReservado($sol));
         });
 
     }
@@ -133,14 +113,7 @@ class AgenteFinancieroController extends Controller
             $agenteRepo = new ProveedoresRepo();
             $proveedor = $agenteRepo->findByUser($usuario->id);
             $proveedor->otorgarCapital($solicitud);
-            $solGate = new SolicitudGateway();
-            $sol = $solGate->solicitudWithComer($solicitud);
-            $usuarios = Sentinel::getUserRepository()->whereHas('roles', function ($q) {
-                $q->where('name', 'gestorSolicitudes');
-            })->get();
-            $usuarios->each(function ($usuario) use ($sol) {
-                $usuario->notify(new SolicitudCapitalOtorgado($sol));
-            });
+
         });
     }
 
