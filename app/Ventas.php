@@ -92,26 +92,7 @@ class Ventas extends Model
         });
 
         $montoContableReal = $montoContable - $monto;
-        $impuBanco = ImputacionGateway::buscarPorCodigo('111010201');
-        $impuComisionPagadaOrganismo = ImputacionGateway::buscarPorCodigo('521020218');
-        $impuFondoTerceroAPagar = ImputacionGateway::buscarPorCodigo('131010003');
-        $impuComisionesACobrar = ImputacionGateway::buscarPorCodigo('131010002');
-        $impuInteresesAPagar = ImputacionGateway::buscarPorCodigo('311020001');
-
-
-        $comisionPagada = 0; // TODO aca hay que calcular la comision del organismo
-        $totalBanco = $montoContableReal - $comisionPagada;
-        $comisionGanada = $montoContableReal * $this->getComision() /100;
-        $interesAPagar = $montoContableReal * $this->getInteres() /100;
-        $capital = $montoContableReal - $comisionGanada - $interesAPagar;
-
-        GeneradorDeAsientos::crear($impuBanco, $totalBanco, 0);
-        GeneradorDeAsientos::crear($impuComisionPagadaOrganismo, $comisionPagada, 0);
-
-
-        GeneradorDeAsientos::crear($impuFondoTerceroAPagar, 0, $capital);
-        GeneradorDeAsientos::crear($impuComisionesACobrar, 0, $comisionGanada);
-        GeneradorDeAsientos::crear($impuInteresesAPagar, 0, $interesAPagar);
+        $this->contabilizarCobro($montoContableReal);
 
         return $monto;
     }
@@ -128,38 +109,37 @@ class Ventas extends Model
             $comisionPagada = 0; // TODO aca hay que calcular la comision del organismo
 
             $totalBanco = $montoContableReal - $comisionPagada;
+            $interesesACobrar = $montoContableReal * $this->getInteres() / 100;
+            $prestamosACobrar = $montoContableReal - $interesesACobrar;
+
+            GeneradorDeAsientos::crear($impuComisionPagadaOrganismo, $comisionPagada, 0);
+            GeneradorDeAsientos::crear($impuBanco, $totalBanco, 0);
+
+            GeneradorDeAsientos::crear($impuPrestamosACobrar, 0, $interesesACobrar);
+            GeneradorDeAsientos::crear($impuInteresesACobrar, 0, $prestamosACobrar);
+
+        } else {
+            $impuBanco = ImputacionGateway::buscarPorCodigo('111010201');
+            $impuComisionPagadaOrganismo = ImputacionGateway::buscarPorCodigo('521020218');
+            $impuFondoTerceroAPagar = ImputacionGateway::buscarPorCodigo('131010003');
+            $impuComisionesACobrar = ImputacionGateway::buscarPorCodigo('131010002');
+            $impuInteresesAPagar = ImputacionGateway::buscarPorCodigo('311020001');
 
 
+            $comisionPagada = 0; // TODO aca hay que calcular la comision del organismo
+            $totalBanco = $montoContableReal - $comisionPagada;
+            $comisionGanada = $montoContableReal * $this->getComision() / 100;
+            $interesAPagar = $montoContableReal * $this->getInteres() / 100;
+            $capital = $montoContableReal - $comisionGanada - $interesAPagar;
 
-
+            GeneradorDeAsientos::crear($impuBanco, $totalBanco, 0);
             GeneradorDeAsientos::crear($impuComisionPagadaOrganismo, $comisionPagada, 0);
 
 
-            GeneradorDeAsientos::crear($impuBanco, 0, $capital);
-            GeneradorDeAsientos::crear($impuPrestamosACobrar, 0, $comisionGanada);
-            GeneradorDeAsientos::crear($impuInteresesACobrar, 0, $interesAPagar);
-
+            GeneradorDeAsientos::crear($impuFondoTerceroAPagar, 0, $capital);
+            GeneradorDeAsientos::crear($impuComisionesACobrar, 0, $comisionGanada);
+            GeneradorDeAsientos::crear($impuInteresesAPagar, 0, $interesAPagar);
         }
-        $impuBanco = ImputacionGateway::buscarPorCodigo('111010201');
-        $impuComisionPagadaOrganismo = ImputacionGateway::buscarPorCodigo('521020218');
-        $impuFondoTerceroAPagar = ImputacionGateway::buscarPorCodigo('131010003');
-        $impuComisionesACobrar = ImputacionGateway::buscarPorCodigo('131010002');
-        $impuInteresesAPagar = ImputacionGateway::buscarPorCodigo('311020001');
-
-
-        $comisionPagada = 0; // TODO aca hay que calcular la comision del organismo
-        $totalBanco = $montoContableReal - $comisionPagada;
-        $comisionGanada = $montoContableReal * $this->getComision() /100;
-        $interesAPagar = $montoContableReal * $this->getInteres() /100;
-        $capital = $montoContableReal - $comisionGanada - $interesAPagar;
-
-        GeneradorDeAsientos::crear($impuBanco, $totalBanco, 0);
-        GeneradorDeAsientos::crear($impuComisionPagadaOrganismo, $comisionPagada, 0);
-
-
-        GeneradorDeAsientos::crear($impuFondoTerceroAPagar, 0, $capital);
-        GeneradorDeAsientos::crear($impuComisionesACobrar, 0, $comisionGanada);
-        GeneradorDeAsientos::crear($impuInteresesAPagar, 0, $interesAPagar);
     }
 
     public function pagarProveedor()

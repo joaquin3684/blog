@@ -35,7 +35,7 @@ class Proovedores extends Model
 
     public function usuario()
     {
-        return $this->belongsTo('Cartalyst\Sentinel\Users\EloquentUser', 'id_usuario', 'id');
+        return $this->belongsTo('Cartalyst\Sentinel\Users\EloquentUser', 'usuario', 'id');
     }
 
     public function cobrar()

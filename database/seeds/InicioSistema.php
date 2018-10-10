@@ -113,41 +113,8 @@ class InicioSistema extends Seeder
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion18->id, 'codigo' => $imputacion18->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion19->id, 'codigo' => $imputacion19->codigo]);
 
-            //config cuentas
 
-            \App\ConfigImputaciones::create(['nombre' => 'Deudores XXXX', 'codigo_base' => '1310100']);
-            \App\ConfigImputaciones::create(['nombre' => 'Cta XXXX', 'codigo_base' => '3110300']);
-            \App\ConfigImputaciones::create(['nombre' => 'Comisiones XXXX', 'codigo_base' => '5110301']);
-            \App\ConfigImputaciones::create(['nombre' => 'Banco XXXX', 'codigo_base' => '1110102']);
 
-            if($proveedores->isNotEmpty()){
-
-                $primerProveedor = $proveedores->splice(1, 1);
-                $primerProveedor = $primerProveedor->first();
-
-                $imputacion = GeneradorDeCuentas::generar('Deudores ' . $primerProveedor->razon_social, '131010001');
-                ProveedorImputacionDeudores::create(['id_proveedor' => $primerProveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Deudores', 'codigo' => $imputacion->codigo]);
-                $imputacion = GeneradorDeCuentas::generar('Cta ' . $primerProveedor->razon_social, '311030001');
-                ProveedorImputacionDeudores::create(['id_proveedor' => $primerProveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Cta', 'codigo' => $imputacion->codigo]);
-
-                $imputacion = GeneradorDeCuentas::generar('Comisiones ' . $primerProveedor->razon_social, '511030101');
-                ProveedorImputacionDeudores::create(['id_proveedor' => $primerProveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Comisiones', 'codigo' => $imputacion->codigo]);
-
-                $proveedores->each(function ($proveedor) {
-                    $codigo = ImputacionGateway::obtenerCodigoNuevo('1310100');
-                    $imputacion = GeneradorDeCuentas::generar('Deudores ' . $proveedor->razon_social, $codigo);
-                    ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Deudores', 'codigo' => $imputacion->codigo]);
-
-                    $codigo = ImputacionGateway::obtenerCodigoNuevo('3110300');
-                    $imputacion = GeneradorDeCuentas::generar('Cta ' . $proveedor->razon_social, $codigo);
-                    ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Cta', 'codigo' => $imputacion->codigo]);
-
-                    $codigo = ImputacionGateway::obtenerCodigoNuevo('5110301');
-                    $imputacion = GeneradorDeCuentas::generar('Comisiones ' . $proveedor->razon_social, $codigo);
-                    ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Comisiones', 'codigo' => $imputacion->codigo]);
-
-                });
-            }
             // Asiento de inicio
             $asiento = factory(\App\Asiento::class)->create(['id_ejercicio' => $ejercicio->id, 'id_imputacion' => $imputacion2]);
 

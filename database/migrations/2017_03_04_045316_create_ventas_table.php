@@ -27,7 +27,7 @@ class CreateVentasTable extends Migration
             $table->integer('nro_cuotas');
             $table->double('importe_total');
             $table->double('importe_cuota');
-            $table->double('importe_otorgado');
+            $table->double('importe_otorgado')->nullable();
             $table->date('fecha_vencimiento');
             $table->integer('nro_credito')->nullable();
             $table->softDeletes();

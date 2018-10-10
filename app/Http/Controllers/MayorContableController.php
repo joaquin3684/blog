@@ -15,7 +15,7 @@ class MayorContableController extends Controller
 
     public function reporte(Request $request)
     {
-        $cuentaDesde = isEmpty($request['codigo_desde']) ? 1 : $request['codigo_desde'];
+        $cuentaDesde = $request['codigo_desde'] ? 1 : $request['codigo_desde'];
         $cuentaHasta = $request['codigo_hasta'] ? 999999999 : $request['codigo_hasta'];
         $fechaDesde = $request['fecha_desde'];
         $fechaHasta = $request['fecha_hasta'];
