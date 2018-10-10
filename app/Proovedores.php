@@ -26,7 +26,7 @@ class Proovedores extends Model
 
     public function ventas()
     {
-        return $this->hasManyThrough('App\Movimientos', 'App\Cuotas', 'id_proovedor', 'id_producto', 'id');
+        return $this->hasManyThrough('App\Ventas', 'App\Productos', 'id_proovedor', 'id_producto', 'id');
     }
     public function solicitudes()
     {
@@ -36,5 +36,12 @@ class Proovedores extends Model
     public function usuario()
     {
         return $this->belongsTo('Cartalyst\Sentinel\Users\EloquentUser', 'id_usuario', 'id');
+    }
+
+    public function cobrar()
+    {
+        $this->ventas->each(function (Ventas $venta){
+            $venta->pagarProveedor();
+        });
     }
 }

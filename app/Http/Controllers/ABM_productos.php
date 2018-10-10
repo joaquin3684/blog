@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ValidacionABMProductos;
 use App\PorcentajeColocacion;
 use App\Productos;
+use App\Services\ABM_ProductosService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\Eloquent\Repos\Gateway\ProductosGateway as Producto;
@@ -17,10 +18,11 @@ class ABM_productos extends Controller
      * @return \Illuminate\Http\Response
      */
     private $producto;
-
+    private $service;
     public function __construct(Producto $producto)
     {
         $this->producto = $producto;
+        $this->service = new ABM_ProductosService();
     }
 
     public function index()
@@ -42,13 +44,7 @@ class ABM_productos extends Controller
     {
         DB::transaction(function() use($request){
 
-            $producto = $this->producto->create($request->all());
-            $id_producto = $producto->id;
-            $porcentajes = collect($request['porcentajes']);
-            $porcentajes->each(function ($porcentaje) use ($id_producto) {
-                $porcentaje['id_producto'] = $id_producto;
-                PorcentajeColocacion::create($porcentaje);
-            });
+           $this->service->crearProducto($request->all());
         });
     }
 

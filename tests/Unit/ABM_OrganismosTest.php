@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Cuotas;
+use App\Services\ABM_OrganismosService;
 use App\Socios;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -47,10 +48,14 @@ class ABM_OrganismosTest extends TestCase
     public function testAltaOrganismo()
     {
         $data = collect($this->data());
-        $response = $this->post('organismos', $data->toArray());
+
+        $service = new ABM_OrganismosService();
+        $service->crearOrganismo($data->toArray());
+
         $cuotaSocial = collect($data['cuota_social']);
         $data->forget('cuota_social');
         $this->assertDatabaseHas('organismos', $data->toArray());
+
         $cuotaSocial->each(function($cuota, $key) {
             $cuota['id_organismo'] = 1;
             $cuota['categoria'] = $key;

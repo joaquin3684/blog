@@ -30,4 +30,15 @@ class Socios extends Model
         return $this->morphMany(Cuotas::class, 'cuotable');
     }
 
+    public function cobrar($monto)
+    {
+        $ventas = $this->ventas->sortBy(function(Ventas $venta){ return $venta->id; });
+        $ventas->each(function(Ventas $venta) use (&$monto){
+            if ($monto == 0)
+                return false;
+            $resto = $venta->cobrar($monto);
+            $monto = $resto;
+        });
+    }
+
 }

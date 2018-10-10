@@ -6,6 +6,7 @@ use App\Repositories\Eloquent\Filtros\VentasFilter;
 use App\Repositories\Eloquent\Mapper\VentasMapper;
 use App\Repositories\Eloquent\Repos\VentasRepo;
 use App\Repositories\Eloquent\Ventas;
+use App\Services\ProveedorService;
 use Illuminate\Http\Request;
 use App\Movimientos;
 use App\Cuotas;
@@ -16,7 +17,14 @@ use App\Socios;
 
 class PagoProovedoresController extends Controller
 {
-   public function index()
+
+    private $service;
+    public function __construct()
+    {
+        $this->service = new ProveedorService();
+    }
+
+    public function index()
     {
         return view('pago_proovedores');
     }
@@ -119,14 +127,7 @@ class PagoProovedoresController extends Controller
 
     public function pagarCuotas(Request $request)
     {
-        foreach($request->all() as $proveedor)
-        {
-            $ventasRepo = new VentasRepo();
-            $ventas = $ventasRepo->cuotasAPagarProovedor($proveedor['id']);
-            $ventas->each(function ($venta) {
-                $venta->pagarProovedor();
-            });
-        }
+        $this->service->pagar();
     }
 
 

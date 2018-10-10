@@ -16,6 +16,8 @@ use App\Repositories\Eloquent\Repos\ProveedoresRepo;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Repositories\Eloquent\Repos\SolicitudRepo;
 use App\Repositories\Eloquent\Repos\VentasRepo;
+use App\Services\ProveedorService;
+use App\Services\SolicitudService;
 use App\Traits\FechasManager;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -29,11 +31,16 @@ class AgenteFinancieroController extends Controller
 
     private $solicitudGateway;
     private $agenteGateway;
+    private $service;
+    private $solService;
 
     public function __construct()
     {
         $this->solicitudGateway = new SolicitudGateway();
         $this->agenteGateway = new ProveedoresGateway();
+
+        $this->service = new ProveedorService();
+        $this->solService = new SolicitudService();
     }
 
     public function index()
@@ -44,36 +51,26 @@ class AgenteFinancieroController extends Controller
     public function generarPropuesta(Request $request)
     {
         DB::transaction(function () use ($request) {
-            $importe = $request['total'];
-            $montoPorCuota = $request['monto_por_cuota'];
-            $cuotas = $request['cuotas'];
-            $solicitud = $request['id'];
-            $usuario = Sentinel::check();
-            $agenteRepo = new ProveedoresRepo();
-            $proveedor = $agenteRepo->findByUser($usuario->id);
-            $proveedor->generarPropuesta($importe, $montoPorCuota, $cuotas, $solicitud);
+
+            $this->solService->modificarSolicitud($request->all());
+
         });
     }
 
     public function rechazarPropuesta(Request $request)
     {
         DB::transaction(function () use ($request) {
-            $solicitud = $request['id'];
-            $usuario = Sentinel::check();
-            $agenteRepo = new ProveedoresRepo();
-            $proveedor = $agenteRepo->findByUser($usuario->id);
-            $proveedor->rechazarPropuesta($solicitud);
+            $request['estado'] = 'Rechazada por Inversionista';
+            $this->solService->modificarSolicitud($request->all());
         });
     }
 
     public function aceptarPropuesta(Request $request)
     {
         DB::transaction(function () use ($request) {
-            $solicitud = $request['id'];
-            $usuario = Sentinel::check();
-            $agenteRepo = new ProveedoresRepo();
-            $proveedor = $agenteRepo->findByUser($usuario->id);
-            $proveedor->aceptarPropuesta($solicitud);
+            $request['estado'] = 'Aceptada por comercializador';
+            $this->solService->modificarSolicitud($request->all());
+
         });
     }
 
@@ -94,12 +91,9 @@ class AgenteFinancieroController extends Controller
     public function reservarCapital(Request $request)
     {
         DB::transaction(function () use ($request) {
-            $elem = $request->all();
-            $solicitud = $elem['id'];
-            $usuario = Sentinel::check();
-            $agenteRepo = new ProveedoresRepo();
-            $proveedor = $agenteRepo->findByUser($usuario->id);
-            $proveedor->reservarCapital($solicitud);
+
+            $request['estado'] = 'Capital Reservado';
+            $this->solService->modificarSolicitud($request->all());
         });
 
     }
@@ -107,13 +101,9 @@ class AgenteFinancieroController extends Controller
     public function otorgarCapital(Request $request)
     {
         DB::transaction(function () use ($request) {
-            $elem = $request->all();
-            $solicitud = $elem['id'];
-            $usuario = Sentinel::check();
-            $agenteRepo = new ProveedoresRepo();
-            $proveedor = $agenteRepo->findByUser($usuario->id);
-            $proveedor->otorgarCapital($solicitud);
 
+            $request['estado'] = 'Capital Otorgado';
+            $this->solService->modificarSolicitud($request->all());
         });
     }
 

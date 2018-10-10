@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comercializador;
 use App\Http\Requests\ValidacionABMcomercializador;
 use App\Repositories\Eloquent\Repos\Gateway\ComercializadorGateway;
+use App\Services\ABM_ComercializadorService;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,9 +13,11 @@ use Illuminate\Support\Facades\DB;
 class ABM_Comercializador extends Controller
 {
     private $comercializador;
-    public function __construct(ComercializadorGateway $comercializador)
+    private $service;
+    public function __construct(ComercializadorGateway $comercializador, ABM_ComercializadorService $service)
     {
         $this->comercializador = $comercializador;
+        $this->service = $service;
     }
 
     public function index()
@@ -27,17 +30,7 @@ class ABM_Comercializador extends Controller
     {
         DB::transaction(function() use ($request){
 
-
-
-        $elem = $request->all();
-        $usuario = $elem['usuario'];
-        $pass = $elem['password'];
-        $email = $elem['email'];
-        $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
-        $elem['usuario'] = $user->id;
-        $this->comercializador->create($elem);
-
-        //TODO: aca hay que ponerle el rol de comercializador
+        $this->service->crearComer($request->all());
 
         });
 

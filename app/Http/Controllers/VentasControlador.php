@@ -6,11 +6,11 @@ use App\EstadoVenta;
 use App\Repositories\Eloquent\Filtros\OrganismoFilter;
 use App\Repositories\Eloquent\Repos\EstadoVentaRepo;
 use App\Repositories\Eloquent\Repos\VentasRepo;
-use Sentinel;
+use App\Services\VentasService;
+use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Illuminate\Http\Request;
 use App\Ventas;
 use App\Cuotas;
-use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Organismos;
@@ -18,6 +18,12 @@ use App\Repositories\Eloquent\Ventas as RepoVentas;
 use App\Repositories\Eloquent\Filtros\VentasFilter;
 class VentasControlador extends Controller
 {
+
+    private $service;
+    public function __construct(){
+        $this->service = new VentasService();
+    }
+
     public function index()
     {
         return view('CuentasCorrientes');
@@ -74,12 +80,8 @@ class VentasControlador extends Controller
     {
         DB::transaction(function() use ($request)
         {
-            $user = Sentinel::getUser();
-            $req = $request->all();
-            $ventaRepo = new VentasRepo();
-            $venta = $ventaRepo->create($req);
-            $estadoRepo = new EstadoVentaRepo();
-            $estadoRepo->create(['id_venta' => $venta->getId(), 'id_responsable_estado' => $user->id, 'estado' => 'ALTA']);
+
+            $this->service->crearVenta($request->all());
         });
     }
 

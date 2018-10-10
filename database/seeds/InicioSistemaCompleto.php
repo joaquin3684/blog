@@ -14,7 +14,7 @@ class InicioSistemaCompleto extends Seeder
     {
         DB::transaction(function () {
             $this->call(InicioSistemaSoloAbms::class);
-            $this->call(SocioConVentaVencidaTest::class);
+            $this->call(VentasParaCobrar::class);
             $this->call(PantallasSeed::class);
             $this->call(InicioSistema::class);
         });

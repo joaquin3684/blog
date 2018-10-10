@@ -15,12 +15,8 @@ use Illuminate\Support\Facades\DB;
 
 class CalcularSaldos
 {
-    public static function modificarSaldo($cuenta, Carbon $fecha)
+    public static function modificarSaldo($cuenta, Carbon $fecha, $debeNuevo, $haberNuevo)
     {
-        $saldo = DB::table('asientos')
-            ->where('id_imputacion', $cuenta->id)
-            ->groupBy('id_imputacion')
-            ->select(DB::raw('(SUM(debe) - SUM(haber)) as saldo'))->first();
 
         $saldo = SaldosCuentas::where('id_imputacion', $cuenta->id)
             ->where('year', $fecha->year)
@@ -30,9 +26,9 @@ class CalcularSaldos
         if($saldo == null)
         {
             $fecha = Carbon::today();
-            SaldosCuentas::create(['codigo' => $cuenta->codigo, 'id_imputacion' => $cuenta->id, 'saldo' => 0, 'year' =>$fecha->year, 'month' => $fecha->month]);
+            SaldosCuentas::create(['codigo' => $cuenta->codigo, 'id_imputacion' => $cuenta->id, 'saldo' => $debeNuevo - $haberNuevo, 'year' =>$fecha->year, 'month' => $fecha->month]);
         } else  {
-            $saldo->fill(['saldo' => $saldo->saldo])->save();
+            $saldo->fill(['saldo' => $saldo->saldo + $debeNuevo - $haberNuevo])->save();
         }
 
     }

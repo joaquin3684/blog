@@ -8,16 +8,24 @@ use App\Productos;
 use App\ProveedorImputacionDeudores;
 use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
+use App\Services\ABM_ProveedorService;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidacionABMproovedores;
 use Illuminate\Support\Facades\DB;
-use Yajra\Datatables\Facades\Datatables;
+//use Yajra\Datatables\Facades\Datatables;
 use App\Proovedores;
 class ABM_proovedores extends Controller
 {
-    
-  public function index()
+
+    private $service;
+    public function __construct()
+    {
+        $this->service = new ABM_ProveedorService();
+    }
+
+
+    public function index()
   {
       $registros = Proovedores::all();
       return view('ABM_proovedores', compact('registros'));
@@ -28,8 +36,8 @@ class ABM_proovedores extends Controller
     {
         $elem = collect($request->all());
         DB::transaction(function () use ($elem) {
-
-            $usuario = $elem['usuario'];
+        $this->service->crearProveedor($elem);
+            /*$usuario = $elem['usuario'];
             $pass = $elem['password'];
             $email = $elem['email'];
             //TODO:: aca falta ponerle el rol al proveedor
@@ -47,7 +55,7 @@ class ABM_proovedores extends Controller
             $codigoBase = ConfigImputaciones::find(3);
             $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
             $imputacion = GeneradorDeCuentas::generar('Comisiones '.$elem['razon_social'], $codigo);
-            ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Comisiones', 'codigo' => $imputacion->codigo]);
+            ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Comisiones', 'codigo' => $imputacion->codigo]);*/
 
 
         });

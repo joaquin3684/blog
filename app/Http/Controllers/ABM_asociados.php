@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cuotas;
 use App\Repositories\Eloquent\GeneradorDeAsientos;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
+use App\Services\ABM_SociosService;
 use App\Socios;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,10 +16,11 @@ use Illuminate\Support\Facades\DB;
 class ABM_asociados extends Controller
 {
     private $socio;
-
-    public function __construct(Socio $socio)
+    private $service;
+    public function __construct(Socio $socio, ABM_SociosService $service)
     {
         $this->socio = $socio;
+        $this->service = $service;
     }
 
     public function index()
@@ -30,22 +32,11 @@ class ABM_asociados extends Controller
     public function store(ValidacionABMsocios $request)
     {
         $elem = $request->all();
-        DB::transaction(function () use ($elem) {
-            $fechaInicioCuota = Carbon::today()->toDateString();
-            $fechaVencimientoCuota = Carbon::today()->addMonths(2);
-            $socio = $this->socio->create($elem);
-            $cuota = Cuotas::create([
-                'fecha_inicio' => $fechaInicioCuota,
-                'fecha_vencimiento' => $fechaVencimientoCuota,
-                'importe' => $elem['valor'],
-                'nro_cuota' => 1,
-            ]);
-            $impu = ImputacionGateway::buscarPorCodigo('511010101');
-            GeneradorDeAsientos::crear($impu, 0, $elem['valor']);
-            GeneradorDeAsientos::crear($impu, $elem['valor'], 0);
 
-            //todo la imputacion al debe queda pendiente no saben que cuenta es todavia
-            $socio->cuotasSociales()->save($cuota);
+
+
+        DB::transaction(function () use ($elem) {
+          $this->service->crearSocio($elem);
         });
         return ['created' => true];
     }

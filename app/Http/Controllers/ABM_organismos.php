@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CategoriaCuotaSocial;
 use App\Organismos;
+use App\Services\ABM_OrganismosService;
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidacionABMorganismos;
 use App\Repositories\Eloquent\Repos\Gateway\OrganismosGateway as Organismo;
@@ -15,9 +16,11 @@ class ABM_organismos extends Controller
 {
 
     private $organismo;
-    public function __construct(Organismo $organismo)
+    private $service;
+    public function __construct(Organismo $organismo, ABM_OrganismosService $service)
     {
         $this->organismo = $organismo;
+        $this->service = $service;
     }
 
 
@@ -37,16 +40,9 @@ class ABM_organismos extends Controller
     public function store(ValidacionABMorganismos $request)
     {
         DB::transaction(function() use($request) {
-            $organismo = $this->organismo->create($request->all());
-            $id_organismo = $organismo->id;
-            $cuotasSociales = collect($request['cuota_social']);
-            $i = 0;
-            $cuotasSociales->each(function ($cuota) use ($id_organismo, &$i) {
-                $cuota['id_organismo'] = $id_organismo;
-                $cuota['categoria'] = $i;
-                CategoriaCuotaSocial::create($cuota);
-                $i++;
-            });
+
+            $this->service->crearOrganismo($request->all());
+
         });
 
     }

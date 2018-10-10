@@ -37,6 +37,6 @@ class GeneradorDeAsientos
             throw new EjercicioCerradoException('ejercicio_cerrado');
         }
         $asientos->create(['id_imputacion' => $cuenta->id, 'nombre' => $cuenta->nombre, 'codigo' => $cuenta->codigo, 'debe' => $debeNuevo, 'haber' => $haberNuevo, 'id_ejercicio' => $ejercicio->id, 'fecha_contable' => $fechaContable->toDateString(), 'fecha_valor' => $fechaVal->toDateString(), 'nro_asiento' => $nroAsiento]);
-        CalcularSaldos::modificarSaldo($cuenta, $fechaVal);
+        CalcularSaldos::modificarSaldo($cuenta, $fechaVal, $debeNuevo, $haberNuevo);
     }
 }

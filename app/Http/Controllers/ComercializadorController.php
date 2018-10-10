@@ -19,6 +19,8 @@ use App\Repositories\Eloquent\Repos\Mapper\AgenteFinancieroMapper;
 use App\Repositories\Eloquent\Repos\Mapper\ProveedoresMapper;
 use App\Repositories\Eloquent\Repos\ProveedoresRepo;
 use App\Repositories\Eloquent\Repos\SolicitudesSinInversionistaRepo;
+use App\Services\ComercializadorService;
+use App\Services\SolicitudService;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
@@ -31,6 +33,8 @@ class ComercializadorController extends Controller
     private $solicitudGateway;
     private $comerGateway;
     private $proovedorMapper;
+    private $service;
+    private $solService;
 
     public function __construct()
     {
@@ -39,6 +43,8 @@ class ComercializadorController extends Controller
         $this->proovedorMapper = new ProveedoresMapper();
         $this->comerGateway = new ComercializadorGateway();
         $this->proveedorRepo = new ProveedoresRepo();
+        $this->service = new ComercializadorService();
+        $this->solService = new SolicitudService();
     }
 
     public function index()
@@ -53,24 +59,9 @@ class ComercializadorController extends Controller
     {
         DB::transaction(function () use ($request){
 
+            $solicitud = $this->service->generarSolicitud($request->all());
 
-            $col = collect($request->all());
-            $usuario = Sentinel::check();
-            $comercializador = $this->comerRepo->findByUser($usuario->id);
-
-            $agentes = DB::table('proovedores')
-                ->join('productos', 'proovedores.id', '=', 'productos.id_proovedor')
-                ->where('productos.tipo', 'Credito')
-                ->select('proovedores.*', 'productos.tipo')->get();
-
-
-            $agentes = $agentes->map(function($agente){
-               return $this->proveedorRepo->find($agente->id);
-            });
-
-            $solicitud = $comercializador->generarSolicitud($col, $agentes);
-
-            $ruta = 'solicitudes/solicitud'.$solicitud->getId();
+            $ruta = 'solicitudes/solicitud'.$solicitud->id;
 
             $doc_endeudamiento = $request->hasFile('doc_endeudamiento') ? $request->doc_endeudamiento : null;
             $doc_domicilio = $request->doc_domicilio;
@@ -106,8 +97,7 @@ class ComercializadorController extends Controller
     public function modificarPropuesta(Request $request)
     {
         DB::transaction(function () use ($request) {
-            $elem = $request->all();
-            $this->solicitudGateway->update($elem, $elem['id']);
+            $this->solService->modificarSolicitud($request->all());
         });
 
     }
@@ -115,7 +105,7 @@ class ComercializadorController extends Controller
     public function rechazarPropuesta(Request $request)
     {
         DB::transaction(function () use ($request) {
-            $this->solicitudGateway->update($request->all(), $request['id']);
+            $this->solService->modificarSolicitud($request->all());
 
         });
     }
@@ -124,29 +114,23 @@ class ComercializadorController extends Controller
     public function enviarFormulario(Request $request)
     {
         DB::transaction(function () use ($request) {
-            $elem = $request->all();
-            $this->solicitudGateway->update($elem, $elem['id']);
+            $this->solService->modificarSolicitud($request->all());
         });
     }
-
-
 
     public function aceptarPropuesta(Request $request)
     {
         DB::transaction(function () use ($request) {
-            $elem = $request->all();
-            $this->solicitudGateway->update($elem, $elem['id']);
+            $this->solService->modificarSolicitud($request->all());
         });
     }
 
     public function sociosQueCumplenConFiltro(Request $request)
     {
-
         $socios = DB::table('socios')
             ->where('id_organismo', $request['id_organismo'])
             ->where('nombre', 'LIKE', '%'.$request['nombre'].'%')->get();
         return $socios;
-
     }
 
 

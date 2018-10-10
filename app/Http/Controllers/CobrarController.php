@@ -9,6 +9,8 @@ use App\Repositories\Eloquent\Mapper\SociosMapper;
 use App\Repositories\Eloquent\Mapper\VentasMapper;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Repositories\Eloquent\Socio;
+use App\Services\ABM_SociosService;
+use App\Services\VentasService;
 use Illuminate\Http\Request;
 use App\Ventas;
 use App\Cuotas;
@@ -35,13 +37,16 @@ class CobrarController extends Controller
     private $filtros;
     private $tabla;
     private $cobrar;
+    private $socioService;
+    private $service;
 
     public function __construct(ConsultasCuotas $cuotas, ConsultasMovimientos $movimientos, Filtros $filtros)
     {
         $this->cuotas = $cuotas;
         $this->movimientos = $movimientos;
         $this->filtros = $filtros;
-
+        $this->service = new VentasService();
+        $this->socioService = new ABM_SociosService();
     }
 
     public function index()
@@ -206,14 +211,8 @@ class CobrarController extends Controller
     {
         DB::transaction(function() use ($request) {
 
+            $this->socioService->cobrar($request->all());
 
-            foreach ($request->all() as $socio) {
-                $socioRepo = new SociosRepo();
-                $socioModelo = $socioRepo->ventasConCuotasVencidas($socio['id']);
-                $cobrar = new CobrarPorSocio($socioModelo);
-                $cobrar->cobrar($socio['monto']);
-
-            }
         });
 
     }
@@ -258,7 +257,9 @@ class CobrarController extends Controller
     {
         DB::transaction(function() use ($request){
 
-            $errores = collect();
+
+            $this->service->cobrar($request->all());
+            /*$errores = collect();
             foreach($request->all() as $venta)
             {
                 $ventasRepo = new VentasRepo();
@@ -272,7 +273,7 @@ class CobrarController extends Controller
                     $errores->push($e->toArray());
                 }
             }
-            return $errores;
+            return $errores;*/
         });
     }
 

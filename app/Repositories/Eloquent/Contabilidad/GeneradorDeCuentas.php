@@ -26,4 +26,9 @@ class GeneradorDeCuentas
         SaldosCuentas::create(['saldo' => 0, 'year' => $fecha->year, 'month' => $fecha->month, 'codigo' => $imputacion->codigo, 'id_imputacion' => $imputacion->id, 'nombre' => $imputacion->nombre]);
         return $imputacion;
     }
+
+    public static function generarCuentaImputable($nombre, $codigo)
+    {
+
+    }
 }

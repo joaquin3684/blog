@@ -15,7 +15,12 @@ class ImputacionGateway extends Gateway
     public static function obtenerCodigoNuevo($codigoBase)
     {
         $imputacion =  DB::table('imputaciones')->where('codigo', 'LIKE', '%'.$codigoBase.'%')->orderBy('codigo', 'desc')->first();
-        return $imputacion->codigo + 1;
+        if($imputacion == null)
+        {
+            return $codigoBase.'01';
+        } else {
+            return $imputacion->codigo + 1;
+        }
     }
 
     public static function traerBancos()

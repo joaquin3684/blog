@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Cuotas;
 use App\Notifications\SolicitudAsignada;
+use App\Productos;
+use App\Proovedores;
 use App\Repositories\Eloquent\FileManager;
 use App\Repositories\Eloquent\Generadores\GeneradorCuotas;
 use App\Repositories\Eloquent\Generadores\GeneradorVenta;
@@ -16,6 +18,9 @@ use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use App\Repositories\Eloquent\Repos\ProveedoresRepo;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Repositories\Eloquent\Repos\VentasRepo;
+use App\Services\ProveedorService;
+use App\Services\SolicitudService;
+use App\Services\VentasService;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
@@ -24,9 +29,11 @@ use Illuminate\Support\Facades\DB;
 class SolicitudesPendientesMutualController extends Controller
 {
     private $solicitudesGateway;
+    private $solService;
     public function __construct()
     {
         $this->solicitudesGateway = new SolicitudGateway();
+        $this->solService = new SolicitudService();
     }
 
     public function index()
@@ -74,7 +81,7 @@ class SolicitudesPendientesMutualController extends Controller
 
     public function proveedores(Request $request)
     {
-        return SolicitudesSinInversionistaGateway::proveedores($request['id']);
+        return Proovedores::all();
     }
 
     public function solicitudesAVerificar()
@@ -96,8 +103,7 @@ class SolicitudesPendientesMutualController extends Controller
 
             //  TODO: aca se tiene que ejecutar el proceso para que se refleje en la contabilidad
             $elem = $request->all();
-            $sol = $this->solicitudesGateway->update($elem, $elem['id']);
-            $proveedorRepo = new ProveedoresRepo();
+            $sol = $this->solService->modificarSolicitud($elem);
             $sol->socio()->restore();
             if($sol->socio->cuotasSociales->count() == 0)
             {
@@ -109,14 +115,20 @@ class SolicitudesPendientesMutualController extends Controller
             $socioPosta->fecha_ingreso = $fecha_ingreso;
             $socioPosta->save();
 
-            $socio = $sol->id_socio;
-            $cuotas = $sol->cuotas;
-            $montoPorCuota = $sol->monto_por_cuota;
-            $proveedor = $sol->agente_financiero;
-            $proveedor = $proveedorRepo->findProductos($proveedor);
-            $producto = $proveedor->getProductos()->first();
 
-            GeneradorVenta::generarVenta($socio, $producto, $cuotas, $montoPorCuota);
+            $ventaService = new VentasService();
+
+            $venta = [
+                'id_asociado' => $sol->id_socio,
+                'nro_cuotas' => $sol->cuotas,
+                'importe_cuota' => $sol->monto_por_cuota,
+                'id_producto' => $sol->id_producto,
+                'importe_total' => $sol->cuotas * $sol->monto_por_cuota,
+                'importe_otorgado' => $sol->monto_pagado,
+                'fecha_vencimiento' => Carbon::today()->addMonths($sol->cuotas + 1)->toDateString(),
+                'id_comercializador' => $sol->comercializador
+            ];
+            $ventaService->crearVenta($venta);
         });
     }
 

@@ -13,30 +13,28 @@ use Carbon\Carbon;
 class GeneradorCuotas
 {
 
-    public static function generarCuotasVenta(\App\Repositories\Eloquent\Ventas $venta)
+    public static function generarCuotasVenta(\App\Ventas $venta)
     {
-        $cuotaRepo = new CuotasRepo();
-        $fechaVto = Carbon::createFromFormat('Y-m-d', $venta->getFechaVencimiento());
-        $fechaInicio = Carbon::today();
 
+        $fechaInicio = Carbon::today();
+        $fechaVto = Carbon::today()->addMonths(2);
         $cuotas = collect();
-        for ($i = 1; $venta->getNroCuotas() >= $i; $i++) {
-           $cuota = $cuotaRepo->create([
-                'cuotable_id' => $venta->getId(),
+        for ($i = 1; $venta->nro_cuotas >= $i; $i++) {
+            $cuota = [
+                'cuotable_id' => $venta->id,
                 'cuotable_type' => 'App\Ventas',
-                'importe' => $venta->getImporte()/$venta->getNroCuotas(),
+                'importe' => $venta->importe_cuota,
                 'fecha_inicio' => $fechaInicio->toDateString(),
                 'fecha_vencimiento' => $fechaVto->toDateString(),
                 'nro_cuota' => $i,
-            ]);
-           $cuotas->push($cuota);
+            ];
+            $cuotas->push($cuota);
 
             $aux = Carbon::create($fechaVto->year, $fechaVto->month, $fechaVto->day);
-            $fechaInicio = $aux->addDay();
+            $fechaInicio->addMonth();
             $fechaVto->addMonth();
         }
-        $venta->setCuotas($cuotas);
-        return $venta;
+        return $cuotas;
     }
 
     public static function generarCuotaSocial($importe, $socio)

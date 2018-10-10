@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as F;
+use Illuminate\Support\Facades\DB;
+
 class SociosTablaSeeder extends Seeder
 {
     /**
