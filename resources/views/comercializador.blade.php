@@ -71,10 +71,9 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="organismocomplete" required>
+                        <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="organismocomplete" ng-change="socio= null" required>
                         <option value="">Elige un organismo</option>
                           <option value="{[{x.id}]}" ng-repeat="x in organismos" ng-bind="x.nombre">
-                           
                           </option>
                         </select>
                       </div>
@@ -85,10 +84,10 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Buscar afiliado existente
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in query(searchText, 'filtroSocios')"
+                        <md-autocomplete ng-disabled="organismocomplete == undefined" class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in query(searchText, 'filtroSocios')"
                           md-search-text="searchText" md-selected-item="socio" md-min-length="0" placeholder="Buscar afiliado..." >
-                          <span md-highlight-text="searchText" ng-cloak>
-                            {[{item.nombre}]}
+                          <span md-highlight-text="searchText" ng-cloak >
+                            {[{item.nombre}]} ({[{item.legajo}]})
                           </span>
                         </md-autocomplete>
                       </div>
