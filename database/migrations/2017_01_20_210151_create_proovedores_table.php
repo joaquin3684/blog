@@ -21,6 +21,8 @@ class CreateProovedoresTable extends Migration
             $table->string('razon_social')->nullable();
             $table->integer('cuit')->nullable();
             $table->string('domicilio')->nullable();
+            $table->string('estado_civil')->nullable();
+            $table->string('provincia')->nullable();
             $table->integer('telefono')->nullable();
             $table->string('descripcion')->nullable();
             $table->string('departamento')->nullable();

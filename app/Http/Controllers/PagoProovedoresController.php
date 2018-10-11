@@ -40,9 +40,10 @@ class PagoProovedoresController extends Controller
             ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
-            ->select('proovedores.razon_social AS proovedor', 'cuotas.nro_cuota', 'cuotas.importe', 'socios.nombre', 'socios.legajo', 'cuotas.estado', 'proovedores.id AS id_proovedor', DB::raw('SUM(movimientos.entrada) AS totalCobrado'), DB::raw('SUM(movimientos.salida) AS totalPagado'), DB::raw('(( SUM(movimientos.entrada) - SUM(movimientos.salida) ) * productos.ganancia / 100) AS comision'))
+            ->select('proovedores.razon_social AS proovedor', 'cuotas.nro_cuota', 'cuotas.importe', 'socios.nombre', 'socios.legajo', 'cuotas.estado', 'proovedores.id AS id_proovedor', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'), DB::raw('ROUND(SUM(movimientos.salida),2) AS totalPagado'), DB::raw('ROUND((( SUM(movimientos.entrada) - SUM(movimientos.salida) ) * productos.ganancia / 100),2) AS comision'))
             ->groupBy('proovedores.id', 'productos.id')
             ->havingRaw('totalCobrado <> totalPagado')->get();
+
 
         $proov = $proovedores->unique('id_proovedor');
         $pnuevo = $proov->each(function($p) use($proovedores){
@@ -53,9 +54,9 @@ class PagoProovedoresController extends Controller
             foreach($proovedores as $pro){
                 if($pro->id_proovedor == $p->id_proovedor)
                 {
-                    $totalCobrado += $pro->totalCobrado;
-                    $totalPagado += $pro->totalPagado;
-                    $comision += $pro->comision;
+                    $totalCobrado += (double) round($pro->totalCobrado, 2);
+                    $totalPagado += (double)round($pro->totalPagado, 2);
+                    $comision += (double) round($pro->comision,2);
                     $totalAPagar = ($totalCobrado - $totalPagado) - $comision;
                 }
             }
@@ -82,7 +83,7 @@ class PagoProovedoresController extends Controller
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->where('proovedores.id', $request['id'])
-            ->select('cuotas.nro_cuota', 'cuotas.importe', 'ventas.id as servicio', 'socios.nombre', 'cuotas.fecha_vencimiento', 'socios.legajo', 'cuotas.estado', DB::raw('SUM(movimientos.entrada) AS totalCobrado'), DB::raw('SUM(movimientos.salida) AS totalPagado'), DB::raw('(SUM(movimientos.salida) * productos.ganancia / 100) AS comision'))
+            ->select('cuotas.nro_cuota', 'cuotas.importe', 'ventas.id as servicio', 'socios.nombre', 'cuotas.fecha_vencimiento', 'socios.legajo', 'cuotas.estado', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'), DB::raw('ROUND(SUM(movimientos.salida),2) AS totalPagado'), DB::raw('ROUND((SUM(movimientos.salida) * productos.ganancia / 100),2) AS comision'))
             ->groupBy('cuotas.id')
             ->havingRaw('totalCobrado <> totalPagado')->get();
 
@@ -127,7 +128,11 @@ class PagoProovedoresController extends Controller
 
     public function pagarCuotas(Request $request)
     {
+        DB::transaction(function(){
+
+
         $this->service->pagar();
+        });
     }
 
 

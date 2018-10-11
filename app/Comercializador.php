@@ -24,8 +24,4 @@ class Comercializador extends Model
         return $this->belongsTo('Cartalyst\Sentinel\Users\EloquentUser', 'usuario', 'id');
     }
 
-    public function generarSolicitud($sol)
-    {
-
-    }
 }
