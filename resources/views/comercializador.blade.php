@@ -288,7 +288,6 @@
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Certificado de Endeudamiento
-                        <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class=" input-group">
@@ -297,7 +296,7 @@
                           </span>
                           <input class="form-control col-md-7 col-xs-12" ng-value="doc_endeudamiento.name">
                           <input id="input_doc_endeudamiento" ngf-select name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" type="file" 
-                            ng-model="doc_endeudamiento" class="form-control col-md-7 col-xs-12" placeholder="" required
+                            ng-model="doc_endeudamiento" class="form-control col-md-7 col-xs-12" placeholder=""
                             style="display: none"><div ng-cloak>{[{errores.doc_endeudamiento[0]}]}</div>
                         </div>
                       </div>

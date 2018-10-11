@@ -269,9 +269,6 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
     $scope.AltaComercializador = function (Dato){
 
         console.log(moment($scope.fecha_nacimiento).format('YYYY-MM-DD'));
-        if($scope.doc_endeudamiento == ''){
-            $scope.doc_endeudamiento = null;
-        }
     if($scope.socio != null) {
         $scope.Dato = {
         'nombre':$scope.nombre,//$scope.nombre,
@@ -287,7 +284,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         'telefono':$scope.telefono,
         'doc_documento':$scope.doc_documento,
         'doc_cbu':$scope.doc_cbu,
-        'doc_endeudamiento':$scope.doc_endeudamiento,
+        'doc_endeudamiento': $scope.doc_endeudamiento && $scope.doc_endeudamiento,
         'doc_recibo':$scope.doc_recibo,
         'doc_domicilio':$scope.doc_domicilio,
         'filtro':'',
@@ -312,7 +309,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         'telefono':$scope.telefono,
         'doc_documento':$scope.doc_documento,
         'doc_cbu':$scope.doc_cbu,
-        'doc_endeudamiento':$scope.doc_endeudamiento,
+        'doc_endeudamiento': $scope.doc_endeudamiento && $scope.doc_endeudamiento,
         'doc_recibo':$scope.doc_recibo,
         'doc_domicilio':$scope.doc_domicilio,
         'filtro':'',

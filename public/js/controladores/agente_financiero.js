@@ -124,7 +124,13 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
             $http({
                 url: 'agente_financiero/enviarPropuesta',
                 method: 'post',
-                data: {'id':$scope.idpropuestae,'total':$scope.importe,'cuotas':$scope.cuotas,'monto_por_cuota':$scope.monto_por_cuota,'estado':'Esperando Respuesta Comercializador'}
+                data: {
+                    'id':$scope.idpropuestae,
+                    'monto_pagado':$scope.importe,
+                    'cuotas':$scope.cuotas,
+                    'total': Math.round($scope.cuotas * $scope.monto_por_cuota * 100) / 100,
+                    'monto_por_cuota':$scope.monto_por_cuota,
+                    'estado':'Esperando Respuesta Comercializador'}
             }).then(function successCallback(response)
             {
                 
