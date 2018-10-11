@@ -100,6 +100,9 @@
                         <td title="'Estado'" sortable="'estado'">
                           {[{solicitud.estado}]}
                         </td>
+                          <td title="'Inicio pedido'" sortable="'created_at'">
+                              {[{solicitud.created_at}]}
+                          </td>
                         <td title="'Acciones Disponibles'" style="color: #21a9d6;">
 
                           <span ng-click="getFotos(solicitud.id)" data-toggle="modal" data-target="#Comprobantes" class="fa fa-file-picture-o fa-2x"
@@ -202,6 +205,9 @@
                         <td title="'Estado'" sortable="'estado'">
                           {[{solicitud.estado}]}
                         </td>
+                          <td title="'Inicio pedido'" sortable="'created_at'">
+                              {[{solicitud.created_at}]}
+                          </td>
                         <td title="'Acciones Disponibles'" style="color: #21a9d6;">
                           @if(Sentinel::check()->hasAccess('solicitudesPendientes.crear'))
                           <span ng-click="AprobarSolicitud(solicitud.id)" ng-show="solicitud.estado == 'Capital Otorgado'" class="fa fa-user fa-2x"
@@ -306,8 +312,8 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <select ng-keyup="$event.keyCode == 13 && AsignarAF()" class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="agente"
                   ng-click="pullProductos()">>
-                  <option value="{[{x.agentes_financieros.id}]}" ng-repeat="x in agentesasignar">
-                    {[{x.agentes_financieros.razon_social}]}
+                  <option value="{[{x.id}]}" ng-repeat="x in agentesasignar">
+                    {[{x.razon_social}]}
                   </option>
                 </select>
               </div>

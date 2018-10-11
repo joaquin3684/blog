@@ -155,19 +155,19 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="piso">Piso
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="number" id="piso" name="piso" class="form-control" required placeholder="1">
+                        <input type="number" id="piso" name="piso" class="form-control"  placeholder="1">
                         <div ng-cloak>{{errores.piso[0]}}</div>
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="departamento">Dpto
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="text" id="departamento" name="departamento" class="form-control" placeholder="12" required>
+                        <input type="text" id="departamento" name="departamento" class="form-control" placeholder="12" >
                         <div ng-cloak>{{errores.departamento[0]}}</div>
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nucleo">Nucleo
                       </label>
                       <div class="col-md-2 col-sm-2 col-xs-12">
-                        <input type="number" id="nucleo" name="nucleo" class="form-control" placeholder="12" required>
+                        <input type="number" id="nucleo" name="nucleo" class="form-control" placeholder="12" >
                         <div ng-cloak>{{errores.nucleo[0]}}</div>
                       </div>
                     </div>
@@ -180,6 +180,15 @@
                         <div ng-cloak>{{errores.localidad[0]}}</div>
                       </div>
                     </div>
+                      <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Provincia
+                              <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" name="provincia" class="form-control col-md-7 col-xs-12" placeholder="Buenos Aires" required>
+                              <div ng-cloak>{{errores.provincia[0]}}</div>
+                          </div>
+                      </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="codigo_postal">Codigo Postal
                         <span class="required">*</span>
@@ -218,6 +227,21 @@
                         <div ng-cloak>{{errores.fecha_ingreso[0]}}</div>
                       </div>
                     </div>
+                      <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado civil
+                              <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                              <select required  name="estado_civil" class="form-control col-md-7 col-xs-12">
+                                  <option value="casado">Casado</option>
+                                  <option value="soltero">Soltero</option>
+                                  <option value="viudo">Viudo</option>
+                                  <option value="divorsiado">Divorciado</option>
+                                  <option value="concubinato">Concubinato</option>
+                              </select>
+                              <div ng-cloak>{{errores.estado_civil[0]}}</div>
+                          </div>
+                      </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Organismo
                         <span class="required">*</span>
@@ -452,7 +476,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text">{{errores.nombre[0]}}
+                <input id="nombre" class="form-control col-md-7 col-xs-12" name="nombre" placeholder="Ingrese nombre del organismo" type="text" required>{{errores.nombre[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -460,7 +484,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="apellido" class="form-control col-md-7 col-xs-12" name="apellido" placeholder="Ingrese apellido del socio" type="text">{{errores.nombre[0]}}
+                <input id="apellido" class="form-control col-md-7 col-xs-12" name="apellido" placeholder="Ingrese apellido del socio" type="text"required>{{errores.nombre[0]}}
               </div>
             </div>
 
@@ -469,7 +493,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control col-md-7 col-xs-12">{{errores.fecha_nacimiento[0]}}
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control col-md-7 col-xs-12" required>{{errores.fecha_nacimiento[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -477,7 +501,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit">{{errores.cuit[0]}}
+                <input type="number" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" placeholder="Ingrese el cuit" required>{{errores.cuit[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -485,15 +509,15 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="dni" name="dni" class="form-control col-md-7 col-xs-12">{{errores.dni[0]}}
+                <input type="number" id="dni" name="dni" class="form-control col-md-7 col-xs-12" required>{{errores.dni[0]}}
               </div>
             </div>
             <div class="item form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Sexo
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni" >Sexo
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" id="sexo" name="sexo">
+                <select class="form-control" id="sexo" name="sexo" required>
                   <option value="Masculino">
                     Masculino
                   </option>
@@ -509,7 +533,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12">{{errores.domicilio[0]}}
+                <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" required>{{errores.domicilio[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -517,9 +541,18 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="localidad" name="localidad" class="form-control col-md-7 col-xs-12">{{errores.localidad[0]}}
+                <input type="text" id="localidad" name="localidad" class="form-control col-md-7 col-xs-12" required>{{errores.localidad[0]}}
               </div>
             </div>
+              <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Provincia
+                      <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" name="provincia" class="form-control col-md-7 col-xs-12" placeholder="Buenos Aires" required>
+                      <div ng-cloak>{{errores.provincia[0]}}</div>
+                  </div>
+              </div>
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="piso">Piso
                 
@@ -549,7 +582,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="codigo_postal" name="codigo_postal" class="form-control col-md-7 col-xs-12">{{errores.codigo_postal[0]}}
+                <input type="number" id="codigo_postal" name="codigo_postal" class="form-control col-md-7 col-xs-12" required>{{errores.codigo_postal[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -557,7 +590,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12">{{errores.telefono[0]}}
+                <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" required>{{errores.telefono[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -565,7 +598,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="legajo" name="legajo" class="form-control col-md-7 col-xs-12">{{errores.legajo[0]}}
+                <input type="number" id="legajo" name="legajo" class="form-control col-md-7 col-xs-12" required>{{errores.legajo[0]}}
               </div>
             </div>
             <div class="item form-group">
@@ -573,22 +606,48 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="date" id="fecha_ingreso" name="fecha_ingreso" class="form-control col-md-7 col-xs-12">{{errores.fecha_ingreso[0]}}
+                <input type="date" id="fecha_ingreso" name="fecha_ingreso" class="form-control col-md-7 col-xs-12" required>{{errores.fecha_ingreso[0]}}
               </div>
             </div>
+              <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado civil
+                      <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                      <select required  name="estado_civil" class="form-control col-md-7 col-xs-12">
+                          <option value="casado">Casado</option>
+                          <option value="soltero">Soltero</option>
+                          <option value="viudo">Viudo</option>
+                          <option value="divorsiado">Divorciado</option>
+                          <option value="concubinato">Concubinato</option>
+                      </select>
+                      <div ng-cloak>{{errores.estado_civil[0]}}</div>
+                  </div>
+              </div>
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Organismo
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <select id="forro" ng-change="getCategorias()" ng-model="orpi" name="id_organismo" class="form-control col-md-7 col-xs-12">
+                <select id="forro" ng-change="getCategorias()" ng-model="orpi" name="id_organismo" class="form-control col-md-7 col-xs-12" required>
                   <option value="{{x.id}}" ng-repeat="x in organismosines" ng-selected="organismo.id == x.id">
                     {{x.nombre}}
                   </option>
                 </select>
               </div>
-
             </div>
+              <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Categoría
+                      <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                      <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="categoria" name="valor" ng-required="true" required>
+                          <option value="{{x.valor}}" ng-repeat="x in categorias" ng-bind="x.categoria">
+
+                          </option>
+                      </select>
+                  </div>
+              </div>
             <input type="hidden" name="id">
             <div class="ln_solid"></div>
             <div class="form-group">

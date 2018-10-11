@@ -21,8 +21,8 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Formulario de proovedores
-                    <small>Dar de alta un proovedor</small>
+                  <h2>Formulario de proveedores
+                    <small>Dar de alta un proveedor</small>
                   </h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
@@ -56,7 +56,7 @@
                   <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario">
                     
 
-                    <span class="section">Datos de proovedor</span>
+                    <span class="section">Datos de proveedor</span>
 
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razonSocial">Razon social
@@ -88,17 +88,17 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="piso">Piso
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="number" id="piso" name="piso" class="form-control" placeholder="1" required><div ng-cloak>{{errores.piso[0]}}</div>
+                        <input type="number" id="piso" name="piso" class="form-control" placeholder="1" ><div ng-cloak>{{errores.piso[0]}}</div>
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="departamento">Dpto
                       </label>
                       <div class="col-md-1 col-sm-1 col-xs-12">
-                        <input type="text" id="departamento" name="departamento" class="form-control" placeholder="12" required><div ng-cloak>{{errores.departamento[0]}}</div>
+                        <input type="text" id="departamento" name="departamento" class="form-control" placeholder="12" ><div ng-cloak>{{errores.departamento[0]}}</div>
                       </div>
                       <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nucleo">Nucleo
                       </label>
                       <div class="col-md-2 col-sm-2 col-xs-12">
-                        <input type="number" id="nucleo" name="nucleo" class="form-control" placeholder="12" required><div ng-cloak>{{errores.nucleo[0]}}</div>
+                        <input type="number" id="nucleo" name="nucleo" class="form-control" placeholder="12" ><div ng-cloak>{{errores.nucleo[0]}}</div>
                       </div>
                     </div>
 
@@ -161,7 +161,7 @@
                       </div>
                     </div> -->
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Prioridad
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Prioridad
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -195,8 +195,8 @@
       
         <div class="x_panel">
           <div class="x_title">
-            <h2>Proovedores
-              <small>Todos los proovedores disponibles</small>
+            <h2>Proveedores
+              <small>Todos los proveedores disponibles</small>
             </h2>
             <ul class="nav navbar-right panel_toolbox">
               <li>
@@ -331,7 +331,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="razon_social" class="form-control col-md-7 col-xs-12" name="razon_social" type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
+                <input id="razon_social" class="form-control col-md-7 col-xs-12" name="razon_social" type="text" required><div ng-cloak>{{errores.nombre[0]}}</div>
               </div>
             </div>
 
@@ -349,7 +349,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.descripcion[0]}}</div>
+                <input type="text" id="domicilio" name="domicilio" class="form-control col-md-7 col-xs-12" required><div ng-cloak>{{errores.domicilio[0]}}</div>
               </div>
             </div>
             <div class="item form-group">
@@ -380,7 +380,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.descripcion[0]}}</div>
+                <input type="number" id="cuit" name="cuit" class="form-control col-md-7 col-xs-12" required><div ng-cloak>{{errores.cuit[0]}}</div>
               </div>
             </div>
 
@@ -389,7 +389,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.descripcion[0]}}</div>
+                <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" required><div ng-cloak>{{errores.telefono[0]}}</div>
               </div>
             </div>
 
@@ -398,7 +398,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.descripcion[0]}}</div>
+                <input type="text" id="email" name="email" value="{{usuario.email}}" class="form-control col-md-7 col-xs-12" required><div ng-cloak>{{errores.email[0]}}</div>
               </div>
             </div>
 
@@ -407,7 +407,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.descripcion[0]}}</div>
+                <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12" required><div ng-cloak>{{errores.usuario[0]}}</div>
               </div>
             </div>
             <!--                     <div class="item form-group">
@@ -425,11 +425,11 @@
                       </div>
                     </div> -->
             <div class="item form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">Prioridad
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" >Prioridad
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <select id="prioridad_Editar" name="id_prioridad" class="form-control col-md-7 col-xs-12"></select>
+                <select id="prioridad_Editar" name="id_prioridad" class="form-control col-md-7 col-xs-12" required></select>
               </div>
 
             </div>

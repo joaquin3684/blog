@@ -241,8 +241,8 @@
                     </li>
                   @endif
                   @if(Sentinel::check()->hasAccess('aprobacionServicios.*'))
-                    <li><a href="aprobacion">Aprobacion Servicio/Prestamo</a>
-                    </li>
+                  <!--  <li><a href="aprobacion">Aprobacion Servicio/Prestamo</a>
+                    </li> -->
                   @endif
                   @if(Sentinel::check()->hasAccess('novedades.*'))
                     <li><a href="novedades">Novedades</a>
@@ -269,7 +269,7 @@
                 <li><a><i class="fa fa-area-chart"></i> Contabilidad <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                   @if(Sentinel::check()->hasAccess('capitulos.*'))
-                      <li><a href="capitulo">Plan de cuentas</a>
+                     <!-- <li><a href="capitulo">Plan de cuentas</a> -->
                       @endif
                       @if(Sentinel::check()->hasAccess('asientosManuales.*'))
                       <li><a href="asientos">Asientos Contables Manuales</a>

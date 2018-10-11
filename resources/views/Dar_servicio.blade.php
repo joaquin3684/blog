@@ -27,7 +27,8 @@
                                             </a>
                                         </li>
                                         <li class="dropdown">
-                                            <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                                            <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown"
+                                               href="#" role="button">
                                                 <i class="fa fa-wrench">
                                                 </i>
                                             </a>
@@ -56,53 +57,65 @@
                                 </div>
                                 <div class="x_content">
                                     <form class=" form-label-left" ng-submit="crearMovimiento()">
-                                        <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre+' (' + item.legajo + ')'" md-items="item in query(searchText, 'filtroSocios')"
-                                            md-search-text="searchText" md-selected-item="socio" md-min-length="0" placeholder="Buscar afiliado..."
-                                            required>
+                                        <md-autocomplete class="" md-input-name="idafiliado"
+                                                         md-item-text="item.nombre+' (' + item.legajo + ')'"
+                                                         md-items="item in query(searchText, 'filtroSocios')"
+                                                         md-search-text="searchText" md-selected-item="socio"
+                                                         md-min-length="0" placeholder="Buscar afiliado..."
+                                                         required>
                                             <span md-highlight-text="searchText" ng-cloak>
                                                 {[{item.nombre}]} {[{item.apellido}]} ({[{item.legajo}]})
                                             </span>
                                         </md-autocomplete>
                                         <hr/>
-                                        <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.razon_social" md-items="item in query(searchText2, 'filtroProovedores')"
-                                            md-search-text="searchText2" md-selected-item="proovedor" md-selected-item-change="habilitar()"
-                                            placeholder="Buscar proovedor..." md-min-length="0" required>
+                                        <md-autocomplete class="" md-input-name="idafiliado"
+                                                         md-item-text="item.razon_social"
+                                                         md-items="item in query(searchText2, 'filtroProovedores')"
+                                                         md-search-text="searchText2" md-selected-item="proovedor"
+                                                         md-selected-item-change="habilitar()"
+                                                         placeholder="Buscar proovedor..." md-min-length="0" required>
                                             <span md-highlight-text="searchText" ng-cloak>
                                                 {[{item.razon_social}]}
                                             </span>
                                         </md-autocomplete>
                                         <hr/>
-                                        <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre" md-items="item in traerProductos(searchText3)"
-                                            md-search-text="searchText3" md-selected-item="producto" ng-disabled="habilitacion"
-                                            placeholder="Buscar producto..." required md-min-length="0">
+                                        <md-autocomplete class="" md-input-name="idafiliado" md-item-text="item.nombre"
+                                                         md-items="item in traerProductos(searchText3)"
+                                                         md-search-text="searchText3" md-selected-item="producto"
+                                                         ng-disabled="habilitacion"
+                                                         placeholder="Buscar producto..." required md-min-length="0">
                                             <span md-highlight-text="searchText" ng-cloak>
                                                 {[{item.nombre}]}
                                             </span>
-                                            
+
                                         </md-autocomplete>
-                                        
+
                                         <hr/>
 
                                         <div class="row form-group">
-                                            <div class="item ">
-                                                <label class="control-label col-md-1 col-sm-3 col-xs-12" for="vencimiento">
-                                                    Vencimiento
+                                            <div class="">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12" for="cuotas">
+                                                    Cuotas
                                                     <span class="required">
                                                         *
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" id="vencimiento" name="vencimiento" ng-model="vencimiento" type="date" min="{[{fechaActual}]}"
-                                                        required>
+                                                    <input class="form-control col-md-7 col-xs-12" name="cuotas"
+                                                           placeholder="12" ng-model="nro_cuotas" type="number"
+                                                           ng-change="calcularVencimiento()" required>
                                                     </input>
                                                 </div>
                                             </div>
-                                            <div class="item ">
-                                                <label class="control-label col-md-offset-1 col-md-1 col-sm-3 col-xs-12" for="observacion">
+                                            <div class="">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                                       for="observacion">
                                                     Observacion
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" id="observacion" name="observacion" ng-model="observacion" type="text" placeholder="Ingrese una observacion">
+                                                    <input class="form-control col-md-7 col-xs-12" id="observacion"
+                                                           name="observacion" ng-model="observacion" type="text"
+                                                           placeholder="Ingrese una observacion">
                                                 </div>
                                             </div>
                                         </div>
@@ -115,74 +128,95 @@
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" name="capital" placeholder="123" ng-model="montoPorCuota" type="number" step="0.01" required>
+                                                    <input class="form-control col-md-7 col-xs-12" name="capital"
+                                                           placeholder="123" ng-model="montoPorCuota" type="number"
+                                                           step="0.01" required>
                                                     </input>
                                                 </div>
                                             </div>
-                                            <div class=" ">
-                                                <label class="control-label col-md-offset-1 col-md-1 col-sm-3 col-xs-12" for="cuotas">
-                                                    Cuotas
+                                            <div class="">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                                       for="vencimiento">
+                                                    Vencimiento
                                                     <span class="required">
                                                         *
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" name="cuotas" placeholder="12" ng-model="nro_cuotas" type="number" required>
+                                                    <input class="form-control col-md-7 col-xs-12" id="vencimiento"
+                                                           name="vencimiento" ng-model="vencimiento" type="date"
+                                                           min="{[{fechaActual}]}"
+                                                           required>
                                                     </input>
                                                 </div>
                                             </div>
 
+
                                         </div>
                                         <div class="row form-group ">
-
+                                            <label class="control-label  col-md-1 col-sm-3 col-xs-12">
+                                                Importe otorgado
+                                            </label>
+                                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                                <input class="form-control col-md-7 col-xs-12"
+                                                       ng-model="importe_otorgado" type="number" placeholder="123"/>
+                                            </div>
                                             <label class="control-label  col-md-1 col-sm-3 col-xs-12">
                                                 Capital total
                                                 <span class="required">
                                                     *
                                                 </span>
                                             </label>
-                                            <div class="col-md-4 col-sm-6 col-xs-12" >
+                                            <div class="col-md-4 col-sm-6 col-xs-12">
                                                 <div ng-cloak>{[{getImporte()}]}</div>
-                                                <input class="form-control col-md-7 col-xs-12" ng-model="importe" type="number" disabled>
+                                                <input class="form-control col-md-7 col-xs-12" ng-model="importe"
+                                                       type="number" disabled>
 
                                                 </input>
                                             </div>
+
                                         </div>
 
                                         <div class="row form-group" ng-if="tipo_servicio == 'credito'" ng-cloak>
                                             <div class="item">
-                                                <label class="control-label col-md-1 col-sm-3 col-xs-12" for="plata recibida">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                                       for="plata recibida">
                                                     Monto Total Otorgado
                                                     <span class="required">
                                                         *
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" name="monto_total" ng-model="monto_total" type="number" required>
+                                                    <input class="form-control col-md-7 col-xs-12" name="monto_total"
+                                                           ng-model="monto_total" type="number" required>
                                                     </input>
                                                 </div>
                                             </div>
                                             <div class="" ng-show="tipo_servicio == 'credito'">
-                                                <label class="control-label col-md-offset-1 col-md-1 col-sm-3 col-xs-12" for="ncredito">
+                                                <label class="control-label col-md-offset-1 col-md-1 col-sm-3 col-xs-12"
+                                                       for="ncredito">
                                                     N° de Credito
                                                     <span class="required">
                                                         *
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" name="ncredito" ng-model="ncredito" type="text" required>
+                                                    <input class="form-control col-md-7 col-xs-12" name="ncredito"
+                                                           ng-model="ncredito" type="text" required>
                                                     </input>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row form-group" ng-if="tipo_servicio == 'producto'" ng-cloak>
                                             <div class="item">
-                                                <label class="control-label col-md-1 col-sm-3 col-xs-12" for="observaciones">
+                                                <label class="control-label col-md-1 col-sm-3 col-xs-12"
+                                                       for="observaciones">
                                                     Observaciones
 
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" name="observaciones" ng-model="observaciones" type="text">
+                                                    <input class="form-control col-md-7 col-xs-12" name="observaciones"
+                                                           ng-model="observaciones" type="text">
                                                     </input>
                                                 </div>
                                             </div>
@@ -190,7 +224,9 @@
                                         <div class="row">
                                             <div class="item form-group" style="margin-top:20px;">
                                                 <div class="">
-                                                    <button class="btn btn-primary" data-target="#planDePago" data-toggle="modal" ng-click="mostrarPlanDePago()" type="button">
+                                                    <button class="btn btn-primary" data-target="#planDePago"
+                                                            data-toggle="modal" ng-click="mostrarPlanDePago()"
+                                                            type="button">
                                                         Plan de pago
                                                     </button>
                                                     @if(Sentinel::check()->hasAccess('darServicios.crear'))
@@ -205,19 +241,19 @@
                                     <div class="row" ng-show="mostrar">
                                         <table class="table striped" ng-cloak>
                                             <thead>
-                                                <tr>
-                                                    <th>Cuota</th>
-                                                    <th>Importe</th>
-                                                    <th>Vencimiento</th>
-                                                </tr>
+                                            <tr>
+                                                <th>Cuota</th>
+                                                <th>Importe</th>
+                                                <th>Vencimiento</th>
+                                            </tr>
 
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="x in planDePago">
-                                                    <td>{[{x.cuota}]}</td>
-                                                    <td>{[{x.importe}]}</td>
-                                                    <td>{[{x.fecha}]}</td>
-                                                </tr>
+                                            <tr ng-repeat="x in planDePago">
+                                                <td>{[{x.cuota}]}</td>
+                                                <td>{[{x.importe}]}</td>
+                                                <td>{[{x.fecha}]}</td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>

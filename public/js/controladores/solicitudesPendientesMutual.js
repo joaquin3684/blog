@@ -30,6 +30,7 @@ app.controller('solicitudesPendientesMutual', function ($scope, $http, $compile,
             {
                 console.log(response);
                 $scope.solicitudes = response.data;
+                $scope.solicitudes.forEach( sol => sol.created_at = moment(sol.created_at).format('DD/MM/YYYY'))
                 $scope.paramssolicitudes = new NgTableParams({
                     page: 1,
                     count: 10
@@ -75,6 +76,7 @@ app.controller('solicitudesPendientesMutual', function ($scope, $http, $compile,
             {
                 console.log(response);
                 $scope.solicitudes2 = response.data;
+                $scope.solicitudes2.forEach( sol => sol.created_at = moment(sol.created_at).format('DD/MM/YYYY'))
                 $scope.paramssolicitudes2 = new NgTableParams({
                     page: 1,
                     count: 10
