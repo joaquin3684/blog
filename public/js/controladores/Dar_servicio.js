@@ -73,6 +73,7 @@ app.controller('Dar_servicio', function ($scope, $http, $compile, $q, UserSrv) {
                 'id_asociado': $scope.socio.id,
                 'id_producto': $scope.producto.id,
                 'importe_total': $scope.importe,
+                'importe_cuota': $scope.montoPorCuota,
                 'nro_cuotas': $scope.nro_cuotas,
                 'descripcion': $scope.observacion,
                 'fecha_vencimiento': vencimiento,
