@@ -31,7 +31,7 @@ class ConsultasMovimientos
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->groupBy('organismos.id')
-            ->select('organismos.id AS id_organismo', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))
+            ->select('organismos.id AS id_organismo', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'))
                         ->get();
 
         return $movimientos;
@@ -45,7 +45,7 @@ class ConsultasMovimientos
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
             ->groupBy('socios.id')
-            ->select('socios.id AS id_socio', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))
+            ->select('socios.id AS id_socio', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'))
             ->where('organismos.id', '=', $id)
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->where('movimientos.identificadores_id', 'App\Cuotas')

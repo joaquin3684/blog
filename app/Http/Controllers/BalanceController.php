@@ -24,9 +24,9 @@ class BalanceController extends Controller
             ->where('fecha_valor', '>', $fechaDesde)
             ->where('fecha_valor', '<', $fechaHasta)
             ->groupBy('id_imputacion')
-            ->select(DB::raw('SUM(asientos.debe) as totalDebe, SUM(asientos.haber) as totalHaber, (SUM(asientos.debe) - SUM(asientos.haber)) as saldo'), 'asientos.codigo', 'imputaciones.nombre')
+            ->select(DB::raw('ROUND(SUM(asientos.debe),2) as totalDebe, ROUND(SUM(asientos.haber),2) as totalHaber, ROUND((SUM(asientos.debe) - SUM(asientos.haber)),2) as saldo'), 'asientos.codigo', 'imputaciones.nombre')
             ->orderBy('codigo')
-            ->havingRaw('SUM(asientos.debe) > 0 OR SUM(asientos.haber) > 0 OR (SUM(asientos.debe) - SUM(asientos.haber)) > 0')
+            ->havingRaw('ROUND(SUM(asientos.debe),2) > 0 OR ROUND(SUM(asientos.haber),2) > 0 OR ROUND((SUM(asientos.debe) - SUM(asientos.haber)),2) > 0')
 
             ->get();
 

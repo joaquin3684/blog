@@ -22,6 +22,8 @@ class CreateSociosTable extends Migration
             $table->double('valor')->nullable();
             $table->string('cuit')->nullable();
             $table->integer('dni')->nullable();
+            $table->string('estado_civil')->nullable();
+            $table->string('provincia')->nullable();
             $table->string('domicilio')->nullable();
             $table->string('sexo')->nullable();
             $table->string('apellido')->nullable();

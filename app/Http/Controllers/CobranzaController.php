@@ -31,7 +31,7 @@ class CobranzaController extends Controller
                 $join->on('productos.id_proovedor', '=', 'proovedores.id')->groupBy('proovedores.id');
             })
             ->groupBy('organismos.id')
-            ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) - SUM(cuotas.cobro) AS importe'))
+            ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('ROUND((SUM(cuotas.importe) - SUM(cuotas.cobro)),2) AS importe'))
             ->where(function($query) use ($fechaHoy){
                 $query->where('cuotas.fecha_vencimiento', '<', $fechaHoy)
                       ->orWhere(function($query2) use ($fechaHoy){
@@ -62,7 +62,7 @@ class CobranzaController extends Controller
                 $join->on('productos.id_proovedor', '=', 'proovedores.id')->groupBy('proovedores.id');
             })
             ->groupBy('socios.id')
-            ->select('socios.nombre AS socio', 'socios.id AS id_asociado', DB::raw('SUM(cuotas.importe) - SUM(cuotas.cobro) AS deuda'))
+            ->select('socios.nombre AS socio', 'socios.id AS id_asociado', DB::raw('ROUND((SUM(cuotas.importe) - SUM(cuotas.cobro)),2) AS deuda'))
             ->where(function($query) use ($fechaHoy){
                 $query->where('cuotas.fecha_vencimiento', '<', $fechaHoy)
                       ->orWhere(function($query2) use ($fechaHoy){

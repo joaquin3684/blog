@@ -30,7 +30,7 @@ class CalculadorSaldoInicial
             ->where('codigo', '<=', $cuentaHasta)
             ->unionAll($saldo)
             ->groupBy('id_imputacion')
-            ->select(DB::raw('SUM(saldo) as saldo'), 'codigo', 'nombre')
+            ->select(DB::raw('ROUND(SUM(saldo),2) as saldo'), 'codigo', 'nombre')
             ->get()->unique('codigo');
 
         $fecha2 = Carbon::createFromFormat('Y-m-d', $fechaInicio);
@@ -43,7 +43,7 @@ class CalculadorSaldoInicial
             ->where('codigo', '<=', $cuentaHasta)
             ->unionAll($saldo)
             ->groupBy('id_imputacion')
-            ->select(DB::raw('(SUM(debe) - SUM(haber)) as saldo'), 'codigo', 'nombre')
+            ->select(DB::raw('ROUND((SUM(debe) - SUM(haber)),2) as saldo'), 'codigo', 'nombre')
             ->get()->unique('codigo');
 
 
@@ -64,7 +64,7 @@ class CalculadorSaldoInicial
             ->where('year', '<=', $fecha->year)
             ->where('month', '<', $fecha->month)
             ->groupBy('id_imputacion')
-            ->select(DB::raw('SUM(saldo) as saldo'), 'codigo')
+            ->select(DB::raw('ROUND(SUM(saldo),2) as saldo'), 'codigo')
             ->get()->unique('codigo');
 
         $fecha2 = Carbon::createFromFormat('Y-m-d', $fechaInicio);
@@ -77,7 +77,7 @@ class CalculadorSaldoInicial
             ->where('codigo', '<=', $cuentaHasta)
             ->unionAll($saldo)
             ->groupBy('id_imputacion')
-            ->select(DB::raw('(SUM(debe) - SUM(haber)) as saldo'), 'codigo')
+            ->select(DB::raw('ROUND((SUM(debe) - SUM(haber)),2) as saldo'), 'codigo')
             ->get()->unique('codigo');
     }
 }

@@ -152,7 +152,8 @@ class InicioSistema extends Seeder
             $role = Sentinel::findRoleById(1);
 
             $role->permissions = $a;
-            $role2->permissions = [];
+            $role2->permissions = ['agentesFinancieros.crear' => true,'agentesFinancieros.visualizar' => true,'agentesFinancieros.borrar' => true,'agentesFinancieros.editar' => true, 'CCProveedor.crear' => true,'CCProveedor.visualizar' => true,'CCProveedor.borrar' => true,'CCProveedor.editar' => true];
+            $role1->permissions = ['comercializador.crear' => true,'comercializador.visualizar' => true,'comercializador.borrar' => true,'comercializador.editar' => true, 'solicitudesPendientesDeCobro.crear' => true,'solicitudesPendientesDeCobro.visualizar' => true,'solicitudesPendientesDeCobro.borrar' => true,'solicitudesPendientesDeCobro.editar' => true];
             $role->save();
             $role1->save();
             $role2->save();

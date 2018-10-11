@@ -30,7 +30,7 @@ class PagoProveedorContable extends Controller
                 ->where('movimientos.contabilizado_salida', '0')
                 ->whereRaw('movimientos.entrada = movimientos.salida')
                 ->groupBy('productos.id')
-                ->select('proovedores.id as id_proveedor', 'proovedores.razon_social', 'productos.id as producto', DB::raw('(SUM(movimientos.salida) * productos.ganancia / 100) as comision , (SUM(movimientos.salida) - (SUM(movimientos.salida) * productos.ganancia / 100)) as totalAPagar'))
+                ->select('proovedores.id as id_proveedor', 'proovedores.razon_social', 'productos.id as producto', DB::raw('ROUND((SUM(movimientos.salida) * productos.ganancia / 100),2) as comision , (SUM(movimientos.salida) - ROUND((SUM(movimientos.salida) * productos.ganancia / 100)),2) as totalAPagar'))
                 ->get();
 
             $proveedores = $productos->unique('id_proveedor');

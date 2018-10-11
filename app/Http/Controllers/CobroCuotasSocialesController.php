@@ -23,7 +23,7 @@ class CobroCuotasSocialesController extends Controller
             ->join('socios', 'socios.id', '=', 'cuotas.cuotable_id')
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->groupBy('organismos.id')
-            ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
+            ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'))
             ->where('cuotas.cuotable_type', 'App\Socios')
             ->where(function($query) use ($hoy){
                 $query->where('cuotas.fecha_vencimiento', '<=', $hoy)
@@ -40,7 +40,7 @@ class CobroCuotasSocialesController extends Controller
             ->where('cuotas.cuotable_type', 'App\Socios')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->groupBy('organismos.id')
-            ->select('organismos.id AS id_organismo', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))
+            ->select('organismos.id AS id_organismo', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'))
             ->get();
 
         $cobrado = $this->unirColecciones($cuotas, $movimientos, ['id_organismo'], ['totalCobrado' => 0]);
@@ -70,7 +70,7 @@ class CobroCuotasSocialesController extends Controller
             ->join('socios', 'socios.id', '=', 'cuotas.cuotable_id')
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->groupBy('socios.id')
-            ->select('socios.nombre AS socio', 'socios.id AS id_socio', 'socios.legajo', DB::raw('SUM(cuotas.importe) AS totalACobrar'))
+            ->select('socios.nombre AS socio', 'socios.id AS id_socio', 'socios.legajo', DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'))
             ->where('cuotas.cuotable_type', 'App\Socios')
             ->where(function($query) use ($hoy){
                 $query->where('cuotas.fecha_vencimiento', '<=', $hoy)
@@ -90,7 +90,7 @@ class CobroCuotasSocialesController extends Controller
             ->where('organismos.id', '=', $id)
             ->where('cuotas.cuotable_type', 'App\Socios')
             ->where('movimientos.identificadores_type', 'App\Cuotas')
-            ->select('socios.id AS id_socio', DB::raw('SUM(movimientos.entrada) AS totalCobrado'))
+            ->select('socios.id AS id_socio', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'))
             ->get();
         $cobrado = $this->unirColecciones($cuotas, $movimientos, ['id_socio'], ['totalCobrado' => 0]);
 
