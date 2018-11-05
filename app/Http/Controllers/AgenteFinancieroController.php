@@ -16,8 +16,11 @@ use App\Repositories\Eloquent\Repos\ProveedoresRepo;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Repositories\Eloquent\Repos\SolicitudRepo;
 use App\Repositories\Eloquent\Repos\VentasRepo;
+use App\Repositories\Eloquent\Socio;
 use App\Services\ProveedorService;
 use App\Services\SolicitudService;
+use App\Socios;
+use App\Solicitud;
 use App\Traits\FechasManager;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -79,11 +82,14 @@ class AgenteFinancieroController extends Controller
         $usuario = Sentinel::check();
         $agente =  $this->agenteGateway->findSolicitudesByAgenteFinanciero($usuario->id);
         return $agente->solicitudes->map(function($solicitud){
-            $socio = $solicitud->socio;
+            $solNueva = $solicitud;
+            $socio = $solNueva->socio;
+            $solNueva->socio = $socio;
+            $s = new Socios($socio->toArray());
             $nombre = explode(",", $socio->nombre);
-            $socio->nombre = $nombre[0];
-            $socio->apellido = $nombre[1];
-            $solicitud->socio = $socio;
+            $s->nombre = $nombre[0];
+            $s->apellido = $nombre[1];
+            $solicitud->socio = $s;
             return $solicitud;
         });
     }

@@ -9,6 +9,6 @@ class CategoriaCuotaSocial extends Model
 {
     protected $table = 'categoria_cuota_sociales';
 
-    protected $fillable = [ 'id_organismo', 'categoria', 'valor'];
+    protected $fillable = [ 'id_organismo', 'categoria', 'valor', 'nombre'];
 
 }

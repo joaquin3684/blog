@@ -16,6 +16,7 @@ class CreateABMOrganismosTable extends Migration
             $table->string('cuit')->nullable();
             $table->string('localidad')->nullable();
             $table->string('domicilio')->nullable();
+            $table->double('gasto_cobranza')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

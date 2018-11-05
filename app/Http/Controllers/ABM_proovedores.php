@@ -69,7 +69,10 @@ class ABM_proovedores extends Controller
     public function show($id)
     {
         $registro = Proovedores::with('usuario')->find($id);
-        return $registro;
+        $arr = $registro->toArray();
+        $arr['email'] = $arr['usuario']['email'];
+        $arr['usuario'] = $arr['usuario']['usuario'];
+        return $arr;
        
     }
 

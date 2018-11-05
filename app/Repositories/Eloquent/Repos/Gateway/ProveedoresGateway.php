@@ -17,7 +17,7 @@ class ProveedoresGateway extends Gateway
 
     public function findSolicitudesByAgenteFinanciero($id)
     {
-        return Proovedores::with('solicitudes.socio', 'solicitudes.producto')->where('usuario', $id)->get()->first();
+        return Proovedores::with('solicitudes.socio', 'solicitudes.producto')->where('usuario', $id)->first();
     }
 
     public function findProductos($id_proveedor)
