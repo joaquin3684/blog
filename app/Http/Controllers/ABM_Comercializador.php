@@ -39,7 +39,11 @@ class ABM_Comercializador extends Controller
 
     public function show($id)
     {
-        return Comercializador::with('usuario')->find($id);
+        $registro = Comercializador::with('usuario')->find($id);
+        $arr = $registro->toArray();
+        $arr['email'] = $arr['usuario']['email'];
+        $arr['usuario'] = $arr['usuario']['usuario'];
+        return $arr;
     }
 
     public function update(ValidacionABMcomercializador $request, $id)

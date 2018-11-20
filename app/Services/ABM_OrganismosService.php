@@ -27,6 +27,7 @@ class ABM_OrganismosService
         $cuotasSociales->each(function ($cuota) use ($id_organismo, &$i) {
             $cuota['id_organismo'] = $id_organismo;
             $cuota['categoria'] = $i;
+            $cuota['nombre'] = $cuota['nombre'];
             CategoriaCuotaSocial::create($cuota);
             $i++;
         });
