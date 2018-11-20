@@ -20,6 +20,7 @@
   <!-- Bootstrap core CSS -->
 {!! Html::style('js/angular-material/angular-material.min.css') !!}
   {!! Html::style('css/bootstrap.min.css') !!}
+  {!! Html::style('css/bootstrap.min.css', array('media' => 'print')) !!}
   {!! Html::style('fonts/css/font-awesome.min.css') !!}
     {!! Html::style('https://fonts.googleapis.com/css?family=PT+Sans+Caption') !!}
 
@@ -35,9 +36,7 @@
   {!! Html::style('css/floatexamples.css') !!}
   {!! Html::style('css/ng-table.min.css') !!}
   {!! Html::style('css/bootstrap-notifications-master/dist/stylesheets/bootstrap-notifications.min.css') !!}
-  {!! Html::style('css/bootstrap-notifications-master/dist/stylesheets/bootstrap-notifications.min.css') !!}
   {!! Html::style('css/loadingBar/loading-bar.css') !!}
-  
 
 
     

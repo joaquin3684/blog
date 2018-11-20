@@ -1,4 +1,3 @@
-
 var app = angular.module('Mutual').config(function ($interpolateProvider) {});
 app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja', 'angular-loading-bar');
 
@@ -8,22 +7,24 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
 
     $scope.fechadehoy = moment().format('YYYY-MM-DD');
-
+    $scope.anioHoy = moment().format('YYYY');
+    $scope.mesHoy = moment().locale('es').format('MMMM');
+    $scope.diaHoy = moment().format('DD');
     $scope.borrarFormulario = function () {
         $('#formulario')[0].reset();
     };
-    $scope.validarCuit = function(sexo) {
+    $scope.validarCuit = function (sexo) {
 
         if (sexo != undefined) $scope.sexo = sexo
         if (($scope.sexoMasculino == undefined && $scope.sexoFemenino == undefined) | $scope.dni == undefined) {
             return false;
         }
-        
+
 
         $scope.tipo = ($scope.sexo == 'masculino') ? 20 : 27;
 
         var acumulado = 0;
-        var digitos = $scope.tipo +''+ $scope.dni;
+        var digitos = $scope.tipo + '' + $scope.dni;
 
         for (var i = 0; i < digitos.length; i++) {
             acumulado += digitos[9 - i] * (2 + (i % 6));
@@ -32,10 +33,10 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         var verif = 11 - (acumulado % 11);
         if (verif == 11) {
             verif = 0;
-        }else if(verif ==10){
+        } else if (verif == 10) {
             verif = undefined
             $scope.tipo = undefined
-            
+
         }
 
         $scope.codigoVerif = verif;
@@ -68,8 +69,8 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
             });
         }
     }
-    
-    
+
+
     $scope.ExportarPDF = function (pantalla) {
         UserSrv.ExportPDF(pantalla);
     }
@@ -142,14 +143,18 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
             $scope.traerElementos();
         }, function errorCallback(data) {
             UserSrv.MostrarError(data)
-                        console.log(data);
+            console.log(data);
             $scope.errores = data.data;
         });
 
     }
 
-   $scope.guardarDatosBaja =  function(){$scope.elemABorrar = this.abm}
-    $scope.delete = function (id) {$scope.enviarFormulario('Borrar', id)}
+    $scope.guardarDatosBaja = function () {
+        $scope.elemABorrar = this.abm
+    }
+    $scope.delete = function (id) {
+        $scope.enviarFormulario('Borrar', id)
+    }
 
     $scope.cambiarFecha = function (dato) {
         moment.locale('es');
@@ -162,6 +167,11 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         dato.apellido = dato.nombre.split(',').shift()
         dato.nombre = dato.nombre.split(',').pop()
         return dato;
+    }
+
+    $scope.formatDate = function (fecha) {
+        var fechaFormateada = moment(fecha).format('DD/MM/YYYY');
+        return fechaFormateada;
     }
 
     $scope.traerElementos = function (relaciones) {
@@ -259,6 +269,20 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         newWin.document.close();
 
     };
+
+    $scope.generarArchivoSocio = function () {
+        /*html2canvas($('#pagina').get(0)).then(function (canvas) {
+            var imgData = canvas.toDataURL(
+                'image/jpeg');
+            var doc = new jsPDF('p', 'mm');
+            doc.addImage(imgData, 'JPEG', 10, 10);
+            doc.save('sample-file.pdf');
+        });*/
+        w = window.open();
+        w.document.write(document.getElementById('archivoSocioImprimir').outerHTML);
+        w.print();
+        w.close();
+    }
 
 
 
