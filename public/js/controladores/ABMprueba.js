@@ -76,14 +76,13 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
     }
 
     $scope.getCategorias = function () {
-        var idorganismo = document.getElementById('forro').value;
-        console.log(idorganismo);
-        for (var i = 0; i < $scope.organismosines.length; i++) {
-            if ($scope.organismosines[i].id == idorganismo) {
-                $scope.categorias = $scope.organismosines[i].cuotas;
-            }
-        }
+        $scope.categorias = $scope.organismosines.find(o => o.id == Number($scope.orpi)).cuotas
         console.log($scope.categorias);
+    }
+
+    $scope.getNombreCategoria = function (id) {
+        var algo = $scope.categorias.find(c => c.categoria == Number(id)).nombre
+        return algo
     }
 
 
@@ -128,6 +127,11 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
                 console.log(response);
                 llenarFormulario('formularioEditar', response.data);
+                if ($scope.organismosines) {
+                    $scope.orpi = response.data.organismo.id
+                    $scope.categoria = response.data.organismo.cuotas.find(c => c.categoria == response.data.valor)
+                    $scope.getCategorias()
+                }
             }
 
             $scope.mensaje = response;

@@ -288,7 +288,7 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="categoriacomplete"
                                                     name="valor" ng-required="true">
-                                                    <option value="{{x.valor}}" ng-repeat="x in categorias" ng-bind="x.categoria">
+                                                    <option value="{{x.categoria}}" ng-repeat="x in categorias" ng-bind="x.nombre">
 
                                                     </option>
                                                 </select>
@@ -304,7 +304,6 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                                             </div>
                                         </div>
                                     </form>
-                                    <button ng-click="generarArchivoSocio()" type="button">Generar</button>
                                     @endverbatim
 
                                 </div>
@@ -679,7 +678,7 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <select id="forro" ng-change="getCategorias()" ng-model="orpi" name="id_organismo"
                                     class="form-control col-md-7 col-xs-12" required>
-                                    <option value="{{x.id}}" ng-repeat="x in organismosines" ng-selected="organismo.id == x.id">
+                                    <option value="{{x.id}}" ng-repeat="x in organismosines" ng-selected="orpi == x.id">
                                         {{x.nombre}}
                                     </option>
                                 </select>
@@ -690,10 +689,10 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                                 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select class="form-control col-sm-3 col-md-7 col-xs-12" ng-model="categoria" name="valor"
+                                <select class="form-control col-sm-3 col-md-7 col-xs-12"  name="valor"
                                     ng-required="true" required>
-                                    <option value="{{x.valor}}" ng-repeat="x in categorias" ng-bind="x.categoria">
-
+                                    <option value="{{x.categoria}}" ng-repeat="x in categorias" ng-selected="categoria.id == x.id">
+                                        {{x.nombre}}
                                     </option>
                                 </select>
                             </div>
@@ -915,7 +914,7 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;mso-spacerun:yes;">
-                                    CATEGORIA: {{categoriacomplete}}</span>
+                                    CATEGORIA: {{getNombreCategorias(categoriacomplete)}}</span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;mso-spacerun:yes;">
@@ -1199,9 +1198,8 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                     </div>
                 </div>
             </div>
-            <div id="pagina2" style="height:297mm;width:210mm; margin:10mm">
+           <!-- <div id="pagina2" style="height:297mm;width:210mm; margin:10mm">
                 <div class="Section3" style="clear: both; page-break-before: always">
-                    <!--Header-->
                     <div class="row" style="display:flex">
                         <div class="col">
                             <p style="text-align:left;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;line-height:normal;margin-top:0pt;margin-bottom:0pt;margin-left:5pt;"><img
@@ -1224,8 +1222,6 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                             </div>
                         </div>
                     </div>
-
-                    <!--Recuadro-->
                     <div style="border: 1px solid black!important;">
                         <p style="text-align:right;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;line-height:13.5pt;margin-top:0pt;margin-bottom:0pt;margin-left:115.65pt;margin-right:8.45pt;"><span
                                 style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:13.5pt;">Buenos
@@ -1961,7 +1957,7 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
 
             </div>
 
-        </div>
+        </div> -->
     </div>
 @endverbatim
 </div>

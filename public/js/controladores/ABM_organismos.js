@@ -155,26 +155,21 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
 
   $scope.cuotas = [{
-    //'categoria': '',
+    'nombre': '',
     'valor': ''
   }]
   var cantComponentes = 1
   $scope.agregarHtml = function (destino) {
 
     destino.push({
-      //'categoria': '',
+      'nombre': '',
       'valor': ''
     })
 
   }
 
-  $scope.eliminarHtml = function (clon, array) {
+  $scope.eliminarHtml = (index) => $scope.cuotas.splice(index)
 
-    var algo = $(clon);
-
-    algo[$(clon).length - 1].remove();
-    array.pop();
-  };
 
 
 });

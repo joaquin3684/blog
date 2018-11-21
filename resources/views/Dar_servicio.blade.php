@@ -145,7 +145,6 @@
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                                     <input class="form-control col-md-7 col-xs-12" id="vencimiento"
                                                            name="vencimiento" ng-model="vencimiento" type="date"
-                                                           min="{[{fechaActual}]}"
                                                            required>
                                                     </input>
                                                 </div>

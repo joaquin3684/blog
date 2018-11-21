@@ -179,7 +179,7 @@
                       </li>
                       @endif
                       @if(Sentinel::check()->hasAccess('proovedores.*'))
-                      <li><a href="proovedores">Proovedores</a></li>
+                      <li><a href="proovedores">Proveedores</a></li>
                       @endif
                       @if(Sentinel::check()->hasAccess('productos.*'))
                       <li><a href="productos">Productos</a></li>

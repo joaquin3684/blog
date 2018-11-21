@@ -101,23 +101,24 @@
                       </div>
                     </div>
 
-                    <div id="aClonar" ng-repeat="cuota in cuotas">
-                      <div class="item form-group clonado">
+                    <div ng-repeat="cuota in cuotas">
+                      <div class="item form-group ">
 
                         <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social
                           <span class="required">*</span>
                         </label>
-                        <!-- <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
-                              <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuota.categoria" ><div ng-cloak>{{errores.cuota_social[0]}}</div>
-                            </div> -->
-                        <div class="col-md-6 col-sm-6 col-xs-12" id="valor">
-                          <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="1234" ng-model="cuota.valor"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                        <div class="col-md-3 col-sm-3 col-xs-6">
+                          <input type="text" class="form-control col-md-2 col-xs-12" placeholder="Nombre" ng-model="cuota.nombre"><div ng-cloak>{{errores.cuota_social[0]}}</div>
                         </div>
+                        <div class="col-md-3 col-sm-3 col-xs-6">
+                          <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Valor" ng-model="cuota.valor"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                        </div>
+                        
                       </div>
                     </div>
 
 
-                    <button id="sumahtml" type="button" class="btn btn-danger" style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado', cuotas)">
+                    <button id="sumahtml" type="button" class="btn btn-danger" style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml($index)">
                       <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                     </button>
                     <button id="sumahtml" type="button" class="btn btn-primary" style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml(cuotas)">
@@ -373,15 +374,15 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social
                   <span class="required">*</span>
                 </label>
-                <!-- <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
-                          <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Categoria"  ng-model="cuota.categoria"><div ng-cloak>{{errores.cuota_social[0]}}</div>
-                        </div> -->
-                <div class="col-md-6 col-sm-6 col-xs-12" id="valor">
-                  <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Ingrese el valor" ng-model="cuota.valor"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                
+                <div class="col-md-3 col-sm-3 col-xs-6" id="valor">
+                  <input type="text" class="form-control col-md-2 col-xs-12" placeholder="Nombre" ng-model="cuota.nombre"><div ng-cloak>{{errores.cuota_social[0]}}</div>
                 </div>
+                <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
+                          <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Valor"  ng-model="cuota.valor"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                        </div>
               </div>
             </div>
-
 
             <!-- <button id="sumahtml" type="button" class="btn btn-danger"  style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado1', abmConsultado.cuotas)">
                       <span class="glyphicon glyphicon-minus" aria-hidden="true" ></span>

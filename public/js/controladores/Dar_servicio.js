@@ -5,7 +5,7 @@ app.requires.push('ngMaterial', 'Mutual.services', 'angular-loading-bar');
 app.controller('Dar_servicio', function ($scope, $http, $compile, $q, UserSrv) {
     //moment.locale('es');
 
-    $scope.vencimiento = new Date(moment().format('YYYY-MM-DD'));
+    $scope.vencimiento = moment(moment().format('YYYY') + '-' + moment().format('MM') + '-20').toDate();
     $scope.fechaActual = moment().format('YYYY-MM-DD');
     $scope.mostrar = false;
 
@@ -30,7 +30,7 @@ app.controller('Dar_servicio', function ($scope, $http, $compile, $q, UserSrv) {
         });
     }
     $scope.calcularVencimiento = function () {
-        $scope.vencimiento = new Date(moment().add(($scope.nro_cuotas + 1 || 0), 'months').format('YYYY-MM-DD'));
+        $scope.vencimiento = moment($scope.vencimiento).add(($scope.nro_cuotas + 1 || 0), 'months').toDate();
     }
     $scope.traerProductos = function (searchText) {
         console.log($scope.proovedor);
