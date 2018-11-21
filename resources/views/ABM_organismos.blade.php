@@ -93,7 +93,13 @@
                         <input required type="text" id="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="CABA"><div ng-cloak>{{errores.localidad[0]}}</div>
                       </div>
                     </div>
-
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comision">Gasto por cobranza
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input  type="number" id="comision" ng-model="comision" class="form-control col-md-7 col-xs-12" placeholder="10"><div ng-cloak>{{errores.comision[0]}}</div>
+                      </div>
+                    </div>
 
                     <div id="aClonar" ng-repeat="cuota in cuotas">
                       <div class="item form-group clonado">
@@ -352,6 +358,13 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" id="localidad" ng-model="abmConsultado.localidad" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.localidad[0]}}</div>
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comision">Gasto por cobranza
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="number" id="comision" ng-model="abmConsultado.comision" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.comision[0]}}</div>
               </div>
             </div>
 

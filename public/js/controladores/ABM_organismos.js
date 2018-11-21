@@ -34,6 +34,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       'domicilio': $scope.domicilio,
       'localidad': $scope.localidad,
       'cuota_social': $scope.cuotas,
+      'comision': $scope.comision
     };
 
     return $http({
@@ -113,6 +114,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       'cuit': $scope.abmConsultado.cuit,
       'domicilio': $scope.abmConsultado.domicilio,
       'localidad': $scope.abmConsultado.localidad,
+      'comision': $scope.abmConsultado.comision,
       'cuota_social': $scope.abmConsultado.cuotas,
       'id': $scope.abmConsultado.id,
     };
@@ -131,7 +133,9 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
   }
 
-  $scope.guardarDatosBaja = function () { $scope.elemABorrar = this.abm }
+  $scope.guardarDatosBaja = function () {
+    $scope.elemABorrar = this.abm
+  }
   $scope.delete = function (id) {
     $scope.borrarElemento(id)
   }
