@@ -67,6 +67,7 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
     $scope.generarArchivo = function (_movimientos, proveedor) {
         let movimientos = _movimientos.map(
             mov => ({
+                'algo': null,
                 'Socio': mov.socio,
                 'Dni': mov.dni,
                 'Organismo': mov.organismo,
@@ -79,9 +80,11 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
             })
         )
         let sumTotalCobrado = _movimientos.reduce((acum, mov) => acum + mov.totalCobrado, 0)
-        let sumImporte = _movimientos.reduce((acum, mov) => acum + mov.importe, 0)
-        let diferencia = sumImporte - sumTotalCobrado
+        let sumImporte = proveedor.totalAPagar
+        let diferencia = sumTotalCobrado - sumImporte
+        let porcentaje = (sumImporte * 100 / sumTotalCobrado).toFixed(2)
         movimientos.push({
+            'algo': null,
             'Socio': '',
             'Dni': '',
             'Organismo': '',
@@ -92,16 +95,18 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
             'Monto_de_cuota': sumTotalCobrado,
         })
         movimientos.push({
+            'algo': null,
             'Socio': '',
             'Dni': '',
             'Organismo': '',
             'Nro_de_servicio': '',
             'Nro_de_cuota': '',
             'Motivo': '',
-            'Importe_descontado': 'Bonif 4%',
+            'Importe_descontado': 'Bonif ' + porcentaje + '%',
             'Monto_de_cuota': sumImporte,
         })
         movimientos.push({
+            'algo': null,
             'Socio': '',
             'Dni': '',
             'Organismo': '',
@@ -112,7 +117,7 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
             'Monto_de_cuota': diferencia,
         })
         var nombreHoja = 'Hoja'
-        var nombreArchivo = 'Cobranza: ' + proveedor
+        var nombreArchivo = 'Cobranza: ' + proveedor.proovedor
 
         ManejoExcell.exportarExcell(movimientos, nombreHoja, nombreArchivo)
     };
@@ -126,7 +131,7 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
                     'id': p.id_proovedor
                 }
             }).then(
-                movimientos => $scope.generarArchivo(movimientos.data, p.proovedor)
+                movimientos => $scope.generarArchivo(movimientos.data, p)
             )
         })
     }
