@@ -1,257 +1,258 @@
-var app = angular.module('Mutual').config(function($interpolateProvider){});
+var app = angular.module('Mutual').config(function ($interpolateProvider) {});
 app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ManejoExcell', 'angular-loading-bar');
 app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTableParams, $filter, UserSrv, ManejoExcell) {
 
-$scope.ActualDate = moment().format('YYYY-MM-DD');
+    $scope.ActualDate = moment().format('YYYY-MM-DD');
 
-$scope.actualizarOrganismos= function(){
-  if($scope.sociosModificados){
-    $scope.pullOrganismos();
-    $scope.sociosModificados = false;
+    $scope.actualizarOrganismos = function () {
+        if ($scope.sociosModificados) {
+            $scope.pullOrganismos();
+            $scope.sociosModificados = false;
 
-  };
-  if($scope.ventasModificadas){
-    $scope.pullOrganismos();
-    $scope.ventasModificadas = false;
-  };
-  $scope.sumarMontosOrganismos();
-}
+        };
+        if ($scope.ventasModificadas) {
+            $scope.pullOrganismos();
+            $scope.ventasModificadas = false;
+        };
+        $scope.sumarMontosOrganismos();
+    }
 
-$scope.actualizarSocios = function(){
-  if($scope.ventasModificadas){
-    $scope.PullSocios($scope.organismoActual.id, $scope.organismoActual.nombre);
-  }
-}
-
-$scope.modificarDatos= function(){
-    $scope.asignarMontosACobrar()
-}
-
-buscarMonto = function(id_socio){
-    var monto = 0
-    for(index in $scope.archivoExcell){ 
-        if ($scope.archivoExcell[index].id_socio == id_socio) {
-         monto = Number($scope.archivoExcell[index].importe);
-         break
+    $scope.actualizarSocios = function () {
+        if ($scope.ventasModificadas) {
+            $scope.PullSocios($scope.organismoActual.id, $scope.organismoActual.nombre);
         }
-    };
-    return monto
-}
-$scope.asignarMontosACobrar= function(){
-    if ($scope.archivoExcell[0].id_organismo == $scope.organismoActual.id) {
+    }
+
+    $scope.modificarDatos = function () {
+        $scope.asignarMontosACobrar()
+    }
+
+    buscarMonto = function (legajo) {
+        let socio = $scope.archivoExcell.find(socio => Number(socio.legajo) === legajo)
+        if (socio) {
+            return Number(socio.monto)
+        } else {
+            UserSrv.MostrarMensaje("Error", "No se encuentra ningun socio con el legajo: " + legajo + ".", 'Error', 'mensaje', undefined);
+            return 0
+        }
+    }
+
+    $scope.asignarMontosACobrar = function () {
         $scope.socios.forEach(socio => {
-            socio.montoACobrar = buscarMonto(socio.id_socio)
+            socio.montoACobrar = buscarMonto(socio.legajo)
         });
-    }else{
-        UserSrv.MostrarMensaje("Error", "Debe importarse una planilla del organismo: "+$scope.organismoactual+".", 'Error', 'mensaje', undefined);
-    }
-}
 
-$scope.sumarMontosACobrar = function (elemsFiltrados, elems){
- var sumaMontoACobrar = 0;
- var sumaMontoTotal = 0;
-  elemsFiltrados.forEach(function(elem) {
-    sumaMontoTotal += elem.totalACobrar;
-  });
-  elems.forEach(function(elem) {
-    if(elem.checked){
-      sumaMontoACobrar += elem.montoACobrar;
     }
 
-  });
 
-    $scope.sumaMontoTotal = sumaMontoTotal.toFixed(2);
-    $scope.sumaMontoACobrar = sumaMontoACobrar.toFixed(2);
-}
+    $scope.sumarMontosACobrar = function (elemsFiltrados, elems) {
+        var sumaMontoACobrar = 0;
+        var sumaMontoTotal = 0;
+        elemsFiltrados.forEach(function (elem) {
+            sumaMontoTotal += elem.totalACobrar;
+        });
+        elems.forEach(function (elem) {
+            if (elem.checked) {
+                sumaMontoACobrar += elem.montoACobrar;
+            }
+
+        });
+
+        $scope.sumaMontoTotal = sumaMontoTotal.toFixed(2);
+        $scope.sumaMontoACobrar = sumaMontoACobrar.toFixed(2);
+    }
 
 
-$scope.cambiarChecks = function(check, elems){
-  elems.forEach(function(elem) {
-    elem.checked = check;
-});
-};
+    $scope.cambiarChecks = function (check, elems) {
+        elems.forEach(function (elem) {
+            elem.checked = check;
+        });
+    };
 
-//mostrarPorSocio en todos mando el id del de atras boludo es asi
+    //mostrarPorSocio en todos mando el id del de atras boludo es asi
     //mostrarPorVenta
     //mostrarPorCuotas
-// ESTAS FUNCIONES SON PARA DEFINIR LOS PARAMETROS DE BUSQUEDA EN LA FUNCION QUERY
-$scope.pullOrganismos = function (){
+    // ESTAS FUNCIONES SON PARA DEFINIR LOS PARAMETROS DE BUSQUEDA EN LA FUNCION QUERY
+    $scope.pullOrganismos = function () {
 
-$http({
-         url: 'cobrar/datos',
-         method: 'post'
-         }).then(function successCallback(response)
-            {
-              console.log(response);
-              //  console.log(response.data.ventas);
-               if(typeof response.data === 'string')
-               {
-                  return [];
-               }
-               else
-               {
-                  // console.log(response);
-                  $scope.organismos = response.data;
-                  console.log($scope.organismos);
-                  $scope.paramsOrganismos = new NgTableParams({
-                       page: 1,
-                       count: 10
-                   }, {
-                       getData: function (params) {
-                         var filterObj = params.filter(),
-                         filteredData = $filter('filter')($scope.organismos, filterObj);
-                         var sortObj = params.orderBy();
-                           orderedData = $filter('orderBy')(filteredData, sortObj);
-                           $scope.paramsOrganismos.total(orderedData.length);
-                           $scope.organismosFiltrados = orderedData;
-                           $scope.sumarMontosOrganismos();
-                           return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                       }
-                   });
-               }
+        $http({
+            url: 'cobrar/datos',
+            method: 'post'
+        }).then(function successCallback(response) {
+            console.log(response);
+            //  console.log(response.data.ventas);
+            if (typeof response.data === 'string') {
+                return [];
+            } else {
+                // console.log(response);
+                $scope.organismos = response.data;
+                console.log($scope.organismos);
+                $scope.paramsOrganismos = new NgTableParams({
+                    page: 1,
+                    count: 10
+                }, {
+                    getData: function (params) {
+                        var filterObj = params.filter(),
+                            filteredData = $filter('filter')($scope.organismos, filterObj);
+                        var sortObj = params.orderBy();
+                        orderedData = $filter('orderBy')(filteredData, sortObj);
+                        $scope.paramsOrganismos.total(orderedData.length);
+                        $scope.organismosFiltrados = orderedData;
+                        $scope.sumarMontosOrganismos();
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    }
+                });
+            }
 
-            }, function errorCallback(data)
-            {
-                UserSrv.MostrarError(data)
-               console.log(data.data);
-            });
-}
-
-$scope.sumarMontosOrganismos = function(){
-  //Sumar montos de organismos
-  var sumaTotalCobrado = 0;
-  var sumaTotalACobrar = 0;
-  var sumaDiferencia = 0;
-  console.log($scope.organismos);
-   $scope.organismosFiltrados.forEach(function(elem) {
-     sumaTotalCobrado += elem.totalCobrado;
-     sumaTotalACobrar += elem.totalACobrar;
-     sumaDiferencia += elem.diferencia;
-
-   });
-    $scope.sumaTotalACobrar = sumaTotalACobrar.toFixed(2);
-    $scope.sumaTotalCobrado = sumaTotalCobrado.toFixed(2);
-    $scope.sumaDiferencia = sumaDiferencia.toFixed(2);
-}
-
-
-$scope.cobrarSocios = function(){
-
-  var data = [];
-  $scope.socios.forEach(function(entry) {
-
-    if(entry.checked){
-      data.push({
-        'id': entry.id_socio,
-        'monto': entry.montoACobrar,
-      });
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data)
+            console.log(data.data);
+        });
     }
 
-  });
+    $scope.sumarMontosOrganismos = function () {
+        //Sumar montos de organismos
+        var sumaTotalCobrado = 0;
+        var sumaTotalACobrar = 0;
+        var sumaDiferencia = 0;
+        console.log($scope.organismos);
+        $scope.organismosFiltrados.forEach(function (elem) {
+            sumaTotalCobrado += elem.totalCobrado;
+            sumaTotalACobrar += elem.totalACobrar;
+            sumaDiferencia += elem.diferencia;
 
-      console.log(data);
-      $http({
-        url:'cobrar/cobroPorPrioridad',
-        method:'post',
-        data:data,
-      }).then(function successCallback(response){
-        UserSrv.MostrarMensaje("OK","Se ha realizado el cobro correctamente.","OK","mensaje");
-        $scope.PullSocios($scope.organismoActual.id, $scope.organismoActual.nombre);
-        $scope.sociosModificados = true;
-      },function errorCallback(data){
-          UserSrv.MostrarError(data)
-        console.log(data.data);
-      });
-
-
-}
-
-$scope.cobrarVentas = function(){
-
-  var data = [];
-  $scope.ventas.forEach(function(entry) {
-
-    if(entry.checked){
-      data.push({
-        'id': entry.id_venta,
-        'monto': entry.montoACobrar,
-      });
+        });
+        $scope.sumaTotalACobrar = sumaTotalACobrar.toFixed(2);
+        $scope.sumaTotalCobrado = sumaTotalCobrado.toFixed(2);
+        $scope.sumaDiferencia = sumaDiferencia.toFixed(2);
     }
-    });
-      $http({
-        url:'cobrar/cobroPorVenta',
-        method:'post',
-        data:data,
-      }).then(function successCallback(response){
-        UserSrv.MostrarMensaje("OK","Se ha realizado el cobro correctamente.","OK","mensaje");
-        $scope.PullVentas($scope.socioActual.id,$scope.socioActual.nombre );
-        $scope.ventasModificadas = true;
-      },function errorCallback(data){
-          UserSrv.MostrarError(data)
-        console.log(data.data);
-      });
-}
 
-
-$scope.PullSocios = function(idorganismo,nombreorganismo){
-
-    $scope.organismoActual = {
-      id: idorganismo,
-      nombre: nombreorganismo
-    }
-    $http({
-        url: 'cobrar/porSocio',
-        method: 'post',
-        data: {'id': idorganismo},
-    }).then(function successCallback(response)
-    {
-      console.log("Este");
-        console.log(response);
-        if(typeof response.data === 'string')
-        {
-            return [];
-        }
-        else
-        {
-            $scope.socios = [];
-            response.data.forEach(function(entry) {
-              $scope.socios.push({
-                'id_socio': entry.id_socio,
-                'totalACobrar': entry.diferencia,
-                'montoACobrar': entry.diferencia,
-                'legajo': entry.legajo,
-                'checked': true,
-                'socio': entry.socio,
-              })
-            });
-
-            console.log($scope.socios);
-            $scope.vistaactual = 'Socios';
-            $scope.organismoactual = nombreorganismo;
-            $scope.paramsSocios = new NgTableParams({
-                page: 1,
-                count: 10
-            }, {
-                getData: function (params) {
-                    var filterObj = params.filter(),
-                    filteredData = $filter('filter')($scope.socios, filterObj);
-                    var sortObj = params.orderBy();
-                    orderedData = $filter('orderBy')(filteredData, sortObj);
-                    $scope.paramsSocios.total(orderedData.length);
-                    $scope.sociosFiltrados= orderedData;
-
-                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                }
-            });
+    $scope.agregarObservaciones = () => {
+        if ($scope.socios.some(socio => socio.montoACobrar !== socio.totalACobrar)) {
+            $scope.sociosConMontoDistintoAlTotal = $scope.socios.filter(socio => socio.montoACobrar != socio.totalACobrar)
+            $('#modalObservaciones').modal('show')
+        } else {
+            $scope.cobrarSocios()
         }
 
-    }, function errorCallback(data)
-    {
-        console.log(data.data);
-    });
+    }
 
-}
-    $scope.setVista = function(vista){
+
+    $scope.cobrarSocios = function () {
+
+        var data = [];
+        $scope.socios.forEach(function (entry) {
+
+            if (entry.checked) {
+                data.push({
+                    'id': entry.id_socio,
+                    'monto': entry.montoACobrar,
+                    'observacion': entry.observacion || null
+                });
+            }
+
+        });
+
+        console.log(data);
+        $http({
+            url: 'cobrar/cobroPorPrioridad',
+            method: 'post',
+            data: data,
+        }).then(function successCallback(response) {
+            UserSrv.MostrarMensaje("OK", "Se ha realizado el cobro correctamente.", "OK", "mensaje");
+            $scope.PullSocios($scope.organismoActual.id, $scope.organismoActual.nombre);
+            $scope.sociosModificados = true;
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data)
+            console.log(data.data);
+        });
+
+
+    }
+
+    $scope.cobrarVentas = function () {
+
+        var data = [];
+        $scope.ventas.forEach(function (entry) {
+
+            if (entry.checked) {
+                data.push({
+                    'id': entry.id_venta,
+                    'monto': entry.montoACobrar,
+                });
+            }
+        });
+        $http({
+            url: 'cobrar/cobroPorVenta',
+            method: 'post',
+            data: data,
+        }).then(function successCallback(response) {
+            UserSrv.MostrarMensaje("OK", "Se ha realizado el cobro correctamente.", "OK", "mensaje");
+            $scope.PullVentas($scope.socioActual.id, $scope.socioActual.nombre);
+            $scope.ventasModificadas = true;
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data)
+            console.log(data.data);
+        });
+    }
+
+
+    $scope.PullSocios = function (idorganismo, nombreorganismo) {
+
+        $scope.organismoActual = {
+            id: idorganismo,
+            nombre: nombreorganismo
+        }
+        $http({
+            url: 'cobrar/porSocio',
+            method: 'post',
+            data: {
+                'id': idorganismo
+            },
+        }).then(function successCallback(response) {
+            console.log("Este");
+            console.log(response);
+            if (typeof response.data === 'string') {
+                return [];
+            } else {
+                $scope.socios = [];
+                response.data.forEach(function (entry) {
+                    $scope.socios.push({
+                        'id_socio': entry.id_socio,
+                        'totalACobrar': entry.diferencia,
+                        'montoACobrar': entry.diferencia,
+                        'legajo': entry.legajo,
+                        'checked': true,
+                        'socio': entry.socio,
+                    })
+                });
+
+                console.log($scope.socios);
+                $scope.vistaactual = 'Socios';
+                $scope.organismoactual = nombreorganismo;
+                $scope.paramsSocios = new NgTableParams({
+                    page: 1,
+                    count: 10
+                }, {
+                    getData: function (params) {
+                        var filterObj = params.filter(),
+                            filteredData = $filter('filter')($scope.socios, filterObj);
+                        var sortObj = params.orderBy();
+                        orderedData = $filter('orderBy')(filteredData, sortObj);
+                        $scope.paramsSocios.total(orderedData.length);
+                        $scope.sociosFiltrados = orderedData;
+
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    }
+                });
+            }
+
+        }, function errorCallback(data) {
+            console.log(data.data);
+        });
+
+    }
+    $scope.setVista = function (vista) {
 
         $scope.vistaactual = vista;
 
@@ -259,35 +260,33 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
 
 
-    $scope.PullVentas = function(idsocio,nombresocio){
+    $scope.PullVentas = function (idsocio, nombresocio) {
 
-      $scope.socioActual = {
-          id: idsocio,
-          nombre: nombresocio
+        $scope.socioActual = {
+            id: idsocio,
+            nombre: nombresocio
         }
         $http({
             url: 'cobrar/mostrarPorVenta',
             method: 'post',
-            data: {'id': idsocio}
-        }).then(function successCallback(response)
-        {
-
-            if(typeof response.data === 'string')
-            {
-                return [];
+            data: {
+                'id': idsocio
             }
-            else
-            {
+        }).then(function successCallback(response) {
+
+            if (typeof response.data === 'string') {
+                return [];
+            } else {
                 // console.log(response);
                 $scope.ventas = [];
-                response.data.forEach(function(entry) {
-                  $scope.ventas.push({
-                    'producto': entry.producto,
-                    'totalACobrar': entry.diferencia,
-                    'montoACobrar': entry.diferencia,
-                    'id_venta': entry.id_venta,
-                    'checked': true,
-                  })
+                response.data.forEach(function (entry) {
+                    $scope.ventas.push({
+                        'producto': entry.producto,
+                        'totalACobrar': entry.diferencia,
+                        'montoACobrar': entry.diferencia,
+                        'id_venta': entry.id_venta,
+                        'checked': true,
+                    })
                 });
                 console.log($scope.ventas);
                 console.log(response.data);
@@ -301,9 +300,9 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                     count: 10
                 }, {
                     getData: function (params) {
-                      var filterObj = params.filter(),
-                      filteredData = $filter('filter')($scope.ventas, filterObj);
-                      var sortObj = params.orderBy();
+                        var filterObj = params.filter(),
+                            filteredData = $filter('filter')($scope.ventas, filterObj);
+                        var sortObj = params.orderBy();
                         orderedData = $filter('orderBy')(filteredData, sortObj);
                         $scope.paramsVentas.total(orderedData.length);
                         $scope.ventasFiltradas = orderedData;
@@ -313,8 +312,7 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
                 });
             }
 
-        }, function errorCallback(data)
-        {
+        }, function errorCallback(data) {
             UserSrv.MostrarError(data)
             console.log(data.data);
         });
@@ -325,9 +323,9 @@ $scope.PullSocios = function(idorganismo,nombreorganismo){
 
 
     //PARAMETROS INICIALES
-        $scope.vistaactual = 'Organismos';
-        var self = this;
-        $scope.pullOrganismos();
+    $scope.vistaactual = 'Organismos';
+    var self = this;
+    $scope.pullOrganismos();
 
 
     //EMPIEZA EL CODIGO DEL EXPANDIR

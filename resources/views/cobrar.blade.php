@@ -1,6 +1,35 @@
 @extends('welcome') @section('contenido') {!! Html::script('js/controladores/cobrar.js') !!}
 
 <div class="nav-md" ng-controller="cobrar">
+<!-- Modal -->
+@verbatim
+<div class="modal fade" id="modalObservaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Observaciones</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 30px">
+        <div class="container">
+            <div class="row" ng-repeat="socio in socios" ng-hide="socio.montoACobrar === socio.totalACobrar">
+                <div class="col-lg-6 col-xl-3">{{socio.socio}}: </div>
+                <div class="col-lg-6">
+                    <input required class="form-control col-md-7 col-xs-12" placeholder="Observacion"
+                          type="text" ng-model="socio.observacion">
+                    </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="cobrarSocios()">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endverbatim
     <div class="container body">
         <div class="main_container">
 
@@ -185,7 +214,7 @@
                             <br />
                             <br /> 
                             @endverbatim @if(Sentinel::check()->hasAccess('cobrar.crear'))
-                            <button type="button" class="btn btn-primary" ng-click="cobrarSocios()">Cobrar</button>
+                            <button type="button" class="btn btn-primary" ng-click="agregarObservaciones()">Cobrar</button>
                             @endif @verbatim
                         </div>
 
@@ -264,4 +293,9 @@
 </div>
 
 </div>
+
+
+
 @endsection
+
+

@@ -97,7 +97,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comision">Gasto por cobranza
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input  type="number" id="comision" ng-model="comision" class="form-control col-md-7 col-xs-12" placeholder="10"><div ng-cloak>{{errores.comision[0]}}</div>
+                        <input  type="number" id="comision" ng-model="gasto_cobranza" class="form-control col-md-7 col-xs-12" placeholder="10"><div ng-cloak>{{errores.gasto_cobranza[0]}}</div>
                       </div>
                     </div>
 
@@ -365,7 +365,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comision">Gasto por cobranza
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="comision" ng-model="abmConsultado.comision" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.comision[0]}}</div>
+                <input type="number" id="comision" ng-model="abmConsultado.gasto_cobranza" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.gasto_cobranza[0]}}</div>
               </div>
             </div>
 

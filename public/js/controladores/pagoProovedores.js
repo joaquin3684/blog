@@ -1,57 +1,55 @@
-var app = angular.module('Mutual').config(function($interpolateProvider){});
-app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'angular-loading-bar');
-app.controller('pago_proovedores', function($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv) {
+var app = angular.module('Mutual').config(function ($interpolateProvider) {});
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ManejoExcell', 'angular-loading-bar');
+app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ManejoExcell) {
 
-  $scope.sumarMontosACobrar = function (){
-   var sumaMontoTotal = 0;
-    $scope.ArrayPago.forEach(function(elem) {
-      sumaMontoTotal += elem.total;
-    });
+    $scope.sumarMontosACobrar = function () {
+        var sumaMontoTotal = 0;
+        $scope.ArrayPago.forEach(function (elem) {
+            sumaMontoTotal += elem.total;
+        });
 
-      $scope.sumaMontoTotal = sumaMontoTotal.toFixed(2);
-  }
+        $scope.sumaMontoTotal = sumaMontoTotal.toFixed(2);
+    }
 
-  $scope.cambiarFecha = function(dato){
-     moment.locale('es');
-     fechaVencimiento= dato.fecha_vencimiento;
-     var fechaVencimiento= moment(fechaVencimiento, 'YYYY-MM-DD').format('L');
-     dato.fecha_vencimiento= fechaVencimiento;
-     return dato;
-   }
+    $scope.cambiarFecha = function (dato) {
+        moment.locale('es');
+        fechaVencimiento = dato.fecha_vencimiento;
+        var fechaVencimiento = moment(fechaVencimiento, 'YYYY-MM-DD').format('L');
+        dato.fecha_vencimiento = fechaVencimiento;
+        return dato;
+    }
 
-$scope.ArrayPago = [];
-    $scope.pullProveedores = function (){
+    $scope.ArrayPago = [];
+    $scope.pullProveedores = function () {
 
         $http({
             url: 'pago_proovedores/datos',
             method: 'post'
-        }).then(function successCallback(response)
-        {
+        }).then(function successCallback(response) {
             console.log(response.data.ventas);
-            if(typeof response.data === 'string')
-            {
+            if (typeof response.data === 'string') {
                 return [];
-            }
-            else
-            {
+            } else {
                 console.log(response);
                 $scope.proveedores = response.data;
                 $scope.sumaMonto = 0;
                 var totalEspecifico = 0;
-                $scope.proveedores.forEach(function(entry) {
-                  var elem= {'id': entry.id_proovedor};
-                  $scope.ArrayPago.push(elem);
-                     totalEspecifico += entry.totalAPagar;
+                $scope.proveedores.forEach(function (entry) {
+                    var elem = {
+                        'id': entry.id_proovedor
+                    };
+                    $scope.ArrayPago.push(elem);
+                    totalEspecifico += entry.totalAPagar;
                 });
-                $scope.sumaMonto= totalEspecifico.toFixed(2)
+                $scope.sumaMonto = totalEspecifico.toFixed(2)
                 $scope.paramsProveedores = new NgTableParams({
                     page: 1,
                     count: 10
                 }, {
                     getData: function (params) {
-                      var filterObj = params.filter(),
-                      filteredData = $filter('filter')($scope.proveedores, filterObj);
-                      var sortObj = params.orderBy();
+                        var filterObj = params.filter(),
+                            filteredData = $filter('filter')($scope.proveedores, filterObj);
+                        var sortObj = params.orderBy();
                         orderedData = $filter('orderBy')(filteredData, sortObj);
                         $scope.paramsProveedores.total(orderedData.length);
                         return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
@@ -59,54 +57,117 @@ $scope.ArrayPago = [];
                 });
             }
 
-        }, function errorCallback(data)
-        {
+        }, function errorCallback(data) {
             UserSrv.MostrarError(data)
             console.log(data.data);
         });
 
     }
 
-    $scope.pullProovedor = function (id){
-      $http({
-          url: 'pago_proovedores/detalleProveedor',
-          method: 'post',
-          data: {'id': id}
-      }).then(function successCallback(response)
-      {
-          console.log(response.data.ventas);
-          if(typeof response.data === 'string')
-          {
-              return [];
-          }
-          else
-          {
-              console.log(response);
+    $scope.generarArchivo = function (_movimientos, proveedor) {
+        let movimientos = _movimientos.map(
+            mov => ({
+                'Socio': mov.socio,
+                'Dni': mov.dni,
+                'Organismo': mov.organismo,
+                'Nro_de_servicio': mov.servicio,
+                'Nro_de_cuota': mov.nro_cuota,
+                'Motivo': mov.motivo,
+                'Importe_descontado': mov.totalCobrado,
+                'Monto_de_cuota': mov.importe,
 
-              $scope.proovedorSeleccionado = response.data.map($scope.cambiarFecha);
-          }
+            })
+        )
+        let sumTotalCobrado = _movimientos.reduce((acum, mov) => acum + mov.totalCobrado, 0)
+        let sumImporte = _movimientos.reduce((acum, mov) => acum + mov.importe, 0)
+        let diferencia = sumImporte - sumTotalCobrado
+        movimientos.push({
+            'Socio': '',
+            'Dni': '',
+            'Organismo': '',
+            'Nro_de_servicio': '',
+            'Nro_de_cuota': '',
+            'Motivo': '',
+            'Importe_descontado': '',
+            'Monto_de_cuota': sumTotalCobrado,
+        })
+        movimientos.push({
+            'Socio': '',
+            'Dni': '',
+            'Organismo': '',
+            'Nro_de_servicio': '',
+            'Nro_de_cuota': '',
+            'Motivo': '',
+            'Importe_descontado': 'Bonif 4%',
+            'Monto_de_cuota': sumImporte,
+        })
+        movimientos.push({
+            'Socio': '',
+            'Dni': '',
+            'Organismo': '',
+            'Nro_de_servicio': '',
+            'Nro_de_cuota': '',
+            'Motivo': '',
+            'Importe_descontado': 'TOTAL',
+            'Monto_de_cuota': diferencia,
+        })
+        var nombreHoja = 'Hoja'
+        var nombreArchivo = 'Cobranza: ' + proveedor
 
-      }, function errorCallback(data)
-      {
-          UserSrv.MostrarError(data)
-          console.log(data.data);
-      });
+        ManejoExcell.exportarExcell(movimientos, nombreHoja, nombreArchivo)
     };
 
-    $scope.PagarProveedores = function (){
+    $scope.generarArchivos = () => {
+        $scope.proveedores.forEach(p => {
+            $http({
+                url: 'pago_proovedores/detalleProveedor',
+                method: 'post',
+                data: {
+                    'id': p.id_proovedor
+                }
+            }).then(
+                movimientos => $scope.generarArchivo(movimientos.data, p.proovedor)
+            )
+        })
+    }
 
+    $scope.pullProovedor = function (id) {
+        $http({
+            url: 'pago_proovedores/detalleProveedor',
+            method: 'post',
+            data: {
+                'id': id
+            }
+        }).then(function successCallback(response) {
+            console.log(response.data.ventas);
+            if (typeof response.data === 'string') {
+                return [];
+            } else {
+                console.log(response);
+
+                $scope.proovedorSeleccionado = response.data.map($scope.cambiarFecha);
+            }
+
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data)
+            console.log(data.data);
+        });
+    };
+
+    $scope.PagarProveedores = function () {
+        $scope.generarArchivos()
         $http({
             url: 'pago_proovedores/pagarCuotas',
             method: 'post',
             data: $scope.ArrayPago,
-        }).then(function successCallback(response)
-        {
-          UserSrv.MostrarMensaje("OK","Operación ejecutada correctamente.","OK","mensaje");
-                $scope.pullProveedores();
-                $scope.ArrayPago = [];
+        }).then(function successCallback(response) {
 
-        }, function errorCallback(data)
-        {
+            UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
+            $scope.pullProveedores();
+            $scope.ArrayPago = [];
+
+
+        }, function errorCallback(data) {
             UserSrv.MostrarError(data)
             console.log(data.data);
         });
@@ -119,25 +180,31 @@ $scope.ArrayPago = [];
     $scope.pullProveedores();
 
 
-    $scope.Corroborar = function(prov,check){
-    var esta = '';
-    var i = 0;
-        if(check == true){
-            for(i == 0; i < $scope.ArrayPago.length; i++){
-                if($scope.ArrayPago[i] == prov){ esta == 'si'; }
+    $scope.Corroborar = function (prov, check) {
+        var esta = '';
+        var i = 0;
+        if (check == true) {
+            for (i == 0; i < $scope.ArrayPago.length; i++) {
+                if ($scope.ArrayPago[i] == prov) {
+                    esta == 'si';
+                }
             }
-            if(esta == 'si'){ }else{ $scope.ArrayPago.push(prov); }
+            if (esta == 'si') {} else {
+                $scope.ArrayPago.push(prov);
+            }
         }
-        if(check == false){
-            for(i == 0; i < $scope.ArrayPago.length; i++){
-                if($scope.ArrayPago[i] == prov){ $scope.ArrayPago.splice(i,1); }
+        if (check == false) {
+            for (i == 0; i < $scope.ArrayPago.length; i++) {
+                if ($scope.ArrayPago[i] == prov) {
+                    $scope.ArrayPago.splice(i, 1);
+                }
             }
         }
 
 
     }
 
-    $scope.pagar = function(){
+    $scope.pagar = function () {
 
         $scope.ArrayPago = ProcesoArray($scope.ArrayPago);
         $scope.PagarProveedores();

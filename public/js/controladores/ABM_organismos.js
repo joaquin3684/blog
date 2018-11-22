@@ -34,6 +34,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       'domicilio': $scope.domicilio,
       'localidad': $scope.localidad,
       'cuota_social': $scope.cuotas,
+      'gasto_cobranza': $scope.gasto_cobranza,
       'comision': $scope.comision
     };
 
@@ -116,6 +117,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       'localidad': $scope.abmConsultado.localidad,
       'comision': $scope.abmConsultado.comision,
       'cuota_social': $scope.abmConsultado.cuotas,
+      'gasto_cobranza': $scope.abmConsultado.gasto_cobranza,
       'id': $scope.abmConsultado.id,
     };
     return $http({

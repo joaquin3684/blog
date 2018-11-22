@@ -89,7 +89,6 @@
                                             <td title="'Monto a pagar'" filter="{ totalAPagar: 'text'}" sortable="'totalAPagar'">
                                                 {{proovedor.totalAPagar}}
                                             </td>
-
                                         </tr>
                                         <tr data-ng-switch-when="true" ng-cloak>
                                             <td colspan="5">
@@ -100,25 +99,33 @@
                                                             <tr>
                                                                 <th>Socio</th>
                                                                 <th>Legajo</th>
+                                                                <th>Dni</th>
+                                                                <th>Organismo</th>
+                                                                <th>Nro Servicio</th>
                                                                 <th>Nro Cuota</th>
                                                                 <th>Fecha vto.</th>
-                                                                <th>Monto</th>
+                                                                <th>Importe descontado</th>
+                                                                <th>Monto de cuota</th>
                                                                 <th>Estado</th>
-                                                                <th>Nro Servicio</th>
+                                                                <th>Motivo</th>
 
                                                             </tr>
                                                             </thead>
                                                             <tbody>
                                                             <tr style="background-color: #A6A6A6; color: white;" data-ng-repeat="movimiento in proovedorSeleccionado">
 
-                                                                <td><center>{{movimiento.nombre}}</center></td>
+                                                                <td><center>{{movimiento.socio}}</center></td>
                                                                 <td><center>{{movimiento.legajo}}</center></td>
+                                                                <td><center>{{movimiento.dni}}</center></td>
+                                                                <td><center>{{movimiento.organismo}}</center></td>
+                                                                <td><center>{{movimiento.servicio}}</center></td>
                                                                 <td><center>{{movimiento.nro_cuota}}</center></td>
                                                                 <td><center>{{movimiento.fecha_vencimiento}}</center></td>
+                                                                <td><center>{{movimiento.totalCobrado}}</center></td>
                                                                 <td><center>{{movimiento.importe}}</center></td>
                                                                 <td><center>{{movimiento.estado}}</center></td>
-                                                                <td><center>{{movimiento.servicio}}</center></td>
-
+                                                                <td><center>{{movimiento.motivo}}</center></td>
+                                                                
                                                             </tr>
                                                             </tbody>
                                                         </table>
