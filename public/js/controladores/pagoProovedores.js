@@ -171,9 +171,6 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
             UserSrv.MostrarError(data)
             console.log(data.data);
         });
-
-
-
     }
 
     var self = this;

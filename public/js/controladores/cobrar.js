@@ -139,7 +139,7 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
 
 
     $scope.cobrarSocios = function () {
-
+    $('#modalObservaciones').modal('hide')                      
         var data = [];
         $scope.socios.forEach(function (entry) {
 
