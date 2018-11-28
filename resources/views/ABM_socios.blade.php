@@ -64,7 +64,7 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                                 </div>
                                 <div class="x_content">
                                     @verbatim
-                                    <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta'); generarArchivoSocio()"
+                                    <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')"
                                         id="formulario">
                                         <div ng-cloak>{{ csrf_field() }}</div>
 
@@ -299,7 +299,8 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                                             <div class="col-md-6 col-md-offset-3">
                                                 <button type="button" ng-click="borrarFormulario()" class="btn btn-primary">Cancelar</button>
                                                 <button id="send" type="submit" class="btn btn-success">Alta</button>
-
+                                                <button type="button" ng-click="generarArchivoSocio()" class="btn btn-warning">Imprimir</button>
+                                                
 
                                             </div>
                                         </div>

@@ -275,13 +275,6 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
     };
 
     $scope.generarArchivoSocio = function () {
-        /*html2canvas($('#pagina').get(0)).then(function (canvas) {
-            var imgData = canvas.toDataURL(
-                'image/jpeg');
-            var doc = new jsPDF('p', 'mm');
-            doc.addImage(imgData, 'JPEG', 10, 10);
-            doc.save('sample-file.pdf');
-        });*/
         w = window.open();
         w.document.write(document.getElementById('archivoSocioImprimir').outerHTML);
         w.print();
