@@ -67,6 +67,13 @@ class PagoProovedoresController extends Controller
         });
 
         $pnuevo = $pnuevo->unique('id_proovedor');
+        $i = 0;
+        $pnuevo = $pnuevo->mapWithKeys(function($a) use (&$i){
+            $b = [$i =>$a];
+            $i++;
+            return $b;
+
+        });
         return $pnuevo;
 
     }
