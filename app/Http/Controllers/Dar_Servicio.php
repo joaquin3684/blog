@@ -17,8 +17,8 @@ class Dar_Servicio extends Controller
   public function sociosQueCumplenConFiltro(Request $request)
   {
 
-  	$socios = DB::table('socios')
-  		->where('nombre', 'LIKE', '%'.$request['nombre'].'%')
+  	$socios = Socios::where('nombre', 'LIKE', '%'.$request['nombre'].'%')
+        ->with('organismo')
         ->get();
   	return $socios;
 

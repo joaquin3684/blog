@@ -34,7 +34,7 @@ class VentasControlador extends Controller
 
         $var = "'App\\".'\\'."Ventas'";
 
-        return DB::select(DB::raw("SELECT socios.nombre AS socio, ventas.id AS id_venta, ventas.created_at AS fecha, proovedores.razon_social AS proovedor, productos.nombre AS producto, ventas.nro_cuotas, ROUND(SUM(cuotas.importe),2) AS totalACobrar, IFNULL(ROUND(SUM(movimientos.entrada),2),0) AS totalCobrado, ROUND(IFNULL((ROUND(SUM(cuotas.importe),2) - ROUND(SUM(movimientos.entrada),2)), 0), 2) AS diferencia 
+        return DB::select(DB::raw("SELECT socios.nombre AS socio, ventas.id AS id_venta, ventas.fecha_vencimiento AS fecha, proovedores.razon_social AS proovedor, productos.nombre AS producto, ventas.nro_cuotas, ROUND(SUM(cuotas.importe),2) AS totalACobrar, IFNULL(ROUND(SUM(movimientos.entrada),2),0) AS totalCobrado, ROUND(IFNULL((ROUND(SUM(cuotas.importe),2) - ROUND(SUM(movimientos.entrada),2)), 0), 2) AS diferencia 
                             FROM (ventas
                             INNER JOIN cuotas ON cuotas.cuotable_id = ventas.id)
                             LEFT JOIN movimientos ON movimientos.identificadores_id = cuotas.id
@@ -148,6 +148,22 @@ class VentasControlador extends Controller
         return ['ventas' => $mov->values()->all(), 'pin' => $this->filtrosNoNulos($request)];
                 
             }
+    }
+
+
+    public function all()
+    {
+        return Ventas::whereHas('cuotas', function($q){
+            $q->where('estado', null);
+        })->get();
+    }
+
+    public function modificar(Request $request)
+    {
+        DB::transaction(function() use ($request){
+            $venta = Ventas::with('cuotas')->find($request['id']);
+            $venta->modificar($request->all());
+        });
     }
 
     public function cancelarVenta(Request $request)

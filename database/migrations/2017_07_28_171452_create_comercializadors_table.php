@@ -23,6 +23,8 @@ class CreateComercializadorsTable extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('domicilio');
+            $table->string('estado_civil');
+            $table->string('provincia');
             $table->integer('dni');
             $table->integer('cuit');
             $table->integer('telefono');

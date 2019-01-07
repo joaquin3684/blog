@@ -235,7 +235,8 @@ Route::post('ventas/mostrarPorVenta', 'VentasControlador@mostrarPorVenta');
 Route::post('ventas/mostrarPorSocio', 'VentasControlador@mostrarPorSocio');
 Route::post('ventas/cancelarVenta', 'VentasControlador@cancelarVenta');
 Route::post('ventas/movimientos', 'VentasControlador@mostrarMovimientosVenta');
-
+Route::post('ventas/modificar', 'VentasControlador@modificar');
+Route::get('ventas/all', 'VentasControlador@all');
 Route::resource('ventas', 'VentasControlador');
 
 //-------------- COBRANZA --------------------

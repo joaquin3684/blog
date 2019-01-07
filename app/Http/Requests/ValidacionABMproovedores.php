@@ -29,10 +29,6 @@ class ValidacionABMproovedores extends FormRequest
             'domicilio' => 'required',
             'telefono' => 'required',
             'id_prioridad' => 'required',
-            'usuario' => 'required|unique:users,usuario,'.$this->get('id'),
-            'email' => 'required|unique:users,email,'.$this->get('id'),
-
-
         ];
     }
 

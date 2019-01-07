@@ -55,6 +55,42 @@ class Ventas extends Model
 
     }
 
+    public function modificar($ventaModificada)
+    {
+        $this->cancelarContabilizacion();
+        $this->fill($ventaModificada);
+        $this->save();
+        GeneradorCuotas::borrarCuotasVenta($this);
+        $cuotas = GeneradorCuotas::generarCuotasVenta($this);
+        $this->cuotas()->createMany($cuotas->toArray());
+        $this->contabilizar();
+    }
+
+    public function cancelarContabilizacion()
+    {
+        if($this->producto->proovedor->id == 1)
+        {
+            $impuDebe = ImputacionGateway::buscarPorCodigo('131010001');
+            $impuHaber = ImputacionGateway::buscarPorCodigo('111010201'); //TODO hay que ver la seleccion del banco aca
+            GeneradorDeAsientos::crear($impuDebe,  0, $this->importe_otorgado);
+            GeneradorDeAsientos::crear($impuHaber, $this->importe_otorgado, 0);
+
+            $interes = $this->importe_total - $this->importe_otorgado;
+            $impuDebe = ImputacionGateway::buscarPorCodigo('131010004');
+            $impuHaber = ImputacionGateway::buscarPorCodigo('131020403'); //TODO hay que ver la seleccion del banco aca
+            GeneradorDeAsientos::crear($impuDebe, 0, $interes);
+            GeneradorDeAsientos::crear($impuHaber, $interes, 0);
+
+        } else {
+            $impuDebe = ImputacionGateway::buscarPorCodigo('131010002');
+            $impuHaber = ImputacionGateway::buscarPorCodigo('131020402');
+
+            $importe = $this->importe_total * $this->getComision() / 100;
+            GeneradorDeAsientos::crear($impuDebe, 0, $importe);
+            GeneradorDeAsientos::crear($impuHaber, $importe, 0);
+        }
+    }
+
     public function contabilizar()
     {
         if($this->producto->proovedor->id == 1)

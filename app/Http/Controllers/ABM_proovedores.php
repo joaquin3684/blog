@@ -37,26 +37,6 @@ class ABM_proovedores extends Controller
         $elem = collect($request->all());
         DB::transaction(function () use ($elem) {
         $this->service->crearProveedor($elem);
-            /*$usuario = $elem['usuario'];
-            $pass = $elem['password'];
-            $email = $elem['email'];
-            //TODO:: aca falta ponerle el rol al proveedor
-            $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
-            $elem['usuario'] = $user->id;
-            $proveedor = Proovedores::create($elem->toArray());
-            $codigoBase = ConfigImputaciones::find(1);
-            $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
-            $imputacion = GeneradorDeCuentas::generar('Deudores '.$elem['razon_social'], $codigo);
-            ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Deudores', 'codigo' => $imputacion->codigo]);
-            $codigoBase = ConfigImputaciones::find(2);
-            $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
-            $imputacion = GeneradorDeCuentas::generar('Cta '.$elem['razon_social'], $codigo);
-            ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Cta', 'codigo' => $imputacion->codigo]);
-            $codigoBase = ConfigImputaciones::find(3);
-            $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
-            $imputacion = GeneradorDeCuentas::generar('Comisiones '.$elem['razon_social'], $codigo);
-            ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Comisiones', 'codigo' => $imputacion->codigo]);*/
-
 
         });
     }
@@ -79,6 +59,7 @@ class ABM_proovedores extends Controller
     public function update(ValidacionABMproovedores $request, $id)
     {
         $registro = Proovedores::with('usuario')->find($id);
+        unset($request['usuario']);
         $registro->fill($request->all())->save();
         return ['updated' => true];
     }

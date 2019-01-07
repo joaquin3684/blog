@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories\Eloquent\Generadores;
+use App\Cuotas;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
 use Carbon\Carbon;
 
@@ -16,8 +17,9 @@ class GeneradorCuotas
     public static function generarCuotasVenta(\App\Ventas $venta)
     {
 
-        $fechaInicio = Carbon::today();
-        $fechaVto = Carbon::today()->addMonths(2);
+
+        $fechaInicio = Carbon::createFromFormat('Y-m-d', $venta->fecha_vencimiento)->subMonths(2);
+        $fechaVto = Carbon::createFromFormat('Y-m-d', $venta->fecha_vencimiento);
         $cuotas = collect();
         for ($i = 1; $venta->nro_cuotas >= $i; $i++) {
             $cuota = [
@@ -35,6 +37,11 @@ class GeneradorCuotas
             $fechaVto->addMonth();
         }
         return $cuotas;
+    }
+
+    public static function borrarCuotasVenta(\App\Ventas $venta)
+    {
+        Cuotas::where('id_venta', $venta->id)->delete();
     }
 
     public static function generarCuotaSocial($importe, $socio)

@@ -9,6 +9,7 @@ namespace App\Services;
 
 
 use App\Cuotas;
+use App\Organismos;
 use App\Repositories\Eloquent\GeneradorDeAsientos;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use App\Socios;
@@ -19,9 +20,11 @@ use App\Repositories\Eloquent\Repos\Gateway\SociosGateway as Socio;
 class ABM_SociosService
 {
     private $socio;
+    private $organismo;
     public function __construct()
     {
         $this->socio = new Socio();
+        $this->organismo = new Organismos();
     }
 
     public function crearSocio($elem)
@@ -30,10 +33,11 @@ class ABM_SociosService
         $fechaInicioCuota = Carbon::today()->toDateString();
         $fechaVencimientoCuota = Carbon::today()->addMonths(2);
         $socio = $this->socio->create($elem);
+        $cuotaSocial = $this->organismo->with('cuotas')->find($elem['id_organismo'])->cuotas->first(function($cuota) use ($elem){ return $cuota->categoria == $elem['valor'];});
         $cuota = Cuotas::create([
             'fecha_inicio' => $fechaInicioCuota,
             'fecha_vencimiento' => $fechaVencimientoCuota,
-            'importe' => $elem['valor'],
+            'importe' => $cuotaSocial->valor,
             'nro_cuota' => 1,
         ]);
         $impuDebe = ImputacionGateway::buscarPorCodigo('131030101');

@@ -10,7 +10,7 @@ class Comercializador extends Model
     use SoftDeletes;
     protected $table = 'comercializadores';
 
-    protected $fillable = [ 'nombre', 'dni', 'cuit', 'telefono', 'usuario', 'apellido', 'domicilio', 'email', 'porcentaje_colocacion' ];
+    protected $fillable = [ 'nombre', 'dni', 'cuit', 'telefono', 'usuario', 'apellido', 'domicilio', 'email', 'porcentaje_colocacion', 'estado_civil', 'provincia' ];
 
     protected $dates = ['deleted_at'];
 
