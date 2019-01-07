@@ -5,7 +5,7 @@ app.requires.push('ngMaterial', 'Mutual.services', 'angular-loading-bar');
 app.controller('Dar_servicio', function ($scope, $http, $compile, $q, UserSrv) {
     //moment.locale('es');
 
-    $scope.vencimiento = moment(moment().format('YYYY') + '-' + moment().format('MM') + '-20').toDate();
+    $scope.vencimiento = moment(moment().format('YYYY') + '-' + moment().add(2, 'months').format('MM') + '-20').toDate();
     $scope.fechaActual = moment().format('YYYY-MM-DD');
     $scope.mostrar = false;
 
@@ -30,6 +30,7 @@ app.controller('Dar_servicio', function ($scope, $http, $compile, $q, UserSrv) {
         });
     }
     $scope.calcularVencimiento = function () {
+        $scope.vencimiento = moment(moment().format('YYYY') + '-' + moment().format('MM') + '-20').toDate();
         $scope.vencimiento = moment($scope.vencimiento).add(($scope.nro_cuotas + 1 || 0), 'months').toDate();
     }
     $scope.traerProductos = function (searchText) {
@@ -64,32 +65,39 @@ app.controller('Dar_servicio', function ($scope, $http, $compile, $q, UserSrv) {
 
 
     $scope.crearMovimiento = function () {
-        var vencimiento = moment($scope.vencimiento, "DD/MM/YYYY").format('YYYY-MM-DD');
 
-        $http({
-            url: 'ventas',
-            method: 'post',
-            data: {
-                'id_asociado': $scope.socio.id,
-                'id_producto': $scope.producto.id,
-                'importe_total': $scope.importe,
-                'importe_cuota': $scope.montoPorCuota,
-                'nro_cuotas': $scope.nro_cuotas,
-                'descripcion': $scope.observacion,
-                'fecha_vencimiento': vencimiento,
-                'plata_recibida': $scope.$parent.plata_recibida,
-                'importe_otorgado': $scope.importe_otorgado
-            }
-        }).then(function successCallback(response) {
-            console.log(response);
-            $scope.refrescarPantalla();
-            UserSrv.MostrarMensaje("OK", "Se ha otorgado el servicio correctamente.", "OK", "mensaje");
-            return response.data;
+        try {
+            $scope.generarArchivo()
+            var vencimiento = moment($scope.vencimiento, "DD/MM/YYYY").format('YYYY-MM-DD');
 
-        }, function errorCallback(data) {
-            UserSrv.MostrarError(data)
-            console.log(data);
-        });
+            $http({
+                url: 'ventas',
+                method: 'post',
+                data: {
+                    'id_asociado': $scope.socio.id,
+                    'id_producto': $scope.producto.id,
+                    'importe_total': $scope.importe,
+                    'importe_cuota': $scope.montoPorCuota,
+                    'nro_cuotas': $scope.nro_cuotas,
+                    'descripcion': $scope.observacion,
+                    'fecha_vencimiento': vencimiento,
+                    'plata_recibida': $scope.$parent.plata_recibida,
+                    'importe_otorgado': $scope.importe_otorgado
+                }
+            }).then(function successCallback(response) {
+                console.log(response);
+                $scope.refrescarPantalla();
+                UserSrv.MostrarMensaje("OK", "Se ha otorgado el servicio correctamente.", "OK", "mensaje");
+                return response.data;
+
+            }, function errorCallback(data) {
+                UserSrv.MostrarError(data)
+                console.log(data);
+            });
+        } catch (e) {
+            console.log(e)
+        }
+
     }
 
     $scope.habilitacion = true;
@@ -102,6 +110,14 @@ app.controller('Dar_servicio', function ($scope, $http, $compile, $q, UserSrv) {
 
         }
     }
+
+    $scope.generarArchivo = function () {
+        w = window.open();
+        w.document.write(document.getElementById('archivoImprimir').outerHTML);
+        w.print();
+        w.close();
+    }
+
     $scope.mostrarPlanDePago = function () {
         $scope.mostrar = true;
         var planDePago = [];

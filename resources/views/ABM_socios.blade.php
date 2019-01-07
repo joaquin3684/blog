@@ -836,31 +836,31 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;">
                                 APELLIDO
-                                    Y NOMBRES: {{apellido}}, {{nombre}}</span>
+                                    Y NOMBRES: <ng-container style="font-weight: 700;">{{apellido}}, {{nombre}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;mso-spacerun:yes;">
-                                    DOMICILIO: {{domicilio}}</span>
+                                    DOMICILIO: <ng-container style="font-weight: 700;">{{domicilio}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;">
-                                LOCALIDAD: {{localidad}}</span>
+                                LOCALIDAD: <ng-container style="font-weight: 700;">{{localidad}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;">
-                                    CODIGO POSTAL: {{codigoPostal}}</span>
+                                    CODIGO POSTAL: <ng-container style="font-weight: 700;">{{codigoPostal}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;">
-                                    NACIONALIDAD: {{nacionalidad}}</span>
+                                    NACIONALIDAD: <ng-container style="font-weight: 700;">{{nacionalidad}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;">
-                                    ESTADO CIVIL: {{estadoCivil}}</span>
+                                    ESTADO CIVIL: <ng-container style="font-weight: 700;">{{estadoCivil}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt; line-height:138.75%;mso-spacerun:yes;">
-                                    CUIT/CUIL: {{tipo}}{{dni}}{{codigoVerif}}</span>
+                                    CUIT/CUIL: <ng-container style="font-weight: 700;">{{tipo}}{{dni}}{{codigoVerif}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;mso-spacerun:yes;">
@@ -872,7 +872,7 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;mso-spacerun:yes;">
-                                    LEGAJO: {{legajo}}</span>
+                                    LEGAJO: <ng-container style="font-weight: 700;">{{legajo}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;mso-spacerun:yes;">
@@ -886,16 +886,16 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                         <div class="col" style="width: 50%">
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;">
-                                PROVINCIA:{{provincia}}</span>
+                                PROVINCIA:<ng-container style="font-weight: 700;">{{provincia}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;mso-spacerun:yes;">
-                                    TEL: {{telefono}}</span>
+                                    TEL: <ng-container style="font-weight: 700;">{{telefono}}</ng-container></span>
                             </div>
 
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;">
-                                    FECHA NAC: {{formatDate(fechaNacimiento)}}</span>
+                                    FECHA NAC: <ng-container style="font-weight: 700;">{{formatDate(fechaNacimiento)}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;">
@@ -903,11 +903,11 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;">
-                                    DOC. TIPO Y N°: DNI {{dni}}</span>
+                                    DOC. TIPO Y N°: DNI <ng-container style="font-weight: 700;">{{dni}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt; line-height:138.75%;mso-spacerun:yes;">
-                                    FECHA INGRESO: {{formatDate(fechaIngreso)}}</span>
+                                    FECHA INGRESO: <ng-container style="font-weight: 700;">{{formatDate(fechaIngreso)}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;mso-spacerun:yes;">
@@ -915,7 +915,7 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;mso-spacerun:yes;">
-                                    CATEGORIA: {{getNombreCategorias(categoriacomplete)}}</span>
+                                    CATEGORIA: <ng-container style="font-weight: 700;">{{getNombreCategorias(categoriacomplete)}}</ng-container></span>
                             </div>
                             <div class="row">
                                 <span style="font-family:Arial;font-size:10pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:138.75%;mso-spacerun:yes;">

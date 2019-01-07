@@ -1,4 +1,4 @@
-var app = angular.module('Mutual').config(function ($interpolateProvider) {});
+var app = angular.module('Mutual').config(function ($interpolateProvider) { });
 app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ManejoExcell', 'angular-loading-bar');
 app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ManejoExcell) {
 
@@ -42,19 +42,20 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
                     totalEspecifico += entry.totalAPagar;
                 });
                 $scope.sumaMonto = totalEspecifico.toFixed(2)
+                $scope.proveedores = $scope.proveedores.map(({ totalAPagar, ...p }) => ({ totalAPagar: totalAPagar.toFixed(2), ...p }))
                 $scope.paramsProveedores = new NgTableParams({
                     page: 1,
                     count: 10
                 }, {
-                    getData: function (params) {
-                        var filterObj = params.filter(),
-                            filteredData = $filter('filter')($scope.proveedores, filterObj);
-                        var sortObj = params.orderBy();
-                        orderedData = $filter('orderBy')(filteredData, sortObj);
-                        $scope.paramsProveedores.total(orderedData.length);
-                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    }
-                });
+                        getData: function (params) {
+                            var filterObj = params.filter(),
+                                filteredData = $filter('filter')($scope.proveedores, filterObj);
+                            var sortObj = params.orderBy();
+                            orderedData = $filter('orderBy')(filteredData, sortObj);
+                            $scope.paramsProveedores.total(orderedData.length);
+                            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                        }
+                    });
             }
 
         }, function errorCallback(data) {
@@ -80,9 +81,11 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
             })
         )
         let sumTotalCobrado = _movimientos.reduce((acum, mov) => acum + mov.totalCobrado, 0)
-        let sumImporte = proveedor.totalAPagar
-        let diferencia = sumTotalCobrado - sumImporte
-        let porcentaje = (sumImporte * 100 / sumTotalCobrado).toFixed(2)
+        let sumTotalPagado = _movimientos.reduce((acum, mov) => acum + mov.totalPagado, 0)
+        let sumTotalAPagar = proveedor.totalAPagar
+
+        let gananciaMutual = (sumTotalCobrado - sumTotalPagado) - sumTotalAPagar
+        let porcentajeBonificacion = (gananciaMutual * 100 / sumTotalCobrado).toFixed(2)
         movimientos.push({
             'algo': null,
             'Socio': '',
@@ -102,8 +105,8 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
             'Nro_de_servicio': '',
             'Nro_de_cuota': '',
             'Motivo': '',
-            'Importe_descontado': 'Bonif ' + porcentaje + '%',
-            'Monto_de_cuota': sumImporte,
+            'Importe_descontado': 'Bonif ' + porcentajeBonificacion + '%',
+            'Monto_de_cuota': sumTotalAPagar,
         })
         movimientos.push({
             'algo': null,
@@ -114,7 +117,7 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
             'Nro_de_cuota': '',
             'Motivo': '',
             'Importe_descontado': 'TOTAL',
-            'Monto_de_cuota': diferencia,
+            'Monto_de_cuota': gananciaMutual,
         })
         var nombreHoja = 'Hoja'
         var nombreArchivo = 'Cobranza: ' + proveedor.proovedor
@@ -191,7 +194,7 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
                     esta == 'si';
                 }
             }
-            if (esta == 'si') {} else {
+            if (esta == 'si') { } else {
                 $scope.ArrayPago.push(prov);
             }
         }

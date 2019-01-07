@@ -1,4 +1,4 @@
-var app = angular.module('Mutual').config(function ($interpolateProvider) {});
+var app = angular.module('Mutual').config(function ($interpolateProvider) { });
 app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ManejoExcell', 'ServicioABM', 'angular-loading-bar');
 app.controller('novedades', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ManejoExcell, ServicioABM) {
 
@@ -17,7 +17,7 @@ app.controller('novedades', function ($scope, $http, $compile, $sce, NgTablePara
         })
     }
 
-    $scope.traerSocios= function(id_organismo){
+    $scope.traerSocios = function (id_organismo) {
         data = {
             'fecha_desde': $scope.fecha_desde,
             'fecha_hasta': $scope.fecha_hasta,
@@ -40,15 +40,15 @@ app.controller('novedades', function ($scope, $http, $compile, $sce, NgTablePara
         $scope.traerSocios(organismo.id_organismo)
         var socios = []
         $scope.socios.forEach(element => {
-            var socio= {
+            var socio = {
                 'id_socio': element.id_socio,
                 'legajo': element.legajo,
-                'apellido': element.apellido,
-                'nombre': element.nombre,
+                'apellido': element.nombre,
+                'nombre': element.apellido,
                 'importe': element.diferencia,
                 'id_organismo': organismo.id_organismo
             }
-            socios.push(socio)   
+            socios.push(socio)
         });
         var nombreHoja = 'Hoja'
         var nombreArchivo = organismo.organismo + ' ' + '(' + $scope.fecha_desde_fija + '/' + $scope.fecha_hasta_fija + ')'

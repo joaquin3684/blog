@@ -104,8 +104,9 @@
                                                                 <th>Nro Servicio</th>
                                                                 <th>Nro Cuota</th>
                                                                 <th>Fecha vto.</th>
-                                                                <th>Importe descontado</th>
+                                                                <th>Total descontado</th>
                                                                 <th>Monto de cuota</th>
+                                                                <th>Importe cobrado</th>
                                                                 <th>Estado</th>
                                                                 <th>Motivo</th>
 
@@ -123,6 +124,7 @@
                                                                 <td><center>{{movimiento.fecha_vencimiento}}</center></td>
                                                                 <td><center>{{movimiento.totalCobrado}}</center></td>
                                                                 <td><center>{{movimiento.importe}}</center></td>
+                                                                <td><center>{{movimiento.totalCobrado - movimiento.totalPagado}}</center></td>
                                                                 <td><center>{{movimiento.estado}}</center></td>
                                                                 <td><center>{{movimiento.motivo}}</center></td>
                                                                 
