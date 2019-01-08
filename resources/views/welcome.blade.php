@@ -269,7 +269,7 @@
                 <li><a><i class="fa fa-area-chart"></i> Contabilidad <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                   @if(Sentinel::check()->hasAccess('capitulos.*'))
-                      <li><a href="imputaciones">Plan de cuentas</a>
+                      <li><a href="imputacion">Plan de cuentas</a>
                       @endif
                       @if(Sentinel::check()->hasAccess('asientosManuales.*'))
                       <li><a href="asientos">Asientos Contables Manuales</a>

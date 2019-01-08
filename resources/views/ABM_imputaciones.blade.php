@@ -1,12 +1,12 @@
-@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABMWizard.js') !!} {!! Html::script('js/forwizards.js')
-!!}
+@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABMimputaciones.js') !!}
+
 <style>
   .wizard .nav-tabs>li {
     width: 16.66%;
   }
 </style>
 
-<div class="nav-md" ng-controller="ABMWizard">
+<div class="nav-md" ng-controller="ABMImputaciones">
 
   <div class="container body">
 
@@ -25,7 +25,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Plan de Cuentas
+                  <h2>Alta imputacion
                   </h2>
 
                   <ul class="nav navbar-right panel_toolbox">
@@ -46,17 +46,15 @@
                 <div class="x_content">
                  @verbatim
 
-                            <form role="form" class="" style="text-align: right" style="text-align: right" ng-submit="enviarFormulario('imputacion','Alta')"
+                    <form role="form" class="" style="text-align: right" style="text-align: right" ng-submit="enviarFormulario('imputacion','Alta')"
                               id="imputacionform">
 
                               <div class="row">
-                                <div class="form-group col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
-                                  <label class="" for="id_subrubro">Subrubro
-                                    <span class="required">*</span>
-                                  </label>
+                                <div class="form-group col-md-2  col-md-offset-2">
+                                  <label class="" for="id_subrubro">Subrubro *</label>
                                 </div>
-                                <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                  <select id="id_subrubro" class="form-control col-md-7 col-xs-12" ng-model="subrubro">
+                                <div class="form-group col-md-4">
+                                  <select id="id_subrubro" class="form-control col-md-7" ng-model="subrubro">
                                     <option ng-value="{{x}}" ng-repeat="x in selectsubrubros">
                                       {{x.nombre}}
                                     </option>
@@ -126,13 +124,24 @@
     
       <div class="x_panel">
         <div class="x_title">
-          @verbatim
-          <h2>
-            <div ng-cloak>{{pantallaActual.toUpperCase()}}</div>
-          </h2>
-          @endverbatim
+                  <h2>Editar imputacion
+                  </h2>
 
-        </div>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a class="close-link">
+                        <i class="fa fa-close"></i>
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
         <div class="x_content">
           <center>
             <button id="exportButton1" class="btn btn-danger clearfix">
@@ -163,7 +172,7 @@
 
                         <td id="botones">
                           @endverbatim @if(Sentinel::check()->hasAccess('capitulos.editar'))
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario(pantallaActual,'Mostrar',abm.id)">
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="enviarFormulario('imputacion','Mostrar',abm.id)">
                             <span class="glyphicon glyphicon-pencil"></span>
                           </button>
                           @endif @verbatim
@@ -212,7 +221,7 @@
           <h4 class="modal-title">Editar</h4>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal form-label-left" ng-submit="editarFormulario(abmConsultado.id)" id="formularioEditar">
+          <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('imputacion','Editar')" id="formularioEditar">
 
 
             <div class="item form-group">
@@ -231,78 +240,13 @@
                 <input name="codigo" class="form-control col-md-7 col-xs-12" type="text" maxlength="{{cantMaxima()}}">
               </div>
             </div>
-            <div class="item form-group" ng-show="pantallaActual == 'rubro'">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_capitulo">Capitulo
-                <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select id="id_subrubro" class="form-control col-md-7 col-xs-12" ng-model="capitulo">
-                  <option ng-value="{{x}}" ng-repeat="x in selectcapitulos" ng-selected="x.id == id_anterior">
-                    {{x.nombre}}
-                  </option>
-                </select>
-                <input type="hidden" value="{{capitulo.id}}" name="id_capitulo">
-              </div>
-            </div>
-            <div class="item form-group" ng-show="pantallaActual == 'moneda'">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_rubro">Rubro
-                <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control col-md-7 col-xs-12" ng-model="rubro">
-                  <option ng-value="{{x}}" ng-repeat="x in selectrubros" ng-selected="x.id == id_anterior">
-                    {{x.nombre}}
-                  </option>
-                </select>
-                <input type="hidden" value="{{rubro.id}}" name="id_rubro">
-              </div>
-            </div>
-            <div class="item form-group" ng-show="pantallaActual == 'departamento'">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_moneda">Moneda
-                <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control col-md-7 col-xs-12" ng-model="moneda">
-                  <option ng-value="{{x}}" ng-repeat="x in selectmonedas" ng-selected="x.id == id_anterior">
-                    {{x.nombre}}
-                  </option>
-                </select>
-                <input type="hidden" value="{{moneda.id}}" name="id_moneda">
-              </div>
-            </div>
-            <div class="item form-group" ng-show="pantallaActual == 'subRubro'">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_moneda">Dpto
-                <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control col-md-7 col-xs-12" ng-model="departamento">
-                  <option ng-value="{{x}}" ng-repeat="x in selectdepartamentos" ng-selected="x.id == id_anterior">
-                    {{x.nombre}}
-                  </option>
-                </select>
-                <input type="hidden" value="{{departamento.id}}" name="id_departamento">
-              </div>
-            </div>
-            <div class="item form-group" ng-show="pantallaActual == 'imputacion'">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_subrubro">Subrubro
-                <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control col-md-7 col-xs-12" ng-model="subrubro">
-                  <option ng-value="{{x}}" ng-repeat="x in selectsubrubros" ng-selected="x.id == id_anterior">
-                    {{x.nombre}}
-                  </option>
-                </select>
-                <input type="hidden" value="{{subrubro.id}}" name="id_subrubro">
-              </div>
-            </div>
-
             <input type="hidden" name="id">
+            <input type="hidden" name="id_subrubro">
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-md-offset-3">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                <button id="send" type="submit" class="btn btn-success" ng-click="enviarFormulario(pantallaActual,'Editar')">Enviar</button>
+                <button id="send" type="submit" class="btn btn-success" >Enviar</button>
 
               </div>
             </div>
