@@ -26,7 +26,7 @@ class ABM_Imputacion extends Controller
 
     public function index()
     {
-        return view('ABM_imputacion');
+        return view('ABM_imputaciones');
     }
 
 
