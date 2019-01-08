@@ -221,32 +221,37 @@
           <h4 class="modal-title">Editar</h4>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('imputacion','Editar')" id="formularioEditar">
+          <form class="form-horizontal form-label-left" ng-submit="editar()" id="formularioEditar">
 
 
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre
                 <span class="required">*</span>
               </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" class="form-control col-md-7 col-xs-12" name="nombre" ng-model="abmConsultado.nombre">
+              <div class="col-md-6">
+                <input type="text" class="form-control " name="nombre" ng-model="abm_consultado.nombre">
               </div>
             </div>
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="codigo">Codigo
                 <span class="required">*</span>
               </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name="codigo" class="form-control col-md-7 col-xs-12" type="text" maxlength="{{cantMaxima()}}">
+              <div class="col-md-6">
+                <div  style="display: flex">
+                    <div class="col-6">
+                        <input name="prefijo" disabled class="form-control" type="text" ng-model="abm_consultado.prefijo">
+                    </div>
+                    <div class="col-6">
+                        <input name="codigo" class="form-control " type="text" maxlength="{{cantMaxima()}}" ng-model="abm_consultado.codigo">
+                    </div>
+                </div>
               </div>
             </div>
-            <input type="hidden" name="id">
-            <input type="hidden" name="id_subrubro">
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-md-offset-3">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                <button id="send" type="submit" class="btn btn-success" >Enviar</button>
+                <button type="submit" class="btn btn-success" data-dismiss="modal">Enviar</button>
 
               </div>
             </div>

@@ -22,6 +22,7 @@ app.controller('ABMImputaciones', function ($scope, $http, $compile, $sce, NgTab
             case 'Editar':
                 var metodo = 'put';
                 var form = $("#formularioEditar").serializeArray();
+                console.log('formulario', form)
                 var id = $('input[name=id]').val();
                 break;
             case 'Alta':
@@ -50,7 +51,7 @@ app.controller('ABMImputaciones', function ($scope, $http, $compile, $sce, NgTab
             if (tipoSolicitud == 'Mostrar') {
                 console.log(response);
                 llenarFormulario('formularioEditar', response.data);
-                $scope.id_anterior = response.data.id_anterior;
+                $scope.abm_consultado = response.data
             }
             $scope.mensaje = response;
             $('#' + formu)[0].reset();
@@ -72,7 +73,21 @@ app.controller('ABMImputaciones', function ($scope, $http, $compile, $sce, NgTab
 
 
 
-
+    $scope.editar = () => {
+        let { id, codigo, prefijo, nombre, id_subrubro } = $scope.abm_consultado
+        $http({
+            url: 'imputacion/' + id,
+            method: 'put',
+            data: $.param({ nombre, id_subrubro, id, codigo: prefijo + codigo }),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }).then(function successCallback(response) {
+            UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
+            $scope.traerElementos($scope.pantallaActual);
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data)
+            $scope.errores = data.data;
+        });
+    };
     $scope.generarTabla = function (url, tipoSelect) {
 
         $http({
