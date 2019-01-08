@@ -49,6 +49,7 @@ class ABM_Imputacion extends Controller
     public function show($id)
     {
         $imputacion = $this->gateway->find($id);
+        $imputacion->prefijo = substr($imputacion->codigo, 0, 7);
         $imputacion->codigo = substr($imputacion->codigo, 7);
         $imputacion->id_anterior = $imputacion->id_subrubro;
         return $imputacion;
