@@ -101,7 +101,7 @@
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" name="cuotas"
+                                                    <input class="form-control col-md-7 col-xs-12" name="cuotas" ng-change="getImporte()"
                                                            placeholder="12" ng-model="nro_cuotas" type="number" required>
                                                     </input>
                                                 </div>
@@ -128,7 +128,7 @@
                                                 </label>
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                                     <input class="form-control col-md-7 col-xs-12" name="capital"
-                                                           placeholder="123" ng-model="montoPorCuota" type="number"
+                                                           placeholder="123" ng-model="montoPorCuota" type="number" ng-change="getImporte()"
                                                            step="0.01" required>
                                                     </input>
                                                 </div>
@@ -166,7 +166,6 @@
                                                 </span>
                                             </label>
                                             <div class="col-md-4 col-sm-6 col-xs-12">
-                                                <div ng-cloak>{[{getImporte()}]}</div>
                                                 <input class="form-control col-md-7 col-xs-12" ng-model="importe"
                                                        type="number" disabled>
 
@@ -230,6 +229,9 @@
                                                     @if(Sentinel::check()->hasAccess('darServicios.crear'))
                                                     <button class="btn btn-success" id="send" type="submit">
                                                         Alta
+                                                    </button>
+                                                    <button class="btn btn-success" id="send" type="button" ng-click="generarArchivo()">
+                                                        imprimir
                                                     </button>
                                                     @endif
                                                 </div>
@@ -302,7 +304,7 @@
         </div>
     </div>
 
-@verbatim
+
     <div style="display: none">
         <div id="archivoImprimir">
         
@@ -333,10 +335,7 @@
                     <div style="border: 1px solid black!important;">
                         <p style="text-align:right;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;line-height:13.5pt;margin-top:0pt;margin-bottom:0pt;margin-left:115.65pt;margin-right:8.45pt;"><span
                                 style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:13.5pt;">Buenos
-                                Aires,</span><span style="letter-spacing:3.3pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:13.5pt;">
-                            </span><span style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:13.5pt;">de</span><span
-                                style="letter-spacing:3.3pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:13.5pt;">
-                            </span><span style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:13.5pt;">del</span></p>
+                                Aires, {[{diaHoy}]} de {[{mesHoy}]} del {[{anioHoy}]}</span></p>
                         <p style="text-align:center;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;line-height:13.5pt;margin-top:0pt;margin-bottom:0pt;margin-left:115.65pt;margin-right:8.45pt;"><span
                                 style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:13.5pt;">&#xa0;</span></p>
                         <div class="Section4">
@@ -350,7 +349,7 @@
                                 </span><span style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">Por
                                     la </span><span style="letter-spacing:0.1pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">
                                 </span><span style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">presente
-                                    autorizo a deducir de mis haberes ...... ...... ....... ....... .......(......)
+                                    autorizo a deducir de mis haberes {[{numberToString(nro_cuotas)}]} ({[{nro_cuotas}]})
                                     cuotas
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">mensuale</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">s
@@ -359,51 +358,17 @@
                                     y </span><span style="letter-spacing:0.15pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">consecutiva</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">s
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">d</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">e
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.....</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.....</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">......</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">......</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">......</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">Peso</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">s
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">($........................</span><span
+                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">de Pesos {[{numberToString(montoPorCuota)}]}, con {[{decimalToString(montoPorCuota)}]} centavos
+                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">(${[{montoPorCuota}]}</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">)
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">cad</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">a
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">un</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">a
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">en
-                                    concept</span><span style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">o</span><span
-                                    style="letter-spacing:0.25pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">d</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;mso-spacerun:yes;">e  
+                                    concepto de  {[{producto.nombre}]}
                                 </span><span style="letter-spacing:0.8pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">po</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">r</span><span
-                                    style="letter-spacing:0.25pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.....</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.</span><span
-                                    style="letter-spacing:0.25pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.....</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.</span><span
-                                    style="letter-spacing:0.25pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">......</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.</span><span
-                                    style="letter-spacing:0.25pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">......</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.</span><span
-                                    style="letter-spacing:0.25pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">......</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.</span><span
-                                    style="letter-spacing:0.25pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">($........................).</span></p>
+                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">por Pesos {[{numberToString(importe)}]}, con {[{decimalToString(importe)}]} centavos ($ {[{importe}]}).</span></p>
                             <p style="text-align:justify;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;line-height:115.833328%;margin-top:0.05pt;margin-bottom:0pt;margin-left:5pt;text-indent:7pt;margin-right:3.3pt;"><span
                                     style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">E</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">n
@@ -419,19 +384,7 @@
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">e
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">labora</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">l
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">e</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">n
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.....</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.....</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">......</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">......</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">......</span><span
-                                    style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">.
-                                    . </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">autoriz</span><span
+                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">en {[{socio.organismo.nombre}]} autoriz</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">o
                                     a </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">l</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">a
@@ -683,7 +636,7 @@
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">l
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">servici</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">o
-                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">de...........................</span><span
+                                </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">de {[{proovedor.razon_social}]}</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">,
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">mediant</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">e
@@ -813,7 +766,7 @@
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">s
                                 </span><span style="letter-spacing:0.3pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">de</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">l
-                                </span><span style="letter-spacing:0.3pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">servicio................
+                                </span><span style="letter-spacing:0.3pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">servicio 
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">percibida</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">s
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">d</span><span
@@ -1067,7 +1020,6 @@
 
         </div>
     </div>
-@endverbatim
 </div>
 @endsection
 

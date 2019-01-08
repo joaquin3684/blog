@@ -9,6 +9,10 @@ app.controller('Dar_servicio', function ($scope, $http, $compile, $q, UserSrv) {
     $scope.fechaActual = moment().format('YYYY-MM-DD');
     $scope.mostrar = false;
 
+    $scope.anioHoy = moment().format('YYYY');
+    $scope.mesHoy = moment().locale('es').format('MMMM');
+    $scope.diaHoy = moment().format('DD');
+
     $scope.getImporte = function () {
         $scope.importe = Number(($scope.montoPorCuota * $scope.nro_cuotas).toFixed(2));
     }
@@ -50,6 +54,14 @@ app.controller('Dar_servicio', function ($scope, $http, $compile, $q, UserSrv) {
             UserSrv.MostrarError(data)
             console.log(data);
         });
+    }
+
+    $scope.numberToString = function (number) {
+        return writtenNumber(Math.trunc(number), { lang: 'es' });
+    }
+    $scope.decimalToString = function (number) {
+        number = Math.ceil((number % 1).toFixed(2) * 100)
+        return $scope.numberToString(number)
     }
 
     $scope.refrescarPantalla = function () {

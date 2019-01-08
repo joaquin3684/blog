@@ -26,7 +26,6 @@
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Plan de Cuentas
-                    <small>Dar de alta un capitulo</small>
                   </h2>
 
                   <ul class="nav navbar-right panel_toolbox">
