@@ -317,8 +317,7 @@
                         </div>
                         <div class="col mr-3" style="width:100%">
                             <div class="row justify-content-end">
-                                <p style="text-align:right;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;line-height:normal;margin-top:5pt;margin-bottom:0pt;margin-left:128.3pt;"><img
-                                        src="images/archivoSocio/MTaLxPbX_img5.png" width="147" height="40" alt="" /></p>
+                                <p style="text-align:right;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;line-height:normal;margin-top:5pt;margin-bottom:0pt;margin-left:128.3pt;"></p>
                             </div>
                             <div class="row justify-content-end">
                                 <p style="text-align:right;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;margin-top:0pt;margin-bottom:0pt;"><span
@@ -332,6 +331,7 @@
                             </div>
                         </div>
                     </div>
+                    <br>
                     <div style="border: 1px solid black!important;">
                         <p style="text-align:right;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;line-height:13.5pt;margin-top:0pt;margin-bottom:0pt;margin-left:115.65pt;margin-right:8.45pt;"><span
                                 style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:13.5pt;">Buenos
@@ -366,7 +366,7 @@
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">un</span><span
                                     style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">a
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">en
-                                    concepto de  {[{producto.nombre}]}
+                                    concepto de  {[{proovedor.razon_social}]} {[{producto.nombre}]}
                                 </span><span style="letter-spacing:0.8pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">
                                 </span><span style="letter-spacing:0.05pt;font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">por Pesos {[{numberToString(importe)}]}, con {[{decimalToString(importe)}]} centavos ($ {[{importe}]}).</span></p>
                             <p style="text-align:justify;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;line-height:115.833328%;margin-top:0.05pt;margin-bottom:0pt;margin-left:5pt;text-indent:7pt;margin-right:3.3pt;"><span
@@ -992,17 +992,17 @@
                                 <div class="col">
                                     <div class="row">
                                         <p style="text-align:left;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;line-height:115.833328%;margin-top:1.45pt;margin-bottom:0pt;margin-left:8.35pt;margin-right:16.7pt;"><span
-                                                style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">Aclaracion:</span></p>
+                                                style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">Aclaracion: {[{socio.apellido}]} {[{socio.nombre}]}</span></p>
                                     </div>
                                     <div class="row">
                                         <p style="text-align:left;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;line-height:115.833328%;margin-top:1.45pt;margin-bottom:0pt;margin-left:8.35pt;margin-right:16.7pt;"><span
                                                 style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;line-height:115.833328%;">Legajo/
-                                                Beneficio N°:</span></p>
+                                                Beneficio N°: {[{socio.legajo}]}</span></p>
                                     </div>
                                     <div class="row">
                                         <p style="text-align:left;page-break-inside:auto;page-break-after:auto;page-break-before:avoid;margin-top:0.05pt;margin-bottom:0pt;margin-left:8.35pt;margin-right:-2.8pt;"><span
                                                 style="font-family:Arial;font-size:12pt;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;">Tipo
-                                                y N° de Doc: </span></p>
+                                                y N° de Doc: DNI {[{socio.dni}]}</span></p>
                                     </div>
                                 </div>
                                 <div class="col">
