@@ -1,35 +1,47 @@
 @extends('welcome') @section('contenido') {!! Html::script('js/controladores/cobrar.js') !!}
 
 <div class="nav-md" ng-controller="cobrar">
-<!-- Modal -->
-@verbatim
-<div class="modal fade" id="modalObservaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Observaciones</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="padding: 30px">
-        <div class="container">
-            <div class="row" ng-repeat="socio in socios" ng-hide="socio.montoACobrar === socio.totalACobrar">
-                <div class="col-lg-6 col-xl-3">{{socio.socio}}: </div>
-                <div class="col-lg-6">
-                    <input required class="form-control col-md-7 col-xs-12" placeholder="Observacion"
-                          type="text" ng-model="socio.observacion">
+    <!-- Modal -->
+    @verbatim
+    <div class="modal fade" id="modalObservaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Observaciones</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding: 30px">
+                    <div class="container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Diferencia</th>
+                                    <th scope="col">Observacion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="socio in socios" ng-hide="socio.montoACobrar === socio.totalACobrar">
+                                    <td>{{socio.socio}}</td>
+                                    <td ng-style="(socio.totalACobrar - socio.montoACobrar) > 0 ? {color: 'red'} : {color: 'green'}">{{diferenciaEnModulo(socio.totalACobrar - socio.montoACobrar)}}</td>
+                                    <td><input required class="form-control col-md-7 col-xs-12"
+                                            placeholder="Observacion" type="text" ng-model="socio.observacion">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="cobrarSocios()">Continuar</button>
+                </div>
             </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" ng-click="cobrarSocios()">Continuar</button>
-      </div>
     </div>
-  </div>
-</div>
-@endverbatim
+    @endverbatim
     <div class="container body">
         <div class="main_container">
 
@@ -57,7 +69,8 @@
                                 </a>
                             </li>
                             <li class="dropdown">
-                                <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                                <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#"
+                                    role="button">
                                     <i class="fa fa-wrench">
                                     </i>
                                 </a>
@@ -102,15 +115,19 @@
 
                             <ol class="breadcrumb breadcrumb-arrow">
                                 <li>
-                                    <a href="" id="bread-organismos" ng-click="setVista('Organismos'); actualizarOrganismos()">
+                                    <a href="" id="bread-organismos"
+                                        ng-click="setVista('Organismos'); actualizarOrganismos()">
                                         <i class="fa fa-home"></i> ORGANISMOS</a>
                                 </li>
                                 <li>
-                                    <a href="" id="bread-socios" ng-if="vistaactual !== 'Organismos'" ng-click="setVista('Socios'); actualizarSocios()">SOCIOS (
+                                    <a href="" id="bread-socios" ng-if="vistaactual !== 'Organismos'"
+                                        ng-click="setVista('Socios'); actualizarSocios()">SOCIOS (
                                         <b>{{organismoactual}}</b>)</a>
                                 </li>
                                 <li>
-                                    <a href="" id="bread-servicios" ng-if="vistaactual !== 'Organismos' && vistaactual !== 'Socios'" ng-click="setVista('Ventas')">SERVICIOS (
+                                    <a href="" id="bread-servicios"
+                                        ng-if="vistaactual !== 'Organismos' && vistaactual !== 'Socios'"
+                                        ng-click="setVista('Ventas')">SERVICIOS (
                                         <b>{{socioactual}}</b>)</a>
                                 </li>
                             </ol>
@@ -118,18 +135,22 @@
                         </div>
                         <div id="divTablaOrganismos" ng-if="vistaactual=='Organismos'">
                             @verbatim
-                            <table id="tablaOrganismos" ng-table="paramsOrganismos" class="table table-hover table-bordered">
+                            <table id="tablaOrganismos" ng-table="paramsOrganismos"
+                                class="table table-hover table-bordered">
 
-                                <tr ng-repeat="organismo in $data" ng-click="PullSocios(organismo.id_organismo,organismo.organismo)" ng-cloak>
+                                <tr ng-repeat="organismo in $data"
+                                    ng-click="PullSocios(organismo.id_organismo,organismo.organismo)" ng-cloak>
 
                                     <td title="'Organismo'" filter="{organismo: 'text'}" sortable="'organismo'">
                                         {{organismo.organismo}}
                                     </td>
 
-                                    <td title="'Total a Cobrar'" filter="{totalACobrar: 'text'}" sortable="'totalACobrar'">
+                                    <td title="'Total a Cobrar'" filter="{totalACobrar: 'text'}"
+                                        sortable="'totalACobrar'">
                                         {{organismo.totalACobrar}}
                                     </td>
-                                    <td title="'Total Cobrado'" filter="{totalCobrado: 'text'}" sortable="'totalCobrado'">
+                                    <td title="'Total Cobrado'" filter="{totalCobrado: 'text'}"
+                                        sortable="'totalCobrado'">
                                         {{organismo.totalCobrado}}
                                     </td>
                                     <td title="'Diferencia'" filter="{diferencia: 'text'}" sortable="'diferencia'">
@@ -164,22 +185,30 @@
                             <table id="tablaSocios" ng-table="paramsSocios" class="table table-hover table-bordered">
 
                                 <tr ng-repeat="socio in $data">
-                                    
-                                    <td title="'Legajo'" filter="{ legajo: 'text'}" sortable="'legajo'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
+
+                                    <td title="'Legajo'" filter="{ legajo: 'text'}" sortable="'legajo'"
+                                        ng-click="PullVentas(socio.id_socio,socio.socio)"
+                                        style="vertical-align: middle">
                                         {{socio.legajo}}
                                     </td>
-                                    <td title="'Socio'" filter="{ socio: 'text'}" sortable="'socio'" ng-click="PullVentas(socio.id_socio,socio.socio)" style="vertical-align: middle">
+                                    <td title="'Socio'" filter="{ socio: 'text'}" sortable="'socio'"
+                                        ng-click="PullVentas(socio.id_socio,socio.socio)"
+                                        style="vertical-align: middle">
                                         {{socio.socio}}
                                     </td>
 
-                                    <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'" ng-click="PullVentas(socio.id_socio,socio.socio)"
+                                    <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}"
+                                        sortable="'totalACobrar'" ng-click="PullVentas(socio.id_socio,socio.socio)"
                                         style="vertical-align: middle">
                                         {{socio.totalACobrar}}
                                     </td>
-                                    <td title="'Monto a cobrar'" filter="{ montoACobrar: 'text'}" sortable="'montoACobrar'">
+                                    <td title="'Monto a cobrar'" filter="{ montoACobrar: 'text'}"
+                                        sortable="'montoACobrar'">
                                         <div class="input-group" style="margin-bottom: 0px;">
-                                            <input type="number" class="form-control" ng-model="socio.montoACobrar" style="height: 25px">
-                                            <span class="input-group-addon" style="padding-bottom: 3px;padding-top: 5px;">
+                                            <input type="number" class="form-control" ng-model="socio.montoACobrar"
+                                                style="height: 25px">
+                                            <span class="input-group-addon"
+                                                style="padding-bottom: 3px;padding-top: 5px;">
                                                 <input type="checkbox" ng-model="socio.checked">
                                             </span>
                                         </div>
@@ -210,11 +239,13 @@
                             </table>
 
 
-                            <input type="checkbox" ng-model="check" ng-init="check =true" ng-click="cambiarChecks(check, socios)">Seleccionar todos</input>
+                            <input type="checkbox" ng-model="check" ng-init="check =true"
+                                ng-click="cambiarChecks(check, socios)">Seleccionar todos</input>
                             <br />
-                            <br /> 
+                            <br />
                             @endverbatim @if(Sentinel::check()->hasAccess('cobrar.crear'))
-                            <button type="button" class="btn btn-primary" ng-click="agregarObservaciones()">Cobrar</button>
+                            <button type="button" class="btn btn-primary"
+                                ng-click="agregarObservaciones()">Cobrar</button>
                             @endif @verbatim
                         </div>
 
@@ -231,15 +262,18 @@
 
                         <table id="tablaVentas" ng-table="paramsVentas" class="table table-hover table-bordered">
                             <tr ng-repeat="venta in $data">
-                                <td title="'Nombre servicio'" filter="{ producto: 'text'}" sortable="'producto'" style="vertical-align: middle">
+                                <td title="'Nombre servicio'" filter="{ producto: 'text'}" sortable="'producto'"
+                                    style="vertical-align: middle">
                                     {{venta.producto}}
                                 </td>
-                                <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'" style="vertical-align: middle">
+                                <td title="'Total a Cobrar'" filter="{ totalACobrar: 'text'}" sortable="'totalACobrar'"
+                                    style="vertical-align: middle">
                                     {{venta.totalACobrar}}
                                 </td>
                                 <td title="'Monto a cobrar'" filter="{ montoACobrar: 'text'}" sortable="'montoACobrar'">
                                     <div class="input-group" style="margin-bottom: 0px;">
-                                        <input type="number" class="form-control" ng-model="venta.montoACobrar" style="height: 25px">
+                                        <input type="number" class="form-control" ng-model="venta.montoACobrar"
+                                            style="height: 25px">
                                         <span class="input-group-addon" style="padding-bottom: 3px;padding-top: 5px;">
                                             <input type="checkbox" ng-model="venta.checked">
                                         </span>
@@ -265,7 +299,8 @@
 
                         </table>
 
-                        <input type="checkbox" ng-model="check" ng-init="check = true" ng-click="cambiarChecks(check, ventas)">Seleccionar todos</input>
+                        <input type="checkbox" ng-model="check" ng-init="check = true"
+                            ng-click="cambiarChecks(check, ventas)">Seleccionar todos</input>
                         <br />
                         <br />
                         @endverbatim
@@ -273,7 +308,7 @@
                         <button type="button" class="btn btn-primary" ng-click="cobrarVentas()">Cobrar</button>
                         @endif
                     </div>
-                    
+
                 </div>
             </div>
             @endif
@@ -297,5 +332,3 @@
 
 
 @endsection
-
-

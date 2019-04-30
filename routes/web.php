@@ -220,6 +220,8 @@ Route::get('dar_servicio', 'Dar_Servicio@index');
 Route::post('dar_servicio/filtroSocios', 'Dar_Servicio@sociosQueCumplenConFiltro');
 Route::post('dar_servicio/filtroProovedores', 'Dar_Servicio@proovedoresQueCumplenConFiltro');
 
+
+
 //------------ LOGIN ----------------------
 Route::get('login', 'Login@index');
 Route::get('logout', 'Login@logout');

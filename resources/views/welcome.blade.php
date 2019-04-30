@@ -240,6 +240,10 @@
                     <li><a href="dar_servicio">Alta Gestion Servicio/Prestamo</a>
                     </li>
                   @endif
+                  @if(Sentinel::check()->hasAccess('darServicios.*'))
+                    <li><a href="modificarServicioVista">Modificar Servicio/Prestamo</a>
+                    </li>
+                  @endif
                   @if(Sentinel::check()->hasAccess('aprobacionServicios.*'))
                   <!--  <li><a href="aprobacion">Aprobacion Servicio/Prestamo</a>
                     </li> -->

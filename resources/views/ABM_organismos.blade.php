@@ -1,4 +1,5 @@
-@extends('welcome') @section('contenido') {!! Html::script('js/controladores/verificarBaja.js')!!}{!! Html::script('js/controladores/ABM_organismos.js') !!}
+@extends('welcome') @section('contenido') {!! Html::script('js/controladores/verificarBaja.js')!!}{!!
+Html::script('js/controladores/ABM_organismos.js') !!}
 
 
 <div class="nav-md" ng-controller="ABM">
@@ -53,7 +54,7 @@
                 <div class="x_content">
                   @verbatim
                   <form class="form-horizontal form-label-left" ng-submit="submit()" id="formulario">
-                   <div ng-cloak>{{ csrf_field() }}</div> 
+                    <div ng-cloak>{{ csrf_field() }}</div>
 
                     <span class="section">Datos del organismo</span>
 
@@ -62,8 +63,9 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre" placeholder="AFIP"
-                          type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
+                        <input required id="nombre" class="form-control col-md-7 col-xs-12" ng-model="nombre"
+                          placeholder="AFIP" type="text">
+                        <div ng-cloak>{{errores.nombre[0]}}</div>
                       </div>
                     </div>
 
@@ -72,16 +74,19 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="number" id="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12" placeholder="00123456780"><div ng-cloak>{{errores.cuit[0]}}</div>
+                        <input required type="number" id="cuit" ng-model="cuit" class="form-control col-md-7 col-xs-12"
+                          placeholder="00123456780">
+                        <div ng-cloak>{{errores.cuit[0]}}</div>
                       </div>
                     </div>
 
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio
-                        <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domicilio">Domicilio*
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="domicilio" ng-model="domicilio" class="form-control col-md-7 col-xs-12" placeholder="Av. 9 de julio 1234"><div ng-cloak>{{errores.domicilio[0]}}</div>
+                        <input required type="text" id="domicilio" ng-model="domicilio"
+                          class="form-control col-md-7 col-xs-12" placeholder="Av. 9 de julio 1234">
+                        <div ng-cloak>{{errores.domicilio[0]}}</div>
                       </div>
                     </div>
 
@@ -90,46 +95,52 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="localidad" ng-model="localidad" class="form-control col-md-7 col-xs-12" placeholder="CABA"><div ng-cloak>{{errores.localidad[0]}}</div>
+                        <input required type="text" id="localidad" ng-model="localidad"
+                          class="form-control col-md-7 col-xs-12" placeholder="CABA">
+                        <div ng-cloak>{{errores.localidad[0]}}</div>
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comision">Gasto por cobranza
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                      <div class="input-group">
-                        <input  type="number" id="comision" ng-model="gasto_cobranza" class="form-control col-md-7 col-xs-12" placeholder="10"><div ng-cloak>{{errores.gasto_cobranza[0]}}</div>
-                        <span class="input-group-addon" id="basic-addon2">%</span>
+                        <div class="input-group">
+                          <input type="number" id="comision" ng-model="gasto_cobranza"
+                            class="form-control col-md-7 col-xs-12" placeholder="10">
+                          <div ng-cloak>{{errores.gasto_cobranza[0]}}</div>
+                          <span class="input-group-addon" id="basic-addon2">%</span>
+                        </div>
                       </div>
                     </div>
 
-                    <div ng-repeat="cuota in cuotas">
-                      <div class="item form-group ">
 
+                    <div ng-repeat="cuota in cuotas">
+                      <div class="item form-group row">
                         <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social
                           <span class="required">*</span>
                         </label>
                         <div class="col-md-3 col-sm-3 col-xs-6">
-                          <input type="text" class="form-control col-md-2 col-xs-12" placeholder="Nombre" ng-model="cuota.nombre"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                          <input type="text" class="form-control col-md-2 col-xs-12" placeholder="Nombre"
+                            ng-model="cuota.nombre">
+                          <div ng-cloak>{{errores.cuota_social[0]}}</div>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-6">
-                          <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Valor" ng-model="cuota.valor"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                          <input type="number" step="0.01" class="form-control col-md-2 col-xs-12" placeholder="Valor"
+                            ng-model="cuota.valor">
+                          <div ng-cloak>{{errores.cuota_social[0]}}</div>
                         </div>
-                        
+                        <div class="col-lg-1">
+                          <button id="sumahtml" type="button" class="btn btn-danger" ng-disabled="$index == 0 && cuotas.length == 1" ng-click="eliminarHtml($index)">
+                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                          </button>
+                        </div>
+
                       </div>
                     </div>
-
-
-                    <button id="sumahtml" type="button" class="btn btn-danger" style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml($index)">
-                      <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                    </button>
-                    <button id="sumahtml" type="button" class="btn btn-primary" style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml(cuotas)">
+                    <button id="sumahtml" type="button" class="btn btn-primary"
+                      style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml(cuotas)">
                       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </button>
-
-
-
-
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
@@ -153,41 +164,41 @@
 
 
 
-      
-        @if(Sentinel::check()->hasAccess('organismos.visualizar'))
-        <div class="x_panel">
-          <div class="x_title">
-            <h2>Organismos
-              <small>Todos los organismos disponibles</small>
-            </h2>
-            <ul class="nav navbar-right panel_toolbox">
-              <li>
-                <a class="collapse-link">
-                  <i class="fa fa-chevron-up"></i>
-                </a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                  <i class="fa fa-wrench"></i>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                  <li>
-                    <a href="#">Settings 1</a>
-                  </li>
-                  <li>
-                    <a href="#">Settings 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fa fa-close"></i>
-                </a>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-          </div>
-          <!--                       <div class="x_content">
+
+      @if(Sentinel::check()->hasAccess('organismos.visualizar'))
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Organismos
+            <small>Todos los organismos disponibles</small>
+          </h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li>
+              <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+              </a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <i class="fa fa-wrench"></i>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a href="#">Settings 1</a>
+                </li>
+                <li>
+                  <a href="#">Settings 2</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-close"></i>
+              </a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <!--                       <div class="x_content">
 
                         <table id="datatable-responsive" cellspacing="0" class="table table-striped table-bordered dt-responsive nowrap order-colum compact" cellspacing="0" width="100%">
                           <thead>
@@ -217,86 +228,88 @@
                         </table>
 
                       </div> -->
-          <div class="x_content">
-            <center>
+        <div class="x_content">
+          <center>
 
-              <button id="exportButton2" data-toggle="modal" data-target="#prompted" class="btn btn-success clearfix">
-                <span class="fa fa-file-excel-o"></span> EXCEL</button>
+            <button id="exportButton2" data-toggle="modal" data-target="#prompted" class="btn btn-success clearfix">
+              <span class="fa fa-file-excel-o"></span> EXCEL</button>
 
-              <button id="exportButton3" ng-click="$Servicio.Impresion()" class="btn btn-primary clearfix">
-                <span class="fa fa-print"></span> IMPRIMIR</button>
-            </center>
+            <button id="exportButton3" ng-click="$Servicio.Impresion()" class="btn btn-primary clearfix">
+              <span class="fa fa-print"></span> IMPRIMIR</button>
+          </center>
 
-            <div id="estatablaseexporta" style="display: none;">
-              @verbatim
-              <table id="tablaexported">
-                <thead>
+          <div id="estatablaseexporta" style="display: none;">
+            @verbatim
+            <table id="tablaexported">
+              <thead>
 
-                  <td>NOMBRE</td>
-                  <td>CUIT</td>
+                <td>NOMBRE</td>
+                <td>CUIT</td>
 
-                </thead>
-                <tbody>
-                  <tr ng-repeat="abm in datatoexcel">
-                    <td>{{abm.nombre}}</td>
-                    <td>{{abm.cuit}}</td>
-                  </tr>
-                </tbody>
-              </table>
-              @endverbatim
-            </div>
-            <div id="pruebaExpandir">
-              <div class="span12 row-fluid">
-                <!-- START $scope.[model] updates -->
-                <!-- END $scope.[model] updates -->
-                <!-- START TABLE -->
-                <div class="table-responsive" id="estatablaseexporta" >
-                  @verbatim
-
-                  <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered" >
-
-                    <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
-
-                      <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)" ng-class="socio.id" ng-cloak>
-                        <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
-                          {{abm.nombre}}
-                        </td>
-                        <td title="'Cuit'" filter="{ cuit: 'text'}" sortable="'cuit'">
-                          {{abm.cuit}}
-                        </td>
-                        <td title="'Domicilio'" filter="{ domicilio: 'text'}" sortable="'domicilio'">
-                          {{abm.domicilio}}
-                        </td>
-                        <td title="'Localidad'" filter="{ localidad: 'text'}" sortable="'localidad'">
-                          {{abm.localidad}}
-                        </td>
-
-
-                        <td id="botones">
-                          @endverbatim @if(Sentinel::check()->hasAccess('organismos.editar')) @verbatim
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar" ng-click="traerElemento(abm.id)">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                          </button>
-                          @endverbatim @endif @if(Sentinel::check()->hasAccess('organismos.borrar')) @verbatim
-                          <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
-                          
-                          @endverbatim @endif @verbatim
-                        </td>
-
-                      </tr>
-
-                    </tbody>
-                  </table>
-                  @endverbatim
-                </div>
-                <!-- END TABLE -->
-              </div>
-            </div>
-
+              </thead>
+              <tbody>
+                <tr ng-repeat="abm in datatoexcel">
+                  <td>{{abm.nombre}}</td>
+                  <td>{{abm.cuit}}</td>
+                </tr>
+              </tbody>
+            </table>
+            @endverbatim
           </div>
+          <div id="pruebaExpandir">
+            <div class="span12 row-fluid">
+              <!-- START $scope.[model] updates -->
+              <!-- END $scope.[model] updates -->
+              <!-- START TABLE -->
+              <div class="table-responsive" id="estatablaseexporta">
+                @verbatim
+
+                <table id="tablita" ng-table="paramsABMS" class="table table-hover table-bordered">
+
+                  <tbody data-ng-repeat="abm in $data" data-ng-switch on="dayDataCollapse[$index]">
+
+                    <tr class="clickableRow" title="Datos" data-ng-click="selectTableRow($index,socio.id)"
+                      ng-class="socio.id" ng-cloak>
+                      <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                        {{abm.nombre}}
+                      </td>
+                      <td title="'Cuit'" filter="{ cuit: 'text'}" sortable="'cuit'">
+                        {{abm.cuit}}
+                      </td>
+                      <td title="'Domicilio'" filter="{ domicilio: 'text'}" sortable="'domicilio'">
+                        {{abm.domicilio}}
+                      </td>
+                      <td title="'Localidad'" filter="{ localidad: 'text'}" sortable="'localidad'">
+                        {{abm.localidad}}
+                      </td>
+
+
+                      <td id="botones">
+                        @endverbatim @if(Sentinel::check()->hasAccess('organismos.editar')) @verbatim
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar"
+                          ng-click="traerElemento(abm.id)">
+                          <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        @endverbatim @endif @if(Sentinel::check()->hasAccess('organismos.borrar')) @verbatim
+                        <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
+
+                        @endverbatim @endif @verbatim
+                      </td>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+                @endverbatim
+              </div>
+              <!-- END TABLE -->
+            </div>
+          </div>
+
         </div>
-        @endif
-      
+      </div>
+      @endif
+
 
 
       <!-- /page content -->
@@ -325,14 +338,17 @@
         <div class="modal-body">
 
 
-          <form class="form-horizontal form-label-left" ng-submit="editarFormulario(abmConsultado.id)" id="formularioEditar">
+          <form class="form-horizontal form-label-left" ng-submit="editarFormulario(abmConsultado.id)"
+            id="formularioEditar">
 
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input class="form-control col-md-7 col-xs-12" placeholder="Ingrese nombre del organismo" type="text" ng-model="abmConsultado.nombre"><div ng-cloak>{{errores.nombre[0]}}</div>
+                <input class="form-control col-md-7 col-xs-12" placeholder="Ingrese nombre del organismo" type="text"
+                  ng-model="abmConsultado.nombre">
+                <div ng-cloak>{{errores.nombre[0]}}</div>
 
               </div>
             </div>
@@ -342,7 +358,8 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="cuit" ng-model="abmConsultado.cuit" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.cuit[0]}}</div>
+                <input type="text" id="cuit" ng-model="abmConsultado.cuit" class="form-control col-md-7 col-xs-12">
+                <div ng-cloak>{{errores.cuit[0]}}</div>
               </div>
             </div>
 
@@ -351,7 +368,9 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="domicilio" ng-model="abmConsultado.domicilio" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.domicilio[0]}}</div>
+                <input type="text" id="domicilio" ng-model="abmConsultado.domicilio"
+                  class="form-control col-md-7 col-xs-12">
+                <div ng-cloak>{{errores.domicilio[0]}}</div>
               </div>
             </div>
 
@@ -360,7 +379,9 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="localidad" ng-model="abmConsultado.localidad" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.localidad[0]}}</div>
+                <input type="text" id="localidad" ng-model="abmConsultado.localidad"
+                  class="form-control col-md-7 col-xs-12">
+                <div ng-cloak>{{errores.localidad[0]}}</div>
               </div>
             </div>
             <div class="item form-group">
@@ -368,12 +389,14 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="input-group">
-                  <input type="number" id="comision" ng-model="abmConsultado.gasto_cobranza" aria-describedby="basic-addon2" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.gasto_cobranza[0]}}</div>
+                  <input type="number" id="comision" ng-model="abmConsultado.gasto_cobranza"
+                    aria-describedby="basic-addon2" class="form-control col-md-7 col-xs-12">
+                  <div ng-cloak>{{errores.gasto_cobranza[0]}}</div>
                   <span class="input-group-addon" id="basic-addon2">%</span>
                 </div>
               </div>
-            
-              
+
+
             </div>
 
             <div ng-repeat="cuota in abmConsultado.cuotas">
@@ -381,20 +404,25 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-4" for="categoria">Cuota social
                   <span class="required">*</span>
                 </label>
-                
+
                 <div class="col-md-3 col-sm-3 col-xs-6" id="valor">
-                  <input type="text" class="form-control col-md-2 col-xs-12" placeholder="Nombre" ng-model="cuota.nombre"><div ng-cloak>{{errores.cuota_social[0]}}</div>
+                  <input type="text" class="form-control col-md-2 col-xs-12" placeholder="Nombre"
+                    ng-model="cuota.nombre">
+                  <div ng-cloak>{{errores.cuota_social[0]}}</div>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-6" id="categoria">
-                          <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Valor"  ng-model="cuota.valor"><div ng-cloak>{{errores.cuota_social[0]}}</div>
-                        </div>
+                  <input type="number" class="form-control col-md-2 col-xs-12" placeholder="Valor"
+                    ng-model="cuota.valor">
+                  <div ng-cloak>{{errores.cuota_social[0]}}</div>
+                </div>
               </div>
             </div>
 
             <!-- <button id="sumahtml" type="button" class="btn btn-danger"  style="float: right;position: relative;bottom: 45px;" ng-click="eliminarHtml('.clonado1', abmConsultado.cuotas)">
                       <span class="glyphicon glyphicon-minus" aria-hidden="true" ></span>
                     </button> -->
-            <button id="sumahtml" type="button" class="btn btn-primary" style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml(abmConsultado.cuotas)">
+            <button id="sumahtml" type="button" class="btn btn-primary"
+              style="float: right;position: relative;bottom: 45px;" ng-click="agregarHtml(abmConsultado.cuotas)">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
 
