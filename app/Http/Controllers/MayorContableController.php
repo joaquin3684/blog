@@ -39,7 +39,7 @@ class MayorContableController extends Controller
               $saldoAcumulativo= $a->saldo;
               return $a;
 
-            })->toArray();
+            })->values();
             return $saldo;
         });
 

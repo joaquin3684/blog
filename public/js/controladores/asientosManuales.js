@@ -29,7 +29,7 @@ $scope.fecha = new Date();
     $scope.asientos.forEach(function(entry) {
       asientosData.push({
         'id_imputacion': entry.id_imputacion.id,
-        'codigo': entry.id_imputacion.codigo,
+        'cuenta': entry.id_imputacion.codigo,
         'debe': entry.debe,
         'haber': entry.haber,
       });

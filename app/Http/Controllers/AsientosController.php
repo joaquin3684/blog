@@ -32,13 +32,8 @@ class AsientosController extends Controller
 
     public function store(Request $request)
     {
-        DB::transaction(function() use ($request){
-
-            foreach($request['asientos'] as $elem){
-                $cuenta = $this->imputacionService->find($elem['id_imputacion']);
-                $elem['cuenta'] = $cuenta->codigo;
-                $this->asientoService->crear($elem);
-            }
+         DB::transaction(function() use ($request){
+            $this->asientoService->crear($request['asientos']);
         });
     }
 

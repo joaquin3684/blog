@@ -47,7 +47,7 @@ class AsientoService
             $cuenta = ImputacionService::findByCodigo($c['cuenta']);
             $debe = $c['debe'];
             $haber = $c['haber'];
-            Asiento::create(['id_imputacion' => $cuenta->id, 'nombre' => $cuenta->nombre, 'codigo' => $cuenta->codigo, 'debe' => $debe, 'haber' => $haber, 'id_ejercicio' => $ejercicio->id, 'fecha_contable' => Carbon::today()->toDateString(), 'fecha_valor' => $fechaVal->toDateString(), 'nro_asiento' => $nroAsiento]);
+            Asiento::create(['id_imputacion' => $cuenta->id, 'nombre' => $cuenta->nombre, 'codigo' => $cuenta->codigo, 'debe' => is_null($debe) ? 0 : $debe, 'haber' => is_null($haber) ? 0 : $haber, 'id_ejercicio' => $ejercicio->id, 'fecha_contable' => Carbon::today()->toDateString(), 'fecha_valor' => $fechaVal->toDateString(), 'nro_asiento' => $nroAsiento]);
             $this->saldoService->modificar($cuenta, Carbon::today(), $debe, $haber);
         }
 
