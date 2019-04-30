@@ -226,7 +226,7 @@ Route::get('logout', 'Login@logout');
 Route::post('login', 'Login@login');
 
 //-------------- VENTAS -------------------
-
+Route::get('ventas/modificarServicioVista', 'VentasControlador@modificarVista');
 Route::post('ventas/mostrarPorOrganismo', 'VentasControlador@mostrarPorOrganismo');
 Route::post('ventas/datosAutocomplete', 'VentasControlador@traerDatosAutocomplete');
 Route::post('ventas/saldo', 'VentasControlador@saldo');

@@ -29,6 +29,11 @@ class VentasControlador extends Controller
         return view('CuentasCorrientes');
     }
 
+    public function modificarVista()
+    {
+        return view('modificar_servicio');
+    }
+
     public function mostrarPorVenta(Request $request)
     {
 
@@ -111,7 +116,6 @@ class VentasControlador extends Controller
     }
 
     public function mostrarPorOrganismo(Request $request)
-
     {
         $var = "'App\\".'\\'."Ventas'";
 
