@@ -10,6 +10,8 @@ use App\Repositories\Eloquent\Generadores\GeneradorCuotas;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
 use App\Repositories\Eloquent\Repos\EstadoVentaRepo;
 use App\Repositories\Eloquent\Repos\VentasRepo;
+use App\Services\CuotaService;
+use App\Services\VentasService;
 use App\Ventas;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -18,6 +20,14 @@ use Illuminate\Support\Facades\DB;
 
 class AprobacionServiciosController extends Controller
 {
+    private $ventaService, $cuotaService;
+
+    public function __construct(VentasService $ventaService, CuotaService $cuotaService)
+    {
+        $this->ventaService = $ventaService;
+        $this->cuotaService = $cuotaService;
+    }
+
     public function index()
     {
         return view('aprobacion_servicios');

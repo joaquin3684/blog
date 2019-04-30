@@ -5,12 +5,24 @@ namespace App\Http\Controllers;
 use App\CajaOperaciones;
 use App\Operacion;
 use App\Repositories\Eloquent\GeneradorDeAsientos;
+use App\Services\AsientoService;
+use App\Services\CajaService;
+use App\Services\OperacionService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CajaController extends Controller
 {
+    private $asientoService, $cajaService, $operacionService;
+
+    public function __construct(AsientoService $asientoService, CajaService $cajaService, OperacionService $operacionService)
+    {
+        $this->asientoService = $asientoService;
+        $this->cajaService = $cajaService;
+        $this->operacionService = $operacionService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,54 +41,31 @@ class CajaController extends Controller
      */
     public function store(Request $request)
     {
-        // data { tipoOperacion: caja o banco, valor: 12, id_operacion: 1, observacion: laskjdf, transferencia: 1 si es transferencia 0 si es cheque, id_banco: 1516 o null, id_chequera: 65 o null, nro_cheque: 1 }
 
         DB::transaction(function() use ($request){
 
             $id_operacion = $request['id_operacion'];
             $tipo = $request['tipoOperacion'];
             $valor = $request['valor'];
-            $operacion = Operacion::with('imputaciones')->find($id_operacion);
-            $operacion->imputaciones->each(function($imputacion) use ($valor){
+            $operacion = $this->operacionService->find($id_operacion);
+
+            $cuentas = array();
+            foreach ($operacion->imputaciones as $imputacion){
 
                 if($imputacion->pivot->debe)
                 {
-                    GeneradorDeAsientos::crear($imputacion, $valor, 0);
+                    $a = ['cuenta' => $imputacion->codigo, 'debe' => $valor, 'haber' => 0];
+                    array_push($cuentas, $a);
                 } else {
-                    GeneradorDeAsientos::crear($imputacion, 0, $valor);
-                }
-            });
-            if($tipo == "caja")
-            {
-                if($operacion->entrada)
-                {
-                    CajaOperaciones::create(['observacion' => $request['observacion'], 'operacion_type' =>  $tipo, 'id_operacion' => $id_operacion, 'entrada' => $valor, 'salida' => 0, 'fecha' => Carbon::today()->toDateString()]);
-                } else {
-                    CajaOperaciones::create(['observacion' => $request['observacion'], 'operacion_type' =>  $tipo, 'id_operacion' => $id_operacion, 'entrada' => 0, 'salida' => $valor, 'fecha' => Carbon::today()->toDateString()]);
-
+                    $a = ['cuenta' => $imputacion->codigo, 'debe' => 0, 'haber' => $valor];
+                    array_push($cuentas, $a);
                 }
             }
-            else if($tipo == "banco")
-            {
-                if($operacion->entrada)
-                {
-                    if(!$request['transferencia'])
-                    {
-                        CajaOperaciones::create(['observacion' => $request['observacion'], 'operacion_type' => $tipo,'id_banco' => $request['id_banco'], 'id_chequera' => $request['id_chequera'], 'nro_cheque' => $request['nro_cheque'], 'transferencia' => 0, 'operacion_type' =>  $tipo, 'id_operacion' => $id_operacion, 'entrada' => $valor, 'salida' => 0, 'fecha' => Carbon::today()->toDateString()]);
-                    } else {
-                        CajaOperaciones::create(['observacion' => $request['observacion'],'transferencia' => 1, 'id_banco' => $request['id_banco'], 'operacion_type' =>  $tipo, 'id_operacion' => $id_operacion, 'entrada' => $valor, 'salida' => 0, 'fecha' => Carbon::today()->toDateString()]);
 
-                    }
-                } else {
-                    if(!$request['transferencia'])
-                    {
-                        CajaOperaciones::create(['observacion' => $request['observacion'],'operacion_type' => $tipo,'id_banco' => $request['id_banco'], 'id_chequera' => $request['id_chequera'], 'nro_cheque' => $request['nro_cheque'], 'transferencia' => 0, 'operacion_type' =>  $tipo, 'id_operacion' => $id_operacion, 'entrada' => 0, 'salida' => $valor, 'fecha' => Carbon::today()->toDateString()]);
-                    } else {
-                        CajaOperaciones::create(['observacion' => $request['observacion'],'transferencia' => 1, 'id_banco' => $request['id_banco'], 'operacion_type' =>  $tipo, 'id_operacion' => $id_operacion, 'entrada' => 0, 'salida' => $valor, 'fecha' => Carbon::today()->toDateString()]);
+            $this->asientoService->crear($cuentas);
+            $this->cajaService->crear($operacion->entrada, $request['observacion'], $tipo, $id_operacion, $valor, Carbon::today()->toDateString(), $request['id_banco'], $request['id_chequera'], $request['nro_cheque'], $request['transferencia']);
 
-                    }
-                }
-            }
+
 
 
         });

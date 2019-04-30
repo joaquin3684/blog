@@ -15,7 +15,7 @@ class Socio
     use Conversion;
     private $ventas;
     private $activeSocio;
-    private $id;
+    public $id;
     private $nombre;
     private $fecha_nacimiento;
     private $cuit;

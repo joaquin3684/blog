@@ -32,8 +32,7 @@ class CuotasSocialesSeeder extends Seeder
             for($j = 1; $j < 3; $j++)
             {
                 DB::table('movimientos')->insert([
-                    'identificadores_id' => $i,
-                    'identificadores_type' => 'App\Cuotas',
+                    'id_cuota' => $i,
                     'fecha' => $faker->date('Y-m-d'),
                     'entrada' => $faker->randomNumber(),
                 ]);

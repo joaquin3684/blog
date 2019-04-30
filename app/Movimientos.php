@@ -10,15 +10,11 @@ class Movimientos extends Model
    	use SoftDeletes;
 
 	protected $fillable = [
-        'identificadores_id', 'identificadores_type', 'entrada', 'salida', 'fecha', 'ganancia', 'contabilizado_entrada', 'contabilizado_salida'
+        'id_cuota', 'entrada', 'salida', 'fecha', 'ganancia', 'contabilizado_entrada', 'contabilizado_salida'
     ];
 
     protected $dates = ['deleted_at'];
 
-    public function identificadores()
-    {
-    	return $this->morphTo();
-    }
 
     public function pagarProveedor($ganancia)
     {

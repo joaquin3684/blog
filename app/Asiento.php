@@ -14,4 +14,5 @@ class Asiento extends Model
     ];
 
     protected $dates = ['deleted_at'];
+
 }

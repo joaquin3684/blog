@@ -18,10 +18,11 @@ use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 
 class ABM_ProveedorService
 {
-    private $proveedor;
+    private $proveedor, $imputacionService;
     public function __construct()
     {
         $this->proveedor = new ProveedoresGateway();
+        $this->imputacionService = new ImputacionService();
     }
 
     public function crearProveedor($elem)
@@ -34,8 +35,8 @@ class ABM_ProveedorService
         $role->users()->attach($user);
         $elem['usuario'] = $user->id;
         $proveedor = Proovedores::create($elem->toArray());
-        $codigo = ImputacionGateway::obtenerCodigoNuevo(3110300);
-        $imputacion = GeneradorDeCuentas::generar('Cta '.$elem['razon_social'], $codigo);
+        $codigo = $this->imputacionService->obtenerCodigoNuevo(3110300);
+        $imputacion = $this->imputacionService->crear($codigo, 'Cta '.$elem['razon_social'], 1);
         ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Deudores', 'codigo' => $imputacion->codigo]);
 
     }

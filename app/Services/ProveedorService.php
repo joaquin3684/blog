@@ -15,27 +15,30 @@ use App\Ventas;
 
 class ProveedorService
 {
+
+    private $ventaService;
+    public function __construct()
+    {
+        $this->ventaService = new VentasService();
+    }
+
     public function pagar()
     {
-        $proveedores = Proovedores::with(['ventas' => function($q){
-            $q->whereHas('cuotas.movimientos', function($q){
-                $q->where('entrada', '>', 0)
-                    ->where('salida', '=', 0);
-            })
-                ->with('cuotas.movimientos');
-
-            }]
-        , 'ventas.producto')->whereHas('ventas.cuotas.movimientos', function($q){
+        $proveedores = Proovedores::whereHas('ventas.cuotas.movimientos', function($q){
 
             $q->where('entrada', '>', 0)
                 ->where('salida', '=', 0);
         })->get();
 
-        $proveedores->each(function ($prov) {
-            $prov->cobrar();
-        });
+        foreach($proveedores as $proveedor)
+        {
+            $ventas = $this->ventaService->ventasDeProveedor($proveedor->id);
+            foreach ($ventas as $venta)
+                $this->ventaService->pagarVenta($venta);
+        }
 
     }
+
 
 
 

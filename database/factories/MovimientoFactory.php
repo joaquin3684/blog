@@ -8,8 +8,7 @@
 $factory->define(App\Movimientos::class, function (Faker\Generator $faker) {
 
     return [
-        'identificadores_id' => 1,
-        'identificadores_type' => 'App\Cuotas',
+        'id_cuota' => 1,
         'entrada' => 100,
         'salida' => 0,
         'fecha' => \Carbon\Carbon::today()->toDateString(),

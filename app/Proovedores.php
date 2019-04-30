@@ -38,10 +38,5 @@ class Proovedores extends Model
         return $this->belongsTo('Cartalyst\Sentinel\Users\EloquentUser', 'usuario', 'id');
     }
 
-    public function cobrar()
-    {
-        $this->ventas->each(function (Ventas $venta){
-            $venta->pagarProveedor();
-        });
-    }
+
 }

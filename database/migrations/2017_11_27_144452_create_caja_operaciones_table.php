@@ -21,8 +21,8 @@ class CreateCajaOperacionesTable extends Migration
             $table->integer('id_operacion')->unsigned();
             $table->foreign('id_operacion')->references('id')->on('operaciones');
             $table->string('operacion_type');
-            $table->string('observacion');
-            $table->integer('transferencia');
+            $table->string('observacion')->nullable();
+            $table->integer('transferencia')->nullable();
             $table->integer('id_chequera')->unsigned()->nullable();
             $table->foreign('id_chequera')->references('id')->on('chequeras');
             $table->integer('nro_cheque')->nullable();

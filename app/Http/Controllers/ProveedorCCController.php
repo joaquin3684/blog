@@ -39,10 +39,9 @@ class ProveedorCCController extends Controller
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->join('productos', 'productos.id', '=', 'ventas.id_producto')
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
-            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+            ->join('movimientos', 'movimientos.id_cuota', '=', 'cuotas.id')
             ->where('proovedores.usuario', $usuario->id)
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->groupBy('organismos.id')
             ->select('organismos.id AS id_organismo', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'));
 
@@ -85,11 +84,10 @@ class ProveedorCCController extends Controller
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
             ->join('productos', 'productos.id', '=', 'ventas.id_producto')
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
-            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+            ->join('movimientos', 'movimientos.id_cuota', '=', 'cuotas.id')
             ->groupBy('socios.id')
             ->where('proovedores.usuario', $usuario->id)
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->where('organismos.id', '=', $request['id'])
             ->select('socios.id AS id_socio', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'));
 
@@ -109,6 +107,7 @@ class ProveedorCCController extends Controller
 
     public function cuentaCorrientePorVentas(Request $request)
     {
+
         $usuario = Sentinel::check();
 
         $ventas = DB::table('ventas')
@@ -129,11 +128,10 @@ class ProveedorCCController extends Controller
             ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
             ->join('productos', 'productos.id', '=', 'ventas.id_producto')
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
-            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+            ->join('movimientos', 'movimientos.id_cuota', '=', 'cuotas.id')
             ->groupBy('ventas.id')
             ->where('proovedores.usuario', $usuario->id)
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->where('socios.id', '=', $request['id'])
             ->select('ventas.id AS id_venta', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'));
 

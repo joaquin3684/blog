@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Cuotas;
+use App\Organismos;
 use App\Repositories\Eloquent\GeneradorDeAsientos;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 use App\Services\ABM_SociosService;
+use App\Services\AsientoService;
+use App\Services\CuotaService;
+use App\Services\ImputacionService;
+use App\Services\SociosService;
 use App\Socios;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,11 +21,15 @@ use Illuminate\Support\Facades\DB;
 class ABM_asociados extends Controller
 {
     private $socio;
-    private $service;
-    public function __construct(Socio $socio, ABM_SociosService $service)
+    private $socioService;
+    private $cuotaService;
+    private $asientoService;
+    public function __construct(Socio $socio, SociosService $service, CuotaService $cuotaService, AsientoService $asientoService)
     {
+        $this->socioService = $service;
+        $this->cuotaService = $cuotaService;
         $this->socio = $socio;
-        $this->service = $service;
+        $this->asientoService = $asientoService;
     }
 
     public function index()
@@ -32,11 +41,44 @@ class ABM_asociados extends Controller
     public function store(ValidacionABMsocios $request)
     {
         $elem = $request->all();
-
-
-
         DB::transaction(function () use ($elem) {
-          $this->service->crearSocio($elem);
+            $socio = $this->socioService->crear(
+                $elem['nombre'],
+                $elem['fecha_nacimiento'],
+                $elem['cuit'],
+                $elem['dni'],
+                $elem['domicilio'],
+                $elem['localidad'],
+                $elem['codigo_postal'],
+                $elem['telefono'],
+                $elem['id_organismo'],
+                $elem['legajo'],
+                $elem['fecha_ingreso'],
+                $elem['sexo'],
+                $elem['valor'],
+                $elem['piso'],
+                $elem['departamento'],
+                $elem['nucleo'],
+                $elem['estado_civil'],
+                $elem['provincia']
+            );
+
+            $fechaInicioCuota = Carbon::today()->toDateString();
+            $fechaVencimientoCuota = Carbon::today()->addMonths(2)->toDateString();
+
+            $cuotaSocial = Organismos::with('cuotas')->find($elem['id_organismo'])->cuotas->first(function($cuota) use ($elem){ return $cuota->categoria == $elem['valor'];});
+
+            $this->cuotaService->crear($fechaInicioCuota, $fechaVencimientoCuota, $cuotaSocial->valor, 1, $socio->id, 'App\Socios');
+
+            $this->asientoService->crear([
+                                    ['cuenta' => 131030101, 'debe' => $cuotaSocial->valor, 'haber' => 0 ],
+                                    ['cuenta' => 131030201, 'debe' => 0, 'haber' => $cuotaSocial->valor ],
+                ]
+            );
+
+
+
+
         });
         return ['created' => true];
     }

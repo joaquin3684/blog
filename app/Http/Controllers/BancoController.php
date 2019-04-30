@@ -8,6 +8,8 @@ use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
 use App\Repositories\Eloquent\Repos\Gateway\BancoGateway;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 
+use App\Services\BancoService;
+use App\Services\ImputacionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,11 +20,12 @@ class BancoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $gateway;
+    private $bancoService, $imputacionService;
 
     public function __construct()
     {
-        $this->gateway = new BancoGateway();
+        $this->bancoService = new BancoService();
+        $this->imputacionService = new ImputacionService();
     }
 
 
@@ -35,32 +38,31 @@ class BancoController extends Controller
     public function store(Request $request)
     {
         DB::transaction(function() use ($request){
-            $this->gateway->create($request->all());
-            $codigoBase = ConfigImputaciones::find(4);
-            $codigo = ImputacionGateway::obtenerCodigoNuevo($codigoBase->codigo_base);
-            GeneradorDeCuentas::generar('Banco '.$request['nombre'], $codigo);
+            $this->bancoService->crear($request['nombre'], $request['sucursal'], $request['direccion'], $request['nro_cuenta']);
+            $codigo = $this->imputacionService->obtenerCodigoNuevo('1110102');
+            $this->imputacionService->crear($codigo, 'Banco '.$request['nombre'], 1);
         });
     }
 
     public function show($id)
     {
-        return $this->gateway->find($id);
+        return $this->bancoService->find($id);
     }
 
 
     public function update(Request $request, $id)
     {
-        return $this->gateway->update($request->all(), $id);
+        return $this->bancoService->update($request->all(), $id);
     }
 
 
     public function destroy($id)
     {
-        $this->gateway->destroy($id);
+        $this->bancoService->destroy($id);
     }
 
     public function all()
     {
-        return $this->gateway->all();
+        return $this->bancoService->all();
     }
 }

@@ -57,11 +57,11 @@ class VentasParaPagarProveedorSeed extends Seeder
                 $vto3->addMonth();
             }
 
-            factory(\App\Movimientos::class)->create(['identificadores_id' => 11, 'entrada' => 250, 'salida' => 0, 'ganancia' => 0]);
-            factory(\App\Movimientos::class)->create(['identificadores_id' => 12, 'entrada' => 250, 'salida' => 0, 'ganancia' => 0]);
-            factory(\App\Movimientos::class)->create(['identificadores_id' => 13, 'entrada' => 250, 'salida' => 0, 'ganancia' => 0]);
-            factory(\App\Movimientos::class)->create(['identificadores_id' => 14, 'entrada' => 250, 'salida' => 0, 'ganancia' => 0]);
-            factory(\App\Movimientos::class)->create(['identificadores_id' => 15, 'entrada' => 250, 'salida' => 0, 'ganancia' => 0]);
+            factory(\App\Movimientos::class)->create(['id_cuota' => 11, 'entrada' => 250, 'salida' => 0, 'ganancia' => 0]);
+            factory(\App\Movimientos::class)->create(['id_cuota' => 12, 'entrada' => 250, 'salida' => 0, 'ganancia' => 0]);
+            factory(\App\Movimientos::class)->create(['id_cuota' => 13, 'entrada' => 250, 'salida' => 0, 'ganancia' => 0]);
+            factory(\App\Movimientos::class)->create(['id_cuota' => 14, 'entrada' => 250, 'salida' => 0, 'ganancia' => 0]);
+            factory(\App\Movimientos::class)->create(['id_cuota' => 15, 'entrada' => 250, 'salida' => 0, 'ganancia' => 0]);
 
 
         });

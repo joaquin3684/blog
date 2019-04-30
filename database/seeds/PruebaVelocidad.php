@@ -49,8 +49,7 @@ class PruebaVelocidad extends Seeder
                 'nro_cuota' => $faker->randomNumber,
             ]);
             DB::table('movimientos')->insert([
-                'identificadores_id' => $faker->numberBetween(1,30000),
-                'identificadores_type' => 'App\Cuotas',
+                'id_cuota' => $faker->numberBetween(1,30000),
                 'entrada' => $faker->randomNumber,
                 'fecha' => $faker->date('Y-m-d'),
             ]);

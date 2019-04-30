@@ -15,6 +15,12 @@ use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
 class ABM_ComercializadorService
 {
 
+    private $imputacionService;
+    public function __construct()
+    {
+        $this->imputacionService = new ImputacionService();
+    }
+
     public function crearComer($elem)
     {
         $usuario = $elem['usuario'];
@@ -22,11 +28,12 @@ class ABM_ComercializadorService
         $email = $elem['email'];
         $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
         $elem['usuario'] = $user->id;
-        Comercializador::create($elem);
+        $comer = Comercializador::create($elem);
         $role = Sentinel::findRoleByName('comercializador');
         $role->users()->attach($user);
-        $codigo = ImputacionGateway::obtenerCodigoNuevo(3110200);
-        $imputacion = GeneradorDeCuentas::generar('Comisiones a pagar '.$elem['nombre'].' '.$elem['apellido'], $codigo);
+        $codigo = $this->imputacionService->obtenerCodigoNuevo(3110200);
+        $imputacion = $this->imputacionService->crear($codigo,'Comisiones a pagar '.$elem['nombre'].' '.$elem['apellido'], 1);
+        return $comer;
 
     }
 }

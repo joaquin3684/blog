@@ -128,7 +128,18 @@ class SolicitudesPendientesMutualController extends Controller
                 'fecha_vencimiento' => Carbon::today()->addMonths($sol->cuotas + 1)->toDateString(),
                 'id_comercializador' => $sol->comercializador
             ];
-            $ventaService->crearVenta($venta);
+            $ventaService->crear(
+                $sol->id_socio,
+                $sol->id_producto,
+                null,
+                $sol->cuotas,
+                $sol->cuotas * $sol->monto_por_cuota,
+                1,
+                Carbon::today()->addMonths(2)->toDateString(),
+                $sol->monto_por_cuota,
+                $sol->monto_pagado,
+                $sol->comercializador
+            );
         });
     }
 

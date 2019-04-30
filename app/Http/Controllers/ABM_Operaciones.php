@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Operacion;
+use App\Services\OperacionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +14,13 @@ class ABM_Operaciones extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $operacionService;
+
+    public function __construct(OperacionService $operacionService)
+    {
+        $this->operacionService = $operacionService;
+    }
+
     public function index()
     {
         return view('ABM_operaciones');
@@ -20,9 +28,15 @@ class ABM_Operaciones extends Controller
 
     public function store(Request $request)
     {
-        $op = Operacion::create($request->all());
-        $op->imputaciones()->attach($request['imputacion1'], ['debe' => $request['debe1'], 'haber' => $request['haber1']]);
-        $op->imputaciones()->attach($request['imputacion2'], ['debe' => $request['debe2'], 'haber' => $request['haber2']]);
+        Db::transaction(function() use ($request){
+            $imputaciones = [
+                ['imputacion' => $request['imputacion1'], 'debe' => $request['debe1'], 'haber' => $request['haber1']],
+                ['imputacion' => $request['imputacion2'], 'debe' => $request['debe2'], 'haber' => $request['haber2']]
+
+            ];
+           $this->operacionService->crear($request['nombre'], $request['entrada'], $request['salida'], $imputaciones);
+        });
+
 
     }
 
@@ -34,7 +48,7 @@ class ABM_Operaciones extends Controller
      */
     public function show($id)
     {
-        return Operacion::with('imputaciones')->find($id);
+        return $this->operacionService->find($id);
     }
 
     /**

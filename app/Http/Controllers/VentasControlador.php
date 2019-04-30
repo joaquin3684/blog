@@ -37,7 +37,7 @@ class VentasControlador extends Controller
         return DB::select(DB::raw("SELECT socios.nombre AS socio, ventas.id AS id_venta, ventas.fecha_vencimiento AS fecha, proovedores.razon_social AS proovedor, productos.nombre AS producto, ventas.nro_cuotas, ROUND(SUM(cuotas.importe),2) AS totalACobrar, IFNULL(ROUND(SUM(movimientos.entrada),2),0) AS totalCobrado, ROUND(IFNULL((ROUND(SUM(cuotas.importe),2) - ROUND(SUM(movimientos.entrada),2)), 0), 2) AS diferencia 
                             FROM (ventas
                             INNER JOIN cuotas ON cuotas.cuotable_id = ventas.id)
-                            LEFT JOIN movimientos ON movimientos.identificadores_id = cuotas.id
+                            LEFT JOIN movimientos ON movimientos.id_cuota = cuotas.id
                             INNER JOIN socios ON socios.id = ventas.id_asociado
                             INNER JOIN productos ON productos.id = ventas.id_producto
                             INNER JOIN proovedores ON proovedores.id = productos.id_proovedor
@@ -50,9 +50,8 @@ class VentasControlador extends Controller
     {
         $ventas = DB::table('ventas')
             ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
-            ->join('movimientos', 'movimientos.identificadores_id', 'cuotas.id')
+            ->join('movimientos', 'movimientos.id_cuota', 'cuotas.id')
             ->where('ventas.id', '=', $request['id'])
-            ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->where('cuotas.cuotable_type', 'App\Ventas')
             ->select('movimientos.*', 'cuotas.nro_cuota');
 
@@ -81,7 +80,18 @@ class VentasControlador extends Controller
         DB::transaction(function() use ($request)
         {
 
-            $this->service->crearVenta($request->all());
+            $this->service->crear(
+                $request['id_asociado'],
+                $request['id_producto'],
+                $request['descripcion'],
+                $request['nro_cuotas'],
+                $request['importe_total'],
+                $request['nro_credito'],
+                $request['fecha_vencimiento'],
+                $request['importe_cuota'],
+                $request['importe_otorgado'],
+                $request['id_comercializador']
+            );
         });
     }
 
@@ -92,7 +102,7 @@ class VentasControlador extends Controller
         return DB::select(DB::raw("SELECT socios.nombre AS socio, socios.id AS id_socio, socios.legajo, ROUND(SUM(cuotas.importe),2) AS totalACobrar, IFNULL(ROUND(SUM(movimientos.entrada),2),0) AS totalCobrado, ROUND(IFNULL((ROUND(SUM(cuotas.importe),2) - ROUND(SUM(movimientos.entrada),2)), 0), 2) AS diferencia 
                             FROM (ventas
                             INNER JOIN cuotas ON cuotas.cuotable_id = ventas.id)
-                            LEFT JOIN movimientos ON movimientos.identificadores_id = cuotas.id
+                            LEFT JOIN movimientos ON movimientos.id_cuota = cuotas.id
                             INNER JOIN socios ON socios.id = ventas.id_asociado
                             INNER JOIN organismos ON organismos.id = socios.id_organismo
                             WHERE cuotas.cuotable_type = $var AND organismos.id = ".$request['id']."
@@ -108,7 +118,7 @@ class VentasControlador extends Controller
         return DB::select(DB::raw("SELECT organismos.nombre AS organismo, organismos.id AS id_organismo, ROUND(SUM(cuotas.importe),2) AS totalACobrar, IFNULL(ROUND(SUM(movimientos.entrada),2),0) AS totalCobrado, ROUND(IFNULL((ROUND(SUM(cuotas.importe),2) - ROUND(SUM(movimientos.entrada),2)), 0), 2) AS diferencia 
                             FROM (ventas
                             INNER JOIN cuotas ON cuotas.cuotable_id = ventas.id)
-                            LEFT JOIN movimientos ON movimientos.identificadores_id = cuotas.id
+                            LEFT JOIN movimientos ON movimientos.id_cuota = cuotas.id
                             INNER JOIN socios ON socios.id = ventas.id_asociado
                             INNER JOIN organismos ON organismos.id = socios.id_organismo
                             WHERE cuotas.cuotable_type = $var
@@ -145,7 +155,7 @@ class VentasControlador extends Controller
                 
                 dd($this->filtrosNoNulos($request));
             }else {
-        return ['ventas' => $mov->values()->all(), 'pin' => $this->filtrosNoNulos($request)];
+                return ['ventas' => $mov->values()->all(), 'pin' => $this->filtrosNoNulos($request)];
                 
             }
     }
@@ -161,8 +171,19 @@ class VentasControlador extends Controller
     public function modificar(Request $request)
     {
         DB::transaction(function() use ($request){
-            $venta = Ventas::with('cuotas')->find($request['id']);
-            $venta->modificar($request->all());
+
+            $this->service->modificar(
+                $request['id_asociado'],
+                $request['id_producto'],
+                $request['descripcion'],
+                $request['nro_cuotas'],
+                $request['importe_total'],
+                $request['nro_credito'],
+                $request['fecha_vencimiento'],
+                $request['importe_cuota'],
+                $request['importe_otorgado'],
+                $request['id_comercializador'],
+                $request['id']);
         });
     }
 

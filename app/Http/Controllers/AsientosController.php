@@ -6,6 +6,8 @@ use App\Repositories\Eloquent\CalcularSaldos;
 use App\Repositories\Eloquent\GeneradorDeAsientos;
 use App\Repositories\Eloquent\Repos\Gateway\AsientosGateway;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
+use App\Services\AsientoService;
+use App\Services\ImputacionService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,10 +16,13 @@ class AsientosController extends Controller
 {
 
     private $gateway;
+    private $imputacionService;
+    private $asientoService;
 
-    public function __construct()
+    public function __construct(ImputacionService $imputacionService, AsientoService $asientoService)
     {
-        $this->gateway = new AsientosGateway();
+        $this->imputacionService = $imputacionService;
+        $this->asientoService = $asientoService;
     }
 
     public function index()
@@ -28,10 +33,11 @@ class AsientosController extends Controller
     public function store(Request $request)
     {
         DB::transaction(function() use ($request){
-            $impuGate = new ImputacionGateway();
+
             foreach($request['asientos'] as $elem){
-                $cuenta = $impuGate->find($elem['id_imputacion']);
-               GeneradorDeAsientos::crear($cuenta, $elem['debe'], $elem['haber'], $request['fecha_valor']);
+                $cuenta = $this->imputacionService->find($elem['id_imputacion']);
+                $elem['cuenta'] = $cuenta->codigo;
+                $this->asientoService->crear($elem);
             }
         });
     }

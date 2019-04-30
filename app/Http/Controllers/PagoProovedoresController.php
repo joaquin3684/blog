@@ -37,9 +37,8 @@ class PagoProovedoresController extends Controller
             ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
             ->join('productos', 'productos.id', '=', 'ventas.id_producto')
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
-            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+            ->join('movimientos', 'movimientos.id_cuota', '=', 'cuotas.id')
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->select('proovedores.razon_social AS proovedor', 'cuotas.nro_cuota', 'cuotas.importe', 'socios.nombre', 'socios.legajo', 'cuotas.estado', 'proovedores.id AS id_proovedor', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'), DB::raw('ROUND(SUM(movimientos.salida),2) AS totalPagado'), DB::raw('ROUND((( SUM(movimientos.entrada) - SUM(movimientos.salida) ) * productos.ganancia / 100),2) AS comision'))
             ->groupBy('proovedores.id', 'productos.id')
             ->havingRaw('totalCobrado <> totalPagado')->get();
@@ -87,9 +86,8 @@ class PagoProovedoresController extends Controller
             ->join('organismos', 'socios.id_organismo', '=', 'organismos.id')
             ->join('productos', 'productos.id', '=', 'ventas.id_producto')
             ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
-            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+            ->join('movimientos', 'movimientos.id_cuota', '=', 'cuotas.id')
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->where('movimientos.identificadores_type', 'App\Cuotas')//TODO falta poner el motivo
             ->where('proovedores.id', $request['id'])
             ->select('cuotas.nro_cuota', 'cuotas.importe', 'ventas.id as servicio', 'socios.nombre as socio' , 'organismos.nombre as organismo', 'socios.dni', 'cuotas.fecha_vencimiento', 'socios.legajo', 'cuotas.estado', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'), DB::raw('ROUND(SUM(movimientos.salida),2) AS totalPagado'), DB::raw('ROUND((SUM(movimientos.salida) * productos.ganancia / 100),2) AS comision'))
             ->groupBy('cuotas.id')
@@ -137,9 +135,7 @@ class PagoProovedoresController extends Controller
     public function pagarCuotas(Request $request)
     {
         DB::transaction(function(){
-
-
-        $this->service->pagar();
+            $this->service->pagar();
         });
     }
 

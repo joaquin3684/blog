@@ -10,6 +10,7 @@ use App\Repositories\Eloquent\Mapper\VentasMapper;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Repositories\Eloquent\Socio;
 use App\Services\ABM_SociosService;
+use App\Services\SociosService;
 use App\Services\VentasService;
 use Illuminate\Http\Request;
 use App\Ventas;
@@ -38,15 +39,15 @@ class CobrarController extends Controller
     private $tabla;
     private $cobrar;
     private $socioService;
-    private $service;
+    private $ventaService;
 
     public function __construct(ConsultasCuotas $cuotas, ConsultasMovimientos $movimientos, Filtros $filtros)
     {
         $this->cuotas = $cuotas;
         $this->movimientos = $movimientos;
         $this->filtros = $filtros;
-        $this->service = new VentasService();
-        $this->socioService = new ABM_SociosService();
+        $this->ventaService = new VentasService();
+        $this->socioService = new SociosService();
     }
 
     public function index()
@@ -77,9 +78,8 @@ class CobrarController extends Controller
             ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
             ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
-            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+            ->join('movimientos', 'movimientos.id_cuota', '=', 'cuotas.id')
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->groupBy('organismos.id')
             ->select('organismos.id AS id_organismo', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'))
             ->get();
@@ -128,11 +128,10 @@ class CobrarController extends Controller
             ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
             ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
-            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+            ->join('movimientos', 'movimientos.id_cuota', '=', 'cuotas.id')
             ->groupBy('socios.id')
             ->where('organismos.id', '=', $id)
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->select('socios.id AS id_socio', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'))
             ->get();
         $cobrado = $this->unirColecciones($cuotas, $movimientos, ['id_socio'], ['totalCobrado' => 0]);
@@ -179,11 +178,10 @@ class CobrarController extends Controller
             ->join('socios', 'ventas.id_asociado', '=', 'socios.id')
             ->join('cuotas', 'cuotas.cuotable_id', '=', 'ventas.id')
             ->join('organismos', 'organismos.id', '=', 'socios.id_organismo')
-            ->join('movimientos', 'movimientos.identificadores_id', '=', 'cuotas.id')
+            ->join('movimientos', 'movimientos.id_cuota', '=', 'cuotas.id')
             ->groupBy('ventas.id')
             ->where('socios.id', '=', $request['id'])
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->where('movimientos.identificadores_type', 'App\Cuotas')
             ->select('ventas.id AS id_venta', DB::raw('ROUND(SUM(movimientos.entrada),2) AS totalCobrado'))->get();
 
         $cobrado = $this->unirColecciones($ventas, $movimientos, ["id_venta"], ['totalCobrado' => 0]);
@@ -210,8 +208,11 @@ class CobrarController extends Controller
     public function cobrarPorPrioridad(Request $request)
     {
         DB::transaction(function() use ($request) {
-
-            $this->socioService->cobrar($request->all());
+            foreach($request->all() as $socio)
+            {
+                $soc = $this->socioService->find($socio['id']);
+                $this->socioService->cobrar($soc, $socio['monto']);
+            }
 
         });
 
@@ -258,22 +259,12 @@ class CobrarController extends Controller
         DB::transaction(function() use ($request){
 
 
-            $this->service->cobrar($request->all());
-            /*$errores = collect();
+
             foreach($request->all() as $venta)
             {
-                $ventasRepo = new VentasRepo();
-                $ventaCuotasVencidas = $ventasRepo->findWithCuotasAndProveedor($venta['id']);
-
-                $cobrar = new CobrarPorVenta();
-                try{
-                    $cobrar->cobrar($ventaCuotasVencidas, $venta['monto']);
-
-                } catch (MasPlataCobradaQueElTotalException $e){
-                    $errores->push($e->toArray());
-                }
+                $ventaa = $this->ventaService->find($venta['id']);
+                $this->ventaService->cobrar($ventaa, $venta['monto']);
             }
-            return $errores;*/
         });
     }
 
