@@ -62,6 +62,9 @@ class VentasService
 
     }
 
+    public function all(){
+        return Ventas::with('socio', 'producto.proovedor')->get();
+    }
     public function modificar($id_asociado,
                               $id_producto,
                               $descripcion,

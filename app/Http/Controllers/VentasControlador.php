@@ -167,9 +167,7 @@ class VentasControlador extends Controller
 
     public function all()
     {
-        return Ventas::whereHas('cuotas', function($q){
-            $q->where('estado', null);
-        })->get();
+        return $this->service->all();
     }
 
     public function modificar(Request $request)

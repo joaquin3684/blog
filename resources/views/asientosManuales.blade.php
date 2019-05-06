@@ -1,4 +1,5 @@
-@extends('welcome') @section('contenido') {!! Html::script('js/controladores/asientosManuales.js') !!}
+@extends('welcome') 
+@section('contenido') {!! Html::script('js/controladores/asientosManuales.js') !!}
 
 
 <div class="nav-md" ng-controller="asientosManuales">
@@ -55,7 +56,7 @@
 
                     <table class="table" ng-cloak>
                       <thead>
-                        <tr >
+                        <tr>
 
                           <th style="text-align: center">Id. imputacion</th>
                           <th style="text-align: center">Debe</th>
@@ -72,16 +73,20 @@
                             </select>
                           </td>
                           <td style="border-top: 1px solid white;">
-                            <input type="number" name="" value="" class="form-control" ng-model="asiento.debe" placeholder="123" ng-disabled="asiento.haber != null">
+                            <input type="number" name="" value="" class="form-control" ng-model="asiento.debe"
+                              placeholder="123" ng-disabled="asiento.haber != null">
                           </td>
                           <td style="border-top: 1px solid white;">
-                            <input type="number" name="" value="" class="form-control" ng-model="asiento.haber" placeholder="123" ng-disabled="asiento.debe != null">
+                            <input type="number" name="" value="" class="form-control" ng-model="asiento.haber"
+                              placeholder="123" ng-disabled="asiento.debe != null">
                           </td>
                           <td style="border-top: 1px solid white;">
-                            <button id="sumahtml" type="button" class="btn btn-danger" ng-click="eliminarHtml('#asiento'+$index, asientos,$index)">
+                            <button id="sumahtml" type="button" class="btn btn-danger"
+                              ng-click="eliminarHtml('#asiento'+$index, asientos,$index)">
                               <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             </button>
-                            <button id="sumahtml" type="button" class="btn btn-primary" ng-click="agregarHtml(asientos)">
+                            <button id="sumahtml" type="button" class="btn btn-primary"
+                              ng-click="agregarHtml(asientos)">
                               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </button>
                           </td>
@@ -100,11 +105,24 @@
                     </table>
 
                     <div class="item form-group">
-                      <label class="control-label ">Fecha valor
-                        <span class="required">*</span>
-                      </label>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <label class="control-label ">Fecha valor
+                            <span class="required">*</span>
+                          </label>
 
-                      <input type="date" class="form-control " placeholder="Ingrese la fecha" ng-model="fecha" max="{{fechaActual}}">
+                          <input type="date" class="form-control " placeholder="Ingrese la fecha" ng-model="fecha"
+                            max="{{fechaActual}}">
+                        </div>
+                        <div class="col-sm-6">
+                          <label class="control-label ">Observacion
+                          </label>
+
+                          <input type="text" class="form-control " placeholder="Ingrese una observacion"
+                            ng-model="observacion">
+                        </div>
+                      </div>
+
 
                     </div>
 
@@ -145,6 +163,4 @@
 
 
 </div>
-
-
 @endsection
