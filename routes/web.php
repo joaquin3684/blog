@@ -372,7 +372,12 @@ Route::get('notificacion/marcarTodasLeidas', 'NotificacionController@marcarTodas
 
 //-------------------- ASIENTOS ---------------------------------
 
-Route::resource('asientos', 'AsientosController');
+Route::get('asientos/{nroAsiento}', 'AsientosController@findFromNumero');
+Route::post('asientos/renumerar', 'AsientoController@renumerar');
+Route::post('asientos/borrar', 'AsientoController@delete');
+Route::post('asientos/editar', 'AsientoController@update');
+Route::post('asientos', 'AsientoController@store');
+Route::get('asientos', 'AsientoController@index');
 
 //-------------------- BANCOS ----------------------------------
 

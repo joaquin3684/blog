@@ -115,7 +115,7 @@ class VentasService
                 ['cuenta' => 111010201, 'debe' => $venta->importe_otorgado, 'haber' => 0],//TODO hay que ver la seleccion del banco aca
                 ['cuenta' => 131010004, 'debe' => 0, 'haber' => $interes],
                 ['cuenta' => 131020403, 'debe' => $interes, 'haber' => 0],//TODO hay que ver la seleccion del banco aca
-            ]);
+            ], '');
 
         } else {
             $importe = $venta->importe_total * $producto->ganancia / 100;
@@ -123,7 +123,7 @@ class VentasService
             $this->asientoService->crear([
                 ['cuenta' => 131010002, 'debe' => 0, 'haber' => $importe],
                 ['cuenta' => 131020402, 'debe' => $importe, 'haber' => 0],
-            ]);
+            ], '');
         }
     }
 
@@ -138,7 +138,7 @@ class VentasService
                 ['cuenta' => 111010201, 'debe' => 0, 'haber' => $venta->importe_otorgado],//TODO hay que ver la seleccion del banco aca
                 ['cuenta' => 131010004, 'debe' => $interes, 'haber' => 0],
                 ['cuenta' => 131020403, 'debe' => 0, 'haber' => $interes],//TODO hay que ver la seleccion del banco aca
-            ]);
+            ], '');
 
         } else {
             $importe = $venta->importe_total * $producto->ganancia / 100;
@@ -146,7 +146,7 @@ class VentasService
             $this->asientoService->crear([
                 ['cuenta' => 131010002, 'debe' => $importe, 'haber' => 0],
                 ['cuenta' => 131020402, 'debe' => 0, 'haber' => $importe],
-            ]);
+            ], '');
         }
     }
 
@@ -224,7 +224,7 @@ class VentasService
                 ['cuenta' => 521020218, 'debe' => $comisionPagada, 'haber' => 0],//TODO hay que ver la seleccion del banco aca
                 ['cuenta' => 131010001, 'debe' => 0, 'haber' => $interesesACobrar],
                 ['cuenta' => 131010004, 'debe' => 0, 'haber' => $prestamosACobrar],//TODO hay que ver la seleccion del banco aca
-            ]);
+            ], '');
 
 
         } else {
@@ -239,7 +239,7 @@ class VentasService
                 ['cuenta' => 131010003, 'debe' => 0, 'haber' => $capital],
                 ['cuenta' => 131010002, 'debe' => 0, 'haber' => $comisionGanada],//TODO hay que ver la seleccion del banco aca
                 ['cuenta' => 311020001, 'debe' => 0, 'haber' => $interesAPagar],//TODO hay que ver la seleccion del banco aca
-            ]);
+            ], '');
         }
     }
 
@@ -269,6 +269,6 @@ class VentasService
             ['cuenta' => 311020001, 'debe' => $interesAPagar, 'haber' => 0],
             ['cuenta' => 311020003, 'debe' => $capital, 'haber' => 0],
             ['cuenta' => 111010201, 'debe' => 0, 'haber' => $totalPagado],
-        ]);
+        ], '');
     }
 }

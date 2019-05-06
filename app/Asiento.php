@@ -10,9 +10,13 @@ class Asiento extends Model
     protected $table = 'asientos';
 
     protected $fillable = [
-        'id_imputacion', 'nombre', 'debe', 'haber', 'fecha_contable', 'nro_asiento', 'id_ejercicio', 'fecha_valor', 'codigo'
+        'id_imputacion', 'nombre', 'debe', 'haber', 'fecha_contable', 'nro_asiento', 'id_ejercicio', 'fecha_valor', 'codigo', 'observacion'
     ];
 
     protected $dates = ['deleted_at'];
 
+    public function cuenta()
+    {
+        return $this->belongsTo('App\Imputacion', 'id_imputacion', 'id');
+    }
 }

@@ -21,6 +21,7 @@ class CreateAsientosTable extends Migration
             $table->double('debe')->default(0);
             $table->integer('codigo');
             $table->string('nombre');
+            $table->string('observacion')->nullable();
             $table->double('haber')->default(0);
             $table->bigInteger('nro_asiento');
             $table->integer('id_ejercicio')->unsigned();
