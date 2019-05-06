@@ -371,11 +371,11 @@ Route::get('notificacion/marcarTodasLeidas', 'NotificacionController@marcarTodas
 //-------------------- ASIENTOS ---------------------------------
 
 Route::get('asientos/{nroAsiento}', 'AsientosController@findFromNumero');
-Route::post('asientos/renumerar', 'AsientoController@renumerar');
-Route::post('asientos/borrar', 'AsientoController@delete');
-Route::post('asientos/editar', 'AsientoController@update');
-Route::post('asientos', 'AsientoController@store');
-Route::get('asientos', 'AsientoController@index');
+Route::post('asientos/renumerar', 'AsientosController@renumerar');
+Route::post('asientos/borrar', 'AsientosController@delete');
+Route::post('asientos/editar', 'AsientosController@update');
+Route::post('asientos', 'AsientosController@store');
+Route::get('asientos', 'AsientosController@index');
 
 //-------------------- BANCOS ----------------------------------
 
