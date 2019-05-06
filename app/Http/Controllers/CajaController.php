@@ -62,7 +62,7 @@ class CajaController extends Controller
                 }
             }
 
-            $this->asientoService->crear($cuentas);
+            $this->asientoService->crear($cuentas, $operacion->nombre);
             $this->cajaService->crear($operacion->entrada, $request['observacion'], $tipo, $id_operacion, $valor, Carbon::today()->toDateString(), $request['id_banco'], $request['id_chequera'], $request['nro_cheque'], $request['transferencia']);
 
 

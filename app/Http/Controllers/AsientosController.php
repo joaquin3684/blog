@@ -33,17 +33,39 @@ class AsientosController extends Controller
     public function store(Request $request)
     {
          DB::transaction(function() use ($request){
-            $this->asientoService->crear($request['asientos']);
+            $this->asientoService->crear($request['asientos'], $request['observacion'], $request['fecha_valor']);
         });
     }
 
     public function show($id)
     {
-        return $this->gateway->find($id);
+        return $this->asientoService->find($id);
     }
 
-    public function all()
+    public function update(Request $request)
     {
-        return $this->gateway->all();
+        DB::transaction(function() use ($request){
+           $this->asientoService->modificar($request['asientos'], $request['observacion'], $request['nro_asiento'], $request['fecha_valor']);
+        });
     }
+
+    public function delete(Request $request)
+    {
+        DB::transaction(function() use ($request){
+            $this->asientoService->borrar($request['nro_asiento']);
+        });
+    }
+
+    public function renumerar(Request $request)
+    {
+        DB::transaction(function() use ($request){
+            $this->asientoService->renumerar($request['fecha']);
+        });
+    }
+
+    public function findFromNumero($nroAsiento)
+    {
+        return $this->asientoService->findFromNumero($nroAsiento);
+    }
+
 }

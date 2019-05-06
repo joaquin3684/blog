@@ -73,7 +73,7 @@ class ABM_asociados extends Controller
             $this->asientoService->crear([
                                     ['cuenta' => 131030101, 'debe' => $cuotaSocial->valor, 'haber' => 0 ],
                                     ['cuenta' => 131030201, 'debe' => 0, 'haber' => $cuotaSocial->valor ],
-                ]
+                ], ''
             );
 
 
