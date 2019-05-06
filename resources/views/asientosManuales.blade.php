@@ -1,4 +1,5 @@
-@extends('welcome') 
+@extends('welcome')
+
 @section('contenido') {!! Html::script('js/controladores/asientosManuales.js') !!}
 
 
@@ -58,7 +59,7 @@
                       <thead>
                         <tr>
 
-                          <th style="text-align: center">Id. imputacion</th>
+                          <th style="text-align: center">Cuenta</th>
                           <th style="text-align: center">Debe</th>
                           <th style="text-align: center">Haber</th>
                           <th></th>

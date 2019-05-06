@@ -12,6 +12,7 @@ $factory->define(App\Asiento::class, function (Faker\Generator $faker) {
     $fecha = Carbon::today()->toDateString();
      return [
         'id_imputacion' => 1,
+        'observacion' => '',
          'debe' => 0,
          'haber' => 0,
          'fecha_contable' => $fecha,

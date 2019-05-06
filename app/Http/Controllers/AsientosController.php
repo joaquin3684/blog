@@ -30,6 +30,11 @@ class AsientosController extends Controller
         return view('asientosManuales');
     }
 
+    public function bajaModificacionVista()
+    {
+        return view('BM_asientosManuales');
+    }
+
     public function store(Request $request)
     {
          DB::transaction(function() use ($request){

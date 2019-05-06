@@ -378,6 +378,7 @@ Route::post('asientos/borrar', 'AsientosController@delete');
 Route::post('asientos/editar', 'AsientosController@update');
 Route::post('asientos', 'AsientosController@store');
 Route::get('asientos', 'AsientosController@index');
+Route::get('BMAsientos', 'AsientosController@bajaModificacionVista');
 
 //-------------------- BANCOS ----------------------------------
 

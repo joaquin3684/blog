@@ -287,7 +287,10 @@
                     <li><a href="asientos">Asientos Contables Manuales</a>
                     </li>
                     @endif
-
+                    @if(Sentinel::check()->hasAccess('asientosManuales.*'))
+                    <li><a href="BMAsientos">Baja/Modif. Asientos Manuales</a>
+                    </li>
+                    @endif
                     <!--<li><a href="cobrar_contablemente">Cobrar contablemente</a></li> -->
                     @if(Sentinel::check()->hasAccess('mayorContable.*'))
                     <li><a href="mayorContable">Mayor contable</a></li>
