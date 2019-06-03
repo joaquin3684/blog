@@ -301,6 +301,9 @@
                     @if(Sentinel::check()->hasAccess('balances.*'))
                     <li><a href="balance">Balance</a></li>
                     @endif
+                    @if(Sentinel::check()->hasAccess('libroDiario.*'))
+                    <li><a href="libroDiario">Libro diario</a></li>
+                    @endif
                     <!-- <li><a href="rubro">Rubros</a>
                       </li>
                       <li><a href="moneda">Monedas</a></li>
