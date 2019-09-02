@@ -20,7 +20,7 @@ class SolicitudGateway extends Gateway
 
     public function solicitudesSinAsignar()
     {
-       return Solicitud::doesntHave('proveedor')->orWhere('doc_endeudamiento', null)->with('socio')->get();
+       return Solicitud::where('doc_endeudamiento', null)->orWhere('agente_financiero', null)->with('socio')->get();
     }
 
     public function buscarPorAgente($id)

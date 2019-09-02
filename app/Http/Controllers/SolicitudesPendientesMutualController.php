@@ -87,13 +87,14 @@ class SolicitudesPendientesMutualController extends Controller
     public function solicitudesAVerificar()
     {
         return $this->solicitudesGateway->solicitudesConCapitalOtorgado()->map(function($solicitud){
+            $soc = (object)['nombre' => null, 'apellido' => null];
             $socio = $solicitud->socio;
             $nombre = explode(",", $socio->nombre);
-            $socio->nombre = $nombre[0];
-            $socio->apellido = $nombre[1];
-            $solicitud->socio = $socio;
+            $soc->nombre = $nombre[0];
+            $soc->apellido = $nombre[1];
+            $solicitud->socio = $soc;
             return $solicitud;
-        });;
+        });
     }
 
     public function aprobarSolicitud(Request $request)

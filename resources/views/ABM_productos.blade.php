@@ -110,7 +110,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input required type="number" step="0.01" ng-model="tasa" class="form-control col-md-7 col-xs-12" placeholder="1">
+                                                <input required type="number" step="0.01" min="{{esTipoCredito? '0.01' : '0'}}" ng-model="tasa" class="form-control col-md-7 col-xs-12" placeholder="1">
                                                 <div ng-cloak>{{errores.tasa[0]}}</div>
                                             </div>
                                         </div>
@@ -119,7 +119,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select ng-model="tipo" class="form-control col-md-7 col-xs-12" required>
+                                                <select ng-model="tipo" ng-change="onSelectTipo()" class="form-control col-md-7 col-xs-12" required>
                                                     <option value="Credito" >Credito</option>
                                                     <option value="Producto">Producto</option>
                                                 </select>
@@ -324,7 +324,8 @@
                                 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" step="0.01" ng-model="abmConsultado.tasa" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la tasa">
+                                {{abmConsultado.tipo}}
+                                <input type="number" step="0.01" ng-model="abmConsultado.tasa" min="{{abmConsultado.tipo === 'Credito'? 0.01 : 0}}" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la tasa">
                                 <div ng-cloak>{{errores.tasa[0]}}</div>
                             </div>
                         </div>

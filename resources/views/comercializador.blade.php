@@ -452,7 +452,7 @@
           <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Editar')" id="formularioEditar">
 
             <div class="item form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Importe
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Importe a otorgar
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12" style="vertical-align: text-middle; color: blue;">
                 <input id="importe" ng-disabled="!modificandopropuesta" class="form-control col-md-7 col-xs-12" name="importe" placeholder="Ingrese el importe"

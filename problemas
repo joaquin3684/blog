@@ -1,34 +1,8 @@
-MODULO CREDITO ENTIDADES
-
-hay entidades que tienen son ellas las que hacen sus creditos, entonces tiene que estar la posibilidad de que tengan un modulo loco para eso
 
 ---------------FRONTEND---------------
-
-
-dar_servicio
-
-- emitir orden de descuento para imprimir
-- primero se tiene que imprimir la orden de descuento y luego manualmente se tiene que enviar el formulario
-- ajustar pagina para celular
-- poner sentinel
-
-
-
-
-Cuenta corriente agente financiero
-
-- en la abstraccion de servicios tiene que haver un boton que se llame sistema frances
-    que habra un modal y que le pegue a la url por post: {id: id_servicio} a la url:
-     proveedorCC/sistemaFrances. esto tiene que mostrar una tabla que despues explico como es
-
-
-
-
-
 
 ---------------- FIN -----------------------
 
 ---------------- BACKEND -----------------------
-
 
 ---------------- FIN -----------------------

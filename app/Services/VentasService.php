@@ -45,8 +45,7 @@ class VentasService
         $venta = Ventas::create([
                         'id_asociado' => $id_asociado,
                         'id_producto' => $id_producto,
-                        'descripcion' => $descripcion,        $this-
-
+                        'descripcion' => $descripcion,
                         'nro_cuotas' => $nro_cuotas,
                         'importe_total' => $importe_total,
                         'nro_credito' => $nro_credito,

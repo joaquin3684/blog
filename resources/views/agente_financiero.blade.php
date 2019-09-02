@@ -87,9 +87,6 @@
                         <td title="'Nombre'" sortable="'nombre'">
                           {[{solicitud.socio.nombre}]}
                         </td>
-                        <td title="'Apellido'" sortable="'apellido'">
-                          {[{solicitud.socio.apellido}]}
-                        </td>
                         <td title="'Cuit'" sortable="'cuit'">
                           {[{solicitud.socio.cuit}]}
                         </td>

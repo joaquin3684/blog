@@ -26,8 +26,8 @@ angular.module('verificarBaja', [])
             
         }
  
-});
-/*app.controller('verificarBaja', function ($scope, $rootScope) {
+})
+.controller('verificarBaja', function ($scope, $rootScope) {
 
         $scope.darDeBaja = function(){
             console.log($scope)
@@ -36,4 +36,4 @@ angular.module('verificarBaja', [])
          
             //$scope.$parent.enviarFormulario('Borrar', 2)
         }
-})*/
+})

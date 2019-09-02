@@ -354,7 +354,7 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input ng-keyup="$event.keyCode == 13 && AsignarEndeudamiento()" id="endeudamiento" class="form-control col-md-7 col-xs-12"
-                  name="endeudamiento" placeholder="Ingrese el Endeudamiento" ng-model="endeudamiento" type="number">
+                  name="endeudamiento" placeholder="Ingrese el Endeudamiento" ng-model="endeudamiento" type="file">
               </div>
             </div>
             <div class="ln_solid"></div>

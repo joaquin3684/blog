@@ -3,10 +3,15 @@ app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'Man
 app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ManejoExcell) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
+    $scope.esTipoCredito = false;
 
   $scope.borrarFormulario = function () {
     $('#formulario')[0].reset();
   };
+
+    $scope.onSelectTipo = function(){
+        $scope.esTipoCredito = $scope.tipo === 'Credito';
+    }
 
 
   $scope.traerRelaciones = function (relaciones) {
