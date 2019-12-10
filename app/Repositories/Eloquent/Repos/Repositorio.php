@@ -57,7 +57,9 @@ abstract class Repositorio implements abmInterface
     public function findByUser($userId)
     {
         $obj = $this->gateway->findByUser($userId);
-        return $this->mapper->map($obj);
+        if ($obj != null) {
+            return $this->mapper->map($obj);
+        }
     }
 
     public function makeModel() {

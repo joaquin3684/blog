@@ -85,7 +85,9 @@ class ComercializadorController extends Controller
     {
         $usuario = Sentinel::check();
         $comercializador = $this->comerGateway->findSolicitudesFromUser($usuario->id);
-        return $comercializador->solicitudes;
+        if ($comercializador != null) {
+            return $comercializador->solicitudes;
+        }
     }
 
     public function fotos(Request $request)

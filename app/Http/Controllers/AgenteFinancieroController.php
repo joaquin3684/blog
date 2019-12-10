@@ -81,17 +81,19 @@ class AgenteFinancieroController extends Controller
     {
         $usuario = Sentinel::check();
         $agente =  $this->agenteGateway->findSolicitudesByAgenteFinanciero($usuario->id);
-        return $agente->solicitudes->map(function($solicitud){
-            $solNueva = $solicitud;
-            $socio = $solNueva->socio;
-            $solNueva->socio = $socio;
-            $s = new Socios($socio->toArray());
-            $nombre = explode(",", $socio->nombre);
-            $s->nombre = $nombre[0];
-            $s->apellido = $nombre[1];
-            $solicitud->socio = $s;
-            return $solicitud;
-        });
+        if ($agente != null) {
+            return $agente->solicitudes->map(function ($solicitud) {
+                $solNueva = $solicitud;
+                $socio = $solNueva->socio;
+                $solNueva->socio = $socio;
+                $s = new Socios($socio->toArray());
+                $nombre = explode(",", $socio->nombre);
+                $s->nombre = $nombre[0];
+                $s->apellido = $nombre[1];
+                $solicitud->socio = $s;
+                return $solicitud;
+            });
+        }
     }
 
     public function reservarCapital(Request $request)
