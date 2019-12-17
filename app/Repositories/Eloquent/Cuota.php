@@ -42,7 +42,7 @@ class Cuota
         $cobrado = $this->montoACobrar($monto);
         $this->determinarEstado($cobrado);
         $fecha = Fechas::getFechaHoy();
-        $array = array('identificadores_id' => $this->id, 'identificadores_type' => 'App\Cuotas', 'entrada' => $cobrado, 'fecha' => $fecha);
+        $array = array('id_cuota'=>$this->id, 'entrada' => $cobrado, 'fecha' => $fecha);
         $this->addMovimiento($array);
         $data = $this->toArray($this);
         $this->cuotasRepo->update($data, $this->id);

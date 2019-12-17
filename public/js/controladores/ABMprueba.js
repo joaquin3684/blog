@@ -168,8 +168,8 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         var fechaIngreso = moment(fechaIngreso, 'YYYY-MM-DD').format('L');
         dato.fecha_nacimiento = fechaNacimiento;
         dato.fecha_ingreso = fechaIngreso;
-        dato.nombre = dato.nombre.split(',').shift()
         dato.apellido = dato.nombre.split(',').pop()
+        dato.nombre = dato.nombre.split(',').shift()
         return dato;
     }
 

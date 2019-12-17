@@ -64,13 +64,18 @@ class CuotaService
 
     public function cuotasDeVenta($idVenta)
     {
-        return Cuotas::where('cuotable_type', 'App\Venta')->where('cuotable_id', $idVenta)->get();
+        return Cuotas::where('cuotable_type', 'App\Ventas')->where('cuotable_id', $idVenta)->get();
     }
 
     public function totalCobrado(Cuotas $cuota)
     {
         $movimientos = $this->movimientoService->movimientosDeCuota($cuota->id);
-        return array_sum(array_map(function($movimiento){ return $movimiento->entrada;}, $movimientos));
+        return array_sum(
+            array_map(
+                function($movimiento){
+                    return $movimiento->entrada;
+                    },
+                $movimientos->toArray()));
     }
 
     public function cobrar(Cuotas $cuota, $montoDisponible)

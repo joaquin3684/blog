@@ -33,7 +33,7 @@ class CC_CuotasSocialesController extends Controller
     {
         $var = "'App\\".'\\'."Socios'";
 
-        return DB::select(DB::raw("SELECT socios.nombre AS socio, socios.id AS id_socio, ROUND(SUM(cuotas.importe),2) AS totalACobrar, IFNULL(ROUND(SUM(movimientos.entrada),2),0) AS totalCobrado, ROUND(IFNULL((ROUND(SUM(cuotas.importe),2) - ROUND(SUM(movimientos.entrada),2)), 0), 2) AS diferencia 
+        return DB::select(DB::raw("SELECT socios.legajo as legajo, socios.nombre AS socio, socios.id AS id_socio, ROUND(SUM(cuotas.importe),2) AS totalACobrar, IFNULL(ROUND(SUM(movimientos.entrada),2),0) AS totalCobrado, ROUND(IFNULL((ROUND(SUM(cuotas.importe),2) - ROUND(SUM(movimientos.entrada),2)), 0), 2) AS diferencia 
                             FROM (socios
                             INNER JOIN cuotas ON cuotas.cuotable_id = socios.id)
                             LEFT JOIN movimientos ON movimientos.id_cuota = cuotas.id

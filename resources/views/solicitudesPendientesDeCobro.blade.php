@@ -76,10 +76,10 @@
 
                                             <tr class="clickableRow" title="Datos" ng-cloak>
                                                 <td title="'Nombre'" sortable="'nombre'">
-                                                    {{solicitud.socio.nombre.split(',').pop()}}
+                                                    {{solicitud.socio.nombre.split(',').shift()}}
                                                 </td>
                                                 <td title="'Apellido'" sortable="'apellido'">
-                                                    {{solicitud.socio.nombre.split(',').shift()}}
+                                                    {{solicitud.socio.nombre.split(',').pop()}}
                                                 </td>
                                                 <td title="'Legajo'" sortable="'legajo'">
                                                     {{solicitud.socio.legajo}}

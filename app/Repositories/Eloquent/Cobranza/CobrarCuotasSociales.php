@@ -10,6 +10,7 @@ namespace App\Repositories\Eloquent\Cobranza;
 
 
 use App\Exceptions\MasPlataCobradaQueElTotalException;
+use App\Repositories\Eloquent\Cuota;
 
 class CobrarCuotasSociales
 {
@@ -18,7 +19,8 @@ class CobrarCuotasSociales
         if($socio->montoAdeudadoCuotasSociales() < $monto)
             throw new MasPlataCobradaQueElTotalException('exceso_de_plata');
 
-        $socio->getCuotasSociales()->each(function($cuota) use (&$monto){
+        // aca no llegan cutas sociales
+        $socio->getCuotasSociales()->each(function(Cuota $cuota) use (&$monto){
             if($monto == 0)
                 return false;
             $cobrado = $cuota->cobrar($monto);

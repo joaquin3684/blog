@@ -6,7 +6,8 @@
  * Time: 16:55
  */
 
-namespace App\Exceptions;
+namespace App\Exceptions;        $socio->getCuotasSociales()->each(function($cuota) use (&$monto){
+
 use App\Traits\Conversion;
 
 

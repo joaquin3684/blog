@@ -84,16 +84,13 @@ class SociosService
 
     public function cobrar(Socios $socio, $monto)
     {
-
-            $ventas = $this->ventaService->ventasDeSocio($socio->id);
-            foreach($ventas as $venta)
-            {
-                if($monto == 0)
-                    break;
-                $cobrado = $this->ventaService->cobrar($venta, $monto);
-                $monto -= $cobrado;
-            }
-
-
+        $ventas = $this->ventaService->ventasDeSocio($socio->id);
+        foreach($ventas as $venta)
+        {
+            if($monto == 0)
+                break;
+            $cobrado = $this->ventaService->cobrar($venta, $monto);
+            $monto -= $cobrado;
+        }
     }
 }

@@ -171,7 +171,6 @@ class VentasService
 
     public function cobrar(Ventas $venta, $monto)
     {
-
             $cuotas = $this->cuotasService->cuotasDeVenta($venta->id);
 
             $montoContable = $monto;

@@ -18,7 +18,7 @@ class Cuotas extends Model
 
     public function movimientos()
     {
-    	return $this->morphMany(Movimientos::class, 'identificadores');
+    	return $this->hasMany(Movimientos::class, 'id_cuota');
     }
 
      public function venta()

@@ -18,7 +18,8 @@ class Movimientos extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('id_cuota')->unsigned();
-            $table->foreign('id_cuota')->references('id')->on('operaciones');            $table->double('entrada');
+            $table->foreign('id_cuota')->references('id')->on('cuotas');
+            $table->double('entrada');
             $table->double('salida')->default(0);
             $table->date('fecha');
             $table->double('ganancia')->default(0);
