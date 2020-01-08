@@ -133,16 +133,16 @@
                                                 </label>
                                                 <div class="col-md-2 col-sm-2 col-xs-8" id="desde">
                                                     <input type="number" step="0.01" ng-model="porcentaje.desde" class="form-control col-md-2 col-xs-12" ng-disabled="{{!$first}}"
-                                                        placeholder="Desde">
+                                                        placeholder="Desde" required>
                                                     <div ng-cloak>{{errores.cuota_social[0]}}</div>
                                                     <div ng-cloak>{{asignarDesde($index, $first, porcentajes)}}</div>
                                                 </div>
                                                 <div class="col-md-2 col-sm-2 col-xs-8" id="hasta">
-                                                    <input type="number" step="0.01" ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta">
+                                                    <input type="number" step="0.01" ng-model="porcentaje.hasta" class="form-control col-md-2 col-xs-12" placeholder="Hasta" required>
                                                     <div ng-cloak>{{errores.cuota_social[0]}}</div>
                                                 </div>
                                                 <div class="col-md-2 col-sm-2 col-xs-8" id="porc">
-                                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje">
+                                                    <input type="number" step="0.01" ng-model="porcentaje.porcentaje" class="form-control col-md-2 col-xs-12" placeholder="Porcentaje" required>
                                                     <div ng-cloak>{{errores.cuota_social[0]}}</div>
                                                 </div>
 
