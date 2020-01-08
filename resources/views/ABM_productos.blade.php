@@ -324,7 +324,6 @@
                                 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{abmConsultado.tipo}}
                                 <input type="number" step="0.01" ng-model="abmConsultado.tasa" min="{{abmConsultado.tipo === 'Credito'? 0.01 : 0}}" class="form-control col-md-7 col-xs-12" placeholder="Ingrese la tasa">
                                 <div ng-cloak>{{errores.tasa[0]}}</div>
                             </div>
