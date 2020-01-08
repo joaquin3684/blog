@@ -48,6 +48,10 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
             console.log(response);
             llenarFormulario('formularioEditar', response.data);
          }
+         if (tipoSolicitud == 'Alta') {
+            $scope.numeroDeRoles = 0;
+            $scope.agregarPantalla();
+         }
          $scope.mensaje = response;
          $('#formulario')[0].reset();
          $scope.errores = '';
