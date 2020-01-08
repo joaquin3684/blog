@@ -181,7 +181,7 @@
                                     <table ng-table="paramsCuotas" class="table table-hover table-bordered">
 
                                         <tbody data-ng-repeat="cuota in $data" data-ng-switch on="dayDataCollapse[$index]">
-                                            <tr class="clickableRow" title="" data-ng-click="selectTableRow($index,cuota.id_cuota)">
+                                            <tr title="">
                                                 <td title="'NroCuota'" filter="{ nro_cuota: 'text'}" sortable="'nro_cuota'">
                                                     {{cuota.nro_cuota}}
                                                 </td>
@@ -202,7 +202,7 @@
                                                     {{cuota.estado}}
                                                 </td>
                                             </tr>
-                                            <tr data-ng-switch-when="true">
+                                            <!--<tr data-ng-switch-when="true">
                                                 <td colspan="5">
                                                     <div>
                                                         <div>
@@ -230,7 +230,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                            </tr>
+                                            </tr> -->
                                         </tbody>
 
                                         <tfoot>
