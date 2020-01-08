@@ -175,7 +175,9 @@
                         <span class="glyphicon glyphicon-pencil"></span>
                       </button>
                       @endif @if(Sentinel::check()->hasAccess('usuarios.borrar'))
-                      <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
+                      <button ng-click="delete(abm.id)" class="btn btn-danger">
+                      <span class="glyphicon glyphicon-trash"></span>
+                      </button>
                       @endif
                       @verbatim
                     </td>
