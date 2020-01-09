@@ -1,5 +1,5 @@
 var app = angular.module('Mutual').config(function ($interpolateProvider) {});
-app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja', 'angular-loading-bar');
+app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'angular-loading-bar');
 
 app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, clonarHtmlService) {
 
@@ -15,7 +15,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
     };
     $scope.validarCuit = function (sexo) {
 
-        if (sexo != undefined) $scope.sexo = sexo
+        if (sexo != undefined) $scope.sexo = sexo;
         if (($scope.sexoMasculino == undefined && $scope.sexoFemenino == undefined) | $scope.dni == undefined) {
             return false;
         }
@@ -34,13 +34,13 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         if (verif == 11) {
             verif = 0;
         } else if (verif == 10) {
-            verif = undefined
-            $scope.tipo = undefined
+            verif = undefined;
+            $scope.tipo = undefined;
 
         }
 
         $scope.codigoVerif = verif;
-    }
+    };
     $scope.$Servicio = UserSrv;
     $scope.traerRelaciones = function (relaciones) {
         var tablasin = $("#tipo_tabla").val();
@@ -68,22 +68,22 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
                 console.log(data);
             });
         }
-    }
+    };
 
 
     $scope.ExportarPDF = function (pantalla) {
         UserSrv.ExportPDF(pantalla);
-    }
+    };
 
     $scope.getCategorias = function () {
-        $scope.categorias = $scope.organismosines.find(o => o.id == Number($scope.orpi)).cuotas
+        $scope.categorias = $scope.organismosines.find(o => o.id == Number($scope.orpi)).cuotas;
         console.log($scope.categorias);
-    }
+    };
 
     $scope.getNombreCategoria = function (id) {
-        var algo = $scope.categorias.find(c => c.categoria == Number(id)).nombre
-        return algo
-    }
+        var algo = $scope.categorias.find(c => c.categoria == Number(id)).nombre;
+        return algo;
+    };
 
 
     $scope.enviarFormulario = function (tipoSolicitud, id = '') {
@@ -128,9 +128,9 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
                 console.log(response);
                 llenarFormulario('formularioEditar', response.data);
                 if ($scope.organismosines) {
-                    $scope.orpi = response.data.organismo.id
-                    $scope.categoria = response.data.organismo.cuotas.find(c => c.categoria == response.data.valor)
-                    $scope.getCategorias()
+                    $scope.orpi = response.data.organismo.id;
+                    $scope.categoria = response.data.organismo.cuotas.find(c => c.categoria == response.data.valor);
+                    $scope.getCategorias();
                 }
             }
 
@@ -146,19 +146,19 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
             console.log(response.data);
             $scope.traerElementos();
         }, function errorCallback(data) {
-            UserSrv.MostrarError(data)
+            UserSrv.MostrarError(data);
             console.log(data);
             $scope.errores = data.data;
         });
 
-    }
+    };
 
     $scope.guardarDatosBaja = function () {
-        $scope.elemABorrar = this.abm
-    }
+        $scope.elemABorrar = this.abm;
+    };
     $scope.delete = function (id) {
-        $scope.enviarFormulario('Borrar', id)
-    }
+        $scope.enviarFormulario('Borrar', id);
+    };
 
     $scope.cambiarFecha = function (dato) {
         moment.locale('es');
@@ -168,15 +168,15 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         var fechaIngreso = moment(fechaIngreso, 'YYYY-MM-DD').format('L');
         dato.fecha_nacimiento = fechaNacimiento;
         dato.fecha_ingreso = fechaIngreso;
-        dato.apellido = dato.nombre.split(',').pop()
-        dato.nombre = dato.nombre.split(',').shift()
+        dato.apellido = dato.nombre.split(',')[0];
+        dato.nombre = dato.nombre.split(',')[1];
         return dato;
-    }
+    };
 
     $scope.formatDate = function (fecha) {
         var fechaFormateada = moment(fecha).format('DD/MM/YYYY');
         return fechaFormateada;
-    }
+    };
 
     $scope.traerElementos = function (relaciones) {
         var metodito = 'get';
@@ -215,10 +215,10 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
             }
 
         }, function errorCallback(data) {
-            UserSrv.MostrarError(data)
+            UserSrv.MostrarError(data);
             console.log(data.data);
         });
-    }
+    };
 
     $scope.agregarPantalla = function () {
 
@@ -254,10 +254,10 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
             });
         }, function errorCallback(data) {
-            UserSrv.MostrarError(data)
+            UserSrv.MostrarError(data);
             console.log(data);
         });
-    }
+    };
     $scope.Impresion = function () {
 
 
@@ -279,7 +279,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         w.document.write(document.getElementById('archivoSocioImprimir').outerHTML);
         w.print();
         w.close();
-    }
+    };
 
 
 

@@ -1,4 +1,4 @@
-@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABMprueba.js') !!}{!! Html::script('js/controladores/verificarBaja.js')!!}
+@extends('welcome') @section('contenido') {!! Html::script('js/controladores/ABMprueba.js') !!}
 
 
 <div class="nav-md" ng-controller="ABM">
@@ -282,7 +282,9 @@
                           </button>
                            @endif @if(Sentinel::check()->hasAccess('proovedores.borrar'))
                            
-                          <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
+                           <button type="button" class="btn btn-danger" ng-click="delete(abm.id)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                          </button>
                           @endif
                           @verbatim
                         </td>
@@ -370,7 +372,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nucleo">Nucleo
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="nucleo" name="departamnucleoento" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.nucleo[0]}}</div>
+                <input type="text" id="nucleo" name="nucleo" class="form-control col-md-7 col-xs-12"><div ng-cloak>{{errores.nucleo[0]}}</div>
               </div>
             </div>
 

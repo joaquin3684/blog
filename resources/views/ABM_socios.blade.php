@@ -64,8 +64,7 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                                 </div>
                                 <div class="x_content">
                                     @verbatim
-                                    <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')"
-                                        id="formulario">
+                                    <form class="form-horizontal form-label-left" ng-submit="enviarFormulario('Alta')" id="formulario">
                                         <div ng-cloak>{{ csrf_field() }}</div>
 
                                         <span class="section">Datos de socio</span>
@@ -432,7 +431,9 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                                                     </button>
                                                     @endverbatim @endif
                                                     @if(Sentinel::check()->hasAccess('socios.borrar')) @verbatim
-                                                    <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
+                                                    <button type="button" class="btn btn-danger" ng-click="delete(abm.id)">
+                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                    </button>
                                                     @endverbatim @endif @verbatim
                                                 </td>
                                             </tr>

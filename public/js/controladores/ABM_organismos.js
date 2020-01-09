@@ -1,4 +1,4 @@
-var app = angular.module('Mutual').config(function ($interpolateProvider) { });
+var app = angular.module('Mutual').config(function ($interpolateProvider) {});
 app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'verificarBaja', 'angular-loading-bar');
 
 app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, clonarHtmlService) {
@@ -7,12 +7,16 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
   $scope.borrarFormulario = function () {
     $('#formulario')[0].reset();
+    $scope.cuotas = [{
+      'nombre': '',
+      'valor': ''
+    }];
   };
 
   $scope.$Servicio = UserSrv;
   $scope.ExportarPDF = function (pantalla) {
     UserSrv.ExportPDF(pantalla);
-  }
+  };
   $scope.Impresion = function () {
     var divToPrint = document.getElementById('exportTable');
     var tabla = document.getElementById('tablita').innerHTML;
@@ -52,11 +56,11 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       }];
       UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
     }, function errorCallback(response) {
-      UserSrv.MostrarError(response)
+      UserSrv.MostrarError(response);
       $scope.errores = response.data;
     });
 
-  }
+  };
 
   $scope.traerElementos = function () {
 
@@ -73,23 +77,23 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
           page: 1,
           count: 10
         }, {
-            getData: function (params) {
-              var filterObj = params.filter();
-              filteredData = $filter('filter')($scope.datosabm, filterObj);
-              var sortObj = params.orderBy();
-              orderedData = $filter('orderBy')(filteredData, sortObj);
-              $scope.datosabmfiltrados = orderedData;
-              $scope.datatoexcel = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-              return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-            }
-          });
+          getData: function (params) {
+            var filterObj = params.filter();
+            filteredData = $filter('filter')($scope.datosabm, filterObj);
+            var sortObj = params.orderBy();
+            orderedData = $filter('orderBy')(filteredData, sortObj);
+            $scope.datosabmfiltrados = orderedData;
+            $scope.datatoexcel = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+          }
+        });
       }
 
 
     }, function errorCallback(response) {
-      UserSrv.MostrarError(response)
+      UserSrv.MostrarError(response);
     });
-  }
+  };
 
   $scope.traerElementos();
 
@@ -104,9 +108,9 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       console.log($scope.abmConsultado);
       console.log($scope.nombreedi);
     }, function errorCallback(response) {
-      UserSrv.MostrarError(response)
+      UserSrv.MostrarError(response);
     });
-  }
+  };
 
   $scope.editarFormulario = function (id) {
 
@@ -130,17 +134,17 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
       $('#editar').modal('toggle');
     }, function errorCallback(response) {
-      UserSrv.MostrarError(response)
+      UserSrv.MostrarError(response);
     });
 
-  }
+  };
 
   $scope.guardarDatosBaja = function () {
-    $scope.elemABorrar = this.abm
-  }
+    $scope.elemABorrar = this.abm;
+  };
   $scope.delete = function (id) {
-    $scope.borrarElemento(id)
-  }
+    $scope.borrarElemento(id);
+  };
   $scope.borrarElemento = function (id) {
 
     return $http({
@@ -151,28 +155,28 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
       console.log("Exito al eliminar");
     }, function errorCallback(response) {
-      UserSrv.MostrarError(response)
+      UserSrv.MostrarError(response);
     });
-  }
+  };
 
 
   $scope.cuotas = [{
     'nombre': '',
     'valor': ''
-  }]
-  var cantComponentes = 1
+  }];
+  var cantComponentes = 1;
   $scope.agregarHtml = function (destino) {
 
     destino.push({
       'nombre': '',
       'valor': ''
-    })
+    });
 
-  }
+  };
 
   $scope.eliminarHtml = (index) => {
-    $scope.cuotas = $scope.cuotas.filter((e, i) => i !== index)
-  }
+    $scope.cuotas = $scope.cuotas.filter((e, i) => i !== index);
+  };
 
 
 

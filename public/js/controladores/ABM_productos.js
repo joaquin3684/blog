@@ -3,15 +3,20 @@ app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'Man
 app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, ManejoExcell) {
 
   // manda las solicitud http necesarias para manejar los requerimientos de un abm
-    $scope.esTipoCredito = false;
+  $scope.esTipoCredito = false;
 
   $scope.borrarFormulario = function () {
     $('#formulario')[0].reset();
+    $scope.porcentajes = [{
+      'desde': '',
+      'hasta': '',
+      'porcentaje': '',
+    }];
   };
 
-    $scope.onSelectTipo = function(){
-        $scope.esTipoCredito = $scope.tipo === 'Credito';
-    }
+  $scope.onSelectTipo = function () {
+    $scope.esTipoCredito = $scope.tipo === 'Credito';
+  };
 
 
   $scope.traerRelaciones = function (relaciones) {
@@ -23,7 +28,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         method: 'get',
       }).then(function successCallback(response) {
         $scope.proovedores = response.data;
-        console.log("Relaciones:")
+        console.log("Relaciones:");
         console.log(response);
         // $.each(response.data, function(val, text) {
         //    console.log(relaciones[x].select);
@@ -31,16 +36,16 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         //    $(relaciones[x].select+'_Editar').append($("<option />").val(text.id).text(text.nombre));
         // });
       }, function errorCallback(response) {
-        UserSrv.MostrarError(response)
- 
+        UserSrv.MostrarError(response);
+
       });
     }
-  }
+  };
 
   $scope.$Servicio = UserSrv;
   $scope.ExportarPDF = function (pantalla) {
     UserSrv.ExportPDF(pantalla);
-  }
+  };
   $scope.Impresion = function () {
     var divToPrint = document.getElementById('exportTable');
     var tabla = document.getElementById('tablita').innerHTML;
@@ -81,11 +86,11 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         'porcentaje': '',
       }];
     }, function errorCallback(response) {
-      UserSrv.MostrarError(response)
-      
+      UserSrv.MostrarError(response);
+
     });
 
-  }
+  };
 
   $scope.traerElementos = function () {
 
@@ -117,9 +122,9 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
 
     }, function errorCallback(response) {
-      UserSrv.MostrarError(response)
+      UserSrv.MostrarError(response);
     });
-  }
+  };
 
   $scope.traerElementos();
 
@@ -134,9 +139,9 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       console.log("Producto");
       console.log(response);
     }, function errorCallback(response) {
-      UserSrv.MostrarError(response)
+      UserSrv.MostrarError(response);
     });
-  }
+  };
 
   $scope.editarFormulario = function (id) {
 
@@ -159,15 +164,15 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       console.log("Exito al editar");
       $('#editar').modal('toggle');
     }, function errorCallback(response) {
-      UserSrv.MostrarError(response)
+      UserSrv.MostrarError(response);
     });
 
-  }
+  };
 
-  $scope.guardarDatosBaja = function () { $scope.elemABorrar = this.abm }
-  $scope.delete = function (id){
-    $scope.borrarElemento(id)
-  }
+  $scope.guardarDatosBaja = function () {$scope.elemABorrar = this.abm;};
+  $scope.delete = function (id) {
+    $scope.borrarElemento(id);
+  };
   $scope.borrarElemento = function (id) {
 
     return $http({
@@ -179,9 +184,9 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       $scope.borrarFormulario();
       console.log("Exito al eliminar");
     }, function errorCallback(response) {
-      UserSrv.MostrarError(response)
+      UserSrv.MostrarError(response);
     });
-  }
+  };
 
   $scope.asignarDesde = function (indice, primero, destino) {
     if (!primero) {
@@ -209,7 +214,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
       'desde': '',
       'hasta': '',
       'porcentaje': '',
-    })
+    });
   };
 
   // var cantComponentes = 1;

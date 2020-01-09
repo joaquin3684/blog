@@ -161,7 +161,7 @@
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
                                             <div class="col-md-6 col-md-offset-3">
-                                                <button type="button" class="btn btn-primary" ng-click="borrarFormulario()">Cancel</button>
+                                                <button type="button" class="btn btn-primary" ng-click="borrarFormulario()">Cancelar</button>
                                                 <button id="send" type="submit" name="enviar" class="btn btn-success">Alta</button>
                                             </div>
                                         </div>
@@ -252,7 +252,9 @@
                                                         <span class="glyphicon glyphicon-pencil"></span>
                                                     </button>
                                                     @endif @if(Sentinel::check()->hasAccess('productos.borrar'))
-                                                    <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
+                                                    <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)">
+                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                    </button>
                                                     @endif @verbatim
                                                 </td>
                                             </tr>

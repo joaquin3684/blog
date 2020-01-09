@@ -291,8 +291,9 @@ Html::script('js/controladores/ABM_organismos.js') !!}
                           <span class="glyphicon glyphicon-pencil"></span>
                         </button>
                         @endverbatim @endif @if(Sentinel::check()->hasAccess('organismos.borrar')) @verbatim
-                        <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
-
+                        <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)">
+                          <span class="glyphicon glyphicon-trash"></span>
+                        </button>
                         @endverbatim @endif @verbatim
                       </td>
 
