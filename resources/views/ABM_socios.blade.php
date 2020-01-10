@@ -383,8 +383,8 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
                                                 <td title="'DNI'" filter="{ dni: 'text'}" sortable="'dni'">
                                                     {{abm.dni}}
                                                 </td>
-                                                <td title="'Organismo'" filter="{ organismo: 'text'}" sortable="'organismo'">
-                                                    {{abm.organismo.nombre}}
+                                                <td title="'Organismo'" filter="{ nombreOrganismo: 'text'}" sortable="'nombreOrganismo'">
+                                                    {{abm.nombreOrganismo}}
                                                 </td>
                                                 <td title="'Legajo'" filter="{ legajo: 'text'}" sortable="'legajo'">
                                                     {{abm.legajo}}

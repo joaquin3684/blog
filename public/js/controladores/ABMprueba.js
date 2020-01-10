@@ -170,6 +170,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
         dato.fecha_ingreso = fechaIngreso;
         dato.apellido = dato.nombre.split(',')[0];
         dato.nombre = dato.nombre.split(',')[1];
+        dato.nombreOrganismo = dato.organismo.nombre;
         return dato;
     };
 

@@ -35,13 +35,14 @@ app.controller('ABM_comercializador', function ($scope, $http, $compile, $sce, N
         }).then(function successCallback(response) {
             $scope.traerElementos();
             $scope.borrarFormulario();
+            $scope.errores = {};
             UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
         }, function errorCallback(response) {
-            UserSrv.MostrarError(response)
+            UserSrv.MostrarError(response);
             $scope.errores = response.data;
         });
 
-    }
+    };
 
 
     $scope.traerElementos = function () {
@@ -74,9 +75,9 @@ app.controller('ABM_comercializador', function ($scope, $http, $compile, $sce, N
 
 
         }, function errorCallback(response) {
-            UserSrv.MostrarError(response)
+            UserSrv.MostrarError(response);
         });
-    }
+    };
 
     $scope.traerElementos();
 
@@ -87,11 +88,12 @@ app.controller('ABM_comercializador', function ($scope, $http, $compile, $sce, N
             method: 'get',
             // data: data,
         }).then(function successCallback(response) {
+            $scope.errores = {};
             $scope.abmConsultado = response.data;
         }, function errorCallback(response) {
-            UserSrv.MostrarError(response)
+            UserSrv.MostrarError(response);
         });
-    }
+    };
 
     $scope.editarFormulario = function (id) {
 
@@ -117,19 +119,21 @@ app.controller('ABM_comercializador', function ($scope, $http, $compile, $sce, N
             $scope.traerElementos();
             UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
             console.log("Exito al editar");
+            $scope.errores = {};
             $('#editar').modal('toggle');
         }, function errorCallback(response) {
-            UserSrv.MostrarError(response)
+            $scope.errores = response.data;
+            UserSrv.MostrarError(response);
         });
 
-    }
+    };
 
     $scope.guardarDatosBaja = function () {
-        $scope.elemABorrar = this.abm
-    }
+        $scope.elemABorrar = this.abm;
+    };
     $scope.delete = function (id) {
-        $scope.borrarElemento(id)
-    }
+        $scope.borrarElemento(id);
+    };
     $scope.borrarElemento = function (id) {
 
         return $http({
@@ -140,9 +144,9 @@ app.controller('ABM_comercializador', function ($scope, $http, $compile, $sce, N
             UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");
             console.log("Exito al eliminar");
         }, function errorCallback(response) {
-            UserSrv.MostrarError(response)
+            UserSrv.MostrarError(response);
         });
-    }
+    };
 
 
 });

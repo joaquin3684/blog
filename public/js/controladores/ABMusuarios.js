@@ -4,6 +4,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
 
    $scope.borrarFormulario = function () {
       $('#formulario')[0].reset();
+      $('#agregarCodigo').html("");
    };
 
    $scope.guardarDatosBaja = function () {$scope.elemABorrar = this.abm;};
@@ -66,9 +67,7 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
    };
 
    $scope.traerRelaciones = function (relaciones) {
-
       for (x in relaciones) {
-
          var url = relaciones[x].tabla + '/traerRelacion' + relaciones[x].tabla;
          $http({
             url: url,
@@ -88,7 +87,6 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
    };
 
    $scope.agregarPantalla = function () {
-
       var codigo = '';
       var array = [];
       for (var i = 0; $scope.numeroDeRoles > i; i++) {

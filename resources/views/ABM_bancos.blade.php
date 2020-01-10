@@ -49,7 +49,7 @@
                 </div>
                 <div class="x_content">
                   @verbatim
-                  <form class="form-horizontal form-label-left" ng-submit="create()" id="formulario1">
+                  <form class="form-horizontal form-label-left" ng-submit="create()" id="formulario">
                     <div ng-cloak>{{ csrf_field() }}</div>
 
                     <span class="section">Datos del banco</span>
@@ -166,7 +166,7 @@
                           {{abm.nombre}}
                         </td>
                         <td title="'Sucursal'" filter="{ sucursal: 'text'}" sortable="'sucursal'">
-                          {{abm.nro_cuenta}}
+                          {{abm.sucursal}}
                         </td>
                         <td title="'Direccion'" filter="{ direccion: 'text'}" sortable="'direccion'">
                           {{abm.direccion}}
@@ -182,7 +182,9 @@
                           </button>
                           @endverbatim @endif @if(Sentinel::check()->hasAccess('bancos.borrar')) @verbatim
 
-                          <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
+                          <button type="button" class="btn btn-danger" ng-click="delete(abm.id)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                          </button>
                           @endverbatim @endif @verbatim
 
                           <button type="button" class="btn btn-info" data-toggle="modal" data-target="#chequera" ng-click="asignarBanco(abm.id)">

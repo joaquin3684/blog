@@ -3,7 +3,8 @@ app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'Ser
 app.controller('ABM_roles', function ($scope, $http, $compile, $sce, NgTableParams, $filter, $timeout, ServicioABM, UserSrv) {
 
   $scope.borrarFormulario = function () {
-    $('#formulario2')[0].reset();
+    $('#formulario')[0].reset();
+    $scope.permisos = [];
   };
 
   $scope.create = function () {

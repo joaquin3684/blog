@@ -344,7 +344,9 @@
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </button>
                                             @endif @if(Sentinel::check()->hasAccess('comercializadores.borrar'))
-                                            <verificar-baja ng-click="guardarDatosBaja()"></verificar-baja>
+                                            <button type="button" class="btn btn-danger" ng-click="borrarElemento(abm.id)">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
                                             @endif
                                             @verbatim
                                         </td>
