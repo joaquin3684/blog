@@ -27,4 +27,18 @@ class BancoService
     {
         return Banco::all();
     }
+
+    public function destroy($id)
+    {
+        Banco::destroy($id);
+    }
+
+    public function update($data, $id)
+    {
+        $banco = Banco::find($id);
+        $banco->update($data);
+        return $banco;
+    }
+
+
 }
