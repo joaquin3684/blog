@@ -118,7 +118,7 @@ class InicioSistema extends Seeder
             // Asiento de inicio
             $asiento = factory(\App\Asiento::class)->create(['id_ejercicio' => $ejercicio->id, 'id_imputacion' => $imputacion2]);
 
-            $user = Sentinel::registerAndActivate(array('usuario'=>'200', 'email'=>'1', 'password'=> '200'));
+            $user = Sentinel::registerAndActivate(array('usuario'=>'200', 'email'=>'200@vadiun.com', 'password'=> '200'));
             $role = Sentinel::getRoleRepository()->createModel()->create([
                 'name' => 'genio',
                 'slug' => 'genio',
@@ -159,6 +159,9 @@ class InicioSistema extends Seeder
             $role2->save();
             $role3->save();
             $role->users()->attach($user);
+            $role1->users()->attach($user);
+            $role2->users()->attach($user);
+            $role3->users()->attach($user);
 
             $this->call(PrioridadesSeed::class);
         });

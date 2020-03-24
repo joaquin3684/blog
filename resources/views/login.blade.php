@@ -97,8 +97,8 @@
 
                             {{ csrf_field() }}
 			                    	<div class="form-group">
-			                    		<label class="sr-only" for="usuario">Usuario</label>
-			                        	<input id="usuario" type="text" name="usuario" placeholder="Usuario..." class="form-username form-control" >{{errores.usuario[0]}}
+			                    		<label class="sr-only" for="email">Email</label>
+			                        	<input id="email" type="text" name="email" placeholder="Email..." class="form-username form-control" >{{errores.email[0]}}
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="password">Contraseña</label>
