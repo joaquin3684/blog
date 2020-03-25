@@ -46,5 +46,4 @@ class Ventas extends Model
         return $this->hasMany('App\EstadoVenta', 'id_venta', 'id');
     }
 
-
 }

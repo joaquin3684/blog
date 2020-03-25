@@ -105,6 +105,7 @@ class MigrationCartalystSentinel extends Migration
             $table->string('usuario');
             $table->engine = 'InnoDB';
             $table->unique('email');
+            $table->softDeletes();
         });
     }
 

@@ -32,7 +32,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
-
+Sentinel::getUserRepository()->setModel('App\User');
+Sentinel::getPersistenceRepository()->setUsersModel('App\User');
 
 Route::get('generarCuotasSociales', function(){
 
