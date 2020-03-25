@@ -12,6 +12,7 @@ use App\Services\ABM_ProveedorService;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidacionABMproovedores;
+use App\Http\Requests\ValidacionAltaProveedor;
 use Illuminate\Support\Facades\DB;
 //use Yajra\Datatables\Facades\Datatables;
 use App\Proovedores;
@@ -32,7 +33,7 @@ class ABM_proovedores extends Controller
 
   }
 
-   public function store(ValidacionABMproovedores $request)
+   public function store(ValidacionAltaProveedor $request)
     {
         $elem = collect($request->all());
         DB::transaction(function () use ($elem) {
@@ -43,7 +44,13 @@ class ABM_proovedores extends Controller
 
     public function traerElementos()
     {
-        return Proovedores::all();
+        $proveedores =  Proovedores::with('usuario')->get();
+        return $proveedores->map(function($item,$key){
+            $item = collect($item);
+            $item['email'] = $item['usuario']['email'];
+            $item['usuario'] = $item['usuario']['usuario'];
+            return $item;
+        });
     }
 
     public function show($id)

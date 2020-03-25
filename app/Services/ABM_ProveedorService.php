@@ -10,6 +10,7 @@ namespace App\Services;
 
 
 use App\Repositories\Eloquent\Repos\Gateway\ProveedoresGateway;
+use App\User;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use App\Proovedores;
 use App\ProveedorImputacionDeudores;
@@ -27,17 +28,21 @@ class ABM_ProveedorService
 
     public function crearProveedor($elem)
     {
-        $usuario = $elem['usuario'];
         $pass = $elem['password'];
         $email = $elem['email'];
-        $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
+        $user = Sentinel::registerAndActivate(['password' => $pass, 'email' => $email]);
         $role = Sentinel::findRoleByName('proveedor');
         $role->users()->attach($user);
+
+        //Agrego el username=email al users
+        $usuario = User::find($user->id);
+        $usuario->usuario = $elem['email'];
+        $usuario->save();
+
         $elem['usuario'] = $user->id;
         $proveedor = Proovedores::create($elem->toArray());
         $codigo = $this->imputacionService->obtenerCodigoNuevo(3110300);
         $imputacion = $this->imputacionService->crear($codigo, 'Cta '.$elem['razon_social'], 1);
         ProveedorImputacionDeudores::create(['id_proveedor' => $proveedor->id, 'id_imputacion' => $imputacion->id, 'tipo' => 'Deudores', 'codigo' => $imputacion->codigo]);
-
     }
 }
