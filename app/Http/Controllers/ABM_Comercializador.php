@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comercializador;
 use App\Http\Requests\ValidacionABMcomercializador;
+use App\Http\Requests\ValidacionAltaComercializador;
 use App\Repositories\Eloquent\Repos\Gateway\ComercializadorGateway;
 use App\Services\ABM_ComercializadorService;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -26,7 +27,7 @@ class ABM_Comercializador extends Controller
     }
 
 
-    public function store(ValidacionABMcomercializador $request)
+    public function store(ValidacionAltaComercializador $request)
     {
         DB::transaction(function() use ($request){
 
@@ -72,6 +73,12 @@ class ABM_Comercializador extends Controller
 
     public function comercializadores()
     {
-        return $this->comercializador->all();
+        $comercializadores =  Comercializador::with('usuario')->get();
+        return $comercializadores->map(function($item,$key){
+            $item = collect($item);
+            $item['email'] = $item['usuario']['email'];
+            $item['usuario'] = $item['usuario']['id'];
+            return $item;
+        });
     }
 }

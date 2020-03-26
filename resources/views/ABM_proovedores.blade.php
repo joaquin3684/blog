@@ -130,15 +130,6 @@
                     </div>
 
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Usuario
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required type="text" id="cuit" name="usuario" class="form-control col-md-7 col-xs-12" placeholder="Usuario123"><div ng-cloak>{{errores.usuario[0]}}</div>
-                      </div>
-                    </div>
-
-                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Contraseña
                         <span class="required">*</span>
                       </label>
@@ -259,7 +250,7 @@
                         <td title="'Telefono'" filter="{ telefono: 'text'}" sortable="'telefono'">
                           {{abm.telefono}}
                         </td>
-                        <td title="'Usuario'" filter="{ usuario: 'text'}" sortable="'usuario'">
+                        <td title="'Email'" filter="{ usuario: 'text'}" sortable="'usuario'">
                           {{abm.usuario}}
                         </td>
                         <!--                                                 <td title="'$ de Ganancia'" sortable="'porcentaje_retencion'">
@@ -392,24 +383,6 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="number" id="telefono" name="telefono" class="form-control col-md-7 col-xs-12" required><div ng-cloak>{{errores.telefono[0]}}</div>
-              </div>
-            </div>
-
-            <div class="item form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email
-                <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="email" name="email" value="{{usuario.email}}" class="form-control col-md-7 col-xs-12" required><div ng-cloak>{{errores.email[0]}}</div>
-              </div>
-            </div>
-
-            <div class="item form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario">Usuario
-                <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12" required><div ng-cloak>{{errores.usuario[0]}}</div>
               </div>
             </div>
             <!--                     <div class="item form-group">
