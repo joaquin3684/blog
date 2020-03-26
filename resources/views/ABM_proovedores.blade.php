@@ -64,7 +64,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input required id="razonSocial" class="form-control col-md-7 col-xs-12" name="razon_social" placeholder="FINANCOMP"
-                          type="text"><div ng-cloak>{{errores.nombre[0]}}</div>
+                          type="text"><div ng-cloak>{{errores.razon_social[0]}}</div>
                       </div>
                     </div>
 
