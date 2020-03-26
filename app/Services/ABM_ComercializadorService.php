@@ -8,6 +8,7 @@
 
 namespace App\Services;
 use App\Comercializador;
+use App\User;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
@@ -23,10 +24,15 @@ class ABM_ComercializadorService
 
     public function crearComer($elem)
     {
-        $usuario = $elem['usuario'];
         $pass = $elem['password'];
         $email = $elem['email'];
-        $user = Sentinel::registerAndActivate(['usuario' => $usuario, 'password' => $pass, 'email' => $email]);
+        $user = Sentinel::registerAndActivate(['password' => $pass, 'email' => $email]);
+
+        //Agrego el username=email al users
+        $usuario = User::find($user->id);
+        $usuario->usuario = $elem['email'];
+        $usuario->save();
+
         $elem['usuario'] = $user->id;
         $comer = Comercializador::create($elem);
         $role = Sentinel::findRoleByName('comercializador');

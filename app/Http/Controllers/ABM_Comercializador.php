@@ -72,6 +72,12 @@ class ABM_Comercializador extends Controller
 
     public function comercializadores()
     {
-        return $this->comercializador->all();
+        $comercializadores =  Comercializador::with('usuario')->get();
+        return $comercializadores->map(function($item,$key){
+            $item = collect($item);
+            $item['email'] = $item['usuario']['email'];
+            $item['usuario'] = $item['usuario']['id'];
+            return $item;
+        });
     }
 }
