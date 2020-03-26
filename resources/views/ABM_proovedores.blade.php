@@ -250,7 +250,7 @@
                         <td title="'Telefono'" filter="{ telefono: 'text'}" sortable="'telefono'">
                           {{abm.telefono}}
                         </td>
-                        <td title="'Usuario'" filter="{ usuario: 'text'}" sortable="'usuario'">
+                        <td title="'Email'" filter="{ usuario: 'text'}" sortable="'usuario'">
                           {{abm.usuario}}
                         </td>
                         <!--                                                 <td title="'$ de Ganancia'" sortable="'porcentaje_retencion'">
