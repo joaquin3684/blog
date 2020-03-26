@@ -100,7 +100,7 @@ app.controller('ABM_comercializador', function ($scope, $http, $compile, $sce, N
         var data = {
             'nombre': $scope.abmConsultado.nombre,
             'apellido': $scope.abmConsultado.apellido,
-            'dni': $scope.abmConsultado.documento,
+            'dni': $scope.abmConsultado.dni,
             'cuit': $scope.abmConsultado.cuit,
             'domicilio': $scope.abmConsultado.domicilio,
             'telefono': $scope.abmConsultado.telefono,
