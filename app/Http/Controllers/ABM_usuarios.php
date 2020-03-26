@@ -54,7 +54,7 @@ class ABM_usuarios extends Controller
         }
 
     }
-    
+
     public function destroy($id)
     {
         $user = Sentinel::findById($id);
