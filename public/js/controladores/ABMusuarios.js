@@ -53,8 +53,12 @@ app.controller('ABM', function ($scope, $http, $compile, $sce, NgTableParams, $f
             $scope.numeroDeRoles = 0;
             $scope.agregarPantalla();
          }
+         if (tipoSolicitud === 'Editar') {
+            $('#editar').modal('hide');
+         }
          $scope.mensaje = response;
          $('#formulario')[0].reset();
+
          $scope.errores = '';
 
          if (tipoSolicitud != 'Mostrar') {UserSrv.MostrarMensaje("OK", "Operación ejecutada correctamente.", "OK", "mensaje");}
