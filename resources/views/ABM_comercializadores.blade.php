@@ -167,17 +167,7 @@
                                                 <div ng-cloak>{{errores.telefono[0]}}</div>
                                             </div>
                                         </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Usuario
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="usuario" name="usuario"
-                                                       class="form-control col-md-7 col-xs-12" placeholder="Usuario123"
-                                                       ng-model="usuarioComerc">
-                                                <div ng-cloak>{{errores.usuario[0]}}</div>
-                                            </div>
-                                        </div>
+     
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Contraseña
                                                 <span class="required">*</span>
@@ -328,9 +318,6 @@
                                         <td title="'Telefono'" filter="{ telefono: 'text'}" sortable="'telefono'">
                                             {{abm.telefono}}
                                         </td>
-                                        <td title="'Usuario'" filter="{ usuario: 'text'}" sortable="'usuario'">
-                                            {{abm.usuario}}
-                                        </td>
                                         <td title="'Colocacion'" filter="{ porcentaje_colocacion: 'text'}"
                                             sortable="'porcentaje_colocacion'">
                                             {{abm.porcentaje_colocacion}}
@@ -434,17 +421,6 @@
                             </div>
                         </div>
                         <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="documento">Email
-                                <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="email" name="email" class="form-control col-md-7 col-xs-12"
-                                       placeholder="Ingrese el email" ng-model="abmConsultado.email"
-                                       required>
-                                <div ng-cloak>{{errores.email[0]}}</div>
-                            </div>
-                        </div>
-                        <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Domicilio
                                 <span class="required">*</span>
                             </label>
@@ -475,17 +451,6 @@
                                        class="form-control col-md-7 col-xs-12" placeholder="Ingrese el telefono"
                                        ng-model="abmConsultado.telefono" required>
                                 <div ng-cloak>{{errores.telefono[0]}}</div>
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Usuario
-                                <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="usuario" name="usuario" class="form-control col-md-7 col-xs-12"
-                                       placeholder="Ingrese el usuario" ng-model="abmConsultado.usuario"
-                                       required>
-                                <div ng-cloak>{{errores.usuario[0]}}</div>
                             </div>
                         </div>
                         <div class="item form-group">

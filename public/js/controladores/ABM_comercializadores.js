@@ -19,7 +19,6 @@ app.controller('ABM_comercializador', function ($scope, $http, $compile, $sce, N
             'domicilio': $scope.domicilioComerc,
             'provincia': $scope.provinciaComerc,
             'telefono': $scope.telefonoComerc,
-            'usuario': $scope.usuarioComerc,
             'password': $scope.contraseniaComerc,
             'email': $scope.emailComerc,
             'estado_civil': $scope.estadoCivilComerc,
@@ -100,14 +99,12 @@ app.controller('ABM_comercializador', function ($scope, $http, $compile, $sce, N
         var data = {
             'nombre': $scope.abmConsultado.nombre,
             'apellido': $scope.abmConsultado.apellido,
-            'dni': $scope.abmConsultado.documento,
+            'dni': $scope.abmConsultado.dni,
             'cuit': $scope.abmConsultado.cuit,
             'domicilio': $scope.abmConsultado.domicilio,
             'telefono': $scope.abmConsultado.telefono,
-            'usuario': $scope.abmConsultado.usuario,
             'provincia': $scope.abmConsultado.provincia,
             'estado_civil': $scope.abmConsultado.estado_civil,
-            'email': $scope.abmConsultado.email,
             'porcentaje_colocacion': $scope.abmConsultado.porcentaje_colocacion
         };
 
