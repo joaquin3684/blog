@@ -1,4 +1,4 @@
-var app = angular.module('Mutual').config(function ($interpolateProvider) { });
+var app = angular.module('Mutual').config(function ($interpolateProvider) {});
 app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ManejoExcell', 'angular-loading-bar');
 app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTableParams, $filter, UserSrv, ManejoExcell) {
 
@@ -15,34 +15,34 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
             $scope.ventasModificadas = false;
         };
         $scope.sumarMontosOrganismos();
-    }
+    };
 
     $scope.actualizarSocios = function () {
         if ($scope.ventasModificadas) {
             $scope.PullSocios($scope.organismoActual.id, $scope.organismoActual.nombre);
         }
-    }
+    };
 
     $scope.modificarDatos = function () {
-        $scope.asignarMontosACobrar()
-    }
+        $scope.asignarMontosACobrar();
+    };
 
     buscarMonto = function (legajo) {
-        let socio = $scope.archivoExcell.find(socio => Number(socio.legajo) === legajo)
+        let socio = $scope.archivoExcell.find(socio => Number(socio.legajo) === legajo);
         if (socio) {
-            return Number(socio.monto)
+            return Number(socio.monto);
         } else {
             UserSrv.MostrarMensaje("Error", "No se encuentra ningun socio con el legajo: " + legajo + ".", 'Error', 'mensaje', undefined);
-            return 0
+            return 0;
         }
-    }
+    };
 
     $scope.asignarMontosACobrar = function () {
         $scope.socios.forEach(socio => {
-            socio.montoACobrar = buscarMonto(socio.legajo)
+            socio.montoACobrar = buscarMonto(socio.legajo);
         });
 
-    }
+    };
 
 
     $scope.sumarMontosACobrar = function (elemsFiltrados, elems) {
@@ -60,7 +60,7 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
 
         $scope.sumaMontoTotal = sumaMontoTotal.toFixed(2);
         $scope.sumaMontoACobrar = sumaMontoACobrar.toFixed(2);
-    }
+    };
 
 
     $scope.cambiarChecks = function (check, elems) {
@@ -91,24 +91,24 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
                     page: 1,
                     count: 10
                 }, {
-                        getData: function (params) {
-                            var filterObj = params.filter(),
-                                filteredData = $filter('filter')($scope.organismos, filterObj);
-                            var sortObj = params.orderBy();
-                            orderedData = $filter('orderBy')(filteredData, sortObj);
-                            $scope.paramsOrganismos.total(orderedData.length);
-                            $scope.organismosFiltrados = orderedData;
-                            $scope.sumarMontosOrganismos();
-                            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                        }
-                    });
+                    getData: function (params) {
+                        var filterObj = params.filter(),
+                            filteredData = $filter('filter')($scope.organismos, filterObj);
+                        var sortObj = params.orderBy();
+                        orderedData = $filter('orderBy')(filteredData, sortObj);
+                        $scope.paramsOrganismos.total(orderedData.length);
+                        $scope.organismosFiltrados = orderedData;
+                        $scope.sumarMontosOrganismos();
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    }
+                });
             }
 
         }, function errorCallback(data) {
-            UserSrv.MostrarError(data)
+            UserSrv.MostrarError(data);
             console.log(data.data);
         });
-    }
+    };
 
     $scope.sumarMontosOrganismos = function () {
         //Sumar montos de organismos
@@ -125,21 +125,21 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
         $scope.sumaTotalACobrar = sumaTotalACobrar.toFixed(2);
         $scope.sumaTotalCobrado = sumaTotalCobrado.toFixed(2);
         $scope.sumaDiferencia = sumaDiferencia.toFixed(2);
-    }
+    };
 
     $scope.agregarObservaciones = () => {
         if ($scope.socios.some(socio => socio.montoACobrar !== socio.totalACobrar)) {
-            $scope.sociosConMontoDistintoAlTotal = $scope.socios.filter(socio => socio.montoACobrar != socio.totalACobrar)
-            $('#modalObservaciones').modal('show')
+            $scope.sociosConMontoDistintoAlTotal = $scope.socios.filter(socio => socio.montoACobrar != socio.totalACobrar);
+            $('#modalObservaciones').modal('show');
         } else {
-            $scope.cobrarSocios()
+            $scope.cobrarSocios();
         }
 
-    }
+    };
 
 
     $scope.cobrarSocios = function () {
-        $('#modalObservaciones').modal('hide')
+        $('#modalObservaciones').modal('hide');
         var data = [];
         $scope.socios.forEach(function (entry) {
 
@@ -163,12 +163,12 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
             $scope.PullSocios($scope.organismoActual.id, $scope.organismoActual.nombre);
             $scope.sociosModificados = true;
         }, function errorCallback(data) {
-            UserSrv.MostrarError(data)
+            UserSrv.MostrarError(data);
             console.log(data.data);
         });
 
 
-    }
+    };
 
     $scope.cobrarVentas = function () {
 
@@ -191,10 +191,10 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
             $scope.PullVentas($scope.socioActual.id, $scope.socioActual.nombre);
             $scope.ventasModificadas = true;
         }, function errorCallback(data) {
-            UserSrv.MostrarError(data)
+            UserSrv.MostrarError(data);
             console.log(data.data);
         });
-    }
+    };
 
 
     $scope.PullSocios = function (idorganismo, nombreorganismo) {
@@ -202,7 +202,7 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
         $scope.organismoActual = {
             id: idorganismo,
             nombre: nombreorganismo
-        }
+        };
         $http({
             url: 'cobrar/porSocio',
             method: 'post',
@@ -224,7 +224,7 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
                         'legajo': entry.legajo,
                         'checked': true,
                         'socio': entry.socio,
-                    })
+                    });
                 });
 
                 console.log($scope.socios);
@@ -234,31 +234,31 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
                     page: 1,
                     count: 10
                 }, {
-                        getData: function (params) {
-                            var filterObj = params.filter(),
-                                filteredData = $filter('filter')($scope.socios, filterObj);
-                            var sortObj = params.orderBy();
-                            orderedData = $filter('orderBy')(filteredData, sortObj);
-                            $scope.paramsSocios.total(orderedData.length);
-                            $scope.sociosFiltrados = orderedData;
+                    getData: function (params) {
+                        var filterObj = params.filter(),
+                            filteredData = $filter('filter')($scope.socios, filterObj);
+                        var sortObj = params.orderBy();
+                        orderedData = $filter('orderBy')(filteredData, sortObj);
+                        $scope.paramsSocios.total(orderedData.length);
+                        $scope.sociosFiltrados = orderedData;
 
-                            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                        }
-                    });
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    }
+                });
             }
 
         }, function errorCallback(data) {
             console.log(data.data);
         });
 
-    }
+    };
     $scope.setVista = function (vista) {
 
         $scope.vistaactual = vista;
 
-    }
+    };
 
-    $scope.diferenciaEnModulo = (value) => Math.abs(value)
+    $scope.diferenciaEnModulo = (value) => Math.abs(value).toFixed(2);
 
 
 
@@ -267,7 +267,7 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
         $scope.socioActual = {
             id: idsocio,
             nombre: nombresocio
-        }
+        };
         $http({
             url: 'cobrar/mostrarPorVenta',
             method: 'post',
@@ -288,7 +288,7 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
                         'montoACobrar': entry.diferencia,
                         'id_venta': entry.id_venta,
                         'checked': true,
-                    })
+                    });
                 });
                 console.log($scope.ventas);
                 console.log(response.data);
@@ -301,25 +301,25 @@ app.controller('cobrar', function ($scope, $http, $compile, $sce, $window, NgTab
                     page: 1,
                     count: 10
                 }, {
-                        getData: function (params) {
-                            var filterObj = params.filter(),
-                                filteredData = $filter('filter')($scope.ventas, filterObj);
-                            var sortObj = params.orderBy();
-                            orderedData = $filter('orderBy')(filteredData, sortObj);
-                            $scope.paramsVentas.total(orderedData.length);
-                            $scope.ventasFiltradas = orderedData;
+                    getData: function (params) {
+                        var filterObj = params.filter(),
+                            filteredData = $filter('filter')($scope.ventas, filterObj);
+                        var sortObj = params.orderBy();
+                        orderedData = $filter('orderBy')(filteredData, sortObj);
+                        $scope.paramsVentas.total(orderedData.length);
+                        $scope.ventasFiltradas = orderedData;
 
-                            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                        }
-                    });
+                        return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    }
+                });
             }
 
         }, function errorCallback(data) {
-            UserSrv.MostrarError(data)
+            UserSrv.MostrarError(data);
             console.log(data.data);
         });
 
-    }
+    };
 
 
 
