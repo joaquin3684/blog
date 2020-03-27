@@ -1,26 +1,23 @@
-var app = angular.module('Mutual').config(function ($interpolateProvider, $compileProvider){
+var app = angular.module('Mutual').config(function ($interpolateProvider, $compileProvider) {
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 });
 app.requires.push('ngMaterial', 'ngSanitize', 'ngTable', 'Mutual.services', 'ngFileUpload', 'angular-loading-bar');
-app.controller('comercializador', function($scope, $http, $compile, $sce, NgTableParams, $filter,UserSrv, Upload) {
+app.controller('comercializador', function ($scope, $http, $compile, $sce, NgTableParams, $filter, UserSrv, Upload) {
 
-   
-    $scope.pullComercializadores = function (){
+
+    $scope.pullComercializadores = function () {
 
         $http({
             url: 'comercializador/solicitudes',
             method: 'get'
-        }).then(function successCallback(response)
-        {
-            if(typeof response.data === 'string')
-            {
+        }).then(function successCallback(response) {
+            if (typeof response.data === 'string') {
                 return [];
             }
-            else
-            {
+            else {
                 console.log(response);
-                $scope.solicitudes = response.data.filter(solicitud => solicitud.estado !='Rechazada por comercializador');
+                $scope.solicitudes = response.data.filter(solicitud => solicitud.estado != 'Rechazada por comercializador');
                 $scope.paramssolicitudes = new NgTableParams({
                     page: 1,
                     count: 10
@@ -33,9 +30,8 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
                 });
             }
 
-        }, function errorCallback(data)
-        {
-            UserSrv.MostrarError(data)
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data);
             console.log(data.data);
         });
 
@@ -44,15 +40,15 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
 
 
 
-    }
+    };
 
-    $scope.submit = function() {
+    $scope.submit = function () {
         console.log("el ng click funciona");
         $scope.upload($scope.file);
 
     };
 
-   
+
     // upload on file select or drop
     $scope.upload = function (file) {
         Upload.upload({
@@ -69,24 +65,21 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         });
     };
 
-    $scope.query = function(searchText, ruta)
-    {
+    $scope.query = function (searchText, ruta) {
         return $http({
             url: 'comercializador/buscarSocios',
             method: 'post',
-            data: {'nombre' : searchText,'id_organismo':$scope.organismocomplete}
-            }).then(function successCallback(response)
-                {
-                    return response.data;
-                    console.log(data);
-                }, function errorCallback(data){
-                    UserSrv.MostrarError(data)
-                    console.log(data);
-                });
-    }
+            data: {'nombre': searchText, 'id_organismo': $scope.organismocomplete}
+        }).then(function successCallback(response) {
+            return response.data;
+            console.log(data);
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data);
+            console.log(data);
+        });
+    };
 
-    $scope.getFotos = function(idsolicitud)
-    {
+    $scope.getFotos = function (idsolicitud) {
         document.getElementById('endeudamientodiv').style.display = 'none';
         document.getElementById('previsualizaciondiv').style.display = 'block';
         document.getElementById('previsualizacion').src = 'images/preload.png';
@@ -94,114 +87,107 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         return $http({
             url: 'comercializador/fotos',
             method: 'post',
-            data: {'id' : idsolicitud}
-            }).then(function successCallback(response)
-                {
-                    $scope.DatosModalActual = response.data;
-                    console.log(response.data);
-                }, function errorCallback(data){
-                    UserSrv.MostrarError(data)
-                });
-    }
+            data: {'id': idsolicitud}
+        }).then(function successCallback(response) {
+            $scope.DatosModalActual = response.data;
+            console.log(response.data);
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data);
+        });
+    };
 
-    $scope.Comprobante = function (){
+    $scope.Comprobante = function () {
 
         archivo = $scope.comprobantevisualizar;
-        if(!isNaN(archivo) && archivo != null){
+        if (!isNaN(archivo) && archivo != null) {
             document.getElementById('previsualizaciondiv').style.display = 'none';
             document.getElementById('endeudamientodiv').style.display = 'block';
             document.getElementById('endeud').innerHTML = archivo;
         } else {
-            if(archivo != null){
+            if (archivo != null) {
                 var img = new Image();
                 img.onload = function () {
-                    
+
                     document.getElementById('endeudamientodiv').style.display = 'none';
                     document.getElementById('previsualizaciondiv').style.display = 'block';
                     document.getElementById('previsualizacion').src = archivo;
                     $scope.heightImg = img.height;
                     $scope.widthImg = img.width;
                     $scope.$apply();
-                }
+                };
                 img.src = archivo;
             }
         }
 
-    }
-    $scope.expandirImg = function(){
+    };
+    $scope.expandirImg = function () {
         // Get the image and insert it inside the modal
         var img = document.getElementById('previsualizacion');
         var modalImg = document.getElementById("imgExpandida");
-       
+
         modalImg.src = img.src;
         $scope.imageSrc = img.src;
-    }
+    };
 
-    $scope.IDPropuesta = function(id,importe,monto,cantcuotas) {
+    $scope.IDPropuesta = function (id, importe, monto, cantcuotas, solicutd) {
         $scope.idpropuestae = id;
         $scope.importe = importe;
         $scope.monto_por_cuota = monto;
         $scope.cuotas = cantcuotas;
-    }
+    };
 
-    $scope.getOrganismos = function (){
+    $scope.getOrganismos = function () {
         $http({
             url: 'organismos/traerElementos',
             method: 'get'
-        }).then(function successCallback(response)
-        {
+        }).then(function successCallback(response) {
 
-            if(typeof response.data === 'string')
-            {
+            if (typeof response.data === 'string') {
                 return [];
             }
-            else
-            {
+            else {
                 $scope.organismos = response.data;
                 console.log(response);
             }
 
-        }, function errorCallback(data)
-        {
-            UserSrv.MostrarError(data)
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data);
             console.log(data.data);
         });
-    }
+    };
 
-    $scope.ImprimirFormulario = function() {
+    $scope.ImprimirFormulario = function () {
         alert('Se imprime el formulario..');
-    }
+    };
 
-    $scope.EnviarFormulario = function(id) {
+    $scope.EnviarFormulario = function (id) {
         $http({
             url: 'comercializador/enviarFormulario',
             method: 'post',
-            data: {'id':id,'estado':'Formulario Enviado'}
-        }).then(function successCallback(response)
-        {
+            data: {'id': id, 'estado': 'Formulario Enviado'}
+        }).then(function successCallback(response) {
 
-                UserSrv.MostrarMensaje("OK","El formulario fue enviado correctamente.","OK","mensaje");
-                $scope.pullComercializadores();
+            UserSrv.MostrarMensaje("OK", "El formulario fue enviado correctamente.", "OK", "mensaje");
+            $scope.pullComercializadores();
 
-        }, function errorCallback(data)
-        {
+        }, function errorCallback(data) {
 
-            UserSrv.MostrarError(data)
+            UserSrv.MostrarError(data);
 
         });
-    }
+    };
 
-    $scope.DatosModal = function (documento,recibo,cbu,domicilio,endeudamiento){
+    $scope.DatosModal = function (documento, recibo, cbu, domicilio, endeudamiento) {
 
         $scope.DatosModalActual = [
-        {'comprobante':'Documento','archivo':documento},
-        {'comprobante':'Recibo','archivo':recibo},
-        {'comprobante':'CBU','archivo':cbu},
-        {'comprobante':'Domicilio','archivo':domicilio},
-        {'comprobante':'Endeudamiento','archivo':endeudamiento}
+            {'comprobante': 'Documento', 'archivo': documento},
+            {'comprobante': 'Recibo', 'archivo': recibo},
+            {'comprobante': 'CBU', 'archivo': cbu},
+            {'comprobante': 'Domicilio', 'archivo': domicilio},
+            {'comprobante': 'Endeudamiento', 'archivo': endeudamiento}
         ];
 
-    }
+    };
 
 
 
@@ -210,129 +196,119 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         $http({
             url: 'comercializador/aceptarPropuesta',
             method: 'post',
-            data: {'id':$scope.idpropuestae,'estado':'Aceptada por comercializador'}
-        }).then(function successCallback(response)
-        {
+            data: {'id': $scope.idpropuestae, 'estado': 'Aceptada por comercializador'}
+        }).then(function successCallback(response) {
 
-                UserSrv.MostrarMensaje("OK","La propuesta fue aceptada correctamente.","OK","mensaje");
-                $scope.pullComercializadores();
+            UserSrv.MostrarMensaje("OK", "La propuesta fue aceptada correctamente.", "OK", "mensaje");
+            $scope.pullComercializadores();
 
-        }, function errorCallback(data)
-        {
-            UserSrv.MostrarError(data)
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data);
 
         });
 
-    }
+    };
     $scope.RechazarPropuesta = function () {
 
         $http({
             url: 'comercializador/rechazarPropuesta',
             method: 'post',
-            data: { 'id': $scope.idpropuestae, 'estado': 'Rechazada por comercializador' }
+            data: {'id': $scope.idpropuestae, 'estado': 'Rechazada por comercializador'}
         }).then(function successCallback(response) {
             UserSrv.MostrarMensaje("OK", "La propuesta fue rechazada correctamente.", "OK", "mensaje");
             $scope.pullComercializadores();
         }, function errorCallback(data) {
-                UserSrv.MostrarError(data);
-            });
+            UserSrv.MostrarError(data);
+        });
 
         $('#AnalizarPropuesta').modal('hide');
 
-    }
+    };
 
     $scope.PropuestaModificada = function () {
 
         $http({
             url: 'comercializador/modificarPropuesta',
             method: 'post',
-            data: {'id':$scope.idpropuestae,'total':$scope.importe,'cuotas':$scope.cuotas,'monto_por_cuota':$scope.monto_por_cuota,'estado':'Modificada por Comercializador'}
-        }).then(function successCallback(response)
-        {
+            data: {'id': $scope.idpropuestae, 'total': $scope.importe, 'cuotas': $scope.cuotas, 'monto_por_cuota': $scope.monto_por_cuota, 'estado': 'Modificada por Comercializador'}
+        }).then(function successCallback(response) {
 
-                UserSrv.MostrarMensaje("OK","La contra propuesta fue enviada correctamente.","OK","mensaje");
-                $scope.pullComercializadores();
+            UserSrv.MostrarMensaje("OK", "La contra propuesta fue enviada correctamente.", "OK", "mensaje");
+            $scope.pullComercializadores();
 
-        }, function errorCallback(data)
-        {
+        }, function errorCallback(data) {
 
-            UserSrv.MostrarError(data)
+            UserSrv.MostrarError(data);
 
         });
 
-    }
+    };
 
     $scope.ModificarPropuesta = function (valor) {
         $scope.modificandopropuesta = valor;
-    }
+    };
 
-    $scope.AltaComercializador = function (Dato){
+    $scope.AltaComercializador = function (Dato) {
 
         console.log(moment($scope.fecha_nacimiento).format('YYYY-MM-DD'));
-    if($scope.socio != null) {
-        $scope.Dato = {
-        'nombre':$scope.nombre,//$scope.nombre,
-        'apellido':$scope.apellido,
-        'cuit':$scope.cuit,
-        'domicilio':$scope.domicilio,
-        'piso': $scope.piso,
-        'departamento': $scope.departamento,
-        'nucleo': $scope.nucleo,
-        'fecha_nacimiento':moment($scope.fecha_nacimiento).format('YYYY-MM-DD'),
-        'sexo':$scope.sexo,
-        'codigo_postal':$scope.codigo_postal,
-        'telefono':$scope.telefono,
-        'doc_documento':$scope.doc_documento,
-        'doc_cbu':$scope.doc_cbu,
-        'doc_endeudamiento': $scope.doc_endeudamiento && $scope.doc_endeudamiento,
-        'doc_recibo':$scope.doc_recibo,
-        'doc_domicilio':$scope.doc_domicilio,
-        'filtro':'',
-        'id_organismo':$scope.organismocomplete,
-        'dni':$scope.dni,
-        'localidad':$scope.localidad,
-        'legajo':$scope.legajo,
-        'id_socio':$scope.socio.id
-        };
-    } else {
-        $scope.Dato = {
-        'nombre':$scope.nombre + ',' + $scope.apellido,//$scope.nombre,
-        'apellido':$scope.apellido,
-        'cuit':$scope.cuit,
-        'domicilio':$scope.domicilio,
-        'piso': $scope.piso,
-            'departamento': $scope.departamento,
-            'nucleo': $scope.nucleo,
-        'fecha_nacimiento':moment($scope.fecha_nacimiento).format('YYYY-MM-DD'),
-        'sexo':$scope.sexo,
-        'codigo_postal':$scope.codigo_postal,
-        'telefono':$scope.telefono,
-        'doc_documento':$scope.doc_documento,
-        'doc_cbu':$scope.doc_cbu,
-        'doc_endeudamiento': $scope.doc_endeudamiento && $scope.doc_endeudamiento,
-        'doc_recibo':$scope.doc_recibo,
-        'doc_domicilio':$scope.doc_domicilio,
-        'filtro':'',
-        'id_organismo':$scope.organismocomplete,
-        'dni':$scope.dni,
-        'localidad':$scope.localidad,
-        'legajo':$scope.legajo
-        };
-    }
+        if ($scope.socio != null) {
+            $scope.Dato = {
+                'nombre': $scope.nombre,//$scope.nombre,
+                'apellido': $scope.apellido,
+                'cuit': $scope.cuit,
+                'domicilio': $scope.domicilio,
+                'piso': $scope.piso,
+                'departamento': $scope.departamento,
+                'nucleo': $scope.nucleo,
+                'fecha_nacimiento': moment($scope.fecha_nacimiento).format('YYYY-MM-DD'),
+                'sexo': $scope.sexo,
+                'codigo_postal': $scope.codigo_postal,
+                'telefono': $scope.telefono,
+                'doc_documento': $scope.doc_documento,
+                'doc_cbu': $scope.doc_cbu,
+                'doc_endeudamiento': $scope.doc_endeudamiento && $scope.doc_endeudamiento,
+                'doc_recibo': $scope.doc_recibo,
+                'doc_domicilio': $scope.doc_domicilio,
+                'filtro': '',
+                'id_organismo': $scope.organismocomplete,
+                'dni': $scope.dni,
+                'localidad': $scope.localidad,
+                'legajo': $scope.legajo,
+                'id_socio': $scope.socio.id
+            };
+        } else {
+            $scope.Dato = {
+                'nombre': $scope.nombre + ',' + $scope.apellido,//$scope.nombre,
+                'apellido': $scope.apellido,
+                'cuit': $scope.cuit,
+                'domicilio': $scope.domicilio,
+                'piso': $scope.piso,
+                'departamento': $scope.departamento,
+                'nucleo': $scope.nucleo,
+                'fecha_nacimiento': moment($scope.fecha_nacimiento).format('YYYY-MM-DD'),
+                'sexo': $scope.sexo,
+                'codigo_postal': $scope.codigo_postal,
+                'telefono': $scope.telefono,
+                'doc_documento': $scope.doc_documento,
+                'doc_cbu': $scope.doc_cbu,
+                'doc_endeudamiento': $scope.doc_endeudamiento && $scope.doc_endeudamiento,
+                'doc_recibo': $scope.doc_recibo,
+                'doc_domicilio': $scope.doc_domicilio,
+                'filtro': '',
+                'id_organismo': $scope.organismocomplete,
+                'dni': $scope.dni,
+                'localidad': $scope.localidad,
+                'legajo': $scope.legajo
+            };
+        }
         /*$http({
             url: 'comercializador/altaSolicitud',
             method: 'post',
             data: $scope.Dato
         }).then(function successCallback(response)
         {
-
-
-
                 UserSrv.MostrarMensaje("OK","La solicitud fue dada de alta correctamente.","OK","mensaje");
                 $scope.pullComercializadores();
-
-
-
 
         }, function errorCallback(data)
         {
@@ -347,7 +323,7 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
             console.log('Success ' + 'uploaded. Response: ' + resp.data);
             $scope.pullComercializadores();
             UserSrv.MostrarMensaje("OK", "La solicitud fue dada de alta correctamente.", "OK", "mensaje");
-            limpiarCampos()
+            limpiarCampos();
         }, function (resp) {
             console.log('Error status: ' + resp.status);
         }, function (evt) {
@@ -356,31 +332,31 @@ app.controller('comercializador', function($scope, $http, $compile, $sce, NgTabl
         });
 
 
-    }
+    };
 
-    var limpiarCampos = function(){
-        $scope.nombre = null
-        $scope.apellido = null
-        $scope.cuit= null
-        $scope.domicilio= null
-        $scope.piso = null
-        $scope.departamento = null
-        $scope.nucleo = null
-        $scope.fecha_nacimiento = null
-        $scope.sexo= null
-        $scope.codigo_postal= null
-        $scope.telefono= null
-        $scope.doc_documento= null
-        $scope.doc_cbu= null
-        $scope.doc_endeudamiento= null
-        $scope.doc_recibo= null
-        $scope.doc_domicilio= null
-        $scope.organismocomplete= null
-        $scope.dni= null
-        $scope.localidad= null
-        $scope.legajo= null
-        $scope.socio = null
-    }
+    var limpiarCampos = function () {
+        $scope.nombre = null;
+        $scope.apellido = null;
+        $scope.cuit = null;
+        $scope.domicilio = null;
+        $scope.piso = null;
+        $scope.departamento = null;
+        $scope.nucleo = null;
+        $scope.fecha_nacimiento = null;
+        $scope.sexo = null;
+        $scope.codigo_postal = null;
+        $scope.telefono = null;
+        $scope.doc_documento = null;
+        $scope.doc_cbu = null;
+        $scope.doc_endeudamiento = null;
+        $scope.doc_recibo = null;
+        $scope.doc_domicilio = null;
+        $scope.organismocomplete = null;
+        $scope.dni = null;
+        $scope.localidad = null;
+        $scope.legajo = null;
+        $scope.socio = null;
+    };
 
     var self = this;
     $scope.pullComercializadores();
