@@ -129,9 +129,10 @@ app.controller('comercializador', function ($scope, $http, $compile, $sce, NgTab
         $scope.imageSrc = img.src;
     };
 
-    $scope.IDPropuesta = function (id, importe, monto, cantcuotas, solicutd) {
+    $scope.IDPropuesta = function (id, importeOtorgado, importeADescontar, monto, cantcuotas) {
         $scope.idpropuestae = id;
-        $scope.importe = importe;
+        $scope.importe = importeOtorgado;
+        $scope.importeADescontar = importeADescontar;
         $scope.monto_por_cuota = monto;
         $scope.cuotas = cantcuotas;
     };
