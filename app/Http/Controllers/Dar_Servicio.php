@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Proovedores;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Socios;
@@ -26,8 +27,6 @@ class Dar_Servicio extends Controller
 
   public function proovedoresQueCumplenConFiltro(Request $request)
   {
-  	$proovedores = DB::table('proovedores')
-  		->where('razon_social', 'LIKE', '%'.$request['nombre'].'%')->get();
-  	return $proovedores;
+      return Proovedores::where('razon_social', 'LIKE', '%'.$request['nombre'].'%' )->get();
   }
 }

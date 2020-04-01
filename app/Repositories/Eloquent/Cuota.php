@@ -51,7 +51,7 @@ class Cuota
 
     public function determinarEstado($cobrado)
     {
-        $this->estado = $cobrado == $this->importe ? 'Cobro Total' : 'Cobro Parcial';
+        $this->estado = $cobrado == $this->montoAdeudado() ? 'Cobro Total' : 'Cobro Parcial';
     }
 
     public function montoACobrar($monto)

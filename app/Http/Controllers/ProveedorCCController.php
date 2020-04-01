@@ -73,7 +73,7 @@ class ProveedorCCController extends Controller
             ->where('proovedores.usuario', $usuario->id)
             ->where('organismos.id', '=', $request['id'])
             ->where('cuotas.cuotable_type', 'App\Ventas')
-            ->select('socios.nombre AS socio', 'socios.id AS id_socio',  DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'));
+            ->select('socios.nombre AS socio', 'socios.legajo AS legajo', 'socios.id AS id_socio',  DB::raw('ROUND(SUM(cuotas.importe),2) AS totalACobrar'));
 
         $socios = VentasFilter::apply($request->all(), $ventas);
 

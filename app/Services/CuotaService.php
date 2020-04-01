@@ -73,7 +73,7 @@ class CuotaService
         return array_sum(
             array_map(
                 function($movimiento){
-                    return $movimiento->entrada;
+                    return $movimiento['entrada'];
                     },
                 $movimientos->toArray()));
     }

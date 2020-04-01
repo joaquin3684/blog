@@ -29,7 +29,7 @@ class NovedadesController extends Controller
         ->join('productos', 'productos.id', '=', 'ventas.id_producto')
         ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
         ->where('cuotas.cuotable_type', 'App\Ventas')
-        ->where('cuotas.fecha_inicio', '>=', $request['fecha_desde'])
+        ->where('cuotas.fecha_vencimiento', '>=', $request['fecha_desde'])
         ->where('cuotas.fecha_vencimiento', '<=', $request['fecha_hasta'])
         ->select('organismos.nombre AS organismo', 'organismos.id AS id_organismo', DB::raw('ROUND(SUM(cuotas.importe), 2) AS totalACobrar'))
         ->groupBy('organismos.id');
@@ -44,7 +44,7 @@ class NovedadesController extends Controller
         ->join('proovedores', 'proovedores.id', '=', 'productos.id_proovedor')
         ->join('movimientos', 'movimientos.id_cuota', '=', 'cuotas.id')
         ->where('cuotas.cuotable_type', 'App\Ventas')
-        ->where('cuotas.fecha_inicio', '>=', $request['fecha_desde'])
+        ->where('cuotas.fecha_vencimiento', '>=', $request['fecha_desde'])
         ->where('cuotas.fecha_vencimiento', '<=', $request['fecha_hasta'])
         ->groupBy('organismos.id')
         ->select('organismos.id AS id_organismo', DB::raw('ROUND(SUM(movimientos.entrada), 2) AS totalCobrado'));
