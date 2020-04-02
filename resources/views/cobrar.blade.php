@@ -8,28 +8,29 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Observaciones</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Pago parcial</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="padding: 30px">
                     <div class="container">
+                    <div class="row">
+                        <div class="col" style="text-align: center">
+                            <h4>¿Esta seguro que desea pagar de forma parcial?</h4>
+                        </div>
+                    </div>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Diferencia</th>
-                                    <th scope="col">Observacion</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="socio in socios" ng-hide="socio.montoACobrar === socio.totalACobrar">
                                     <td>{{socio.socio}}</td>
                                     <td ng-style="(socio.totalACobrar - socio.montoACobrar) > 0 ? {color: 'red'} : {color: 'green'}">{{diferenciaEnModulo(socio.totalACobrar - socio.montoACobrar)}}</td>
-                                    <td><input required class="form-control col-md-7 col-xs-12"
-                                            placeholder="Observacion" type="text" ng-model="socio.observacion">
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
