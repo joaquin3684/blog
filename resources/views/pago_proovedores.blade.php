@@ -80,11 +80,8 @@
 
                                         <tbody data-ng-repeat="proovedor in $data" data-ng-switch on="dayDataCollapse[$index]">
                                         <tr class="clickableRow" title="" data-ng-click="pullProovedor(proovedor.id_proovedor);selectTableRow($index,proovedor.id_proovedor)" ng-cloak>
-                                            <td title="'Nombre'" filter="{ nombre: 'text'}" sortable="'nombre'">
+                                            <td title="'Razon Social'" filter="{ nombre: 'text'}" sortable="'nombre'">
                                                 {{proovedor.proovedor}}
-                                            </td>
-                                            <td title="'Apellido'" filter="{ apellido: 'text'}" sortable="'apellido'">
-                                                {{proovedor.apellido}}
                                             </td>
                                             <td title="'Monto a pagar'" filter="{ totalAPagar: 'text'}" sortable="'totalAPagar'">
                                                 {{proovedor.totalAPagar}}
@@ -140,7 +137,6 @@
                                                 <b>Total</b>
 
                                             </td>
-                                            <td></td>
                                             <td>
                                                 {{sumaMonto}}
                                             </td>
