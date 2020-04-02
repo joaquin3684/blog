@@ -1,4 +1,4 @@
-var app = angular.module('Mutual').config(function ($interpolateProvider, $compileProvider){
+var app = angular.module('Mutual').config(function ($interpolateProvider, $compileProvider) {
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 });
@@ -13,70 +13,65 @@ app.controller('solicitudesPendientesMutual', function ($scope, $http, $compile,
 
         modalImg.src = img.src;
         $scope.imageSrc = img.src;
-    }
+    };
 
-    $scope.pullSolicitudes = function (){
+    $scope.pullSolicitudes = function () {
 
         $http({
             url: 'solicitudesPendientesMutual/solicitudes',
             method: 'get'
-        }).then(function successCallback(response)
-        {
-            if(typeof response.data === 'string')
-            {
-                return [];
-            }
-            else
-            {
-                console.log(response);
-                $scope.solicitudes = response.data;
-                $scope.solicitudes.forEach( sol => sol.created_at = moment(sol.created_at).format('DD/MM/YYYY'))
-                $scope.paramssolicitudes = new NgTableParams({
-                    page: 1,
-                    count: 10
-                }, {
-                    getData: function (params) {
-                        $scope.solicitudes = $filter('orderBy')($scope.solicitudes, params.orderBy());
-                        $scope.paramssolicitudes.total($scope.solicitudes.length);
-                        return $scope.solicitudes.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    }
-                });
-            }
+        }).then((response) => {
 
-        }, function errorCallback(data)
-        {
-            UserSrv.MostrarError(data)
-            console.log(data.data);
-        });
+            $scope.solicitudes = response.data.map($scope.mapSolicitud);
+            $scope.paramssolicitudes = new NgTableParams({
+                page: 1,
+                count: 10
+            }, {
+                getData: function (params) {
+                    $scope.solicitudes = $filter('orderBy')($scope.solicitudes, params.orderBy());
+                    $scope.paramssolicitudes.total($scope.solicitudes.length);
+                    return $scope.solicitudes.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                }
+            });
 
-    }
-   
+        }, (data) => UserSrv.MostrarError(data)
+        );
+    };
+
+
+    $scope.mapSolicitud = (solicitud) => {
+        return {
+            ...solicitud,
+            created_at: moment(solicitud.created_at).format('DD/MM/YYYY'),
+            socio: {
+                ...solicitud.socio,
+                nombre: solicitud.socio.nombre.split(',')[1],
+                apellido: solicitud.socio.nombre.split(',')[0]
+            }
+        };
+    };
+
     $scope.pullProductos = function () {
-        var url= 'proveedores/productos';
+        var url = 'proveedores/productos';
         var data = {
             'id': Number($scope.agente)
-        }
+        };
         ServicioABM.pullFilteredByData(url, data).then(function (returnedData) {
             $scope.productos = returnedData;
         });
-    }
+    };
 
-        $scope.pullSolicitudes2 = function (){
+    $scope.pullSolicitudes2 = function () {
 
         $http({
             url: 'solicitudesPendientesMutual/conCapitalOtrogado',
             method: 'get'
-        }).then(function successCallback(response)
-        {
-            if(typeof response.data === 'string')
-            {
+        }).then(function successCallback(response) {
+            if (typeof response.data === 'string') {
                 return [];
             }
-            else
-            {
-                console.log(response);
-                $scope.solicitudes2 = response.data;
-                $scope.solicitudes2.forEach( sol => sol.created_at = moment(sol.created_at).format('DD/MM/YYYY'))
+            else {
+                $scope.solicitudes2 = response.data.map($scope.mapSolicitud);
                 $scope.paramssolicitudes2 = new NgTableParams({
                     page: 1,
                     count: 10
@@ -89,109 +84,97 @@ app.controller('solicitudesPendientesMutual', function ($scope, $http, $compile,
                 });
             }
 
-        }, function errorCallback(data)
-        {
-            UserSrv.MostrarError(data)
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data);
             console.log(data.data);
         });
 
 
 
-    }
+    };
 
-    $scope.IDModal = function(id) {
+    $scope.IDModal = function (id) {
         $scope.idpropuestae = id;
         $scope.getAgentes();
-    }
+    };
 
-    $scope.AsignarAF = function() {
+    $scope.AsignarAF = function () {
         $http({
-                url: 'solicitudesPendientesMutual/actualizar',
-                method: 'post',
-                data: {
-                    'id':$scope.idpropuestae,
-                    'agente_financiero':$scope.agente,
-                    'id_producto': $scope.productoSeleccionado
-                }
-            }).then(function successCallback(response)
-            {
+            url: 'solicitudesPendientesMutual/actualizar',
+            method: 'post',
+            data: {
+                'id': $scope.idpropuestae,
+                'agente_financiero': $scope.agente,
+                'id_producto': $scope.productoSeleccionado
+            }
+        }).then(function successCallback(response) {
 
-                    console.log(response);
-                    UserSrv.MostrarMensaje("OK","El agente financiero fué asignado correctamente.","OK","mensaje");
-                    $scope.pullSolicitudes();
+            console.log(response);
+            UserSrv.MostrarMensaje("OK", "El agente financiero fué asignado correctamente.", "OK", "mensaje");
+            $scope.pullSolicitudes();
 
-            }, function errorCallback(data)
-            {
+        }, function errorCallback(data) {
 
-                UserSrv.MostrarError(data)
+            UserSrv.MostrarError(data);
 
-            });
+        });
 
-            $('#AgenteFinanciero').modal('hide');
-    }
+        $('#AgenteFinanciero').modal('hide');
+    };
 
-    $scope.AprobarSolicitud = function(id) {
+    $scope.AprobarSolicitud = function (id) {
         $http({
-                url: 'solicitudesPendientesMutual/aprobarSolicitud',
-                method: 'post',
-                data: {'id':id,'estado':'Solicitud Aprobada'}
-            }).then(function successCallback(response)
-            {
-                    UserSrv.MostrarMensaje("OK","El agente financiero fué asignado correctamente.","OK","mensaje");
-                    $scope.pullSolicitudes2();
-            }, function errorCallback(data)
-            {
-                UserSrv.MostrarError(data)
-            });
-    }
+            url: 'solicitudesPendientesMutual/aprobarSolicitud',
+            method: 'post',
+            data: {'id': id, 'estado': 'Solicitud Aprobada'}
+        }).then(function successCallback(response) {
+            UserSrv.MostrarMensaje("OK", "El agente financiero fué asignado correctamente.", "OK", "mensaje");
+            $scope.pullSolicitudes2();
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data);
+        });
+    };
 
-    $scope.AsignarEndeudamiento = function() {
+    $scope.AsignarEndeudamiento = function () {
         $http({
-                url: 'solicitudesPendientesMutual/actualizar',
-                method: 'post',
-                data: {'id':$scope.idpropuestae,'doc_endeudamiento':$scope.endeudamiento}
-            }).then(function successCallback(response)
-            {
-                    console.log(response);
-                    UserSrv.MostrarMensaje("OK","El endeudamiento fué asignado correctamente.","OK","mensaje");
-                    $scope.pullSolicitudes();
+            url: 'solicitudesPendientesMutual/actualizar',
+            method: 'post',
+            data: {'id': $scope.idpropuestae, 'doc_endeudamiento': $scope.endeudamiento}
+        }).then(function successCallback(response) {
+            console.log(response);
+            UserSrv.MostrarMensaje("OK", "El endeudamiento fué asignado correctamente.", "OK", "mensaje");
+            $scope.pullSolicitudes();
 
-            }, function errorCallback(data)
-            {
+        }, function errorCallback(data) {
 
-                UserSrv.MostrarError(data)
+            UserSrv.MostrarError(data);
 
-            });
-            $('#Endeudamiento').modal('hide');
-    }
+        });
+        $('#Endeudamiento').modal('hide');
+    };
 
-    $scope.getAgentes = function (){
+    $scope.getAgentes = function () {
         $http({
             url: 'solicitudesPendientesMutual/proveedores',
             method: 'post',
-            data: {'id':$scope.idpropuestae}
-        }).then(function successCallback(response)
-        {
-          
-            if(typeof response.data === 'string')
-            {
+            data: {'id': $scope.idpropuestae}
+        }).then(function successCallback(response) {
+
+            if (typeof response.data === 'string') {
                 return [];
             }
-            else
-            {
+            else {
                 $scope.agentesasignar = response.data;
-                
+
                 console.log(response);
             }
 
-        }, function errorCallback(data)
-        {
+        }, function errorCallback(data) {
             console.log(data.data);
         });
-    }
+    };
 
-    $scope.getFotos = function(idsolicitud)
-    {
+    $scope.getFotos = function (idsolicitud) {
         document.getElementById('endeudamientodiv').style.display = 'none';
         document.getElementById('previsualizaciondiv').style.display = 'block';
         document.getElementById('previsualizacion').src = 'images/preload.png';
@@ -199,40 +182,39 @@ app.controller('solicitudesPendientesMutual', function ($scope, $http, $compile,
         return $http({
             url: 'comercializador/fotos',
             method: 'post',
-            data: {'id' : idsolicitud}
-            }).then(function successCallback(response)
-                {
-                    $scope.DatosModalActual = response.data;
-                    console.log(response.data);
-                }, function errorCallback(data){
-                    UserSrv.MostrarError(data)
-                    console.log(data);
-                });
-    }
+            data: {'id': idsolicitud}
+        }).then(function successCallback(response) {
+            $scope.DatosModalActual = response.data;
+            console.log(response.data);
+        }, function errorCallback(data) {
+            UserSrv.MostrarError(data);
+            console.log(data);
+        });
+    };
 
-    $scope.Comprobante = function (){
- 
+    $scope.Comprobante = function () {
+
         archivo = $scope.comprobantevisualizar;
-        if(!isNaN(archivo) && archivo != null){
+        if (!isNaN(archivo) && archivo != null) {
             document.getElementById('previsualizaciondiv').style.display = 'none';
             document.getElementById('endeudamientodiv').style.display = 'block';
             document.getElementById('endeud').innerHTML = archivo;
         } else {
-            if(archivo != null){
-                document.getElementById('endeudamientodiv').style.display = 'none';    
+            if (archivo != null) {
+                document.getElementById('endeudamientodiv').style.display = 'none';
                 document.getElementById('previsualizaciondiv').style.display = 'block';
                 document.getElementById('previsualizacion').src = archivo;
             }
         }
-        
-    }
+
+    };
 
 
     var self = this;
     $scope.pullSolicitudes();
     $scope.pullSolicitudes2();
-    
-    
+
+
 
 });
 

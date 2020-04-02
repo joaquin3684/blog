@@ -404,7 +404,7 @@
                           <span data-toggle="modal" data-target="#Comprobantes" ng-click="getFotos(solicitud.id)" class="fa fa-file-picture-o fa-2x"
                             titulo="Ver Comprobantes"></span>
                           @if(Sentinel::check()->hasAccess('comercializador.crear'))
-                          <span ng-show="solicitud.estado == 'Esperando Respuesta Comercializador'" ng-click="IDPropuesta(solicitud.id,solicitud.total,solicitud.monto_por_cuota,solicitud.cuotas)"
+                          <span ng-show="solicitud.estado == 'Esperando Respuesta Comercializador'" ng-click="IDPropuesta(solicitud.id,solicitud.monto_pagado, solicitud.total,solicitud.monto_por_cuota,solicitud.cuotas)"
                             data-toggle="modal" data-target="#ContraPropuesta" class="fa fa-eye fa-2x" titulo="Analizar Propuesta"></span>
 
                           <span ng-show="solicitud.estado == 'Capital Reservado'" class="fa fa-print fa-2x" ng-click="ImprimirFormulario()" titulo="Imprimir Formulario"></span>
@@ -457,6 +457,14 @@
               <div class="col-md-6 col-sm-6 col-xs-12" style="vertical-align: text-middle; color: blue;">
                 <input id="importe" ng-disabled="!modificandopropuesta" class="form-control col-md-7 col-xs-12" name="importe" placeholder="Ingrese el importe"
                   type="number" ng-model="importe" step="0.01">{[{errores.importe[0]}]}
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" >Importe a descontar
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input ng-disabled="!modificandopropuesta" class="form-control col-md-7 col-xs-12"  placeholder="Ingrese el nro de cuotas"
+                  type="number" ng-model="importeADescontar" step="0.01">{[{errores.nombre[0]}]}
               </div>
             </div>
             <div class="item form-group">
