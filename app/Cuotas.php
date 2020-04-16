@@ -31,5 +31,10 @@ class Cuotas extends Model
         return $this->morphTo();
     }
 
+    public function totalCobrado()
+    {
+        return $this->movimientos()->sum('entrada');
+    }
+
 
 }

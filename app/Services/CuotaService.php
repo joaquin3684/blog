@@ -72,9 +72,9 @@ class CuotaService
         $movimientos = $this->movimientoService->movimientosDeCuota($cuota->id);
         return array_sum(
             array_map(
-                function($movimiento){
+                function ($movimiento) {
                     return $movimiento['entrada'];
-                    },
+                },
                 $movimientos->toArray()));
     }
 
@@ -85,7 +85,7 @@ class CuotaService
 
         $this->movimientoService->crear($cuota->id, $cobrado, 0, Carbon::today()->toDateString());
         $this->modificar(
-            $cuota->fecha_iinicio,
+            $cuota->fecha_inicio,
             $cuota->fecha_vencimiento,
             $cuota->importe,
             $cuota->nro_cuota,
@@ -101,7 +101,7 @@ class CuotaService
     {
         $movimientos = $this->movimientoService->movimientosDeCuota($cuota->id);
         $totalPagado = 0;
-        foreach($movimientos as $movimiento) {
+        foreach ($movimientos as $movimiento) {
             $this->movimientoService->modificar(
                 $movimiento->id_cuota,
                 $movimiento->entrada,
@@ -117,4 +117,15 @@ class CuotaService
         return $totalPagado;
 
     }
+
+    public function cuotasImpagasProveedor($venta)
+    {
+        return Cuotas::where('cuotable_type', 'App\Ventas')
+            ->whereHas('movimientos', function ($q) {
+                return $q->where('entrada', '<>', 'salida')
+                    ->where('entrada', '>', 0);
+            })
+            ->where('cuotable_id', $venta->id)->get();
+    }
+
 }

@@ -9,6 +9,7 @@
 namespace App\Services;
 
 
+use App\Cuotas;
 use App\Proovedores;
 use App\Repositories\Eloquent\GeneradorDeAsientos;
 use App\Repositories\Eloquent\Generadores\GeneradorCuotas;
@@ -198,7 +199,7 @@ class VentasService
 
     public function ventasDeProveedor($idProveedor)
     {
-        return Ventas::with('cuotas.movimientos')->whereHas('producto.proovedor', function($q) use ($idProveedor){
+        return Ventas::with('cuotas.movimientos')->whereHas('producto', function($q) use ($idProveedor){
             $q->whereHas('proovedor', function($q) use ($idProveedor){
                 $q->where('id', $idProveedor);
             });
@@ -243,7 +244,7 @@ class VentasService
 
     public function pagarVenta(Ventas $venta)
     {
-        $cuotasImpagas = $this->cuotasService->cuotasImpagas($venta);
+        $cuotasImpagas = $this->cuotasService->cuotasImpagasProveedor($venta);
         $producto = $this->productoService->find($venta->id_producto);
         $totalPagado = 0;
 
@@ -251,7 +252,7 @@ class VentasService
         foreach($cuotasImpagas as $cuota)
             $totalPagado += $this->cuotasService->pagarCuota($cuota, $producto->ganancia);
 
-        $totalCuotas = $cuotasImpagas->sum(function($cuota){ return $cuota->totalCobrado($cuota);});
+        $totalCuotas = $cuotasImpagas->sum(function(Cuotas $cuota){ return $cuota->totalCobrado();});
 
         $this->contabilizarPago($totalCuotas, $totalPagado, $producto->tasa);
     }
