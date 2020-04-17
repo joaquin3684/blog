@@ -295,9 +295,9 @@
                     @if(Sentinel::check()->hasAccess('mayorContable.*'))
                     <li><a href="mayorContable">Mayor contable</a></li>
                     @endif
-                    @if(Sentinel::check()->hasAccess('pagoContableProveedores.*'))
-                    <li><a href="pagoContableProveedor">Pago contable Proveedor</a></li>
-                    @endif
+{{--                    @if(Sentinel::check()->hasAccess('pagoContableProveedores.*'))--}}
+{{--                    <li><a href="pagoContableProveedor">Pago contable Proveedor</a></li>--}}
+{{--                    @endif--}}
                     @if(Sentinel::check()->hasAccess('balances.*'))
                     <li><a href="balance">Balance</a></li>
                     @endif
