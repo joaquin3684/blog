@@ -119,11 +119,11 @@ Html::script('js/bootstrap-menu/BootstrapMenu.min.js')!!}
 
                                                 <label class="radio-inline">
                                                     <input type="radio" name="sexo" value="Masculino" ng-model="sexoMasculino"
-                                                        ng-click="validarCuit('masculino')">Masculino
+                                                        ng-click="validarCuit('masculino')" required>Masculino
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="sexo" value="Femenino" ng-model="sexoFemenino"
-                                                        ng-click="validarCuit('femenino')">Femenino
+                                                        ng-click="validarCuit('femenino')" required>Femenino
                                                     <div ng-cloak>{{errores.sexo[0]}}</div>
                                                 </label>
 
