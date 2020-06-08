@@ -68,8 +68,6 @@ class NovedadesController extends Controller
 
     }
 
-
-
     public function mostrarPorSocio(Request $request)
     {
         $ventas = DB::table('ventas')

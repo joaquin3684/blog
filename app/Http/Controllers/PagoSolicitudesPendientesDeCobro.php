@@ -53,7 +53,7 @@ class PagoSolicitudesPendientesDeCobro extends Controller
             $solicitudes->each(function ($solicitud) use ($productos, $comer) {
                 $index = $this->getIndex($solicitud->id_producto, $productos);
                 $montoComer = ($solicitud->total * $productos[$index]['porcentajeElejido'] / 100) * $comer->getPorcentajeColocacion() / 100;
-                $this->solRepo->update(['monto_pagado' => $montoComer, 'estado' => 'Pagada'], $solicitud->id);
+                $this->solRepo->update(['estado' => 'Pagada'], $solicitud->id);
 
             });
         }
@@ -75,7 +75,7 @@ class PagoSolicitudesPendientesDeCobro extends Controller
             $index = $this->getIndex($solicitud->id_producto, $productos);
             if($index != -1)
             {
-                $productos[$index]['total'] += $solicitud->total;
+                $productos[$index]['total'] += $solicitud->monto_pagado;
             } else {
                 $producto = array('id' => $solicitud->id_producto, 'total' => $solicitud->total, 'porcentajes' => $solicitud->producto->porcentajes->toArray());
                 array_push($productos, $producto);
@@ -95,7 +95,7 @@ class PagoSolicitudesPendientesDeCobro extends Controller
 
         $solicitudes->each(function($solicitud) use ($productos, $comer){
             $index = $this->getIndex($solicitud->id_producto, $productos);
-            $montoComer = ($solicitud->total * $productos[$index]['porcentajeElejido'] /100) * $comer->getPorcentajeColocacion() /100;
+            $montoComer = ($solicitud->monto_pagado * $productos[$index]['porcentajeElejido'] /100) * $comer->getPorcentajeColocacion() /100;
             $solicitud['montoACobrar'] = $montoComer;
         });
 

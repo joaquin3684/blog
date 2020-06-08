@@ -94,7 +94,7 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
             'Nro_de_servicio': '',
             'Nro_de_cuota': '',
             'Motivo': '',
-            'Importe_descontado': '',
+            'Importe_descontado': 'Total descontado',
             'Monto_de_cuota': sumTotalCobrado,
         })
         movimientos.push({
@@ -106,7 +106,7 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
             'Nro_de_cuota': '',
             'Motivo': '',
             'Importe_descontado': 'Bonif ' + porcentajeBonificacion + '%',
-            'Monto_de_cuota': sumTotalAPagar,
+            'Monto_de_cuota': gananciaMutual,
         })
         movimientos.push({
             'algo': null,
@@ -116,8 +116,8 @@ app.controller('pago_proovedores', function ($scope, $http, $compile, $sce, NgTa
             'Nro_de_servicio': '',
             'Nro_de_cuota': '',
             'Motivo': '',
-            'Importe_descontado': 'TOTAL',
-            'Monto_de_cuota': gananciaMutual,
+            'Importe_descontado': 'TOTAL a depositar',
+            'Monto_de_cuota': sumTotalAPagar,
         })
         var nombreHoja = 'Hoja'
         var nombreArchivo = 'Cobranza: ' + proveedor.proovedor
