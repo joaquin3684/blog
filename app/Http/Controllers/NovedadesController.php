@@ -8,16 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class NovedadesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('novedades');
     }
-
 
     public function mostrarPorOrganismo(Request $request)
     {
@@ -64,8 +59,6 @@ class NovedadesController extends Controller
         });
 
         return $col->toJson();
-
-
     }
 
     public function mostrarPorSocio(Request $request)

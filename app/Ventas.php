@@ -46,4 +46,16 @@ class Ventas extends Model
         return $this->hasMany('App\EstadoVenta', 'id_venta', 'id');
     }
 
+    public function tasaMensual()
+    {
+       return round($this->producto->tasa / $this->nro_cuotas, 2);
+    }
+
+    /**
+     * @return Cuotas[]
+     */
+    public function cuotasPendientes()
+    {
+        return $this->cuotas->filter(function($c){return $c->totalCobrado() !== $c->importe;})->values();
+    }
 }

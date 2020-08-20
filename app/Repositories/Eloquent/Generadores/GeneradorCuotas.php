@@ -3,6 +3,7 @@
 namespace App\Repositories\Eloquent\Generadores;
 use App\Cuotas;
 use App\Repositories\Eloquent\Repos\CuotasRepo;
+use App\Services\AsientoService;
 use Carbon\Carbon;
 
 /**
@@ -46,6 +47,8 @@ class GeneradorCuotas
 
     public static function generarCuotaSocial($importe, $socio)
     {
+        $asientoService = new AsientoService();
+
         $cuotasRepo = new CuotasRepo();
         $fechaInicioCuota = Carbon::today()->toDateString();
         $fechaVencimientoCuota = Carbon::today()->addMonths(2)->toDateString();
@@ -57,6 +60,12 @@ class GeneradorCuotas
             'importe' => $importe,
             'nro_cuota' => 1,
         ]);
+
+        $asientoService->crear([
+            ['cuenta' => 131030101, 'debe' => $importe, 'haber' => 0 ],
+            ['cuenta' => 511010101, 'debe' => 0, 'haber' => $importe ],
+        ], ''
+        );
         return $cuota;
     }
 }

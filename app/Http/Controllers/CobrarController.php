@@ -258,8 +258,6 @@ class CobrarController extends Controller
     {
         DB::transaction(function() use ($request){
 
-
-
             foreach($request->all() as $venta)
             {
                 $ventaa = $this->ventaService->find($venta['id']);

@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Repositories\Eloquent\Fechas;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes; 
 
@@ -34,6 +35,25 @@ class Cuotas extends Model
     public function totalCobrado()
     {
         return $this->movimientos()->sum('entrada');
+    }
+
+    public function cobrar($monto)
+    {
+        $montoRestante = $this->importe - $this->totalCobrado();
+        $cobrado = $montoRestante <= $monto ? $montoRestante : $monto;
+        $this->estado = $cobrado == $this->importe ? 'Cobro Total' : 'Cobro Parcial';
+        $this->save();
+        Movimientos::create([
+            'id_cuota' => $this->id,
+            'entrada' => $cobrado,
+            'salida' => 0,
+            'fecha' => Carbon::today()->toDateString(),
+            'ganancia' => 0,
+            'contabilizado_entrada' => 0,
+            'contabilizado_salida' => 0
+        ]);
+
+        return $cobrado;
     }
 
 

@@ -1,8 +1,11 @@
 <?php
 
+use App\Comercializador;
+use App\Proovedores;
 use App\ProveedorImputacionDeudores;
 use App\Repositories\Eloquent\Contabilidad\GeneradorDeCuentas;
 use App\Repositories\Eloquent\Repos\Gateway\ImputacionGateway;
+use App\Services\ImputacionService;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -72,7 +75,6 @@ class InicioSistema extends Seeder
             $subRubroGastosAdministrativos = factory(\App\SubRubro::class)->create(['id_departamento' => $dptoAyudaEconomica->id, 'nombre' => 'Gastos administrativos', 'codigo' => 5210202]);
 
             // Imputaciones
-            $imputacion1 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubro5->id, 'nombre' => 'Cuenta puente cobro', 'codigo' => 111010102]);
             $imputacion2 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubro3->id, 'nombre' => 'Cuotas sociales', 'codigo' => 511010101]);
             $imputacion3 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubro4->id, 'nombre' => 'Banco xxx', 'codigo' => 111010201]);
             $imputacion4 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubro5->id, 'nombre' => 'Caja - Efectivo', 'codigo' => 111010101]);
@@ -81,19 +83,15 @@ class InicioSistema extends Seeder
             $imputacion7 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubroCreditosCuotaSocialDevengamiento->id, 'nombre' => 'Cuota Social a devengar', 'codigo' => 131030201]);
             $imputacion8 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubroRegularizadora->id, 'nombre' => 'Comisiones a devengar (Reg A)', 'codigo' => 131020402]);
             $imputacion9 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubroGastosAdministrativos->id, 'nombre' => 'Comisiones pagadas (R-)', 'codigo' => 521020218]);
-            $imputacion10 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubroCreditos->id, 'nombre' => 'Fondo de terceros a pagar', 'codigo' => 131010003]);
-            $imputacion11 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubroDeudasAyudaEconomica->id, 'nombre' => 'Intereses a pagar (proveedor)', 'codigo' => 311020001]);
             $imputacion12 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubroDeudasAyudaEconomica->id, 'nombre' => 'Comisiones a pagar (comer)', 'codigo' => 311020002]);
             $imputacion13 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubroCreditos->id, 'nombre' => 'Prestamos a cobrar', 'codigo' => 131010001]);
             $imputacion14 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubroCreditos->id, 'nombre' => 'Intereses a cobrar', 'codigo' => 131010004]);
             $imputacion15 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubro3->id, 'nombre' => 'Intereses ganados', 'codigo' => 511010104]);
             $imputacion16 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubroRegularizadora->id, 'nombre' => 'Intereses a devengar', 'codigo' => 131020403]);
             $imputacion17 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubro3->id, 'nombre' => 'Comisiones ganadas', 'codigo' => 511010103]);
-            $imputacion18 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubroDeudasAyudaEconomica->id, 'nombre' => 'Fondos de terceros a pagar (P-)', 'codigo' => 311020003]);
             $imputacion19 = factory(\App\Imputacion::class)->create(['id_subrubro' => $subRubroRegularizadoraDeAhorro->id, 'nombre' => 'Comisiones a devengar (Reg P)', 'codigo' => 311020401]);
 
             // Saldos
-            $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion1->id, 'codigo' => $imputacion1->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion2->id, 'codigo' => $imputacion2->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion3->id, 'codigo' => $imputacion3->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion4->id, 'codigo' => $imputacion4->codigo]);
@@ -102,15 +100,12 @@ class InicioSistema extends Seeder
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion7->id, 'codigo' => $imputacion7->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion8->id, 'codigo' => $imputacion8->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion9->id, 'codigo' => $imputacion9->codigo]);
-            $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion10->id, 'codigo' => $imputacion10->codigo]);
-            $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion11->id, 'codigo' => $imputacion11->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion12->id, 'codigo' => $imputacion12->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion13->id, 'codigo' => $imputacion13->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion14->id, 'codigo' => $imputacion14->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion15->id, 'codigo' => $imputacion15->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion16->id, 'codigo' => $imputacion16->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion17->id, 'codigo' => $imputacion17->codigo]);
-            $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion18->id, 'codigo' => $imputacion18->codigo]);
             $saldoCuenta = factory(\App\SaldosCuentas::class)->create(['id_imputacion' => $imputacion19->id, 'codigo' => $imputacion19->codigo]);
 
 
@@ -138,18 +133,14 @@ class InicioSistema extends Seeder
             $this->call(PantallasSeed::class);
 
             $pantallas = \App\Pantallas::all();
-            $permisos = collect();
             $a = [];
             foreach ($pantallas as $pantalla) {
                 $p = $pantalla->nombre;
-                $a[$pantalla->nombre . '.crear'] = true;
-                $a[$pantalla->nombre . '.visualizar'] = true;
-                $a[$pantalla->nombre . '.borrar'] = true;
-                $a[$pantalla->nombre . '.editar'] = true;
-
-                
+                $a["$p.crear"] = true;
+                $a["$p.visualizar"] = true;
+                $a["$p.borrar"] = true;
+                $a["$p.editar"] = true;
             }
-            $role = Sentinel::findRoleById(1);
 
             $role->permissions = $a;
             $role2->permissions = ['agentesFinancieros.crear' => true,'agentesFinancieros.visualizar' => true,'agentesFinancieros.borrar' => true,'agentesFinancieros.editar' => true, 'CCProveedor.crear' => true,'CCProveedor.visualizar' => true,'CCProveedor.borrar' => true,'CCProveedor.editar' => true];
@@ -164,6 +155,40 @@ class InicioSistema extends Seeder
             $role3->users()->attach($user);
 
             $this->call(PrioridadesSeed::class);
+
+            $imputacionService = new ImputacionService();
+
+            $proveedor = Proovedores::create([
+                'id_prioridad' => 1,
+                'usuario' => $user->id,
+                'razon_social' => 'Asociación Mutual 27 de Junio',
+                'cuit' => '30-65784538-4',
+                'domicilio' => 'Tte. Gral. Juan D. Perón 1730',
+                'telefono' => '4371 3490',
+                'piso' => '7',
+                'departamento' => '74',
+                'nucleo' => null,
+                'estado_civil' => "casado",
+            ]);
+            $codigo = $imputacionService->obtenerCodigoNuevo(3110300);
+            $imputacionService->crear($codigo, 'Cta Asociación Mutual 27 de Junio', 1);
+
+            $comer = Comercializador::create([
+                'nombre' => 'Asociación Mutual 27 de Junio',
+                'dni' => '65784538',
+                'cuit' => '30-65784538-4',
+                'telefono' => '4371 3490',
+                'usuario' => $user->id,
+                'apellido' => '27',
+                'domicilio' => 'Tte. Gral. Juan D. Perón 1730',
+                'email' => '200@vadiun.com',
+                'porcentaje_colocacion' => 0,
+                'estado_civil' => "casado",
+                'provincia' => 'Buenos Aires'
+            ]);
+            $codigo = $imputacionService->obtenerCodigoNuevo(3110200);
+            $imputacionService->crear($codigo,'Comisiones a pagar Asociación Mutual 27 de Junio 27', 1);
+            return $comer;
         });
     }
 }

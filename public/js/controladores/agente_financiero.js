@@ -11,7 +11,6 @@ app.controller('agente_financiero', function($scope, $http, $compile, $sce, NgTa
             //var tasa = $scope.solicitudSeleccionada.producto.tasa / 100;
             //$scope.monto_por_cuota = Number((($scope.importe * Math.pow((1 + tasa), $scope.cuotas) * tasa) / (Math.pow((1 + tasa), $scope.cuotas)-1)).toFixed(2))
             var tasa = $scope.solicitudSeleccionada.producto.tasa/12/100;
-            var cuotas = 10;
             var factor = Math.pow((1 + tasa), ($scope.cuotas));
             $scope.monto_por_cuota = Number(($scope.importe * ((tasa * factor) / (factor - 1 ))).toFixed(2));
             var j =8;

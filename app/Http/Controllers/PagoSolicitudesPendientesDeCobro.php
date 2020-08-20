@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\Eloquent\Repos\ComercializadorRepo;
 use App\Repositories\Eloquent\Repos\SolicitudRepo;
+use App\Services\AsientoService;
 use Illuminate\Http\Request;
 
 class PagoSolicitudesPendientesDeCobro extends Controller
@@ -50,9 +51,14 @@ class PagoSolicitudesPendientesDeCobro extends Controller
                 }
             }
 
-            $solicitudes->each(function ($solicitud) use ($productos, $comer) {
+            $asientoService = new AsientoService();
+            $solicitudes->each(function ($solicitud) use ($productos, $comer, $asientoService) {
                 $index = $this->getIndex($solicitud->id_producto, $productos);
-                $montoComer = ($solicitud->total * $productos[$index]['porcentajeElejido'] / 100) * $comer->getPorcentajeColocacion() / 100;
+                $montoComer = ($solicitud->monto_pagado * $productos[$index]['porcentajeElejido'] / 100) * $comer->getPorcentajeColocacion() / 100;
+                $asientoService->crear([
+                    ['cuenta' => 311020002, 'debe' => $montoComer, 'haber' => 0],
+                    ['cuenta' => 111010201, 'debe' => 0, 'haber' => $montoComer],
+                ], '');
                 $this->solRepo->update(['estado' => 'Pagada'], $solicitud->id);
 
             });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Asiento;
 use App\Cuotas;
 use App\Notifications\SolicitudAsignada;
 use App\Productos;
@@ -18,6 +19,7 @@ use App\Repositories\Eloquent\Repos\Gateway\SolicitudGateway;
 use App\Repositories\Eloquent\Repos\ProveedoresRepo;
 use App\Repositories\Eloquent\Repos\SociosRepo;
 use App\Repositories\Eloquent\Repos\VentasRepo;
+use App\Services\AsientoService;
 use App\Services\ProveedorService;
 use App\Services\SolicitudService;
 use App\Services\VentasService;
@@ -119,18 +121,9 @@ class SolicitudesPendientesMutualController extends Controller
 
 
             $ventaService = new VentasService();
+            $asientoService = new AsientoService();
 
-            $venta = [
-                'id_asociado' => $sol->id_socio,
-                'nro_cuotas' => $sol->cuotas,
-                'importe_cuota' => $sol->monto_por_cuota,
-                'id_producto' => $sol->id_producto,
-                'importe_total' => $sol->cuotas * $sol->monto_por_cuota,
-                'importe_otorgado' => $sol->monto_pagado,
-                'fecha_vencimiento' => Carbon::today()->addMonths($sol->cuotas + 1)->toDateString(),
-                'id_comercializador' => $sol->comercializador
-            ];
-            $ventaService->crear(
+            $venta = $ventaService->crear(
                 $sol->id_socio,
                 $sol->id_producto,
                 null,
@@ -142,6 +135,14 @@ class SolicitudesPendientesMutualController extends Controller
                 $sol->monto_pagado,
                 $sol->comercializador
             );
+            if($venta->producto->proovedor->id == 1)
+            {
+                $asientoService->crear([
+                    ['cuenta' => 131010001, 'debe' => $sol->total, 'haber' => 0],
+                    ['cuenta' => 111010201, 'debe' => 0, 'haber' => $sol->monto_pagado],
+                    ['cuenta' => 131020403, 'debe' => 0, 'haber' => $sol->total - $sol->monto_pagado],
+                ], '');
+            }
         });
     }
 

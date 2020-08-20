@@ -24,7 +24,7 @@ class ValidacionABMcomercializador extends FormRequest
     public function rules()
     {
         return [
-            'dni' => 'required|unique:comercializadores,dni,'.$this->get('id'),
+            'dni' => 'required',
             'telefono' => 'required',
             'porcentaje_colocacion' => 'required',
         ];
