@@ -66,7 +66,7 @@
     "url": "https://github.com/pagekit/vue-resource/issues"
   },
   "dependencies": {
-    "got": "^7.0.0"
+    "got": "^11.8.5"
   },
   "description": "The HTTP client for Vue.js",
   "devDependencies": {
